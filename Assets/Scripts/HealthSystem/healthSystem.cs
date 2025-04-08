@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-public class HealthSystem
+public class HealthSystem : IHealth
 {
     private float _maxHealth;
     private float _currentHealth;
