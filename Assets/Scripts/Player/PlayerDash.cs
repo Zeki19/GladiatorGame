@@ -7,6 +7,7 @@ public class PlayerDash : MonoBehaviour, IDashable
     [SerializeField] private float dashCooldown = 1f;
 
     private PlayerMovement _playerMovement;
+    private float _speedModifier = 1;
     private Rigidbody2D _rb;
     private Vector2 _lastDirection;
     private bool _isDashing;
@@ -44,7 +45,7 @@ public class PlayerDash : MonoBehaviour, IDashable
         _cooldownTimer = dashCooldown;
 
         _playerMovement.EnableMovement(false);
-        _rb.linearVelocity = _lastDirection.normalized * dashForce;
+        _rb.linearVelocity = _lastDirection.normalized * dashForce * _speedModifier;
     }
 
     public void SetLastDirection(Vector2 direction)

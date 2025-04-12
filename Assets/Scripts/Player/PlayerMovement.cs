@@ -4,24 +4,25 @@ public class PlayerMovement : MonoBehaviour, IMovable
 {
     [SerializeField] public float baseMoveSpeed = 5f;
     private Rigidbody2D _rb;
-    private Vector2 _movementInput;
-    private float _currentSpeed;
+    private Vector2 _moveInput;
+    private float _moveSpeed;
+    private float _speedModifier = 1;
     private bool _canMove = true;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _currentSpeed = baseMoveSpeed;
+        _moveSpeed = baseMoveSpeed;
     }
 
     public void Move(Vector2 direction)
     {
-        _movementInput = direction;
+        _moveInput = direction;
     }
 
     public void SetSpeed(float speed)
     {
-        _currentSpeed = speed;
+        _moveSpeed = speed;
     }
 
     public void EnableMovement(bool enabled)
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour, IMovable
     {
         if (_canMove)
         {
-            _rb.linearVelocity = _movementInput * _currentSpeed;
+            _rb.linearVelocity = _moveInput * _moveSpeed * _speedModifier;
         }
     }
 }
