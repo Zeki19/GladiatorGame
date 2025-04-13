@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashInvincibility;
 
     private FSM<StateEnum> _fsm;
-    private IHealth _playerHealth;
+    private IHealth _playerHealth = new HealthSystem(100);
     private PlayerInput _playerInput;
     private InputAction _moveAction;
     private InputAction _attackAction;
@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
         _moveAction.canceled += ctx => _fsm.HandleMove(Vector2.zero);
         _attackAction.performed += ctx => _fsm.HandleAttack();
         _dashAction.performed += ctx => _fsm.HandleDash();
-        _playerHealth = new HealthSystem(100);
     }
 
     private void InitializeFSM()
