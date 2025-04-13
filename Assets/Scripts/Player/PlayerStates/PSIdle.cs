@@ -15,7 +15,7 @@ public class PSIdle<T> : PSBase<T>
     }
     public override void Execute(Vector2 direction)
     {
-        if (InputManager.GetMove() != Vector2.zero)
+        if (direction != Vector2.zero)
         {
             StateMachine.Transition(_inputToWalk);
         }
