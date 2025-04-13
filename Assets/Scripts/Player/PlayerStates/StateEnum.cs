@@ -4,7 +4,7 @@
     Idle,
     Walk,
     Dash,
-    Spin,
+    Attack,
     Chase,
     GoZone
 }

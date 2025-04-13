@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class PlayerModel : MonoBehaviour, IMove, IAttack
 {
-    [SerializeField] public float moveSpeed = 5f;
-    [SerializeField] private float dashForce = 10f;
-    [SerializeField] private float dashDuration = 0.2f;
-    [SerializeField] private float dashCooldown = 1f;
 
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
@@ -38,17 +34,12 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
         _speedModifier = speed;
     }
 
-    public void Dash()
+    public void Dash(float dashForce)
     {
-
-        _isDashing = true;
-        _dashTimer = dashDuration;
-        _cooldownTimer = dashCooldown;
-
         _rb.linearVelocity = _moveInput * dashForce * _speedModifier;
     }
 
-    public virtual void Move(Vector2 dir)
+    public virtual void Move(Vector2 dir, float moveSpeed)
     {
         if (dir != Vector2.zero)
         {

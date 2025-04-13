@@ -2,32 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PSSpin<T> : PSBase<T>
+public class PSAttack<T> : PSBase<T>
 {
     float _timer;
     float _seconds = 1;
+    float _moveSpeed;
     T _inputFinish;
-    public PSSpin(T inputFinish, float seconds = 1)
+    public PSAttack(T inputFinish, float moveSpeed, float seconds = 1)
     {
         _inputFinish = inputFinish;
         _seconds = seconds;
+        _moveSpeed = moveSpeed;
     }
     public override void Enter()
     {
         base.Enter();
         _timer = _seconds;
         _attack.Attack();
-
-        var dir = new Vector2(InputManager.GetMove().x, InputManager.GetMove().y);
-        _move.Move(dir);
     }
-    public override void Execute()
+    public override void Execute(Vector2 direction)
     {
-        base.Execute();
+        base.Execute(direction);
+        _move.Move(direction, _moveSpeed);
         _timer -= Time.deltaTime;
         if (_timer < 0)
         {
             StateMachine.Transition(_inputFinish);
         }
+
     }
 }

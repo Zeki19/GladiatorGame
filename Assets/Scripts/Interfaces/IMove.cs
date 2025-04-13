@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface IMove
 {
-    void Move(Vector2 dir);
-    void Dash();
+    void Move(Vector2 dir, float moveSpeed);
+    void Dash( float dashForce);
 
     Vector2 Position { get; }
 }

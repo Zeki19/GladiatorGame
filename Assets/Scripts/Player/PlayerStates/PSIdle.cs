@@ -13,7 +13,7 @@ public class PSIdle<T> : PSBase<T>
     {
         base.Enter();
     }
-    public override void Execute()
+    public override void Execute(Vector2 direction)
     {
         if (InputManager.GetMove() != Vector2.zero)
         {

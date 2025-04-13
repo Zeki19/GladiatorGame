@@ -6,7 +6,7 @@ public interface IState<T>
 {
     void Initialize(params object[] p);
     void Enter();
-    void Execute();
+    void Execute(Vector2 direction);
     void FixedExecute();
     void Exit();
     void OnMove(Vector2 direction);

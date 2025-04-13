@@ -6,6 +6,10 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rigidbody;
+    [SerializeField] float _moveSpeed;
+    [SerializeField] float _dashforce;
+    [SerializeField] float _dashDuration;
+    [SerializeField] float _dashCooldown;
 
     private FSM<StateEnum> _fsm;
     private PlayerInput _playerInput;
@@ -39,41 +43,41 @@ public class PlayerController : MonoBehaviour
 
         var stateList = new List<PSBase<StateEnum>>();
 
-        var idle = new PSIdle<StateEnum>(StateEnum.Walk);
-        var walk = new PSWalk<StateEnum>(StateEnum.Idle);
-        var spin = new PSSpin<StateEnum>(StateEnum.Idle);
-        var dash = new PSDash<StateEnum>(StateEnum.Idle);
+        var idleState = new PSIdle<StateEnum>(StateEnum.Walk);
+        var walkState = new PSWalk<StateEnum>(StateEnum.Idle, _moveSpeed);
+        var attackState = new PSAttack<StateEnum>(StateEnum.Idle, _moveSpeed);
+        var dashState = new PSDash<StateEnum>(StateEnum.Idle, _dashforce, _dashDuration, _dashCooldown, this);
 
-        idle.AddTransition(StateEnum.Walk, walk);
-        idle.AddTransition(StateEnum.Spin, spin);
-        idle.AddTransition(StateEnum.Dash, dash);
+        idleState.AddTransition(StateEnum.Walk, walkState);
+        idleState.AddTransition(StateEnum.Attack, attackState);
+        idleState.AddTransition(StateEnum.Dash, dashState);
 
-        walk.AddTransition(StateEnum.Idle, idle);
-        walk.AddTransition(StateEnum.Spin, spin);
-        walk.AddTransition(StateEnum.Dash, dash);
+        walkState.AddTransition(StateEnum.Idle, idleState);
+        walkState.AddTransition(StateEnum.Attack, attackState);
+        walkState.AddTransition(StateEnum.Dash, dashState);
 
 
-        spin.AddTransition(StateEnum.Idle, idle);
+        attackState.AddTransition(StateEnum.Idle, idleState);
 
-        dash.AddTransition(StateEnum.Idle, idle);
-        dash.AddTransition(StateEnum.Walk, walk);
-        dash.AddTransition(StateEnum.Spin, spin);
+        dashState.AddTransition(StateEnum.Idle, idleState);
+        dashState.AddTransition(StateEnum.Walk, walkState);
+        dashState.AddTransition(StateEnum.Attack, attackState);
 
-        stateList.Add(idle);
-        stateList.Add(walk);
-        stateList.Add(spin);
-        stateList.Add(dash);
+        stateList.Add(idleState);
+        stateList.Add(walkState);
+        stateList.Add(attackState);
+        stateList.Add(dashState);
 
         for (int i = 0; i < stateList.Count; i++)
         {
             stateList[i].Initialize(move, look, attack);
         }
 
-        _fsm.SetInit(idle);
+        _fsm.SetInit(idleState);
     }
     private void Update()
     {
-        _fsm.OnExecute();
+        _fsm.OnExecute(_moveAction.ReadValue<Vector2>());
     }
     private void FixedUpdate()
     {
@@ -81,7 +85,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ChangeToAttack()
     {
-        _fsm.Transition(StateEnum.Spin);
+        _fsm.Transition(StateEnum.Attack);
     }
     public void ChangeToDash()
     {

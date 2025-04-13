@@ -12,7 +12,7 @@ public class StateMono<T> : MonoBehaviour, IState<T>
     public virtual void Enter()
     {
     }
-    public virtual void Execute()
+    public virtual void Execute(Vector2 direction)
     {
     }
     public void OnMove(Vector2 direction)

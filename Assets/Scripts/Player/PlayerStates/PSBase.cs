@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PSBase<T> : State<T>
 {
@@ -12,8 +13,8 @@ public class PSBase<T> : State<T>
         _look = p[1] as ILook;
         _attack = p[2] as IAttack;
     }
-    public override void Execute()
+    public override void Execute(Vector2 direction)
     {
-        base.Execute();
+        base.Execute(direction);
     }
 }
