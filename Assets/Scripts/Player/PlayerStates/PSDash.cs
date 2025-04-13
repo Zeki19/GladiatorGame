@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PSDash<T> : PSBase<T>
 {
@@ -10,18 +11,22 @@ public class PSDash<T> : PSBase<T>
     private float _dashDuration = 1;
     private float _dashCooldown = 1;
     private float _dashTimer = 1;
+    private float _dashInvincibility = 1;
+    private IHealth _characterHealth;
 
     private bool _canDash = true;
 
 
     T _inputFinish;
-    public PSDash(T inputFinish, float dashForce, float dashDuration, float dashCooldown, MonoBehaviour coroutineRunner)
+    public PSDash(T inputFinish, float dashForce, float dashDuration, float dashCooldown,float dashInvincibility, IHealth healthSystem,MonoBehaviour coroutineRunner)
     {
         _inputFinish = inputFinish;
         _dashForce = dashForce;
         _dashDuration = dashDuration;
         _dashCooldown = dashCooldown;
         _coroutineRunner = coroutineRunner;
+        _dashInvincibility = Mathf.Clamp(dashInvincibility, 0, 100);
+        _characterHealth = healthSystem;
     }
     public override void Enter()
     {
@@ -31,6 +36,7 @@ public class PSDash<T> : PSBase<T>
             return;
         }
         _canDash = false;
+        _characterHealth.isInvulnerable = true;
         _move.Dash(_dashForce);
         _dashTimer = _dashDuration;
         _coroutineRunner.StartCoroutine(CooldownCoroutine());
@@ -39,6 +45,12 @@ public class PSDash<T> : PSBase<T>
     {
         yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
+    }
+
+    private IEnumerator InvulnerabilityCooldown()
+    {
+        yield return new WaitForSeconds((_dashCooldown*_dashInvincibility)/100);
+        _characterHealth.isInvulnerable = false;
     }
     public override void Execute(Vector2 direction)
     {

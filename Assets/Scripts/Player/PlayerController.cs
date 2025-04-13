@@ -10,10 +10,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _dashforce;
     [SerializeField] float _dashDuration;
     [SerializeField] float _dashCooldown;
+    [SerializeField] private float _dashInvincibility;
 
     private FSM<StateEnum> _fsm;
+    private IHealth _playerHealth;
     private PlayerInput _playerInput;
-
     private InputAction _moveAction;
     private InputAction _attackAction;
     private InputAction _dashAction;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         _moveAction.canceled += ctx => _fsm.HandleMove(Vector2.zero);
         _attackAction.performed += ctx => _fsm.HandleAttack();
         _dashAction.performed += ctx => _fsm.HandleDash();
+        _playerHealth = new HealthSystem(100);
     }
 
     private void InitializeFSM()
@@ -46,7 +48,7 @@ public class PlayerController : MonoBehaviour
         var idleState = new PSIdle<StateEnum>(StateEnum.Walk);
         var walkState = new PSWalk<StateEnum>(StateEnum.Idle, _moveSpeed);
         var attackState = new PSAttack<StateEnum>(StateEnum.Idle, _moveSpeed);
-        var dashState = new PSDash<StateEnum>(StateEnum.Idle, _dashforce, _dashDuration, _dashCooldown, this);
+        var dashState = new PSDash<StateEnum>(StateEnum.Idle, _dashforce, _dashDuration, _dashCooldown, _dashInvincibility, _playerHealth, this);
 
         idleState.AddTransition(StateEnum.Walk, walkState);
         idleState.AddTransition(StateEnum.Attack, attackState);

@@ -5,7 +5,7 @@ public interface IHealth
 {
     float maxHealth { get; }
     float currentHealth { get; }
-    bool isInvulnerable { get; }
+    bool isInvulnerable { get; set; }
 
     event Action OnDead;
     event Action<float> OnHeal;

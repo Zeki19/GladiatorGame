@@ -52,6 +52,7 @@ public class HealthSystem : IHealth
     {
         maxHealth = MaxHealth;
         currentHealth = maxHealth;
+        isInvulnerable = false;
     }
 
     /// <summary>

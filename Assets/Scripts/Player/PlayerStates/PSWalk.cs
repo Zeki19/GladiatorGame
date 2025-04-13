@@ -25,17 +25,4 @@ public class PSWalk<T> : PSBase<T>
             StateMachine.Transition(_inputToStopWalk);
         }
     }
-
-    public override void FixedExecute() 
-    {
-    }
-
-    public override void OnMove(Vector2 direction)
-    {
-    }
-
-    public override void Exit() 
-    {
-        //_move.Move(Vector2.zero);
-    }
 }
