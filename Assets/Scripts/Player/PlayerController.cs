@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
 
         dashState.AddTransition(StateEnum.Idle, idleState);
         dashState.AddTransition(StateEnum.Walk, walkState);
-        dashState.AddTransition(StateEnum.Attack, attackState);
 
         stateList.Add(idleState);
         stateList.Add(walkState);

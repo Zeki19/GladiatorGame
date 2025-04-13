@@ -10,9 +10,6 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
     private Vector2 _moveInput;
     private float _speedModifier = 1;
     private Vector2 _lastDirection;
-    private bool _isDashing;
-    private float _dashTimer;
-    private float _cooldownTimer;
 
 
     Action _onAttack = delegate { };
@@ -36,19 +33,13 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
 
     public void Dash(float dashForce)
     {
-        _rb.linearVelocity = _moveInput * dashForce * _speedModifier;
+        _rb.linearVelocity = _lastDirection * dashForce * _speedModifier;
     }
 
     public virtual void Move(Vector2 dir, float moveSpeed)
     {
-        if (dir != Vector2.zero)
-        {
-            _moveInput = dir.normalized;
-        }
-        else
-        {
-            _moveInput = dir;
-        }
+        _moveInput = dir;
+        if (_moveInput != Vector2.zero) _lastDirection = _moveInput;
         _rb.linearVelocity = _moveInput * moveSpeed * _speedModifier;
     }
 }
