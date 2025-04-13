@@ -3,6 +3,7 @@
     Default,
     Idle,
     Walk,
+    Dash,
     Spin,
     Chase,
     GoZone

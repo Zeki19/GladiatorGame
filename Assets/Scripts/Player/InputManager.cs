@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class InputManager
 {
-    static KeyCode _attack = KeyCode.Space;
+    static KeyCode _attack = KeyCode.F;
+    static KeyCode _dash = KeyCode.Space;
+
     public static bool GetKeyAttack()
     {
         return Input.GetKeyDown(_attack);
+    }
+    public static bool GetKeyDash()
+    {
+        return Input.GetKeyDown(_dash);
     }
     public static Vector2 GetMove()
     {

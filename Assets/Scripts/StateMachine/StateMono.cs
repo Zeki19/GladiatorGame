@@ -15,7 +15,16 @@ public class StateMono<T> : MonoBehaviour, IState<T>
     public virtual void Execute()
     {
     }
+    public void OnMove(Vector2 direction)
+    {
+    }
+    public void OnAttack() { }
+    public void OnDash() { }
+
     public virtual void Exit()
+    {
+    }
+    public void FixedExecute()
     {
     }
     public IState<T> GetTransition(T input)
@@ -45,6 +54,8 @@ public class StateMono<T> : MonoBehaviour, IState<T>
             }
         }
     }
+
+
     public FSM<T> StateMachine
     {
         set
