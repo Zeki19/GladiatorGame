@@ -1,43 +1,54 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using System;
 public class PlayerController : MonoBehaviour
 {
-    private IMovable _movement;
-    private IDashable _dash;
-    private IRotatable _rotation;
-    private PlayerInputActions _inputActions;
-    private Vector2 _moveInput;
-    private Vector2 _lookInput;
-
+    private FSM<StateEnum> _fsm;
     private void Awake()
-    {
-        _movement = GetComponent<IMovable>();
-        _dash = GetComponent<IDashable>();
-        _rotation = GetComponent<IRotatable>();
-        _inputActions = new PlayerInputActions();
+    { 
+        InitializeFSM();
     }
 
-    private void OnEnable()
+    private void InitializeFSM()
     {
-        _inputActions.Player.Move.performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
-        _inputActions.Player.Move.canceled += ctx => _moveInput = Vector2.zero;
-        _inputActions.Player.Dash.performed += _ => _dash.Dash();
-        _inputActions.Player.Look.performed += ctx => _lookInput = ctx.ReadValue<Vector2>();
-        _inputActions.Enable();
-    }
+        _fsm = new FSM<StateEnum>();
+        var move = GetComponent<IMove>();
+        var look = GetComponent<ILook>();
+        var attack = GetComponent<IAttack>();
 
-    private void OnDisable()
-    {
-        _inputActions.Disable();
-    }
+        var stateList = new List<PSBase<StateEnum>>();
 
+        var idle = new PSIdle<StateEnum>(StateEnum.Walk);
+        var walk = new PSWalk<StateEnum>(StateEnum.Idle);
+        var spin = new PSSpin<StateEnum>(StateEnum.Idle);
+
+        idle.AddTransition(StateEnum.Walk, walk);
+        idle.AddTransition(StateEnum.Spin, spin);
+
+        walk.AddTransition(StateEnum.Idle, idle);
+        walk.AddTransition(StateEnum.Spin, spin);
+
+        spin.AddTransition(StateEnum.Idle, idle);
+
+        stateList.Add(idle);
+        stateList.Add(walk);
+        stateList.Add(spin);
+
+        for (int i = 0; i < stateList.Count; i++)
+        {
+            stateList[i].Initialize(move, look, attack);
+        }
+
+        _fsm.SetInit(idle);
+    }
     private void Update()
     {
-        _movement.Move(_moveInput);
-        _dash.SetLastDirection(_moveInput);
-    }
-    private void FixedUpdate()
-    {
-        _rotation.Rotate(_lookInput);
+        if (InputManager.GetKeyAttack())
+        {
+            _fsm.Transition(StateEnum.Spin);
+        }
+        _fsm.OnExecute();
     }
 }
