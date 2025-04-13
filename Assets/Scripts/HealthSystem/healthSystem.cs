@@ -4,6 +4,7 @@ public class HealthSystem : IHealth
 {
     private float _maxHealth;
     private float _currentHealth;
+    private bool _isInvulnerable;
 
     public float maxHealth
     {
@@ -14,6 +15,12 @@ public class HealthSystem : IHealth
     {
         get => _currentHealth;
         private set => _currentHealth = Mathf.Clamp(value, 0, maxHealth);
+    }
+
+    public bool isInvulnerable
+    {
+        get => _isInvulnerable;
+        set => _isInvulnerable = value;
     }
 
     #region EVENTS
@@ -97,6 +104,7 @@ public class HealthSystem : IHealth
     /// <param name="damageAmount">The amount of damage to apply.</param>
     public void TakeDamage(float damageAmount)
     {
+        if (isInvulnerable) return;
         currentHealth -= damageAmount;
         OnDamage?.Invoke(damageAmount);
         if (currentHealth <= 0)
@@ -111,6 +119,7 @@ public class HealthSystem : IHealth
     /// </summary>
     public void Kill()
     {
+        if (isInvulnerable) return;
         currentHealth -= maxHealth;
         if (currentHealth <= 0)
         {
@@ -118,7 +127,7 @@ public class HealthSystem : IHealth
         }
         else
         {
-            Debug.LogError("did not die!!!");
+            Debug.LogError("Did not die!!!");
         }
     }
 
