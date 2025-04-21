@@ -16,9 +16,8 @@ public class PSDash<T> : PSBase<T>
 
     private bool _canDash = true;
 
-
     T _inputFinish;
-    public PSDash(T inputFinish, float dashForce, float dashDuration, float dashCooldown,float dashInvincibility, IHealth healthSystem,MonoBehaviour coroutineRunner)
+    public PSDash(T inputFinish, float dashForce, float dashDuration, float dashCooldown, float dashInvincibility, IHealth healthSystem,MonoBehaviour coroutineRunner)
     {
         _inputFinish = inputFinish;
         _dashForce = dashForce;
@@ -52,15 +51,20 @@ public class PSDash<T> : PSBase<T>
         yield return new WaitForSeconds((_dashCooldown*_dashInvincibility)/100);
         _characterHealth.isInvulnerable = false;
     }
-    public override void Execute(Vector2 direction)
+    public override void Execute()
     {
-        base.Execute(direction);
+        base.Execute();
         
         _dashTimer -= Time.deltaTime;
         if (_dashTimer <= 0)
         {
-            _move.Move(Vector2.zero, 0);
             StateMachine.Transition(_inputFinish);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _move.Move(10); //This is here so that the player doesn't go on infinitively with the dash if no input is being received. <-- MANSO CHOCLO
     }
 }

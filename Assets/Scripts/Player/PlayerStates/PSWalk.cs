@@ -16,13 +16,8 @@ public class PSWalk<T> : PSBase<T>
         base.Enter();
     }
 
-    public override void Execute(Vector2 direction)
+    public override void Execute()
     {
-        base.OnMove(direction);
-        _move.Move(direction, _moveSpeed);
-        if (direction == Vector2.zero)
-        {
-            StateMachine.Transition(_inputToStopWalk);
-        }
+        _move.Move(_moveSpeed);
     }
 }

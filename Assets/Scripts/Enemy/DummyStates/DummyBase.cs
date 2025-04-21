@@ -13,8 +13,8 @@ public class DummyBase<T> : State<T>
         _target = args[5] as Transform;
     }
 
-    public override void Execute(Vector2 direction)
+    public override void Execute()
     {
-        base.Execute(direction);
+        base.Execute();
     }
 }

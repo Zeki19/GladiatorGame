@@ -22,9 +22,9 @@ public class DSAttacking<T> : DummyBase<T>
         _target.GetComponent<IHealth>()?.TakeDamage(10);
     }
 
-    public override void Execute(Vector2 direction)
+    public override void Execute()
     {
-        base.Execute(direction);
+        base.Execute();
 
         _timer -= Time.deltaTime;
 

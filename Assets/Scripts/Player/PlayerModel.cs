@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerModel : MonoBehaviour, IMove, IAttack
 {
@@ -10,6 +11,8 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
     private Vector2 _moveInput;
     private float _speedModifier = 1;
     private Vector2 _lastDirection;
+    private PlayerInput _playerInput;
+    private InputAction _direction;
 
 
     Action _onAttack = delegate { };
@@ -20,6 +23,10 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _playerInput = GetComponent<PlayerInput>();
+        var actionMap = _playerInput.actions.FindActionMap("Player");
+        _direction = actionMap.FindAction("Move");
+
     }
     public virtual void Attack()
     {
@@ -36,9 +43,9 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
         _rb.linearVelocity = _lastDirection * dashForce * _speedModifier;
     }
 
-    public virtual void Move(Vector2 dir, float moveSpeed)
+    public virtual void Move(float moveSpeed)
     {
-        _moveInput = dir;
+        _moveInput = _direction.ReadValue<Vector2>();
         if (_moveInput != Vector2.zero) _lastDirection = _moveInput;
         _rb.linearVelocity = _moveInput * moveSpeed * _speedModifier;
     }
