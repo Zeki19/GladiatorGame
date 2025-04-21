@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 namespace Enemy
 {
@@ -85,7 +86,7 @@ namespace Enemy
 
         bool QuestionCanAttack()
         {
-            return Vector2.Distance(_model.Position, target.position) <= _model.attackRange;
+            return _los.CheckRange(target.transform,_model.attackRange);
         }
     
         bool QuestionTargetInView()

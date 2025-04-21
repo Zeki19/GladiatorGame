@@ -752,8 +752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1fb01b5a37d354e87b9382d1afc8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  attackRange: 2
+  _speed: 0
+  attackRange: 1
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
@@ -783,7 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
-  angle: 150
+  angle: 90
   obstacleMask:
     serializedVersion: 2
     m_Bits: 0

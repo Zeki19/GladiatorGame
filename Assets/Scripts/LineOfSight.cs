@@ -8,20 +8,24 @@ public class LineOfSight : MonoBehaviour
     public float angle;
     public LayerMask obstacleMask;
 
-    private bool CheckRange(Transform target)
+    public bool CheckRange(Transform target)
+    {
+        return CheckRange(target,range);
+    }
+    public bool CheckRange(Transform target, float range)
     {
         Vector2 dir = target.position - transform.position;
-        var distance = dir.magnitude;
+        float distance = dir.magnitude;
         return distance <= range;
     }
-    private bool CheckAngle(Transform target)
+    public bool CheckAngle(Transform target)
     {
         return CheckAngle(target, transform.right); //Usamos RIGHT xq en 2D no hay forward.
     }
     private bool CheckAngle(Transform target, Vector2 front)
     {
         Vector2 dir = target.position - transform.position;
-        float angleToTarget = Vector2.Angle(front, dir);
+        float angleToTarget = Vector2.Angle(front, dir.normalized);
         return angleToTarget <= angle / 2;
     }
     private bool CheckView(Transform target)
@@ -38,12 +42,12 @@ public class LineOfSight : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position,range/2);
+        Gizmos.DrawWireSphere(transform.position,range);
         
         Gizmos.color = Color.yellow;
         
-        Vector2 forward = transform.right; //Modify it to its needs.
-        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, -angle / 2f) * forward * range/2);
-        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, angle / 2f) * forward * range/2);
+        Vector2 forward = transform.right;
+        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, -angle / 2f) * forward * range);
+        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, angle / 2f) * forward * range);
     }
 }

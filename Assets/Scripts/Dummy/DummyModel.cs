@@ -35,4 +35,10 @@ public class DummyModel : MonoBehaviour, IMove, IAttack
     }
 
     public Vector2 Position { get; }
+
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
 }

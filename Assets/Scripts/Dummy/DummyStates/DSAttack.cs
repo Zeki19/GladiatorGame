@@ -6,6 +6,10 @@ public class DSAttack<T> : DSBase<T>
     {
         base.Enter();
         _attack.Attack();
-        //Debug.Log("StateAttack");
+    }
+    public override void Execute()
+    {
+        base.Execute();
+        Debug.Log("RIVER");
     }
 }
