@@ -16,6 +16,9 @@ public class State<T> : IState<T>
     public virtual void Execute(Vector2 direction)
     {
     }
+    public virtual void Execute()
+    {
+    }
     public virtual void FixedExecute() 
     {
     }
