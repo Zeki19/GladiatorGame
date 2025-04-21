@@ -10,16 +10,12 @@ public class DSChase<T> : DSBase<T>
         _target = target;
         _speed = speed;
     }
-
-    public override void Enter()
-    {
-        base.Enter();
-        Debug.Log("StateChase");
-    }
+    
     public override void Execute()
     {
+        Debug.Log("Boca");
         base.Execute(); 
         var dir = (Vector2)_target.transform.position - _move.Position;
-       _move.Move(Vector2.right, _speed);
+       _move.Move(dir.normalized, _speed);
     }
 }

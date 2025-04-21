@@ -17,7 +17,7 @@ public class LineOfSight : MonoBehaviour
 
     public bool CheckAngle(Transform target)
     {
-        return CheckAngle(target, transform.forward);
+        return CheckAngle(target, transform.right); //Usamos RIGHT xq en 2D no hay forward.
     }
     public bool CheckAngle(Transform target, Vector2 front)
     {

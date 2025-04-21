@@ -6,6 +6,6 @@ public class DSAttack<T> : DSBase<T>
     {
         base.Enter();
         _attack.Attack();
-        Debug.Log("StateAttack");
+        //Debug.Log("StateAttack");
     }
 }
