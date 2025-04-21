@@ -1,11 +1,12 @@
-using System;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
-public class DSIdle<T> : DSBase<T>
+public class DSIdle<T> : DummyBase<T>
 {
-    public override void Execute(Vector2 direction)
+    private T _transitionToSearch;
+    
+    public DSIdle(T transitionToSearch)
     {
-        
+        _transitionToSearch = transitionToSearch;
     }
+    
 }

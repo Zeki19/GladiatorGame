@@ -28,11 +28,6 @@ public class PlayerController : MonoBehaviour
         _moveAction = actionMap.FindAction("Move");
         _attackAction = actionMap.FindAction("Attack");
         _dashAction = actionMap.FindAction("Dash");
-
-        _moveAction.performed += ctx => _fsm.HandleMove(ctx.ReadValue<Vector2>());
-        _moveAction.canceled += ctx => _fsm.HandleMove(Vector2.zero);
-        _attackAction.performed += ctx => _fsm.HandleAttack();
-        _dashAction.performed += ctx => _fsm.HandleDash();
     }
 
     private void InitializeFSM()
@@ -61,7 +56,7 @@ public class PlayerController : MonoBehaviour
         attackState.AddTransition(StateEnum.Idle, idleState);
 
         dashState.AddTransition(StateEnum.Idle, idleState);
-        dashState.AddTransition(StateEnum.Walk, walkState);
+        //dashState.AddTransition(StateEnum.Walk, walkState);
 
         stateList.Add(idleState);
         stateList.Add(walkState);
@@ -77,11 +72,16 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        _fsm.OnExecute(_moveAction.ReadValue<Vector2>());
+        _fsm.OnExecute();
     }
     private void FixedUpdate()
     {
         _fsm.OnFixedExecute();
+    }
+
+    public void ChangeToMove()
+    {
+        _fsm.Transition(StateEnum.Walk);
     }
     public void ChangeToAttack()
     {

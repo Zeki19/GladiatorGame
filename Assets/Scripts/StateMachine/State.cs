@@ -13,7 +13,7 @@ public class State<T> : IState<T>
     public virtual void Enter()
     {
     }
-    public virtual void Execute(Vector2 direction)
+    public virtual void Execute()
     {
     }
     public virtual void Execute()
@@ -51,18 +51,6 @@ public class State<T> : IState<T>
                 break;
             }
         }
-    }
-
-    public virtual void OnMove(Vector2 direction)
-    {
-    }
-
-    public virtual void OnAttack()
-    {
-    }
-
-    public virtual void OnDash()
-    {
     }
 
     public FSM<T> StateMachine
