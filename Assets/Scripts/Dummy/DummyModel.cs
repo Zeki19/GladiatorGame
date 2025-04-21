@@ -4,16 +4,9 @@ using UnityEngine;
 public class DummyModel : MonoBehaviour, IMove, IAttack
 {
     public float _speed;
-    private Rigidbody _rb;
-    
     public float attackRange;
     public LayerMask enemyMask;
-
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody>();
-    }
-
+    
     public void Attack()
     {
         var colls = Physics.OverlapSphere(Position, attackRange, enemyMask);
@@ -31,13 +24,11 @@ public class DummyModel : MonoBehaviour, IMove, IAttack
         _speed = speed;
     }
 
-    public void Move(Vector2 dir, float moveSpeed)
+    public void Move(float moveSpeed)
     {
-        dir *= _speed;
-        dir.y = _rb.linearVelocity.y;
-        _rb.linearVelocity = dir;
+        transform.position = Vector2.one;
     }
-
+    
     public void Dash(float dashForce)
     {
         throw new NotImplementedException();

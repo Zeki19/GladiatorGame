@@ -16,9 +16,6 @@ public class State<T> : IState<T>
     public virtual void Execute()
     {
     }
-    public virtual void Execute()
-    {
-    }
     public virtual void FixedExecute() 
     {
     }

@@ -16,6 +16,6 @@ public class DSChase<T> : DSBase<T>
         Debug.Log("Boca");
         base.Execute(); 
         var dir = (Vector2)_target.transform.position - _move.Position;
-       _move.Move(dir.normalized, _speed);
+       _move.Move(_speed);
     }
 }
