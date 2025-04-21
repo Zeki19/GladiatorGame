@@ -10,6 +10,12 @@ public class FSM<T>
     {
         SetInit(curr);
     }
+    public enum EnemyInputs
+    {
+        SeePlayer,
+        LosePlayer,
+        ReachLastPos
+    }
     public void SetInit(IState<T> curr)
     {
         curr.StateMachine = this;

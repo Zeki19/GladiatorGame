@@ -3,17 +3,14 @@ using UnityEngine;
 public class DSSearching<T> : DummyBase<T>
 {
     private T _transitionToChase;
-    
     public DSSearching(T transitionToChase)
     {
         _transitionToChase = transitionToChase;
     }
-    
     public override void Enter()
     {
         base.Enter();
     }
-    
     public override void Execute(Vector2 direction)
     {
         base.Execute(direction);
