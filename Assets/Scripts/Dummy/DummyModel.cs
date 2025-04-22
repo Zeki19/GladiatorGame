@@ -27,17 +27,12 @@ namespace Dummy
             _speed = speed;
         }
 
-        public void Move(float moveSpeed)
+        public void Move(Vector2 dir)
         {
-            transform.position = Vector2.one;
+            
         }
     
         public void Dash(float dashForce)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MoveToPoint(Vector2 point)
         {
             throw new NotImplementedException();
         }

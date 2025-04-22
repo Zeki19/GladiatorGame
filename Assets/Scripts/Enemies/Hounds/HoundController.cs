@@ -80,16 +80,16 @@ public class HoundController : MonoBehaviour
         var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, aIdle);
         var qLastAction = new QuestionNode(QuestionLastAction, qFarFromCamp, aPatrol);
         
-        _root = qFarFromCamp;
+        _root = qCanAttack;
     }
     
     bool QuestionCanAttack()
     {
-        return false;
+        return Vector2.Distance(_model.Position,target.position) <= _model.attackRange;
     }
     bool QuestionTargetInView()
     {
-        return false;
+        return target != null && _los.LOS(target.transform);
     }
     
     bool QuestionLastAction()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class HoundModel : MonoBehaviour, IMove, IAttack
 {
     [SerializeField] private float moveSpeed = 5f;
+    public float attackRange;
     
     
     public void ModifySpeed(float speed)
@@ -12,7 +13,7 @@ public class HoundModel : MonoBehaviour, IMove, IAttack
         throw new NotImplementedException();
     }
 
-    public void Move(float moveSpeed)
+    public void Move(Vector2 dir)
     {
         
     }

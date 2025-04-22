@@ -13,9 +13,8 @@ public class DSChase<T> : States_Base<T>
     
     public override void Execute()
     {
-        Debug.Log("Boca");
         base.Execute(); 
         var dir = (Vector2)_target.transform.position - _move.Position;
-       _move.Move(_speed);
+       _move.Move(dir);
     }
 }

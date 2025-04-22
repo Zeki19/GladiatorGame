@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerModel : MonoBehaviour, IMove, IAttack
 {
-
+    [SerializeField] private float _moveSpeed;
     private Rigidbody2D _rb;
     private Vector2 _moveInput;
     private float _speedModifier = 1;
@@ -18,11 +18,6 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
 
     Action _onAttack = delegate { };
     public Action OnAttack { get => _onAttack; set => _onAttack = value; }
-
-    public void MoveTo(Vector2 point)
-    {
-        
-    }
 
     public Vector2 Position => transform.position;
 
@@ -46,13 +41,13 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
 
     public void Dash(float dashForce)
     {
-        _rb.linearVelocity = _lastDirection * dashForce * _speedModifier;
+        _rb.linearVelocity = _lastDirection * (dashForce * _speedModifier);
     }
 
-    public virtual void Move(float moveSpeed)
+    public virtual void Move(Vector2 dir)
     {
         _moveInput = _direction.ReadValue<Vector2>();
         if (_moveInput != Vector2.zero) _lastDirection = _moveInput;
-        _rb.linearVelocity = _moveInput * moveSpeed * _speedModifier;
+        _rb.linearVelocity = _moveInput * (_moveSpeed * _speedModifier);
     }
 }

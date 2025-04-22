@@ -405,7 +405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1212377210}
-  _moveSpeed: 10
   _dashforce: 40
   _dashDuration: 1
   _dashCooldown: 2
@@ -556,6 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 133c7ac54d88c1441996527be93f796c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 10
 --- !u!114 &1212377220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,6 +1032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  attackRange: 0
 --- !u!114 &2132518120
 MonoBehaviour:
   m_ObjectHideFlags: 0

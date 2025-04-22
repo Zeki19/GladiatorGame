@@ -8,7 +8,6 @@ using Interfaces;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rigidbody;
-    [SerializeField] private float _moveSpeed;
     [SerializeField] private float _dashforce;
     [SerializeField] private float _dashDuration;
     [SerializeField] private float _dashCooldown;
@@ -41,9 +40,9 @@ public class PlayerController : MonoBehaviour
 
         var stateList = new List<PSBase<StateEnum>>();
 
-        var idleState = new PSIdle<StateEnum>(StateEnum.Walk);
-        var walkState = new PSWalk<StateEnum>(StateEnum.Idle, _moveSpeed);
-        var attackState = new PSAttack<StateEnum>(StateEnum.Idle, _moveSpeed);
+        var idleState = new PSIdle<StateEnum>();
+        var walkState = new PSWalk<StateEnum>();
+        var attackState = new PSAttack<StateEnum>(StateEnum.Idle);
         var dashState = new PSDash<StateEnum>(StateEnum.Idle, _dashforce, _dashDuration, _dashCooldown, _dashInvincibility, _playerHealth, this);
 
         idleState.AddTransition(StateEnum.Walk, walkState);
