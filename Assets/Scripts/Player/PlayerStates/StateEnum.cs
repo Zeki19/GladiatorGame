@@ -6,5 +6,7 @@
     Dash,
     Attack,
     Chase,
-    GoZone
+    GoZone,
+    Patrol,
+    Runaway
 }

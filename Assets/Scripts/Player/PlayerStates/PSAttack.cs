@@ -20,10 +20,10 @@ public class PSAttack<T> : PSBase<T>
         _timer = _seconds;
         _attack.Attack();
     }
-    public override void Execute(Vector2 direction)
+    public override void Execute()
     {
-        base.Execute(direction);
-        _move.Move(direction, _moveSpeed);
+        base.Execute();
+        _move.Move(_moveSpeed);
         _timer -= Time.deltaTime;
         if (_timer < 0)
         {

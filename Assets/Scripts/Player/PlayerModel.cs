@@ -1,47 +1,52 @@
 using System;
-using Interfaces;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-namespace Player
+public class PlayerModel : MonoBehaviour, IMove, IAttack
 {
-    public class PlayerModel : MonoBehaviour, IMove, IAttack
+
+    private Rigidbody2D _rb;
+    private Vector2 _moveInput;
+    private float _speedModifier = 1;
+    private Vector2 _lastDirection;
+    private PlayerInput _playerInput;
+    private InputAction _direction;
+
+
+    Action _onAttack = delegate { };
+    public Action OnAttack { get => _onAttack; set => _onAttack = value; }
+
+    public Vector2 Position => transform.position;
+
+    protected virtual void Awake()
     {
+        _rb = GetComponent<Rigidbody2D>();
+        _playerInput = GetComponent<PlayerInput>();
+        var actionMap = _playerInput.actions.FindActionMap("Player");
+        _direction = actionMap.FindAction("Move");
 
-        private Rigidbody2D _rb;
-        private Vector2 _moveInput;
-        private float _speedModifier = 1;
-        private Vector2 _lastDirection;
+    }
+    public virtual void Attack()
+    {
+        _onAttack();
+    }
 
+    public void ModifySpeed(float speed)
+    {
+        _speedModifier = speed;
+    }
 
-        Action _onAttack = delegate { };
-        public Action OnAttack { get => _onAttack; set => _onAttack = value; }
+    public void Dash(float dashForce)
+    {
+        _rb.linearVelocity = _lastDirection * dashForce * _speedModifier;
+    }
 
-        public Vector2 Position => transform.position;
-
-        protected virtual void Awake()
-        {
-            _rb = GetComponent<Rigidbody2D>();
-        }
-        public virtual void Attack()
-        {
-            _onAttack();
-        }
-
-        public void ModifySpeed(float speed)
-        {
-            _speedModifier = speed;
-        }
-
-        public void Dash(float dashForce)
-        {
-            _rb.linearVelocity = _lastDirection * (dashForce * _speedModifier);
-        }
-
-        public virtual void Move(Vector2 dir, float moveSpeed)
-        {
-            _moveInput = dir;
-            if (_moveInput != Vector2.zero) _lastDirection = _moveInput;
-            _rb.linearVelocity = _moveInput * (moveSpeed * _speedModifier);
-        }
+    public virtual void Move(float moveSpeed)
+    {
+        _moveInput = _direction.ReadValue<Vector2>();
+        if (_moveInput != Vector2.zero) _lastDirection = _moveInput;
+        _rb.linearVelocity = _moveInput * moveSpeed * _speedModifier;
     }
 }

@@ -1,8 +1,6 @@
-using Interfaces;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PSBase<T> : State<T>
+public class States_Base<T> : State<T>
 {
     protected IMove _move;
     protected ILook _look;
@@ -14,8 +12,5 @@ public class PSBase<T> : State<T>
         _look = p[1] as ILook;
         _attack = p[2] as IAttack;
     }
-    public override void Execute()
-    {
-        base.Execute();
-    }
+
 }
