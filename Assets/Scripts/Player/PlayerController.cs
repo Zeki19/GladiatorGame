@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System;
+using Interfaces;
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D _rigidbody;
-    [SerializeField] float _moveSpeed;
-    [SerializeField] float _dashforce;
-    [SerializeField] float _dashDuration;
-    [SerializeField] float _dashCooldown;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _dashforce;
+    [SerializeField] private float _dashDuration;
+    [SerializeField] private float _dashCooldown;
     [SerializeField] private float _dashInvincibility;
 
     private FSM<StateEnum> _fsm;
