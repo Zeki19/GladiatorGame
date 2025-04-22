@@ -37,6 +37,11 @@ namespace Dummy
             throw new NotImplementedException();
         }
 
+        public void MoveToPoint(Vector2 point)
+        {
+            throw new NotImplementedException();
+        }
+
         public Vector2 Position { get; }
 
         public void OnDrawGizmosSelected()

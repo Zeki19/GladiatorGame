@@ -1,16 +1,32 @@
+using System;
+using Interfaces;
 using UnityEngine;
 
-public class HoundModel : MonoBehaviour
+public class HoundModel : MonoBehaviour, IMove, IAttack
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float moveSpeed = 5f;
+    
+    
+    public void ModifySpeed(float speed)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Move(float moveSpeed)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Dash(float dashForce)
     {
-        
+        throw new NotImplementedException();
     }
+
+    public Vector2 Position { get; }
+    public void Attack()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Action OnAttack { get; set; }
 }

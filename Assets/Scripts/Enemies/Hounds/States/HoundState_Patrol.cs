@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class HoundState_Patrol<T> : States_Base<T>
 {
-    public override void Enter()
+    public override void Execute()
     {
-        base.Enter();
-        Debug.Log("Hound enters patrol state");
+        base.Execute();
+        _move.Move(5f);
     }
 }
