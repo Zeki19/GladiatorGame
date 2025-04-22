@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
 
 public class HoundController : MonoBehaviour

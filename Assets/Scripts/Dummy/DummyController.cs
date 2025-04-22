@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
-namespace Enemy
+namespace Dummy
 {
     public class DummyController : MonoBehaviour
     {
