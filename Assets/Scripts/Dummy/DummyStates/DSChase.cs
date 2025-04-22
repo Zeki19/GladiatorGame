@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DSChase<T> : DSBase<T>
+public class DSChase<T> : States_Base<T>
 {
     private Transform _target;
     private float _speed;

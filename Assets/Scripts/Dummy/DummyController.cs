@@ -48,7 +48,7 @@ namespace Enemy
             var attackState = new DSAttack<StateEnum>();
             var chaseState = new DSChase<StateEnum>(target, 5f);
 
-            var stateList = new List<DSBase<StateEnum>>
+            var stateList = new List<States_Base<StateEnum>>
             {
                 idleState,
                 attackState,

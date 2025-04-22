@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DSAttack<T> : DSBase<T>
+public class DSAttack<T> : States_Base<T>
 {
     public override void Enter()
     {

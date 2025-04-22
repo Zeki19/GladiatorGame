@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DSBase<T> : State<T>
+public class States_Base<T> : State<T>
 {
     protected IMove _move;
     protected ILook _look;
