@@ -15,6 +15,14 @@ public class HoundController : MonoBehaviour
 
     [SerializeField] private HoundsCamp homeCamp;
     
+    
+    
+    private float timer = 0f;
+    private bool isCounting = false;
+    
+    
+    
+    
     private void Awake()
     {
         _model = GetComponent<HoundModel>();
@@ -30,16 +38,26 @@ public class HoundController : MonoBehaviour
     {
         _fsm.OnExecute();
         _root.Execute();
+        
+        if (!isCounting) return;
+        timer -= Time.deltaTime;
+        if (timer <= 0f)
+        {
+            isCounting = false;
+            timer = 0f;
+            _fsm.Transition(StateEnum.Patrol);
+        }
     }
 
     void InitializeSteering() //No nesecitamos esto, solo el NEW en el State. Pero lo usamos para probar.
     {
         var seek = new Seek(target.transform, _model.transform);
+        var patrolToPoint = new PatrolToPoint(homeCamp.GetRandomPatrolPoint(), _model.Position);
         var flee = new Flee(target.transform, _model.transform);
         var evade = new Evade(_model.transform, target);
-        
-        _steering = evade;
     }
+
+    private HoundState_Idle<StateEnum> _idleState;
     void InitializedFsm()
     {
                 
@@ -50,14 +68,15 @@ public class HoundController : MonoBehaviour
         var attack = GetComponent<IAttack>();
             
         var idleState = new HoundState_Idle<StateEnum>();
-        var patrolState = new HoundState_Patrol<StateEnum>(new Seek(target.transform, _model.transform));
+        _idleState = idleState;
+        var patrolState = new HoundState_Patrol<StateEnum>(new PatrolToPoint(homeCamp.GetRandomPatrolPoint(), _model.Position));
         var attackState = new HoundState_Attack<StateEnum>(target.transform);
-        var runawayState = new HoundState_Runaway<StateEnum>(homeCamp.CampCenter);
+        var runawayState = new HoundState_Runaway<StateEnum>(new PatrolToPoint(homeCamp.CampCenter, _model.Position),homeCamp.CampCenter);
         var chaseState = new HoundState_Chase<StateEnum>(new Pursuit(_model.transform, target, timePred));
     
         var stateList = new List<States_Base<StateEnum>>
         {
-            idleState,
+            _idleState,
             patrolState,
             attackState,
             runawayState,
@@ -68,6 +87,7 @@ public class HoundController : MonoBehaviour
         
         patrolState.AddTransition(StateEnum.Idle, idleState);
         patrolState.AddTransition(StateEnum.Chase, chaseState);
+        patrolState.AddTransition(StateEnum.Runaway,runawayState);
         
         chaseState.AddTransition(StateEnum.Attack, attackState);
         chaseState.AddTransition(StateEnum.Runaway, runawayState);
@@ -82,25 +102,35 @@ public class HoundController : MonoBehaviour
             t.Initialize(move, look, attack);
         }
             
-        _fsm.SetInit(patrolState);
+        _fsm.SetInit(idleState);
+        
     }
     
     void InitializedTree()
     {
-        var aIdle = new ActionNode(()=> _fsm.Transition(StateEnum.Idle));
-        var aPatrol = new ActionNode(() => _fsm.Transition(StateEnum.Patrol));
+        var aIdle = new ActionNode(() =>
+        {
+            _fsm.Transition(input: StateEnum.Idle);
+            StartTimer(); //already preset in 4sec
+        });
+        var aPatrol = new ActionNode(() =>
+        {
+            _fsm.Transition(StateEnum.Patrol);
+            //StartTimer(8);
+        });
         var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
         var aRunaway = new ActionNode(() => _fsm.Transition(StateEnum.Runaway));
         var aChase = new ActionNode(() => _fsm.Transition(StateEnum.Chase));
     
         var qFarFromCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, aPatrol);
-        var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, qFarFromCamp);
-        var qTargetInView = new QuestionNode(QuestionTargetInView, aChase, aAttack);
-        var qLastAction = new QuestionNode(QuestionLastAction, qFarFromCamp, aPatrol);
-        
-        _root = qTargetInView;
+        var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, aChase);
+        var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, qFarFromCamp);
+        var qIsStillIdle = new QuestionNode(QuestionIsStillIdle, aIdle, qTargetInView);
+
+        _root = qIsStillIdle;
     }
-    
+
+
     bool QuestionCanAttack()
     {
         return Vector2.Distance(_model.Position,target.position) <= _model.attackRange;
@@ -110,14 +140,21 @@ public class HoundController : MonoBehaviour
         return target != null && _los.LOS(target.transform);
     }
     
-    bool QuestionLastAction()
+    bool QuestionIsStillIdle()
     {
-        return false;
+        return _fsm.CurrentState() == _idleState;
     }
 
     bool QuestionFarFromCamp()
     {
         return homeCamp.IsFarFromCamp(transform.position);
+    }
+    
+    private void StartTimer(float duration = 4f)
+    {
+        if (isCounting) return;
+        timer = duration;
+        isCounting = true;
     }
 }
 

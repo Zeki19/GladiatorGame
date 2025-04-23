@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ILook
 {
-    void LookDir();
+    void LookDir(Vector2 dir);
 }

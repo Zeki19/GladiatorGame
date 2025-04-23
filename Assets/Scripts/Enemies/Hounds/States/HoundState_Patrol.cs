@@ -8,7 +8,11 @@ public class HoundState_Patrol<T> : States_Base<T>
     {
         _steering = steering;
     }
-
+    public override void Enter()
+    {
+        base.Enter();
+        Debug.Log("Hound enters Patrol state");
+    }
     public override void Execute()
     {
         base.Execute();

@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fabdbeb0a1ec2c4e9067ff31711d58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 2
 --- !u!114 &2132518119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1031,7 +1032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de5a09d761df2446b78b5f18f3a3aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2
   attackRange: 1
 --- !u!114 &2132518120
 MonoBehaviour:
@@ -1045,7 +1046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46aa2b089fbdc864bb9a2da89514b579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1212377216}
+  target: {fileID: 1212377210}
   timePred: 0
   homeCamp: {fileID: 1248064634}
 --- !u!212 &2132518121
@@ -1112,7 +1113,7 @@ Transform:
   m_GameObject: {fileID: 2132518116}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

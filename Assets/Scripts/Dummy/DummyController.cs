@@ -12,6 +12,8 @@ namespace Dummy
         private LineOfSight _los;
         private ITreeNode _root;
 
+        private StateEnum _currentState;
+
         private void Awake()
         {
             _model = GetComponent<DummyModel>();

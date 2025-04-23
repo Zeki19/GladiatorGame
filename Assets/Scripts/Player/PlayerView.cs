@@ -21,7 +21,7 @@ public class PlayerView : MonoBehaviour, ILook
         //LookDir();
     }
 
-    public void LookDir()
+    public void LookDir(Vector2 dir)
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Vector2 lookDir = (mouseWorldPos - transform.position);
