@@ -16,6 +16,7 @@ public class HoundController : MonoBehaviour
 
     [SerializeField] private HoundsCamp homeCamp;
     
+    //Gova
     private Dictionary<AttackType, float> _attacks = new Dictionary<AttackType, float>
     {
         { AttackType.Normal, 60f },
@@ -74,7 +75,7 @@ public class HoundController : MonoBehaviour
         var idleState = new HoundState_Idle<StateEnum>();
         _idleState = idleState;
         var patrolState = new HoundState_Patrol<StateEnum>(new PatrolToPoint(homeCamp.GetRandomPatrolPoint(), _model.Position));
-        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle);
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle);//Gova
         var runawayState = new HoundState_Runaway<StateEnum>(new PatrolToPoint(homeCamp.CampCenter, _model.Position),homeCamp.CampCenter);
         var chaseState = new HoundState_Chase<StateEnum>(new Pursuit(_model.transform, target, timePred));
     
@@ -98,7 +99,7 @@ public class HoundController : MonoBehaviour
             
         attackState.AddTransition(StateEnum.Chase, chaseState);
         attackState.AddTransition(StateEnum.Runaway, runawayState);
-        attackState.AddTransition(StateEnum.Idle, idleState);
+        attackState.AddTransition(StateEnum.Idle, idleState);//Gova
         
         runawayState.AddTransition(StateEnum.Idle, idleState);
         
@@ -125,7 +126,7 @@ public class HoundController : MonoBehaviour
         });
         var aRunaway = new ActionNode(() => _fsm.Transition(StateEnum.Runaway));
         var aChase = new ActionNode(() => _fsm.Transition(StateEnum.Chase));
-        var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
+        var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));//Gova
         
         var qFarFromCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, aPatrol);
         var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, aChase);

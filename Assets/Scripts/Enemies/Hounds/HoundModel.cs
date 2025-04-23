@@ -23,7 +23,7 @@ public class HoundModel : MonoBehaviour, IMove, IAttack
         throw new NotImplementedException();
     }
 
-    public Vector2 Position => transform.position;
+    public Vector2 Position => transform.position;//Gova
     public void Attack()
     {
         throw new NotImplementedException();
