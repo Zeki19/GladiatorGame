@@ -486,6 +486,7 @@ GameObject:
   - component: {fileID: 1212377219}
   - component: {fileID: 1212377218}
   - component: {fileID: 1212377220}
+  - component: {fileID: 1212377221}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -767,6 +768,35 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1212377221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212377209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b8451e6a5e7c24da253935d4a5454b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedManagerRaw: {fileID: 1212377219}
+  damageManagerRaw: {fileID: 1212377219}
+  showTankSettings: 1
+  tankPercentage: 0
+  tankAttack: 0
+  tankDefence: 0
+  tankSpeed: 0
+  showBalancedSettings: 1
+  balancedPercentage: 0
+  balancedAttack: 0
+  balancedDefence: 0
+  balancedSpeed: 0
+  showGlassCannonSettings: 1
+  glassCannonPercentage: 0
+  glassCannonAttack: 0
+  glassCannonDefence: 0
+  glassCannonSpeed: 0
 --- !u!1 &1318266914
 GameObject:
   m_ObjectHideFlags: 0
