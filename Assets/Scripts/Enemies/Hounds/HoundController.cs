@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Enemies.Hounds.States;
 using Interfaces;
 using UnityEngine;
 
@@ -15,13 +16,16 @@ public class HoundController : MonoBehaviour
 
     [SerializeField] private HoundsCamp homeCamp;
     
+    private Dictionary<AttackType, float> _attacks = new Dictionary<AttackType, float>
+    {
+        { AttackType.Normal, 60f },
+        { AttackType.Charge, 30f },
+        { AttackType.Lunge, 10f }
+    };
     
     
     private float timer = 0f;
     private bool isCounting = false;
-    
-    
-    
     
     private void Awake()
     {
@@ -70,7 +74,7 @@ public class HoundController : MonoBehaviour
         var idleState = new HoundState_Idle<StateEnum>();
         _idleState = idleState;
         var patrolState = new HoundState_Patrol<StateEnum>(new PatrolToPoint(homeCamp.GetRandomPatrolPoint(), _model.Position));
-        var attackState = new HoundState_Attack<StateEnum>(target.transform);
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle);
         var runawayState = new HoundState_Runaway<StateEnum>(new PatrolToPoint(homeCamp.CampCenter, _model.Position),homeCamp.CampCenter);
         var chaseState = new HoundState_Chase<StateEnum>(new Pursuit(_model.transform, target, timePred));
     
@@ -94,6 +98,7 @@ public class HoundController : MonoBehaviour
             
         attackState.AddTransition(StateEnum.Chase, chaseState);
         attackState.AddTransition(StateEnum.Runaway, runawayState);
+        attackState.AddTransition(StateEnum.Idle, idleState);
         
         runawayState.AddTransition(StateEnum.Idle, idleState);
         
@@ -118,10 +123,10 @@ public class HoundController : MonoBehaviour
             _fsm.Transition(StateEnum.Patrol);
             //StartTimer(8);
         });
-        var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
         var aRunaway = new ActionNode(() => _fsm.Transition(StateEnum.Runaway));
         var aChase = new ActionNode(() => _fsm.Transition(StateEnum.Chase));
-    
+        var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
+        
         var qFarFromCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, aPatrol);
         var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, aChase);
         var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, qFarFromCamp);
