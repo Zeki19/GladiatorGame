@@ -21,6 +21,8 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
 
     public Vector2 Position => transform.position;
 
+    public float damageModifier { get; set; }
+
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -43,7 +45,10 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
     {
         _rb.linearVelocity = _lastDirection * dashForce * _speedModifier;
     }
-
+    public void ModifyDamage(float damage)
+    {
+        damageModifier += damage;
+    }
     public virtual void Move(float moveSpeed)
     {
         _moveInput = _direction.ReadValue<Vector2>();

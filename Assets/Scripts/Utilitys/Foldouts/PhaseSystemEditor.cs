@@ -1,3 +1,4 @@
+using Interfaces;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,11 +9,26 @@ public class PhaseSystemEditor : Editor
     {
         PhaseSystem script = (PhaseSystem)target;
 
-        // How to make regular fields
-        /*
-            script.someName = EditorGUILayout.TextField("Name", script.someName);
-            script.someID = EditorGUILayout.IntField("ID", script.someID);
-        */
+        EditorGUILayout.LabelField("Managers", EditorStyles.boldLabel);
+
+        script.speedManagerRaw = (MonoBehaviour)EditorGUILayout.ObjectField(
+            "Speed Manager (IMove)",
+            script.speedManagerRaw,
+            typeof(MonoBehaviour),
+            true);
+
+        script.damageManagerRaw = (MonoBehaviour)EditorGUILayout.ObjectField(
+            "Damage Manager (IAttack)",
+            script.damageManagerRaw,
+            typeof(MonoBehaviour),
+            true);
+
+        if (script.speedManagerRaw != null && !(script.speedManagerRaw is IMove))
+            EditorGUILayout.HelpBox("Speed Manager must implement IMove!", MessageType.Error);
+
+        if (script.damageManagerRaw != null && !(script.damageManagerRaw is IAttack))
+            EditorGUILayout.HelpBox("Damage Manager must implement IAttack!", MessageType.Error);
+
         EditorGUILayout.Space();
 
         // Foldout for Group A
@@ -38,6 +54,7 @@ public class PhaseSystemEditor : Editor
             script.balancedSpeed = EditorGUILayout.FloatField("Speed", script.balancedSpeed);
             EditorGUI.indentLevel--;
         }
+
         // Foldout for Group C
         script.showGlassCannonSettings = EditorGUILayout.Foldout(script.showGlassCannonSettings, "GlassCannon Phase", true);
         if (script.showGlassCannonSettings)

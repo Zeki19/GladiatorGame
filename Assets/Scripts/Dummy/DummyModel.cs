@@ -9,6 +9,8 @@ namespace Dummy
         public float _speed;
         public float attackRange;
         public LayerMask enemyMask;
+        public Vector2 Position { get; }
+        public float damageModifier { get; set; }
     
         public void Attack()
         {
@@ -36,13 +38,16 @@ namespace Dummy
         {
             throw new NotImplementedException();
         }
-
-        public Vector2 Position { get; }
+        public void ModifyDamage(float damage)
+        {
+            throw new NotImplementedException();
+        }
 
         public void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
+
     }
 }

@@ -1,7 +1,18 @@
+using Interfaces;
+using System;
 using UnityEngine;
 
 public class PhaseSystem : HealthSystem
 {
+    // Serialized fields for inspector assignment
+    [SerializeField] public MonoBehaviour speedManagerRaw;
+    [SerializeField] public MonoBehaviour damageManagerRaw;
+
+    // Public interface accessors
+    public IMove speedManager => speedManagerRaw as IMove;
+    public IAttack damageManager => damageManagerRaw as IAttack;
+
+
     public bool showTankSettings = true;
      public int tankPercentage;
      public float tankAttack;
@@ -25,30 +36,31 @@ public class PhaseSystem : HealthSystem
     {
 
     }
-    #region EVENTS
-    //OnDead
-    //OnHeal
-    //OnDamage
-    #endregion
-
     void Start()
     {
-        
+        OnHeal += _ => CheckState(); // "_" Is for ignoring the float parameter
+        OnDamage += _ => CheckState();
     }
     void CheckState()
     {
         float healthPercentage = GetCurrentHealthPercentage();
-        if (tankPercentage < healthPercentage)
+        if (balancedPercentage < healthPercentage)
         {
-            //Tank
+            damageManager.ModifyDamage(tankAttack);
+            SetDefence(tankDefence);
+            speedManager.ModifySpeed(tankSpeed);
         }
-        else if (balancedPercentage < healthPercentage)
+        else if (glassCannonPercentage < healthPercentage)
         {
-            //Balanced
+            damageManager.ModifyDamage(balancedAttack);
+            SetDefence(balancedDefence);
+            speedManager.ModifySpeed(balancedSpeed);
         }
         else 
         {
-            //GlassCannon
+            damageManager.ModifyDamage(glassCannonAttack);
+            SetDefence(glassCannonDefence);
+            speedManager.ModifySpeed(glassCannonSpeed);
         }
     }
 }

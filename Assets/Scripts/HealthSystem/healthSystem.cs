@@ -5,7 +5,7 @@ public class HealthSystem : MonoBehaviour, IHealth
     private float _maxHealth;
     private float _currentHealth;
     private bool _isInvulnerable;
-
+    private float _defence;
     public float maxHealth
     {
         get => _maxHealth;
@@ -16,11 +16,15 @@ public class HealthSystem : MonoBehaviour, IHealth
         get => _currentHealth;
         private set => _currentHealth = Mathf.Clamp(value, 0, maxHealth);
     }
-
     public bool isInvulnerable
     {
         get => _isInvulnerable;
         set => _isInvulnerable = value;
+    }
+    public float defence
+    {
+        get => _defence;
+        private set => _defence = Mathf.Clamp(value, -2, 2);
     }
 
     #region EVENTS
@@ -53,6 +57,7 @@ public class HealthSystem : MonoBehaviour, IHealth
         maxHealth = MaxHealth;
         currentHealth = maxHealth;
         isInvulnerable = false;
+        defence = 1;
     }
 
     /// <summary>
@@ -106,8 +111,10 @@ public class HealthSystem : MonoBehaviour, IHealth
     public void TakeDamage(float damageAmount)
     {
         if (isInvulnerable) return;
-        currentHealth -= damageAmount;
-        OnDamage?.Invoke(damageAmount);
+
+        float actualDamageReceived = damageAmount * (2 - defence);
+        currentHealth -= actualDamageReceived;
+        OnDamage?.Invoke(actualDamageReceived);
         if (currentHealth <= 0)
         {
             Kill();
@@ -130,6 +137,11 @@ public class HealthSystem : MonoBehaviour, IHealth
         {
             Debug.LogError("Did not die!!!");
         }
+    }
+
+    public void SetDefence(float defenceModifier)
+    {
+        defence += defenceModifier;
     }
 
     /// <summary>
