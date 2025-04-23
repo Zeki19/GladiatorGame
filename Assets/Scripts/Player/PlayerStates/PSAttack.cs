@@ -12,7 +12,7 @@ public class PSAttack<T> : PSBase<T>
     {
         _inputFinish = inputFinish;
         _seconds = seconds;
-        _moveSpeed = moveSpeed;
+        _moveSpeed = moveSpeed*.1f;
     }
     public override void Enter()
     {

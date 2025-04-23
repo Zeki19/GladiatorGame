@@ -3,93 +3,72 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Weapons
 {
     public class BasicSwing : Attack
     {
-        public float RotationStartingPoint;
-        public float SwingAngle;
-        public float AttackSpeed;
-        public float Range;
-        public GameObject weapon;
-        public WeaponTest test;
-        public bool attack=false;
-        public AnimationCurve curve;
-        private Vector3 _startingPosition;
-        private Vector3 _startingRotation;
+        private GameObject _weapon;
+        [SerializeField] private float rotationStartingPoint;
+        [SerializeField] private float swingAngle;
+        private bool _attack;
         private bool _oneTime =true;
+        private Vector3 _startingPosition;
+        private Vector3 _attackPosition;
         private InputAction _attackAction;
-        [SerializeField]private PlayerInput _playerInput;
-        float currentAngle;
-        float targetAngle ;
-        float speed = 270f;
-        private Vector3 parentStartingAngle;
-
-        private void Start()
+        private float _currentAngle;
+        private float _targetAngle ;
+        private Vector3 _parentStartingAngle;
+        
+        public BasicSwing(float StartingPoint, float swingAngle)
         {
-            var actionMap = _playerInput.actions.FindActionMap("Player");
-            _attackAction = actionMap.FindAction("Attack");
+            rotationStartingPoint = StartingPoint;
+            this.swingAngle = swingAngle;
+        }
+        public override void MakeAttack(Weapon weapon)
+        {
+            if (_oneTime)
+            {
+                _weapon = weapon.WeaponGameObject;
+                _oneTime = false;
+                _startingPosition = _weapon.transform.localPosition;
+                _currentAngle = rotationStartingPoint;
+                _targetAngle = rotationStartingPoint + swingAngle;
+                _weapon.transform.localRotation = Quaternion.Euler(0, 0, rotationStartingPoint);
+                _weapon.transform.position += _weapon.transform.up * weapon._range;
+                _parentStartingAngle = _weapon.transform.parent.eulerAngles;
+                _attackPosition = _weapon.transform.position;
+            }
+            if(_currentAngle<_targetAngle)
+            {
+                _currentAngle = Mathf.MoveTowards(_currentAngle, _targetAngle, weapon._attackSpeed * Time.deltaTime);
+                _weapon.transform.localRotation = Quaternion.Euler(0, 0, _currentAngle);
+                var offset =_parentStartingAngle-_weapon.transform.parent.eulerAngles;
+                _weapon.transform.localEulerAngles += offset;
+                _weapon.transform.position = _attackPosition;
+            }
+            else
+            {
+                _attack = false;
+                _oneTime = true;
+                _weapon.transform.localRotation =quaternion.identity;
+                _weapon.transform.localPosition =_startingPosition;
+            }
         }
 
-        private void Update()
+        private Transform Attack(float range, float attackSpeed)
         {
             if (_attackAction.triggered)
             {
-                attack = true;
+                _attack = true;
             }
-            if ( attack)
+            if ( _attack)
             {
-                if (_oneTime)
-                {
-                    _startingPosition = transform.localPosition;
-                    weapon.transform.position += transform.up * Range;
-                    transform.localRotation = Quaternion.Euler(0, 0, RotationStartingPoint);
-                    currentAngle = RotationStartingPoint;
-                    _startingRotation = weapon.transform.localEulerAngles;
-                    _oneTime = false;
-                    targetAngle = RotationStartingPoint + SwingAngle;
-                    parentStartingAngle = transform.parent.eulerAngles;
-                }
-                if(currentAngle<targetAngle)
-                {
-                    currentAngle = Mathf.MoveTowards(currentAngle, targetAngle, AttackSpeed * Time.deltaTime);
-                    transform.localRotation = Quaternion.Euler(0, 0, currentAngle+parentStartingAngle.z-transform.parent.rotation.eulerAngles.z);
-                    transform.parent.eulerAngles = parentStartingAngle;
-
-                }
-                else
-                {
-                    attack = false;
-                    _oneTime = true;
-                    weapon.transform.localRotation =quaternion.identity;
-                    weapon.transform.localPosition =_startingPosition;
-                }
+                
             }
-        }
 
-        [ContextMenu("swing")]
-        public override void MakeAttack()
-        {
-            base.MakeAttack();
-            test.corrutineUser(SwingAction());
-        }
-        IEnumerator SwingAction()
-        {
-            Debug.Log("Test");
-            float initialZRot =weapon.transform.rotation.eulerAngles.z;
-            while (Mathf.Abs(weapon.transform.rotation.eulerAngles.z)<(initialZRot+SwingAngle))
-            {
-                weapon.transform.Rotate(0,0,AttackSpeed*Time.deltaTime);
-                yield return 0;
-            }
-        
-        }
-        float NormalizeAngle(float angle)
-        {
-            angle %= 360f;
-            if (angle > 360f) angle -= 360f;
-            return angle;
+            return _weapon.transform;
         }
     }
     

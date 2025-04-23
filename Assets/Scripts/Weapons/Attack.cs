@@ -1,10 +1,6 @@
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-public abstract class Attack: MonoBehaviour
+public abstract class Attack
 {
-    public virtual void MakeAttack()
-    {
-        
-    }
+    public abstract void MakeAttack(Weapon weapon);
 }

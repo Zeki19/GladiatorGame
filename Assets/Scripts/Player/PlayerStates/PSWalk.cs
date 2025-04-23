@@ -11,10 +11,6 @@ public class PSWalk<T> : PSBase<T>
         _inputToStopWalk = inputToIdle;
         _moveSpeed = moveSpeed;
     }
-    public override void Enter()
-    {
-        base.Enter();
-    }
 
     public override void Execute()
     {

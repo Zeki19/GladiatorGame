@@ -1,6 +1,8 @@
 using Factory.Essentials;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utilitys.Factory.WeaponFactory;
+using Weapons;
 
 public class Weapon:IConfigurable<SoWeapon>
 {
@@ -9,12 +11,12 @@ public class Weapon:IConfigurable<SoWeapon>
     public GameObject WeaponGameObject;
     private string _weaponName;
     private float _baseDamage;
-    private float _attackSpeed;
-    private float _range;
+    public float _attackSpeed;
+    public float _range;
     private int _durability;
     private int _durabilityStandardLoss;
     private int _durabilityChargeLoss;
-    private enum _attackType{};
+    //private enum _attackType{};
     private float _knockbackForce;
     private float _slowPercent;
     private float _changeThreshold;
@@ -24,11 +26,12 @@ public class Weapon:IConfigurable<SoWeapon>
     private bool _canAttack;
     //private Player _owner;
     private float _chargeMeter;
-    //private Attack BaseAttack;
-    //private Attack ChargeAttack;
+    private Attack _baseSoAttack;
+    private Attack _chargeSoAttack;
 
-    public Weapon()
+    public void basicAttack()
     {
+        _baseSoAttack.MakeAttack(this);
     }
 
     public void Configure(SoWeapon config)
@@ -46,6 +49,7 @@ public class Weapon:IConfigurable<SoWeapon>
         _slowPercent = config.slowPercent;
         _changeThreshold = config.changeThreshold;
         _chargePerAttack = config.chargePerAttack;
+        _baseSoAttack = config.basicAttack.Clone();
     }
     
 }

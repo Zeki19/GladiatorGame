@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utilitys.Factory.WeaponFactory;
+using Weapons;
 
 public class WeaponTest : MonoBehaviour
 {

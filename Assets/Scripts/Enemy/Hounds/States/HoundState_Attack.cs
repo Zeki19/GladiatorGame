@@ -11,6 +11,6 @@ public class HoundState_Attack<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Hound enters Attack state");
+        Debug.Log("Hound enters SOAttack state");
     }
 }
