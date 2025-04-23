@@ -10,6 +10,5 @@ public class DSAttack<T> : States_Base<T>
     public override void Execute()
     {
         base.Execute();
-        Debug.Log("RIVER");
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class HoundController : MonoBehaviour
 {
-    public Transform target;
+    public Rigidbody2D target;
     private FSM<StateEnum> _fsm;
     private HoundModel _model;
     private LineOfSight _los;
     private ITreeNode _root;
+    private ISteering _steering;
+
+    public float timePred;
 
     [SerializeField] private HoundsCamp homeCamp;
     
@@ -19,6 +22,7 @@ public class HoundController : MonoBehaviour
     }
     void Start()
     {
+        InitializeSteering();
         InitializedFsm();
         InitializedTree();
     }
@@ -26,6 +30,15 @@ public class HoundController : MonoBehaviour
     {
         _fsm.OnExecute();
         _root.Execute();
+    }
+
+    void InitializeSteering() //No nesecitamos esto, solo el NEW en el State. Pero lo usamos para probar.
+    {
+        var seek = new Seek(target.transform, _model.transform);
+        var flee = new Flee(target.transform, _model.transform);
+        var evade = new Evade(_model.transform, target);
+        
+        _steering = evade;
     }
     void InitializedFsm()
     {
@@ -37,25 +50,29 @@ public class HoundController : MonoBehaviour
         var attack = GetComponent<IAttack>();
             
         var idleState = new HoundState_Idle<StateEnum>();
-        var patrolState = new HoundState_Patrol<StateEnum>(); //The parameters should be adjusted to use the Camp.
-        var attackState = new HoundState_Attack<StateEnum>(target);
+        var patrolState = new HoundState_Patrol<StateEnum>(new Seek(target.transform, _model.transform));
+        var attackState = new HoundState_Attack<StateEnum>(target.transform);
         var runawayState = new HoundState_Runaway<StateEnum>(homeCamp.CampCenter);
-        
+        var chaseState = new HoundState_Chase<StateEnum>(new Pursuit(_model.transform, target, timePred));
     
         var stateList = new List<States_Base<StateEnum>>
         {
             idleState,
             patrolState,
             attackState,
-            runawayState
+            runawayState,
+            chaseState
         };
     
         idleState.AddTransition(StateEnum.Patrol, patrolState); 
         
         patrolState.AddTransition(StateEnum.Idle, idleState);
-        patrolState.AddTransition(StateEnum.Attack, attackState);
+        patrolState.AddTransition(StateEnum.Chase, chaseState);
+        
+        chaseState.AddTransition(StateEnum.Attack, attackState);
+        chaseState.AddTransition(StateEnum.Runaway, runawayState);
             
-        attackState.AddTransition(StateEnum.Patrol, patrolState);
+        attackState.AddTransition(StateEnum.Chase, chaseState);
         attackState.AddTransition(StateEnum.Runaway, runawayState);
         
         runawayState.AddTransition(StateEnum.Idle, idleState);
@@ -74,13 +91,14 @@ public class HoundController : MonoBehaviour
         var aPatrol = new ActionNode(() => _fsm.Transition(StateEnum.Patrol));
         var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
         var aRunaway = new ActionNode(() => _fsm.Transition(StateEnum.Runaway));
+        var aChase = new ActionNode(() => _fsm.Transition(StateEnum.Chase));
     
         var qFarFromCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, aPatrol);
         var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, qFarFromCamp);
-        var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, aIdle);
+        var qTargetInView = new QuestionNode(QuestionTargetInView, aChase, aAttack);
         var qLastAction = new QuestionNode(QuestionLastAction, qFarFromCamp, aPatrol);
         
-        _root = qCanAttack;
+        _root = qTargetInView;
     }
     
     bool QuestionCanAttack()

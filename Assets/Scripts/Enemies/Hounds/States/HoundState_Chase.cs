@@ -8,11 +8,10 @@ public class HoundState_Chase<T> : States_Base<T>
     {
         _steering = steering;
     }
-
     public override void Execute()
     {
         base.Execute();
         var dir = _steering.GetDir();
-        //_move.Move(dir.normalized);
+        _move.Move(dir.normalized);
     }
 }

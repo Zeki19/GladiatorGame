@@ -3,17 +3,17 @@ using UnityEngine;
 public class Pursuit : ISteering
 {
     private readonly Transform _self;
-    private readonly Rigidbody _target;
+    private readonly Rigidbody2D _target;
     public float TimePrediction { get; set; }
 
-    public Pursuit(Transform self, Rigidbody target, float timePrediction)
+    public Pursuit(Transform self, Rigidbody2D target, float timePrediction)
     {
         _self = self;
         _target = target;
         TimePrediction = timePrediction;
     }    
     
-    public Pursuit(Transform self, Rigidbody target)
+    public Pursuit(Transform self, Rigidbody2D target)
     {
         _self = self;
         _target = target;
@@ -23,7 +23,7 @@ public class Pursuit : ISteering
     {
         Vector2 point = _target.position + _target.linearVelocity; // Capaz falta sumarle un _target.transform.right?
         Vector2 dirToPoint = (point - (Vector2)_self.position).normalized;
-        Vector2 dirToTarget = (_target.position - _self.position).normalized;
+        Vector2 dirToTarget = (_target.position - (Vector2)_self.position).normalized;
         
         return Vector2.Dot(dirToPoint, dirToTarget) < 0 ? dirToTarget : dirToPoint;
     }

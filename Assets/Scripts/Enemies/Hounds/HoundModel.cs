@@ -15,7 +15,7 @@ public class HoundModel : MonoBehaviour, IMove, IAttack
 
     public void Move(Vector2 dir)
     {
-        
+        transform.Translate(dir.normalized * (moveSpeed * Time.deltaTime));
     }
 
     public void Dash(float dashForce)
