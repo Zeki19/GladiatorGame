@@ -2,19 +2,17 @@ using UnityEngine;
 
 public class FastEnemyBase<T> : State<T>
 {
-    protected Transform _selfTransform;
-    protected Transform _target;
-
-    public override void Initialize(params object[] args)
+    protected IMove _move;
+    protected ILook _look;
+    protected IAttack _attack;
+    protected IGoback _back;
+    public override void Initialize(params object[] p)
     {
-        base.Initialize(args);
-
-        _selfTransform = args[0] as Transform;
-        _target = args[3] as Transform;
-    }
-    public override void Execute(Vector2 direction)
-    {
-        base.Execute(direction);
+        base.Initialize(p);
+        _move = p[0] as IMove;
+        _look = p[1] as ILook;
+        _attack = p[2] as IAttack;
+        _back = p[3] as IGoback;
     }
 }
 

@@ -24,4 +24,11 @@ public class LineOfSight2D
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, obsMask);
         return hit.collider == null;
     }
+
+    public bool CanSee(Transform self, Transform target, float range, float angle, LayerMask obsMask)
+    {
+        return CheckRange(self, target, range) &&
+               CheckAngle(self, target, angle) &&
+               CheckView(self, target, obsMask);
+    }
 }
