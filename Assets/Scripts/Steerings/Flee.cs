@@ -6,10 +6,10 @@ public class Flee
     Transform _self;
     Transform _target;
 
-    public Seek(Transform _self, Transform _target)
+    public Flee(Transform self, Transform target)
     {
-        _self = _self;
-        _target = _target;
+        _self = self;
+        _target = target;
 
     }
 
@@ -20,7 +20,7 @@ public class Flee
         //a: self
         //b: target
 
-        return (_self.position - _target.position).normalized;
+        return ( _self.position- _target.position).normalized;
 
     }
 

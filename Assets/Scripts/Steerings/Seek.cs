@@ -9,10 +9,10 @@ public class Seek : ISteering
     Transform _self;
     Transform _target;
 
-    public Seek(Transform _self, Transform _target)
+    public Seek(Transform self, Transform target)
     {
-        _self = _self;
-        _target = _target;
+        _self = self;
+        _target = target;
 
     }
 
