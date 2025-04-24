@@ -16,7 +16,13 @@ public class HoundView : MonoBehaviour, ILook
     {
         if (dir == Vector2.zero) return;
 
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        float angle = Vector2.SignedAngle(Vector2.up, dir);
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
     }
 }

@@ -780,8 +780,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d79d504551aae244b0b18eafe2b5856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  campRadius: 10
-  limitMultiplier: 1
+  campRadius: 5
+  limitMultiplier: 1.5
 --- !u!4 &1248064635
 Transform:
   m_ObjectHideFlags: 0
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fabdbeb0a1ec2c4e9067ff31711d58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 5
+  rotationSpeed: 360
   _rb: {fileID: 2132518123}
 --- !u!114 &2132518119
 MonoBehaviour:
@@ -1117,7 +1117,8 @@ MonoBehaviour:
   target: {fileID: 1212377210}
   timePred: 0
   camp: {fileID: 1248064634}
-  timeToRested: 2
+  timeToRested: 1
+  timeToTired: 100
 --- !u!212 &2132518121
 SpriteRenderer:
   m_ObjectHideFlags: 0
