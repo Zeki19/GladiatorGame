@@ -14,10 +14,10 @@ public class HoundsCamp : MonoBehaviour
         return Vector2.Distance(position, CampCenter) > (limitMultiplier * campRadius);
     }
 
-    public Vector2 GetRandomPoint() //Nice to Upgrade
+    public Vector2 GetRandomPoint()
     {
-        Vector2 randomCircle = Random.insideUnitCircle * (campRadius);
-        return CampCenter + randomCircle;
+        Vector2 randomOffset = Random.insideUnitCircle * campRadius;
+        return CampCenter + randomOffset;
     }
     
     private void OnDrawGizmosSelected()

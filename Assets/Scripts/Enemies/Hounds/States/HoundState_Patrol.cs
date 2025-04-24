@@ -18,6 +18,6 @@ public class HoundState_Patrol<T> : States_Base<T>
         base.Execute();
         var dir = _steering.GetDir();
         _move.Move(dir.normalized);
-        _look.LookDir(dir.normalized);
+        //_look.LookDir(dir.normalized);
     }
 }
