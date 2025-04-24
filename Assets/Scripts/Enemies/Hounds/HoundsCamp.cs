@@ -25,7 +25,7 @@ public class HoundsCamp : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(CampCenter, campRadius);
         
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(CampCenter, campRadius * limitMultiplier );
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(CampCenter, campRadius * limitMultiplier );
     }
 }

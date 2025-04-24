@@ -21,12 +21,6 @@ public class HoundState_Attack<T> : States_Base<T>
         _inputFinish = inputFinish;
         
     }
-
-    public HoundState_Attack()
-    {
-        
-    }
-    
     public override void Enter()
     { 
         base.Enter();

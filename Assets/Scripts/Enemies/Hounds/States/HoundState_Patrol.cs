@@ -7,7 +7,6 @@ public class HoundState_Patrol<T> : States_Base<T>
     {
         _steering = steering;
     }
-    
     public override void Enter()
     {
         base.Enter();
@@ -17,7 +16,11 @@ public class HoundState_Patrol<T> : States_Base<T>
     {
         base.Execute();
         var dir = _steering.GetDir();
-        _move.Move(dir.normalized);
-        _look.LookDir(dir.normalized);
+        _move.Move(dir);
+        _look.LookDir(dir);
+    }
+    public void ChangeSteering(ISteering newSteering)
+    {
+        _steering = newSteering;
     }
 }
