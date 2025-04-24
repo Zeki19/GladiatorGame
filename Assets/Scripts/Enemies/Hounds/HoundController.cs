@@ -90,7 +90,7 @@ public class HoundController : MonoBehaviour
         var idleState = new HoundState_Idle<StateEnum>();
         var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering);
         var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering);
-        var attackState = new HoundState_Attack<StateEnum>(); //Hay que implementar lo de juani
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle);
 
         _idleState = idleState;
         _patrolState = patrolState;
