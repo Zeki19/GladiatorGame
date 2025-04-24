@@ -5,17 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Steerings/ToPoint.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Steerings/ToPoint.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dummy/DummyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dummy/DummyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dummy/DummyModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dummy/DummyModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundsCamp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundsCamp.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Chase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Chase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Patrol.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Patrol.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Runaway.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Runaway.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interfaces/ILook.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Interfaces/ILook.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/StateMachine/FSM.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StateMachine/FSM.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LineOfSight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LineOfSight.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steerings/Flee.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steerings/Flee.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steerings/PatrolToPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steerings/PatrolToPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steerings/PatrolToPoint.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steerings/PatrolToPoint.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steerings/Seek.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steerings/Seek.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +126,7 @@
       <workItem from="1745371119752" duration="1199000" />
       <workItem from="1745373930177" duration="1508000" />
       <workItem from="1745383735281" duration="4498000" />
+      <workItem from="1745418557137" duration="29860000" />
     </task>
     <servers />
   </component>

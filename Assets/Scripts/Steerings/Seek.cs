@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Seek : ISteering
 {
-    private readonly Transform _target;
-    private readonly Transform _self;
+    private readonly Vector2 _target;
+    private readonly Vector2 _self;
  
-    public Seek(Transform target, Transform self)
+    public Seek(Vector2 target, Vector2 self)
     {
         _target = target;
         _self = self;
@@ -13,6 +13,6 @@ public class Seek : ISteering
 
     public Vector2 GetDir()
     {
-        return (_target.position - _self.position).normalized;
+        return (_target - _self).normalized;
     }
 }

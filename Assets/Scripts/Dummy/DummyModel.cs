@@ -37,7 +37,7 @@ namespace Dummy
             throw new NotImplementedException();
         }
 
-        public Vector2 Position { get; }
+        public Vector2 Position => transform.position;
 
         public void OnDrawGizmosSelected()
         {

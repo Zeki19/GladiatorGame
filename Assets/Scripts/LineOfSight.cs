@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
@@ -7,6 +8,12 @@ public class LineOfSight : MonoBehaviour
     public float range;
     public float angle;
     public LayerMask obstacleMask;
+    private Vector2 _forward;
+
+    private void Awake()
+    {
+        _forward = transform.up;
+    }
 
     public bool CheckRange(Transform target)
     {
@@ -18,9 +25,10 @@ public class LineOfSight : MonoBehaviour
         float distance = dir.magnitude;
         return distance <= range;
     }
-    public bool CheckAngle(Transform target)
+
+    private bool CheckAngle(Transform target)
     {
-        return CheckAngle(target, transform.right); //Usamos RIGHT xq en 2D no hay forward.
+        return CheckAngle(target, _forward);
     }
     private bool CheckAngle(Transform target, Vector2 front)
     {
@@ -45,8 +53,9 @@ public class LineOfSight : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position,range);
         
         Gizmos.color = Color.yellow;
+
+        var forward = transform.up;
         
-        Vector2 forward = transform.right;
         Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, -angle / 2f) * forward * range);
         Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, angle / 2f) * forward * range);
     }

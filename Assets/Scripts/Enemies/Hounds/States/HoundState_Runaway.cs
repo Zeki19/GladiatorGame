@@ -4,11 +4,9 @@ using Vector2 = UnityEngine.Vector2;
 
 public class HoundState_Runaway<T> : States_Base<T>
 {
-    private Vector2 _destination;
     private ISteering _steering;
-    public HoundState_Runaway(ISteering steering,Vector2 point)
+    public HoundState_Runaway(ISteering steering )
     {
-        _destination = point;
         _steering = steering;
     }
     

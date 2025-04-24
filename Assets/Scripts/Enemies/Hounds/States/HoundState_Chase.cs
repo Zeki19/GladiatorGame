@@ -20,6 +20,11 @@ public class HoundState_Chase<T> : States_Base<T>
         base.Execute();
         var dir = _steering.GetDir();
         _move.Move(dir.normalized);
-        //_look.LookDir(Vector2.right);
+        _look.LookDir(dir.normalized);
+    }
+    public void ChangeSteering(ISteering newSteering)
+    {
+        _steering = newSteering;
+        Debug.Log("New steer: " + _steering);
     }
 }

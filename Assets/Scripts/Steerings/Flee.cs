@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Flee : ISteering
 {
-    private readonly Transform _target;
-    private readonly Transform _self;
+    private readonly Vector2 _target;
+    private readonly Vector2 _self;
  
-    public Flee(Transform target, Transform self)
+    public Flee(Vector2 target, Vector2 self)
     {
         _target = target;
         _self = self;
@@ -13,6 +13,6 @@ public class Flee : ISteering
 
     public Vector2 GetDir()
     {
-        return (_self.position - _target.position).normalized;
+        return (_self - _target).normalized;
     }
 }
