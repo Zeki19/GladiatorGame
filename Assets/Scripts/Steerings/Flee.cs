@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Flee
 
+    //hace lo mismo que el seek pero al reves
 {
     Transform _self;
     Transform _target;
