@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HoundController : MonoBehaviour
 {
@@ -10,17 +9,29 @@ public class HoundController : MonoBehaviour
     private HoundModel _model;
     private LineOfSight _los;
     private ITreeNode _root;
+    private ISteering _steering;
+
+    public float timePred;
 
     [SerializeField] private HoundsCamp camp;
     [SerializeField] private float timeToRested;
+    private bool _rested = false;
     
     private float timer = 0f;
     private bool isCounting = false;
-    private bool _rested = false;
     
     private HoundState_Idle<StateEnum> _idleState;
     private HoundState_Patrol<StateEnum> _patrolState;
-  
+    
+    private Dictionary<AttackType, float> _attacks = new Dictionary<AttackType, float>
+    {
+        { AttackType.Normal, 60f },
+        { AttackType.Charge, 30f },
+        { AttackType.Lunge, 10f }
+    };
+    
+    
+    
     private void Awake()
     {
         _model = GetComponent<HoundModel>();
@@ -28,6 +39,7 @@ public class HoundController : MonoBehaviour
     }
     void Start()
     {
+        InitializeSteering();
         InitializedFsm();
         InitializedTree();
     }
@@ -45,19 +57,17 @@ public class HoundController : MonoBehaviour
             _rested = true;
         }
     }
-
-
     void InitializedFsm()
     {
         _fsm = new FSM<StateEnum>();
-        
+    
         List<Vector2> _waypoints = null;
         int a = 5;
         for (int i = 0; i < 5; i++)
         {
             _waypoints.Add(camp.GetRandomPoint());
         }
-    
+        
         var move = GetComponent<IMove>();
         var look = GetComponent<ILook>();
         var attack = GetComponent<IAttack>();
@@ -69,7 +79,7 @@ public class HoundController : MonoBehaviour
 
         _idleState = idleState;
         _patrolState = patrolState;
-    
+        
         var stateList = new List<States_Base<StateEnum>>
         {
             idleState,
