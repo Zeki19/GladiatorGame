@@ -4,7 +4,7 @@ public class Pursuit : ISteering
 {
     private readonly Transform _self;
     private readonly Rigidbody2D _target;
-    public float TimePrediction { get; set; }
+    private float TimePrediction { get; set; }
 
     public Pursuit(Transform self, Rigidbody2D target, float timePrediction)
     {
@@ -12,12 +12,6 @@ public class Pursuit : ISteering
         _target = target;
         TimePrediction = timePrediction;
     }    
-    
-    public Pursuit(Transform self, Rigidbody2D target)
-    {
-        _self = self;
-        _target = target;
-    }
     
     public Vector2 GetDir()
     {

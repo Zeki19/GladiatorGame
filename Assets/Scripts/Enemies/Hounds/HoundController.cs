@@ -121,12 +121,10 @@ public class HoundController : MonoBehaviour
         });
         var aReturnToCamp = new ActionNode(() =>
         {
-            //_patrolState.ChangeSteering(new Seek(camp.GetRandomPoint(), _model.Position));
             _fsm.Transition(StateEnum.Patrol);
         });
         var aChase = new ActionNode(() =>
         {
-            //_patrolState.ChangeSteering(new Pursuit(_model.transform, target, _model.TimePredict));
             _fsm.Transition(StateEnum.Chase);
         });
         var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));

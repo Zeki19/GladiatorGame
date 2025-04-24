@@ -22,9 +22,4 @@ public class HoundState_Chase<T> : States_Base<T>
         _move.Move(dir.normalized);
         _look.LookDir(dir.normalized);
     }
-    public void ChangeSteering(ISteering newSteering)
-    {
-        _steering = newSteering;
-        Debug.Log("New steer: " + _steering);
-    }
 }
