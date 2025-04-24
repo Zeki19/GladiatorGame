@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Enemies.Hounds.States;
 using Interfaces;
 using UnityEngine;
 
@@ -30,8 +31,6 @@ public class HoundController : MonoBehaviour
         { AttackType.Lunge, 10f }
     };
     
-    
-    
     private void Awake()
     {
         _model = GetComponent<HoundModel>();
@@ -39,7 +38,6 @@ public class HoundController : MonoBehaviour
     }
     void Start()
     {
-        InitializeSteering();
         InitializedFsm();
         InitializedTree();
     }
@@ -61,11 +59,10 @@ public class HoundController : MonoBehaviour
     {
         _fsm = new FSM<StateEnum>();
     
-        List<Vector2> _waypoints = null;
-        int a = 5;
-        for (int i = 0; i < 5; i++)
+        var waypoints = new List<Vector2>();
+        for (var i = 0; i < 5; i++)
         {
-            _waypoints.Add(camp.GetRandomPoint());
+            waypoints.Add(camp.GetRandomPoint());
         }
         
         var move = GetComponent<IMove>();
@@ -73,9 +70,9 @@ public class HoundController : MonoBehaviour
         var attack = GetComponent<IAttack>();
             
         var idleState = new HoundState_Idle<StateEnum>();
-        var patrolState = new HoundState_Patrol<StateEnum>(new PatrolToPoint(_waypoints, _model.transform));
-        var chaseState = new HoundState_Chase<StateEnum>(new Pursuit(_model.transform, target, _model.TimePredict));
-        var attackState = new HoundState_Attack<StateEnum>(target.transform);
+        var patrolState = new HoundState_Patrol<StateEnum>(new PatrolToPoint(waypoints, _model.transform));
+        var chaseState = new HoundState_Chase<StateEnum>(new Pursuit(_model.transform, target, _model.AttackRange));
+        var attackState = new HoundState_Attack<StateEnum>(); //Hay que implementar lo de juani
 
         _idleState = idleState;
         _patrolState = patrolState;

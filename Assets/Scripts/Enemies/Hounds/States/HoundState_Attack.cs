@@ -21,6 +21,11 @@ public class HoundState_Attack<T> : States_Base<T>
         _inputFinish = inputFinish;
         
     }
+
+    public HoundState_Attack()
+    {
+        
+    }
     
     public override void Enter()
     { 
@@ -44,7 +49,7 @@ public class HoundState_Attack<T> : States_Base<T>
 
     public override void Execute()
     {
-        if (_target != null && Vector2.Distance(_target.position, _model.Position) <= _model.attackRange)
+        if (_target != null && Vector2.Distance(_target.position, _model.Position) <= _model.AttackRange)
         {
             var health = _target.GetComponent<HealthSystem>();
             if (health != null)

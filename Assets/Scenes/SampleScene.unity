@@ -472,7 +472,7 @@ Transform:
   m_GameObject: {fileID: 1212377209}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.75, y: -3.93, z: 0}
+  m_LocalPosition: {x: 3.69, y: -4.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -693,8 +693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d79d504551aae244b0b18eafe2b5856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  campRadius: 2
-  limitMultiplier: 3
+  campRadius: 4.5
+  limitMultiplier: 0
 --- !u!4 &1248064635
 Transform:
   m_ObjectHideFlags: 0
@@ -1014,9 +1014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  timePrediction: 0
   attackRange: 1
-  _rb: {fileID: 2132518123}
 --- !u!114 &2132518120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,7 +1028,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1212377210}
-  homeCamp: {fileID: 1248064634}
+  timePred: 0
+  camp: {fileID: 1248064634}
   timeToRested: 2
 --- !u!212 &2132518121
 SpriteRenderer:

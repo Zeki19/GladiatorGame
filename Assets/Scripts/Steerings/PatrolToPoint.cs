@@ -8,14 +8,14 @@ public class PatrolToPoint : ISteering
     private Transform _self;
     private Vector2 dir;
     private Vector2 currentPos;
+    private bool _goingForward = true;
 
     public PatrolToPoint(List<Vector2> waypoints, Transform self)
     {
         _waypoints = waypoints;
         _self = self;
 
-        // Optionally: Start at the closest waypoint
-        _currentIndex = GetClosestWaypointIndex();
+        _currentIndex = 0;
     }
     
     public Vector2 GetDir()
@@ -31,27 +31,26 @@ public class PatrolToPoint : ISteering
 
         if (Vector2.Distance(currentPos, target) < 0.2f)
         {
-            _currentIndex = (_currentIndex + 1) % _waypoints.Count;
-        }
-
-        dir = _waypoints[_currentIndex] - currentPos;
-    }
-    
-    private int GetClosestWaypointIndex()
-    {
-        float minDist = float.MaxValue;
-        int closestIndex = 0;
-
-        for (int i = 0; i < _waypoints.Count; i++)
-        {
-            float dist = Vector2.Distance(_self.position, _waypoints[i]);
-            if (dist < minDist)
+            if (_goingForward)
             {
-                minDist = dist;
-                closestIndex = i;
+                _currentIndex++;
+                if (_currentIndex >= _waypoints.Count)
+                {
+                    _currentIndex = _waypoints.Count - 2;
+                    _goingForward = false;
+                }
+            }
+            else
+            {
+                _currentIndex--;
+                if (_currentIndex < 0)
+                {
+                    _currentIndex = 1;
+                    _goingForward = true;
+                }
             }
         }
 
-        return closestIndex;
+        dir = _waypoints[_currentIndex] - currentPos;
     }
 }
