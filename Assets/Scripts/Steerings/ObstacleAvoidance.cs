@@ -14,8 +14,8 @@ public class ObstacleAvoidance : MonoBehaviour
     public Vector2 ClosestPoint(Vector2 currDir)
     {
         _colliders = Physics2D.OverlapCircleAll(Self, radius, obsMask);
-        //int count = Physics2D.OverlapCircle(Self, radius, contactFilter, _colliders);
         int count = _colliders.Length;
+        //int count = Physics2D.OverlapCircle(Self, radius, contactFilter, _colliders); <- INTENTO DE NACHO DE QUE ANDE NONALLOC.
         Collider2D nearColl = null;
         float nearCollDistance = 0;
         for (int i = 0; i < count; i++)
@@ -31,6 +31,6 @@ public class ObstacleAvoidance : MonoBehaviour
             }
         }
         if (nearColl == null) return currDir;
-        return nearColl.ClosestPoint(Self) - new Vector2(Self.x,Self.y);
+        return nearColl.ClosestPoint(Self);
     }
 }

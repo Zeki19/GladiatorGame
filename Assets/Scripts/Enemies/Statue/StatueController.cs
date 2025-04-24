@@ -15,6 +15,7 @@ public class StatueController : MonoBehaviour
     private ISteering _steering;
     public Vector2 _wallPosition;
     [SerializeField] ObstacleAvoidance _obstacleAvoidance;
+    [SerializeField] float damage;
 
 
     StatueState_Idle<StateEnum> idleState;
@@ -49,8 +50,8 @@ public class StatueController : MonoBehaviour
         var attack = GetComponent<IAttack>();
 
         idleState = new StatueState_Idle<StateEnum>();
-        chaseState = new StatueState_Chase<StateEnum>(new Pursuit(_model.transform, target, _model.AttackRange));
-        attackState = new StatueState_Attack<StateEnum>();
+        chaseState = new StatueState_Chase<StateEnum>(new Pursuit(transform, target, attack.AttackRange));
+        attackState = new StatueState_Attack<StateEnum>(target.transform, damage);
         RunAwayState = new StatueState_Runaway<StateEnum>(_steering);
 
         var stateList = new List<States_Base<StateEnum>>
@@ -62,13 +63,21 @@ public class StatueController : MonoBehaviour
         };
 
         idleState.AddTransition(StateEnum.Runaway, RunAwayState);
+        idleState.AddTransition(StateEnum.Chase, chaseState);
+        idleState.AddTransition(StateEnum.Attack, attackState);
 
         chaseState.AddTransition(StateEnum.Attack, attackState);
+        chaseState.AddTransition(StateEnum.Idle, idleState);
+        chaseState.AddTransition(StateEnum.Runaway, RunAwayState);
+
 
         attackState.AddTransition(StateEnum.Idle, idleState);
         attackState.AddTransition(StateEnum.Chase, chaseState);
+        attackState.AddTransition(StateEnum.Runaway, RunAwayState);
 
         RunAwayState.AddTransition(StateEnum.Idle, idleState);
+        RunAwayState.AddTransition(StateEnum.Chase, chaseState);
+        RunAwayState.AddTransition(StateEnum.Attack, attackState);
 
         foreach (var t in stateList)
         {
@@ -99,9 +108,10 @@ public class StatueController : MonoBehaviour
         var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
 
         var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, aChase);
-        var qLookingForWall = new QuestionNode(QuestionIsThereAWall, aRunAway, aIdle);
-        var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, aIdle);
-        var qPlayerLookin = new QuestionNode(QuestionIsPlayerLooking, aIdle, qLookingForWall);
+        var qIsTheWallClose = new QuestionNode(QuestionIsTheWallCloseEnough, aIdle, aRunAway);
+        var qLookingForWall = new QuestionNode(QuestionIsThereAWall, qIsTheWallClose, aIdle);
+        var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, qLookingForWall);
+        var qPlayerLookin = new QuestionNode(QuestionIsPlayerLooking, aIdle, qTargetInView);
         _root = qPlayerLookin;
     }
 
@@ -112,16 +122,25 @@ public class StatueController : MonoBehaviour
     }
     bool QuestionCanAttack()
     {
-        return Vector2.Distance(_model.transform.position, target.position) <= _model.AttackRange;
+        return Vector2.Distance(transform.position, target.position) <= _model.AttackRange;
     }
     bool QuestionIsPlayerLooking()
     {
-        if (_playerLOS.LOS(target.transform, transform)) Debug.Log("ME ESTAN MIRANDO GUEY");
         return _playerLOS.LOS(target.transform,transform);
     }
     bool QuestionIsThereAWall()
     {
         _wallPosition = _obstacleAvoidance.ClosestPoint(Vector2.zero);
+        Debug.Log(_wallPosition);
         return _wallPosition != Vector2.zero;
+    }
+    bool QuestionIsTheWallCloseEnough()
+    {
+        return Vector2.Distance(transform.position, _wallPosition) < .5;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, .5f);
     }
 }

@@ -1,16 +1,8 @@
 using UnityEngine;
 
-public class StatueView : MonoBehaviour
+public class StatueView : MonoBehaviour, ILook
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public void LookDir(Vector2 dir)
+    {    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

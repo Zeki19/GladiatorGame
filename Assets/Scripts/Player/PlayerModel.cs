@@ -21,6 +21,8 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
 
     public Vector2 Position => transform.position;
 
+    public float AttackRange => 0;
+
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
