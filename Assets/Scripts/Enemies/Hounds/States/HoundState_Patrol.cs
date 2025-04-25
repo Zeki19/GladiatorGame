@@ -4,19 +4,18 @@ public class HoundState_Patrol<T> : States_Base<T>
 {
     private ISteering _steering;
     private HoundView _view;
-    public HoundState_Patrol(ISteering steering)
+    public HoundState_Patrol(ISteering steering, HoundView view)
     {
         _steering = steering;
+        _view = view;
     }
     public override void Enter()
     {
         base.Enter();
         Debug.Log("PatrolState"); 
         
-        if (_view is HoundView houndView)
-        {
-            houndView.SetWalking(true);
-        }
+        _view.SetWalking(true);
+        
     }
     public override void Execute()
     {
@@ -34,9 +33,7 @@ public class HoundState_Patrol<T> : States_Base<T>
     {
         base.Exit();
         
-        if (_view is HoundView houndView)
-        {
-            houndView.SetWalking(false);
-        }
+        _view.SetWalking(false);
+        
     }
 }

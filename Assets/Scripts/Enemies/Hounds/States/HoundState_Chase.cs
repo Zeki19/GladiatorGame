@@ -5,9 +5,10 @@ public class HoundState_Chase<T> : States_Base<T>
     private ISteering _steering;
     private HoundView _view;
 
-    public HoundState_Chase(ISteering steering)
+    public HoundState_Chase(ISteering steering, HoundView view)
     {
         _steering = steering;
+        _view = view;
     }
 
     public override void Enter()
@@ -15,10 +16,8 @@ public class HoundState_Chase<T> : States_Base<T>
         base.Enter();
         Debug.Log("Hound enters Chase state");
         
-        if (_view is HoundView houndView)
-        {
-            houndView.SetRunningAway(true);
-        }
+        _view.SetChasing(true);
+        
     }
 
     public override void Execute()
@@ -33,9 +32,6 @@ public class HoundState_Chase<T> : States_Base<T>
     {
         base.Exit();
         
-        if (_view is HoundView houndView)
-        {
-            houndView.SetRunningAway(false);
-        }
+            _view.SetChasing(false);
     }
 }

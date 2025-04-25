@@ -6,20 +6,21 @@ public class HoundState_Runaway<T> : States_Base<T>
 {
     private ISteering _steering;
     private HoundView _view;
-    public HoundState_Runaway(ISteering steering )
+    
+    
+    public HoundState_Runaway(ISteering steering, HoundView view )
     {
         _steering = steering;
+        _view = view;
     }
     
     public override void Enter()
     {
         base.Enter();
         Debug.Log("Hound enters Runaway state");
+
+        _view.SetRunningAway(true);
         
-        if (_view is HoundView houndView)
-        {
-            houndView.SetRunningAway(true);
-        }
     }
 
     public override void Execute()
@@ -33,9 +34,7 @@ public class HoundState_Runaway<T> : States_Base<T>
     {
         base.Exit();
 
-        if (_view is HoundView houndView)
-        {
-            houndView.SetRunningAway(false);
-        }
+        _view.SetRunningAway(false);
+        
     }
 }

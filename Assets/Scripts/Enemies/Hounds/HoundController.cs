@@ -89,10 +89,10 @@ public class HoundController : MonoBehaviour
         var look = GetComponent<ILook>();
         var attack = GetComponent<IAttack>();
             
-        var idleState = new HoundState_Idle<StateEnum>();
-        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering);
-        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering);
-        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle);
+        var idleState = new HoundState_Idle<StateEnum>(_view);
+        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering,_view);
+        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering,_view);
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle,_view);
 
         _idleState = idleState;
         _patrolState = patrolState;

@@ -41,6 +41,11 @@ public class HoundView : MonoBehaviour, ILook
     {
         _animator.SetBool("IsRunningAway", value);
     }
+    
+    public void SetChasing(bool value)
+    {
+        _animator.SetBool("IsChasing", value);
+    }
 
     public void PlayIdle()
     {
