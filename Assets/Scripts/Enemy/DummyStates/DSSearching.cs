@@ -11,9 +11,9 @@ public class DSSearching<T> : DummyBase<T>
     {
         base.Enter();
     }
-    public override void Execute(Vector2 direction)
+    public override void Execute()
     {
-        base.Execute(direction);
+        base.Execute();
 
         if (_target != null)
         {

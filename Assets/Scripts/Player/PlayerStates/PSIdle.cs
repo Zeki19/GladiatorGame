@@ -13,11 +13,8 @@ public class PSIdle<T> : PSBase<T>
     {
         base.Enter();
     }
-    public override void Execute(Vector2 direction)
+    public override void Execute()
     {
-        if (direction != Vector2.zero)
-        {
-            StateMachine.Transition(_inputToWalk);
-        }
+  
     }
 }

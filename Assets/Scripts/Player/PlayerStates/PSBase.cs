@@ -13,8 +13,8 @@ public class PSBase<T> : State<T>
         _look = p[1] as ILook;
         _attack = p[2] as IAttack;
     }
-    public override void Execute(Vector2 direction)
+    public override void Execute()
     {
-        base.Execute(direction);
+        base.Execute();
     }
 }

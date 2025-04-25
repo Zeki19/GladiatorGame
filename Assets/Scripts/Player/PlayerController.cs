@@ -29,10 +29,10 @@ public class PlayerController : MonoBehaviour
         _attackAction = actionMap.FindAction("Attack");
         _dashAction = actionMap.FindAction("Dash");
 
-        _moveAction.performed += ctx => _fsm.HandleMove(ctx.ReadValue<Vector2>());
-        _moveAction.canceled += ctx => _fsm.HandleMove(Vector2.zero);
-        _attackAction.performed += ctx => _fsm.HandleAttack();
-        _dashAction.performed += ctx => _fsm.HandleDash();
+        //_moveAction.performed += ctx => _fsm.HandleMove(ctx.ReadValue<Vector2>());
+        //_moveAction.canceled += ctx => _fsm.HandleMove(Vector2.zero);
+        //_attackAction.performed += ctx => _fsm.HandleAttack();
+        //_dashAction.performed += ctx => _fsm.HandleDash();
     }
 
     private void InitializeFSM()
@@ -77,11 +77,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        _fsm.OnExecute(_moveAction.ReadValue<Vector2>());
+        _fsm.OnExecute();
     }
     private void FixedUpdate()
     {
-        _fsm.OnFixedExecute();
+        _fsm.OnFixExecute();
     }
     public void ChangeToAttack()
     {

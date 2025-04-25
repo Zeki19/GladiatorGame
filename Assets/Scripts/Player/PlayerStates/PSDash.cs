@@ -52,9 +52,9 @@ public class PSDash<T> : PSBase<T>
         yield return new WaitForSeconds((_dashCooldown*_dashInvincibility)/100);
         _characterHealth.isInvulnerable = false;
     }
-    public override void Execute(Vector2 direction)
+    public override void Execute()
     {
-        base.Execute(direction);
+        base.Execute();
         
         _dashTimer -= Time.deltaTime;
         if (_dashTimer <= 0)

@@ -22,16 +22,16 @@ public class FEEIdle<T> : FastEnemyBase<T>
         _idleTimer = 2f;
     }
 
-    public override void Execute(Vector2 direction)
-    {
-        _idleTimer += Time.deltaTime;
+    //public override void Execute(Vector2 direction)
+    //{
+    //    _idleTimer += Time.deltaTime;
 
-        if (_idleTimer >= _idleDuration)
-        {
-            StateMachine.Transition(_goPatrol);
-        }
+    //    if (_idleTimer >= _idleDuration)
+    //    {
+    //        StateMachine.Transition(_goPatrol);
+    //    }
 
-    }
+    //}
 }
         //public override void Execute(Vector2 direction)
         //{
