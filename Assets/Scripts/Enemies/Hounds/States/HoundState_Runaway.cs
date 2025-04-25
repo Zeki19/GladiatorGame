@@ -13,13 +13,14 @@ public class HoundState_Runaway<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Hound enters Runaway state");
+        Debug.Log("Runaway state");
     }
 
     public override void Execute()
     {
         base.Execute();
         var dir = _steering.GetDir();
-        _move.Move(dir.normalized);
+        _move.Move(dir);
+        _look.LookDir(dir);
     }
 }

@@ -780,8 +780,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d79d504551aae244b0b18eafe2b5856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  campRadius: 5
-  limitMultiplier: 1.5
+  patrolRadius: 5
+  chaseRadius: 2
 --- !u!4 &1248064635
 Transform:
   m_ObjectHideFlags: 0
@@ -1115,10 +1115,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1212377210}
-  timePred: 0
   camp: {fileID: 1248064634}
-  timeToRested: 1
-  timeToTired: 100
+  idleDuration: 3
+  patrolDuration: 10
+  attackCooldown: 2
 --- !u!212 &2132518121
 SpriteRenderer:
   m_ObjectHideFlags: 0
