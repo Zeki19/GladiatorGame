@@ -2,10 +2,5 @@ using UnityEngine;
 
 public interface ISteering
 {
-    Vector3 GetDirection()
-    {
-
-    }
-
-
+    Vector2 GetDirection();
 }

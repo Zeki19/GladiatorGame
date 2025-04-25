@@ -16,7 +16,7 @@ public class Seek : ISteering
 
     }
 
-    public Vector3 GetDirection()
+    public Vector2 GetDirection()
     {
         //a-->b
         //b-a

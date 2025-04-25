@@ -7,7 +7,7 @@ public class Pursuit : ISteering
     Rigidbody2D _target;
     float _timePrediction;
 
-    public Pursuit (Transform self, Rigidbody target, float timePrediction)
+    public Pursuit (Transform self, Rigidbody2D target, float timePrediction)
 
     {
         _self = self;
@@ -15,7 +15,7 @@ public class Pursuit : ISteering
         _timePrediction = timePrediction;
     }
 
-    public Pursuit(Transform self, Rigidbody target)
+    public Pursuit(Transform self, Rigidbody2D target)
 
     {
         _self = self;
@@ -23,13 +23,14 @@ public class Pursuit : ISteering
        
     }
 
-    public Vector3 GetDirection()
+    public Vector2 GetDirection()
     {
-        Vector3 point = _target.position + _target.linearVelocity * _timePrediction; 
-        Vector3 dirToPoint = (point- _self.position).normalized;
-        Vector3 dirToTarget = (_target.position- _self.position).normalized;
+        Vector2 point = _target.position + _target.linearVelocity * _timePrediction;
+        //FIJARSE
+        Vector2 dirToPoint = (point - (Vector2)_self.position).normalized;
+        Vector2 dirToTarget = (_target.position - (Vector2)_self.position).normalized;
 
-        if (Vector3.Dot(dirToPoint, dirToTarget) < 0)
+        if (Vector2.Dot(dirToPoint, dirToTarget) < 0)
         {
             return dirToTarget;
         }
@@ -37,6 +38,7 @@ public class Pursuit : ISteering
         {
             return dirToPoint;
         }
+    }
 
     public float TimePrediction
     {

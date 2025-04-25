@@ -26,21 +26,21 @@ public class FEESeek<T> : FastEnemyBase<T>
         base.Enter();
     }
 
-    public override void Execute()
-    {
-        if (_waypoints == null || _waypoints.Count == 0) return;
+    //public override void Execute()
+    //{
+    //    if (_waypoints == null || _waypoints.Count == 0) return;
 
-        Transform currentTarget = _waypoints[_currentWaypointIndex];
-        Vector2 direction = (currentTarget.position - _selfTransform.position).normalized;
+    //    Transform currentTarget = _waypoints[_currentWaypointIndex];
+    //    Vector2 direction = (currentTarget.position - _selfTransform.position).normalized;
 
-        _rb.linearVelocity = direction * _moveSpeed;
+    //    _rb.linearVelocity = direction * _moveSpeed;
 
-        float distance = Vector2.Distance(_selfTransform.position, currentTarget.position);
-        if (distance <= _arrivalThreshold)
-        {
-            _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Count;
-        }
-    }
+    //    float distance = Vector2.Distance(_selfTransform.position, currentTarget.position);
+    //    if (distance <= _arrivalThreshold)
+    //    {
+    //        _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Count;
+    //    }
+    //}
 
     public override void Exit()
     {
