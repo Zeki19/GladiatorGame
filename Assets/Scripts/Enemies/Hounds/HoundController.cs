@@ -30,6 +30,7 @@ public class HoundController : MonoBehaviour
     private ISteering _patrolSteering;
     private ISteering _pursuitSteering;
     private ISteering _runawaySteering;
+    private HoundView _view;
     
     private Dictionary<AttackType, float> _attacks = new Dictionary<AttackType, float>
     {
@@ -42,6 +43,7 @@ public class HoundController : MonoBehaviour
     {
         _model = GetComponent<HoundModel>();
         _los = GetComponent<LineOfSight>();
+        _view = GetComponent<HoundView>();
     }
     void Start()
     {
