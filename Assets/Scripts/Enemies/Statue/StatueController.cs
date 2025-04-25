@@ -50,7 +50,7 @@ public class StatueController : MonoBehaviour
         var attack = GetComponent<IAttack>();
 
         idleState = new StatueState_Idle<StateEnum>();
-        chaseState = new StatueState_Chase<StateEnum>(new Pursuit(transform, target, attack.AttackRange));
+        chaseState = new StatueState_Chase<StateEnum>(new Pursuit(transform, target));
         attackState = new StatueState_Attack<StateEnum>(target.transform, damage);
         RunAwayState = new StatueState_Runaway<StateEnum>(_steering);
 
@@ -98,7 +98,7 @@ public class StatueController : MonoBehaviour
         });
         var aRunAway = new ActionNode(() =>
         {
-            RunAwayState.ChangeSteering(new ToPoint(_wallPosition, transform.position));
+            RunAwayState.ChangeSteering(new ToPoint(_wallPosition, transform));
             _fsm.Transition(StateEnum.Runaway);
         });
         var aChase = new ActionNode(() =>

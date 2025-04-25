@@ -13,6 +13,12 @@ public class HoundsCamp : MonoBehaviour
     {
         return Vector2.Distance(position, CampCenter) > patrolRadius * chaseRadius;
     }
+    
+    public bool IsInCamp(Vector2 position)
+    {
+        return Vector2.Distance(position, CampCenter) < patrolRadius;
+    }
+
 
     public Vector2 GetRandomPoint()
     {

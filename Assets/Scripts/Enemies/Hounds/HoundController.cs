@@ -9,6 +9,7 @@ public class HoundController : MonoBehaviour
     public Rigidbody2D target;
     private FSM<StateEnum> _fsm;
     private HoundModel _model;
+    private HoundView _view;
     private LineOfSight _los;
     private ITreeNode _root;
     private ISteering _steering;
@@ -37,6 +38,7 @@ public class HoundController : MonoBehaviour
     private void Awake()
     {
         _model = GetComponent<HoundModel>();
+        _view = GetComponent<HoundView>();
         _los = GetComponent<LineOfSight>();
     }
 
@@ -75,10 +77,10 @@ public class HoundController : MonoBehaviour
         var look = GetComponent<ILook>();
         var attack = GetComponent<IAttack>();
 
-        var idleState = new HoundState_Idle<StateEnum>();
-        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering);
-        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering);
-        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle);
+        var idleState = new HoundState_Idle<StateEnum>(_view);
+        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering, _view);
+        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering, _view);
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle, _view);
         var runawayState = new HoundState_Runaway<StateEnum>(_runawaySteering);
 
         _idleState = idleState;
@@ -92,7 +94,8 @@ public class HoundController : MonoBehaviour
             idleState,
             patrolState,
             chaseState,
-            attackState
+            attackState,
+            runawayState
         };
 
         idleState.AddTransition(StateEnum.Patrol, patrolState);
@@ -146,10 +149,9 @@ public class HoundController : MonoBehaviour
             _fsm.Transition(StateEnum.Attack);
             StartCoroutine(AttackCD());
         });
-        var aWhat = new ActionNode(() => { Debug.Log("A Idle?"); });
 
-        var qInCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, aPatrol);
-        var qRunawayState = new QuestionNode(QuestionIsRunaway, qInCamp, aWhat);
+        var qInCamp = new QuestionNode(QuestionIsInCamp, aPatrol, aRunaway);
+        var qRunawayState = new QuestionNode(QuestionIsRunaway, qInCamp, aIdle);
         var qAttackCd = new QuestionNode(QuestionIsAttackCD, aChase, aAttack);
         var qAttackRange = new QuestionNode(QuestionAttackRange, qAttackCd, aChase);
         var qStateAttack = new QuestionNode(QuestionIsAttack, qAttackCd, qRunawayState);
@@ -174,7 +176,10 @@ public class HoundController : MonoBehaviour
     {
         return camp.IsFarFromCamp(_model.Position);
     }
-
+    bool QuestionIsInCamp()
+    {
+        return camp.IsInCamp(_model.Position);
+    }
     bool QuestionIsRested()
     {
         return _isRested;
