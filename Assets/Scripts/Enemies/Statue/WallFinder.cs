@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObstacleAvoidance : MonoBehaviour
+public class WallFinder : MonoBehaviour
 {
     Collider2D[] _colliders;
     int radius = 10;

@@ -14,7 +14,7 @@ public class StatueController : MonoBehaviour
     private LineOfSightNoMono _playerLOS;
     private ISteering _steering;
     public Vector2 _wallPosition;
-    [SerializeField] ObstacleAvoidance _obstacleAvoidance;
+    [SerializeField] WallFinder _wallFinder;
     [SerializeField] float damage;
 
 
@@ -130,7 +130,7 @@ public class StatueController : MonoBehaviour
     }
     bool QuestionIsThereAWall()
     {
-        _wallPosition = _obstacleAvoidance.ClosestPoint(Vector2.zero);
+        _wallPosition = _wallFinder.ClosestPoint(Vector2.zero);
         Debug.Log(_wallPosition);
         return _wallPosition != Vector2.zero;
     }
