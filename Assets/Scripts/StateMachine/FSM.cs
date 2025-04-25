@@ -4,36 +4,35 @@ using UnityEngine;
 
 public class FSM<T>
 {
-    IState<T> _currentState;
+    IState<T> _currState;
     public FSM() { }
     public FSM(IState<T> curr)
     {
         SetInit(curr);
     }
-    public enum EnemyInputs
-    {
-        SeePlayer,
-        LosePlayer,
-        ReachLastPos
-    }
     public void SetInit(IState<T> curr)
     {
         curr.StateMachine = this;
-        _currentState = curr;
-        _currentState.Enter();
+        _currState = curr;
+        _currState.Enter();
     }
-    public void OnExecute(Vector2 direction) => _currentState?.Execute(direction);
-    public void OnFixedExecute() => _currentState?.FixedExecute();
-    public void HandleMove(Vector2 dir) => _currentState?.OnMove(dir);
-    public void HandleAttack() => _currentState?.OnAttack();
-    public void HandleDash() => _currentState?.OnDash();
+    public void OnExecute()
+    {
+        if (_currState != null)
+            _currState.Execute();
+    }
+    public void OnFixExecute()
+    {
+        if (_currState != null)
+            _currState.FixExecute();
+    }
     public void Transition(T input)
     {
-        IState<T> newState = _currentState.GetTransition(input);
+        IState<T> newState = _currState.GetTransition(input);
         if (newState == null) return;
         newState.StateMachine = this;
-        _currentState.Exit();
-        _currentState = newState;
-        _currentState.Enter();
+        _currState.Exit();
+        _currState = newState;
+        _currState.Enter();
     }
 }
