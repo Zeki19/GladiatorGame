@@ -47,7 +47,7 @@ public class LineOfSight : MonoBehaviour
         return CheckRange(target) && CheckAngle(target) && CheckView(target);
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position,range);

@@ -18,7 +18,7 @@ public class PlayerView : MonoBehaviour, ILook
     }
     public void Update()
     {
-        //LookDir();
+        LookDir(Vector2.zero);
     }
 
     public void LookDir(Vector2 dir)

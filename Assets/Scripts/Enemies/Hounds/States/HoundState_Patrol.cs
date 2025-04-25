@@ -3,14 +3,19 @@ using UnityEngine;
 public class HoundState_Patrol<T> : States_Base<T>
 {
     private ISteering _steering;
-    public HoundState_Patrol(ISteering steering)
+    private HoundView _view;
+    public HoundState_Patrol(ISteering steering, HoundView view)
     {
         _steering = steering;
+        _view = view;
     }
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("PatrolState");
+        Debug.Log("PatrolState"); 
+        
+        _view.SetWalking(true);
+        
     }
     public override void Execute()
     {
@@ -22,5 +27,13 @@ public class HoundState_Patrol<T> : States_Base<T>
     public void ChangeSteering(ISteering newSteering)
     {
         _steering = newSteering;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        
+        _view.SetWalking(false);
+        
     }
 }

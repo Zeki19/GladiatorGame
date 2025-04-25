@@ -9,6 +9,7 @@ namespace Dummy
         public float _speed;
         public float attackRange;
         public LayerMask enemyMask;
+        public float AttackRange => attackRange;
     
         public void Attack()
         {
@@ -38,6 +39,7 @@ namespace Dummy
         }
 
         public Vector2 Position => transform.position;
+
 
         public void OnDrawGizmosSelected()
         {
