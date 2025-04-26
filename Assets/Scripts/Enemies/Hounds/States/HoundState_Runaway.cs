@@ -9,11 +9,11 @@ public class HoundState_Runaway<T> : States_Base<T>
     {
         _steering = steering;
     }
-    
+
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Runaway state");
+        _look.PlayStateAnimation(StateEnum.Runaway);
     }
 
     public override void Execute()

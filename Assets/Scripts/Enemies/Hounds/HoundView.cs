@@ -7,6 +7,9 @@ public class HoundView : MonoBehaviour, ILook
     public float rotationSpeed;
     [SerializeField] private Rigidbody2D _rb;
     private Animator _animator;
+    private static readonly int Idle = Animator.StringToHash("Idle");
+    private static readonly int Walk = Animator.StringToHash("Walk");
+    private static readonly int Run = Animator.StringToHash("Run");
 
     private void Awake()
     {
@@ -27,28 +30,40 @@ public class HoundView : MonoBehaviour, ILook
             rotationSpeed * Time.deltaTime
         );
     }
-    public void SetWalking(bool value)
-    {
-        _animator.SetBool("IsWalking", value);
-    }
 
-    public void PlayAttack()
+    public void PlayStateAnimation(StateEnum state)
     {
-        _animator.SetTrigger("IsAttacking");
+        ResetAnimatorBools();
+        switch (state)
+        {
+            case StateEnum.Idle:
+                _animator.SetTrigger(Idle);
+                break;
+            case StateEnum.Attack:
+                _animator.SetTrigger(Idle);
+                break;
+            case StateEnum.Chase:
+                _animator.SetTrigger(Run);
+                break;
+            case StateEnum.Patrol:
+                _animator.SetTrigger(Walk);
+                break;
+            case StateEnum.Runaway:
+                _animator.SetTrigger(Walk);
+                break;
+            case StateEnum.Walk:
+            case StateEnum.Default:
+            case StateEnum.Dash:
+            case StateEnum.GoZone:
+            default:
+                Debug.LogWarning("No animation mapped for state: " + state);
+                break;
+        }
     }
-
-    public void SetRunningAway(bool value)
+    private void ResetAnimatorBools()
     {
-        _animator.SetBool("IsRunningAway", value);
-    }
-    
-    public void SetChasing(bool value)
-    {
-        _animator.SetBool("IsChasing", value);
-    }
-
-    public void PlayIdle()
-    {
-        _animator.SetTrigger("IsIdle");
+        _animator.SetBool("IsWalking", false);
+        _animator.SetBool("IsChasing", false);
+        _animator.SetBool("IsRunningAway", false);
     }
 }

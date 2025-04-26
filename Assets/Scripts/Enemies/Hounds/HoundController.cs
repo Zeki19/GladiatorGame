@@ -6,19 +6,22 @@ using UnityEngine;
 
 public class HoundController : MonoBehaviour
 {
-    public Rigidbody2D target;
+    [Header("Required GameObjects")]
+    [SerializeField] private Rigidbody2D target;
+    [SerializeField] private HoundsCamp camp;
+    [Header("States Settings")]
+    [Tooltip("Time it takes to force a state change.")]
+    [SerializeField] private float idleDuration;
+    [SerializeField] private float patrolDuration;
+    
+    #region Private Variables
+    
     private FSM<StateEnum> _fsm;
     private HoundModel _model;
     private HoundView _view;
     private LineOfSight _los;
     private ITreeNode _root;
     private ISteering _steering;
-
-    [SerializeField] private HoundsCamp camp;
-    [SerializeField] private float idleDuration;
-    [SerializeField] private float patrolDuration;
-    [SerializeField] private float attackCooldown;
-
     private HoundState_Idle<StateEnum> _idleState;
     private HoundState_Patrol<StateEnum> _patrolState;
     private HoundState_Chase<StateEnum> _chaseState;
@@ -27,7 +30,9 @@ public class HoundController : MonoBehaviour
     private ISteering _patrolSteering;
     private ISteering _pursuitSteering;
     private ISteering _runawaySteering;
-
+    
+    #endregion
+    
     private Dictionary<AttackType, float> _attacks = new Dictionary<AttackType, float>
     {
         { AttackType.Normal, 60f },
@@ -55,11 +60,11 @@ public class HoundController : MonoBehaviour
         _root.Execute();
     }
 
-    void InitalizeSteering()
+    #region States
+void InitalizeSteering()
     {
-        //Falta VAR para settear la cantidad de waypoints, actualmente usamos 5.
         var waypoints = new List<Vector2>();
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < _model.AmountOfWaypoints; i++)
         {
             waypoints.Add(camp.GetRandomPoint());
         }
@@ -77,10 +82,10 @@ public class HoundController : MonoBehaviour
         var look = GetComponent<ILook>();
         var attack = GetComponent<IAttack>();
 
-        var idleState = new HoundState_Idle<StateEnum>(_view);
-        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering, _view);
-        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering, _view);
-        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle, _view);
+        var idleState = new HoundState_Idle<StateEnum>();
+        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering);
+        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering);
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle);
         var runawayState = new HoundState_Runaway<StateEnum>(_runawaySteering);
 
         _idleState = idleState;
@@ -99,19 +104,15 @@ public class HoundController : MonoBehaviour
         };
 
         idleState.AddTransition(StateEnum.Patrol, patrolState);
-        idleState.AddTransition(StateEnum.Runaway, runawayState);
 
         patrolState.AddTransition(StateEnum.Idle, idleState);
         patrolState.AddTransition(StateEnum.Chase, chaseState);
-        patrolState.AddTransition(StateEnum.Runaway, runawayState);
-
-        chaseState.AddTransition(StateEnum.Patrol, patrolState);
+        
         chaseState.AddTransition(StateEnum.Attack, attackState);
         chaseState.AddTransition(StateEnum.Runaway, runawayState);
-
-        attackState.AddTransition(StateEnum.Idle, idleState);
+        
         attackState.AddTransition(StateEnum.Chase, chaseState);
-        attackState.AddTransition(StateEnum.Runaway, runawayState);
+        attackState.AddTransition(StateEnum.Attack, attackState);
         
         runawayState.AddTransition(StateEnum.Patrol, patrolState);
 
@@ -123,7 +124,16 @@ public class HoundController : MonoBehaviour
         _fsm.SetInit(idleState);
         StartCoroutine(RestFor());
     }
+    
 
+    #endregion
+
+    #region DecisionTree
+    
+    private bool _isRested = false;
+    private bool _isTired = false;
+    private bool _attackCd = false;
+    
     void InitializedTree()
     {
         var aIdle = new ActionNode(() =>
@@ -132,30 +142,40 @@ public class HoundController : MonoBehaviour
             _fsm.Transition(StateEnum.Idle);
             StartCoroutine(RestFor());
         });
+        
         var aPatrol = new ActionNode(() =>
         {
             if (_fsm.CurrentState() == _patrolState) return;
             _fsm.Transition(StateEnum.Patrol);
             StartCoroutine(PatrolFor());
         });
+        
         var aRunaway = new ActionNode(() =>
         {
+            if (_fsm.CurrentState() == _runawayState) return;
             _fsm.Transition(StateEnum.Runaway); 
         });
-        var aChase = new ActionNode(() => { _fsm.Transition(StateEnum.Chase); });
+        
+        var aChase = new ActionNode(() =>
+        {
+            if (_fsm.CurrentState() == _chaseState) return;
+            _fsm.Transition(StateEnum.Chase);
+            StopCoroutine(PatrolFor());
+        });
+        
         var aAttack = new ActionNode(() =>
         {
             if (_fsm.CurrentState() == _attackState) return;
             _fsm.Transition(StateEnum.Attack);
-            StartCoroutine(AttackCD());
+            StartCoroutine(AttackCd());
         });
 
         var qInCamp = new QuestionNode(QuestionIsInCamp, aPatrol, aRunaway);
-        var qRunawayState = new QuestionNode(QuestionIsRunaway, qInCamp, aIdle);
-        var qAttackCd = new QuestionNode(QuestionIsAttackCD, aChase, aAttack);
-        var qAttackRange = new QuestionNode(QuestionAttackRange, qAttackCd, aChase);
-        var qStateAttack = new QuestionNode(QuestionIsAttack, qAttackCd, qRunawayState);
-        var qFarFromLimit = new QuestionNode(QuestionFarFromCamp, qAttackRange, qAttackRange);
+        var qStateRunaway = new QuestionNode(QuestionIsRunaway, qInCamp, aRunaway);
+        var qCanAttack  = new QuestionNode(QuestionIsAttackInCd, aChase, aAttack);
+        var qAttackRange = new QuestionNode(QuestionAttackRange, qCanAttack, aChase);
+        var qStateAttack = new QuestionNode(QuestionIsAttack, qAttackRange, qStateRunaway);
+        var qFarFromLimit = new QuestionNode(QuestionFarFromCamp, aRunaway, qAttackRange);
         var qTargetInViewChase = new QuestionNode(QuestionTargetInView, qFarFromLimit, aRunaway);
         var qStateChase = new QuestionNode(QuestionIsChase, qTargetInViewChase, qStateAttack);
         var qIsTired = new QuestionNode(QuestionIsTired, aIdle, aPatrol);
@@ -167,11 +187,7 @@ public class HoundController : MonoBehaviour
 
         _root = qFarFromCamp;
     }
-
-    private bool _isRested = false;
-    private bool _isTired = false;
-    private bool _attackCd = false;
-
+    
     bool QuestionFarFromCamp()
     {
         return camp.IsFarFromCamp(_model.Position);
@@ -184,42 +200,34 @@ public class HoundController : MonoBehaviour
     {
         return _isRested;
     }
-
     bool QuestionTargetInView()
     {
         return target != null && _los.LOS(target.transform);
     }
-
     bool QuestionIsTired()
     {
         return _isTired;
     }
-
     bool QuestionAttackRange()
     {
         return Vector2.Distance(_model.Position, target.position) <= _model.AttackRange;
     }
-
-    bool QuestionIsAttackCD()
+    bool QuestionIsAttackInCd()
     {
         return _attackCd;
     }
-
     bool QuestionIsIdle()
     {
         return _fsm.CurrentState() == _idleState;
     }
-
     bool QuestionIsPatrol()
     {
         return _fsm.CurrentState() == _patrolState;
     }
-
     bool QuestionIsChase()
     {
         return _fsm.CurrentState() == _chaseState;
     }
-
     bool QuestionIsAttack()
     {
         return _fsm.CurrentState() == _attackState;
@@ -228,14 +236,13 @@ public class HoundController : MonoBehaviour
     {
         return _fsm.CurrentState() == _runawayState;
     }
-
+    
     IEnumerator RestFor()
     {
         _isRested = false;
         yield return new WaitForSeconds(idleDuration);
         _isRested = true;
     }
-
     IEnumerator PatrolFor()
     {
         _isTired = false;
@@ -243,10 +250,14 @@ public class HoundController : MonoBehaviour
         _isTired = true;
     }
 
-    IEnumerator AttackCD()
+    IEnumerator AttackCd()
     {
-        yield return new WaitForSeconds(attackCooldown);
+        _attackCd = true;
+        yield return new WaitForSeconds(_model.AttackCooldown);
         _attackCd = false;
     }
+    
+    #endregion
+
 }
 
