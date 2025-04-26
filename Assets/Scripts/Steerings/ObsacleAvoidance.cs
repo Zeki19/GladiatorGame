@@ -37,7 +37,7 @@ public class ObstacleAvoidance
             float distance = dir.magnitude;
 
             var currAngle = Vector2.Angle(dir, currDir);
-            if (currAngle > _angle / 2) continue;
+            if (currAngle > _angle ) continue;
             if (nearColl == null || distance < nearCollDistance)
             {
                 nearColl = currColl;
@@ -52,7 +52,6 @@ public class ObstacleAvoidance
         }
         Vector2 relativePos = self.InverseTransformPoint(nearClosestPoint);
         Vector3 dirToColl = (nearClosestPoint - self.position).normalized;
-        //Vector2 avoidDir = (relativePos.y > 0 ? Vector2.Perpendicular(dirToColl) : -Vector2.Perpendicular(dirToColl)).normalized;
         Vector2 avoidDir = Vector2.Perpendicular(dirToColl).normalized;
         return Vector2.Lerp(currDir, avoidDir, (_radius - Mathf.Clamp(nearCollDistance - _personalArea, 0, _radius)) / _radius);
         /*
