@@ -11,7 +11,7 @@ public class StatueController : MonoBehaviour
     private ITreeNode _root;
     private LineOfSightNoMono _playerLOS;
     private ISteering _steering;
-    public Vector2 _wallPosition;
+    private Vector2 _wallPosition;
     [SerializeField] WallFinder _wallFinder;
     [SerializeField] float damage;
 
@@ -32,9 +32,7 @@ public class StatueController : MonoBehaviour
         _model = GetComponent<StatueModel>();
         _los = GetComponent<LineOfSight>();
         _steering = new ToPoint(Vector2.zero, transform);
-        _playerLOS = new LineOfSightNoMono();
-        _playerLOS.angle = 90;
-        _playerLOS.range = 3;
+        _playerLOS = new LineOfSightNoMono(3, 90, _avoidMask);
     }
     void Start()
     {
@@ -121,7 +119,6 @@ public class StatueController : MonoBehaviour
             _fsm.Transition(StateEnum.Chase);
         });
         var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
-
         var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, aChase);
         var qIsTheWallClose = new QuestionNode(QuestionIsTheWallCloseEnough, aIdle, aRunAway);
         var qLookingForWall = new QuestionNode(QuestionIsThereAWall, qIsTheWallClose, aIdle);

@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class LineOfSightNoMono
 {
-    public float range;
-    public float angle;
-    public LayerMask obstacleMask;
+    private float _range;
+    private float _angle;
+    private LayerMask _obstacleMask;
 
+    public LineOfSightNoMono(float range, float angle, LayerMask obstacleMask)
+    {
+        _angle = angle;
+        _range = range;
+        _obstacleMask = obstacleMask;
+    }
     public bool CheckRange(Transform looker, Transform target)
     {
-        return CheckRange(looker,target,range);
+        return CheckRange(looker,target,_range);
     }
     public bool CheckRange(Transform looker, Transform target, float range)
     {
@@ -28,12 +34,12 @@ public class LineOfSightNoMono
     {
         Vector2 dir = target.position - looker.position;
         float angleToTarget = Vector2.Angle(front, dir.normalized);
-        return angleToTarget <= angle / 2;
+        return angleToTarget <= _angle / 2;
     }
     private bool CheckView(Transform looker, Transform target)
     {
         Vector2 dir = target.position - looker.position;
-        return !Physics.Raycast(looker.position, dir.normalized, dir.magnitude, obstacleMask);
+        return !Physics.Raycast(looker.position, dir.normalized, dir.magnitude, _obstacleMask);
     }
 
     public bool LOS(Transform looker, Transform target)

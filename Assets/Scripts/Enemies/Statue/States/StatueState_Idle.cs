@@ -17,6 +17,7 @@ public class StatueState_Idle<T> : States_Base<T>
     {
         base.Execute();
         _look.LookDir(-_steering.GetDir());
+        Debug.Log(_steering.GetDir());
 
     }
     internal void ChangeSteering(ISteering newSteering)
