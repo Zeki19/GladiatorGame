@@ -13,7 +13,13 @@ public class Pursuit : ISteering
     
     public Vector2 GetDir()
     {
-        Vector2 point = _target.position + _target.linearVelocity; // Capaz falta sumarle un _target.transform.up o algo?
+        var distanceToTarget = Vector2.Distance(_self.position, _target.position);
+        if (distanceToTarget < 1.5f)
+        {
+            return Vector2.zero;
+        }
+        
+        Vector2 point = _target.position + _target.linearVelocity;
         Vector2 dirToPoint = (point - (Vector2)_self.position).normalized;
         Vector2 dirToTarget = (_target.position - (Vector2)_self.position).normalized;
         

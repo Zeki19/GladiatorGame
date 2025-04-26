@@ -61,7 +61,7 @@ public class HoundController : MonoBehaviour
     }
 
     #region States
-void InitalizeSteering()
+    void InitalizeSteering()
     {
         var waypoints = new List<Vector2>();
         for (var i = 0; i < _model.AmountOfWaypoints; i++)

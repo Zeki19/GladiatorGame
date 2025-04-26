@@ -33,7 +33,6 @@ public class HoundView : MonoBehaviour, ILook
 
     public void PlayStateAnimation(StateEnum state)
     {
-        ResetAnimatorBools();
         switch (state)
         {
             case StateEnum.Idle:
@@ -59,11 +58,5 @@ public class HoundView : MonoBehaviour, ILook
                 Debug.LogWarning("No animation mapped for state: " + state);
                 break;
         }
-    }
-    private void ResetAnimatorBools()
-    {
-        _animator.SetBool("IsWalking", false);
-        _animator.SetBool("IsChasing", false);
-        _animator.SetBool("IsRunningAway", false);
     }
 }
