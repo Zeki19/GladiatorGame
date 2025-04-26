@@ -31,7 +31,7 @@ public class StatueController : MonoBehaviour
     {
         _model = GetComponent<StatueModel>();
         _los = GetComponent<LineOfSight>();
-
+        _steering = new ToPoint(Vector2.zero, transform);
         _playerLOS = new LineOfSightNoMono();
         _playerLOS.angle = 90;
         _playerLOS.range = 3;
@@ -54,7 +54,7 @@ public class StatueController : MonoBehaviour
         var look = GetComponent<ILook>();
         var attack = GetComponent<IAttack>();
 
-        idleState = new StatueState_Idle<StateEnum>();
+        idleState = new StatueState_Idle<StateEnum>(_steering);
         chaseState = new StatueState_Chase<StateEnum>
         (
             this,
@@ -104,6 +104,7 @@ public class StatueController : MonoBehaviour
     {
         var aIdle = new ActionNode(() =>
         {
+            idleState.ChangeSteering(new ToPoint(_wallPosition, transform));
             _fsm.Transition(input: StateEnum.Idle);
         });
         var aPatrol = new ActionNode(() =>
@@ -151,6 +152,7 @@ public class StatueController : MonoBehaviour
     {
         return Vector2.Distance(transform.position, _wallPosition) < .5;
     }
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -162,4 +164,5 @@ public class StatueController : MonoBehaviour
         Gizmos.DrawRay(transform.position, dirA * _radius);
         Gizmos.DrawRay(transform.position, dirB * _radius);
     }
+    */
 }
