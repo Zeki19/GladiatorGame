@@ -43,15 +43,15 @@ public class LineOfSight : MonoBehaviour
     {
         return CheckRange(target) && CheckAngle(target) && CheckView(target);
     }
-    /*
+    
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
+        Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position,range);
         
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.black;
         Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, -angle / 2f) * transform.up * range);
         Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, angle / 2f) * transform.up * range);
     }
-    */
+    
 }

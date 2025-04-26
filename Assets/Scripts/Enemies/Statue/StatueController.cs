@@ -152,7 +152,7 @@ public class StatueController : MonoBehaviour
     {
         return Vector2.Distance(transform.position, _wallPosition) < .5;
     }
-    /*
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -164,5 +164,5 @@ public class StatueController : MonoBehaviour
         Gizmos.DrawRay(transform.position, dirA * _radius);
         Gizmos.DrawRay(transform.position, dirB * _radius);
     }
-    */
+    
 }

@@ -18,9 +18,9 @@ public class HoundModel : MonoBehaviour, IMove, IAttack
     public float AttackRange => attackRange;
     public float AttackCooldown => attackCooldown;
     public float AmountOfWaypoints => amountOfWaypoints;
-    
+
     #endregion
-    
+
     public void ModifySpeed(float speed)
     {
         throw new NotImplementedException();

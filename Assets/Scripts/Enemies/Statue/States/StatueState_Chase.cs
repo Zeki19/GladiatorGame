@@ -21,9 +21,6 @@ public class StatueState_Chase<T> : States_Base<T>
     {
         base.Execute();
         var dir = _steering.GetDir();
-        if (dir != _obs.GetDir(_controller.transform, dir)) 
-        {
-        }
         dir = _obs.GetDir(_controller.transform ,dir);
 
         _move.Move(dir.normalized);

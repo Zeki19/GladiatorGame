@@ -13,9 +13,16 @@ public class HoundController : MonoBehaviour
     [Tooltip("Time it takes to force a state change.")]
     [SerializeField] private float idleDuration;
     [SerializeField] private float patrolDuration;
-    
+
+    [Header("Obstacle Avoidance Settings")]
+    [SerializeField] public int _maxObs;
+    [SerializeField] public float _radius;
+    [SerializeField] public float _angle;
+    [SerializeField] public float _personalArea;
+    [SerializeField] public LayerMask _obsMask;
+
     #region Private Variables
-    
+
     private FSM<StateEnum> _fsm;
     private HoundModel _model;
     private HoundView _view;
@@ -30,6 +37,7 @@ public class HoundController : MonoBehaviour
     private ISteering _patrolSteering;
     private ISteering _pursuitSteering;
     private ISteering _runawaySteering;
+    private ObstacleAvoidance _avoidWalls;
     
     #endregion
     
@@ -45,6 +53,7 @@ public class HoundController : MonoBehaviour
         _model = GetComponent<HoundModel>();
         _view = GetComponent<HoundView>();
         _los = GetComponent<LineOfSight>();
+        _avoidWalls = new ObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
     }
 
     void Start()
@@ -83,10 +92,10 @@ public class HoundController : MonoBehaviour
         var attack = GetComponent<IAttack>();
 
         var idleState = new HoundState_Idle<StateEnum>();
-        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering);
-        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering);
+        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering, _avoidWalls, transform);
+        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering, _avoidWalls, transform);
         var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle);
-        var runawayState = new HoundState_Runaway<StateEnum>(_runawaySteering);
+        var runawayState = new HoundState_Runaway<StateEnum>(_runawaySteering, _avoidWalls, transform);
 
         _idleState = idleState;
         _patrolState = patrolState;

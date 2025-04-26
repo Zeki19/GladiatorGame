@@ -3,10 +3,13 @@ using UnityEngine;
 public class HoundState_Chase<T> : States_Base<T>
 {
     private ISteering _steering;
-
-    public HoundState_Chase(ISteering steering)
+    private ObstacleAvoidance _avoidWalls;
+    private Transform _self;
+    public HoundState_Chase(ISteering steering, ObstacleAvoidance avoidWalls, Transform self)
     {
         _steering = steering;
+        _self = self;
+        _avoidWalls = avoidWalls;
     }
 
     public override void Enter()
@@ -17,7 +20,7 @@ public class HoundState_Chase<T> : States_Base<T>
     public override void Execute()
     {
         base.Execute();
-        var dir = _steering.GetDir();
+        var dir = _avoidWalls.GetDir(_self, _steering.GetDir()); 
         _move.Move(dir.normalized);
         _look.LookDir(dir.normalized);
     }
