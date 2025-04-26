@@ -18,6 +18,11 @@ public class StatueView : MonoBehaviour, ILook
         );
     }
 
+    public void LookSpeedMultiplier(float mult)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void PlayStateAnimation(StateEnum state)
     {
         throw new System.NotImplementedException();

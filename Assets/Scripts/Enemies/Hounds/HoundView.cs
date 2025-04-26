@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class HoundView : MonoBehaviour, ILook
 {
-    public float rotationSpeed;
-    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private float rotationSpeed;
+    private float _rotationMult;
+    
     private Animator _animator;
+    
     private static readonly int Idle = Animator.StringToHash("Idle");
     private static readonly int Walk = Animator.StringToHash("Walk");
     private static readonly int Run = Animator.StringToHash("Run");
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
     
@@ -27,8 +28,13 @@ public class HoundView : MonoBehaviour, ILook
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             targetRotation,
-            rotationSpeed * Time.deltaTime
+            rotationSpeed * _rotationMult * Time.deltaTime
         );
+    }
+
+    public void LookSpeedMultiplier(float mult = 1)
+    {
+        _rotationMult = mult;
     }
 
     public void PlayStateAnimation(StateEnum state)
@@ -50,10 +56,12 @@ public class HoundView : MonoBehaviour, ILook
             case StateEnum.Runaway:
                 _animator.SetTrigger(Walk);
                 break;
+            case StateEnum.Search:
+                _animator.SetTrigger(Run);
+                break;
             case StateEnum.Walk:
             case StateEnum.Default:
             case StateEnum.Dash:
-            case StateEnum.GoZone:
             default:
                 Debug.LogWarning("No animation mapped for state: " + state);
                 break;

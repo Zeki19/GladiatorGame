@@ -29,6 +29,11 @@ public class PlayerView : MonoBehaviour, ILook
         transform.rotation = Quaternion.Euler(0f, 0f, angle - 90);
     }
 
+    public void LookSpeedMultiplier(float mult)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void PlayStateAnimation(StateEnum state)
     {
         throw new System.NotImplementedException();
