@@ -19,7 +19,6 @@ public class HoundState_Attack<T> : States_Base<T>
         _model = model;
         _attackOptions = attackOptions;
         _inputFinish = inputFinish;
-        
     }
     public override void Enter()
     { 
@@ -39,6 +38,7 @@ public class HoundState_Attack<T> : States_Base<T>
               _damage = 15f;
               break;
         }
+        _look.PlayStateAnimation(StateEnum.Attack);
     }
 
     public override void Execute()

@@ -4,18 +4,16 @@ public class Pursuit : ISteering
 {
     private readonly Transform _self;
     private readonly Rigidbody2D _target;
-    private float TimePrediction { get; set; }
 
-    public Pursuit(Transform self, Rigidbody2D target, float timePrediction)
+    public Pursuit(Transform self, Rigidbody2D target)
     {
         _self = self;
         _target = target;
-        TimePrediction = timePrediction;
     }    
     
     public Vector2 GetDir()
     {
-        Vector2 point = _target.position + _target.linearVelocity; // Capaz falta sumarle un _target.transform.right?
+        Vector2 point = _target.position + _target.linearVelocity; // Capaz falta sumarle un _target.transform.up o algo?
         Vector2 dirToPoint = (point - (Vector2)_self.position).normalized;
         Vector2 dirToTarget = (_target.position - (Vector2)_self.position).normalized;
         

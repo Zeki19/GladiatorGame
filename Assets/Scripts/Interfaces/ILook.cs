@@ -5,4 +5,5 @@ using UnityEngine;
 public interface ILook
 {
     void LookDir(Vector2 dir);
+    public void PlayStateAnimation(StateEnum state);
 }

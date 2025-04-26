@@ -1,8 +1,6 @@
-using Enemies.Hounds.States;
 using Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class StatueController : MonoBehaviour
 {
@@ -16,6 +14,13 @@ public class StatueController : MonoBehaviour
     public Vector2 _wallPosition;
     [SerializeField] WallFinder _wallFinder;
     [SerializeField] float damage;
+
+    // Variables for the obstacle avoidance.
+    [SerializeField] float _radius;
+    [SerializeField] float _angle;
+    [SerializeField] float _personalArea;
+    [SerializeField] int _maxObs;
+    [SerializeField] LayerMask _avoidMask;
 
 
     StatueState_Idle<StateEnum> idleState;
@@ -50,7 +55,16 @@ public class StatueController : MonoBehaviour
         var attack = GetComponent<IAttack>();
 
         idleState = new StatueState_Idle<StateEnum>();
-        chaseState = new StatueState_Chase<StateEnum>(new Pursuit(transform, target, attack.AttackRange));
+        chaseState = new StatueState_Chase<StateEnum>
+        (
+            this,
+            new Pursuit(transform, target),
+            _maxObs,
+            _radius,
+            _angle,
+            _personalArea,
+            _avoidMask
+        );
         attackState = new StatueState_Attack<StateEnum>(target.transform, damage);
         RunAwayState = new StatueState_Runaway<StateEnum>(_steering);
 
@@ -98,7 +112,7 @@ public class StatueController : MonoBehaviour
         });
         var aRunAway = new ActionNode(() =>
         {
-            RunAwayState.ChangeSteering(new ToPoint(_wallPosition, transform.position));
+            RunAwayState.ChangeSteering(new ToPoint(_wallPosition, transform));
             _fsm.Transition(StateEnum.Runaway);
         });
         var aChase = new ActionNode(() =>
@@ -131,7 +145,6 @@ public class StatueController : MonoBehaviour
     bool QuestionIsThereAWall()
     {
         _wallPosition = _wallFinder.ClosestPoint(Vector2.zero);
-        Debug.Log(_wallPosition);
         return _wallPosition != Vector2.zero;
     }
     bool QuestionIsTheWallCloseEnough()
@@ -141,6 +154,12 @@ public class StatueController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, .5f);
+        Gizmos.DrawWireSphere(transform.position, _radius);
+
+        Gizmos.color = Color.red;
+        Vector3 dirA = Quaternion.AngleAxis(+_angle / 2, transform.forward) * transform.up;
+        Vector3 dirB = Quaternion.AngleAxis(-_angle / 2, transform.forward) * transform.up;
+        Gizmos.DrawRay(transform.position, dirA * _radius);
+        Gizmos.DrawRay(transform.position, dirB * _radius);
     }
 }
