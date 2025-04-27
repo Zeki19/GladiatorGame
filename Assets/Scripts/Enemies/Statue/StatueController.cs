@@ -11,11 +11,11 @@ public class StatueController : MonoBehaviour
     private ITreeNode _root;
     private LineOfSightNoMono _playerLOS;
     private ISteering _steering;
-    private Vector2 _wallPosition;
-    [SerializeField] WallFinder _wallFinder;
+    public Vector2 wallPosition;
     [SerializeField] float damage;
 
-    // Variables for the obstacle avoidance.
+    [Header("Obstacle Avoidance Settings")]
+    [SerializeField] WallFinder _wallFinder;
     [SerializeField] float _radius;
     [SerializeField] float _angle;
     [SerializeField] float _personalArea;
@@ -102,7 +102,7 @@ public class StatueController : MonoBehaviour
     {
         var aIdle = new ActionNode(() =>
         {
-            idleState.ChangeSteering(new ToPoint(_wallPosition, transform));
+            idleState.ChangeSteering(new ToPoint(wallPosition, transform));
             _fsm.Transition(input: StateEnum.Idle);
         });
         var aPatrol = new ActionNode(() =>
@@ -111,7 +111,7 @@ public class StatueController : MonoBehaviour
         });
         var aRunAway = new ActionNode(() =>
         {
-            RunAwayState.ChangeSteering(new ToPoint(_wallPosition, transform));
+            RunAwayState.ChangeSteering(new ToPoint(wallPosition, transform));
             _fsm.Transition(StateEnum.Runaway);
         });
         var aChase = new ActionNode(() =>
@@ -142,12 +142,12 @@ public class StatueController : MonoBehaviour
     }
     bool QuestionIsThereAWall()
     {
-        _wallPosition = _wallFinder.ClosestPoint(Vector2.zero);
-        return _wallPosition != Vector2.zero;
+        wallPosition = _wallFinder.ClosestPoint(Vector2.zero);
+        return wallPosition != Vector2.zero;
     }
     bool QuestionIsTheWallCloseEnough()
     {
-        return Vector2.Distance(transform.position, _wallPosition) < .5;
+        return Vector2.Distance(transform.position, wallPosition) < .5;
     }
     
     private void OnDrawGizmos()

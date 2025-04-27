@@ -252,9 +252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2014713768}
-  _wallPosition: {x: 0, y: 0}
-  _wallFinder: {fileID: 586737236}
+  wallPosition: {x: 0, y: 0}
   damage: 0
+  _wallFinder: {fileID: 586737236}
   _radius: 1
   _angle: 120
   _personalArea: 0.5
@@ -1016,7 +1016,7 @@ Transform:
   m_GameObject: {fileID: 2014713761}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.09, y: -4.39, z: 0}
+  m_LocalPosition: {x: 7.09, y: -3.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
