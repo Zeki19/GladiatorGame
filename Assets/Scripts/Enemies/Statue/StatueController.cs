@@ -11,12 +11,15 @@ public class StatueController : MonoBehaviour
     private ITreeNode _root;
     private LineOfSightNoMono _playerLOS;
     private ISteering _steering;
+
     public Vector2 _wallPosition;
-    [SerializeField] WallFinder _wallFinder;
+
+    [SerializeField] private Transform RotationHandler;
     [SerializeField] float damage;
+    [SerializeField] WallFinder _wallFinder;
     [SerializeField] private float LineOfSightRange;
 
-    // Variables for the obstacle avoidance.
+    [Header("Obstacle Avoidance Settings")]
     [SerializeField] float _radius;
     [SerializeField] float _angle;
     [SerializeField] float _personalArea;
@@ -141,7 +144,7 @@ public class StatueController : MonoBehaviour
     }
     bool QuestionIsPlayerLooking()
     {
-        return _playerLOS.LOS(target.transform,transform);
+        return _playerLOS.LOS(RotationHandler.transform,transform, RotationHandler);
     }
     bool QuestionIsThereAWall()
     {
@@ -150,7 +153,7 @@ public class StatueController : MonoBehaviour
     }
     bool QuestionIsTheWallCloseEnough()
     {
-        return Vector2.Distance(transform.position, _wallPosition) < .5;
+        return Vector2.Distance(transform.position, _wallPosition) < 1;
     }
     void Dead()
     {

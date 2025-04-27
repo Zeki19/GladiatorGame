@@ -26,9 +26,9 @@ public class LineOfSightNoMono
         return distance <= range;
     }
 
-    private bool CheckAngle(Transform looker, Transform target)
+    private bool CheckAngle(Transform looker, Transform target, Transform rotationTarget)
     {
-        return CheckAngle(looker, target, looker.up);
+        return CheckAngle(looker, target, rotationTarget.up);
     }
     private bool CheckAngle(Transform looker, Transform target, Vector2 front)
     {
@@ -42,8 +42,8 @@ public class LineOfSightNoMono
         return !Physics2D.Raycast(looker.position, dir.normalized, dir.magnitude, _obstacleMask);
     }
 
-    public bool LOS(Transform looker, Transform target)
+    public bool LOS(Transform looker, Transform target, Transform rotationTarget)
     {
-        return CheckRange(looker,target) && CheckAngle(looker,target) && CheckView(looker,target);
+        return CheckRange(looker,target) && CheckAngle(looker,target, rotationTarget) && CheckView(looker,target);
     }
 }

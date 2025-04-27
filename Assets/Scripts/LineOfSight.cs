@@ -36,11 +36,11 @@ public class LineOfSight : MonoBehaviour
     private bool CheckView(Transform target)
     {
         Vector2 dir = target.position - transform.position;
-        if(Physics.Raycast(transform.position, dir.normalized, dir.magnitude, obstacleMask))
+        if(Physics2D.Raycast(transform.position, dir.normalized, dir.magnitude, obstacleMask))
         {
 
         }
-        return !Physics.Raycast(transform.position, dir.normalized, dir.magnitude, obstacleMask);
+        return !Physics2D.Raycast(transform.position, dir.normalized, dir.magnitude, obstacleMask);
     }
 
     public bool LOS(Transform target)

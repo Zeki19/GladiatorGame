@@ -5,7 +5,7 @@ public class StatueView : MonoBehaviour, ILook
 {
     [SerializeField] float rotationSpeed;
     [SerializeField] private Animator animator;
-    private StateEnum _lastAnimationState;
+    private StateEnum _lastAnimationState = StateEnum.Idle;
     public void LookDir(Vector2 dir)
     {
         if (dir == Vector2.zero) return;
@@ -29,7 +29,7 @@ public class StatueView : MonoBehaviour, ILook
     public void PlayStateAnimation(StateEnum state)
     {
         Debug.Log(state);
-        if(state == _lastAnimationState )
+        if(state == _lastAnimationState)
             return;
         _lastAnimationState = state;
         switch (state)

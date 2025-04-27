@@ -22,13 +22,13 @@ public class PlayerController : MonoBehaviour
 
     void Dead()
     {
-        gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
     private void Awake()
     {
         InitializeFSM();
         
-        _playerHealth = GetComponent<HealthSystem>();
+        _playerHealth = transform.parent.GetComponent<HealthSystem>();
 
         _playerHealth.OnDead += Dead;
             
