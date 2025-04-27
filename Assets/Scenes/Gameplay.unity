@@ -1101,6 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b8451e6a5e7c24da253935d4a5454b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 0
   showTankSettings: 1
   tankPercentage: 0
   tankAttack: 0
@@ -2506,7 +2507,7 @@ GameObject:
   - component: {fileID: 407207488}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
