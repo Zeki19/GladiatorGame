@@ -19,6 +19,7 @@ public class StatueState_Attack<T> : States_Base<T>
     { 
         base.Enter();
         Debug.Log("Statue enters Attack state");
+        _look.PlayStateAnimation(StateEnum.Attack);
 
         if (_target != null && Vector2.Distance(_target.position, _move.Position) <= _attack.AttackRange)
         {

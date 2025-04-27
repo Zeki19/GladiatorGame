@@ -11,9 +11,10 @@ public class StatueController : MonoBehaviour
     private ITreeNode _root;
     private LineOfSightNoMono _playerLOS;
     private ISteering _steering;
-    private Vector2 _wallPosition;
+    public Vector2 _wallPosition;
     [SerializeField] WallFinder _wallFinder;
     [SerializeField] float damage;
+    [SerializeField] private float LineOfSightRange;
 
     // Variables for the obstacle avoidance.
     [SerializeField] float _radius;
@@ -32,7 +33,7 @@ public class StatueController : MonoBehaviour
         _model = GetComponent<StatueModel>();
         _los = GetComponent<LineOfSight>();
         _steering = new ToPoint(Vector2.zero, transform);
-        _playerLOS = new LineOfSightNoMono(3, 90, _avoidMask);
+        _playerLOS = new LineOfSightNoMono(LineOfSightRange, 90, _avoidMask);
     }
     void Start()
     {

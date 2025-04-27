@@ -39,7 +39,7 @@ public class LineOfSightNoMono
     private bool CheckView(Transform looker, Transform target)
     {
         Vector2 dir = target.position - looker.position;
-        return !Physics.Raycast(looker.position, dir.normalized, dir.magnitude, _obstacleMask);
+        return !Physics2D.Raycast(looker.position, dir.normalized, dir.magnitude, _obstacleMask);
     }
 
     public bool LOS(Transform looker, Transform target)

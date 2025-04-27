@@ -14,7 +14,7 @@ public class StatueState_Chase<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Statue enters Chase state");
+        _look.PlayStateAnimation(StateEnum.Chase);
     }
 
     public override void Execute()

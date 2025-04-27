@@ -4,6 +4,8 @@ using UnityEngine.Rendering;
 public class StatueView : MonoBehaviour, ILook
 {
     [SerializeField] float rotationSpeed;
+    [SerializeField] private Animator animator;
+    private StateEnum _lastAnimationState;
     public void LookDir(Vector2 dir)
     {
         if (dir == Vector2.zero) return;
@@ -26,6 +28,20 @@ public class StatueView : MonoBehaviour, ILook
 
     public void PlayStateAnimation(StateEnum state)
     {
-        throw new System.NotImplementedException();
+        Debug.Log(state);
+        if(state == _lastAnimationState )
+            return;
+        _lastAnimationState = state;
+        switch (state)
+        {
+            case StateEnum.Idle :animator.SetTrigger("Idle");
+                break;
+            case StateEnum.Chase :animator.SetTrigger("Chase");
+                break;
+            case StateEnum.Attack :animator.SetTrigger("Attack");
+                break;
+            default:
+                break;
+        }
     }
 }

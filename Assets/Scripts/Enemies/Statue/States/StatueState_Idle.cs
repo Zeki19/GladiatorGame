@@ -11,14 +11,12 @@ public class StatueState_Idle<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Statue enters idle state");
+        _look.PlayStateAnimation(StateEnum.Idle);
     }
     public override void Execute()
     {
         base.Execute();
         _look.LookDir(-_steering.GetDir());
-        Debug.Log(_steering.GetDir());
-
     }
     internal void ChangeSteering(ISteering newSteering)
     {
