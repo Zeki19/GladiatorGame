@@ -14,15 +14,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashInvincibility;
 
     private FSM<StateEnum> _fsm;
-    private IHealth _playerHealth = new HealthSystem(100);
+    private IHealth _playerHealth;
     private PlayerInput _playerInput;
     private InputAction _moveAction;
     private InputAction _attackAction;
     private InputAction _dashAction;
+
+    void Dead()
+    {
+        gameObject.SetActive(false);
+    }
     private void Awake()
     {
         InitializeFSM();
+        
+        _playerHealth = GetComponent<HealthSystem>();
 
+        _playerHealth.OnDead += Dead;
+            
         _playerInput = GetComponent<PlayerInput>();
         var actionMap = _playerInput.actions.FindActionMap("Player");
 

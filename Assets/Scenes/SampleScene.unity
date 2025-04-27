@@ -1387,6 +1387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
+  _rb: {fileID: 1212377210}
 --- !u!114 &1212377220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,24 +1495,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1212377209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39b8451e6a5e7c24da253935d4a5454b, type: 3}
+  m_Script: {fileID: 11500000, guid: c817af1cfb680a6409ab29122da86039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTankSettings: 1
-  tankPercentage: 0
-  tankAttack: 0
-  tankDefence: 0
-  tankSpeed: 0
-  showBalancedSettings: 1
-  balancedPercentage: 0
-  balancedAttack: 0
-  balancedDefence: 0
-  balancedSpeed: 0
-  showGlassCannonSettings: 1
-  glassCannonPercentage: 0
-  glassCannonAttack: 0
-  glassCannonDefence: 0
-  glassCannonSpeed: 0
+  _maxHealth: 50
 --- !u!1 &1247685014
 GameObject:
   m_ObjectHideFlags: 0
