@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerModel : MonoBehaviour, IMove, IAttack
 {
     [SerializeField] private float _moveSpeed;
-    private Rigidbody2D _rb;
+    [SerializeField] private Rigidbody2D _rb;
     private Vector2 _moveInput;
     private float _speedModifier = 1;
     private Vector2 _lastDirection;
@@ -25,7 +25,7 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
 
     protected virtual void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        //_rb = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
         var actionMap = _playerInput.actions.FindActionMap("Player");
         _direction = actionMap.FindAction("Move");

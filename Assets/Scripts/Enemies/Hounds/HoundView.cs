@@ -5,7 +5,6 @@ using UnityEngine;
 public class HoundView : MonoBehaviour, ILook
 {
     [SerializeField] private float rotationSpeed;
-    private float _rotationMult;
     
     private Animator _animator;
     
@@ -28,15 +27,10 @@ public class HoundView : MonoBehaviour, ILook
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             targetRotation,
-            rotationSpeed * _rotationMult * Time.deltaTime
+            rotationSpeed * Time.deltaTime
         );
     }
-
-    public void LookSpeedMultiplier(float mult = 1)
-    {
-        _rotationMult = mult;
-    }
-
+    
     public void PlayStateAnimation(StateEnum state)
     {
         switch (state)

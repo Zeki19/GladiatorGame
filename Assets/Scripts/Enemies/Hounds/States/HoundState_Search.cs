@@ -30,9 +30,6 @@ public class HoundState_Search<T> : States_Base<T>
         
         if (dir == Vector2.zero)
         {
-            _look.LookSpeedMultiplier(.2f);
-            _look.LookDir(_self.transform.right.normalized);
-            
             if (coRunning) return;
             coRunning = true;
             
@@ -55,7 +52,6 @@ public class HoundState_Search<T> : States_Base<T>
         
         Searched = true;
         coRunning = false;
-        _look.LookSpeedMultiplier(1f);
     }
 }
 

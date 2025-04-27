@@ -20,7 +20,7 @@ public class StatueState_SearchingWall<T> : States_Base<T>
         base.Enter();
 
         wall = _wallFinder.ClosestPoint(Vector2.zero);
-        _controller._wallPosition = wall;
+        _controller.wallPosition = wall;
         Debug.Log(wall);
     }
 
