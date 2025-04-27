@@ -760,6 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b8451e6a5e7c24da253935d4a5454b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 0
   showTankSettings: 1
   tankPercentage: 0
   tankAttack: 0
@@ -887,6 +888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
+  _rb: {fileID: 2014713768}
 --- !u!114 &2014713766
 MonoBehaviour:
   m_ObjectHideFlags: 0

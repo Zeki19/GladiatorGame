@@ -28,6 +28,8 @@ public class StatueController : MonoBehaviour
     StatueState_Chase<StateEnum> chaseState;
     StatueState_Attack<StateEnum> attackState;
     StatueState_Runaway<StateEnum> RunAwayState;
+
+
     private void Awake()
     {
         _model = GetComponent<StatueModel>();
@@ -149,6 +151,10 @@ public class StatueController : MonoBehaviour
     bool QuestionIsTheWallCloseEnough()
     {
         return Vector2.Distance(transform.position, _wallPosition) < .5;
+    }
+    void Dead()
+    {
+        gameObject.SetActive(false);
     }
     
     private void OnDrawGizmos()
