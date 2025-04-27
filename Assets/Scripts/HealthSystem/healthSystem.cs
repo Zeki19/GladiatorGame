@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 public class HealthSystem : MonoBehaviour, IHealth
 {
-    private float _maxHealth;
+    [SerializeField] private float _maxHealth;
     private float _currentHealth;
     private bool _isInvulnerable;
 
@@ -108,6 +108,7 @@ public class HealthSystem : MonoBehaviour, IHealth
         if (isInvulnerable) return;
         currentHealth -= damageAmount;
         OnDamage?.Invoke(damageAmount);
+        Debug.Log("The player took " + damageAmount + " damage");
         if (currentHealth <= 0)
         {
             Kill();

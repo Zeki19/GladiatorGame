@@ -49,7 +49,6 @@ public class HoundState_Attack<T> : States_Base<T>
             if (health != null)
             {
                 health.TakeDamage(_damage);
-                Debug.Log($"Ataque {_chosenType}.Daño {_damage}");
                 StateMachine.Transition(_inputFinish);
             }
         }
