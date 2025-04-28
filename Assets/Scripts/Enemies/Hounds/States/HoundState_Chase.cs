@@ -15,6 +15,7 @@ public class HoundState_Chase<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
+        _move.ModifySpeed(2f);
         _look.PlayStateAnimation(StateEnum.Chase);
     }
     public override void Execute()
@@ -23,5 +24,11 @@ public class HoundState_Chase<T> : States_Base<T>
         var dir = _avoidWalls.GetDir(_self, _steering.GetDir()); 
         _move.Move(dir.normalized);
         _look.LookDir(dir.normalized);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _move.ModifySpeed(1f);
     }
 }

@@ -8,6 +8,7 @@ public class HoundModel : MonoBehaviour, IMove, IAttack
     [Tooltip("Speed at which the hound patrols.")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float amountOfWaypoints = 5f;
+    private float _speedMult = 1f;
     
     [Header("Attack Settings")]
     [SerializeField] private float attackRange;
@@ -23,12 +24,13 @@ public class HoundModel : MonoBehaviour, IMove, IAttack
 
     public void ModifySpeed(float speed)
     {
-        throw new NotImplementedException();
+        _speedMult = speed;
     }
 
     public void Move(Vector2 dir)
     {
-        transform.Translate(dir * (moveSpeed * Time.deltaTime), Space.World);
+        if (_speedMult <= 0) _speedMult = 1;
+        transform.Translate(dir * (moveSpeed * _speedMult * Time.deltaTime), Space.World);
     }
 
     public void Dash(float dashForce)
