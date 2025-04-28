@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5755179845042629338}
   - component: {fileID: 6330654030206379390}
   - component: {fileID: 2427859933623633257}
+  - component: {fileID: 2001263911101445769}
   - component: {fileID: 278376296804834196}
   - component: {fileID: 8540523845805222788}
   - component: {fileID: 5489819235261190120}
@@ -33,8 +34,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -79,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1707773313
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -7026968489346428562, guid: f7e3293bae088454c90884248b7d942a, type: 3}
   m_Color: {r: 0.7169812, g: 0.47009614, b: 0.47009614, a: 1}
@@ -119,7 +120,44 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!70 &2001263911101445769
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4388794976801370552}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.61, y: 1.82}
+  m_Direction: 0
 --- !u!114 &278376296804834196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,13 +174,13 @@ MonoBehaviour:
   camp: {fileID: 0}
   idleDuration: 4.5
   patrolDuration: 12
-  _maxObs: 5
-  _radius: 2
-  _angle: 170
-  _personalArea: 1
+  _maxObs: 10
+  _radius: 1
+  _angle: 60
+  _personalArea: 0.5
   _obsMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
 --- !u!114 &8540523845805222788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,9 +193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de5a09d761df2446b78b5f18f3a3aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 2
   amountOfWaypoints: 5
-  attackRange: 2
+  attackRange: 1
   attackCooldown: 3
 --- !u!114 &5489819235261190120
 MonoBehaviour:

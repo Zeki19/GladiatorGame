@@ -21,6 +21,8 @@ public class HoundState_Search<T> : States_Base<T>
     {
         base.Enter();
         Searched = false;
+        
+        _self.StartCoroutine(Timer());
         _look.PlayStateAnimation(StateEnum.Chase);
     }
     public override void Execute()
@@ -48,10 +50,16 @@ public class HoundState_Search<T> : States_Base<T>
 
     private IEnumerator TurnAroundCoroutine()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(1f);
         
         Searched = true;
         coRunning = false;
+    }
+
+    private IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(3f);
+        Searched = true;
     }
 }
 

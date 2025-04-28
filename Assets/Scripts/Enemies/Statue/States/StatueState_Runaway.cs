@@ -9,12 +9,6 @@ public class StatueState_Runaway<T> : States_Base<T>
         _steering = steering;
     }
     
-    public override void Enter()
-    {
-        base.Enter();
-        Debug.Log("Statue enters Runaway state");
-    }
-
     public override void Execute()
     {
         base.Execute();
