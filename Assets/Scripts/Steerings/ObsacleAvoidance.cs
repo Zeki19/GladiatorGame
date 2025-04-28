@@ -50,7 +50,7 @@ public class ObstacleAvoidance
         {
             return currDir;
         }
-        Vector2 relativePos = self.InverseTransformPoint(nearClosestPoint);
+        //Vector2 relativePos = self.InverseTransformPoint(nearClosestPoint);
         Vector3 dirToColl = (nearClosestPoint - self.position).normalized;
         Vector2 avoidDir = Vector2.Perpendicular(dirToColl).normalized;
         return Vector2.Lerp(currDir, avoidDir, (_radius - Mathf.Clamp(nearCollDistance - _personalArea, 0, _radius)) / _radius);

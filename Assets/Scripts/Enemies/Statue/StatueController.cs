@@ -111,10 +111,6 @@ public class StatueController : MonoBehaviour
             idleState.ChangeSteering(new ToPoint(_wallPosition, transform));
             _fsm.Transition(input: StateEnum.Idle);
         });
-        var aPatrol = new ActionNode(() =>
-        {
-            _fsm.Transition(StateEnum.Patrol);
-        });
         var aRunAway = new ActionNode(() =>
         {
             RunAwayState.ChangeSteering(new ToPoint(_wallPosition, transform));
@@ -125,12 +121,14 @@ public class StatueController : MonoBehaviour
             _fsm.Transition(StateEnum.Chase);
         });
         var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
+        
         var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, aChase);
         var qIsTheWallClose = new QuestionNode(QuestionIsTheWallCloseEnough, aIdle, aRunAway);
         var qLookingForWall = new QuestionNode(QuestionIsThereAWall, qIsTheWallClose, aIdle);
         var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, qLookingForWall);
-        var qPlayerLookin = new QuestionNode(QuestionIsPlayerLooking, aIdle, qTargetInView);
-        _root = qPlayerLookin;
+        var qPlayerLooking = new QuestionNode(QuestionIsPlayerLooking, aIdle, qTargetInView);
+        
+        _root = qPlayerLooking;
     }
 
 
