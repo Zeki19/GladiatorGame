@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 372884652}
   - component: {fileID: 372884651}
   m_Layer: 0
-  m_Name: VictoryBOCA_0
+  m_Name: DefeatBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,7 +180,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7064029056669817200, guid: 38ab0a9cc5ba5e649b54320139058512, type: 3}
+  m_Sprite: {fileID: -8048513154784661654, guid: fb9055bae81ac864ab2ef423a88ef050, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -200,8 +200,8 @@ Transform:
   m_GameObject: {fileID: 372884650}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.10689657, y: 0.09576647, z: 0.09202844}
+  m_LocalPosition: {x: -0.012, y: -0.0264, z: 0}
+  m_LocalScale: {x: 0.3959124, y: 0.19918966, z: 0.09202844}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7064029056669817200, guid: 38ab0a9cc5ba5e649b54320139058512, type: 3}
+  m_Sprite: {fileID: -8048513154784661654, guid: fb9055bae81ac864ab2ef423a88ef050, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 1223087380}
   - component: {fileID: 1223087379}
   m_Layer: 5
-  m_Name: Boca
+  m_Name: Defeat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
