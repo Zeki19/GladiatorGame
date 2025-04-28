@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     void Dead()
     {
         transform.parent.gameObject.SetActive(false);
+        ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(3);
     }
     private void Awake()
     {
