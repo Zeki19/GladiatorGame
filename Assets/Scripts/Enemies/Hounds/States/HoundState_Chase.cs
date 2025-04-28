@@ -28,7 +28,7 @@ public class HoundState_Chase<T> : States_Base<T>
 
     public override void Exit()
     {
-        base.Exit();
         _move.ModifySpeed(1f);
+        base.Exit();
     }
 }

@@ -16,6 +16,7 @@ public class HoundState_Runaway<T> : States_Base<T>
 
     public override void Enter()
     {
+        _move.ModifySpeed(3f);
         base.Enter();
         _look.PlayStateAnimation(StateEnum.Runaway);
     }
@@ -26,5 +27,11 @@ public class HoundState_Runaway<T> : States_Base<T>
         var dir = _avoidWalls.GetDir(_self, _steering.GetDir());
         _move.Move(dir);
         _look.LookDir(dir);
+    }
+
+    public override void Exit()
+    {
+        _move.ModifySpeed(1f);
+        base.Exit();
     }
 }

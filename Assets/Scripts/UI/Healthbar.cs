@@ -7,9 +7,7 @@ public class Healthbar : MonoBehaviour
 
     public void UpdateHealthbar(float maxHealth, float currentHealth)
     {
-        var a = currentHealth / maxHealth;
-        Debug.Log(a);
-        _bar.fillAmount = a;
+        _bar.fillAmount = currentHealth / maxHealth;
     }
     
 }
