@@ -1,10 +1,19 @@
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
+
 public class HealthSystem : MonoBehaviour, IHealth
 {
     [SerializeField] private float _maxHealth;
     private float _currentHealth;
     private bool _isInvulnerable;
+
+    [SerializeField] private Healthbar _healthbar;
+
+    private void Awake()
+    {
+        _currentHealth = _maxHealth;
+    }
 
     public float maxHealth
     {
@@ -107,6 +116,11 @@ public class HealthSystem : MonoBehaviour, IHealth
     {
         if (isInvulnerable) return;
         currentHealth -= damageAmount;
+        
+        if (_healthbar != null)
+        {
+            _healthbar.UpdateHealthbar(maxHealth,currentHealth);
+        }
         OnDamage?.Invoke(damageAmount);
         Debug.Log("The player took " + damageAmount + " damage");
         if (currentHealth <= 0)

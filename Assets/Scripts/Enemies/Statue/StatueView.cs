@@ -28,7 +28,7 @@ public class StatueView : MonoBehaviour, ILook
 
     public void PlayStateAnimation(StateEnum state)
     {
-        Debug.Log(state);
+        //Debug.Log(state);
         if(state == _lastAnimationState)
             return;
         _lastAnimationState = state;
