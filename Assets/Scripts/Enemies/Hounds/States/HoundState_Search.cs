@@ -1,65 +1,48 @@
 using System.Collections;
 using UnityEngine;
 
-public class HoundState_Search<T> : States_Base<T>
+public class HoundState_Search<T> : State_Steering<T>
 {
-    private ISteering _steering;
-    private ObstacleAvoidance _avoidWalls;
-    private MonoBehaviour _self;
-    public bool Searched = false;
+    private MonoBehaviour _mono;
+    public bool Searched { get; private set; } = false;
 
-    private bool coRunning = false;
-    
-    public HoundState_Search(ISteering steering, ObstacleAvoidance avoidWalls, MonoBehaviour self)
+    public HoundState_Search(ISteering steering, ObstacleAvoidance avoidObstacles, Transform self, MonoBehaviour monoBehaviour) : base(steering, avoidObstacles, self)
     {
-        _steering = steering;
-        _self = self;
-        _avoidWalls = avoidWalls;
+        _mono = monoBehaviour;
     }
-
+    
     public override void Enter()
     {
         base.Enter();
-        Searched = false;
+        Debug.Log("Search");
         
-        _self.StartCoroutine(Timer());
+        Searched = false;
         _look.PlayStateAnimation(StateEnum.Chase);
     }
+
     public override void Execute()
     {
-        base.Execute();
-        var dir = _avoidWalls.GetDir(_self.transform, _steering.GetDir());
-        
+        var dir = _avoidObstacles.GetDir(_self, _steering.GetDir());
         if (dir == Vector2.zero)
         {
-            if (coRunning) return;
-            coRunning = true;
-            
-            _self.StartCoroutine(TurnAroundCoroutine());
-            return;
+            _look.LookDir(Vector2.right);
+            _mono.StartCoroutine(Timer(2));
         }
-        
-        _move.Move(dir.normalized);
-        _look.LookDir(dir.normalized);
+        _move.Move(dir);
+        _look.LookDir(dir);
     }
-    
+
     public void ChangeSteering(ISteering newSteering)
     {
         _steering = newSteering;
     }
 
-    private IEnumerator TurnAroundCoroutine()
+    private IEnumerator Timer(float duration)
     {
-        yield return new WaitForSeconds(1f);
-        
+        yield return new WaitForSeconds(duration);
         Searched = true;
-        coRunning = false;
     }
 
-    private IEnumerator Timer()
-    {
-        yield return new WaitForSeconds(3f);
-        Searched = true;
-    }
+
 }
 

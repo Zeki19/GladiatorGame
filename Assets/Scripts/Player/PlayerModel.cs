@@ -19,6 +19,11 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
     Action _onAttack = delegate { };
     public Action OnAttack { get => _onAttack; set => _onAttack = value; }
 
+    public void StopMovement()
+    {
+        throw new NotImplementedException();
+    }
+
     public Vector2 Position => transform.position;
 
     public float AttackRange => 0;

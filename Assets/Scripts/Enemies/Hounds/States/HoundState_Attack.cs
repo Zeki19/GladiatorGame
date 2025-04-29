@@ -11,21 +11,28 @@ public class HoundState_Attack<T> : States_Base<T>
     private float _damage;
     private HoundModel _model;
     private Dictionary<AttackType, float> _attackOptions;
-    private T _inputFinish;
+
+    private MonoBehaviour _mono;
+    private float duration;
+    public bool canAttack;
     
-    public HoundState_Attack(Transform target, HoundModel model, Dictionary<AttackType, float> attackOptions, T inputFinish)
+    public HoundState_Attack(Transform target, HoundModel model, Dictionary<AttackType, float> attackOptions, MonoBehaviour monoBehaviour, float attackCooldown)
     {
         _target = target;
         _model = model;
         _attackOptions = attackOptions;
-        _inputFinish = inputFinish;
+
+        _mono = monoBehaviour;
+        duration = attackCooldown;
     }
     public override void Enter()
     { 
         base.Enter();
+        Debug.Log("Attack");
 
         _chosenType = MyRandom.Roulette(_attackOptions);
         
+        //Esto deberia ser solo el DMG
         switch (_chosenType)
         {
           case  AttackType.Normal:
@@ -39,18 +46,27 @@ public class HoundState_Attack<T> : States_Base<T>
               break;
         }
         _look.PlayStateAnimation(StateEnum.Attack);
+        
+        PerformAttack();
+        canAttack = false;
+        _mono.StartCoroutine(AttackCooldown());
+    }
+    
+    void PerformAttack()
+    {
+        if (_target == null) return;
+        
+        var health = _target.GetComponent<HealthSystem>();
+        if (health != null)
+        {
+            health.TakeDamage(_damage);
+            //_model.Attack();
+        }
     }
 
-    public override void Execute()
+    private System.Collections.IEnumerator AttackCooldown()
     {
-        if (_target != null && Vector2.Distance(_target.position, _model.Position) <= _model.AttackRange)
-        {
-            var health = _target.GetComponent<HealthSystem>();
-            if (health != null)
-            {
-                health.TakeDamage(_damage);
-                StateMachine.Transition(_inputFinish);
-            }
-        }
+        yield return new WaitForSeconds(duration);
+        canAttack = true;
     }
 }

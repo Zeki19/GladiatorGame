@@ -7,6 +7,11 @@ public class StatueModel : MonoBehaviour, IMove, IAttack
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float attackRange;
     [SerializeField] private Rigidbody2D _rb;
+    public void StopMovement()
+    {
+        throw new NotImplementedException();
+    }
+
     public Vector2 Position => transform.position;
     public float AttackRange => attackRange;
     public void Move(Vector2 dir)

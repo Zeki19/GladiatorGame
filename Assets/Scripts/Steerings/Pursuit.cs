@@ -14,7 +14,7 @@ public class Pursuit : ISteering
     public Vector2 GetDir()
     {
         var distanceToTarget = Vector2.Distance(_self.position, _target.position);
-        if (distanceToTarget < .5f)
+        if (distanceToTarget < .5f) //Esto no va aca va en los Estados
         {
             return Vector2.zero;
         }

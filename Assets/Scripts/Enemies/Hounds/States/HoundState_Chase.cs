@@ -1,34 +1,25 @@
 using UnityEngine;
 
-public class HoundState_Chase<T> : States_Base<T>
+public class HoundState_Chase<T> : State_Steering<T>
 {
-    private ISteering _steering;
-    private ObstacleAvoidance _avoidWalls;
-    private Transform _self;
-    public HoundState_Chase(ISteering steering, ObstacleAvoidance avoidWalls, Transform self)
+    private Transform _target;
+    public Vector2 lastSeenPositionOfTarget;
+    public HoundState_Chase(ISteering steering, ObstacleAvoidance avoidObstacles, Transform self, Transform target) : base(steering, avoidObstacles, self)
     {
-        _steering = steering;
-        _self = self;
-        _avoidWalls = avoidWalls;
+        _target = target;
     }
-
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Chase");
+        
         _move.ModifySpeed(2f);
         _look.PlayStateAnimation(StateEnum.Chase);
     }
+
     public override void Execute()
     {
         base.Execute();
-        var dir = _avoidWalls.GetDir(_self, _steering.GetDir()); 
-        _move.Move(dir.normalized);
-        _look.LookDir(dir.normalized);
-    }
-
-    public override void Exit()
-    {
-        _move.ModifySpeed(1f);
-        base.Exit();
+        lastSeenPositionOfTarget = _target.position;
     }
 }

@@ -18,6 +18,9 @@ public class HoundModel : MonoBehaviour, IMove, IAttack
     [SerializeField] private float attackCooldown;
 
     #region Public calls to private variables
+
+
+
     public Vector2 Position => transform.position;
     public float AttackRange => attackRange;
     public float AttackCooldown => attackCooldown;
@@ -25,6 +28,10 @@ public class HoundModel : MonoBehaviour, IMove, IAttack
 
     #endregion
 
+    public void StopMovement()
+    {
+        _rb.linearVelocity = Vector2.zero;
+    }
     public void ModifySpeed(float speed)
     {
         _speedMult = speed;

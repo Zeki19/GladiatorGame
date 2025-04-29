@@ -83,7 +83,8 @@ public class HoundController : MonoBehaviour
             waypoints.Add(camp.GetRandomPoint());
         }
 
-        _patrolSteering = new PatrolToWaypoints(waypoints, _model.transform);
+        //No hace falta inicializarlo asi
+        _patrolSteering = new PatrolToWaypoints(waypoints, _model.transform); 
         _runawaySteering = new ToPoint(camp.CampCenter, _model.transform);
         _pursuitSteering = new Pursuit(_model.transform, target);
         _toPointSteering = new ToPoint(_targetLastPos, _model.transform);
@@ -97,11 +98,11 @@ public class HoundController : MonoBehaviour
         var look = GetComponent<ILook>();
         var attack = GetComponent<IAttack>();
 
-        var idleState = new HoundState_Idle<StateEnum>();
-        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering, _avoidWalls, transform);
-        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering, _avoidWalls, transform);
-        var searchState = new HoundState_Search<StateEnum>(_toPointSteering, _avoidWalls, _model);
-        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, StateEnum.Idle);
+        var idleState = new HoundState_Idle<StateEnum>(this, idleDuration);
+        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
+        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform);
+        var searchState = new HoundState_Search<StateEnum>(_toPointSteering, _avoidWalls, _model.transform, this);
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, this, _model.AttackCooldown);
         var runawayState = new HoundState_Runaway<StateEnum>(_runawaySteering, _avoidWalls, transform);
 
         _idleState = idleState;
@@ -132,7 +133,6 @@ public class HoundController : MonoBehaviour
         
         searchState.AddTransition(StateEnum.Chase, chaseState);
         searchState.AddTransition(StateEnum.Runaway, runawayState);
-        searchState.AddTransition(StateEnum.Search, searchState);
         
         attackState.AddTransition(StateEnum.Chase, chaseState);
         attackState.AddTransition(StateEnum.Attack, attackState);
@@ -145,7 +145,6 @@ public class HoundController : MonoBehaviour
         }
 
         _fsm.SetInit(idleState);
-        StartCoroutine(RestFor());
     }
     
 
@@ -153,53 +152,40 @@ public class HoundController : MonoBehaviour
 
     #region DecisionTree
     
-    private bool _isRested = false;
-    private bool _isTired = false;
-    private bool _attackCd = false;
-    
     void InitializedTree()
     {
         var aIdle = new ActionNode(() =>
         {
-            if (_fsm.CurrentState() == _idleState) return;
             _fsm.Transition(StateEnum.Idle);
-            StartCoroutine(RestFor());
         });
         
         var aPatrol = new ActionNode(() =>
         {
-            if (_fsm.CurrentState() == _patrolState) return;
             _fsm.Transition(StateEnum.Patrol);
-            StartCoroutine(PatrolFor());
         });
         
         var aRunaway = new ActionNode(() =>
         {
-            if (_fsm.CurrentState() == _runawayState) return;
             _fsm.Transition(StateEnum.Runaway); 
         });
         
         var aChase = new ActionNode(() =>
         {
-            _targetLastPos = target.transform.position;
-            if (_fsm.CurrentState() == _chaseState) return;
             _fsm.Transition(StateEnum.Chase);
-            StopCoroutine(PatrolFor());
+        });
+        
+        var aSearch = new ActionNode(() =>
+        {
+            _searchState.ChangeSteering(new ToPoint(_chaseState.lastSeenPositionOfTarget, _model.transform));
+            _fsm.Transition(StateEnum.Search);
         });
         
         var aAttack = new ActionNode(() =>
         {
-            if (_fsm.CurrentState() == _attackState) return;
             _fsm.Transition(StateEnum.Attack);
-            StartCoroutine(AttackCd());
         });
 
-        var aSearch = new ActionNode(() =>
-        {
-            if (_fsm.CurrentState() == _searchState) return;
-            _searchState.ChangeSteering(new ToPoint(_targetLastPos, _model.transform));
-            _fsm.Transition(StateEnum.Search);
-        });
+
 
         var qInCamp = new QuestionNode(QuestionIsInCamp, aPatrol, aRunaway);
         var qCanAttack  = new QuestionNode(QuestionIsAttackInCd, aChase, aAttack);
@@ -235,7 +221,7 @@ public class HoundController : MonoBehaviour
     }
     bool QuestionIsRested()
     {
-        return _isRested;
+        return _idleState.FinishedResting;
     }
     bool QuestionTargetInView()
     {
@@ -243,7 +229,7 @@ public class HoundController : MonoBehaviour
     }
     bool QuestionIsTired()
     {
-        return _isTired;
+        return _patrolState.TiredOfPatroling;
     }
     bool QuestionAttackRange()
     {
@@ -251,7 +237,7 @@ public class HoundController : MonoBehaviour
     }
     bool QuestionIsAttackInCd()
     {
-        return _attackCd;
+        return _attackState.canAttack;
     }
     bool QuestionIsIdle()
     {
@@ -272,26 +258,6 @@ public class HoundController : MonoBehaviour
     bool QuestionIsSearch()
     {
         return _fsm.CurrentState() == _searchState;
-    }
-    
-    IEnumerator RestFor()
-    {
-        _isRested = false;
-        yield return new WaitForSeconds(idleDuration);
-        _isRested = true;
-    }
-    IEnumerator PatrolFor()
-    {
-        _isTired = false;
-        yield return new WaitForSeconds(patrolDuration);
-        _isTired = true;
-    }
-
-    IEnumerator AttackCd()
-    {
-        _attackCd = true;
-        yield return new WaitForSeconds(_model.AttackCooldown);
-        _attackCd = false;
     }
     
     #endregion

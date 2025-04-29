@@ -27,7 +27,6 @@ public class FSM<T>
         _currentState = newState;
         _currentState.Enter();
     }
-
     public IState<T> CurrentState()
     {
         return _currentState;
