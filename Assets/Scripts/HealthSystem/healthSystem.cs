@@ -1,11 +1,20 @@
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
+
 public class HealthSystem : MonoBehaviour, IHealth
 {
-    private float _maxHealth;
+    [SerializeField] private float _maxHealth;
     private float _currentHealth;
     private bool _isInvulnerable;
-    private float _defence;
+
+    [SerializeField] private Healthbar _healthbar;
+
+    private void Awake()
+    {
+        _currentHealth = _maxHealth;
+    }
+
     public float maxHealth
     {
         get => _maxHealth;
@@ -16,15 +25,11 @@ public class HealthSystem : MonoBehaviour, IHealth
         get => _currentHealth;
         private set => _currentHealth = Mathf.Clamp(value, 0, maxHealth);
     }
+
     public bool isInvulnerable
     {
         get => _isInvulnerable;
         set => _isInvulnerable = value;
-    }
-    public float defence
-    {
-        get => _defence;
-        private set => _defence = Mathf.Clamp(value, -2, 2);
     }
 
     #region EVENTS
@@ -57,7 +62,6 @@ public class HealthSystem : MonoBehaviour, IHealth
         maxHealth = MaxHealth;
         currentHealth = maxHealth;
         isInvulnerable = false;
-        defence = 1;
     }
 
     /// <summary>
@@ -111,10 +115,14 @@ public class HealthSystem : MonoBehaviour, IHealth
     public void TakeDamage(float damageAmount)
     {
         if (isInvulnerable) return;
-
-        float actualDamageReceived = damageAmount * (2 - defence);
-        currentHealth -= actualDamageReceived;
-        OnDamage?.Invoke(actualDamageReceived);
+        currentHealth -= damageAmount;
+        
+        if (_healthbar != null)
+        {
+            _healthbar.UpdateHealthbar(maxHealth,currentHealth);
+        }
+        OnDamage?.Invoke(damageAmount);
+        Debug.Log("The player took " + damageAmount + " damage");
         if (currentHealth <= 0)
         {
             Kill();
@@ -137,11 +145,6 @@ public class HealthSystem : MonoBehaviour, IHealth
         {
             Debug.LogError("Did not die!!!");
         }
-    }
-
-    public void SetDefence(float defenceModifier)
-    {
-        defence += defenceModifier;
     }
 
     /// <summary>

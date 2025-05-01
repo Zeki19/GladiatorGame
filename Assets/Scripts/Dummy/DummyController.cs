@@ -6,20 +6,41 @@ namespace Dummy
 {
     public class DummyController : MonoBehaviour
     {
-        public Transform target;
-        private FSM<StateEnum> _fsm;
+        [Header("Required scripts")]
+        [SerializeField] private Rigidbody2D target; //This is the target it will attack
+
+        #region Private variables
+        
         private DummyModel _model;
+        private DummyView _view;
+        
         private LineOfSight _los;
+        
         private ITreeNode _root;
+        
+        //Ref to each State
+        private FSM<StateEnum> _fsm;
+        private DSChase<StateEnum> _chaseState;
+        private DSIdle<StateEnum> _idleState;
+        private DSAttack<StateEnum> _attackState;
+        //Ref to Steering
+        private ISteering _steering;
+        private ISteering _pursuitSteering;
+        
+        #endregion
+        
+        private StateEnum _currentState;
 
         private void Awake()
         {
             _model = GetComponent<DummyModel>();
+            _view = GetComponent<DummyView>();
             _los = GetComponent<LineOfSight>();
         }
 
         void Start()
         {
+            _pursuitSteering = new Pursuit(_model.transform, target);
             InitializedFsm();
             InitializedTree();
         }
@@ -29,12 +50,7 @@ namespace Dummy
             _fsm.OnExecute();
             _root.Execute();
         }
-
-        private void FixedUpdate()
-        {
-            _fsm.OnFixedExecute();
-        }
-
+        
         void InitializedFsm()
         {
             
@@ -46,7 +62,7 @@ namespace Dummy
         
             var idleState = new DSIdle<StateEnum>();
             var attackState = new DSAttack<StateEnum>();
-            var chaseState = new DSChase<StateEnum>(target, 5f);
+            var chaseState = new DSChase<StateEnum>(_pursuitSteering, _model.transform);
 
             var stateList = new List<States_Base<StateEnum>>
             {
@@ -86,7 +102,7 @@ namespace Dummy
 
         bool QuestionCanAttack()
         {
-            return _los.CheckRange(target.transform,_model.attackRange);
+            return _los.CheckRange(target.transform,_model.AttackRange);
         }
     
         bool QuestionTargetInView()

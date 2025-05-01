@@ -6,13 +6,11 @@ public class PSAttack<T> : PSBase<T>
 {
     float _timer;
     float _seconds = 1;
-    float _moveSpeed;
     T _inputFinish;
-    public PSAttack(T inputFinish, float moveSpeed, float seconds = 1)
+    public PSAttack(T inputFinish, float seconds = 1)
     {
         _inputFinish = inputFinish;
         _seconds = seconds;
-        _moveSpeed = moveSpeed*.1f;
     }
     public override void Enter()
     {
@@ -23,7 +21,7 @@ public class PSAttack<T> : PSBase<T>
     public override void Execute()
     {
         base.Execute();
-        _move.Move(_moveSpeed);
+        _move.Move(Vector2.zero);
         _timer -= Time.deltaTime;
         if (_timer < 0)
         {

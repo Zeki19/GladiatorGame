@@ -1,0 +1,25 @@
+using UnityEngine;
+
+public class HoundState_Chase<T> : State_Steering<T>
+{
+    private Transform _target;
+    public Vector2 lastSeenPositionOfTarget;
+    public HoundState_Chase(ISteering steering, ObstacleAvoidance avoidObstacles, Transform self, Transform target) : base(steering, avoidObstacles, self)
+    {
+        _target = target;
+    }
+    public override void Enter()
+    {
+        base.Enter();
+        Debug.Log("Chase");
+        
+        _move.ModifySpeed(2f);
+        _look.PlayStateAnimation(StateEnum.Chase);
+    }
+
+    public override void Execute()
+    {
+        base.Execute();
+        lastSeenPositionOfTarget = _target.position;
+    }
+}

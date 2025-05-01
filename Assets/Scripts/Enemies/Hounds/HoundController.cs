@@ -1,103 +1,266 @@
+using System.Collections;
 using System.Collections.Generic;
+using Enemies.Hounds.States;
 using Interfaces;
+using NUnit.Framework;
 using UnityEngine;
 
 public class HoundController : MonoBehaviour
 {
-    public Transform target;
+    [Header("Required GameObjects")]
+    [SerializeField] private Rigidbody2D target;
+    [SerializeField] private HoundsCamp camp;
+    [Header("States Settings")]
+    [Tooltip("Time it takes to force a state change.")]
+    [SerializeField] private float idleDuration;
+    [SerializeField] private float patrolDuration;
+
+    [Header("Obstacle Avoidance Settings")]
+    [SerializeField] public int _maxObs;
+    [SerializeField] public float _radius;
+    [SerializeField] public float _angle;
+    [SerializeField] public float _personalArea;
+    [SerializeField] public LayerMask _obsMask;
+
+    private Vector2 _targetLastPos;
+
+    #region Private Variables
+
     private FSM<StateEnum> _fsm;
     private HoundModel _model;
+    private HoundView _view;
     private LineOfSight _los;
     private ITreeNode _root;
+    private ISteering _steering;
+    private HoundState_Idle<StateEnum> _idleState;
+    private HoundState_Patrol<StateEnum> _patrolState;
+    private HoundState_Chase<StateEnum> _chaseState;
+    private HoundState_Attack<StateEnum> _attackState;
+    private HoundState_Runaway<StateEnum> _runawayState;
+    private HoundState_Search<StateEnum> _searchState;
+    private ISteering _patrolSteering;
+    private ISteering _pursuitSteering;
+    private ISteering _runawaySteering;
+    private ISteering _toPointSteering;
+    private ObstacleAvoidance _avoidWalls;
     
+    #endregion
+    
+    private Dictionary<AttackType, float> _attacks = new Dictionary<AttackType, float>
+    {
+        { AttackType.Normal, 60f },
+        { AttackType.Charge, 30f },
+        { AttackType.Lunge, 10f }
+    };
+
     private void Awake()
     {
         _model = GetComponent<HoundModel>();
+        _view = GetComponent<HoundView>();
         _los = GetComponent<LineOfSight>();
+        _avoidWalls = new ObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
     }
+
     void Start()
     {
+        InitalizeSteering();
         InitializedFsm();
         InitializedTree();
     }
+
     void Update()
     {
         _fsm.OnExecute();
         _root.Execute();
     }
+
+    #region States
+    void InitalizeSteering()
+    {
+        var waypoints = new List<Vector2>();
+        for (var i = 0; i < _model.AmountOfWaypoints; i++)
+        {
+            waypoints.Add(camp.GetRandomPoint());
+        }
+
+        //No hace falta inicializarlo asi
+        _patrolSteering = new PatrolToWaypoints(waypoints, _model.transform); 
+        _runawaySteering = new ToPoint(camp.CampCenter, _model.transform);
+        _pursuitSteering = new Pursuit(_model.transform, target);
+        _toPointSteering = new ToPoint(_targetLastPos, _model.transform);
+    }
+
     void InitializedFsm()
     {
-                
         _fsm = new FSM<StateEnum>();
-    
+
         var move = GetComponent<IMove>();
         var look = GetComponent<ILook>();
         var attack = GetComponent<IAttack>();
-            
-        var idleState = new HoundState_Idle<StateEnum>();
-        var patrolState = new HoundState_Patrol<StateEnum>();
-        var attackState = new HoundState_Attack<StateEnum>(target);
-        var runawayState = new HoundState_Runaway<StateEnum>();
+
+        var idleState = new HoundState_Idle<StateEnum>(this, idleDuration);
+        var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
+        var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform);
+        var searchState = new HoundState_Search<StateEnum>(_toPointSteering, _avoidWalls, _model.transform, this);
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, this, _model.AttackCooldown);
+        var runawayState = new HoundState_Runaway<StateEnum>(_runawaySteering, _avoidWalls, transform);
+
+        _idleState = idleState;
+        _patrolState = patrolState;
+        _chaseState = chaseState;
+        _searchState = searchState;
+        _attackState = attackState;
+        _runawayState = runawayState;
         
-    
         var stateList = new List<States_Base<StateEnum>>
         {
             idleState,
             patrolState,
+            chaseState,
+            searchState,
             attackState,
             runawayState
         };
-    
-        idleState.AddTransition(StateEnum.Patrol, patrolState); 
-        
+
+        idleState.AddTransition(StateEnum.Patrol, patrolState);
+
         patrolState.AddTransition(StateEnum.Idle, idleState);
-        patrolState.AddTransition(StateEnum.Attack, attackState);
-            
-        attackState.AddTransition(StateEnum.Patrol, patrolState);
-        attackState.AddTransition(StateEnum.Runaway, runawayState);
+        patrolState.AddTransition(StateEnum.Chase, chaseState);
         
-        runawayState.AddTransition(StateEnum.Idle, idleState);
+        chaseState.AddTransition(StateEnum.Attack, attackState);
+        chaseState.AddTransition(StateEnum.Runaway, runawayState);
+        chaseState.AddTransition(StateEnum.Search, searchState);
         
-        foreach (var t in stateList) 
-        { 
+        searchState.AddTransition(StateEnum.Chase, chaseState);
+        searchState.AddTransition(StateEnum.Runaway, runawayState);
+        
+        attackState.AddTransition(StateEnum.Chase, chaseState);
+        attackState.AddTransition(StateEnum.Attack, attackState);
+        
+        runawayState.AddTransition(StateEnum.Patrol, patrolState);
+
+        foreach (var t in stateList)
+        {
             t.Initialize(move, look, attack);
         }
-            
-        _fsm.SetInit(patrolState);
+
+        _fsm.SetInit(idleState);
     }
+    
+
+    #endregion
+
+    #region DecisionTree
     
     void InitializedTree()
     {
-        var aIdle = new ActionNode(()=>_fsm.Transition(StateEnum.Idle));
-        var aPatrol = new ActionNode(() => _fsm.Transition(StateEnum.Patrol));
-        var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
-        var aRunaway = new ActionNode(() => _fsm.Transition(StateEnum.Runaway));
-    
-        var qFarFromCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, aAttack);
-        var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, qFarFromCamp);
-        var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, aIdle);
-        var qLastAction = new QuestionNode(QuestionLastAction, qFarFromCamp, aPatrol);
+        var aIdle = new ActionNode(() =>
+        {
+            _fsm.Transition(StateEnum.Idle);
+        });
         
-        _root = qTargetInView;
+        var aPatrol = new ActionNode(() =>
+        {
+            _fsm.Transition(StateEnum.Patrol);
+        });
+        
+        var aRunaway = new ActionNode(() =>
+        {
+            _fsm.Transition(StateEnum.Runaway); 
+        });
+        
+        var aChase = new ActionNode(() =>
+        {
+            _fsm.Transition(StateEnum.Chase);
+        });
+        
+        var aSearch = new ActionNode(() =>
+        {
+            _searchState.ChangeSteering(new ToPoint(_chaseState.lastSeenPositionOfTarget, _model.transform));
+            _fsm.Transition(StateEnum.Search);
+        });
+        
+        var aAttack = new ActionNode(() =>
+        {
+            _fsm.Transition(StateEnum.Attack);
+        });
+
+
+
+        var qInCamp = new QuestionNode(QuestionIsInCamp, aPatrol, aRunaway);
+        var qCanAttack  = new QuestionNode(QuestionIsAttackInCd, aChase, aAttack);
+        var qAttackRange = new QuestionNode(QuestionAttackRange, qCanAttack, aChase);
+        var qStateAttack = new QuestionNode(QuestionIsAttack, qAttackRange, qInCamp);
+        var qFinishedSearching = new QuestionNode(QuestionFinishedSearching, aRunaway, aSearch);
+        var qTargetInViewSearch = new QuestionNode(QuestionTargetInView, aChase, qFinishedSearching);
+        var qStateSearch = new QuestionNode(QuestionIsSearch, qTargetInViewSearch, qStateAttack);
+        var qFarFromLimit = new QuestionNode(QuestionFarFromCamp, aRunaway, qAttackRange);
+        var qTargetInViewChase = new QuestionNode(QuestionTargetInView, qFarFromLimit, aSearch);
+        var qStateChase = new QuestionNode(QuestionIsChase, qTargetInViewChase, qStateSearch);
+        var qIsTired = new QuestionNode(QuestionIsTired, aIdle, aPatrol);
+        var qTargetInViewPatrol = new QuestionNode(QuestionTargetInView, aChase, qIsTired);
+        var qStatePatrol = new QuestionNode(QuestionIsPatrol, qTargetInViewPatrol, qStateChase);
+        var qIsRested = new QuestionNode(QuestionIsRested, aPatrol, aIdle);
+        var qStateIdle = new QuestionNode(QuestionIsIdle, qIsRested, qStatePatrol);
+        var qFarFromCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, qStateIdle);
+
+        _root = qFarFromCamp;
     }
-    
-    bool QuestionCanAttack()
+
+    bool QuestionFinishedSearching()
     {
-        return false;
+        return _searchState.Searched;
+    }
+    bool QuestionFarFromCamp()
+    {
+        return camp.IsFarFromCamp(_model.Position);
+    }
+    bool QuestionIsInCamp()
+    {
+        return camp.IsInCamp(_model.Position);
+    }
+    bool QuestionIsRested()
+    {
+        return _idleState.FinishedResting;
     }
     bool QuestionTargetInView()
     {
-        return false;
+        return target != null && _los.LOS(target.transform);
+    }
+    bool QuestionIsTired()
+    {
+        return _patrolState.TiredOfPatroling;
+    }
+    bool QuestionAttackRange()
+    {
+        return Vector2.Distance(_model.Position, target.position) <= _model.AttackRange;
+    }
+    bool QuestionIsAttackInCd()
+    {
+        return _attackState.canAttack;
+    }
+    bool QuestionIsIdle()
+    {
+        return _fsm.CurrentState() == _idleState;
+    }
+    bool QuestionIsPatrol()
+    {
+        return _fsm.CurrentState() == _patrolState;
+    }
+    bool QuestionIsChase()
+    {
+        return _fsm.CurrentState() == _chaseState;
+    }
+    bool QuestionIsAttack()
+    {
+        return _fsm.CurrentState() == _attackState;
+    }
+    bool QuestionIsSearch()
+    {
+        return _fsm.CurrentState() == _searchState;
     }
     
-    bool QuestionLastAction()
-    {
-        return false;
-    }
+    #endregion
 
-    bool QuestionFarFromCamp()
-    {
-        return false;
-    }
 }
 

@@ -1,14 +1,12 @@
 using System;
 using UnityEngine;
 
-
 namespace Interfaces
 {
     public interface IAttack
     {
-        float damageModifier { get; set; }
+        float AttackRange {  get; }
         void Attack();
-        void ModifyDamage(float damage);
         Action OnAttack { get; set; }
     }
 }

@@ -65,6 +65,6 @@ public class PSDash<T> : PSBase<T>
     public override void Exit()
     {
         base.Exit();
-        _move.Move(10); //This is here so that the player doesn't go on infinitively with the dash if no input is being received. <-- MANSO CHOCLO
+        _move.Move(Vector2.zero); //This is here so that the player doesn't go on infinitively with the dash if no input is being received. <-- MANSO CHOCLO
     }
 }

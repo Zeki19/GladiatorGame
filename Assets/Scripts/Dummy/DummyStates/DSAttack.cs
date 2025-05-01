@@ -7,9 +7,4 @@ public class DSAttack<T> : States_Base<T>
         base.Enter();
         _attack.Attack();
     }
-    public override void Execute()
-    {
-        base.Execute();
-        Debug.Log("RIVER");
-    }
 }
