@@ -1,13 +1,15 @@
-using System;
 using UnityEngine;
 
-public abstract class EntityController : MonoBehaviour
+namespace Entities
 {
-    [SerializeField] protected EntityManager manager;
-    [SerializeField] protected FSM<StateEnum> Fsm;
-    protected virtual void Update()
+    public abstract class EntityController : MonoBehaviour
     {
-        Fsm.OnExecute();
+        [SerializeField] protected EntityManager manager;
+        [SerializeField] protected FSM<StateEnum> Fsm;
+        protected virtual void Update()
+        {
+            Fsm.OnExecute();
+        }
+        protected abstract void InitializeFsm();
     }
-    protected abstract void InitializeFsm();
 }

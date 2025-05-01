@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using Entities;
 using Interfaces;
+using Player.PlayerStates;
+using HealthSystem;
 using UnityEngine;
 
 namespace Player
@@ -10,8 +13,7 @@ namespace Player
         [SerializeField] private float dashDuration;
         [SerializeField] private float dashCooldown;
         [SerializeField] private float dashInvincibility;
-
-        private FSM<StateEnum> _fsm;
+        
         private IHealth _playerHealth;
 
         void Dead()
@@ -22,15 +24,15 @@ namespace Player
         private void Awake()
         {
             InitializeFsm();
-        
-            _playerHealth = transform.parent.GetComponent<HealthSystem>();
+
+            _playerHealth = new HealthSystem.HealthSystem(100);
 
             _playerHealth.OnDead += Dead;
         }
 
         protected override void InitializeFsm()
         {
-            _fsm = new FSM<StateEnum>();
+            Fsm = new FSM<StateEnum>();
             var move = GetComponent<IMove>();
             var look = GetComponent<ILook>();
             var attack = GetComponent<IAttack>();
@@ -65,24 +67,24 @@ namespace Player
                 state.Initialize(move, look, attack);
             }
 
-            _fsm.SetInit(idleState);
+            Fsm.SetInit(idleState);
         }
         private void FixedUpdate()
         {
-            _fsm.OnFixedExecute();
+            Fsm.OnFixedExecute();
         }
 
         public void ChangeToMove()
         {
-            _fsm.Transition(StateEnum.Walk);
+            Fsm.Transition(StateEnum.Walk);
         }
         public void ChangeToAttack()
         {
-            _fsm.Transition(StateEnum.Attack);
+            Fsm.Transition(StateEnum.Attack);
         }
         public void ChangeToDash()
         {
-            _fsm.Transition(StateEnum.Dash);
+            Fsm.Transition(StateEnum.Dash);
         }
 
     }

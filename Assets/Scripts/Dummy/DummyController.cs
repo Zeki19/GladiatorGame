@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Dummy.DummyStates;
 using Interfaces;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Dummy
         private DSAttack<StateEnum> _attackState;
         //Ref to Steering
         private ISteering _pursuitSteering;
+        private float AttackRange;
         
         #endregion
 
@@ -78,7 +80,7 @@ namespace Dummy
         }
         bool QuestionCanAttack()
         {
-            return _los.CheckRange(target.transform, manager.model.AttackRange);
+            return _los.CheckRange(target.transform, AttackRange);
         }
         bool QuestionTargetInView()
         {

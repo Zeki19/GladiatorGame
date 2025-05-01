@@ -11,5 +11,8 @@ namespace Entities
         private ILook _look;
         [SerializeField]private Rigidbody2D rb;
         public Rigidbody2D Rb => rb;
+        public EntityModel model;
+        public EntityView View;
+        public EntityController Controller;
     }
 }

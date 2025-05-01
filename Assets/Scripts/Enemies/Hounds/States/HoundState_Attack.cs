@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Enemies.Hounds;
 using Enemies.Hounds.States;
+using Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
