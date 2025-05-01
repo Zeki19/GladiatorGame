@@ -1,17 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerView : MonoBehaviour, ILook
+public class PlayerView : EntityView, ILook
 {
-    //M: Model
-    //V: View
-    //C: Controller
-    [SerializeField]
-    Animator _anim;
-    Rigidbody _rb;
-
     private int _oldSector = 1;
 
     private static readonly int TopRight = Animator.StringToHash("TopRight");
@@ -20,16 +15,8 @@ public class PlayerView : MonoBehaviour, ILook
     private static readonly int BottomLeft = Animator.StringToHash("BottomLeft");
     private static readonly int Bottom = Animator.StringToHash("Bottom");
     private static readonly int BottomRight = Animator.StringToHash("BottomRight");
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody>();
-    }
-    public void Update()
-    {
-        LookDir(Vector2.zero);
-    }
 
-    public void LookDir(Vector2 dir)
+    public override void LookDir(Vector2 dir)
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Vector2 lookDir = (mouseWorldPos - transform.position);
@@ -56,23 +43,22 @@ public class PlayerView : MonoBehaviour, ILook
         switch (sector)
         {
             case 0:
-                _anim.SetTrigger(TopRight);
+                animator.SetTrigger(TopRight);
                 break;
             case 1:
-                _anim.SetTrigger(Top);
+                animator.SetTrigger(Top);
                 break;
             case 2:
-                _anim.SetTrigger(TopLeft);
+                animator.SetTrigger(TopLeft);
                 break;
             case 3:
-                _anim.SetTrigger(BottomLeft);
-
+                animator.SetTrigger(BottomLeft);
                 break;
             case 4:
-                _anim.SetTrigger(Bottom);
+                animator.SetTrigger(Bottom);
                 break;
             case 5:
-                _anim.SetTrigger(BottomRight);
+                animator.SetTrigger(BottomRight);
                 break;
         }
     }
@@ -81,17 +67,17 @@ public class PlayerView : MonoBehaviour, ILook
         throw new System.NotImplementedException();
     }
 
-    public void PlayStateAnimation(StateEnum state)
+    public override void PlayStateAnimation(StateEnum state)
     {
         throw new System.NotImplementedException();
     }
 
     public void OnAttackAnim()
     {
-        _anim.SetTrigger("Spin");
+        animator.SetTrigger("Spin");
     }
     void OnMoveAnim()
     {
-        _anim.SetFloat("Vel", _rb.linearVelocity.magnitude);
+        animator.SetFloat("Vel", manager.Rb.linearVelocity.magnitude);
     }
 }

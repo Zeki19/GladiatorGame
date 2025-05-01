@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class StatueView : MonoBehaviour, ILook
+public class StatueView : EntityView, ILook
 {
     [SerializeField] float rotationSpeed;
-    [SerializeField] private Animator animator;
     private StateEnum _lastAnimationState = StateEnum.Idle;
-    public void LookDir(Vector2 dir)
+    public override void LookDir(Vector2 dir)
     {
         if (dir == Vector2.zero) return;
 
@@ -26,9 +25,8 @@ public class StatueView : MonoBehaviour, ILook
         throw new System.NotImplementedException();
     }
 
-    public void PlayStateAnimation(StateEnum state)
+    public override void PlayStateAnimation(StateEnum state)
     {
-        //Debug.Log(state);
         if(state == _lastAnimationState)
             return;
         _lastAnimationState = state;

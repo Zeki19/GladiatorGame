@@ -2,22 +2,15 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class HoundView : MonoBehaviour, ILook
+public class HoundView : EntityView, ILook
 {
     [SerializeField] private float rotationSpeed;
-    
-    private Animator _animator;
     
     private static readonly int Idle = Animator.StringToHash("Idle");
     private static readonly int Walk = Animator.StringToHash("Walk");
     private static readonly int Run = Animator.StringToHash("Run");
-
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
     
-    public void LookDir(Vector2 dir)
+    public override void LookDir(Vector2 dir)
     {
         if (dir == Vector2.zero) return;
 
@@ -31,27 +24,27 @@ public class HoundView : MonoBehaviour, ILook
         );
     }
     
-    public void PlayStateAnimation(StateEnum state)
+    public override void PlayStateAnimation(StateEnum state)
     {
         switch (state)
         {
             case StateEnum.Idle:
-                _animator.SetTrigger(Idle);
+                animator.SetTrigger(Idle);
                 break;
             case StateEnum.Attack:
-                _animator.SetTrigger(Idle);
+                animator.SetTrigger(Idle);
                 break;
             case StateEnum.Chase:
-                _animator.SetTrigger(Run);
+                animator.SetTrigger(Run);
                 break;
             case StateEnum.Patrol:
-                _animator.SetTrigger(Walk);
+                animator.SetTrigger(Walk);
                 break;
             case StateEnum.Runaway:
-                _animator.SetTrigger(Walk);
+                animator.SetTrigger(Walk);
                 break;
             case StateEnum.Search:
-                _animator.SetTrigger(Run);
+                animator.SetTrigger(Run);
                 break;
             case StateEnum.Walk:
             case StateEnum.Default:

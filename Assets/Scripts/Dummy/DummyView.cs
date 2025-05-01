@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Dummy
 {
-    public class DummyView : MonoBehaviour, ILook
+    public class DummyView : EntityView, ILook
     {
-        public void LookDir(Vector2 dir)
+        public override void LookDir(Vector2 dir)
         {
             throw new System.NotImplementedException();
         }
 
-        public void PlayStateAnimation(StateEnum state)
+        public override void PlayStateAnimation(StateEnum state)
         {
             throw new System.NotImplementedException();
         }
