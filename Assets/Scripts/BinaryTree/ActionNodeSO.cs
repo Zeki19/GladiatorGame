@@ -1,0 +1,10 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "ActionNodeSO", menuName = "Scriptable Objects/Tree Nodes/ActionNode")]
+public class ActionNodeSO : TreeNodeSO
+{
+    [SerializeField] public StateEnum stateEnum;
+    public override void Execute()
+    {
+    }
+}
