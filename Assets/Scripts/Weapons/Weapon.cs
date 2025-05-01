@@ -28,15 +28,9 @@ public class Weapon:IConfigurable<SoWeapon>
     private float _chargeMeter;
     private Attack _baseSoAttack;
     private Attack _chargeSoAttack;
-
-    public void basicAttack()
-    {
-        _baseSoAttack.MakeAttack(this);
-    }
-
+    
     public void Configure(SoWeapon config)
     {
-        Debug.Log("config");
         WeaponGameObject=Object.Instantiate(config.weaponPrefab);
         _weaponName = config.weaponName;
         _baseDamage = config.baseDamage;

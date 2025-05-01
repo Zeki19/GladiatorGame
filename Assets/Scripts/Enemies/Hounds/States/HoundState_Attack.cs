@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Enemies.Hounds;
 using Enemies.Hounds.States;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,7 +57,7 @@ public class HoundState_Attack<T> : States_Base<T>
     {
         if (_target == null) return;
         
-        var health = _target.GetComponent<HealthSystem>();
+        var health = _target.GetComponent<HealthSystem.HealthSystem>();
         if (health != null)
         {
             health.TakeDamage(_damage);

@@ -1,29 +1,19 @@
-using Interfaces;
-using System;
+using Entities;
 using UnityEngine;
 
-public class StatueModel : MonoBehaviour, IMove, IAttack
+namespace Enemies.Statue
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float attackRange;
-    [SerializeField] private Rigidbody2D _rb;
-    public void StopMovement()
+    public class StatueModel : EntityModel
     {
-        throw new NotImplementedException();
+        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float attackRange;
+        public float AttackRange => attackRange;
+        public override void Move(Vector2 dir)
+        {
+            manager.Rb.linearVelocity =  dir * (moveSpeed);
+        }
+        public override void ModifySpeed(float speed) {    }
+
+        public override void Dash(float dashForce) {    }
     }
-
-    public Vector2 Position => transform.position;
-    public float AttackRange => attackRange;
-    public void Move(Vector2 dir)
-    {
-        //transform.Translate(dir * (moveSpeed * Time.deltaTime), Space.World);
-        _rb.linearVelocity =  dir * (moveSpeed);
-    }
-    public void ModifySpeed(float speed) {    }
-
-    public void Dash(float dashForce) {    }
-
-    public void Attack() {    }
-
-    public Action OnAttack { get; set; }
 }

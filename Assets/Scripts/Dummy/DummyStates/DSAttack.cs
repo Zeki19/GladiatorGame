@@ -1,10 +1,10 @@
-using UnityEngine;
-
-public class DSAttack<T> : States_Base<T>
+namespace Dummy.DummyStates
 {
-    public override void Enter()
+    public class DSAttack<T> : States_Base<T>
     {
-        base.Enter();
-        _attack.Attack();
+        public override void Enter()
+        {
+            base.Enter();
+        }
     }
 }

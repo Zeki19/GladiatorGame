@@ -2,7 +2,7 @@ using Interfaces;
 using System;
 using UnityEngine;
 
-public class PhaseSystem : HealthSystem
+public class PhaseSystem : HealthSystem.HealthSystem
 {
     // Serialized fields for inspector assignment
     [SerializeField] public MonoBehaviour speedManagerRaw;

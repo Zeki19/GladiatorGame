@@ -1,6 +1,9 @@
-using UnityEngine;
-
-public abstract class Attack
+namespace Weapons
 {
-    public abstract void MakeAttack(Weapon weapon);
+    public abstract class Attack
+    {
+        public abstract void StartAttack(Weapon weapon);
+        public abstract void ExecuteAttack(Weapon weapon);
+        public abstract void FinishAttack(Weapon weapon);
+    }
 }

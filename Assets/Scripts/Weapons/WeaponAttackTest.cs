@@ -24,10 +24,5 @@ public class WeaponAttackTest : MonoBehaviour
             _test = true;
             weapon = _manager.GetWeapon();
         }
-
-        if (_test)
-        {
-            weapon.basicAttack();
-        }
     }
 }
