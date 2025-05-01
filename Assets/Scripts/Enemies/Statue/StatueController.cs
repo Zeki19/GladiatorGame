@@ -2,13 +2,10 @@ using Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatueController : MonoBehaviour
+public class StatueController : EnemyController
 {
-    public Rigidbody2D target;
-    private FSM<StateEnum> _fsm;
-    private StatueModel _model;
+    [SerializeField] private float AttackRange;
     private LineOfSight _los;
-    private ITreeNode _root;
     private LineOfSightNoMono _playerLOS;
     private ISteering _steering;
 
@@ -35,24 +32,14 @@ public class StatueController : MonoBehaviour
 
     private void Awake()
     {
-        _model = GetComponent<StatueModel>();
         _los = GetComponent<LineOfSight>();
         _steering = new ToPoint(Vector2.zero, transform);
         _playerLOS = new LineOfSightNoMono(LineOfSightRange, 90, _avoidMask);
     }
-    void Start()
+
+    protected override void InitializeFsm()
     {
-        InitializedFsm();
-        InitializedTree();
-    }
-    void Update()
-    {
-        _fsm.OnExecute();
-        _root.Execute();
-    }
-    void InitializedFsm()
-    {
-        _fsm = new FSM<StateEnum>();
+        Fsm = new FSM<StateEnum>();
 
         var move = GetComponent<IMove>();
         var look = GetComponent<ILook>();
@@ -101,26 +88,26 @@ public class StatueController : MonoBehaviour
         {
             t.Initialize(move, look, attack);
         }
-        _fsm.SetInit(idleState);
+        Fsm.SetInit(idleState);
     }
 
-    void InitializedTree()
+    protected override void InitializeTree()
     {
         var aIdle = new ActionNode(() =>
         {
             idleState.ChangeSteering(new ToPoint(_wallPosition, transform));
-            _fsm.Transition(input: StateEnum.Idle);
+            Fsm.Transition(input: StateEnum.Idle);
         });
         var aRunAway = new ActionNode(() =>
         {
             RunAwayState.ChangeSteering(new ToPoint(_wallPosition, transform));
-            _fsm.Transition(StateEnum.Runaway);
+            Fsm.Transition(StateEnum.Runaway);
         });
         var aChase = new ActionNode(() =>
         {
-            _fsm.Transition(StateEnum.Chase);
+            Fsm.Transition(StateEnum.Chase);
         });
-        var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
+        var aAttack = new ActionNode(() => Fsm.Transition(StateEnum.Attack));
         
         var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, aChase);
         var qIsTheWallClose = new QuestionNode(QuestionIsTheWallCloseEnough, aIdle, aRunAway);
@@ -128,7 +115,7 @@ public class StatueController : MonoBehaviour
         var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, qLookingForWall);
         var qPlayerLooking = new QuestionNode(QuestionIsPlayerLooking, aIdle, qTargetInView);
         
-        _root = qPlayerLooking;
+        Root = qPlayerLooking;
     }
 
 
@@ -138,7 +125,7 @@ public class StatueController : MonoBehaviour
     }
     bool QuestionCanAttack()
     {
-        return Vector2.Distance(transform.position, target.position) <= _model.AttackRange;
+        return Vector2.Distance(transform.position, target.position) <= AttackRange;
     }
     bool QuestionIsPlayerLooking()
     {

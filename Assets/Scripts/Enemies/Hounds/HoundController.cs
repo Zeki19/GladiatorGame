@@ -5,15 +5,19 @@ using Interfaces;
 using NUnit.Framework;
 using UnityEngine;
 
-public class HoundController : MonoBehaviour
+public class HoundController : EnemyController
 {
     [Header("Required GameObjects")]
-    [SerializeField] private Rigidbody2D target;
     [SerializeField] private HoundsCamp camp;
+
+    [SerializeField] private float AmountOfWaypoints;
+    
     [Header("States Settings")]
     [Tooltip("Time it takes to force a state change.")]
     [SerializeField] private float idleDuration;
     [SerializeField] private float patrolDuration;
+    [SerializeField] private float AttackCooldown;
+    [SerializeField] private float AttackRange;
 
     [Header("Obstacle Avoidance Settings")]
     [SerializeField] public int _maxObs;
@@ -25,12 +29,8 @@ public class HoundController : MonoBehaviour
     private Vector2 _targetLastPos;
 
     #region Private Variables
-
-    private FSM<StateEnum> _fsm;
-    private HoundModel _model;
-    private HoundView _view;
+    
     private LineOfSight _los;
-    private ITreeNode _root;
     private ISteering _steering;
     private HoundState_Idle<StateEnum> _idleState;
     private HoundState_Patrol<StateEnum> _patrolState;
@@ -55,44 +55,37 @@ public class HoundController : MonoBehaviour
 
     private void Awake()
     {
-        _model = GetComponent<HoundModel>();
-        _view = GetComponent<HoundView>();
         _los = GetComponent<LineOfSight>();
+        
         _avoidWalls = new ObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         InitalizeSteering();
-        InitializedFsm();
-        InitializedTree();
     }
-
-    void Update()
-    {
-        _fsm.OnExecute();
-        _root.Execute();
-    }
+    
 
     #region States
     void InitalizeSteering()
     {
         var waypoints = new List<Vector2>();
-        for (var i = 0; i < _model.AmountOfWaypoints; i++)
+        for (var i = 0; i < AmountOfWaypoints; i++)
         {
             waypoints.Add(camp.GetRandomPoint());
         }
 
         //No hace falta inicializarlo asi
-        _patrolSteering = new PatrolToWaypoints(waypoints, _model.transform); 
-        _runawaySteering = new ToPoint(camp.CampCenter, _model.transform);
-        _pursuitSteering = new Pursuit(_model.transform, target);
-        _toPointSteering = new ToPoint(_targetLastPos, _model.transform);
+        _patrolSteering = new PatrolToWaypoints(waypoints, manager.model.transform);
+        _runawaySteering = new ToPoint(camp.CampCenter, manager.model.transform);
+        _pursuitSteering = new Pursuit(manager.model.transform, target);
+        _toPointSteering = new ToPoint(_targetLastPos, manager.model.transform);
     }
 
-    void InitializedFsm()
+    protected override void InitializeFsm()
     {
-        _fsm = new FSM<StateEnum>();
+        Fsm = new FSM<StateEnum>();
 
         var move = GetComponent<IMove>();
         var look = GetComponent<ILook>();
@@ -101,8 +94,8 @@ public class HoundController : MonoBehaviour
         var idleState = new HoundState_Idle<StateEnum>(this, idleDuration);
         var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
         var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform);
-        var searchState = new HoundState_Search<StateEnum>(_toPointSteering, _avoidWalls, _model.transform, this);
-        var attackState = new HoundState_Attack<StateEnum>(target.transform, _model, _attacks, this, _model.AttackCooldown);
+        var searchState = new HoundState_Search<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, manager.model, _attacks, this, AttackCooldown);
         var runawayState = new HoundState_Runaway<StateEnum>(_runawaySteering, _avoidWalls, transform);
 
         _idleState = idleState;
@@ -144,7 +137,7 @@ public class HoundController : MonoBehaviour
             t.Initialize(move, look, attack);
         }
 
-        _fsm.SetInit(idleState);
+        Fsm.SetInit(idleState);
     }
     
 
@@ -152,37 +145,37 @@ public class HoundController : MonoBehaviour
 
     #region DecisionTree
     
-    void InitializedTree()
+    protected override void InitializeTree()
     {
         var aIdle = new ActionNode(() =>
         {
-            _fsm.Transition(StateEnum.Idle);
+            Fsm.Transition(StateEnum.Idle);
         });
         
         var aPatrol = new ActionNode(() =>
         {
-            _fsm.Transition(StateEnum.Patrol);
+            Fsm.Transition(StateEnum.Patrol);
         });
         
         var aRunaway = new ActionNode(() =>
         {
-            _fsm.Transition(StateEnum.Runaway); 
+            Fsm.Transition(StateEnum.Runaway); 
         });
         
         var aChase = new ActionNode(() =>
         {
-            _fsm.Transition(StateEnum.Chase);
+            Fsm.Transition(StateEnum.Chase);
         });
         
         var aSearch = new ActionNode(() =>
         {
-            _searchState.ChangeSteering(new ToPoint(_chaseState.lastSeenPositionOfTarget, _model.transform));
-            _fsm.Transition(StateEnum.Search);
+            _searchState.ChangeSteering(new ToPoint(_chaseState.lastSeenPositionOfTarget, manager.model.transform));
+            Fsm.Transition(StateEnum.Search);
         });
         
         var aAttack = new ActionNode(() =>
         {
-            _fsm.Transition(StateEnum.Attack);
+            Fsm.Transition(StateEnum.Attack);
         });
 
 
@@ -204,7 +197,7 @@ public class HoundController : MonoBehaviour
         var qStateIdle = new QuestionNode(QuestionIsIdle, qIsRested, qStatePatrol);
         var qFarFromCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, qStateIdle);
 
-        _root = qFarFromCamp;
+        Root = qFarFromCamp;
     }
 
     bool QuestionFinishedSearching()
@@ -213,11 +206,11 @@ public class HoundController : MonoBehaviour
     }
     bool QuestionFarFromCamp()
     {
-        return camp.IsFarFromCamp(_model.Position);
+        return camp.IsFarFromCamp(manager.model.Position);
     }
     bool QuestionIsInCamp()
     {
-        return camp.IsInCamp(_model.Position);
+        return camp.IsInCamp(manager.model.Position);
     }
     bool QuestionIsRested()
     {
@@ -233,7 +226,7 @@ public class HoundController : MonoBehaviour
     }
     bool QuestionAttackRange()
     {
-        return Vector2.Distance(_model.Position, target.position) <= _model.AttackRange;
+        return Vector2.Distance(manager.model.Position, target.position) <= AttackRange;
     }
     bool QuestionIsAttackInCd()
     {
@@ -241,23 +234,23 @@ public class HoundController : MonoBehaviour
     }
     bool QuestionIsIdle()
     {
-        return _fsm.CurrentState() == _idleState;
+        return Fsm.CurrentState() == _idleState;
     }
     bool QuestionIsPatrol()
     {
-        return _fsm.CurrentState() == _patrolState;
+        return Fsm.CurrentState() == _patrolState;
     }
     bool QuestionIsChase()
     {
-        return _fsm.CurrentState() == _chaseState;
+        return Fsm.CurrentState() == _chaseState;
     }
     bool QuestionIsAttack()
     {
-        return _fsm.CurrentState() == _attackState;
+        return Fsm.CurrentState() == _attackState;
     }
     bool QuestionIsSearch()
     {
-        return _fsm.CurrentState() == _searchState;
+        return Fsm.CurrentState() == _searchState;
     }
     
     #endregion

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : EntityController
     {
         [SerializeField] private float dashForce;
         [SerializeField] private float dashDuration;
@@ -28,7 +28,7 @@ namespace Player
             _playerHealth.OnDead += Dead;
         }
 
-        private void InitializeFsm()
+        protected override void InitializeFsm()
         {
             _fsm = new FSM<StateEnum>();
             var move = GetComponent<IMove>();
@@ -66,10 +66,6 @@ namespace Player
             }
 
             _fsm.SetInit(idleState);
-        }
-        private void Update()
-        {
-            _fsm.OnExecute();
         }
         private void FixedUpdate()
         {

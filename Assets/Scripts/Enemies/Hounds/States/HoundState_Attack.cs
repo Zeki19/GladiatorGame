@@ -10,14 +10,14 @@ public class HoundState_Attack<T> : States_Base<T>
     private Transform _target;
     private AttackType _chosenType;
     private float _damage;
-    private HoundModel _model;
+    private EntityModel _model;
     private Dictionary<AttackType, float> _attackOptions;
 
     private MonoBehaviour _mono;
     private float duration;
     public bool canAttack;
     
-    public HoundState_Attack(Transform target, HoundModel model, Dictionary<AttackType, float> attackOptions, MonoBehaviour monoBehaviour, float attackCooldown)
+    public HoundState_Attack(Transform target, EntityModel model, Dictionary<AttackType, float> attackOptions, MonoBehaviour monoBehaviour, float attackCooldown)
     {
         _target = target;
         _model = model;

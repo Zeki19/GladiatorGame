@@ -4,57 +4,35 @@ using UnityEngine;
 
 namespace Dummy
 {
-    public class DummyController : MonoBehaviour
+    public class DummyController : EnemyController
     {
-        [Header("Required scripts")]
-        [SerializeField] private Rigidbody2D target; //This is the target it will attack
-
         #region Private variables
-        
-        private DummyModel _model;
-        private DummyView _view;
         
         private LineOfSight _los;
         
-        private ITreeNode _root;
-        
         //Ref to each State
-        private FSM<StateEnum> _fsm;
         private DSChase<StateEnum> _chaseState;
         private DSIdle<StateEnum> _idleState;
         private DSAttack<StateEnum> _attackState;
         //Ref to Steering
-        private ISteering _steering;
         private ISteering _pursuitSteering;
         
         #endregion
-        
-        private StateEnum _currentState;
 
         private void Awake()
         {
-            _model = GetComponent<DummyModel>();
-            _view = GetComponent<DummyView>();
             _los = GetComponent<LineOfSight>();
         }
-
-        void Start()
+        protected override void Start()
         {
-            _pursuitSteering = new Pursuit(_model.transform, target);
-            InitializedFsm();
-            InitializedTree();
+            base.Start();
+            
+            _pursuitSteering = new Pursuit(manager.model.transform, target);
         }
-
-        void Update()
-        {
-            _fsm.OnExecute();
-            _root.Execute();
-        }
-        
-        void InitializedFsm()
+        protected override void InitializeFsm()
         {
             
-            _fsm = new FSM<StateEnum>();
+            Fsm = new FSM<StateEnum>();
 
             var move = GetComponent<IMove>();
             var look = GetComponent<ILook>();
@@ -62,7 +40,7 @@ namespace Dummy
         
             var idleState = new DSIdle<StateEnum>();
             var attackState = new DSAttack<StateEnum>();
-            var chaseState = new DSChase<StateEnum>(_pursuitSteering, _model.transform);
+            var chaseState = new DSChase<StateEnum>(_pursuitSteering, manager.model.transform);
 
             var stateList = new List<States_Base<StateEnum>>
             {
@@ -85,26 +63,23 @@ namespace Dummy
                 t.Initialize(move, look, attack);
             }
         
-            _fsm.SetInit(idleState);
+            Fsm.SetInit(idleState);
         }
-
-        void InitializedTree()
+        protected override void InitializeTree()
         {
-            var aIdle = new ActionNode(()=>_fsm.Transition(StateEnum.Idle));
-            var aChase = new ActionNode(() => _fsm.Transition(StateEnum.Chase));
-            var aAttack = new ActionNode(() => _fsm.Transition(StateEnum.Attack));
+            var aIdle = new ActionNode(()=> Fsm.Transition(StateEnum.Idle));
+            var aChase = new ActionNode(() => Fsm.Transition(StateEnum.Chase));
+            var aAttack = new ActionNode(() => Fsm.Transition(StateEnum.Attack));
 
             var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, aChase);
             var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, aIdle);
 
-            _root = qTargetInView;
+            Root = qTargetInView;
         }
-
         bool QuestionCanAttack()
         {
-            return _los.CheckRange(target.transform,_model.AttackRange);
+            return _los.CheckRange(target.transform, manager.model.AttackRange);
         }
-    
         bool QuestionTargetInView()
         {
             return target != null && _los.LOS(target.transform);
