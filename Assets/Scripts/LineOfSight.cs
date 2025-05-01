@@ -6,6 +6,7 @@ public class LineOfSight : MonoBehaviour
     public float angle;
     public LayerMask obstacleMask;
     private Vector2 _forward;
+    [SerializeField] private bool Gizmo;
 
     private void Awake()
     {
@@ -50,12 +51,14 @@ public class LineOfSight : MonoBehaviour
     
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position,range);
+        if (Gizmo)
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireSphere(transform.position,range);
         
-        Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, -angle / 2f) * transform.up * range);
-        Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, angle / 2f) * transform.up * range);
+            Gizmos.color = Color.black;
+            Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, -angle / 2f) * transform.up * range);
+            Gizmos.DrawRay(transform.position, Quaternion.Euler(0, 0, angle / 2f) * transform.up * range);
+        }
     }
-    
 }

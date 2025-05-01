@@ -36,12 +36,12 @@ public class PhaseSystem : HealthSystem
     {
 
     }
-    void Start()
-    {
-        OnHeal += _ => CheckState(); // "_" Is for ignoring the float parameter
-        OnDamage += _ => CheckState();
-    }
-    void CheckState()
+    //void Start()
+    //{
+    //    OnHeal += _ => CheckState(); // "_" Is for ignoring the float parameter
+    //    OnDamage += _ => CheckState();
+    //}
+    /*void CheckState()
     {
         float healthPercentage = GetCurrentHealthPercentage();
         if (balancedPercentage < healthPercentage)
@@ -61,6 +61,6 @@ public class PhaseSystem : HealthSystem
             damageManager.ModifyDamage(glassCannonAttack);
             SetDefence(glassCannonDefence);
             speedManager.ModifySpeed(glassCannonSpeed);
-        }
+        }*/
     }
-}
+//}

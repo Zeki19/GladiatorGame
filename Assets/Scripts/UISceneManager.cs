@@ -10,7 +10,6 @@ public class UISceneManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        return;
 #endif 
         Application.Quit();
     }
