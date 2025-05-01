@@ -6,39 +6,67 @@
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/HoundAC.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/HoundAC.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Bottom.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Bottom.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/BottomLeft.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/BottomLeft.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/BottomRight.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/BottomRight.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/PlayerAC.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/PlayerAC.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Top.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/Top.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/TopLeft.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/TopLeft.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/TopRight.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animation/Player/TopRight.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Idle/Idle.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Hound/Idle/Idle.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDown.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDown.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDownLeft.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDownLeft.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDownRight.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDownRight.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUp.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUp.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUpLeft.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUpLeft.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUpRight.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUpRight.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Spritesheet_Statue_Chase.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Statue/Spritesheet_Statue_Chase.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Spritesheet_Statue_Idle.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Statue/Spritesheet_Statue_Idle.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MenuToggel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/MenuToggel.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorDownLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorDownLeft.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorDownRight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorDownRight.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorUp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorUp.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorUpLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorUpLeft.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorUpRight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/GladiatorUpRight.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Idle.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Idle/Hound_Idle.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Idle/Hound_Idle.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Idle/Idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Idle/Idle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Run.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Run/Hound_Chase.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Run/Hound_Chase.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Run/Spritesheet_hound_Run.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Run/Spritesheet_hound_Run.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Run/Spritesheet_hound_Run_0.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Run/Spritesheet_hound_Run_0.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Walk.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Walk/Hound_Walk.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Walk/Hound_Walk.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Walk/Spritesheet_hound_Walk.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Hound/Walk/Spritesheet_hound_Walk.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDown.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDownLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDownLeft.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDownRight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorDownRight.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUp.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUpLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUpLeft.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUpRight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/GladiatorUpRight.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Attack.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Attack.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Chasing.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Chasing.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Explosion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Explosion.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Idel.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Idel.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Spritesheet_Statue_Chase.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Spritesheet_Statue_Chase.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Spritesheet_Statue_Idle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/Spritesheet_Statue_Idle.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/StatueAnimationController.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Statue/StatueAnimationController.controller.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HealthSystem/PhaseSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HealthSystem/PhaseSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LineOfSight.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LineOfSight.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UISceneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UISceneManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/WeaponTesting.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/WeaponTesting.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/BasicSwing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/BasicSwing.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,13 +99,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "WeaponDevelopment",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.appearance",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {

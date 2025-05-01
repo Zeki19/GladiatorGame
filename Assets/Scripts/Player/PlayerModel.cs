@@ -30,7 +30,6 @@ public class PlayerModel : MonoBehaviour, IMove, IAttack
 
     protected virtual void Awake()
     {
-        //_rb = GetComponent<Rigidbody2D>();
         _playerInput = GetComponent<PlayerInput>();
         var actionMap = _playerInput.actions.FindActionMap("Player");
         _direction = actionMap.FindAction("Move");
