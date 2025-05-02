@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace Entities
 {
-    public class EntityManager : MonoBehaviour
+    public abstract class EntityManager : MonoBehaviour
     {
-        private IHealth _healthSystem =new HealthSystem.HealthSystem(100);
-        private IMove _move;
-        private IAttack _attack;
-        private ILook _look;
+        protected IHealth HealthSystem ;
+        protected IMove Move;
+        protected IAttack Attack;
+        protected ILook Look;
         [SerializeField]private Rigidbody2D rb;
         public Rigidbody2D Rb => rb;
         public EntityModel model;
-        public EntityView View;
-        public EntityController Controller;
+        public EntityView view;
+        public EntityController controller;
     }
 }

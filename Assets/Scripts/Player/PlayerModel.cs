@@ -2,7 +2,6 @@ using System;
 using Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Player
 {

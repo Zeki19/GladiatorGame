@@ -10,20 +10,23 @@ namespace Player.PlayerStates
         T _inputFinish;
         private Attack _currentAttack;
         private Weapon _weapon;
-        public PSAttack(T inputFinish, float seconds = 1)
+        private PlayerManager manager;
+        public PSAttack(T inputFinish,PlayerManager manager ,float seconds = 1)
         {
             _inputFinish = inputFinish;
             _seconds = seconds;
+            this.manager = manager;
         }
 
-        public void SetWeapon(Attack attack,Weapon weapon)
+        public void SetWeapon(Weapon weapon)
         {
-            _currentAttack = attack;
+            _currentAttack = weapon._baseSoAttack;
             _weapon = weapon;
         }
         public override void Enter()
         {
             base.Enter();
+            SetWeapon(manager.weapon);
             _timer = _seconds;
             _attack.StartAttack(_currentAttack,_weapon);;
         }
@@ -38,6 +41,12 @@ namespace Player.PlayerStates
                 StateMachine.Transition(_inputFinish);
             }
 
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            _attack.FinishAttack(_currentAttack,_weapon);
         }
     }
 }

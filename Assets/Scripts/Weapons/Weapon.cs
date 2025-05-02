@@ -26,8 +26,8 @@ public class Weapon:IConfigurable<SoWeapon>
     private bool _canAttack;
     //private Player _owner;
     private float _chargeMeter;
-    private Attack _baseSoAttack;
-    private Attack _chargeSoAttack;
+    public Attack _baseSoAttack;
+    public Attack _chargeSoAttack;
     
     public void Configure(SoWeapon config)
     {

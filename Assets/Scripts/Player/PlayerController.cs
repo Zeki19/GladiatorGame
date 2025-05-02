@@ -41,7 +41,7 @@ namespace Player
 
             var idleState = new PSIdle<StateEnum>();
             var walkState = new PSWalk<StateEnum>();
-            var attackState = new PSAttack<StateEnum>(StateEnum.Idle);
+            var attackState = new PSAttack<StateEnum>(StateEnum.Idle,(PlayerManager)manager);
             var dashState = new PSDash<StateEnum>(StateEnum.Idle, dashForce, dashDuration, dashCooldown, dashInvincibility, _playerHealth, this);
 
             idleState.AddTransition(StateEnum.Walk, walkState);

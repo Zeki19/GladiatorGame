@@ -25,7 +25,7 @@ namespace Weapons
             _currentAngle = _rotationStartingPoint;
             _targetAngle = _rotationStartingPoint + _swingAngle;
             _weapon.transform.localRotation = Quaternion.Euler(0, 0, _rotationStartingPoint);
-            _weapon.transform.position += _weapon.transform.up * weapon._range;
+            _weapon.transform.position += _weapon.transform.parent.up * weapon._range;
             _attackPosition = _weapon.transform.position;
         }
 

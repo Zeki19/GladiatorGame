@@ -27,10 +27,10 @@ namespace Weapons
 
         public Weapon GetWeapon()
         {
-            if (_droppedWeapons!= null)
-            {
-                return _droppedWeapons[0];
-            }
+            //if (_droppedWeapons!= null)
+            //{
+            //    return _droppedWeapons[0];
+            //}
 
             CreateWeapon(forTest);
             return _droppedWeapons[0];
