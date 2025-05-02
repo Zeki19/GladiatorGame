@@ -20,4 +20,16 @@ public class PlayerManager : EntityManager
     {
         HealthSystem = new HealthSystem.HealthSystem(maxHp);
     }
+
+    public LayerMask EnemyLayer;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(other.gameObject.layer);
+        Debug.Log(EnemyLayer.value);
+        if(other.gameObject.layer==8)
+        {
+            Debug.Log("Hit");
+        }
+    }
 }

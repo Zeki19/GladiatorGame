@@ -4,7 +4,7 @@ using Vector2 = UnityEngine.Vector2;
 
 public class HoundState_Runaway<T> : State_Steering<T>
 {
-    public HoundState_Runaway(ISteering steering, ObstacleAvoidance avoidObstacles, Transform self) : base(steering, avoidObstacles, self)
+    public HoundState_Runaway(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self) : base(steering, avoidStObstacles, self)
     {
 
     }

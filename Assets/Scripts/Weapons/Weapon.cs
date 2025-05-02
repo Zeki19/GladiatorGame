@@ -43,7 +43,7 @@ public class Weapon:IConfigurable<SoWeapon>
         _slowPercent = config.slowPercent;
         _changeThreshold = config.changeThreshold;
         _chargePerAttack = config.chargePerAttack;
-        _baseSoAttack = config.basicAttack.Clone();
+        _baseSoAttack = config.basic.Clone();
     }
     
 }

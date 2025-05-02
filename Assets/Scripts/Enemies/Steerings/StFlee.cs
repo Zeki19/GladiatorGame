@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Flee : ISteering
+public class StFlee : ISteering
 {
     private readonly Vector2 _target;
     private readonly Vector2 _self;
  
-    public Flee(Vector2 target, Vector2 self)
+    public StFlee(Vector2 target, Vector2 self)
     {
         _target = target;
         _self = self;

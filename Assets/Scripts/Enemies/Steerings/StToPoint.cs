@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class ToPoint : ISteering
+public class StToPoint : ISteering
 {
     private readonly Vector2 _destination;
     private readonly Transform _self;
-    public ToPoint(Vector2 destination, Transform self)
+    public StToPoint(Vector2 destination, Transform self)
     {
         _destination = destination;
         _self = self;

@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Pursuit : ISteering
+public class StPursuit : ISteering
 {
     private readonly Transform _self;
     private readonly Rigidbody2D _target;
 
-    public Pursuit(Transform self, Rigidbody2D target)
+    public StPursuit(Transform self, Rigidbody2D target)
     {
         _self = self;
         _target = target;

@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class Evade : ISteering
+public class StEvade : ISteering
 {
     private readonly Transform _self;
     private readonly Rigidbody2D _target;
     public float TimePrediction { get; set; }
 
-    public Evade(Transform self, Rigidbody2D target, float timePrediction)
+    public StEvade(Transform self, Rigidbody2D target, float timePrediction)
     {
         _self = self;
         _target = target;
         TimePrediction = timePrediction;
     }
 
-    public Evade(Transform self, Rigidbody2D target)
+    public StEvade(Transform self, Rigidbody2D target)
     {
         _self = self;
         _target = target;

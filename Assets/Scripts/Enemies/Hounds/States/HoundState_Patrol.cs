@@ -7,7 +7,7 @@ public class HoundState_Patrol<T> : State_Steering<T>
     private readonly float _duration;
     public bool TiredOfPatroling;
     private Coroutine _patrolCoroutine;
-    public HoundState_Patrol(ISteering steering, ObstacleAvoidance avoidObstacles, Transform self, MonoBehaviour monoBehaviour,float duration) : base(steering, avoidObstacles, self)
+    public HoundState_Patrol(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self, MonoBehaviour monoBehaviour,float duration) : base(steering, avoidStObstacles, self)
     {
         _mono = monoBehaviour;
         _duration = duration;

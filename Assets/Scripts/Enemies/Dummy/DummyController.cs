@@ -29,7 +29,7 @@ namespace Dummy
         {
             base.Start();
             
-            _pursuitSteering = new Pursuit(manager.model.transform, target);
+            _pursuitSteering = new StPursuit(manager.model.transform, target);
         }
         protected override void InitializeFsm()
         {

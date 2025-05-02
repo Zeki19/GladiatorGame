@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolToWaypoints : ISteering
+public class StPatrolToWaypoints : ISteering
 {
     private List<Vector2> _waypoints;
     private int _currentIndex = 0;
@@ -10,7 +10,7 @@ public class PatrolToWaypoints : ISteering
     private Vector2 currentPos;
     private bool _goingForward = true;
 
-    public PatrolToWaypoints(List<Vector2> waypoints, Transform self)
+    public StPatrolToWaypoints(List<Vector2> waypoints, Transform self)
     {
         _waypoints = waypoints;
         _self = self;

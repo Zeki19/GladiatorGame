@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObstacleAvoidance
+public class StObstacleAvoidance
 {
     [Min(1)]
     private int _maxObs = 1;
@@ -12,7 +12,7 @@ public class ObstacleAvoidance
     private float _personalArea;
     public LayerMask _obsMask;
     Collider2D[] _colls;
-    public ObstacleAvoidance(int maxObs, float radius, float angle, float personalArea, LayerMask obsMask)
+    public StObstacleAvoidance(int maxObs, float radius, float angle, float personalArea, LayerMask obsMask)
     {
         _radius = radius;
         _angle = angle;

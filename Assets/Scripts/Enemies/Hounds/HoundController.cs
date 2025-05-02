@@ -42,7 +42,7 @@ public class HoundController : EnemyController
     private ISteering _pursuitSteering;
     private ISteering _runawaySteering;
     private ISteering _toPointSteering;
-    private ObstacleAvoidance _avoidWalls;
+    private StObstacleAvoidance _avoidWalls;
     
     #endregion
     
@@ -57,7 +57,7 @@ public class HoundController : EnemyController
     {
         _los = GetComponent<LineOfSight>();
         
-        _avoidWalls = new ObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
+        _avoidWalls = new StObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
     }
 
     protected override void Start()
@@ -77,10 +77,10 @@ public class HoundController : EnemyController
         }
 
         //No hace falta inicializarlo asi
-        _patrolSteering = new PatrolToWaypoints(waypoints, manager.model.transform);
-        _runawaySteering = new ToPoint(camp.CampCenter, manager.model.transform);
-        _pursuitSteering = new Pursuit(manager.model.transform, target);
-        _toPointSteering = new ToPoint(_targetLastPos, manager.model.transform);
+        _patrolSteering = new StPatrolToWaypoints(waypoints, manager.model.transform);
+        _runawaySteering = new StToPoint(camp.CampCenter, manager.model.transform);
+        _pursuitSteering = new StPursuit(manager.model.transform, target);
+        _toPointSteering = new StToPoint(_targetLastPos, manager.model.transform);
     }
 
     protected override void InitializeFsm()
@@ -169,7 +169,7 @@ public class HoundController : EnemyController
         
         var aSearch = new ActionNode(() =>
         {
-            _searchState.ChangeSteering(new ToPoint(_chaseState.lastSeenPositionOfTarget, manager.model.transform));
+            _searchState.ChangeSteering(new StToPoint(_chaseState.lastSeenPositionOfTarget, manager.model.transform));
             Fsm.Transition(StateEnum.Search);
         });
         

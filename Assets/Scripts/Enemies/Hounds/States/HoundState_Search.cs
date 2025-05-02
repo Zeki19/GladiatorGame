@@ -6,7 +6,7 @@ public class HoundState_Search<T> : State_Steering<T>
     private MonoBehaviour _mono;
     public bool Searched { get; private set; } = false;
 
-    public HoundState_Search(ISteering steering, ObstacleAvoidance avoidObstacles, Transform self, MonoBehaviour monoBehaviour) : base(steering, avoidObstacles, self)
+    public HoundState_Search(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self, MonoBehaviour monoBehaviour) : base(steering, avoidStObstacles, self)
     {
         _mono = monoBehaviour;
     }
@@ -22,7 +22,7 @@ public class HoundState_Search<T> : State_Steering<T>
 
     public override void Execute()
     {
-        var dir = _avoidObstacles.GetDir(_self, _steering.GetDir());
+        var dir = AvoidStObstacles.GetDir(_self, _steering.GetDir());
         if (dir == Vector2.zero)
         {
             _look.LookDir(Vector2.right);

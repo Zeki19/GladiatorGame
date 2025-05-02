@@ -33,7 +33,7 @@ public class StatueController : EnemyController
     private void Awake()
     {
         _los = GetComponent<LineOfSight>();
-        _steering = new ToPoint(Vector2.zero, transform);
+        _steering = new StToPoint(Vector2.zero, transform);
         _playerLOS = new LineOfSightNoMono(LineOfSightRange, 90, _avoidMask);
     }
 
@@ -49,7 +49,7 @@ public class StatueController : EnemyController
         chaseState = new StatueState_Chase<StateEnum>
         (
             this,
-            new Pursuit(transform, target),
+            new StPursuit(transform, target),
             _maxObs,
             _radius,
             _angle,
@@ -95,12 +95,12 @@ public class StatueController : EnemyController
     {
         var aIdle = new ActionNode(() =>
         {
-            idleState.ChangeSteering(new ToPoint(_wallPosition, transform));
+            idleState.ChangeSteering(new StToPoint(_wallPosition, transform));
             Fsm.Transition(input: StateEnum.Idle);
         });
         var aRunAway = new ActionNode(() =>
         {
-            RunAwayState.ChangeSteering(new ToPoint(_wallPosition, transform));
+            RunAwayState.ChangeSteering(new StToPoint(_wallPosition, transform));
             Fsm.Transition(StateEnum.Runaway);
         });
         var aChase = new ActionNode(() =>

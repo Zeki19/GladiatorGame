@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 using Weapons;
+using Weapons.AttackSo;
 
 namespace Utilitys.Factory.WeaponFactory
 {
@@ -19,6 +20,6 @@ namespace Utilitys.Factory.WeaponFactory
       public float chargePerAttack;
       public float knockbackForce;
       public float slowPercent;
-      [FormerlySerializedAs("BasicAttack")] public SOAttack basicAttack;
+      [FormerlySerializedAs("basicAttack")] [FormerlySerializedAs("BasicAttack")] public AttackSo basic;
    }
 }

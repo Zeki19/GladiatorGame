@@ -16,7 +16,6 @@ namespace Entities
         public abstract void Dash(float dashForce);
         public void StartAttack(Attack attack,Weapon weapon) => attack.StartAttack(weapon);
         public void ExecuteAttack(Attack attack,Weapon weapon) => attack.ExecuteAttack(weapon);
-    
         public void FinishAttack(Attack attack,Weapon weapon) => attack.FinishAttack(weapon);
     
         public virtual Action OnAttack { get; set; }
