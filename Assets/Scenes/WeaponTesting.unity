@@ -662,7 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6834934ad875bc4ca6f868405fdfe76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forTest: {fileID: 11400000, guid: a3e698ad9960446489270ee23cf4df71, type: 2}
+  forTest: {fileID: 11400000, guid: aac5b358800d5534eaf2178d83939b43, type: 2}
 --- !u!1 &1656660041
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +726,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -737,7 +737,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1 &1717606058 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6180874162191578616, guid: 867e3c66e2b1b5f4b8d0e8222e552f2d, type: 3}

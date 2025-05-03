@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Utilitys.Factory.WeaponFactory;
 using Weapons;
+using Weapons.Attacks;
 
 public class Weapon:IConfigurable<SoWeapon>
 {

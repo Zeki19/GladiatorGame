@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Weapons;
 
@@ -21,13 +22,18 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void lookDir()
     {
-        this.transform.rotation = playerRotation.transform.rotation;
-        this.transform.position = playerRotation.transform.position +(playerRotation.transform.up)*offset;
+        transform.rotation = playerRotation.transform.rotation;
+        transform.position = playerRotation.transform.position +(playerRotation.transform.up)*offset;
     }
     public void CreateAWeapon()
     {
         _weapon=ServiceLocator.Instance.GetService<WeaponManager>().GetWeapon();
         _weapon.WeaponGameObject.transform.parent = this.transform;
         _manager.weapon = _weapon;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        throw new NotImplementedException();
     }
 }
