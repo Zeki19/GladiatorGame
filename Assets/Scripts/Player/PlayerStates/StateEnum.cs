@@ -8,5 +8,8 @@
     Chase,
     Search,
     Patrol,
-    Runaway
+    Runaway,
+    Phase1,
+    Phase2,
+    Phase3
 }
