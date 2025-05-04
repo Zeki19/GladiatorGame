@@ -3,14 +3,14 @@ using Weapons.Attacks;
 
 namespace Weapons.AttackSo
 {
-    [CreateAssetMenu(fileName = "NewWeapon",menuName = "AttackSo/Pock")]
-    public class PockAttackSo : AttackSo
+    [CreateAssetMenu(fileName = "NewWeapon",menuName = "AttackSo/Poke")]
+    public class PokeAttackSo : AttackSo
     {
         [SerializeField] private float maxDistance;
         [SerializeField] private int pierce;
         public override Attack Clone()
         {
-            return new Pock(maxDistance, pierce);
+            return new Poke(maxDistance, pierce);
         }
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using Weapons.Attacks;
 
 namespace Weapons
 {

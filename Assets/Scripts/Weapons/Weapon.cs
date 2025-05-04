@@ -1,17 +1,19 @@
+using System;
 using Factory.Essentials;
 using Unity.VisualScripting;
 using UnityEngine;
 using Utilitys.Factory.WeaponFactory;
 using Weapons;
-using Weapons.Attacks;
+using Object = UnityEngine.Object;
 
 public class Weapon:IConfigurable<SoWeapon>
 {
     
 
     public GameObject WeaponGameObject;
+    private Collider2D weaponCollider2D;
     private string _weaponName;
-    private float _baseDamage;
+    public float _baseDamage;
     public float _attackSpeed;
     public float _range;
     private int _durability;
@@ -29,10 +31,12 @@ public class Weapon:IConfigurable<SoWeapon>
     private float _chargeMeter;
     public Attack _baseSoAttack;
     public Attack _chargeSoAttack;
+    public Attack CurrentAttack;
     
     public void Configure(SoWeapon config)
     {
         WeaponGameObject=Object.Instantiate(config.weaponPrefab);
+        weaponCollider2D = WeaponGameObject.GetComponent<Collider2D>();
         _weaponName = config.weaponName;
         _baseDamage = config.baseDamage;
         _attackSpeed = config.attackSpeed;
@@ -46,5 +50,8 @@ public class Weapon:IConfigurable<SoWeapon>
         _chargePerAttack = config.chargePerAttack;
         _baseSoAttack = config.basic.Clone();
     }
-    
+    public void SetCollision(bool state)
+    {
+        weaponCollider2D.enabled = state;
+    }
 }

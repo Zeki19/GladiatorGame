@@ -1,5 +1,4 @@
 using System;
-using Weapons.Attacks;
 
 namespace Weapons.AttackSo
 {

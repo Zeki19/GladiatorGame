@@ -1,6 +1,5 @@
 using Unity.Mathematics;
 using UnityEngine;
-using Weapons.Attacks;
 
 namespace Weapons
 {

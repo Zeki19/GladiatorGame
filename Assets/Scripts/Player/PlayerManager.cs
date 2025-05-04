@@ -25,11 +25,11 @@ public class PlayerManager : EntityManager
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.layer);
-        Debug.Log(EnemyLayer.value);
-        if(other.gameObject.layer==8)
-        {
-            Debug.Log("Hit");
-        }
+        //Debug.Log(other.gameObject.layer);
+        //Debug.Log(EnemyLayer.value);
+        //if(other.gameObject.layer==8)
+        //{
+        //    Debug.Log("Hit");
+        //}
     }
 }

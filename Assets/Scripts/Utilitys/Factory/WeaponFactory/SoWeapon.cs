@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Serialization;
-using Weapons;
 using Weapons.AttackSo;
 
 namespace Utilitys.Factory.WeaponFactory

@@ -2,7 +2,6 @@ using System;
 using Interfaces;
 using UnityEngine;
 using Weapons;
-using Weapons.Attacks;
 
 namespace Entities
 {
