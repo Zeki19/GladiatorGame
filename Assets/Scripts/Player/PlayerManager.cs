@@ -18,6 +18,7 @@ public class PlayerManager : EntityManager
 
     private void Awake()
     {
+        ServiceLocator.Instance.RegisterService(this);
         HealthSystem = new HealthSystem.HealthSystem(maxHp);
     }
 
