@@ -266,6 +266,8 @@ GameObject:
   m_Component:
   - component: {fileID: 131394853}
   - component: {fileID: 131394852}
+  - component: {fileID: 131394855}
+  - component: {fileID: 131394854}
   m_Layer: 0
   m_Name: BossTest
   m_TagString: Untagged
@@ -343,6 +345,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &131394854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131394851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9bbf9f269fae7c49ba4e5254976bc90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 131394855}
+  target: {fileID: 0}
+--- !u!114 &131394855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131394851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f7ff47246bf4e4cadb187cc23c16c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  model: {fileID: 0}
+  view: {fileID: 0}
+  controller: {fileID: 0}
+  enemy: {fileID: 0}
+  maxLife: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

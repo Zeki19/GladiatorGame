@@ -5,7 +5,7 @@ namespace Entities
     public abstract class EntityController : MonoBehaviour
     {
         [SerializeField] protected EntityManager manager;
-        [SerializeField] protected FSM<StateEnum> Fsm;
+        protected FSM<StateEnum> Fsm;
         protected virtual void Update()
         {
             Fsm.OnExecute();
