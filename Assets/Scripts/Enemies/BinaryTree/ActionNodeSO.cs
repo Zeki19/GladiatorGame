@@ -4,7 +4,7 @@ using UnityEngine;
 public class ActionNodeSO : TreeNodeSO
 {
     [SerializeField] public StateEnum stateEnum;
-    public override void Execute()
+    public override void Execute(AIContext context)
     {
     }
 }

@@ -9,7 +9,7 @@ namespace Entities
         protected IMove Move;
         protected IAttack Attack;
         protected ILook Look;
-        [SerializeField]private Rigidbody2D rb;
+        [SerializeField] private Rigidbody2D rb;
         public Rigidbody2D Rb => rb;
         public EntityModel model;
         public EntityView view;

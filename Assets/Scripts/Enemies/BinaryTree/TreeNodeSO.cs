@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class TreeNodeSO : ScriptableObject, ITreeNode
+public abstract class TreeNodeSO : ScriptableObject
 {
-    public abstract void Execute();
+    public abstract void Execute(AIContext context);
 }
