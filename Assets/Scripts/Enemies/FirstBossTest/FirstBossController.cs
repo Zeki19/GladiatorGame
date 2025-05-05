@@ -19,6 +19,13 @@ public class FirstBossController : EnemyController
     private void Awake()
     {
         selfManager = ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(gameObject);
+        objectContext = new AIContext //Actualizar para dar refencias en vez de ir actualizando.
+        {
+            selfGameObject = gameObject,
+            playerGameObject = target.gameObject,
+            attackRange = attackRange,
+            stateMachine = Fsm
+        };
     }
 
 
@@ -82,8 +89,8 @@ public class FirstBossController : EnemyController
     {
         AIContext context = new AIContext //Actualizar para dar refencias en vez de ir actualizando.
         {
-            selfTransform = transform,
-            playerTransform = target.gameObject.transform,
+            //selfTransform = transform,
+            //playerTransform = target.gameObject.transform,
             attackRange = attackRange,
             stateMachine = Fsm
         };

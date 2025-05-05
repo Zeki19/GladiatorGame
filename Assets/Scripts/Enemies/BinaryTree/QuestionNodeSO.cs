@@ -34,18 +34,18 @@ public class QuestionNodeSO : TreeNodeSO
     }
     private bool PlayerInAttackRange(AIContext context)
     {
-        float distance = Vector3.Distance(context.selfTransform.position, context.playerTransform.position);
+        float distance = Vector3.Distance(context.selfGameObject.transform.position, context.playerGameObject.transform.position);
         return distance <= context.attackRange;
     }
     private bool PlayerIsInAStraightLine(AIContext context)
     {
-        Vector3 origin = context.selfTransform.position;
-        Vector3 direction = (context.playerTransform.position - origin).normalized;
-        float distance = Vector3.Distance(origin, context.playerTransform.position);
+        Vector3 origin = context.selfGameObject.transform.position;
+        Vector3 direction = (context.playerGameObject.transform.position - origin).normalized;
+        float distance = Vector3.Distance(origin, context.playerGameObject.transform.position);
 
         if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
         {
-            return hit.transform == context.playerTransform;
+            return hit.transform == context.playerGameObject.transform;
         }
 
         return false;

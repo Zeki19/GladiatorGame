@@ -23,6 +23,7 @@ public class PlayerManager : EntityManager
 
     public LayerMask EnemyLayer;
 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log(other.gameObject.layer);

@@ -13,7 +13,7 @@ namespace Player
         [SerializeField] private float dashDuration;
         [SerializeField] private float dashCooldown;
         [SerializeField] private float dashInvincibility;
-        
+
         private IHealth _playerHealth;
 
         void Dead()
@@ -24,9 +24,11 @@ namespace Player
         private void Awake()
         {
             InitializeFsm();
+        }
 
-            _playerHealth = new HealthSystem.HealthSystem(100);
-
+        private void Start()
+        {
+            _playerHealth = manager.HealthComponent;
             _playerHealth.OnDead += Dead;
         }
 
