@@ -23,13 +23,13 @@ namespace Player
         }
         private void Awake()
         {
-            InitializeFsm();
         }
 
         private void Start()
         {
             _playerHealth = manager.HealthComponent;
             _playerHealth.OnDead += Dead;
+            InitializeFsm();
         }
 
         protected override void InitializeFsm()
