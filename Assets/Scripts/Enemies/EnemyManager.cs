@@ -11,6 +11,8 @@ public class EnemyManager : EntityManager
     private void Awake()
     {
         HealthSystem = new HealthSystem.HealthSystem(maxLife);
+        HealthSystem.OnDamage += PrintHealth;
+        HealthSystem.OnHeal += PrintHealth;
     }
 
     private void Start()
@@ -20,9 +22,11 @@ public class EnemyManager : EntityManager
 
     private void Update()
     {
+    }
+    private void PrintHealth(float ignore)
+    {
         Debug.Log(HealthSystem.currentHealth);
     }
-
     public Vector2 GetEnemyPosition() 
     { 
         return enemy.transform.position;

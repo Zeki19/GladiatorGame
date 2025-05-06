@@ -115,7 +115,6 @@ namespace HealthSystem
             if (isInvulnerable) return;
             currentHealth -= damageAmount;
             OnDamage?.Invoke(damageAmount);
-            Debug.Log("The player took " + damageAmount + " damage");
             if (currentHealth <= 0)
             {
                 Kill();
