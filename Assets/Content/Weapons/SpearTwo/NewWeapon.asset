@@ -10,48 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6db6773487474953bd774bfb2c235aba, type: 3}
-  m_Name: Pock
+  m_Name: NewWeapon
   m_EditorClassIdentifier: 
-  maxDistance: 5
-  pierce: 1
+  maxDistance: 0
+  pierce: 0
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 9.30317
-      outSlope: 9.30317
-      tangentMode: 34
+      inSlope: 2.7419686
+      outSlope: 2.7419686
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.11677262
     - serializedVersion: 3
-      time: 0.18355931
-      value: 1.7076836
-      inSlope: 5.342983
-      outSlope: 5.342983
+      time: 0.2520674
+      value: 2.019302
+      inSlope: 0.33421507
+      outSlope: 0.33421507
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.09870361
+      outWeight: 0.15010107
     - serializedVersion: 3
-      time: 0.899822
-      value: 4.463108
-      inSlope: 3.4423907
-      outSlope: 3.4423907
+      time: 0.94484985
+      value: 0.81246305
+      inSlope: -0.30504665
+      outSlope: -0.30504665
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.13465625
-      outWeight: 0.33333334
+      inWeight: 0.15191565
+      outWeight: 0.12229006
     - serializedVersion: 3
       time: 1.4087917
       value: 0
-      inSlope: -3.7103007
-      outSlope: -3.7103007
+      inSlope: -0.1916864
+      outSlope: -0.1916864
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.96071774
+      inWeight: 0.106716275
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

@@ -13,6 +13,7 @@ public class EnemyManager : EntityManager
         HealthSystem = new HealthSystem.HealthSystem(maxLife);
         HealthSystem.OnDamage += PrintHealth;
         HealthSystem.OnHeal += PrintHealth;
+        ServiceLocator.Instance.RegisterService(this);
     }
 
     private void Start()

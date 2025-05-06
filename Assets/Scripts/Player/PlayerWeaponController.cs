@@ -52,7 +52,7 @@ namespace Player
         {
             if(_weapon==null)
             {
-                var size = Physics2D.OverlapCircle(transform.position, 2, mask);
+                var size = Physics2D.OverlapCircle(transform.position, 1, mask);
                 if (size != null)
                 {
                     WeaponMono weaponMono = size.GetComponent<WeaponMono>();
