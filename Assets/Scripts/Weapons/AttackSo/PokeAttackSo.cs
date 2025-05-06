@@ -8,9 +8,10 @@ namespace Weapons.AttackSo
     {
         [SerializeField] private float maxDistance;
         [SerializeField] private int pierce;
+        [SerializeField] private AnimationCurve curve;
         public override Attack Clone()
         {
-            return new Poke(maxDistance, pierce);
+            return new Poke(maxDistance, pierce,curve);
         }
     }
 }

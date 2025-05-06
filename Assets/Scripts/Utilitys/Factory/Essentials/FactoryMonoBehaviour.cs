@@ -1,6 +1,7 @@
+using Factory.Essentials;
 using UnityEngine;
 
-namespace Factory.Essentials
+namespace Utilitys.Factory.Essentials
 {
     public class FactoryMonoBehaviour<TObject, TConfig> : AbstractFactoryMonoBehaviour<TObject, TConfig>
         where TObject : MonoBehaviour, IConfigurable<TConfig>

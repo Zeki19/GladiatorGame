@@ -17,15 +17,17 @@ namespace Player.PlayerStates
 
         public void SetWeapon(Weapon weapon)
         {
-            _currentAttack = weapon._baseSoAttack;
+            _currentAttack = weapon.BaseSoAttack;
             _weapon = weapon;
         }
         public override void Enter()
         {
             base.Enter();
             SetWeapon(_manager.weapon);
+            _weapon.Attacking = true;
             _currentAttack.FinishAnimation += AttackFinished;
             _attack.StartAttack(_currentAttack,_weapon);
+            _move.ModifySpeed(_weapon.SlowPercent);
         }
         public override void Execute()
         {
@@ -37,6 +39,7 @@ namespace Player.PlayerStates
         public override void Exit()
         {
             base.Exit();
+            _weapon.Attacking = false;
             _attack.FinishAttack(_currentAttack,_weapon);
             _currentAttack.FinishAnimation -= AttackFinished;
         }
@@ -44,6 +47,7 @@ namespace Player.PlayerStates
         private void AttackFinished()
         {
             StateMachine.Transition(_inputFinish);
+            _move.ModifySpeed(1);
         }
     }
 }

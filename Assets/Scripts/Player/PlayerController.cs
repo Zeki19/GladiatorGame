@@ -20,6 +20,7 @@ namespace Player
         {
             transform.parent.gameObject.SetActive(false);
             ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(3);
+            
         }
         private void Awake()
         {
@@ -86,6 +87,6 @@ namespace Player
         {
             Fsm.Transition(StateEnum.Dash);
         }
-
+        
     }
 }

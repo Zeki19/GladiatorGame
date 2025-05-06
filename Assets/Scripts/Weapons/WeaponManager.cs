@@ -18,20 +18,16 @@ namespace Weapons
             ServiceLocator.Instance.RegisterService(this);
         }
 
+        
         public void CreateWeapon(SoWeapon weaponConfig)
         {
             var newWeapon = _factory.Create(weaponConfig);
             _droppedWeapons.Add(newWeapon);
             newWeapon.WeaponGameObject.transform.parent = transform;
         }
-
+        [ContextMenu("create")]
         public Weapon GetWeapon()
         {
-            //if (_droppedWeapons!= null)
-            //{
-            //    return _droppedWeapons[0];
-            //}
-
             CreateWeapon(forTest);
             return _droppedWeapons[0];
         }

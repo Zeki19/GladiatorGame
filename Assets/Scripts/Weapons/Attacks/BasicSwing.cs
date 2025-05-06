@@ -25,17 +25,22 @@ namespace Weapons
             _currentAngle = _startingOffset;
             _targetAngle = _startingOffset + _swingAngle;
             _weapon.transform.localRotation = Quaternion.Euler(0, 0, _startingOffset);
-            _weapon.transform.position += _weapon.transform.parent.up * weapon._range;
+            _weapon.transform.position += _weapon.transform.parent.up * weapon.Range;
             _attackPosition = _weapon.transform.position;
+            weapon.SetCollision(true);
         }
 
         public override void ExecuteAttack(Weapon weapon)
         {
             if(_currentAngle<_targetAngle)
             {
-                _currentAngle = Mathf.MoveTowards(_currentAngle, _targetAngle, weapon._attackSpeed * Time.deltaTime);
+                _currentAngle = Mathf.MoveTowards(_currentAngle, _targetAngle, weapon.AttackSpeed * Time.deltaTime);
                 _weapon.transform.localRotation = Quaternion.Euler(0, 0, _currentAngle);
                 _weapon.transform.position = _attackPosition;
+            }
+            else
+            {
+                FinishAnimation.Invoke();
             }
         }
 
@@ -43,6 +48,7 @@ namespace Weapons
         {
             _weapon.transform.localRotation =quaternion.identity;
             _weapon.transform.localPosition =_startingPosition;
+            weapon.SetCollision(false);
         }
     }
 }
