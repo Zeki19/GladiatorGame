@@ -14,5 +14,6 @@ namespace Entities
         public EntityModel model;
         public EntityView view;
         public EntityController controller;
+        public IHealth HealthComponent => HealthSystem;
     }
 }

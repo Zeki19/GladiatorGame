@@ -16,6 +16,7 @@ namespace Enemies
         public void RegisterEnemy(GameObject enemy, EnemyManager enemyManager) =>
             _enemies.Add(enemy, enemyManager);
 
+
         public EnemyManager GetManager(GameObject enemy)
         {
             return _enemies.GetValueOrDefault(enemy);

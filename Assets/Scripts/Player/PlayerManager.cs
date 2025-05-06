@@ -18,10 +18,12 @@ public class PlayerManager : EntityManager
 
     private void Awake()
     {
+        ServiceLocator.Instance.RegisterService(this);
         HealthSystem = new HealthSystem.HealthSystem(maxHp);
     }
 
     public LayerMask EnemyLayer;
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
