@@ -1,42 +1,14 @@
 using UnityEngine;
 
-using UnityEngine;
 
 public class AudioTest : MonoBehaviour
 {
-    [Header("Prueba de Audio")]
-    public string sfxName;
-    public string musicName;
 
-    private AudioManager audioManager;
-
-    void Start()
+    public void Update()
     {
-
-        audioManager = ServiceLocator.Instance.GetService<AudioManager>();
-
-
-        audioManager.PlayMusic(musicName);
-
-
-        audioManager.PlaySFX(sfxName);
-    }
-
-    void Update()
-    {
-            audioManager.PlaySFX(sfxName);
-        
-
-        // Subir volumen de música con flecha arriba
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            audioManager.SetMusicVolume(1f);
-        }
-
-        // Bajar volumen de música con flecha abajo
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            audioManager.SetMusicVolume(0.2f);
+            AudioManager.Instance.PlayMusic("clubbed");
         }
     }
 }

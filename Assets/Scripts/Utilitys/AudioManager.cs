@@ -1,102 +1,57 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("Audio Scriptables")]
-    [SerializeField] private List<AudioSettingsScriptable> audioClips;
+    public static AudioManager Instance { get; private set; }
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource sfxSourcePrefab;
-    private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
 
-    private Dictionary<string, AudioSettingsScriptable> clipLookup = new Dictionary<string, AudioSettingsScriptable>();
-    private List<AudioSource> activeSfxSources = new List<AudioSource>();
-
-    [Header("Volume Settings")]
-    [Range(0f, 100f)][SerializeField] private float musicVolume = 1f;
-    [Range(0f, 100f)][SerializeField] private float sfxVolume = 1f;
+    [Header("Audio Clip Configurations")]
+    [SerializeField] private List<AudioSettingsScriptable> audioClips;
+    private Dictionary<string, AudioSettingsScriptable> clipLookup;
 
     private void Awake()
     {
-        ServiceLocator.Instance.RegisterService<AudioManager>(this);
-
-        if (musicSource == null)
+        if (Instance != null && Instance != this)
         {
-            musicSource = gameObject.AddComponent<AudioSource>();
-            musicSource.loop = true;
+            Destroy(gameObject);
+            return;
         }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
 
-        foreach (var clipSetting in audioClips)
-        {
-            if (clipSetting != null && !clipLookup.ContainsKey(clipSetting.soundName))
-            {
-                clipLookup.Add(clipSetting.soundName, clipSetting);
-            }
-        }
+        clipLookup = audioClips.ToDictionary(c => c.soundName, c => c);
     }
-    private void Update()
+    public void PlaySFX(string id)
     {
-        for (int i = activeSfxSources.Count - 1; i >= 0; i--)
+        if (clipLookup.TryGetValue(id, out var data))
         {
-            if (!activeSfxSources[i].isPlaying)
-            {
-                Destroy(activeSfxSources[i].gameObject);
-                activeSfxSources.RemoveAt(i);
-            }
+            sfxSource.PlayOneShot(data.clip, data.volume);
         }
-
-        musicSource.volume = musicVolume;
-        foreach (var sfx in activeSfxSources)
+        else
         {
-            sfx.volume = sfxVolume;
+            Debug.LogWarning($"SID sfx '{id}' Not Found");
         }
     }
-    public void PlayMusic(AudioClip clip)
+    public void PlayMusic(string id)
     {
-        if (clip == null) return;
-        musicSource.clip = clip;
-        musicSource.volume = musicVolume;
-        musicSource.Play();
-    }
-    public void PlayMusic(string soundName)
-    {
-        if (clipLookup.TryGetValue(soundName, out var soundData))
+        if (clipLookup.TryGetValue(id, out var data))
         {
-            musicSource.clip = soundData.clip;
-            musicSource.volume = soundData.volume * musicVolume;
-            musicSource.Play();
+            sfxSource.clip = data.clip;
+            sfxSource.volume = data.volume;
+            sfxSource.loop = true;
+            sfxSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning($"ID music '{id}' Not found ");
         }
     }
-    public void PlaySFX(AudioClip clip)
+    public void StopMusic()
     {
-        if (clip == null) return;
-
-        var newSource = Instantiate(sfxSourcePrefab, transform);
-        newSource.clip = clip;
-        newSource.volume = sfxVolume;
-        newSource.Play();
-
-        activeSfxSources.Add(newSource);
-    }
-    public void PlaySFX(string soundName)
-    {
-        if (clipLookup.TryGetValue(soundName, out var soundData))
-        {
-            var newSource = Instantiate(sfxSourcePrefab, transform);
-            newSource.clip = soundData.clip;
-            newSource.volume = soundData.volume * sfxVolume;
-            newSource.Play();
-
-            activeSfxSources.Add(newSource);
-        }
-    }
-    public void SetMusicVolume(float volume)
-    {
-        musicVolume = Mathf.Clamp01(volume);
-    }
-    public void SetSFXVolume(float volume)
-    {
-        sfxVolume = Mathf.Clamp01(volume);
+        sfxSource.Stop();
     }
 }
