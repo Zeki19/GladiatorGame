@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class EnemyManager : EntityManager
 {
-    [SerializeField] private GameObject enemy;
     [SerializeField] private int maxLife;
 
     private void Awake()
@@ -20,21 +19,12 @@ public class EnemyManager : EntityManager
     {
         ServiceLocator.Instance.GetService<EnemiesManager>().RegisterEnemy(gameObject,this);
     }
-
-    private void Update()
-    {
-    }
     private void PrintHealth(float ignore)
     {
         Debug.Log(HealthSystem.currentHealth);
     }
     public Vector2 GetEnemyPosition() 
     { 
-        return enemy.transform.position;
-    }
-
-    public IHealth GetEnemyHealthSystem()
-    {
-        return HealthSystem;
+        return gameObject.transform.position;
     }
 }

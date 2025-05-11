@@ -13,15 +13,15 @@ public class QuestionNode : ITreeNode
         _tNode = tNode;
         _fNode = fNode;
     }
-    public void Execute()
+    public void Execute(AIContext context)
     {
         if (_question())
         {
-            _tNode.Execute();
+            _tNode.Execute(context);
         }
         else
         {
-            _fNode.Execute();
+            _fNode.Execute(context);
         }
     }
 }

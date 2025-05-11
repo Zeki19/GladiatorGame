@@ -11,7 +11,7 @@ namespace Weapons.Attacks
         private float _maxDistance;
         private float _piercing;
         private float _toGo;
-        private float _currentMag;
+        //private float _currentMag;
         private AnimationCurve _curve;
         private float animationTime;
         private float _timer;
@@ -28,7 +28,7 @@ namespace Weapons.Attacks
             _weapon = weapon.WeaponGameObject;
             _startingPosition = _weapon.transform.localPosition;
             _weapon.transform.position += _weapon.transform.parent.up * weapon.Range;
-            _currentMag = 0;
+            //_currentMag = 0;
             _toGo= _weapon.transform.localPosition.magnitude * _maxDistance;
             weapon.SetCollision(true);
         }

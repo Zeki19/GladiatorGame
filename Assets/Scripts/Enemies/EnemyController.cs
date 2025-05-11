@@ -5,19 +5,28 @@ public abstract class EnemyController : EntityController
 {
     [SerializeField] protected Rigidbody2D target;
     [SerializeField] protected float attackRange;
+    [SerializeField] protected TreeNodeSO Root;
 
-    protected ITreeNode Root;
     protected StateEnum CurrentState;
-    protected virtual void Start()
+    protected AIContext objectContext;
+
+    protected virtual void Awake()
     {
         InitializeFsm();
+        objectContext = new AIContext
+        {
+            selfGameObject = gameObject,
+            playerGameObject = target.gameObject,
+            attackRange = attackRange,
+            stateMachine = Fsm
+        };
         InitializeTree();
     }
     
     protected override void Update()
     {
         base.Update();
-        Root.Execute();
+        Root.Execute(objectContext);
     }
     
     protected abstract void InitializeTree();

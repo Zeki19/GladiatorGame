@@ -30,8 +30,9 @@ public class StatueController : EnemyController
     StatueState_Runaway<StateEnum> RunAwayState;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _los = GetComponent<LineOfSight>();
         _steering = new StToPoint(Vector2.zero, transform);
         _playerLOS = new LineOfSightNoMono(LineOfSightRange, 90, _avoidMask);
@@ -115,7 +116,7 @@ public class StatueController : EnemyController
         var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, qLookingForWall);
         var qPlayerLooking = new QuestionNode(QuestionIsPlayerLooking, aIdle, qTargetInView);
         
-        Root = qPlayerLooking;
+        //Root = qPlayerLooking;
     }
 
 

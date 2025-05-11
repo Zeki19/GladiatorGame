@@ -7,8 +7,6 @@ namespace Player
 {
     public class PlayerModel : EntityModel
     {
-        [SerializeField] private float moveSpeed;
-        private float _speedModifier = 1;
         private Vector2 _moveInput;
         private Vector2 _lastDirection;
         private PlayerInput _playerInput;
@@ -31,7 +29,7 @@ namespace Player
 
         public override void ModifySpeed(float speed)
         {
-            _speedModifier = speed;
+            _speedModifier += speed;  //Ask the designer if this should be a + or a *.
         }
 
         public override void Dash(float dashForce)

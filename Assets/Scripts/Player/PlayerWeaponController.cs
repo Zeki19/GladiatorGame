@@ -84,7 +84,7 @@ namespace Player
         
             if (_enemiesHit.Any(hits => hits==other.gameObject)) return;
             
-            ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject).GetEnemyHealthSystem().TakeDamage(_weapon.BaseDamage);
+            ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject).HealthComponent.TakeDamage(_weapon.BaseDamage);
             _enemiesHit.Add(other.gameObject);
         
         }

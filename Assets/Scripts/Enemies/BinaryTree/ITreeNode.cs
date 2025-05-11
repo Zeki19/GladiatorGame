@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface ITreeNode
 {
-    void Execute();
+    void Execute(AIContext context);
 }
