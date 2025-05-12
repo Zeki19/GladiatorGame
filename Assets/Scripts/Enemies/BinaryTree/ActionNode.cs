@@ -9,7 +9,7 @@ public class ActionNode : ITreeNode
     {
         _action = action;
     }
-    public void Execute()
+    public void Execute(AIContext context)
     {
         _action();
     }

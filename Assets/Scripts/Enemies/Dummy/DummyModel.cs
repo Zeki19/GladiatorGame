@@ -8,7 +8,6 @@ namespace Dummy
     public class DummyModel : EntityModel
     {
         [Header("Movement Settings")]
-        [SerializeField] private float moveSpeed = 5f;
         private float _speedMult = 1f;
         
         [Header("Attack Settings")]

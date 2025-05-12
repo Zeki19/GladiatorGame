@@ -7,7 +7,10 @@ namespace Entities
 {
     public abstract class EntityModel : MonoBehaviour, IMove, IAttack
     {
-        [SerializeField]protected EntityManager manager;
+        [SerializeField] protected EntityManager manager;
+        [SerializeField] protected float moveSpeed;
+        protected float _speedModifier = 1;
+
         public Vector2 Position => transform.position;
 
         public void StopMovement() => manager.Rb.linearVelocity = Vector2.zero;

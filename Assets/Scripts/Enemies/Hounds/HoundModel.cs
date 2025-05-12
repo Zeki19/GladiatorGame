@@ -9,9 +9,7 @@ namespace Enemies.Hounds
     {
         [Header("Movement Settings")]
         [Tooltip("Speed at which the hound patrols.")]
-        [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private float amountOfWaypoints = 5f;
-        private float _speedMultiplier = 1f;
         
         [Header("Attack Settings")]
         [SerializeField] private float attackRange;
@@ -27,13 +25,13 @@ namespace Enemies.Hounds
         
         public override void ModifySpeed(float speed)
         {
-            _speedMultiplier = speed;
+            _speedModifier = speed;
         }
 
         public override void Move(Vector2 dir)
         {
-            if (_speedMultiplier <= 0) _speedMultiplier = 1;
-            manager.Rb.linearVelocity =  dir * (moveSpeed * _speedMultiplier);
+            if (_speedModifier <= 0) _speedModifier = 1;
+            manager.Rb.linearVelocity =  dir * (moveSpeed * _speedModifier);
         }
 
         public override void Dash(float dashForce)

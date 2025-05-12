@@ -20,10 +20,7 @@ namespace Dummy
         private float AttackRange;
         
         #endregion
-        protected override void Start()
-        {
-            base.Start();
-        }
+
         protected override void InitializeFsm()
         {
             
@@ -51,7 +48,7 @@ namespace Dummy
         {
             var aIdle = new ActionNode(()=> Fsm.Transition(StateEnum.Idle));
 
-            Root = aIdle;
+            //Root = aIdle;
         }
     }
 }

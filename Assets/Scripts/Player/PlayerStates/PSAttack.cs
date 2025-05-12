@@ -27,7 +27,7 @@ namespace Player.PlayerStates
             _weapon.Attacking = true;
             _currentAttack.FinishAnimation += AttackFinished;
             _attack.StartAttack(_currentAttack,_weapon);
-            _move.ModifySpeed(_weapon.SlowPercent);
+            _move.ModifySpeed(-_weapon.SlowPercent);
         }
         public override void Execute()
         {
@@ -47,7 +47,7 @@ namespace Player.PlayerStates
         private void AttackFinished()
         {
             StateMachine.Transition(_inputFinish);
-            _move.ModifySpeed(1);
+            _move.ModifySpeed(_weapon.SlowPercent);
         }
     }
 }

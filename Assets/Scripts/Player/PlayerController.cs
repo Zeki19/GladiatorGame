@@ -22,10 +22,6 @@ namespace Player
             ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(3);
             
         }
-        private void Awake()
-        {
-        }
-
         private void Start()
         {
             _playerHealth = manager.HealthComponent;

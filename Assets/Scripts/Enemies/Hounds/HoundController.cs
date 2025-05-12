@@ -53,16 +53,16 @@ public class HoundController : EnemyController
         { AttackType.Lunge, 10f }
     };
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _los = GetComponent<LineOfSight>();
         
         _avoidWalls = new StObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
     }
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
         InitalizeSteering();
     }
     
@@ -197,7 +197,7 @@ public class HoundController : EnemyController
         var qStateIdle = new QuestionNode(QuestionIsIdle, qIsRested, qStatePatrol);
         var qFarFromCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, qStateIdle);
 
-        Root = qFarFromCamp;
+        //Root = qFarFromCamp;
     }
 
     bool QuestionFinishedSearching()

@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class StatueView : EntityView, ILook
+public class StatueView : EnemyView, ILook
 {
-    [SerializeField] float rotationSpeed;
     private StateEnum _lastAnimationState = StateEnum.Idle;
     public override void LookDir(Vector2 dir)
     {
