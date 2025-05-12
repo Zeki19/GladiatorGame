@@ -16,12 +16,6 @@ namespace Player
         private Weapon _weapon;
         public LayerMask mask;
         public float offset;
-        
-        void Start()
-        {
-            //CreateAWeapon();
-            //_weapon.BaseSoAttack.FinishAnimation += ClearEnemiesList;
-        }
 
         void Update()
         {
@@ -32,12 +26,6 @@ namespace Player
         {
             transform.rotation = playerRotation.transform.rotation;
             transform.position = playerRotation.transform.position +(playerRotation.transform.up)*offset;
-        }
-        private void CreateAWeapon()
-        {
-            _weapon=ServiceLocator.Instance.GetService<WeaponManager>().GetWeapon();
-            _weapon.WeaponGameObject.transform.parent = this.transform;
-            manager.weapon = _weapon;
         }
 
         public void Attack()
@@ -50,20 +38,18 @@ namespace Player
         }
         public void GrabWeapon()
         {
-            if(_weapon==null)
+            if (_weapon != null) return;
+            //var size = Physics2D.OverlapCircle(transform.position, 1, mask);
+            var weapon = ServiceLocator.Instance.GetService<WeaponManager>().PickUpWeaponInRange(transform.position, 1);
+            if (weapon != default)
             {
-                var size = Physics2D.OverlapCircle(transform.position, 1, mask);
-                if (size != null)
-                {
-                    WeaponMono weaponMono = size.GetComponent<WeaponMono>();
-                    _weapon = weaponMono.Weapon;
-                    weaponMono.gameObject.transform.parent = transform;
-                    weaponMono.gameObject.transform.localPosition=Vector3.zero;
-                    weaponMono.gameObject.transform.localRotation=quaternion.identity;
-                    _weapon.BaseSoAttack.FinishAnimation += ClearEnemiesList;
-                    manager.weapon = _weapon;
-                    _weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
-                }
+                _weapon = weapon;
+                _weapon.WeaponGameObject.gameObject.transform.parent = transform;
+                _weapon.WeaponGameObject.gameObject.transform.localPosition=Vector3.zero;
+                _weapon.WeaponGameObject.gameObject.transform.localRotation=quaternion.identity;
+                _weapon.BaseSoAttack.FinishAnimation += ClearEnemiesList;
+                _weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
+                manager.weapon = _weapon;
             }
         }
 
