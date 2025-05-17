@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Enemies;
+using Entities.Interfaces;
 using Unity.Mathematics;
 using UnityEngine;
 using Weapons;
@@ -69,8 +70,16 @@ namespace Player
             if (!IsInLayerMask(other.gameObject, collisionLayer)) return;
         
             if (_enemiesHit.Any(hits => hits==other.gameObject)) return;
+            var enemyManager = ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject);
+            enemyManager.HealthComponent.TakeDamage(_weapon.BaseDamage);
+            if (enemyManager.model is IKnockbackable knockbackable)
+            {
+                knockbackable.ApplyKnockbackFromSource(this.transform.position,_weapon.KnockbackForce);
+            }
+
+            _weapon.AffectDurability(_weapon.DurabilityStandardLoss);
             
-            ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject).HealthComponent.TakeDamage(_weapon.BaseDamage);
+           
             _enemiesHit.Add(other.gameObject);
         
         }

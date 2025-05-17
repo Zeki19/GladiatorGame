@@ -1,15 +1,16 @@
 using UnityEngine;
+using Weapons.Attacks;
 
-namespace Weapons
+namespace Weapons.AttackSo
 {
     [CreateAssetMenu(fileName = "NewWeapon",menuName = "AttackSo/Swing")]
-    public class BasicSwingAttackSo : AttackSo.AttackSo
+    public class BasicSwingAttackSo : AttackSo
     {
-        [SerializeField] private float swingStartingPoint;
-        [SerializeField] private float swingAngle;
+        [SerializeField] private float swingStartingAngle;
+        [SerializeField] private AnimationCurve curve;
         public override Attack Clone()
         {
-            return new BasicSwing(swingStartingPoint,swingAngle);
+            return new BasicSwing(swingStartingAngle,curve);
         }
     }
 }

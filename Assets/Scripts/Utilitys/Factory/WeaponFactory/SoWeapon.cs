@@ -19,6 +19,7 @@ namespace Utilitys.Factory.WeaponFactory
       public float chargePerAttack;
       public float knockbackForce;
       public float slowPercent;
-      [FormerlySerializedAs("basicAttack")] [FormerlySerializedAs("BasicAttack")] public AttackSo basic;
+      public AttackSo basic;
+      public AttackSo charge;
    }
 }

@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 
-namespace Weapons
+namespace Weapons.Attacks
 {
     public abstract class Attack
     {
+        protected GameObject WeaponGameObject;
+        protected Vector3 StartingPosition;
         protected Weapon Weapon;
         public Action FinishAnimation;
         public abstract void StartAttack(Weapon weapon);

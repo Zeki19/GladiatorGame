@@ -6,61 +6,44 @@ namespace Weapons.Attacks
 {
     public class Poke : Attack
     {
-        private GameObject _weapon;
-        private Vector3 _startingPosition;
-        private float _maxDistance;
         private float _piercing;
-        private float _toGo;
-        //private float _currentMag;
-        private AnimationCurve _curve;
-        private float animationTime;
-        private float _timer;
+        private readonly AnimationCurve _animationCurve;
+        private readonly float _animationTime;
+        private float _animationClock;
 
-        public Poke(float maxDistance,int piercing,AnimationCurve curve)
+        public Poke(int piercing,AnimationCurve curve)
         {
-            _maxDistance = maxDistance;
-            _curve = curve;
-            if (_curve.length > 0)
-                animationTime = _curve.keys[_curve.length - 1].time;
+            _animationCurve = curve;
+            if (_animationCurve.length > 0)
+                _animationTime = _animationCurve.keys[_animationCurve.length - 1].time;
         }
         public override void StartAttack(Weapon weapon)
         {
-            _weapon = weapon.WeaponGameObject;
-            _startingPosition = _weapon.transform.localPosition;
-            _weapon.transform.position += _weapon.transform.parent.up * weapon.Range;
-            //_currentMag = 0;
-            _toGo= _weapon.transform.localPosition.magnitude * _maxDistance;
+            WeaponGameObject = weapon.WeaponGameObject;
+            StartingPosition = WeaponGameObject.transform.localPosition;
+            WeaponGameObject.transform.position += WeaponGameObject.transform.parent.up * weapon.Range;
             weapon.SetCollision(true);
         }
 
         public override void ExecuteAttack(Weapon weapon)
         {   
-            _timer += Time.deltaTime;
-            if (_timer < animationTime)
+            _animationClock += Time.deltaTime;
+            if (_animationClock < _animationTime)
             {
-                _weapon.transform.localPosition =
-                    _weapon.transform.localPosition.normalized *_curve.Evaluate(_timer);
+                WeaponGameObject.transform.localPosition =
+                    WeaponGameObject.transform.localPosition.normalized *_animationCurve.Evaluate(_animationClock);
             }
             else
             {
-                _timer = 0;
+                _animationClock = 0;
                 FinishAnimation.Invoke();
             }
-            //if(_currentMag<_toGo)
-            //{
-            //    _currentMag = Mathf.MoveTowards(_currentMag, _toGo, weapon._attackSpeed * Time.deltaTime);
-            //    _weapon.transform.localPosition = _weapon.transform.localPosition.normalized*_currentMag;
-            //}
-            //else
-            //{
-            //    FinishAnimation.Invoke();
-            //}
         }
 
         public override void FinishAttack(Weapon weapon)
         {
-            _weapon.transform.localRotation =quaternion.identity;
-            _weapon.transform.localPosition =_startingPosition;
+            WeaponGameObject.transform.localRotation =quaternion.identity;
+            WeaponGameObject.transform.localPosition =StartingPosition;
             weapon.SetCollision(false);
         }
     }

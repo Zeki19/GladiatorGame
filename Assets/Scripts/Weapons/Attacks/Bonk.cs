@@ -1,3 +1,5 @@
+using Weapons.Attacks;
+
 namespace Weapons
 {
     public class Bonk : Attack

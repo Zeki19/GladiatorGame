@@ -1,11 +1,11 @@
 using System;
 using Entities;
-using Interfaces;
+using Entities.Interfaces;
 using UnityEngine;
 
-namespace Dummy
+namespace Enemies.Dummy
 {
-    public class DummyModel : EntityModel
+    public class DummyModel : EntityModel, IKnockbackable
     {
         [Header("Movement Settings")]
         private float _speedMult = 1f;
@@ -15,6 +15,8 @@ namespace Dummy
         [SerializeField] private float attackRange;
         
         Action _onAttack = delegate { };
+        [Min(0.1f)][SerializeField] private float knockbackWeight=1f;
+        private bool _canBeKnockedBack = true;
         public override Action OnAttack { get => _onAttack; set => _onAttack = value; }
 
         #region Public variables
@@ -58,5 +60,28 @@ namespace Dummy
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
         #endregion
-    }
+
+        #region KnockBack
+
+        float IKnockbackable.KnockbackWeight => knockbackWeight;
+
+        bool IKnockbackable.CanBeKnockedBack => _canBeKnockedBack;
+
+        public void ApplyKnockback(Vector2 force)
+        {
+            if (!_canBeKnockedBack) return;
+            Vector2 adjustedForce = force / knockbackWeight;
+            manager.Rb.linearVelocity = Vector2.zero;
+            manager.Rb.AddForce(adjustedForce, ForceMode2D.Impulse);
+        }
+
+        public void ApplyKnockbackFromSource(Vector2 sourcePosition, float intensity)
+        {
+            if (!_canBeKnockedBack) return;
+            Vector2 direction = (transform.position - (Vector3)sourcePosition).normalized;
+            Vector2 force = direction * intensity;
+            ApplyKnockback(force);
+        }
+        #endregion
+        }
 }

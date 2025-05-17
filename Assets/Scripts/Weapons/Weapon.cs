@@ -1,53 +1,92 @@
 using Factory.Essentials;
 using UnityEngine;
 using Utilitys.Factory.WeaponFactory;
+using Weapons.Attacks;
 
 namespace Weapons
 {
     public class Weapon:IConfigurable<SoWeapon>
     {
-        public bool Attacking = false;
-        public GameObject WeaponGameObject;
+        public string WeaponName { get; private set; }
+        public GameObject WeaponGameObject{ get; private set; }
         private Collider2D _weaponCollider2D;
-        private string _weaponName;
-        public float BaseDamage;
-        public float AttackSpeed;
-        public float Range;
-        private int _durability;
-        private int _durabilityStandardLoss;
-        private int _durabilityChargeLoss;
-        private float _knockbackForce;
-        public float SlowPercent;
-        private float _changeThreshold;
-        private float _chargePerAttack;
-        private float _currentDurability;
-        private bool _isOnCooldown;
-        private bool _canAttack;
-        private float _chargeMeter;
-        public Attack BaseSoAttack;
-        public Attack ChargeSoAttack;
-        public Attack CurrentAttack;
+        #region BaseStats
+
+            public float BaseDamage { get; private set; }
+            public float AttackSpeed{ get; private set; }
+            public float Range{ get; private set; }
+            public float KnockbackForce{ get; private set; }
+            public float SlowPercent{ get; private set; }
+
+        #endregion
+        #region Durability
+
+            public int Durability{ get; private set; }
+            public int DurabilityStandardLoss{ get; private set; }
+            public int DurabilityChargeLoss{ get; private set; }
+            public float CurrentDurability{ get; private set; }
+
+        #endregion
+        #region Charge
+
+            public float ChangeThreshold{ get; private set; }
+            public float ChargePerAttack{ get; private set; }
+            public float ChargeMeter{ get; private set; }
+
+        #endregion
+        #region Bools
+        
+        public bool Attacking { get; set; } = false;
+        public bool IsOnCooldown{ get; private set; }
+        public bool CanAttack{ get; private set; }
+        
+        #endregion
+        #region Attacks
+
+            public Attack BaseSoAttack{ get; private set; }
+            public Attack ChargeSoAttack{ get; private set; }
+            public Attack CurrentAttack{ get; private set; }
+
+        #endregion
+        
     
         public void Configure(SoWeapon config)
         {
             WeaponGameObject=Object.Instantiate(config.weaponPrefab);
-            _weaponCollider2D = WeaponGameObject.GetComponent<Collider2D>();
-            _weaponName = config.weaponName;
-            _durabilityStandardLoss = config.durabilityStandardLoss;
-            _durability = config.durability;
-            _durabilityChargeLoss = config.durabilityChargeLoss;
-            _knockbackForce = config.knockbackForce;
-            _changeThreshold = config.changeThreshold;
-            _chargePerAttack = config.chargePerAttack;
+            
+            DurabilityStandardLoss = config.durabilityStandardLoss;
+            DurabilityChargeLoss = config.durabilityChargeLoss;
+            ChargePerAttack = config.chargePerAttack;
+            ChangeThreshold = config.changeThreshold;
+            KnockbackForce = config.knockbackForce;
             SlowPercent = config.slowPercent;
-            BaseDamage = config.baseDamage;
             AttackSpeed = config.attackSpeed;
+            WeaponName = config.weaponName;
+            Durability = config.durability;
+            BaseDamage = config.baseDamage;
             Range = config.range;
+            
+            ChargeSoAttack = config.charge.Clone();
             BaseSoAttack = config.basic.Clone();
+
+            CurrentDurability = Durability;
+            _weaponCollider2D = WeaponGameObject.GetComponent<Collider2D>();
         }
         public void SetCollision(bool state)
         {
             _weaponCollider2D.enabled = state;
+        }
+        /// <summary>
+        /// This is an addition if you want to damage use a negative number
+        /// </summary>
+        /// <param name="durabilityChange"><br /> Positive = Repair<br /> Negative = Damage</param>
+        /// <returns>Return False if Broken</returns>
+        public bool AffectDurability(float durabilityChange)
+        {
+            CurrentDurability += durabilityChange;
+            CurrentDurability = Mathf.Clamp(CurrentDurability, 0, Durability);
+            Debug.Log("Current Weapon Durability :" + CurrentDurability);
+            return !(CurrentDurability <= 0);
         }
     }
 }
