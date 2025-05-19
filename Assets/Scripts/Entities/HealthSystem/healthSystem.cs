@@ -8,6 +8,9 @@ namespace HealthSystem
         private float _maxHealth;
         private float _currentHealth;
         private bool _isInvulnerable;
+
+        public event Action<float> OnHealthChanged;
+
         private void Awake()
         {
             _currentHealth = _maxHealth;

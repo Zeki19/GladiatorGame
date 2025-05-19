@@ -7,16 +7,30 @@ public class Player_Healthbar : MonoBehaviour
 {
     [SerializeField] private Slider slider;
     private IHealth _health;
-    private void Start()
+    public void Setup(IHealth health)
     {
-        _health = ServiceLocator.Instance.GetService<PlayerManager>().HealthComponent;
-        SetHealth();
-    }
-    void SetHealth()
-    {
+        _health = health;
         slider.maxValue = _health.maxHealth;
         slider.value = _health.currentHealth;
         _health.OnDamage += OnDamaged;
+        _health.OnHeal += OnHealed; 
     }
-    private void OnDamaged(float damage) => slider.value = _health.currentHealth;
+    private void OnDamaged(float damage)
+    {
+        slider.value = _health.currentHealth;
+    }
+
+    private void OnHealed(float heal)
+    {
+        slider.value = _health.currentHealth;
+    }
+
+    private void OnDestroy()
+    {
+        if (_health != null)
+        {
+            _health.OnDamage -= OnDamaged;
+            _health.OnHeal -= OnHealed;
+        }
+    }
 }
