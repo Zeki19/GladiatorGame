@@ -3,20 +3,42 @@ using Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Player_Healthbar : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
+    [SerializeField] private Image CircleBar;
     private IHealth _health;
-    private void Start()
+
+    public void Setup(IHealth health)
     {
-        _health = ServiceLocator.Instance.GetService<PlayerManager>().HealthComponent;
-        SetHealth();
-    }
-    void SetHealth()
-    {
-        slider.maxValue = _health.maxHealth;
-        slider.value = _health.currentHealth;
+        _health = health;
+        UpdateFill(); 
+
         _health.OnDamage += OnDamaged;
+        _health.OnHeal += OnHealed;
     }
-    private void OnDamaged(float damage) => slider.value = _health.currentHealth;
+
+    private void OnDamaged(float damage)
+    {
+        UpdateFill();
+    }
+    private void OnHealed(float heal)
+    {
+        UpdateFill();
+    }
+    private void UpdateFill()
+    {
+        if (_health != null && _health.maxHealth > 0)
+        {
+            CircleBar.fillAmount = _health.currentHealth / _health.maxHealth;
+        }
+    }
+    private void OnDestroy()
+    {
+        if (_health != null)
+        {
+            _health.OnDamage -= OnDamaged;
+            _health.OnHeal -= OnHealed;
+        }
+    }
 }
