@@ -1,5 +1,6 @@
 using Factory.Essentials;
 using UnityEngine;
+using Utilitys.Factory.Essentials;
 using Utilitys.Factory.WeaponFactory;
 using Weapons.Attacks;
 
@@ -52,8 +53,6 @@ namespace Weapons
     
         public void Configure(SoWeapon config)
         {
-            WeaponGameObject=Object.Instantiate(config.weaponPrefab);
-            
             DurabilityStandardLoss = config.durabilityStandardLoss;
             DurabilityChargeLoss = config.durabilityChargeLoss;
             ChargePerAttack = config.chargePerAttack;
@@ -70,6 +69,10 @@ namespace Weapons
             BaseSoAttack = config.basic.Clone();
 
             CurrentDurability = Durability;
+        }
+        public void Initialize(SoWeapon config)
+        {
+            WeaponGameObject=Object.Instantiate(config.weaponPrefab);
             _weaponCollider2D = WeaponGameObject.GetComponent<Collider2D>();
         }
         public void SetCollision(bool state)

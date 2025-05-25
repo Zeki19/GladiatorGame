@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Entities;
-using Interfaces;
+using Entities.Interfaces;
 using Player.PlayerStates;
 using HealthSystem;
 using UnityEngine;

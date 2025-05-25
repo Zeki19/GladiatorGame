@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Enemies.Hounds.States;
-using Interfaces;
+using Entities.Interfaces;
 using NUnit.Framework;
 using UnityEngine;
 

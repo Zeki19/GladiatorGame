@@ -1,4 +1,4 @@
-using Interfaces;
+using Entities.Interfaces;
 using UnityEngine;
 
 namespace Entities

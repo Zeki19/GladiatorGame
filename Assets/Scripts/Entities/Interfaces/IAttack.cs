@@ -1,9 +1,8 @@
 using System;
-using UnityEngine;
 using Weapons;
 using Weapons.Attacks;
 
-namespace Interfaces
+namespace Entities.Interfaces
 {
     public interface IAttack
     {

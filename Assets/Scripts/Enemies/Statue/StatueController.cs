@@ -1,5 +1,5 @@
-using Interfaces;
 using System.Collections.Generic;
+using Entities.Interfaces;
 using UnityEngine;
 
 public class StatueController : EnemyController

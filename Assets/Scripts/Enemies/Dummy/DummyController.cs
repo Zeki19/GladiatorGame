@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Dummy.DummyStates;
-using Interfaces;
+using Entities.Interfaces;
 using UnityEngine;
 
 namespace Dummy

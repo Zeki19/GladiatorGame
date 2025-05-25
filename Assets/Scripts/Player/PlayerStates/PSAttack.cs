@@ -43,6 +43,7 @@ namespace Player.PlayerStates
             _weapon.Attacking = false;
             _attack.FinishAttack(_currentAttack,_weapon);
             _currentAttack.FinishAnimation -= AttackFinished;
+            ServiceLocator.Instance.GetService<PlayerWeaponController>().CheckDurability();
         }
 
         private void AttackFinished()

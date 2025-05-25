@@ -1,5 +1,5 @@
 using System;
-using Interfaces;
+using Entities.Interfaces;
 using UnityEngine;
 using Weapons;
 using Weapons.Attacks;

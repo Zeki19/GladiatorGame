@@ -1,6 +1,6 @@
 using Enemies;
-using Interfaces;
 using System.Collections.Generic;
+using Entities.Interfaces;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 

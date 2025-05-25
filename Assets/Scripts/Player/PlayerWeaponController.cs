@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Enemies;
@@ -17,6 +18,17 @@ namespace Player
         private Weapon _weapon;
         public LayerMask mask;
         public float offset;
+        private WeaponManager _weaponManager;
+
+        private void Awake()
+        {
+            ServiceLocator.Instance.RegisterService(this);
+        }
+
+        private void Start()
+        {
+            _weaponManager = ServiceLocator.Instance.GetService<WeaponManager>();
+        }
 
         void Update()
         {
@@ -40,8 +52,7 @@ namespace Player
         public void GrabWeapon()
         {
             if (_weapon != null) return;
-            //var size = Physics2D.OverlapCircle(transform.position, 1, mask);
-            var weapon = ServiceLocator.Instance.GetService<WeaponManager>().PickUpWeaponInRange(transform.position, 1);
+            var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
             if (weapon != default)
             {
                 _weapon = weapon;
@@ -65,6 +76,16 @@ namespace Player
             }
         }
 
+        private void DestroyWeapon()
+        {
+            if(_weapon is { Attacking: false })
+            {
+                _weapon.BaseSoAttack.FinishAnimation -= ClearEnemiesList;
+                _weaponManager.DestroyWeapon(_weapon);
+                _weapon = null;
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!IsInLayerMask(other.gameObject, collisionLayer)) return;
@@ -76,12 +97,16 @@ namespace Player
             {
                 knockbackable.ApplyKnockbackFromSource(this.transform.position,_weapon.KnockbackForce);
             }
-
             _weapon.AffectDurability(_weapon.DurabilityStandardLoss);
-            
-           
             _enemiesHit.Add(other.gameObject);
-        
+        }
+
+        public void CheckDurability()
+        {
+            if (!_weapon.AffectDurability(0))
+            {
+                DestroyWeapon();
+            }
         }
         bool IsInLayerMask(GameObject obj, LayerMask layerMask)
         {
