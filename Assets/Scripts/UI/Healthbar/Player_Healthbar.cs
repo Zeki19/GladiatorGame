@@ -12,8 +12,7 @@ public class Player_Healthbar : MonoBehaviour
     public void Setup(IHealth health)
     {
         _health = health;
-        UpdateFill(); 
-
+        UpdateFill();
         _health.OnDamage += OnDamaged;
         _health.OnHeal += OnHealed;
     }
@@ -22,16 +21,18 @@ public class Player_Healthbar : MonoBehaviour
     {
         UpdateFill();
     }
+
     private void OnHealed(float heal)
     {
         UpdateFill();
     }
+
     private void UpdateFill()
     {
-        if (_health != null && _health.maxHealth > 0)
-        {
-            CircleBar.fillAmount = _health.currentHealth / _health.maxHealth;
-        }
+        if (_health == null || _health.maxHealth <= 0) return;
+
+        float pct = _health.currentHealth / _health.maxHealth;
+        CircleBar.fillAmount = pct;
     }
     private void OnDestroy()
     {
