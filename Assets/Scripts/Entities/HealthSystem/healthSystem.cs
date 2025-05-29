@@ -113,11 +113,11 @@ namespace HealthSystem
         /// If health falls to zero or below, triggers the Kill method.
         /// </summary>
         /// <param name="damageAmount">The amount of damage to apply.</param>
-        public void TakeDamage(float damageAmount)
+        public void TakeDamage(float amount)
         {
             if (isInvulnerable) return;
-            currentHealth -= damageAmount;
-            OnDamage?.Invoke(damageAmount);
+            currentHealth -= amount;
+            OnDamage?.Invoke(amount);
             if (currentHealth <= 0)
             {
                 Kill();

@@ -37,6 +37,11 @@ public class UIManager : MonoBehaviour
         SpawnPlayerHealthbar();
     }
 
+    private void Update()
+    {
+        playerHealthbar = 
+    }
+
 
     //Debugged with Chat GPT
     private void SpawnPlayerHealthbar()
