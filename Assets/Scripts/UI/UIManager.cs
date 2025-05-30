@@ -36,12 +36,7 @@ public class UIManager : MonoBehaviour
         yield return new WaitUntil(() => ServiceLocator.Instance.GetService<PlayerManager>() != null);
         SpawnPlayerHealthbar();
     }
-
-    private void Update()
-    {
-        playerHealthbar = 
-    }
-
+    
 
     //Debugged with Chat GPT
     private void SpawnPlayerHealthbar()

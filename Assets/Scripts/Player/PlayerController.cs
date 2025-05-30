@@ -40,25 +40,31 @@ namespace Player
 
             var idleState = new PSIdle<StateEnum>();
             var walkState = new PSWalk<StateEnum>();
-            var attackState = new PSAttack<StateEnum>(StateEnum.Idle,(PlayerManager)manager);
+            var baseAttackState = new PSAttack<StateEnum>(StateEnum.Idle,(PlayerManager)manager);
+            var changeAttackState = new PSChargeAttack<StateEnum>(StateEnum.Idle,(PlayerManager)manager);
             var dashState = new PSDash<StateEnum>(StateEnum.Idle, dashForce, dashDuration, dashCooldown, dashInvincibility, _playerHealth, this);
 
             idleState.AddTransition(StateEnum.Walk, walkState);
-            idleState.AddTransition(StateEnum.Attack, attackState);
+            idleState.AddTransition(StateEnum.Attack, baseAttackState);
+            idleState.AddTransition(StateEnum.ChargeAttack, changeAttackState);
             idleState.AddTransition(StateEnum.Dash, dashState);
 
             walkState.AddTransition(StateEnum.Idle, idleState);
-            walkState.AddTransition(StateEnum.Attack, attackState);
+            walkState.AddTransition(StateEnum.Attack, baseAttackState);
+            walkState.AddTransition(StateEnum.ChargeAttack, changeAttackState);
             walkState.AddTransition(StateEnum.Dash, dashState);
 
 
-            attackState.AddTransition(StateEnum.Idle, idleState);
+            baseAttackState.AddTransition(StateEnum.Idle, idleState);
+            
+            changeAttackState.AddTransition(StateEnum.Idle, idleState);
 
             dashState.AddTransition(StateEnum.Idle, idleState);
 
             stateList.Add(idleState);
             stateList.Add(walkState);
-            stateList.Add(attackState);
+            stateList.Add(baseAttackState);
+            stateList.Add(changeAttackState);
             stateList.Add(dashState);
 
             foreach (var state in stateList)
@@ -80,6 +86,10 @@ namespace Player
         public void ChangeToAttack()
         {
             Fsm.Transition(StateEnum.Attack);
+        }
+        public void ChangeToChargeAttack()
+        {
+            Fsm.Transition(StateEnum.ChargeAttack);
         }
         public void ChangeToDash()
         {

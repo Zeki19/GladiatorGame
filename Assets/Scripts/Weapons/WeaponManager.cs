@@ -3,7 +3,7 @@ using Factory.Essentials;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
-using Utilitys.Factory.WeaponFactory;
+using Utilities.Factory.WeaponFactory;
 
 namespace Weapons
 {

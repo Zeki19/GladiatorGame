@@ -6,50 +6,51 @@ namespace Player.PlayerStates
 {
     public class PSAttack<T> : PSBase<T>
     {
-        T _inputFinish;
-        private Attack _currentAttack;
-        private Weapon _weapon;
-        private PlayerManager _manager;
-        public PSAttack(T inputFinish,PlayerManager manager)
+        protected T InputFinish;
+        protected PlayerManager Manager;
+        protected Attack CurrentAttack;
+        protected Weapon Weapon;
+
+        public PSAttack(T inputFinish, PlayerManager manager)
         {
-            _inputFinish = inputFinish;
-            _manager = manager;
+            InputFinish = inputFinish;
+            Manager = manager;
         }
 
-        public void SetWeapon(Weapon weapon)
+        protected virtual void SetWeapon(Weapon weapon)
         {
-            _currentAttack = weapon.BaseSoAttack;
-            _weapon = weapon;
+            CurrentAttack = weapon.BaseAttack;
+            Weapon = weapon;
         }
+
         public override void Enter()
         {
-            base.Enter();
-            SetWeapon(_manager.weapon);
-            _weapon.Attacking = true;
-            _currentAttack.FinishAnimation += AttackFinished;
-            _attack.StartAttack(_currentAttack,_weapon);
-            _move.ModifySpeed(-_weapon.SlowPercent);
+            SetWeapon(Manager.weapon);
+            Weapon.Attacking = true;
+            CurrentAttack.FinishAnimation += AttackFinished;
+            _attack.StartAttack(CurrentAttack, Weapon);
+            _move.ModifySpeed(-Weapon.SlowPercent);
         }
+
         public override void Execute()
         {
-            base.Execute();
-            _attack.ExecuteAttack(_currentAttack,_weapon);
+            _attack.ExecuteAttack(CurrentAttack, Weapon);
             _move.Move(Vector2.zero);
         }
 
         public override void Exit()
         {
-            base.Exit();
-            _weapon.Attacking = false;
-            _attack.FinishAttack(_currentAttack,_weapon);
-            _currentAttack.FinishAnimation -= AttackFinished;
+            Weapon.Attacking = false;
+            Weapon.PutOnCooldown();
+            _attack.FinishAttack(CurrentAttack, Weapon);
+            CurrentAttack.FinishAnimation -= AttackFinished;
             ServiceLocator.Instance.GetService<PlayerWeaponController>().CheckDurability();
         }
 
         private void AttackFinished()
         {
-            StateMachine.Transition(_inputFinish);
-            _move.ModifySpeed(_weapon.SlowPercent);
+            StateMachine.Transition(InputFinish);
+            _move.ModifySpeed(Weapon.SlowPercent);
         }
     }
 }

@@ -959,11 +959,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6834934ad875bc4ca6f868405fdfe76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingPos: {x: 0, y: -4, z: 0}
+  inactiveWeapon: {fileID: 0}
   forTest:
   - {fileID: 11400000, guid: a3e698ad9960446489270ee23cf4df71, type: 2}
   - {fileID: 11400000, guid: aac5b358800d5534eaf2178d83939b43, type: 2}
   - {fileID: 11400000, guid: bef29d0c6c174fb4a97a1c9b0e36f085, type: 2}
-  startingPos: {x: 0, y: -4, z: 0}
 --- !u!114 &1478290496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1370,6 +1371,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8307102956479284612, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 250e726ef11f8f64c89af6286fbb1c90, type: 2}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: cc119b46-a4aa-4744-9d43-5bbf464e13fb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: 'Player/ChargeAttack[/Mouse/rightButton]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6431802769096657131}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChargeAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player.PlayerWeaponController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1418,6 +1463,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1841872505213293466}
   m_SourcePrefab: {fileID: 100100000, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+--- !u!114 &6431802769096657131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8182166463018864506, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+  m_PrefabInstance: {fileID: 6431802769096657130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b37aaf5bb23e14ba2fe78adc20ce57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

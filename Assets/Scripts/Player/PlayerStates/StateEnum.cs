@@ -5,6 +5,7 @@
     Walk,
     Dash,
     Attack,
+    ChargeAttack,
     Chase,
     Search,
     Patrol,

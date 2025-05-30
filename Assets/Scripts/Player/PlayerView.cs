@@ -9,12 +9,13 @@ public class PlayerView : EntityView, ILook
 {
     private int _oldSector = 1;
 
-    private static readonly int TopRight = Animator.StringToHash("TopRight");
-    private static readonly int Top = Animator.StringToHash("Top");
-    private static readonly int TopLeft = Animator.StringToHash("TopLeft");
-    private static readonly int BottomLeft = Animator.StringToHash("BottomLeft");
-    private static readonly int Bottom = Animator.StringToHash("Bottom");
-    private static readonly int BottomRight = Animator.StringToHash("BottomRight");
+    //private static readonly int TopRight = Animator.StringToHash("TopRight");
+    //private static readonly int Top = Animator.StringToHash("Top");
+    //private static readonly int TopLeft = Animator.StringToHash("TopLeft");
+    //private static readonly int BottomLeft = Animator.StringToHash("BottomLeft");
+    //private static readonly int Bottom = Animator.StringToHash("Bottom");
+    //private static readonly int BottomRight = Animator.StringToHash("BottomRight");
+    private static readonly int Direction = Animator.StringToHash("MoveDirection");
 
     public override void LookDir(Vector2 dir)
     {
@@ -40,27 +41,28 @@ public class PlayerView : EntityView, ILook
             return;
         }
         _oldSector = sector;
-        switch (sector)
-        {
-            case 0:
-                animator.SetTrigger(TopRight);
-                break;
-            case 1:
-                animator.SetTrigger(Top);
-                break;
-            case 2:
-                animator.SetTrigger(TopLeft);
-                break;
-            case 3:
-                animator.SetTrigger(BottomLeft);
-                break;
-            case 4:
-                animator.SetTrigger(Bottom);
-                break;
-            case 5:
-                animator.SetTrigger(BottomRight);
-                break;
-        }
+        animator.SetFloat(Direction,sector);
+        //switch (sector)
+        //{
+        //    case 0:
+        //        animator.SetTrigger(TopRight);
+        //        break;
+        //    case 1:
+        //        animator.SetTrigger(Top);
+        //        break;
+        //    case 2:
+        //        animator.SetTrigger(TopLeft);
+        //        break;
+        //    case 3:
+        //        animator.SetTrigger(BottomLeft);
+        //        break;
+        //    case 4:
+        //        animator.SetTrigger(Bottom);
+        //        break;
+        //    case 5:
+        //        animator.SetTrigger(BottomRight);
+        //        break;
+        //}
     }
     public void LookSpeedMultiplier(float mult)
     {

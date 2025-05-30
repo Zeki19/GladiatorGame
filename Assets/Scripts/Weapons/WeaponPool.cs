@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Factory.Essentials;
-using Utilitys.Factory.WeaponFactory;
+using Utilities.Factory.WeaponFactory;
 using Object = UnityEngine.Object;
 
 namespace Weapons

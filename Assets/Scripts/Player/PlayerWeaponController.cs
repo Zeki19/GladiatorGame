@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Enemies;
@@ -14,7 +13,7 @@ namespace Player
         [SerializeField] private PlayerManager manager;
         [SerializeField] private GameObject playerRotation;
         [SerializeField] private LayerMask collisionLayer;
-        private List<GameObject> _enemiesHit= new List<GameObject>();
+        private List<GameObject> _enemiesHit = new List<GameObject>();
         private Weapon _weapon;
         public LayerMask mask;
         public float offset;
@@ -33,81 +32,91 @@ namespace Player
         void Update()
         {
             LookDir();
+            _weapon?.CooldownCounter();
         }
 
         private void LookDir()
         {
             transform.rotation = playerRotation.transform.rotation;
-            transform.position = playerRotation.transform.position +(playerRotation.transform.up)*offset;
+            transform.position = playerRotation.transform.position + (playerRotation.transform.up) * offset;
         }
 
         public void Attack()
         {
-            if (_weapon!=null)
+            if (_weapon == null || !_weapon.CanAttack()) return;
+
+            var controller = manager.controller as PlayerController;
+            controller?.ChangeToAttack();
+            _weapon.CurrentAttack = _weapon.BaseAttack;
+        }
+
+        public void ChargeAttack()
+        {
+            if (_weapon == null || !_weapon.CanAttack()) return;
+
+            var controller = manager.controller as PlayerController;
+            if (_weapon.CheckCharge())
             {
-               var controller= manager.controller as PlayerController;
-               controller?.ChangeToAttack();
+                controller?.ChangeToChargeAttack();
+                _weapon.CurrentAttack = _weapon.ChargeAttack;
             }
         }
+
         public void GrabWeapon()
         {
             if (_weapon != null) return;
+
             var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
-            if (weapon != default)
-            {
-                _weapon = weapon;
-                _weapon.WeaponGameObject.gameObject.transform.parent = transform;
-                _weapon.WeaponGameObject.gameObject.transform.localPosition=Vector3.zero;
-                _weapon.WeaponGameObject.gameObject.transform.localRotation=quaternion.identity;
-                _weapon.BaseSoAttack.FinishAnimation += ClearEnemiesList;
-                _weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
-                manager.weapon = _weapon;
-            }
+            if (weapon == default) return;
+
+            _weapon = weapon;
+            _weapon.WeaponGameObject.gameObject.transform.parent = transform;
+            _weapon.WeaponGameObject.gameObject.transform.localPosition = Vector3.zero;
+            _weapon.WeaponGameObject.gameObject.transform.localRotation = quaternion.identity;
+            _weapon.BaseAttack.FinishAnimation += ClearEnemiesList;
+            _weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
+            manager.weapon = _weapon;
         }
 
         public void DropWeapon()
         {
-            if(_weapon is { Attacking: false })
-            {
-                _weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = true;
-                _weapon.BaseSoAttack.FinishAnimation -= ClearEnemiesList;
-                _weapon.WeaponGameObject.transform.parent = null;
-                _weapon = null;
-            }
+            if (_weapon is not { Attacking: false }) return;
+
+            _weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = true;
+            _weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
+            _weapon.WeaponGameObject.transform.parent = null;
+            _weapon = null;
         }
 
         private void DestroyWeapon()
         {
-            if(_weapon is { Attacking: false })
-            {
-                _weapon.BaseSoAttack.FinishAnimation -= ClearEnemiesList;
-                _weaponManager.DestroyWeapon(_weapon);
-                _weapon = null;
-            }
+            if (_weapon is not { Attacking: false }) return;
+
+            _weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
+            _weaponManager.DestroyWeapon(_weapon);
+            _weapon = null;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!IsInLayerMask(other.gameObject, collisionLayer)) return;
-        
-            if (_enemiesHit.Any(hits => hits==other.gameObject)) return;
+            if (!IsInLayerMask(other.gameObject, collisionLayer) || _enemiesHit.Any(hits => hits == other.gameObject))
+                return;
+
             var enemyManager = ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject);
-            enemyManager.HealthComponent.TakeDamage(_weapon.BaseDamage);
+            enemyManager.HealthComponent.TakeDamage(_weapon.Damage());
             if (enemyManager.model is IKnockbackable knockbackable)
-            {
-                knockbackable.ApplyKnockbackFromSource(this.transform.position,_weapon.KnockbackForce);
-            }
-            _weapon.AffectDurability(_weapon.DurabilityStandardLoss);
+                knockbackable.ApplyKnockbackFromSource(this.transform.position, _weapon.KnockbackForce);
+            _weapon.ChargeWeapon();
+            _weapon.AffectDurability();
             _enemiesHit.Add(other.gameObject);
         }
 
         public void CheckDurability()
         {
-            if (!_weapon.AffectDurability(0))
-            {
+            if (!_weapon.CheckDurability())
                 DestroyWeapon();
-            }
         }
+
         bool IsInLayerMask(GameObject obj, LayerMask layerMask)
         {
             return (layerMask.value & (1 << obj.layer)) != 0;
