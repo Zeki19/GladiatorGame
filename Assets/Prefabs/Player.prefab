@@ -199,7 +199,7 @@ SpriteRenderer:
   m_SortingLayerID: 1298906051
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3061911670268291115, guid: 3cf60a1595e53a94e8a351977bf444b2, type: 3}
+  m_Sprite: {fileID: 490971195994360826, guid: 37bd8dfd06a078141a978d1ad0f81fc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -220,7 +220,7 @@ Animator:
   m_GameObject: {fileID: 2382062061231218183}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e4864df7e78cdc045b10a11c49c609fa, type: 2}
+  m_Controller: {fileID: 9100000, guid: 250e726ef11f8f64c89af6286fbb1c90, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -361,9 +361,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 5522031050175312599}
-  dashForce: 1
-  dashDuration: 1
-  dashCooldown: 1
+  dashForce: 30
+  dashDuration: 0.1
+  dashCooldown: 0.5
   dashInvincibility: 1
 --- !u!114 &110136598475017519
 MonoBehaviour:
@@ -378,7 +378,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 5522031050175312599}
-  moveSpeed: 5
+  moveSpeed: 10
+  knockbackWeight: 0
 --- !u!114 &3230016562665857638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +436,19 @@ MonoBehaviour:
     m_ActionId: 09398f51-3bb8-478c-b616-47046893db33
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6520464762290886026}
+        m_TargetAssemblyTypeName: Player.PlayerController, Assembly-CSharp
+        m_MethodName: ChangeToDash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b5630367-5c76-436e-a6b1-be024403c561
     m_ActionName: 'Player/Dash[/Keyboard/space]'
   - m_PersistentCalls:

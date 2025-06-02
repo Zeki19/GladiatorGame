@@ -106,7 +106,7 @@ public class HoundController : EnemyController
         var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform);
         var searchState = new HoundState_Search<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
         var attackState = new HoundState_Attack<StateEnum>(target.transform, manager.model, _attacks, _lowHealthAttacks, this, AttackCooldown);
-        var runawayState = new HoundState_Runaway<StateEnum>(_runawaySteering, _avoidWalls, transform);
+        var runawayState = new HoundState_Runaway<StateEnum>(this.transform, .25f, target.transform); //A checkear
 
         _idleState = idleState;
         _patrolState = patrolState;

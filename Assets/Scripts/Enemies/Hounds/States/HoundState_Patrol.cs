@@ -15,7 +15,6 @@ public class HoundState_Patrol<T> : State_Steering<T>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Patrol");
         
         _look.PlayStateAnimation(StateEnum.Patrol);
         
@@ -37,7 +36,6 @@ public class HoundState_Patrol<T> : State_Steering<T>
     private System.Collections.IEnumerator StartPatrol()
     {
         yield return new WaitForSeconds(_duration);
-        Debug.Log("True");
         TiredOfPatroling = true;
     }
 }
