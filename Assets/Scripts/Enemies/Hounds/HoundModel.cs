@@ -38,6 +38,17 @@ namespace Enemies.Hounds
         {
             throw new NotImplementedException();
         }
+        
+        public void AttackTarget(Transform target, float damage)
+        {
+            if (target == null) return;
+
+            var health = target.GetComponent<HealthSystem.HealthSystem>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
+        }
     
         private void OnDrawGizmosSelected()
         {
