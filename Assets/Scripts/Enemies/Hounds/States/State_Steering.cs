@@ -25,3 +25,4 @@ using UnityEngine;
             _move.ModifySpeed(1f);
         }
     }
+    

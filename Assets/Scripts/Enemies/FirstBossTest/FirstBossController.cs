@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Enemies.FirstBossTest.States;
+using Enemies.Hounds.States;
 using Entities.Interfaces;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,6 +25,46 @@ namespace Enemies.FirstBossTest
         public States_Base<StateEnum> SearchState=> _searchState;
         public States_Base<StateEnum> RunAwayState=> _runAwayState;
         
+        [Header("Required GameObjects")]
+        [SerializeField] private HoundsCamp camp;
+
+        [SerializeField] private float AmountOfWaypoints;
+    
+        [Header("States Settings")]
+        [Tooltip("Time it takes to force a state change.")]
+        [SerializeField] private float idleDuration;
+        [SerializeField] private float patrolDuration;
+        [SerializeField] private float AttackCooldown;
+        [SerializeField] private float AttackRange;
+
+        [Header("Obstacle Avoidance Settings")]
+        [SerializeField] public int _maxObs;
+        [SerializeField] public float _radius;
+        [SerializeField] public float _angle;
+        [SerializeField] public float _personalArea;
+        [SerializeField] public LayerMask _obsMask;
+
+        private Vector2 _targetLastPos;
+
+        #region Private Variables
+    
+        private LineOfSight _los;
+        private ISteering _steering;
+        private ISteering _patrolSteering;
+        private ISteering _pursuitSteering;
+        private ISteering _runawaySteering;
+        private ISteering _toPointSteering;
+        private StObstacleAvoidance _avoidWalls;
+    
+        #endregion
+    
+        private Dictionary<AttackType, float> _attacks = new Dictionary<AttackType, float>
+        {
+            { AttackType.Normal, 60f },
+            { AttackType.Charge, 30f },
+            { AttackType.Lunge, 10f }
+        };
+        
         private PhaseSystem _phaseSystem;
         private int _currentPhase = 1;
         public bool isRested;
@@ -36,6 +77,20 @@ namespace Enemies.FirstBossTest
             manager.HealthComponent.OnDamage += CheckPhase;
         }
 
+        void InitalizeSteering()
+        {
+            var waypoints = new List<Vector2>();
+            for (var i = 0; i < AmountOfWaypoints; i++)
+            {
+                waypoints.Add(camp.GetRandomPoint());
+            }
+
+            //No hace falta inicializarlo asi
+            _patrolSteering = new StPatrolToWaypoints(waypoints, manager.model.transform);
+            _runawaySteering = new StToPoint(camp.CampCenter, manager.model.transform);
+            _pursuitSteering = new StPursuit(manager.model.transform, target);
+            _toPointSteering = new StToPoint(_targetLastPos, manager.model.transform);
+        }
         protected override void InitializeFsm()
         {
             Fsm = new FSM<StateEnum>();
@@ -44,12 +99,12 @@ namespace Enemies.FirstBossTest
             var look = GetComponent<ILook>();
             var attack = GetComponent<IAttack>();
 
-            var idleState = new FirstBossStateIdle<StateEnum>();
-            var chaseState = new FirstBossStateChase<StateEnum>();
-            var attackState = new FirstBossStateAttack<StateEnum>();
-            var patrolState = new FirstBossStatePatrol<StateEnum>();
-            var searchState = new FirstBossStateSearch<StateEnum>();
-            var runAwayState = new FirstBossStateRunAway<StateEnum>();
+            var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration);
+            var chaseState = new FirstBossStateChase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform);
+            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, manager.model, _attacks, this, AttackCooldown);
+            var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
+            var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
+            var runAwayState = new FirstBossStateRunAway<StateEnum>(_runawaySteering, _avoidWalls, transform);
             
             _idleState = idleState;
             _attackState = attackState;
