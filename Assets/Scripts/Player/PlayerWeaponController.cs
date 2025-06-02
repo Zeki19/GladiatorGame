@@ -126,5 +126,8 @@ namespace Player
         {
             _enemiesHit.Clear();
         }
+
+        public float CheckWeaponDurabilityPercent() => _weapon.DurabilityPercent();
+        public float CheckWeaponChargePercent() => _weapon.ChargePercent();
     }
 }

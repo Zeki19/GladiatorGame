@@ -24,5 +24,11 @@ namespace Enemies.FirstBossTest.States
             base.Execute();
             lastSeenPositionOfTarget = _target.position;
         }
+
+        public override void Exit()
+        {
+            base.Exit();
+            _move.ModifySpeed(-2f);
+        }
     }
 }

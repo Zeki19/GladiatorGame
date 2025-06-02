@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enemies;
 using Enemies.Hounds.States;
 using Entities.Interfaces;
+using Entities.StateMachine;
 using NUnit.Framework;
 using UnityEngine;
 

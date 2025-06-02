@@ -16,5 +16,11 @@ namespace Enemies.FirstBossTest.States
             _move.ModifySpeed(3f);
             _look.PlayStateAnimation(StateEnum.Runaway);
         }
+
+        public override void Exit()
+        {
+            base.Exit();
+            _move.ModifySpeed(-3f);
+        }
     }
 }

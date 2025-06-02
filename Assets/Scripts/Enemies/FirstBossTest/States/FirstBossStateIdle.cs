@@ -7,6 +7,7 @@ namespace Enemies.FirstBossTest.States
         private readonly MonoBehaviour _mono;
         private readonly float _duration;
         public bool FinishedResting;
+        private FirstBossModel _model;
 
         public FirstBossStateIdle(MonoBehaviour monoBehaviour, float duration)
         {
@@ -17,6 +18,7 @@ namespace Enemies.FirstBossTest.States
         public override void Enter()
         {
             base.Enter();
+            if (_model==null) _model=_move as FirstBossModel;
             Debug.Log("Idle");
         
             _move.Move(Vector2.zero);
@@ -27,14 +29,14 @@ namespace Enemies.FirstBossTest.States
 
         public override void Exit()
         {
-            FinishedResting = false;
+            _model.isRested = false;
             base.Exit();
         }
     
         private System.Collections.IEnumerator StartResting()
         {
             yield return new WaitForSeconds(_duration);
-            FinishedResting = true;
+            _model.isRested = true;
         }
     }
 }

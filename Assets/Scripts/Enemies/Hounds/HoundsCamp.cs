@@ -4,8 +4,8 @@ using Random = UnityEngine.Random;
 
 public class HoundsCamp : MonoBehaviour
 {
-    [SerializeField] private float patrolRadius;
-    [SerializeField] private float chaseRadius;
+    [SerializeField] public float patrolRadius;
+    [SerializeField] public float chaseRadius;
 
     public Vector2 CampCenter => transform.position;
     

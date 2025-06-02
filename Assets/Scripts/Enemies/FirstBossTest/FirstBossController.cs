@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Enemies.FirstBossTest.States;
 using Enemies.Hounds.States;
 using Entities.Interfaces;
+using Entities.StateMachine;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -67,14 +68,22 @@ namespace Enemies.FirstBossTest
         
         private PhaseSystem _phaseSystem;
         private int _currentPhase = 1;
-        public bool isRested;
-        public bool isTired;
-        public bool isAttackOnCd;
+        
+        protected override void Awake()
+        {
+            InitalizeSteering();
+            _avoidWalls = new StObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
+            base.Awake();
+            _los = GetComponent<LineOfSight>();
+            objectContext.Points[0] = (camp.CampCenter, (int)camp.patrolRadius);
+            objectContext.Points[1] = (camp.CampCenter, (int)camp.chaseRadius*(int)camp.patrolRadius);
+        }
 
         private void Start()
         {
             _phaseSystem = new PhaseSystem(phasesThresholds, manager.HealthComponent);
             manager.HealthComponent.OnDamage += CheckPhase;
+            
         }
 
         void InitalizeSteering()
@@ -101,7 +110,7 @@ namespace Enemies.FirstBossTest
 
             var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration);
             var chaseState = new FirstBossStateChase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform);
-            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, manager.model, _attacks, this, AttackCooldown);
+            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, this, AttackCooldown);
             var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
             var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
             var runAwayState = new FirstBossStateRunAway<StateEnum>(_runawaySteering, _avoidWalls, transform);
@@ -140,6 +149,9 @@ namespace Enemies.FirstBossTest
             runAwayState.AddTransition(StateEnum.Patrol, patrolState);
 
             attackState.AddTransition(StateEnum.Idle, idleState);
+            attackState.AddTransition(StateEnum.Chase, chaseState);
+            attackState.AddTransition(StateEnum.Runaway, runAwayState);
+            attackState.AddTransition(StateEnum.Search, searchState);
 
             foreach (var t in stateList)
             {

@@ -111,6 +111,16 @@ namespace Weapons
         private bool IsCurrentAttackBase() => CurrentAttack == BaseAttack;
         public bool CheckCharge() => ChargeMeter >= ChangeThreshold;
 
+        public float DurabilityPercent()
+        {
+            return CurrentDurability / Durability;
+        }
+
+        public float ChargePercent()
+        {
+            return ChargeMeter / ChangeThreshold;
+        }
+
         public void ChargeWeapon()
         {
             if (IsCurrentAttackBase())

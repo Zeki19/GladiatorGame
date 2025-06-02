@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Dummy.DummyStates;
+using Enemies;
 using Entities.Interfaces;
+using Entities.StateMachine;
 using UnityEngine;
 
 namespace Dummy

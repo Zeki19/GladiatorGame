@@ -62,6 +62,7 @@ namespace Enemies.BinaryTree
             float distance = Vector3.Distance(origin, context.playerGameObject.transform.position);
             int layerBit = 1 << context.playerGameObject.layer;
             LayerMask mask = layerBit;
+            distance = Mathf.Clamp(distance, 0, 3);
             var hit = Physics2D.Raycast(origin, direction, distance,mask);
             Debug.DrawLine(origin, origin+direction*distance, Color.green);
             if(hit.collider!=null)
@@ -91,49 +92,54 @@ namespace Enemies.BinaryTree
 
         private bool FinishedSearching(AIContext arg)
         {
-            throw new NotImplementedException();
+            var model = arg.model as FirstBossModel;
+            return model != null && model.isSearchFinish;
         }
 
         private bool IsAttackOnCd(AIContext arg)
         {
-            var controller = arg.controller as FirstBossController;
-            return controller != null && controller.isAttackOnCd;
+            var model = arg.model as FirstBossModel;
+            return model != null && model.isAttackOnCd;
         }
 
         private bool IsTired(AIContext arg)
         {
-            var controller = arg.controller as FirstBossController;
-            return controller != null && controller.isTired;
+            var model = arg.model as FirstBossModel;
+            return model != null && model.isTired;
         }
 
         private bool IsRested(AIContext arg)
         {
-            var controller = arg.controller as FirstBossController;
-            return controller != null && controller.isRested;
+            var model = arg.model as FirstBossModel;
+            return model != null && model.isRested;
         }
 
         private bool IsInIdleState(AIContext arg)
         {
-            var controller = arg.controller as FirstBossController;
-            return arg.stateMachine.CurrentState() == controller?.IdleState;
+            //var controller = arg.controller as FirstBossController;
+            //return arg.stateMachine.CurrentState() == controller?.IdleState;
+            return arg.stateMachine.CurrentStateEnum() == StateEnum.Idle;
         }
 
         private bool IsInChaseState(AIContext arg)
         {
-            var controller = arg.controller as FirstBossController;
-            return arg.stateMachine.CurrentState() == controller?.ChaseState;
+            //var controller = arg.controller as FirstBossController;
+            //return arg.stateMachine.CurrentState() == controller?.ChaseState;
+            return arg.stateMachine.CurrentStateEnum() == StateEnum.Chase;
         }
 
         private bool IsInPatrolState(AIContext arg)
         {
-            var controller = arg.controller as FirstBossController;
-            return arg.stateMachine.CurrentState() == controller?.PatrolState;
+            //var controller = arg.controller as FirstBossController;
+            //return arg.stateMachine.CurrentState() == controller?.PatrolState;
+            return arg.stateMachine.CurrentStateEnum() == StateEnum.Patrol;
         }
 
         private bool IsInSearchState(AIContext arg)
         {
-            var controller = arg.controller as FirstBossController;
-            return arg.stateMachine.CurrentState() == controller?.SearchState;
+            //var controller = arg.controller as FirstBossController;
+            //return arg.stateMachine.CurrentState() == controller?.SearchState;
+            return arg.stateMachine.CurrentStateEnum() == StateEnum.Search;
         }
     }
 }

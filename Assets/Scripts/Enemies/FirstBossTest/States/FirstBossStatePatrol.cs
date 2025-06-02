@@ -8,6 +8,7 @@ namespace Enemies.FirstBossTest.States
         private readonly float _duration;
         public bool TiredOfPatroling;
         private Coroutine _patrolCoroutine;
+        private FirstBossModel _model;
 
         public FirstBossStatePatrol(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self,
             MonoBehaviour monoBehaviour, float duration) : base(steering, avoidStObstacles, self)
@@ -20,6 +21,8 @@ namespace Enemies.FirstBossTest.States
         {
             base.Enter();
             Debug.Log("Patrol");
+            
+            if (_model==null) _model=_move as FirstBossModel;
 
             _look.PlayStateAnimation(StateEnum.Patrol);
 
@@ -28,7 +31,7 @@ namespace Enemies.FirstBossTest.States
 
         public override void Exit()
         {
-            TiredOfPatroling = false;
+            _model.isTired = false;
             if (_patrolCoroutine != null)
             {
                 _mono.StopCoroutine(_patrolCoroutine);
@@ -42,7 +45,7 @@ namespace Enemies.FirstBossTest.States
         {
             yield return new WaitForSeconds(_duration);
             Debug.Log("True");
-            TiredOfPatroling = true;
+            _model.isTired = true;
         }
     }
 }

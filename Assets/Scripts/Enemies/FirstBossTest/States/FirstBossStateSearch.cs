@@ -7,6 +7,7 @@ namespace Enemies.FirstBossTest.States
     {
         private MonoBehaviour _mono;
         public bool Searched { get; private set; } = false;
+        private FirstBossModel _model;
 
         public FirstBossStateSearch(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self, MonoBehaviour monoBehaviour) : base(steering, avoidStObstacles, self)
         {
@@ -17,8 +18,10 @@ namespace Enemies.FirstBossTest.States
         {
             base.Enter();
             Debug.Log("Search");
-        
-            Searched = false;
+            
+            if (_model==null) _model=_move as FirstBossModel;
+
+            _model.isSearchFinish = false;
             _look.PlayStateAnimation(StateEnum.Chase);
         }
 
@@ -42,7 +45,7 @@ namespace Enemies.FirstBossTest.States
         private IEnumerator Timer(float duration)
         {
             yield return new WaitForSeconds(duration);
-            Searched = true;
+            _model.isSearchFinish = true;
         }
     }
 }

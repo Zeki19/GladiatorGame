@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Enemies.Hounds.States;
 using Entities;
+using Player;
+using TMPro;
 using UnityEngine;
 
 namespace Enemies.FirstBossTest.States
@@ -10,17 +12,16 @@ namespace Enemies.FirstBossTest.States
         private Transform _target;
             private AttackType _chosenType;
             private float _damage;
-            private EntityModel _model;
+            private FirstBossModel _model;
             private Dictionary<AttackType, float> _attackOptions;
         
             private MonoBehaviour _mono;
             private float duration;
             public bool canAttack;
-            
-            public FirstBossStateAttack(Transform target, EntityModel model, Dictionary<AttackType, float> attackOptions, MonoBehaviour monoBehaviour, float attackCooldown)
+
+            public FirstBossStateAttack(Transform target, Dictionary<AttackType, float> attackOptions, MonoBehaviour monoBehaviour, float attackCooldown)
             {
                 _target = target;
-                _model = model;
                 _attackOptions = attackOptions;
         
                 _mono = monoBehaviour;
@@ -29,6 +30,7 @@ namespace Enemies.FirstBossTest.States
             public override void Enter()
             { 
                 base.Enter();
+                if (_model==null) _model=_move as FirstBossModel;
                 Debug.Log("Attack");
         
                 _chosenType = MyRandom.Roulette(_attackOptions);
@@ -49,7 +51,7 @@ namespace Enemies.FirstBossTest.States
                 _look.PlayStateAnimation(StateEnum.Attack);
                 
                 PerformAttack();
-                canAttack = false;
+                _model.isAttackOnCd = false;
                 _mono.StartCoroutine(AttackCooldown());
             }
             
@@ -57,18 +59,17 @@ namespace Enemies.FirstBossTest.States
             {
                 if (_target == null) return;
                 
-                var health = _target.GetComponent<HealthSystem.HealthSystem>();
+                var health = _target.GetComponent<PlayerManager>().HealthComponent;
                 if (health != null)
                 {
                     health.TakeDamage(_damage);
-                    //_model.Attack();
                 }
             }
         
             private System.Collections.IEnumerator AttackCooldown()
             {
                 yield return new WaitForSeconds(duration);
-                canAttack = true;
+                _model.isAttackOnCd = true;
             }
     }
 }

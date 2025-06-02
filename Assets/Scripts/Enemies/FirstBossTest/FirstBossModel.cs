@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class FirstBossModel : EnemyModel
 {
+    public bool isRested;
+    public bool isTired;
+    public bool isAttackOnCd;
+    public bool isSearchFinish;
     public override void ModifySpeed(float speed)
     {
         _speedModifier += speed;

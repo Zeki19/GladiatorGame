@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Enemies;
 using Entities.Interfaces;
+using Entities.StateMachine;
 using UnityEngine;
 
 public class StatueController : EnemyController

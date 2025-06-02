@@ -256,6 +256,52 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &120705348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 120705350}
+  - component: {fileID: 120705349}
+  m_Layer: 0
+  m_Name: Hond Camp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &120705349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120705348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d79d504551aae244b0b18eafe2b5856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolRadius: 3
+  chaseRadius: 4.25
+--- !u!4 &120705350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120705348}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.24, y: 0.796404, z: 0.03363931}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &131394851
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,9 +409,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 131394855}
   target: {fileID: 1827914495}
-  attackRange: 3
+  attackRange: 1
   Root: {fileID: 11400000, guid: fd4ddd611374e1d4498c2a809cb10383, type: 2}
   phasesThresholds: 28000000
+  camp: {fileID: 120705349}
+  AmountOfWaypoints: 3
+  idleDuration: 2
+  patrolDuration: 5
+  AttackCooldown: 2
+  AttackRange: 2
+  _maxObs: 2
+  _radius: 5
+  _angle: 180
+  _personalArea: 1
+  _obsMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &131394855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,7 +470,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 131394855}
-  moveSpeed: 10
+  moveSpeed: 3
+  isRested: 0
+  isTired: 0
+  isAttackOnCd: 0
+  isSearchFinish: 0
 --- !u!50 &131394858
 Rigidbody2D:
   serializedVersion: 5
@@ -438,7 +501,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &131394859
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -533,9 +596,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6834934ad875bc4ca6f868405fdfe76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingPos: {x: 0, y: 0, z: 0}
+  inactiveWeapon: {fileID: 0}
   forTest:
   - {fileID: 11400000, guid: a3e698ad9960446489270ee23cf4df71, type: 2}
-  startingPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &1827914493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -564,6 +628,14 @@ PrefabInstance:
       propertyPath: dashDuration
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8307102956479284612, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 250e726ef11f8f64c89af6286fbb1c90, type: 2}
+    - target: {fileID: 8461442029586105149, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 490971195994360826, guid: 37bd8dfd06a078141a978d1ad0f81fc1, type: 3}
     - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -594,7 +666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.376769
+      value: -14.17
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.y
@@ -661,3 +733,4 @@ SceneRoots:
   - {fileID: 131394853}
   - {fileID: 1827914493}
   - {fileID: 748019330}
+  - {fileID: 120705350}

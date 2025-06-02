@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Entities.StateMachine;
 using UnityEngine;
 
 namespace Enemies
@@ -9,6 +10,7 @@ namespace Enemies
         public GameObject selfGameObject;
         public GameObject playerGameObject;
         public EnemyController controller;
+        public EnemyModel model;
         //public Transform playerTransform;
         public float attackRange;
         public FSM<StateEnum> stateMachine;
