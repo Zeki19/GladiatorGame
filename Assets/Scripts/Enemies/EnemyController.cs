@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Enemies;
 using Entities;
 using UnityEngine;
 
@@ -18,8 +20,11 @@ public abstract class EnemyController : EntityController
             selfGameObject = gameObject,
             playerGameObject = target.gameObject,
             attackRange = attackRange,
-            stateMachine = Fsm
+            stateMachine = Fsm,
+            controller = this
         };
+        objectContext.Points.Add((new Vector2(0, 0), 5));
+        objectContext.Points.Add((new Vector2(0, 0), 8));
         InitializeTree();
     }
     

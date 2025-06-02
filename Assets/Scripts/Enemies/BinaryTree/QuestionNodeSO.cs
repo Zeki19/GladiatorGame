@@ -1,53 +1,139 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Enemies.BinaryTree.QuestionFunctions;
+using Enemies.FirstBossTest;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "QuestionNodeSO", menuName = "Scriptable Objects/Tree Nodes/QuestionNode")]
-public class QuestionNodeSO : TreeNodeSO
+namespace Enemies.BinaryTree
 {
-    [SerializeField] public QuestionEnum _question;
-    [SerializeField] private TreeNodeSO _tNode;
-    [SerializeField] private TreeNodeSO _fNode;
-    private Dictionary<QuestionEnum, Func<AIContext, bool>> _questionFunc;
+    [CreateAssetMenu(fileName = "QuestionNodeSO", menuName = "Scriptable Objects/Tree Nodes/QuestionNode")]
+    public class QuestionNodeSO : TreeNodeSO
+    {
+        [SerializeField] public QuestionEnum _question;
+        [SerializeField] private TreeNodeSO _tNode;
+        [SerializeField] private TreeNodeSO _fNode;
+        private Dictionary<QuestionEnum, Func<AIContext, bool>> _questionFunc;
 
-    private void OnEnable()
-    {
-        _questionFunc = new Dictionary<QuestionEnum, Func<AIContext, bool>>
+        private void OnEnable()
         {
-            { QuestionEnum.PlayerInAttackRange, PlayerInAttackRange },
-            { QuestionEnum.PlayerIsInAStraightLine, PlayerIsInAStraightLine }
-        };
-    }
-    public override void Execute(AIContext context)
-    {
-        if (_questionFunc == null)
-            OnEnable();
-
-        if (_questionFunc[_question](context)) 
-        {
-            _tNode.Execute(context);
-        }
-        else 
-        {
-            _fNode.Execute(context);
-        }
-    }
-    private bool PlayerInAttackRange(AIContext context)
-    {
-        float distance = Vector3.Distance(context.selfGameObject.transform.position, context.playerGameObject.transform.position);
-        return distance <= context.attackRange;
-    }
-    private bool PlayerIsInAStraightLine(AIContext context)
-    {
-        Vector3 origin = context.selfGameObject.transform.position;
-        Vector3 direction = (context.playerGameObject.transform.position - origin).normalized;
-        float distance = Vector3.Distance(origin, context.playerGameObject.transform.position);
-
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
-        {
-            return hit.transform == context.playerGameObject.transform;
+            _questionFunc = new Dictionary<QuestionEnum, Func<AIContext, bool>>
+            {
+                { QuestionEnum.PlayerInAttackRange, PlayerInAttackRange },
+                { QuestionEnum.PlayerIsInAStraightLine, PlayerIsInAStraightLine },
+                { QuestionEnum.IsFarToPoint1, IsFarToPoint1 },
+                { QuestionEnum.IsFarToPoint2, IsFarToPoint2 }, 
+                { QuestionEnum.IsNearToPoint1, IsNearToPoint1 },
+                { QuestionEnum.IsInIdleState, IsInIdleState },
+                { QuestionEnum.IsInChaseState, IsInChaseState },
+                { QuestionEnum.IsInPatrolState, IsInPatrolState },
+                { QuestionEnum.IsInSearchState, IsInSearchState },
+                { QuestionEnum.IsRested, IsRested },
+                { QuestionEnum.IsTired, IsTired },
+                { QuestionEnum.IsAttackOnCd, IsAttackOnCd },
+                { QuestionEnum.FinishedSearching, FinishedSearching }
+            };
         }
 
-        return false;
+        public override void Execute(AIContext context)
+        {
+            if (_questionFunc == null)
+                OnEnable();
+
+            if (_questionFunc[_question](context))
+            {
+                _tNode.Execute(context);
+            }
+            else
+            {
+                _fNode.Execute(context);
+            }
+        }
+
+        private bool PlayerInAttackRange(AIContext context)
+        {
+            return Vector3.Distance(context.selfGameObject.transform.position,
+                context.playerGameObject.transform.position) <= context.attackRange;
+        }
+
+        private bool PlayerIsInAStraightLine(AIContext context)
+        {
+            Vector3 origin = context.selfGameObject.transform.position;
+            Vector3 direction = (context.playerGameObject.transform.position - origin).normalized;
+            float distance = Vector3.Distance(origin, context.playerGameObject.transform.position);
+            int layerBit = 1 << context.playerGameObject.layer;
+            LayerMask mask = layerBit;
+            var hit = Physics2D.Raycast(origin, direction, distance,mask);
+            Debug.DrawLine(origin, origin+direction*distance, Color.green);
+            if(hit.collider!=null)
+            {
+                return hit.transform == context.playerGameObject.transform;
+            }
+
+            return false;
+        }
+
+        private bool IsFarToPoint1(AIContext context)
+        {
+            return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) >
+                   context.Points[0].Item2;
+        }
+        private bool IsNearToPoint1(AIContext context)
+        {
+            return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) <
+                   context.Points[0].Item2;
+        }
+
+        private bool IsFarToPoint2(AIContext context)
+        {
+            return Vector2.Distance(context.selfGameObject.transform.position, context.Points[1].Item1) >
+                   context.Points[1].Item2;
+        }
+
+        private bool FinishedSearching(AIContext arg)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsAttackOnCd(AIContext arg)
+        {
+            var controller = arg.controller as FirstBossController;
+            return controller != null && controller.isAttackOnCd;
+        }
+
+        private bool IsTired(AIContext arg)
+        {
+            var controller = arg.controller as FirstBossController;
+            return controller != null && controller.isTired;
+        }
+
+        private bool IsRested(AIContext arg)
+        {
+            var controller = arg.controller as FirstBossController;
+            return controller != null && controller.isRested;
+        }
+
+        private bool IsInIdleState(AIContext arg)
+        {
+            var controller = arg.controller as FirstBossController;
+            return arg.stateMachine.CurrentState() == controller?.IdleState;
+        }
+
+        private bool IsInChaseState(AIContext arg)
+        {
+            var controller = arg.controller as FirstBossController;
+            return arg.stateMachine.CurrentState() == controller?.ChaseState;
+        }
+
+        private bool IsInPatrolState(AIContext arg)
+        {
+            var controller = arg.controller as FirstBossController;
+            return arg.stateMachine.CurrentState() == controller?.PatrolState;
+        }
+
+        private bool IsInSearchState(AIContext arg)
+        {
+            var controller = arg.controller as FirstBossController;
+            return arg.stateMachine.CurrentState() == controller?.SearchState;
+        }
     }
 }

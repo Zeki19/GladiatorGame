@@ -1,11 +1,14 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ActionNodeSO", menuName = "Scriptable Objects/Tree Nodes/ActionNode")]
-public class ActionNodeSO : TreeNodeSO
+namespace Enemies.BinaryTree
 {
-    [SerializeField] public StateEnum stateEnum;
-    public override void Execute(AIContext context)
+    [CreateAssetMenu(fileName = "ActionNodeSO", menuName = "Scriptable Objects/Tree Nodes/ActionNode")]
+    public class ActionNodeSO : TreeNodeSO
     {
-        context.stateMachine.Transition(stateEnum);
+        [SerializeField] public StateEnum stateEnum;
+        public override void Execute(AIContext context)
+        {
+            context.stateMachine.Transition(stateEnum);
+        }
     }
 }

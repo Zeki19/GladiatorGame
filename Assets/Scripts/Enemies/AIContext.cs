@@ -1,11 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class AIContext
+namespace Enemies
 {
-    //public Transform selfTransform;
-    public GameObject selfGameObject;
-    public GameObject playerGameObject;
-    //public Transform playerTransform;
-    public float attackRange;
-    public FSM<StateEnum> stateMachine;
+    public class AIContext
+    {
+        //public Transform selfTransform;
+        public GameObject selfGameObject;
+        public GameObject playerGameObject;
+        public EnemyController controller;
+        //public Transform playerTransform;
+        public float attackRange;
+        public FSM<StateEnum> stateMachine;
+        public List<(Vector2, int)> Points=new List<(Vector2, int)>();
+    }
 }
