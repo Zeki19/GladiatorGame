@@ -209,7 +209,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -907,8 +907,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00095558, y: 18.2}
-  m_SizeDelta: {x: 417.19, y: 50}
+  m_AnchoredPosition: {x: -0.00095558, y: 31.145798}
+  m_SizeDelta: {x: 417.19, y: 295.3543}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2143027942
 MonoBehaviour:
@@ -932,14 +932,18 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Team:
 
-    Ignacio Martin Puk - nachi99.itch.io/
 
-    Matias Leon - wishedclover48.itch.io/
+    Ignacio Martin Puk  nachi99.itch.io/
+
+
+    Matias Leon  wishedclover48.itch.io/
+
 
     Juan
-    Borgini - gova21.itch.io/
+    Borgini  gova21.itch.io/
 
-    Ezequiel Giglio - zeki19.itch.io/'
+
+    Ezequiel Giglio  zeki19.itch.io/'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e36e13dcf176de942bb76162c17e53f4, type: 2}
   m_sharedMaterial: {fileID: -3929391620233850018, guid: e36e13dcf176de942bb76162c17e53f4, type: 2}
@@ -966,12 +970,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 46.05
+  m_fontSize: 20.7
+  m_fontSizeBase: 20.7
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 14
-  m_fontSizeMax: 72
+  m_fontSizeMax: 20
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
