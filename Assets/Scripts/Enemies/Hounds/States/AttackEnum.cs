@@ -4,6 +4,7 @@ namespace Enemies.Hounds.States
     {
         Normal,
         Lunge,
-        Charge
+        Charge,
+        Super
     }
 }

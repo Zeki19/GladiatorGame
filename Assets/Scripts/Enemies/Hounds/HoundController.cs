@@ -53,6 +53,14 @@ public class HoundController : EnemyController
         { AttackType.Lunge, 10f }
     };
 
+    private Dictionary<AttackType, float> _lowHealthAttacks = new Dictionary<AttackType, float>
+    {
+        { AttackType.Normal, 50f },
+        { AttackType.Charge, 20f },
+        { AttackType.Lunge, 10f },
+        { AttackType.Super, 20f }
+    };
+
     protected override void Awake()
     {
         base.Awake();
@@ -95,7 +103,7 @@ public class HoundController : EnemyController
         var patrolState = new HoundState_Patrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
         var chaseState = new HoundState_Chase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform);
         var searchState = new HoundState_Search<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
-        var attackState = new HoundState_Attack<StateEnum>(target.transform, manager.model, _attacks, this, AttackCooldown);
+        var attackState = new HoundState_Attack<StateEnum>(target.transform, manager.model, _attacks, _lowHealthAttacks, this, AttackCooldown);
         var runawayState = new HoundState_Runaway<StateEnum>(_runawaySteering, _avoidWalls, transform);
 
         _idleState = idleState;
