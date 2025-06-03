@@ -9,6 +9,7 @@ namespace Entities
     public abstract class EntityModel : MonoBehaviour, IMove, IAttack
     {
         [SerializeField] protected EntityManager manager;
+        public EntityManager Manager => manager;
         [SerializeField] protected float moveSpeed;
         protected float _speedModifier = 1;
 

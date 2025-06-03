@@ -1,4 +1,5 @@
 using UnityEngine;
+using Entities;
 
 public class FirstBossModel : EnemyModel
 {
@@ -15,5 +16,16 @@ public class FirstBossModel : EnemyModel
     {
         dir.Normalize(); //Just in case someone fucks up.
         manager.Rb.linearVelocity = dir * (moveSpeed * _speedModifier);
+    }
+    
+    public void AttackTarget(Transform target, float damage)
+    {
+        if (target == null) return;
+
+        var manager = target.GetComponent<EntityManager>();
+        if (manager != null)
+        {
+            manager.HealthComponent.TakeDamage(damage);
+        }
     }
 }

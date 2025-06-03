@@ -20,26 +20,27 @@ namespace Enemies.FirstBossTest
         private States_Base<StateEnum> _runAwayState;
 
         public States_Base<StateEnum> IdleState => _idleState;
-        public States_Base<StateEnum> ChaseState=> _chaseState;
-        public States_Base<StateEnum> AttackState=> _attackState;
-        public States_Base<StateEnum> PatrolState=> _patrolState;
-        public States_Base<StateEnum> SearchState=> _searchState;
-        public States_Base<StateEnum> RunAwayState=> _runAwayState;
-        
-        [Header("Required GameObjects")]
-        [SerializeField] private HoundsCamp camp;
+        public States_Base<StateEnum> ChaseState => _chaseState;
+        public States_Base<StateEnum> AttackState => _attackState;
+        public States_Base<StateEnum> PatrolState => _patrolState;
+        public States_Base<StateEnum> SearchState => _searchState;
+        public States_Base<StateEnum> RunAwayState => _runAwayState;
+
+        [Header("Required GameObjects")] [SerializeField]
+        private HoundsCamp camp;
 
         [SerializeField] private float AmountOfWaypoints;
-    
-        [Header("States Settings")]
-        [Tooltip("Time it takes to force a state change.")]
-        [SerializeField] private float idleDuration;
+
+        [Header("States Settings")] [Tooltip("Time it takes to force a state change.")] [SerializeField]
+        private float idleDuration;
+
         [SerializeField] private float patrolDuration;
         [SerializeField] private float AttackCooldown;
         [SerializeField] private float AttackRange;
 
-        [Header("Obstacle Avoidance Settings")]
-        [SerializeField] public int _maxObs;
+        [Header("Obstacle Avoidance Settings")] [SerializeField]
+        public int _maxObs;
+
         [SerializeField] public float _radius;
         [SerializeField] public float _angle;
         [SerializeField] public float _personalArea;
@@ -48,7 +49,7 @@ namespace Enemies.FirstBossTest
         private Vector2 _targetLastPos;
 
         #region Private Variables
-    
+
         private LineOfSight _los;
         private ISteering _steering;
         private ISteering _patrolSteering;
@@ -56,9 +57,9 @@ namespace Enemies.FirstBossTest
         private ISteering _runawaySteering;
         private ISteering _toPointSteering;
         private StObstacleAvoidance _avoidWalls;
-    
+
         #endregion
-    
+
         private Dictionary<AttackType, float> _attacks = new Dictionary<AttackType, float>
         {
             { AttackType.Normal, 60f },
@@ -66,7 +67,15 @@ namespace Enemies.FirstBossTest
             { AttackType.Lunge, 10f }
         };
         
-        private PhaseSystem _phaseSystem;
+        private Dictionary<AttackType, float> _lowHealthAttacks = new Dictionary<AttackType, float>
+        {
+            { AttackType.Normal, 50f },
+            { AttackType.Charge, 20f },
+            { AttackType.Lunge, 10f },
+            { AttackType.Super, 20f }
+        };
+
+    private PhaseSystem _phaseSystem;
         private int _currentPhase = 1;
         
         protected override void Awake()
@@ -110,7 +119,7 @@ namespace Enemies.FirstBossTest
 
             var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration);
             var chaseState = new FirstBossStateChase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform);
-            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, this, AttackCooldown);
+            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown);
             var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
             var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
             var runAwayState = new FirstBossStateRunAway<StateEnum>(_runawaySteering, _avoidWalls, transform);
