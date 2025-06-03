@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 278376296804834196}
   - component: {fileID: 8540523845805222788}
   - component: {fileID: 5489819235261190120}
-  - component: {fileID: 5787349317707919119}
   - component: {fileID: 253762330955473449}
   m_Layer: 0
   m_Name: Hound
@@ -34,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: 1707773313
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7026968489346428562, guid: f7e3293bae088454c90884248b7d942a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39b545898be37744092dc6553c160e33, type: 2}
   m_Color: {r: 0.7169812, g: 0.47009614, b: 0.47009614, a: 1}
   m_FlipX: 0
   m_FlipY: 1
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.61, y: 1.9}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -170,10 +169,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46aa2b089fbdc864bb9a2da89514b579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   target: {fileID: 0}
+  attackRange: 0
+  Root: {fileID: 0}
   camp: {fileID: 0}
+  AmountOfWaypoints: 0
   idleDuration: 4.5
   patrolDuration: 12
+  AttackCooldown: 0
+  AttackRange: 0
   _maxObs: 10
   _radius: 1
   _angle: 60
@@ -193,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de5a09d761df2446b78b5f18f3a3aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
   moveSpeed: 2
   amountOfWaypoints: 5
   attackRange: 1
@@ -209,24 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fabdbeb0a1ec2c4e9067ff31711d58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  manager: {fileID: 0}
   rotationSpeed: 400
---- !u!114 &5787349317707919119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4388794976801370552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85656bc56ebea8646883aecdef35bf1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 10
-  angle: 170
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!95 &253762330955473449
 Animator:
   serializedVersion: 7
