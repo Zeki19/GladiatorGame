@@ -51,7 +51,7 @@ namespace Enemies.FirstBossTest.States
                 _look.PlayStateAnimation(StateEnum.Attack);
                 
                 PerformAttack();
-                _model.isAttackOnCd = false;
+                _model.isAttackOnCd = true;
                 _mono.StartCoroutine(AttackCooldown());
             }
             
@@ -69,7 +69,7 @@ namespace Enemies.FirstBossTest.States
             private System.Collections.IEnumerator AttackCooldown()
             {
                 yield return new WaitForSeconds(duration);
-                _model.isAttackOnCd = true;
+                _model.isAttackOnCd = false;
             }
     }
 }

@@ -4,7 +4,7 @@ using Entities.Interfaces;
 using Entities.StateMachine;
 using UnityEngine;
 
-public class StatueController : EnemyController
+public class  StatueController : EnemyController
 {
     [SerializeField] private float AttackRange;
     private LineOfSight _los;
@@ -91,7 +91,7 @@ public class StatueController : EnemyController
         {
             t.Initialize(move, look, attack);
         }
-        Fsm.SetInit(idleState);
+        Fsm.SetInit(idleState,StateEnum.Idle);
     }
 
     protected override void InitializeTree()

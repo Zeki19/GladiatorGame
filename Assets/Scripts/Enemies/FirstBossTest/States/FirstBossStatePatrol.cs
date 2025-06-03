@@ -31,7 +31,7 @@ namespace Enemies.FirstBossTest.States
 
         public override void Exit()
         {
-            _model.isTired = false;
+            //_model.isTired = false;
             if (_patrolCoroutine != null)
             {
                 _mono.StopCoroutine(_patrolCoroutine);
@@ -45,7 +45,7 @@ namespace Enemies.FirstBossTest.States
         {
             yield return new WaitForSeconds(_duration);
             Debug.Log("True");
-            _model.isTired = true;
+            _model.isRested = false;
         }
     }
 }

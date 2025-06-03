@@ -147,7 +147,7 @@ public class HoundController : EnemyController
             t.Initialize(move, look, attack);
         }
 
-        Fsm.SetInit(idleState);
+        Fsm.SetInit(idleState,StateEnum.Idle);
     }
     
 

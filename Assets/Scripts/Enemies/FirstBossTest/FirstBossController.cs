@@ -158,7 +158,7 @@ namespace Enemies.FirstBossTest
                 t.Initialize(move, look, attack);
             }
 
-            Fsm.SetInit(idleState);
+            Fsm.SetInit(idleState,StateEnum.Idle);
         }
 
         protected override void InitializeTree()

@@ -29,7 +29,7 @@ namespace Enemies.FirstBossTest.States
 
         public override void Exit()
         {
-            _model.isRested = false;
+            
             base.Exit();
         }
     

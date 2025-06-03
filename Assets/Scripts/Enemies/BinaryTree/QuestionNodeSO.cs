@@ -118,7 +118,8 @@ namespace Enemies.BinaryTree
         {
             //var controller = arg.controller as FirstBossController;
             //return arg.stateMachine.CurrentState() == controller?.IdleState;
-            return arg.stateMachine.CurrentStateEnum() == StateEnum.Idle;
+            var b= arg.stateMachine.CurrentStateEnum() == StateEnum.Idle;
+            return b;
         }
 
         private bool IsInChaseState(AIContext arg)
@@ -132,7 +133,8 @@ namespace Enemies.BinaryTree
         {
             //var controller = arg.controller as FirstBossController;
             //return arg.stateMachine.CurrentState() == controller?.PatrolState;
-            return arg.stateMachine.CurrentStateEnum() == StateEnum.Patrol;
+            var b =arg.stateMachine.CurrentStateEnum() == StateEnum.Patrol;
+            return b;
         }
 
         private bool IsInSearchState(AIContext arg)
