@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Alignment : FlockingBaseBehaviour
+public class Alignment : MonoBehaviour, IFlocking
 {
-    protected override Vector3 GetRealDir(List<IBoid> boids, IBoid self)
+    [SerializeField] public float multiplier = 1;
+    public Vector3 GetDir(List<IBoid> boids, IBoid self)
     {
         Vector3 alignment = Vector3.zero;
 

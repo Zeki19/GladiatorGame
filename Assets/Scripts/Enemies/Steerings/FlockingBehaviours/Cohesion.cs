@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cohesion : FlockingBaseBehaviour
+public class Cohesion : MonoBehaviour, IFlocking
 {
-    protected override Vector3 GetRealDir(List<IBoid> boids, IBoid self)
+    [SerializeField] public float multiplier = 1;
+    public Vector3 GetDir(List<IBoid> boids, IBoid self)
     {
         Vector3 cohesion = Vector3.zero;
         Vector3 center = Vector3.zero;
