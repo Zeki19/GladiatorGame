@@ -124,9 +124,9 @@ public class State_FollowPoints<T> : States_Base<T>
     }
     protected float GetCost(Vector3Int current, Vector3Int child)
     {
-        if (WallsManager.NextToObs.ContainsKey(child))
+        if (WallsManager.NextToWall.ContainsKey(child))
         {
-            return WallsManager.NextToObs[child];
+            return WallsManager.NextToWall[child];
         }
         
         return 5;

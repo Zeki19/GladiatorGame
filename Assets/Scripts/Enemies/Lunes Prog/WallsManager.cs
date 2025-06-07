@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class WallsManager : MonoBehaviour
 {
-    private Dictionary<Vector3, int> _obs = new Dictionary<Vector3, int>();
-    public Dictionary<Vector3, int> NextToObs = new Dictionary<Vector3, int>(); //Should be a getter for public
+    private Dictionary<Vector3, int> _walls = new Dictionary<Vector3, int>();
+    public Dictionary<Vector3, int> NextToWall = new Dictionary<Vector3, int>(); //Should be a getter for public
     private void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);
@@ -15,26 +15,26 @@ public class WallsManager : MonoBehaviour
         var points = GetPointsOnCollider(coll);
         for (int i = 0; i < points.Count; i++)
         {
-            if (_obs.ContainsKey(points[i]))
+            if (_walls.ContainsKey(points[i]))
             {
-                _obs[points[i]]++;
+                _walls[points[i]]++;
             }
             else
             {
-                _obs[points[i]] = 1;
+                _walls[points[i]] = 1;
             }
         }
 
         var steps = GetAroundPoints(points);
         for (int i = 0; i < steps.Count; i++)
         {
-            if (!NextToObs.ContainsKey(steps[i]))
+            if (!NextToWall.ContainsKey(steps[i]))
             {
-                NextToObs.Add(steps[i],8);
+                NextToWall.Add(steps[i],8);
             }
             else
             {
-                NextToObs[steps[i]]++;
+                NextToWall[steps[i]]++;
             }
         }
     }
@@ -43,12 +43,12 @@ public class WallsManager : MonoBehaviour
         var points = GetPointsOnCollider(coll);
         for (int i = 0; i < points.Count; i++)
         {
-            if (_obs.ContainsKey(points[i]))
+            if (_walls.ContainsKey(points[i]))
             {
-                _obs[points[i]] -= 1;
-                if (_obs[points[i]] <= 0)
+                _walls[points[i]] -= 1;
+                if (_walls[points[i]] <= 0)
                 {
-                    _obs.Remove(points[i]);
+                    _walls.Remove(points[i]);
                 }
             }
         }
@@ -56,7 +56,7 @@ public class WallsManager : MonoBehaviour
     public bool IsRightPos(Vector3 curr)
     {
         curr = Vector3Int.RoundToInt(curr);
-        return !_obs.ContainsKey(curr);
+        return !_walls.ContainsKey(curr);
     }
     List<Vector3> GetPointsOnCollider(Collider2D coll)
     {
@@ -100,7 +100,7 @@ public class WallsManager : MonoBehaviour
 
                     Vector3Int neighbor = new Vector3Int(curr.x + x, curr.y + y, 0);
 
-                    if (!_obs.ContainsKey(neighbor)) // Only add if not an obstacle
+                    if (!_walls.ContainsKey(neighbor)) // Only add if not an obstacle
                     {
                         result.Add(neighbor);
                     }
@@ -112,20 +112,20 @@ public class WallsManager : MonoBehaviour
 
     public int Count()
     {
-        return _obs.Count;
+        return _walls.Count;
     }
     private void OnDrawGizmosSelected()
     {
-        if (_obs == null) return;
+        if (_walls == null) return;
         Gizmos.color = Color.red;
-        foreach (var item in _obs)
+        foreach (var item in _walls)
         {
             Gizmos.DrawWireSphere(item.Key, 0.25f);
         }
         
-        if (NextToObs == null) return;
+        if (NextToWall == null) return;
         Gizmos.color = Color.yellow;
-        foreach (var item in NextToObs)
+        foreach (var item in NextToWall)
         {
             Gizmos.DrawWireSphere(item.Key, 0.25f);
         }
