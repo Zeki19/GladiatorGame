@@ -22,7 +22,9 @@ namespace Enemies.FirstBossTest.States
             Debug.Log("Chase");
             _move.ModifySpeed(1.2f);
             _look.PlayStateAnimation(StateEnum.Chase);
-            _leaderBehaviour.GetLeader(_move as IBoid, 10, _boidMask);
+            Transform test = _leaderBehaviour.GetLeader(_move as IBoid, 10, _boidMask);
+            _leaderBehaviour.Leader = test;
+            Debug.Log(test);
             _leaderBehaviour.IsActive = true;
         }
 
