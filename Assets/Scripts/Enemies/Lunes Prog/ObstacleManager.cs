@@ -4,29 +4,12 @@ using System.Collections.Generic;
 public class ObstacleManager : MonoBehaviour
 {
     Dictionary<Vector3, int> _obs = new Dictionary<Vector3, int>();
-    static ObstacleManager instance;
-    public static ObstacleManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new GameObject("ObstacleManager").AddComponent<ObstacleManager>();
-            }
-            return instance;
-        }
-    }
+    public Dictionary<Vector3, int> _pickup = new Dictionary<Vector3, int>(); //Solo para Getter
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
+        ServiceLocator.Instance.RegisterService(this);
     }
+    
     public void AddColl(Collider2D coll)
     {
         var points = GetPointsOnCollider(coll);
@@ -39,6 +22,19 @@ public class ObstacleManager : MonoBehaviour
             else
             {
                 _obs[points[i]] = 1;
+            }
+        }
+
+        var steps = GetAroundPoints(points);
+        for (int i = 0; i < steps.Count; i++)
+        {
+            if (!_pickup.ContainsKey(steps[i]))
+            {
+                _pickup.Add(steps[i],8);
+            }
+            else
+            {
+                _pickup[steps[i]]++;
             }
         }
     }
@@ -87,13 +83,46 @@ public class ObstacleManager : MonoBehaviour
 
         return points;
     }
+
+    List<Vector3> GetAroundPoints(List<Vector3> pts)
+    {
+        var result = new HashSet<Vector3>(); // Use HashSet to avoid duplicates
+
+        foreach (var step in pts)
+        {
+            Vector3Int curr = Vector3Int.RoundToInt(step);
+
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    if (x == 0 && y == 0) continue; // Skip center point
+
+                    Vector3Int neighbor = new Vector3Int(curr.x + x, curr.y + y, 0);
+
+                    if (!_obs.ContainsKey(neighbor)) // Only add if not an obstacle
+                    {
+                        result.Add(neighbor);
+                    }
+                }
+            }
+        }
+        return new List<Vector3>(result); 
+    }
+
+    public int Count()
+    {
+        return _obs.Count;
+    }
     private void OnDrawGizmosSelected()
     {
-        if (_obs == null) return;
-        Gizmos.color = Color.red;
-        foreach (var item in _obs)
+        
+        if (_pickup == null) return;
+        Gizmos.color = Color.yellow;
+        foreach (var item in _pickup)
         {
             Gizmos.DrawWireSphere(item.Key, 0.25f);
         }
     }
+    
 }
