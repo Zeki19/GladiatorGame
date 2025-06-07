@@ -9,7 +9,7 @@ public class State_FollowPoints<T> : States_Base<T>
     protected Transform Entity;
     protected float DistanceToPoint;
     private bool _isFinishPath;
-    private WallsManager _wallsManager;
+    protected GridManager GridManager;
 
     protected State_FollowPoints(Transform entity, float distanceToPoint = 0.2f)
     {
@@ -28,7 +28,7 @@ public class State_FollowPoints<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
-        _wallsManager = ServiceLocator.Instance.GetService<WallsManager>();
+        GridManager = ServiceLocator.Instance.GetService<GridManager>();
     }
     public override void Execute()
     {
@@ -80,16 +80,11 @@ public class State_FollowPoints<T> : States_Base<T>
 
         int x = start.x;
         int y = start.y;
-        
-        
 
         while (true)
         {
             Vector3Int current = new Vector3Int(x, y, 0);
-            
-            if (!_wallsManager.IsRightPos(current))
-                return false;
-            if (_wallsManager.NextToWall.ContainsKey(current)&&_wallsManager.NextToWall[current]>50)
+            if (!GridManager.IsRightPos(current))
                 return false;
 
             if (x == end.x && y == end.y)
@@ -119,7 +114,7 @@ public class State_FollowPoints<T> : States_Base<T>
             {
                 if (x == 0 && y == 0) continue;
                 var child = new Vector3Int(x, y, 0) + curr;
-                if (_wallsManager.IsRightPos(child))
+                if (GridManager.IsRightPos(child))
                 {
                     neighbours.Add(child);
                 }
@@ -129,8 +124,19 @@ public class State_FollowPoints<T> : States_Base<T>
     }
     protected float GetCost(Vector3Int current, Vector3Int child)
     {
-        var baseCost = 5;
-        return _wallsManager.NextToWall.GetValueOrDefault(child, baseCost);
+        var baseCost = 5f;
+        
+        if (GridManager.NextToWall.ContainsKey(child))
+        {
+            baseCost += 3f; 
+        }
+        
+        if (GridManager.PickUp.TryGetValue(child, out float pickupValue))
+        {
+            baseCost -= pickupValue;
+        }
+
+        return baseCost;
     }
     public bool IsFinishPath => _isFinishPath;
 }

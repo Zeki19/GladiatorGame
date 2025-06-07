@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class PathFindObjects : MonoBehaviour
 {
-    private WallsManager _wallsManager;
-    [SerializeField] private int value;
+    private GridManager _wallsManager;
+    [SerializeField] private int weight;
+    [SerializeField] private int range;
     private void Start()
     {
-        _wallsManager = ServiceLocator.Instance.GetService<WallsManager>();
-        var coll = GetComponent<Collider2D>();
-        _wallsManager.poti(coll,value);
+        _wallsManager = ServiceLocator.Instance.GetService<GridManager>();
+        _wallsManager.AddPickUp(transform.position, weight, range);
     }
     
 }

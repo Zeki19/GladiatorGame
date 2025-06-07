@@ -55,7 +55,14 @@ namespace Enemies.FirstBossTest.States
             private float Heuristic(Vector3Int current)
             {
                 Vector3 targetPos = Vector3Int.RoundToInt(_target.position);
-                return Vector3.Distance(current, targetPos);
+                float baseHeuristic = Vector3.Distance(current, targetPos);
+                
+                if (GridManager.PickUp.TryGetValue(current, out float pickupValue))
+                {
+                    baseHeuristic -= pickupValue;
+                }
+
+                return baseHeuristic;
             }
 
             bool IsSatisfied(Vector3Int curr)

@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 131394862}
   - component: {fileID: 131394861}
   - component: {fileID: 131394860}
+  - component: {fileID: 131394864}
   m_Layer: 8
   m_Name: BossTest
   m_TagString: Untagged
@@ -480,7 +481,7 @@ Transform:
   m_GameObject: {fileID: 131394851}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 1.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -508,7 +509,9 @@ MonoBehaviour:
   idleDuration: 2
   patrolDuration: 5
   AttackCooldown: 2
-  AttackRange: 2
+  flockMask:
+    serializedVersion: 2
+    m_Bits: 256
   _maxObs: 2
   _radius: 5
   _angle: 180
@@ -687,6 +690,20 @@ MonoBehaviour:
   boidMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &131394864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131394851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+  timePrediction: 0
 --- !u!1 &748019328
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +785,7 @@ GameObject:
   - component: {fileID: 1154251879}
   - component: {fileID: 1154251878}
   - component: {fileID: 1154251877}
+  - component: {fileID: 1154251889}
   m_Layer: 8
   m_Name: BossTest (1)
   m_TagString: Untagged
@@ -887,7 +905,9 @@ MonoBehaviour:
   idleDuration: 2
   patrolDuration: 5
   AttackCooldown: 2
-  AttackRange: 2
+  flockMask:
+    serializedVersion: 2
+    m_Bits: 256
   _maxObs: 2
   _radius: 5
   _angle: 180
@@ -1040,12 +1060,26 @@ Transform:
   m_GameObject: {fileID: 1154251876}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 5.13, z: 0}
+  m_LocalPosition: {x: 0, y: 4.3900003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1154251889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154251876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+  timePrediction: 0
 --- !u!1 &1198561603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +1100,7 @@ GameObject:
   - component: {fileID: 1198561606}
   - component: {fileID: 1198561605}
   - component: {fileID: 1198561604}
+  - component: {fileID: 1198561616}
   m_Layer: 8
   m_Name: BossTest (3)
   m_TagString: Untagged
@@ -1185,7 +1220,9 @@ MonoBehaviour:
   idleDuration: 2
   patrolDuration: 5
   AttackCooldown: 2
-  AttackRange: 2
+  flockMask:
+    serializedVersion: 2
+    m_Bits: 256
   _maxObs: 2
   _radius: 5
   _angle: 180
@@ -1338,12 +1375,26 @@ Transform:
   m_GameObject: {fileID: 1198561603}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 2.08, y: 3, z: 0}
+  m_LocalPosition: {x: 2.08, y: 2.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1198561616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198561603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+  timePrediction: 0
 --- !u!1001 &1827914493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1410,11 +1461,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.81
+      value: -12.98
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.32
+      value: -6.89
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1489,6 +1540,7 @@ GameObject:
   - component: {fileID: 1892030498}
   - component: {fileID: 1892030497}
   - component: {fileID: 1892030496}
+  - component: {fileID: 1892030508}
   m_Layer: 8
   m_Name: BossTest (2)
   m_TagString: Untagged
@@ -1608,7 +1660,9 @@ MonoBehaviour:
   idleDuration: 2
   patrolDuration: 5
   AttackCooldown: 2
-  AttackRange: 2
+  flockMask:
+    serializedVersion: 2
+    m_Bits: 256
   _maxObs: 2
   _radius: 5
   _angle: 180
@@ -1761,12 +1815,26 @@ Transform:
   m_GameObject: {fileID: 1892030495}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.16, y: 3, z: 0}
+  m_LocalPosition: {x: -2.16, y: 2.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1892030508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892030495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+  timePrediction: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
