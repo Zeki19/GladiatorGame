@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class WallsManager : MonoBehaviour
 {
+    [SerializeField] private int WeightOfPointsNextToWalls;
     private readonly Dictionary<Vector3, int> _walls = new Dictionary<Vector3, int>();
-    public readonly Dictionary<Vector3, int> NextToWall = new Dictionary<Vector3, int>(); //Should be a getter for public
+    public readonly Dictionary<Vector3, int> NextToWall = new Dictionary<Vector3, int>();
     private void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);
@@ -13,6 +15,8 @@ public class WallsManager : MonoBehaviour
     public void AddColl(Collider2D coll)
     {
         var points = GetPointsOnCollider(coll);
+    
+        //RED points
         for (int i = 0; i < points.Count; i++)
         {
             if (_walls.ContainsKey(points[i]))
@@ -25,12 +29,22 @@ public class WallsManager : MonoBehaviour
             }
         }
 
-        var steps = GetAroundPoints(points);
+        //Clean YELLOW
+        foreach (var p in points)
+        {
+            if (NextToWall.ContainsKey(p))
+            {
+                NextToWall.Remove(p);
+            }
+        }
+
+        //YELLOW points
+        var steps = GetPointsAroundColl(points);
         for (int i = 0; i < steps.Count; i++)
         {
             if (!NextToWall.ContainsKey(steps[i]))
             {
-                NextToWall.Add(steps[i],8);
+                NextToWall.Add(steps[i], WeightOfPointsNextToWalls);
             }
             else
             {
@@ -43,7 +57,7 @@ public class WallsManager : MonoBehaviour
         curr = Vector3Int.RoundToInt(curr);
         return !_walls.ContainsKey(curr);
     }
-    List<Vector3> GetPointsOnCollider(Collider2D coll)
+    private List<Vector3> GetPointsOnCollider(Collider2D coll)
     {
         List<Vector3> points = new List<Vector3>();
         Bounds bounds = coll.bounds;
@@ -68,24 +82,21 @@ public class WallsManager : MonoBehaviour
 
         return points;
     }
-
-    List<Vector3> GetAroundPoints(List<Vector3> pts)
+    private List<Vector3> GetPointsAroundColl(List<Vector3> pts)
     {
-        var result = new HashSet<Vector3>(); // Use HashSet to avoid duplicates
+        var result = new HashSet<Vector3>();
 
-        foreach (var step in pts)
+        foreach (var curr in pts.Select(Vector3Int.RoundToInt))
         {
-            Vector3Int curr = Vector3Int.RoundToInt(step);
-
             for (int x = -1; x <= 1; x++)
             {
                 for (int y = -1; y <= 1; y++)
                 {
-                    if (x == 0 && y == 0) continue; // Skip center point
+                    if (x == 0 && y == 0) continue;
 
                     Vector3Int neighbor = new Vector3Int(curr.x + x, curr.y + y, 0);
 
-                    if (!_walls.ContainsKey(neighbor)) // Only add if not an obstacle
+                    if (!_walls.ContainsKey(neighbor))
                     {
                         result.Add(neighbor);
                     }
@@ -95,10 +106,6 @@ public class WallsManager : MonoBehaviour
         return new List<Vector3>(result); 
     }
 
-    public int Count()
-    {
-        return _walls.Count;
-    }
     private void OnDrawGizmosSelected()
     {
         if (_walls == null) return;

@@ -7,9 +7,9 @@ public class State_FollowPoints<T> : States_Base<T>
     protected List<Vector3Int> Waypoints;
     private int _index;
     protected Transform Entity;
-    protected float DistanceToPoint; //How close to be considered "arrived".
+    protected float DistanceToPoint;
     private bool _isFinishPath;
-    protected WallsManager WallsManager;
+    private WallsManager _wallsManager;
 
     protected State_FollowPoints(Transform entity, float distanceToPoint = 0.2f)
     {
@@ -28,7 +28,7 @@ public class State_FollowPoints<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
-        WallsManager = ServiceLocator.Instance.GetService<WallsManager>();
+        _wallsManager = ServiceLocator.Instance.GetService<WallsManager>();
     }
     public override void Execute()
     {
@@ -84,8 +84,8 @@ public class State_FollowPoints<T> : States_Base<T>
         while (true)
         {
             Vector3Int current = new Vector3Int(x, y, 0);
-            if (!WallsManager.IsRightPos(current))
-                return false; //Hit an obstacle
+            if (!_wallsManager.IsRightPos(current))
+                return false;
 
             if (x == end.x && y == end.y)
                 break;
@@ -103,7 +103,7 @@ public class State_FollowPoints<T> : States_Base<T>
             }
         }
 
-        return true; //No obstacles along the path
+        return true;
     }
     protected List<Vector3Int> GetConnections(Vector3Int curr)
     {
@@ -114,7 +114,7 @@ public class State_FollowPoints<T> : States_Base<T>
             {
                 if (x == 0 && y == 0) continue;
                 var child = new Vector3Int(x, y, 0) + curr;
-                if (WallsManager.IsRightPos(child))
+                if (_wallsManager.IsRightPos(child))
                 {
                     neighbours.Add(child);
                 }
@@ -124,12 +124,8 @@ public class State_FollowPoints<T> : States_Base<T>
     }
     protected float GetCost(Vector3Int current, Vector3Int child)
     {
-        if (WallsManager.NextToWall.ContainsKey(child))
-        {
-            return WallsManager.NextToWall[child];
-        }
-        
-        return 5;
+        var baseCost = 5;
+        return _wallsManager.NextToWall.GetValueOrDefault(child, baseCost);
     }
     public bool IsFinishPath => _isFinishPath;
 }
