@@ -7,18 +7,23 @@ namespace Enemies.FirstBossTest.States
         private Transform _target;
         public Vector2 lastSeenPositionOfTarget;
         private float _attackRange;
-        public FirstBossStateChase(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self, Transform target,float attackRange) : base(steering, avoidStObstacles, self)
+        LeaderBehaviour _leaderBehaviour;
+        LayerMask _boidMask;
+        public FirstBossStateChase(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self, Transform target,float attackRange, LeaderBehaviour leaderBehaviour, LayerMask boidMask) : base(steering, avoidStObstacles, self)
         {
             _target = target;
             _attackRange = attackRange;
+            _leaderBehaviour = leaderBehaviour;
+            _boidMask = boidMask;
         }
         public override void Enter()
         {
             base.Enter();
             Debug.Log("Chase");
-        
             _move.ModifySpeed(1.2f);
             _look.PlayStateAnimation(StateEnum.Chase);
+            _leaderBehaviour.GetLeader(_move as IBoid, 10, _boidMask);
+            _leaderBehaviour.IsActive = true;
         }
 
         public override void Execute()
@@ -33,6 +38,7 @@ namespace Enemies.FirstBossTest.States
         {
             base.Exit();
             _move.ModifySpeed(-1.2f);
+            _leaderBehaviour.IsActive = false;
         }
     }
 }

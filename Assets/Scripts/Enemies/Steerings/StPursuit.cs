@@ -19,10 +19,6 @@ public class StPursuit : ISteering
     public Vector2 GetDir()
     {
         var distanceToTarget = Vector2.Distance(_self.position, _target.position);
-        if (distanceToTarget < .5f) //Esto no va aca, va en los Estados
-        {
-            return Vector2.zero;
-        }
         
         Vector2 point = _target.position + _target.linearVelocity;
         Vector2 dirToPoint = (point - (Vector2)_self.position).normalized;
