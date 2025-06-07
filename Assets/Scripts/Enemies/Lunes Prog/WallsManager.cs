@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class WallsManager : MonoBehaviour
 {
-    private Dictionary<Vector3, int> _walls = new Dictionary<Vector3, int>();
-    public Dictionary<Vector3, int> NextToWall = new Dictionary<Vector3, int>(); //Should be a getter for public
+    private readonly Dictionary<Vector3, int> _walls = new Dictionary<Vector3, int>();
+    public readonly Dictionary<Vector3, int> NextToWall = new Dictionary<Vector3, int>(); //Should be a getter for public
     private void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);
@@ -35,21 +35,6 @@ public class WallsManager : MonoBehaviour
             else
             {
                 NextToWall[steps[i]]++;
-            }
-        }
-    }
-    public void RemoveColl(Collider2D coll)
-    {
-        var points = GetPointsOnCollider(coll);
-        for (int i = 0; i < points.Count; i++)
-        {
-            if (_walls.ContainsKey(points[i]))
-            {
-                _walls[points[i]] -= 1;
-                if (_walls[points[i]] <= 0)
-                {
-                    _walls.Remove(points[i]);
-                }
             }
         }
     }
