@@ -2,19 +2,24 @@ using UnityEngine;
 
 public class StPursuit : ISteering
 {
-    private readonly Transform _self;
-    private readonly Rigidbody2D _target;
+    private Transform _self;
+    private Rigidbody2D _target;
+
 
     public StPursuit(Transform self, Rigidbody2D target)
     {
         _self = self;
         _target = target;
-    }    
-    
+    }
+    public StPursuit(Transform self)
+    {
+        _self = self;
+    }
+
     public Vector2 GetDir()
     {
         var distanceToTarget = Vector2.Distance(_self.position, _target.position);
-        if (distanceToTarget < .5f) //Esto no va aca va en los Estados
+        if (distanceToTarget < .5f) //Esto no va aca, va en los Estados
         {
             return Vector2.zero;
         }
@@ -24,5 +29,9 @@ public class StPursuit : ISteering
         Vector2 dirToTarget = (_target.position - (Vector2)_self.position).normalized;
         
         return Vector2.Dot(dirToPoint, dirToTarget) < 0 ? dirToTarget : dirToPoint;
+    }
+    public Rigidbody2D Target
+    {
+        set => _target = value;
     }
 }
