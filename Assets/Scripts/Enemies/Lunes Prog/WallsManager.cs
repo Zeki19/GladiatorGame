@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ObstacleManager : MonoBehaviour
+public class WallsManager : MonoBehaviour
 {
-    Dictionary<Vector3, int> _obs = new Dictionary<Vector3, int>();
-    public Dictionary<Vector3, int> _pickup = new Dictionary<Vector3, int>(); //Solo para Getter
+    private Dictionary<Vector3, int> _obs = new Dictionary<Vector3, int>();
+    public Dictionary<Vector3, int> NextToObs = new Dictionary<Vector3, int>(); //Should be a getter for public
     private void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);
@@ -28,13 +28,13 @@ public class ObstacleManager : MonoBehaviour
         var steps = GetAroundPoints(points);
         for (int i = 0; i < steps.Count; i++)
         {
-            if (!_pickup.ContainsKey(steps[i]))
+            if (!NextToObs.ContainsKey(steps[i]))
             {
-                _pickup.Add(steps[i],8);
+                NextToObs.Add(steps[i],8);
             }
             else
             {
-                _pickup[steps[i]]++;
+                NextToObs[steps[i]]++;
             }
         }
     }
@@ -116,10 +116,16 @@ public class ObstacleManager : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
+        if (_obs == null) return;
+        Gizmos.color = Color.red;
+        foreach (var item in _obs)
+        {
+            Gizmos.DrawWireSphere(item.Key, 0.25f);
+        }
         
-        if (_pickup == null) return;
+        if (NextToObs == null) return;
         Gizmos.color = Color.yellow;
-        foreach (var item in _pickup)
+        foreach (var item in NextToObs)
         {
             Gizmos.DrawWireSphere(item.Key, 0.25f);
         }

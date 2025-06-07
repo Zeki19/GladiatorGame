@@ -9,7 +9,7 @@ public class State_FollowPoints<T> : States_Base<T>
     protected Transform Entity;
     protected float DistanceToPoint; //How close to be considered "arrived".
     private bool _isFinishPath;
-    protected ObstacleManager obsManager;
+    protected WallsManager WallsManager;
 
     protected State_FollowPoints(Transform entity, float distanceToPoint = 0.2f)
     {
@@ -28,7 +28,7 @@ public class State_FollowPoints<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
-        obsManager = ServiceLocator.Instance.GetService<ObstacleManager>();
+        WallsManager = ServiceLocator.Instance.GetService<WallsManager>();
     }
     public override void Execute()
     {
@@ -84,7 +84,7 @@ public class State_FollowPoints<T> : States_Base<T>
         while (true)
         {
             Vector3Int current = new Vector3Int(x, y, 0);
-            if (!obsManager.IsRightPos(current))
+            if (!WallsManager.IsRightPos(current))
                 return false; //Hit an obstacle
 
             if (x == end.x && y == end.y)
@@ -114,7 +114,7 @@ public class State_FollowPoints<T> : States_Base<T>
             {
                 if (x == 0 && y == 0) continue;
                 var child = new Vector3Int(x, y, 0) + curr;
-                if (obsManager.IsRightPos(child))
+                if (WallsManager.IsRightPos(child))
                 {
                     neighbours.Add(child);
                 }
@@ -124,9 +124,9 @@ public class State_FollowPoints<T> : States_Base<T>
     }
     protected float GetCost(Vector3Int current, Vector3Int child)
     {
-        if (obsManager._pickup.ContainsKey(child))
+        if (WallsManager.NextToObs.ContainsKey(child))
         {
-            return obsManager._pickup[child];
+            return WallsManager.NextToObs[child];
         }
         
         return 5;
