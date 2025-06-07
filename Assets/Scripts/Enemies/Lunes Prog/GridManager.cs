@@ -1,18 +1,32 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class WallsManager : MonoBehaviour
+public class GridManager : MonoBehaviour
 {
     [SerializeField] private int WeightOfPointsNextToWalls;
+    
     private readonly Dictionary<Vector3, int> _walls = new Dictionary<Vector3, int>();
     public readonly Dictionary<Vector3, int> NextToWall = new Dictionary<Vector3, int>();
+    public readonly Dictionary<Vector3Int, float> PickUp = new Dictionary<Vector3Int, float>();
+    
     private void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);
     }
-    
-    public void AddColl(Collider2D coll)
+    private void Start()
+    {
+        foreach (Transform child in transform)
+        {
+            Collider2D coll = child.GetComponent<Collider2D>();
+            if (coll != null)
+            {
+                AddColl(coll);
+            }
+        }
+    }
+    private void AddColl(Collider2D coll)
     {
         var points = GetPointsOnCollider(coll);
     
@@ -105,7 +119,34 @@ public class WallsManager : MonoBehaviour
         }
         return new List<Vector3>(result); 
     }
+    public void AddPickUp(Vector3 centerPos, int weight, int range)
+    {
+        Vector3Int center = Vector3Int.RoundToInt(centerPos);
 
+        for (int x = -range; x <= range; x++)
+        {
+            for (int y = -range; y <= range; y++)
+            {
+                Vector3Int p = new Vector3Int(center.x + x, center.y + y, 0);
+
+                if (_walls.ContainsKey(p)) continue;
+
+                int dist = Mathf.Abs(x) + Mathf.Abs(y);
+                if (dist > range) continue;
+
+                float falloff = 1f - (dist / (float)range);
+                float pointValue = Mathf.Max(0f, weight * falloff);
+
+                if (pointValue <= 0f) continue;
+
+                if (!PickUp.TryAdd(p, Mathf.RoundToInt(pointValue)))
+                {
+                    PickUp[p] += Mathf.RoundToInt(pointValue);
+                }
+            }
+        }
+    }
+    
     private void OnDrawGizmosSelected()
     {
         if (_walls == null) return;
@@ -114,13 +155,22 @@ public class WallsManager : MonoBehaviour
         {
             Gizmos.DrawWireSphere(item.Key, 0.25f);
         }
-        
+
         if (NextToWall == null) return;
-        Gizmos.color = Color.yellow;
         foreach (var item in NextToWall)
         {
+            Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(item.Key, 0.25f);
         }
+
+        if (PickUp != null)
+        {
+            foreach (var item in PickUp)
+            {
+                var t = Mathf.InverseLerp(0, 20, item.Value);
+                Gizmos.color = Color.Lerp(Color.red, Color.green, t);
+                Gizmos.DrawWireSphere(item.Key, 0.25f);
+            }
+        }
     }
-    
 }
