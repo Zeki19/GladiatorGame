@@ -38,10 +38,6 @@ namespace Enemies.FirstBossTest.States
             List<Vector3Int> path = ASTAR.Run(init, IsSatisfied, GetConnections, GetCost, Heuristic);
             path = ASTAR.CleanPath(path, InView);
 
-            foreach (var step in path)
-            {
-                Debug.Log(step);
-            }
             SetWaypoints(path);
         }
         
