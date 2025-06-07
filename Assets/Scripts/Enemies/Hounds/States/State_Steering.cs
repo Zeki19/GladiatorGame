@@ -22,7 +22,6 @@ using UnityEngine;
         public override void Exit()
         {
             base.Exit();
-            //_move.ModifySpeed(1f);
         }
     }
     

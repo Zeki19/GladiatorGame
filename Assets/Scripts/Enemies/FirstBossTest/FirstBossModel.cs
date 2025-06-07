@@ -1,12 +1,16 @@
 using UnityEngine;
 using Entities;
 
-public class FirstBossModel : EnemyModel
+public class FirstBossModel : EnemyModel, IBoid
 {
     public bool isRested;
     public bool isTired;
     public bool isAttackOnCd;
     public bool isSearchFinish;
+
+    Vector3 IBoid.Position => transform.position;
+    public Vector3 Forward => transform.forward;
+
     public override void ModifySpeed(float speed)
     {
         _speedModifier += speed;

@@ -55,6 +55,7 @@ namespace Enemies.FirstBossTest
         private ISteering _pursuitSteering;
         private ISteering _runawaySteering;
         private ISteering _toPointSteering;
+        private ISteering _leaderSteering;
         private StObstacleAvoidance _avoidWalls;
 
         #endregion
@@ -92,6 +93,7 @@ namespace Enemies.FirstBossTest
             base.Start();
             _phaseSystem = new PhaseSystem(phasesThresholds, manager.HealthComponent);
             manager.HealthComponent.OnDamage += CheckPhase;
+            _leaderSteering = GetComponent<FlockingManager>();
         }
 
         void InitalizeSteering()
