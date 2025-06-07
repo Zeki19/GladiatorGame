@@ -21,18 +21,21 @@ namespace Enemies.BinaryTree
                 { QuestionEnum.PlayerInAttackRange, PlayerInAttackRange },
                 { QuestionEnum.PlayerIsInAStraightLine, PlayerIsInAStraightLine },
                 { QuestionEnum.IsFarToPoint1, IsFarToPoint1 },
-                { QuestionEnum.IsFarToPoint2, IsFarToPoint2 }, 
+                { QuestionEnum.IsFarToPoint2, IsFarToPoint2 },
                 { QuestionEnum.IsNearToPoint1, IsNearToPoint1 },
                 { QuestionEnum.IsInIdleState, IsInIdleState },
                 { QuestionEnum.IsInChaseState, IsInChaseState },
                 { QuestionEnum.IsInPatrolState, IsInPatrolState },
                 { QuestionEnum.IsInSearchState, IsInSearchState },
+                { QuestionEnum.IsInAttackState, IsInAttackState },
+                { QuestionEnum.IsPlayerAlive, IsPlayerAlive },
                 { QuestionEnum.IsRested, IsRested },
                 { QuestionEnum.IsTired, IsTired },
                 { QuestionEnum.IsAttackOnCd, IsAttackOnCd },
                 { QuestionEnum.FinishedSearching, FinishedSearching }
             };
         }
+
 
         public override void Execute(AIContext context)
         {
@@ -63,9 +66,9 @@ namespace Enemies.BinaryTree
             int layerBit = 1 << context.playerGameObject.layer;
             LayerMask mask = layerBit;
             distance = Mathf.Clamp(distance, 0, 3);
-            var hit = Physics2D.Raycast(origin, direction, distance,mask);
-            Debug.DrawLine(origin, origin+direction*distance, Color.green);
-            if(hit.collider!=null)
+            var hit = Physics2D.Raycast(origin, direction, distance, mask);
+            Debug.DrawLine(origin, origin + direction * distance, Color.green);
+            if (hit.collider != null)
             {
                 return hit.transform == context.playerGameObject.transform;
             }
@@ -78,6 +81,7 @@ namespace Enemies.BinaryTree
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) >
                    context.Points[0].Item2;
         }
+
         private bool IsNearToPoint1(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) <
@@ -113,12 +117,16 @@ namespace Enemies.BinaryTree
             var model = arg.model as FirstBossModel;
             return model != null && model.isRested;
         }
+        private bool IsPlayerAlive(AIContext arg)
+        {
+            return true;
+        }
 
         private bool IsInIdleState(AIContext arg)
         {
             //var controller = arg.controller as FirstBossController;
             //return arg.stateMachine.CurrentState() == controller?.IdleState;
-            var b= arg.stateMachine.CurrentStateEnum() == StateEnum.Idle;
+            var b = arg.stateMachine.CurrentStateEnum() == StateEnum.Idle;
             return b;
         }
 
@@ -133,7 +141,7 @@ namespace Enemies.BinaryTree
         {
             //var controller = arg.controller as FirstBossController;
             //return arg.stateMachine.CurrentState() == controller?.PatrolState;
-            var b =arg.stateMachine.CurrentStateEnum() == StateEnum.Patrol;
+            var b = arg.stateMachine.CurrentStateEnum() == StateEnum.Patrol;
             return b;
         }
 
@@ -142,6 +150,11 @@ namespace Enemies.BinaryTree
             //var controller = arg.controller as FirstBossController;
             //return arg.stateMachine.CurrentState() == controller?.SearchState;
             return arg.stateMachine.CurrentStateEnum() == StateEnum.Search;
+        }
+
+        private bool IsInAttackState(AIContext arg)
+        {
+            return arg.stateMachine.CurrentStateEnum() == StateEnum.Attack;
         }
     }
 }

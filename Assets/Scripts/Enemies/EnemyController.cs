@@ -25,7 +25,7 @@ namespace Enemies
                 model=manager.model as EnemyModel
             };
             objectContext.Points.Add((new Vector2(0, 0), 5));
-            objectContext.Points.Add((new Vector2(0, 0), 8));
+            objectContext.Points.Add((new Vector2(0, 0), 10));
             InitializeTree();
         }
     

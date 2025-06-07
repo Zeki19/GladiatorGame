@@ -13,6 +13,8 @@ namespace Enemies.BinaryTree.QuestionFunctions
         IsInPatrolState,
         IsInChaseState,
         IsInSearchState,
+        IsInAttackState,
+        IsPlayerAlive,
         IsTired,//Hound: isTired
         IsRested,//Hound: isRested
         IsAttackOnCd,//hound: isAttackOnCd

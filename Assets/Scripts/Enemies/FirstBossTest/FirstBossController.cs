@@ -36,7 +36,6 @@ namespace Enemies.FirstBossTest
 
         [SerializeField] private float patrolDuration;
         [SerializeField] private float AttackCooldown;
-        [SerializeField] private float AttackRange;
 
         [Header("Obstacle Avoidance Settings")] [SerializeField]
         public int _maxObs;
@@ -118,7 +117,7 @@ namespace Enemies.FirstBossTest
             var attack = GetComponent<IAttack>();
 
             var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration);
-            var chaseState = new FirstBossStateChase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform);
+            var chaseState = new FirstBossStateChase<StateEnum>(_pursuitSteering, _avoidWalls, transform,target.transform,attackRange);
             var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown);
             var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
             var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
@@ -156,11 +155,9 @@ namespace Enemies.FirstBossTest
             
             runAwayState.AddTransition(StateEnum.Idle, idleState);
             runAwayState.AddTransition(StateEnum.Patrol, patrolState);
-
-            attackState.AddTransition(StateEnum.Idle, idleState);
+            
             attackState.AddTransition(StateEnum.Chase, chaseState);
             attackState.AddTransition(StateEnum.Runaway, runAwayState);
-            attackState.AddTransition(StateEnum.Search, searchState);
 
             foreach (var t in stateList)
             {
