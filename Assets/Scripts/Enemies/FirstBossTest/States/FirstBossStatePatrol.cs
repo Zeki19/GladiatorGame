@@ -44,7 +44,6 @@ namespace Enemies.FirstBossTest.States
         private System.Collections.IEnumerator StartPatrol()
         {
             yield return new WaitForSeconds(_duration);
-            Debug.Log("True");
             _model.isRested = false;
         }
     }

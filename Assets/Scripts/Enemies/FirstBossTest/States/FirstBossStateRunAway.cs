@@ -1,26 +1,70 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Enemies.FirstBossTest.States
 {
-    internal class FirstBossStateRunAway<T> : State_Steering<T>
+    internal class FirstBossStateRunAway<T> : State_FollowPoints<T>
     {
-        public FirstBossStateRunAway(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self) : base(steering, avoidStObstacles, self)
+        private readonly MonoBehaviour _mono;
+        private Transform _target;
+        public FirstBossStateRunAway(Transform entity, Transform target, MonoBehaviour monoBehaviour) : base(entity)
         {
+            Entity = entity;
+            DistanceToPoint = .2f;
+            _target = target;
 
+            _mono = monoBehaviour;
         }
     
         public override void Enter()
         {
             base.Enter();
             Debug.Log("Runaway");
-            _move.ModifySpeed(3f);
+            _move.ModifySpeed(2f);
             _look.PlayStateAnimation(StateEnum.Runaway);
+            
+            _mono.StartCoroutine(DelayedSetPath());
         }
+        
+        private System.Collections.IEnumerator DelayedSetPath()
+        {
+            yield return null;
+            SetPath();
+        }
+        
+        private void SetPath()
+        {
+            var init = Vector3Int.RoundToInt(Entity.transform.position);
+            List<Vector3Int> path = ASTAR.Run(init, IsSatisfied, GetConnections, GetCost, Heuristic);
+            path = ASTAR.CleanPath(path, InView);
 
+            foreach (var step in path)
+            {
+                Debug.Log(step);
+            }
+            SetWaypoints(path);
+        }
+        
         public override void Exit()
         {
             base.Exit();
-            _move.ModifySpeed(-3f);
+            _move.ModifySpeed(-2f);
         }
+        
+        #region Utils
+
+            private float Heuristic(Vector3Int current)
+            {
+                Vector3 targetPos = Vector3Int.RoundToInt(_target.position);
+                return Vector3.Distance(current, targetPos);
+            }
+
+            bool IsSatisfied(Vector3Int curr)
+            {
+                Vector3 targetPos = Vector3Int.RoundToInt(_target.position);
+                return Vector3.Distance(curr, targetPos) <= (DistanceToPoint) && InView(curr, Vector3Int.RoundToInt(targetPos));
+            }
+
+        #endregion
     }
 }

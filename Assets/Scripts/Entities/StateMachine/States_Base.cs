@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class States_Base<T> : State<T>
 {
+    // This is the base for all the states. Is the parent of State_FollowPoints and State_Steering.
     protected IMove _move;
     protected ILook _look;
     protected IAttack _attack;

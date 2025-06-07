@@ -87,11 +87,11 @@ namespace Enemies.FirstBossTest
             objectContext.Points[1] = (camp.CampCenter, (int)camp.chaseRadius*(int)camp.patrolRadius);
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             _phaseSystem = new PhaseSystem(phasesThresholds, manager.HealthComponent);
             manager.HealthComponent.OnDamage += CheckPhase;
-            
         }
 
         void InitalizeSteering()
@@ -121,7 +121,7 @@ namespace Enemies.FirstBossTest
             var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown);
             var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
             var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
-            var runAwayState = new FirstBossStateRunAway<StateEnum>(_runawaySteering, _avoidWalls, transform);
+            var runAwayState = new FirstBossStateRunAway<StateEnum>(this.transform, camp.transform, this);
             
             _idleState = idleState;
             _attackState = attackState;

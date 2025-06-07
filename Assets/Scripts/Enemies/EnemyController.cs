@@ -1,3 +1,4 @@
+using System;
 using Entities;
 using UnityEngine;
 
@@ -26,9 +27,13 @@ namespace Enemies
             };
             objectContext.Points.Add((new Vector2(0, 0), 5));
             objectContext.Points.Add((new Vector2(0, 0), 10));
+        }
+
+        protected virtual void Start()
+        {
             InitializeTree();
         }
-    
+
         protected override void Update()
         {
             base.Update();

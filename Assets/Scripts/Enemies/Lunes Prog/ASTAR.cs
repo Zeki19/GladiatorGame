@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ASTAR : MonoBehaviour
 {
-    public static List<T> Run<T>(T start, Func<T, bool> isSatisfied, Func<T, List<T>> getConnections, Func<T, T, float> getCost, Func<T, float> heuristic, int watchdog = 500, int watchdogPath = 500)
+    public static List<T> Run<T>(T start, Func<T, bool> isSatisfied, Func<T, List<T>> getConnections, Func<T, T, float> getCost, Func<T, float> heuristic, int watchdog = 20000, int watchdogPath = 20000)
     {
         Dictionary<T, T> parents = new Dictionary<T, T>();
         PriorityQueue<T> pending = new PriorityQueue<T>();
@@ -26,7 +26,8 @@ public class ASTAR : MonoBehaviour
                 {
                     watchdogPath--;
                     if (watchdogPath <= 0) break;
-                    path.Add(parents[path[path.Count - 1]]);
+                    var a = parents[path[path.Count - 1]];
+                    path.Add(a);
                 }
                 path.Reverse();
                 return path;
