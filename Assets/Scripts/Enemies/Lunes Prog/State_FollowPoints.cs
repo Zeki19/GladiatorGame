@@ -80,11 +80,16 @@ public class State_FollowPoints<T> : States_Base<T>
 
         int x = start.x;
         int y = start.y;
+        
+        
 
         while (true)
         {
             Vector3Int current = new Vector3Int(x, y, 0);
+            
             if (!_wallsManager.IsRightPos(current))
+                return false;
+            if (_wallsManager.NextToWall.ContainsKey(current)&&_wallsManager.NextToWall[current]>50)
                 return false;
 
             if (x == end.x && y == end.y)

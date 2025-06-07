@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Player;
+using Unity.VisualScripting;
 
 namespace Enemies.FirstBossTest.States
 {
@@ -37,7 +39,8 @@ namespace Enemies.FirstBossTest.States
             var init = Vector3Int.RoundToInt(Entity.transform.position);
             List<Vector3Int> path = ASTAR.Run(init, IsSatisfied, GetConnections, GetCost, Heuristic);
             path = ASTAR.CleanPath(path, InView);
-
+           var a = _move as FirstBossModel;
+           a.Points = path;
             SetWaypoints(path);
         }
         
@@ -61,6 +64,7 @@ namespace Enemies.FirstBossTest.States
                 return Vector3.Distance(curr, targetPos) <= (DistanceToPoint) && InView(curr, Vector3Int.RoundToInt(targetPos));
             }
 
+            
         #endregion
     }
 }

@@ -8,8 +8,7 @@ public class PathFindObjects : MonoBehaviour
     {
         _wallsManager = ServiceLocator.Instance.GetService<WallsManager>();
         var coll = GetComponent<Collider2D>();
-        
-        _wallsManager.PickupColl(coll,value);
+        _wallsManager.poti(coll,value);
     }
     
 }

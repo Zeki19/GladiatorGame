@@ -3,6 +3,7 @@ using Enemies.FirstBossTest.States;
 using Enemies.Hounds.States;
 using Entities.Interfaces;
 using Entities.StateMachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -182,6 +183,7 @@ namespace Enemies.FirstBossTest
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, attackRange);
+            
         }
     }
 }

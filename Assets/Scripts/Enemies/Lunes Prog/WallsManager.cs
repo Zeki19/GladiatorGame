@@ -52,6 +52,19 @@ public class WallsManager : MonoBehaviour
             }
         }
     }
+
+    public void poti(Collider2D coll,int value)
+    {
+        var steps = GetPointsOnCollider(coll);
+        for (int i = 0; i < steps.Count; i++)
+        {
+            if (!NextToWall.ContainsKey(steps[i]))
+            {
+                NextToWall.Add(steps[i], value);
+            }
+        }
+    }
+    
     public bool IsRightPos(Vector3 curr)
     {
         curr = Vector3Int.RoundToInt(curr);
@@ -116,9 +129,10 @@ public class WallsManager : MonoBehaviour
         }
         
         if (NextToWall == null) return;
-        Gizmos.color = Color.yellow;
         foreach (var item in NextToWall)
         {
+            float t = Mathf.InverseLerp(0, 100, item.Value);
+            Gizmos.color = Color.Lerp(Color.green, Color.red, t);
             Gizmos.DrawWireSphere(item.Key, 0.25f);
         }
     }

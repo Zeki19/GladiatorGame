@@ -3,7 +3,6 @@ using Entities;
 using Entities.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -77,6 +76,5 @@ namespace Player
         public void SetKnockbackEnabled(bool can) =>_canBeKnockedBack = can;
 
         #endregion
-        
     }
 }

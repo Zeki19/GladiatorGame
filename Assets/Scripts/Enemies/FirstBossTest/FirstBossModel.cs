@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Entities;
 
 public class FirstBossModel : EnemyModel
 {
+    public List<Vector3Int> Points=new List<Vector3Int>();
     public bool isRested;
     public bool isTired;
     public bool isAttackOnCd;
@@ -26,6 +28,14 @@ public class FirstBossModel : EnemyModel
         if (manager != null)
         {
             manager.HealthComponent.TakeDamage(damage);
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        foreach (var VARIABLE in Points)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(VARIABLE, .25f);
         }
     }
 }
