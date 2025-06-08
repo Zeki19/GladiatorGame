@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class LeaderBehaviour : FlockingBaseBehaviour
 {
+    [SerializeField] Transform Enemy;
     public float timePrediction;
     StSeek _seek;
     StPursuit _pursuit;
     bool _isPursuit;
+    bool _isThereLeader = false;
     private void Awake()
     {
         _pursuit = new StPursuit(transform);
@@ -14,6 +16,10 @@ public class LeaderBehaviour : FlockingBaseBehaviour
     }
     protected override Vector3 GetRealDir(List<IBoid> boids, IBoid self)
     {
+        if (!_isThereLeader)
+        {
+            Leader = Enemy;
+        }
         if (_isPursuit)
         {
             return _pursuit.GetDir() * multiplier;
@@ -62,6 +68,14 @@ public class LeaderBehaviour : FlockingBaseBehaviour
                 leader = trans;
                 minDistance = currDistance;
             }
+        }
+        if (leader == transform)
+        {
+            _isThereLeader = false;
+        }
+        else
+        {
+            _isThereLeader = true;
         }
 
         return leader;

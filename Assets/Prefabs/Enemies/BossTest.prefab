@@ -16,6 +16,11 @@ GameObject:
   - component: {fileID: 4571573161694968607}
   - component: {fileID: 3042383693339123862}
   - component: {fileID: 4306031749313399851}
+  - component: {fileID: 7290384638625800057}
+  - component: {fileID: 8216829488320887945}
+  - component: {fileID: 1139145100125414009}
+  - component: {fileID: 5978382900781884209}
+  - component: {fileID: 4293189018648841291}
   m_Layer: 8
   m_Name: BossTest
   m_TagString: Untagged
@@ -189,20 +194,24 @@ MonoBehaviour:
   manager: {fileID: 8564860264683652268}
   target: {fileID: 0}
   attackRange: 1
-  Root: {fileID: 11400000, guid: fd4ddd611374e1d4498c2a809cb10383, type: 2}
+  Root: {fileID: 11400000, guid: 13bb61cfe99cbc54592ef5f8a2ac18e2, type: 2}
   phasesThresholds: 28000000
+  SpriteRendererBoss: {fileID: 0}
   camp: {fileID: 0}
-  AmountOfWaypoints: 3
+  AmountOfWaypoints: 5
   idleDuration: 2
   patrolDuration: 5
   AttackCooldown: 2
-  _maxObs: 2
-  _radius: 5
-  _angle: 180
+  flockMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _maxObs: 6
+  _radius: 1
+  _angle: 90
   _personalArea: 1
   _obsMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
 --- !u!114 &3042383693339123862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,10 +226,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 8564860264683652268}
   moveSpeed: 3
+  Points: []
   isRested: 0
   isTired: 0
   isAttackOnCd: 0
   isSearchFinish: 0
+  lastSeenPlayerPosition: {x: 0, y: 0}
 --- !u!114 &4306031749313399851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,3 +247,75 @@ MonoBehaviour:
   animator: {fileID: 0}
   manager: {fileID: 8564860264683652268}
   rotationSpeed: 1
+--- !u!114 &7290384638625800057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489748630771119169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7074688694a66a945b567711064728d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxBoids: 10
+  radius: 10
+  boidMask:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &8216829488320887945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489748630771119169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72625c4b89bd48540a05dfaa47e89efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+--- !u!114 &1139145100125414009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489748630771119169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d918a252b51e01345a201bc64f259f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+  personalArea: 1
+--- !u!114 &5978382900781884209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489748630771119169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64ec9335aec28241970ec8d3421f074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+--- !u!114 &4293189018648841291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489748630771119169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 1
+  Enemy: {fileID: 0}
+  timePrediction: 0

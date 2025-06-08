@@ -9,12 +9,13 @@ namespace Enemies.FirstBossTest.States
         public bool TiredOfPatroling;
         private Coroutine _patrolCoroutine;
         private FirstBossModel _model;
-
+        SpriteRenderer _spriteRenderer;
         public FirstBossStatePatrol(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self,
-            MonoBehaviour monoBehaviour, float duration) : base(steering, avoidStObstacles, self)
+            MonoBehaviour monoBehaviour, float duration, SpriteRenderer spriteRenderer) : base(steering, avoidStObstacles, self)
         {
             _mono = monoBehaviour;
             _duration = duration;
+            _spriteRenderer = spriteRenderer;   
         }
 
         public override void Enter()
@@ -27,6 +28,8 @@ namespace Enemies.FirstBossTest.States
             _look.PlayStateAnimation(StateEnum.Patrol);
 
             _patrolCoroutine = _mono.StartCoroutine(StartPatrol());
+
+            _spriteRenderer.color = Color.green;
         }
         
         public override void Execute()

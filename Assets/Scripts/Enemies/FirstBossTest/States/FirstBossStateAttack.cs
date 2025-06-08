@@ -15,19 +15,23 @@ namespace Enemies.FirstBossTest.States
             private FirstBossModel _model;
             private Dictionary<AttackType, float> _attackOptions;
             private Dictionary<AttackType, float> _lowHpAttackOptions;
+            private ChompEffect chompEffect;
         
             private MonoBehaviour _mono;
             private float duration;
             public bool canAttack;
-
-            public FirstBossStateAttack(Transform target, Dictionary<AttackType, float> attackOptions, Dictionary<AttackType, float> lowHpAttackOptions, MonoBehaviour monoBehaviour, float attackCooldown)
+            
+        SpriteRenderer _spriteRenderer;
+            public FirstBossStateAttack(Transform target, Dictionary<AttackType, float> attackOptions, Dictionary<AttackType, float> lowHpAttackOptions, MonoBehaviour monoBehaviour, float attackCooldown, SpriteRenderer spriteRenderer, ChompEffect chomp)
             {
                 _target = target;
                 _attackOptions = attackOptions;
                 _lowHpAttackOptions = lowHpAttackOptions;
+                chompEffect = chomp;
         
                 _mono = monoBehaviour;
                 duration = attackCooldown;
+                _spriteRenderer = spriteRenderer;
             }
             public override void Enter()
             { 
@@ -57,23 +61,25 @@ namespace Enemies.FirstBossTest.States
                 switch (_chosenType)
                 {
                   case  AttackType.Normal:
-                      _damage = 10f;
+                      _damage = 0;//10
                       break;
                   case AttackType.Charge:
-                      _damage = 20f;
+                      _damage = 0;//20
                       break;
                   case AttackType.Lunge:
-                      _damage = 15f;
+                      _damage = 0;//15
                       break;
                   case AttackType.Super:
-                      _damage = 25f;
+                      _damage = 0;//25
                       break;
                 }
                 _look.PlayStateAnimation(StateEnum.Attack);
+                chompEffect.PlayEffect();
                 
                 _model.AttackTarget(_target,_damage);
                 _model.isAttackOnCd = true;
                 _mono.StartCoroutine(AttackCooldown());
+            _spriteRenderer.color = Color.red;
             }
         
             private System.Collections.IEnumerator AttackCooldown()
