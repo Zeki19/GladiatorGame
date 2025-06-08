@@ -9,13 +9,15 @@ namespace Enemies.FirstBossTest.States
     {
         private readonly MonoBehaviour _mono;
         private Transform _target;
-        public FirstBossStateRunAway(Transform entity, Transform target, MonoBehaviour monoBehaviour) : base(entity)
+        SpriteRenderer _spriteRenderer;
+        public FirstBossStateRunAway(Transform entity, Transform target, MonoBehaviour monoBehaviour, SpriteRenderer spriteRenderer) : base(entity)
         {
             Entity = entity;
             DistanceToPoint = .2f;
             _target = target;
 
             _mono = monoBehaviour;
+            _spriteRenderer = spriteRenderer;
         }
     
         public override void Enter()
@@ -26,6 +28,7 @@ namespace Enemies.FirstBossTest.States
             _look.PlayStateAnimation(StateEnum.Runaway);
             
             _mono.StartCoroutine(DelayedSetPath());
+            _spriteRenderer.color = Color.black;
         }
         
         

@@ -9,6 +9,7 @@ public class FirstBossModel : EnemyModel, IBoid
     public bool isTired;
     public bool isAttackOnCd;
     public bool isSearchFinish;
+    public Vector2 lastSeenPlayerPosition;
 
     Vector3 IBoid.Position => transform.position;
     public Vector3 Forward => transform.forward;

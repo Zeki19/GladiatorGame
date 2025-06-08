@@ -13,6 +13,9 @@ public class FlockingManager : MonoBehaviour, ISteering
     IBoid _self;
     Collider[] _colliders;
     List<IBoid> _boids;
+    [SerializeField] ISteering cohesion;
+    [SerializeField] ISteering avoidance;
+    [SerializeField] ISteering alignment;
     private void Awake()
     {
         _behaviours = GetComponents<IFlocking>();
