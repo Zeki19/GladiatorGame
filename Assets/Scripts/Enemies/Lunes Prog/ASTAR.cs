@@ -71,4 +71,32 @@ public class ASTAR : MonoBehaviour
         newPath.Add(path[path.Count - 1]);
         return newPath;
     }
+    
+    public static List<Vector3Int> CleanPathPickUps(List<Vector3Int> path, Func<Vector3Int, Vector3Int, bool> inView, HashSet<Vector3Int> pickUps)
+    {
+        if (path == null) return path;
+        if (path.Count <= 2) return path;
+    
+        var newPath = new List<Vector3Int>();
+        newPath.Add(path[0]);
+
+        for (int i = 2; i < path.Count; i++)
+        {
+            var last = newPath[newPath.Count - 1];
+
+            if (pickUps.Contains(path[i - 1]))
+            {
+                newPath.Add(path[i - 1]);
+                continue;
+            }
+
+            if (!inView(last, path[i]))
+            {
+                newPath.Add(path[i - 1]);
+            }
+        }
+
+        newPath.Add(path[path.Count - 1]);
+        return newPath;
+    }
 }

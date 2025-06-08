@@ -13,10 +13,17 @@ public class PowerUP : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Collider2D collider2D;
     [SerializeField] private SpriteRenderer renderer;
+    [SerializeField] private int weight;
+    [SerializeField] private int range;
     private EntityManager _collisionManager;
     private static readonly int BuffType = Animator.StringToHash("BuffType");
     private static readonly int Use = Animator.StringToHash("Use");
     private static readonly int Reset = Animator.StringToHash("Reset");
+
+    private void Start()
+    {
+        ServiceLocator.Instance.GetService<GridManager>().AddPickUp(transform.position,weight,range, type);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

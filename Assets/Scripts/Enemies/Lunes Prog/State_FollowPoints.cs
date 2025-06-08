@@ -123,21 +123,6 @@ public class State_FollowPoints<T> : States_Base<T>
         }
         return neighbours;
     }
-    protected float GetCost(Vector3Int current, Vector3Int child)
-    {
-        var baseCost = 5f;
-        
-        if (GridManager.NextToWall.ContainsKey(child))
-        {
-            baseCost += 3f; 
-        }
-        
-        if (GridManager.PickUpItem.TryGetValue(child, out float pickupValue))
-        {
-            baseCost -= pickupValue;
-        }
 
-        return baseCost;
-    }
     public bool IsFinishPath => _isFinishPath;
 }

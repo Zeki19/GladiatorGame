@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Enemies.FirstBossTest.States;
 using Enemies.Hounds.States;
+using Entities;
 using Entities.Interfaces;
 using Entities.StateMachine;
 using Unity.VisualScripting;
@@ -127,7 +128,7 @@ namespace Enemies.FirstBossTest
             var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown, SpriteRendererBoss, chompEffect);
             var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration, SpriteRendererBoss);
             var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this, SpriteRendererBoss);
-            var runAwayState = new FirstBossStateRunAway<StateEnum>(this.transform, camp.transform, this, SpriteRendererBoss);
+            var runAwayState = new FirstBossStateRunAway<StateEnum>(this.transform, camp.transform, this, manager, SpriteRendererBoss);
             
             _idleState = idleState;
             _attackState = attackState;
