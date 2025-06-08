@@ -38,7 +38,7 @@ namespace Enemies.FirstBossTest.States
         {
             var init = Vector3Int.RoundToInt(Entity.transform.position);
             List<Vector3Int> path = ASTAR.Run(init, IsSatisfied, GetConnections, GetCost, Heuristic);
-            path = ASTAR.CleanPath(path, InView);
+            //path = ASTAR.CleanPath(path, InView);
            var a = _move as FirstBossModel;
            a.Points = path;
             SetWaypoints(path);
@@ -57,7 +57,7 @@ namespace Enemies.FirstBossTest.States
                 Vector3 targetPos = Vector3Int.RoundToInt(_target.position);
                 float baseHeuristic = Vector3.Distance(current, targetPos);
                 
-                if (GridManager.PickUp.TryGetValue(current, out float pickupValue))
+                if (GridManager.PickUpHeu.TryGetValue(current, out float pickupValue))
                 {
                     baseHeuristic -= pickupValue;
                 }

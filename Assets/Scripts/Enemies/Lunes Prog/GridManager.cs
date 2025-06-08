@@ -9,7 +9,8 @@ public class GridManager : MonoBehaviour
     
     private readonly Dictionary<Vector3, int> _walls = new Dictionary<Vector3, int>();
     public readonly Dictionary<Vector3, int> NextToWall = new Dictionary<Vector3, int>();
-    public readonly Dictionary<Vector3Int, float> PickUp = new Dictionary<Vector3Int, float>();
+    public readonly Dictionary<Vector3Int, float> PickUpItem = new Dictionary<Vector3Int, float>();
+    public readonly Dictionary<Vector3Int, float> PickUpHeu = new Dictionary<Vector3Int, float>();
     
     private void Awake()
     {
@@ -122,6 +123,7 @@ public class GridManager : MonoBehaviour
     public void AddPickUp(Vector3 centerPos, int weight, int range)
     {
         Vector3Int center = Vector3Int.RoundToInt(centerPos);
+        PickUpItem.Add(center,weight);
 
         for (int x = -range; x <= range; x++)
         {
@@ -139,9 +141,9 @@ public class GridManager : MonoBehaviour
 
                 if (pointValue <= 0f) continue;
 
-                if (!PickUp.TryAdd(p, Mathf.RoundToInt(pointValue)))
+                if (!PickUpHeu.TryAdd(p, Mathf.RoundToInt(pointValue)))
                 {
-                    PickUp[p] += Mathf.RoundToInt(pointValue);
+                    PickUpHeu[p] += Mathf.RoundToInt(pointValue);
                 }
             }
         }
@@ -163,9 +165,9 @@ public class GridManager : MonoBehaviour
             Gizmos.DrawWireSphere(item.Key, 0.25f);
         }
 
-        if (PickUp != null)
+        if (PickUpHeu != null)
         {
-            foreach (var item in PickUp)
+            foreach (var item in PickUpHeu)
             {
                 var t = Mathf.InverseLerp(0, 20, item.Value);
                 Gizmos.color = Color.Lerp(Color.red, Color.green, t);

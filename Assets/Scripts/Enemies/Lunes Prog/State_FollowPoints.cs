@@ -131,7 +131,7 @@ public class State_FollowPoints<T> : States_Base<T>
             baseCost += 3f; 
         }
         
-        if (GridManager.PickUp.TryGetValue(child, out float pickupValue))
+        if (GridManager.PickUpItem.TryGetValue(child, out float pickupValue))
         {
             baseCost -= pickupValue;
         }
