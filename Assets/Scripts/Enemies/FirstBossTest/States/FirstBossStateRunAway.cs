@@ -8,18 +8,16 @@ namespace Enemies.FirstBossTest.States
 {
     internal class FirstBossStateRunAway<T> : State_FollowPoints<T>
     {
-        private readonly MonoBehaviour _mono;
         private Transform _target;
         SpriteRenderer _spriteRenderer;
         private EntityManager _entityManager;
-        public FirstBossStateRunAway(Transform entity, Transform target, MonoBehaviour monoBehaviour, EntityManager manager, SpriteRenderer spriteRenderer) : base(entity)
+        public FirstBossStateRunAway(Transform entity, Transform target, MonoBehaviour monoBehaviour, EntityManager manager, SpriteRenderer spriteRenderer) : base(entity, monoBehaviour)
         {
             Entity = entity;
             DistanceToPoint = .2f;
             _entityManager = manager;
             _target = target;
-
-            _mono = monoBehaviour;
+            
             _spriteRenderer = spriteRenderer;
         }
     
@@ -29,20 +27,16 @@ namespace Enemies.FirstBossTest.States
             Debug.Log("Runaway");
             _move.ModifySpeed(2f);
             _look.PlayStateAnimation(StateEnum.Runaway);
-            
             _mono.StartCoroutine(DelayedSetPath());
+            
             _spriteRenderer.color = Color.black;
         }
-        
-        
-        
         private System.Collections.IEnumerator DelayedSetPath()
         {
             yield return null;
             SetPath();
         }
-        
-        private void SetPath()
+        protected override void SetPath()
         {
             var init = Vector3Int.RoundToInt(Entity.transform.position);
             List<Vector3Int> path = ASTAR.Run(init, IsSatisfied, GetConnections, GetCost, Heuristic);
@@ -62,7 +56,6 @@ namespace Enemies.FirstBossTest.States
         }
         
         #region Utils
-
             private float Heuristic(Vector3Int current)
         {
             Vector3 targetPos = Vector3Int.RoundToInt(_target.position);
@@ -93,13 +86,11 @@ namespace Enemies.FirstBossTest.States
             }
             return baseHeuristic;
         }
-
-            bool IsSatisfied(Vector3Int curr)
+            private bool IsSatisfied(Vector3Int curr)
             {
                 Vector3 targetPos = Vector3Int.RoundToInt(_target.position);
                 return Vector3.Distance(curr, targetPos) <= (DistanceToPoint) && InView(curr, Vector3Int.RoundToInt(targetPos));
             }
-            
             private float GetCost(Vector3Int from, Vector3Int child)
             {
                 var baseCost = 5f;
@@ -137,8 +128,6 @@ namespace Enemies.FirstBossTest.States
 
                 return baseCost;
             }
-
-            
         #endregion
     }
 }

@@ -1,21 +1,21 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemies.FirstBossTest.States
 {
-    internal class FirstBossStatePatrol<T> : State_Steering<T>
+    internal class FirstBossStatePatrol<T> : State_FollowPoints<T>
     {
-        private readonly MonoBehaviour _mono;
         private readonly float _duration;
         public bool TiredOfPatroling;
         private Coroutine _patrolCoroutine;
         private FirstBossModel _model;
         SpriteRenderer _spriteRenderer;
-        public FirstBossStatePatrol(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self,
-            MonoBehaviour monoBehaviour, float duration, SpriteRenderer spriteRenderer) : base(steering, avoidStObstacles, self)
+        public FirstBossStatePatrol(Transform entity, float duration, List<Vector3Int> waypoints, MonoBehaviour monoBehaviour, SpriteRenderer spriteRenderer) : base(entity, monoBehaviour)
         {
-            _mono = monoBehaviour;
             _duration = duration;
-            _spriteRenderer = spriteRenderer;   
+            _spriteRenderer = spriteRenderer;
+            Waypoints = waypoints;
         }
 
         public override void Enter()
@@ -26,32 +26,20 @@ namespace Enemies.FirstBossTest.States
             if (_model==null) _model=_move as FirstBossModel;
 
             _look.PlayStateAnimation(StateEnum.Patrol);
-
+            
+            
             _patrolCoroutine = _mono.StartCoroutine(StartPatrol());
 
             _spriteRenderer.color = Color.green;
         }
         
-        public override void Execute()
-        {
-            base.Execute();
-
-            Vector2 dir = _steering.GetDir(); 
-            _move.Move(dir);
-            
-            _look.LookDir(dir);
-        }
-
-
         public override void Exit()
         {
-            //_model.isTired = false;
             if (_patrolCoroutine != null)
             {
                 _mono.StopCoroutine(_patrolCoroutine);
                 _patrolCoroutine = null;
             }
-
             base.Exit();
         }
 

@@ -31,7 +31,7 @@ namespace Enemies.FirstBossTest
         [Header("Required GameObjects")] [SerializeField]
         private HoundsCamp camp;
 
-        [SerializeField] private float AmountOfWaypoints;
+        [SerializeField] private int amountOfWaypoints;
 
         [Header("States Settings")] [Tooltip("Time it takes to force a state change.")] [SerializeField]
         private float idleDuration;
@@ -102,15 +102,8 @@ namespace Enemies.FirstBossTest
 
         void InitalizeSteering()
         {
-            var waypoints = new List<Vector2>();
-            for (var i = 0; i < AmountOfWaypoints; i++)
-            {
-                waypoints.Add(camp.GetRandomPoint());
-            }
-
             //No hace falta inicializarlo asi
             _leaderSteering = GetComponent<FlockingManager>();
-            _patrolSteering = new StPatrolToWaypoints(waypoints, manager.model.transform);
             _runawaySteering = new StToPoint(camp.CampCenter, manager.model.transform);
             _pursuitSteering = new StPursuit(manager.model.transform, target);
             _toPointSteering = new StToPoint(_targetLastPos, manager.model.transform);
@@ -126,7 +119,7 @@ namespace Enemies.FirstBossTest
             var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration, SpriteRendererBoss);
             var chaseState = new FirstBossStateChase<StateEnum>(_leaderSteering, _avoidWalls, transform,target.transform,attackRange, GetComponent<LeaderBehaviour>(), flockMask, SpriteRendererBoss);
             var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown, SpriteRendererBoss, chompEffect);
-            var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration, SpriteRendererBoss);
+            var patrolState = new FirstBossStatePatrol<StateEnum>(this.transform, patrolDuration, camp.GetPoints(amountOfWaypoints), this, SpriteRendererBoss);
             var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this, SpriteRendererBoss);
             var runAwayState = new FirstBossStateRunAway<StateEnum>(this.transform, camp.transform, this, manager, SpriteRendererBoss);
             

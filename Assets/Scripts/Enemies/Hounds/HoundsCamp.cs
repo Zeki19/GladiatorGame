@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,6 +25,22 @@ public class HoundsCamp : MonoBehaviour
     {
         Vector2 randomOffset = Random.insideUnitCircle * patrolRadius;
         return CampCenter + randomOffset;
+    }
+    
+    public Vector3Int GetRandomPointV3I()
+    {
+        Vector2 randomOffset = Random.insideUnitCircle * patrolRadius;
+        return Vector3Int.RoundToInt(CampCenter + randomOffset);
+    }
+    
+    public List<Vector3Int> GetPoints(int amount)
+    {
+        var waypoints = new List<Vector3Int>();
+        for (var i = 0; i < amount; i++)
+        {
+            waypoints.Add(GetRandomPointV3I());
+        }
+        return waypoints;
     }
     
     private void OnDrawGizmosSelected()
