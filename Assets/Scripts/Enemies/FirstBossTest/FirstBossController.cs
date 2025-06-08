@@ -36,6 +36,7 @@ namespace Enemies.FirstBossTest
         private float idleDuration;
 
         [SerializeField] private float patrolDuration;
+        [SerializeField] private ChompEffect chompEffect;
         [SerializeField] private float AttackCooldown;
         [SerializeField] private LayerMask flockMask;
 
@@ -122,7 +123,7 @@ namespace Enemies.FirstBossTest
 
             var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration);
             var chaseState = new FirstBossStateChase<StateEnum>(_leaderSteering, _avoidWalls, transform,target.transform,attackRange, GetComponent<LeaderBehaviour>(), flockMask);
-            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown);
+            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown, chompEffect);
             var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
             var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
             var runAwayState = new FirstBossStateRunAway<StateEnum>(this.transform, camp.transform, this);

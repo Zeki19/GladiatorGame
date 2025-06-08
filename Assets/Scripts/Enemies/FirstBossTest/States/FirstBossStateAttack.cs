@@ -15,16 +15,18 @@ namespace Enemies.FirstBossTest.States
             private FirstBossModel _model;
             private Dictionary<AttackType, float> _attackOptions;
             private Dictionary<AttackType, float> _lowHpAttackOptions;
+            private ChompEffect chompEffect;
         
             private MonoBehaviour _mono;
             private float duration;
             public bool canAttack;
 
-            public FirstBossStateAttack(Transform target, Dictionary<AttackType, float> attackOptions, Dictionary<AttackType, float> lowHpAttackOptions, MonoBehaviour monoBehaviour, float attackCooldown)
+            public FirstBossStateAttack(Transform target, Dictionary<AttackType, float> attackOptions, Dictionary<AttackType, float> lowHpAttackOptions, MonoBehaviour monoBehaviour, float attackCooldown, ChompEffect chomp)
             {
                 _target = target;
                 _attackOptions = attackOptions;
                 _lowHpAttackOptions = lowHpAttackOptions;
+                chompEffect = chomp;
         
                 _mono = monoBehaviour;
                 duration = attackCooldown;
@@ -70,6 +72,7 @@ namespace Enemies.FirstBossTest.States
                       break;
                 }
                 _look.PlayStateAnimation(StateEnum.Attack);
+                chompEffect.PlayEffect();
                 
                 _model.AttackTarget(_target,_damage);
                 _model.isAttackOnCd = true;
