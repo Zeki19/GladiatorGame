@@ -28,6 +28,17 @@ namespace Enemies.FirstBossTest.States
 
             _patrolCoroutine = _mono.StartCoroutine(StartPatrol());
         }
+        
+        public override void Execute()
+        {
+            base.Execute();
+
+            Vector2 dir = _steering.GetDir(); 
+            _move.Move(dir);
+            
+            _look.LookDir(dir);
+        }
+
 
         public override void Exit()
         {

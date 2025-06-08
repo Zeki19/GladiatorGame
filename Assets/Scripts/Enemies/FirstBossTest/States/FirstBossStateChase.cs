@@ -30,9 +30,17 @@ namespace Enemies.FirstBossTest.States
         public override void Execute()
         {
             base.Execute();
-            if(Vector2.Distance(_self.position,_target.position)<_attackRange)
-                _move.Move(Vector2.zero);
+
+            Vector2 dir = _steering.GetDir(); 
+            _move.Move(dir);
+
+            if (dir != Vector2.zero)
+                _look.LookDir(dir);
+
             lastSeenPositionOfTarget = _target.position;
+
+            if (Vector2.Distance(_self.position, _target.position) < _attackRange)
+                _move.Move(Vector2.zero);
         }
 
         public override void Exit()

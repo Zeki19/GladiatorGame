@@ -28,6 +28,8 @@ namespace Enemies.FirstBossTest.States
             _mono.StartCoroutine(DelayedSetPath());
         }
         
+        
+        
         private System.Collections.IEnumerator DelayedSetPath()
         {
             yield return null;
