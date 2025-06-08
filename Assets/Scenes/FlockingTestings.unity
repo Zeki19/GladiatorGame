@@ -565,6 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 131394855}
   moveSpeed: 3
+  Points: []
   isRested: 0
   isTired: 0
   isAttackOnCd: 0
@@ -702,7 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1
+  multiplier: 100
   timePrediction: 0
 --- !u!1 &748019328
 GameObject:
@@ -715,6 +716,7 @@ GameObject:
   - component: {fileID: 748019330}
   - component: {fileID: 748019329}
   - component: {fileID: 748019331}
+  - component: {fileID: 748019332}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -765,6 +767,19 @@ MonoBehaviour:
   inactiveWeapon: {fileID: 0}
   forTest:
   - {fileID: 11400000, guid: a3e698ad9960446489270ee23cf4df71, type: 2}
+--- !u!114 &748019332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748019328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eda64bf54dfda64fadcfb8e59a15d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeightOfPointsNextToWalls: 0
 --- !u!1 &1154251876
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1154251877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,6 +894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1154251884}
   moveSpeed: 3
+  Points: []
   isRested: 0
   isTired: 0
   isAttackOnCd: 0
@@ -1078,7 +1094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1
+  multiplier: 100
   timePrediction: 0
 --- !u!1 &1198561603
 GameObject:
@@ -1107,7 +1123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1198561604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1194,6 +1210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1198561611}
   moveSpeed: 3
+  Points: []
   isRested: 0
   isTired: 0
   isAttackOnCd: 0
@@ -1393,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1
+  multiplier: 0
   timePrediction: 0
 --- !u!1001 &1827914493
 PrefabInstance:
@@ -1461,11 +1478,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.98
+      value: 8.36
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.89
+      value: -4.21
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1547,7 +1564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1892030496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1634,6 +1651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1892030503}
   moveSpeed: 3
+  Points: []
   isRested: 0
   isTired: 0
   isAttackOnCd: 0
@@ -1833,7 +1851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1
+  multiplier: 100
   timePrediction: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

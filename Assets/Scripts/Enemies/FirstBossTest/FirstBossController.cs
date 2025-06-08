@@ -19,13 +19,13 @@ namespace Enemies.FirstBossTest
         private States_Base<StateEnum> _patrolState;
         private States_Base<StateEnum> _searchState;
         private States_Base<StateEnum> _runAwayState;
-
-        public States_Base<StateEnum> IdleState => _idleState;
-        public States_Base<StateEnum> ChaseState => _chaseState;
-        public States_Base<StateEnum> AttackState => _attackState;
-        public States_Base<StateEnum> PatrolState => _patrolState;
-        public States_Base<StateEnum> SearchState => _searchState;
-        public States_Base<StateEnum> RunAwayState => _runAwayState;
+        public SpriteRenderer SpriteRendererBoss;
+        public States_Base<StateEnum> IdleState => _idleState; // WHITE
+        public States_Base<StateEnum> ChaseState => _chaseState; // YELLOW
+        public States_Base<StateEnum> AttackState => _attackState; // RED
+        public States_Base<StateEnum> PatrolState => _patrolState; // GREEN
+        public States_Base<StateEnum> SearchState => _searchState; // BLUE
+        public States_Base<StateEnum> RunAwayState => _runAwayState; // BLACK
 
         [Header("Required GameObjects")] [SerializeField]
         private HoundsCamp camp;
@@ -77,11 +77,12 @@ namespace Enemies.FirstBossTest
             { AttackType.Super, 20f }
         };
 
-    private PhaseSystem _phaseSystem;
+        private PhaseSystem _phaseSystem;
         private int _currentPhase = 1;
         
         protected override void Awake()
         {
+            SpriteRendererBoss = GetComponent<SpriteRenderer>();
             InitalizeSteering();
             _avoidWalls = new StObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
             base.Awake();
@@ -120,12 +121,12 @@ namespace Enemies.FirstBossTest
             var look = GetComponent<ILook>();
             var attack = GetComponent<IAttack>();
 
-            var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration);
-            var chaseState = new FirstBossStateChase<StateEnum>(_leaderSteering, _avoidWalls, transform,target.transform,attackRange, GetComponent<LeaderBehaviour>(), flockMask);
-            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown);
-            var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration);
-            var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this);
-            var runAwayState = new FirstBossStateRunAway<StateEnum>(this.transform, camp.transform, this);
+            var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration, SpriteRendererBoss);
+            var chaseState = new FirstBossStateChase<StateEnum>(_leaderSteering, _avoidWalls, transform,target.transform,attackRange, GetComponent<LeaderBehaviour>(), flockMask, SpriteRendererBoss);
+            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown, SpriteRendererBoss);
+            var patrolState = new FirstBossStatePatrol<StateEnum>(_patrolSteering, _avoidWalls, transform, this, patrolDuration, SpriteRendererBoss);
+            var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this, SpriteRendererBoss);
+            var runAwayState = new FirstBossStateRunAway<StateEnum>(this.transform, camp.transform, this, SpriteRendererBoss);
             
             _idleState = idleState;
             _attackState = attackState;
