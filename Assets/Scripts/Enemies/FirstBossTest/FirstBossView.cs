@@ -5,6 +5,7 @@ public class FirstBossView : EnemyView, ILook
     private static readonly int Idle = Animator.StringToHash("Idle");
     private static readonly int Walk = Animator.StringToHash("Walk");
     private static readonly int Run = Animator.StringToHash("Run");
+
     public override void LookDir(Vector2 dir)
     {
         if (dir == Vector2.zero) return;
