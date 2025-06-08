@@ -10,7 +10,7 @@ public class State_FollowPoints<T> : States_Base<T>
     protected float DistanceToPoint;
     private bool _isFinishPath;
     protected GridManager GridManager;
-
+    
     protected State_FollowPoints(Transform entity, float distanceToPoint = 0.2f)
     {
         Entity = entity;
@@ -64,6 +64,7 @@ public class State_FollowPoints<T> : States_Base<T>
     protected virtual void OnMove(Vector3 dir)
     {
         _move.Move(dir);
+        _look.LookDir(dir);
     }
     protected bool InView(Vector3Int grandparent, Vector3Int child)
     {
