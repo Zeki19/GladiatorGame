@@ -95,7 +95,6 @@ namespace Enemies.FirstBossTest
             base.Start();
             _phaseSystem = new PhaseSystem(phasesThresholds, manager.HealthComponent);
             manager.HealthComponent.OnDamage += CheckPhase;
-            _leaderSteering = GetComponent<FlockingManager>();
         }
 
         void InitalizeSteering()
@@ -107,6 +106,7 @@ namespace Enemies.FirstBossTest
             }
 
             //No hace falta inicializarlo asi
+            _leaderSteering = GetComponent<FlockingManager>();
             _patrolSteering = new StPatrolToWaypoints(waypoints, manager.model.transform);
             _runawaySteering = new StToPoint(camp.CampCenter, manager.model.transform);
             _pursuitSteering = new StPursuit(manager.model.transform, target);
