@@ -6,7 +6,7 @@ using UnityEngine;
 public class State_FollowPoints<T> : States_Base<T>
 {
     protected List<Vector3Int> Waypoints;
-    private int _index;
+    protected int _index;
     protected Transform Entity;
     protected float DistanceToPoint;
     private bool _isFinishPath;
@@ -45,7 +45,7 @@ public class State_FollowPoints<T> : States_Base<T>
         _index = 0;
         _isFinishPath = false;
     }
-    void Run()
+    protected virtual void Run()
     {
         if (_isFinishPath) return;
         Vector3 point = Waypoints[_index];

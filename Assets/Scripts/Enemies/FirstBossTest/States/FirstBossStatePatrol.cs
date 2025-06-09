@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace Enemies.FirstBossTest.States
@@ -15,7 +16,7 @@ namespace Enemies.FirstBossTest.States
         {
             _duration = duration;
             _spriteRenderer = spriteRenderer;
-            Waypoints = waypoints;
+            SetWaypoints(waypoints);
         }
 
         public override void Enter()
@@ -27,12 +28,34 @@ namespace Enemies.FirstBossTest.States
 
             _look.PlayStateAnimation(StateEnum.Patrol);
             
-            
             _patrolCoroutine = _mono.StartCoroutine(StartPatrol());
 
             _spriteRenderer.color = Color.green;
         }
-        
+
+        public override void Execute()
+        {
+            base.Execute();
+        }
+
+        protected override void Run()
+        {
+            if (Waypoints == null || Waypoints.Count == 0) return;
+
+            Vector3 point = Waypoints[_index];
+            point.z = Entity.position.z;
+            Vector3 dir = point - Entity.position;
+
+            if (dir.magnitude < DistanceToPoint)
+            {
+                Entity.position = Waypoints[_index];
+                
+                _index = (_index + 1) % Waypoints.Count;
+            }
+
+            OnMove(dir.normalized);
+        }
+
         public override void Exit()
         {
             if (_patrolCoroutine != null)
