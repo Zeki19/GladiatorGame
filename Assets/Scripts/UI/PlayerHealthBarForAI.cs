@@ -14,7 +14,7 @@ public class PlayerHealthBarForAI : MonoBehaviour
         _manager.HealthComponent.OnHeal += UpdateLife;
 
         _slider = GetComponent<Slider>();
-        _slider.value = 0.5f;
+        _slider.value = 1f;
     }
 
     void UpdateLife(float amount)
