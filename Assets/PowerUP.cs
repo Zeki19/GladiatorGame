@@ -50,6 +50,7 @@ public class PowerUp : MonoBehaviour
                     break;
             }
 
+            collider2D.enabled = false;
             StartCoroutine(CountDown());
             animator.SetTrigger(Use);
         }
@@ -57,7 +58,6 @@ public class PowerUp : MonoBehaviour
 
     public void TurnOff()
     {
-        collider2D.enabled = false;
         renderer.enabled = false;
     }
 
