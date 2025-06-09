@@ -110,7 +110,7 @@ namespace HealthSystem
         /// Reduces current health by a specified amount and invokes the OnDamage event.
         /// If health falls to zero or below, triggers the Kill method.
         /// </summary>
-        /// <param name="damageAmount">The amount of damage to apply.</param>
+        /// <param name="amount">The amount of damage to apply.</param>
         public void TakeDamage(float amount)
         {
             if (isInvulnerable) return;
