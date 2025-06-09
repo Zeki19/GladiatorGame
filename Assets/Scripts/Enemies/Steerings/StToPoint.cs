@@ -12,6 +12,6 @@ public class StToPoint : ISteering
     public Vector2 GetDir()
     {
         var distanceToTarget = Vector2.Distance(_destination, _self.position);
-        return distanceToTarget < 0.1f ? Vector2.zero : (_destination - (Vector2)_self.position).normalized;
+        return distanceToTarget < 0.5f ? Vector2.zero : (_destination - (Vector2)_self.position).normalized;
     }
 }

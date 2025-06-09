@@ -39,8 +39,6 @@ namespace Enemies.FirstBossTest.States
             if (dir != Vector2.zero)
                 _look.LookDir(dir);
 
-            lastSeenPositionOfTarget = _target.position;
-
             if (Vector2.Distance(_self.position, _target.position) < _attackRange)
                 _move.Move(Vector2.zero);
         }
@@ -49,6 +47,9 @@ namespace Enemies.FirstBossTest.States
         {
             base.Exit();
             _move.ModifySpeed(-1.2f);
+            lastSeenPositionOfTarget = _target.position;
+            var _model = _move as FirstBossModel;
+            _model.lastSeenPlayerPosition = lastSeenPositionOfTarget;
             _leaderBehaviour.IsActive = false;
         }
     }

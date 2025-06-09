@@ -12,6 +12,7 @@ namespace Enemies.BinaryTree
         [SerializeField] public QuestionEnum _question;
         [SerializeField] private TreeNodeSO _tNode;
         [SerializeField] private TreeNodeSO _fNode;
+        [SerializeField] private LayerMask _layerMask;
         private Dictionary<QuestionEnum, Func<AIContext, bool>> _questionFunc;
 
         private void OnEnable()
@@ -60,13 +61,14 @@ namespace Enemies.BinaryTree
 
         private bool PlayerIsInAStraightLine(AIContext context)
         {
+
             Vector3 origin = context.selfGameObject.transform.position;
             Vector3 direction = (context.playerGameObject.transform.position - origin).normalized;
             float distance = Vector3.Distance(origin, context.playerGameObject.transform.position);
             int layerBit = 1 << context.playerGameObject.layer;
             LayerMask mask = layerBit;
             distance = Mathf.Clamp(distance, 0, 6);
-            var hit = Physics2D.Raycast(origin, direction, distance, mask);
+            var hit = Physics2D.Raycast(origin, direction, distance, _layerMask);
             Debug.DrawLine(origin, origin + direction * distance, Color.green);
             if (hit.collider != null)
             {
