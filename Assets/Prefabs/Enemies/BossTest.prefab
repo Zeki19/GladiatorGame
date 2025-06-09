@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 1139145100125414009}
   - component: {fileID: 5978382900781884209}
   - component: {fileID: 4293189018648841291}
-  - component: {fileID: 6044508626644095110}
   - component: {fileID: 2905050577734864630}
   m_Layer: 8
   m_Name: BossTest
@@ -375,7 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2905050577734864630}
   manager: {fileID: 8564860264683652268}
-  rotationSpeed: 1
+  rotationSpeed: -270
 --- !u!114 &7290384638625800057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,21 +447,6 @@ MonoBehaviour:
   multiplier: 1
   Enemy: {fileID: 0}
   timePrediction: 0
---- !u!114 &6044508626644095110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7489748630771119169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d3a4a46b9210514689eb35c8d2404eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  multiplier: 1
-  Enemy: {fileID: 0}
-  timePrediction: 0.18
 --- !u!95 &2905050577734864630
 Animator:
   serializedVersion: 7
