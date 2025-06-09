@@ -29,7 +29,7 @@ public class FirstBossView : EnemyView, ILook
                 animator.SetTrigger(Idle);
                 break;
             case StateEnum.Attack:
-                animator.SetTrigger(Idle);
+                animator.SetTrigger(Run);
                 break;
             case StateEnum.Chase:
                 animator.SetTrigger(Run);

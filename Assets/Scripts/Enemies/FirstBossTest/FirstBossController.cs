@@ -98,6 +98,7 @@ namespace Enemies.FirstBossTest
             base.Start();
             _phaseSystem = new PhaseSystem(phasesThresholds, manager.HealthComponent);
             manager.HealthComponent.OnDamage += CheckPhase;
+            manager.HealthComponent.OnDead += Die;
         }
 
         void InitalizeSteering()
@@ -182,7 +183,12 @@ namespace Enemies.FirstBossTest
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, attackRange);
-            
         }
+
+        private void Die()
+        {
+            Destroy(gameObject);
+        }
+
     }
 }

@@ -74,7 +74,6 @@ public class LeaderBehaviour : FlockingBaseBehaviour
         else
         {
             _isThereLeader = true;
-            timePrediction = 1;
         }
 
         return leader;
