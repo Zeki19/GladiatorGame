@@ -28,7 +28,7 @@ namespace Enemies.FirstBossTest.States
         public override void Execute()
         {
             var dir = AvoidStObstacles.GetDir(_self, _steering.GetDir());
-            if (dir == Vector2.zero)
+            if (dir == Vector2.zero||_model.Manager.Rb.linearVelocity.magnitude<=0.1f)
             {
                 _look.LookDir(Vector2.right);
                 _mono.StartCoroutine(Timer(2));
