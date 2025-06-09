@@ -60,16 +60,16 @@ namespace Enemies.FirstBossTest.States
                 switch (_chosenType)
                 {
                   case  AttackType.Normal:
-                      _damage = 5;//10
+                      _damage = 5;
                       break;
                   case AttackType.Charge:
-                      _damage = 8;//20
+                      _damage = 8;
                       break;
                   case AttackType.Lunge:
-                      _damage = 10;//15
+                      _damage = 10;
                       break;
                   case AttackType.Super:
-                      _damage = 15;//25
+                      _damage = 15;
                       break;
                 }
                 _look.PlayStateAnimation(StateEnum.Attack);

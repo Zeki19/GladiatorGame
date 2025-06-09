@@ -21,12 +21,12 @@ namespace Enemies.FirstBossTest
         private States_Base<StateEnum> _searchState;
         private States_Base<StateEnum> _runAwayState;
         public SpriteRenderer SpriteRendererBoss;
-        public States_Base<StateEnum> IdleState => _idleState; // WHITE
-        public States_Base<StateEnum> ChaseState => _chaseState; // YELLOW
-        public States_Base<StateEnum> AttackState => _attackState; // RED
-        public States_Base<StateEnum> PatrolState => _patrolState; // GREEN
-        public States_Base<StateEnum> SearchState => _searchState; // BLUE
-        public States_Base<StateEnum> RunAwayState => _runAwayState; // BLACK
+        public States_Base<StateEnum> IdleState => _idleState;
+        public States_Base<StateEnum> ChaseState => _chaseState;
+        public States_Base<StateEnum> AttackState => _attackState; 
+        public States_Base<StateEnum> PatrolState => _patrolState;
+        public States_Base<StateEnum> SearchState => _searchState;
+        public States_Base<StateEnum> RunAwayState => _runAwayState;
 
         [Header("Required GameObjects")] [SerializeField]
         private HoundsCamp camp;
@@ -103,7 +103,6 @@ namespace Enemies.FirstBossTest
 
         void InitalizeSteering()
         {
-            //No hace falta inicializarlo asi
             _leaderSteering = GetComponent<FlockingManager>();
             _runawaySteering = new StToPoint(camp.CampCenter, manager.model.transform);
             _pursuitSteering = new StPursuit(manager.model.transform, target, 0);

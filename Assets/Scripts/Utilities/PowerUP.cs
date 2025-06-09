@@ -11,8 +11,8 @@ public class PowerUp : MonoBehaviour
     [SerializeField] private float duration;
     [SerializeField] private float reappear;
     [SerializeField] private Animator animator;
-    [SerializeField] private Collider2D collider2D;
-    [SerializeField] private SpriteRenderer renderer;
+    [SerializeField] private Collider2D collider2DPowerUp;
+    [SerializeField] private SpriteRenderer rendererPowerUp;
     [SerializeField] private int weight;
     [SerializeField] private int range;
     private EntityManager _collisionManager;
@@ -50,7 +50,7 @@ public class PowerUp : MonoBehaviour
                     break;
             }
 
-            collider2D.enabled = false;
+            collider2DPowerUp.enabled = false;
             StartCoroutine(CountDown());
             animator.SetTrigger(Use);
         }
@@ -58,7 +58,7 @@ public class PowerUp : MonoBehaviour
 
     public void TurnOff()
     {
-        renderer.enabled = false;
+        rendererPowerUp.enabled = false;
     }
 
     private IEnumerator CountDown()
@@ -74,8 +74,8 @@ public class PowerUp : MonoBehaviour
                 break;
         }
         yield return new WaitForSeconds(reappear);
-        collider2D.enabled = true;
-        renderer.enabled = true;
+        collider2DPowerUp.enabled = true;
+        rendererPowerUp.enabled = true;
         animator.SetTrigger(Reset);
         animator.ResetTrigger(Use);
     }

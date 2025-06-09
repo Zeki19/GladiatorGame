@@ -71,7 +71,7 @@ public class HoundController : EnemyController
         _avoidWalls = new StObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
     }
 
-    protected void Start()
+    protected override void Start()
     {
         InitalizeSteering();
     }
@@ -86,7 +86,6 @@ public class HoundController : EnemyController
             waypoints.Add(camp.GetRandomPoint());
         }
 
-        //No hace falta inicializarlo asi
         _patrolSteering = new StPatrolToWaypoints(waypoints, manager.model.transform);
         _runawaySteering = new StToPoint(camp.CampCenter, manager.model.transform);
         _pursuitSteering = new StPursuit(manager.model.transform, target, 0);

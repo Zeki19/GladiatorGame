@@ -5,10 +5,6 @@ namespace Entities.StateMachine
         IState<T> _currentState;
         private T _currentStateEnum;
         public FSM() { }
-        //public FSM(IState<T> curr)
-        //{
-        //    SetInit(curr,StateEnum.Idle);
-        //}
         public void SetInit(IState<T> curr,T initEnum)
         {
             curr.StateMachine = this;

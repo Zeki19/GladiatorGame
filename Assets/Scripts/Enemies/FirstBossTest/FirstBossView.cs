@@ -43,9 +43,6 @@ public class FirstBossView : EnemyView, ILook
             case StateEnum.Search:
                 animator.SetTrigger(Run);
                 break;
-            case StateEnum.Walk:
-            case StateEnum.Default:
-            case StateEnum.Dash:
             default:
                 Debug.LogWarning("No animation mapped for state: " + state);
                 break;
