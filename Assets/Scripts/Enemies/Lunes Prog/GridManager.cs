@@ -11,7 +11,7 @@ public class GridManager : MonoBehaviour
     public readonly Dictionary<Vector3, int> NextToWall = new Dictionary<Vector3, int>();
     public readonly Dictionary<Vector3Int, float> PickUpItem = new Dictionary<Vector3Int, float>();
     public readonly Dictionary<Vector3Int, float> PickUpHeu = new Dictionary<Vector3Int, float>();
-    public readonly Dictionary<PowerUpType, Vector3Int> PickUpDictionary = new Dictionary<PowerUpType, Vector3Int>();
+    public readonly Dictionary<Vector3Int, PowerUpType > PickUpDictionary = new Dictionary<Vector3Int, PowerUpType>();
     
     private void Awake()
     {
@@ -125,7 +125,7 @@ public class GridManager : MonoBehaviour
     {
         Vector3Int center = Vector3Int.RoundToInt(centerPos);
         PickUpItem.Add(center,weight);
-        PickUpDictionary.Add(type,center);
+        PickUpDictionary.Add(center,type);
 
         for (int x = -range; x <= range; x++)
         {

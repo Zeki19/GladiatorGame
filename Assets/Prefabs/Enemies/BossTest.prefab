@@ -164,8 +164,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1204453607710306674}
   m_Father: {fileID: 0}
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 8564860264683652268}
   target: {fileID: 0}
-  attackRange: 1.5
+  attackRange: 1
   Root: {fileID: 11400000, guid: 13bb61cfe99cbc54592ef5f8a2ac18e2, type: 2}
   phasesThresholds: 28000000
   SpriteRendererBoss: {fileID: 7318148500638555909}

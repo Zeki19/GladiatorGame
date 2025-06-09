@@ -4,7 +4,7 @@ using Entities;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PowerUP : MonoBehaviour
+public class PowerUp : MonoBehaviour
 {
     [SerializeField]private PowerUpType type;
     [SerializeField] private float value;
@@ -23,6 +23,15 @@ public class PowerUP : MonoBehaviour
     private void Start()
     {
         ServiceLocator.Instance.GetService<GridManager>().AddPickUp(transform.position,weight,range, type);
+        switch (type)
+        {
+            case PowerUpType.Heal:
+                animator.SetFloat(BuffType,0);
+                break;
+            case PowerUpType.Speed:
+                animator.SetFloat(BuffType,1);
+                break;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,8 +48,6 @@ public class PowerUP : MonoBehaviour
                     _collisionManager.model.ModifySpeed(value);
                     animator.SetFloat(BuffType,1);
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
 
             StartCoroutine(CountDown());

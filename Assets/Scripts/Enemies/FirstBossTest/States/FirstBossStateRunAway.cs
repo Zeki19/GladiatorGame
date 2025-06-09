@@ -41,7 +41,7 @@ namespace Enemies.FirstBossTest.States
             var init = Vector3Int.RoundToInt(Entity.transform.position);
             List<Vector3Int> path = ASTAR.Run(init, IsSatisfied, GetConnections, GetCost, Heuristic);
             
-            HashSet<Vector3Int> pickUpPositions = new HashSet<Vector3Int>(GridManager.PickUpDictionary.Values);
+            HashSet<Vector3Int> pickUpPositions = new HashSet<Vector3Int>(GridManager.PickUpDictionary.Keys);
             path = ASTAR.CleanPathPickUps(path, InView, pickUpPositions);
             
             var a = _move as FirstBossModel;
@@ -65,9 +65,9 @@ namespace Enemies.FirstBossTest.States
             {
                 foreach (var item in GridManager.PickUpDictionary)
                 {
-                    if (item.Value == current)
+                    if (item.Key == current)
                     {
-                        PowerUpType type = item.Key;
+                        PowerUpType type = item.Value;
 
                         if (type == PowerUpType.Speed)
                         {
@@ -75,7 +75,7 @@ namespace Enemies.FirstBossTest.States
                         }
                         else if (type == PowerUpType.Heal)
                         {
-                            if (_entityManager.HealthComponent.GetCurrentHealthPercentage() < 0.5f) // low HP
+                            if (_entityManager.HealthComponent.GetCurrentHealthPercentage() <= 50f) // low HP
                             {
                                 baseHeuristic -= pickupValue;
                             }
@@ -104,9 +104,9 @@ namespace Enemies.FirstBossTest.States
                 {
                     foreach (var kvp in GridManager.PickUpDictionary)
                     {
-                        if (kvp.Value == child)
+                        if (kvp.Key == child)
                         {
-                            PowerUpType type = kvp.Key;
+                            PowerUpType type = kvp.Value;
 
                             if (type == PowerUpType.Speed)
                             {
@@ -115,7 +115,7 @@ namespace Enemies.FirstBossTest.States
                             }
                             else if (type == PowerUpType.Heal)
                             {
-                                if (_entityManager.HealthComponent.GetCurrentHealthPercentage() < 0.5f)
+                                if (_entityManager.HealthComponent.GetCurrentHealthPercentage() <= 50f)
                                 {
                                     baseCost -= pickupValue;
                                 }
