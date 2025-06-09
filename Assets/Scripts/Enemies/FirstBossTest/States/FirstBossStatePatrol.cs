@@ -11,11 +11,9 @@ namespace Enemies.FirstBossTest.States
         public bool TiredOfPatroling;
         private Coroutine _patrolCoroutine;
         private FirstBossModel _model;
-        SpriteRenderer _spriteRenderer;
         public FirstBossStatePatrol(Transform entity, float duration, List<Vector3Int> waypoints, MonoBehaviour monoBehaviour, SpriteRenderer spriteRenderer) : base(entity, monoBehaviour)
         {
             _duration = duration;
-            _spriteRenderer = spriteRenderer;
             SetWaypoints(waypoints);
         }
 
@@ -33,7 +31,6 @@ namespace Enemies.FirstBossTest.States
             
             _patrolCoroutine = _mono.StartCoroutine(StartPatrol());
 
-            _spriteRenderer.color = Color.green;
         }
 
         public override void Execute()

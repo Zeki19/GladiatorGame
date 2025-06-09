@@ -9,14 +9,12 @@ namespace Enemies.FirstBossTest.States
         private float _attackRange;
         LeaderBehaviour _leaderBehaviour;
         LayerMask _boidMask;
-        SpriteRenderer _spriteRenderer;
         public FirstBossStateChase(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self, Transform target,float attackRange, LeaderBehaviour leaderBehaviour, LayerMask boidMask, SpriteRenderer spriteRenderer) : base(steering, avoidStObstacles, self)
         {
             _target = target;
             _attackRange = attackRange;
             _leaderBehaviour = leaderBehaviour;
             _boidMask = boidMask;
-            _spriteRenderer = spriteRenderer;   
         }
         public override void Enter()
         {
@@ -26,7 +24,6 @@ namespace Enemies.FirstBossTest.States
             _look.PlayStateAnimation(StateEnum.Chase);
             _leaderBehaviour.Leader = _target;
             _leaderBehaviour.IsActive = true;
-            _spriteRenderer.color = Color.yellow;
         }
 
         public override void Execute()

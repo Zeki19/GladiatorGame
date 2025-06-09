@@ -21,7 +21,6 @@ namespace Enemies.FirstBossTest.States
             private float duration;
             public bool canAttack;
             
-        SpriteRenderer _spriteRenderer;
             public FirstBossStateAttack(Transform target, Dictionary<AttackType, float> attackOptions, Dictionary<AttackType, float> lowHpAttackOptions, MonoBehaviour monoBehaviour, float attackCooldown, SpriteRenderer spriteRenderer, ChompEffect chomp)
             {
                 _target = target;
@@ -31,7 +30,7 @@ namespace Enemies.FirstBossTest.States
         
                 _mono = monoBehaviour;
                 duration = attackCooldown;
-                _spriteRenderer = spriteRenderer;
+
             }
             public override void Enter()
             { 
@@ -79,7 +78,6 @@ namespace Enemies.FirstBossTest.States
                 _model.AttackTarget(_target,_damage);
                 _model.isAttackOnCd = true;
                 _mono.StartCoroutine(AttackCooldown());
-            _spriteRenderer.color = Color.red;
             }
         
             private System.Collections.IEnumerator AttackCooldown()

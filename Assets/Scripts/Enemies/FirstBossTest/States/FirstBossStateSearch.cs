@@ -8,11 +8,9 @@ namespace Enemies.FirstBossTest.States
         private MonoBehaviour _mono;
         public bool Searched { get; private set; } = false;
         private FirstBossModel _model;
-        SpriteRenderer _spriteRenderer;
         public FirstBossStateSearch(ISteering steering, StObstacleAvoidance avoidStObstacles, Transform self, MonoBehaviour monoBehaviour, SpriteRenderer spriteRenderer) : base(steering, avoidStObstacles, self)
         {
             _mono = monoBehaviour;
-            _spriteRenderer = spriteRenderer;
         }
 
         public override void Enter()
@@ -25,7 +23,6 @@ namespace Enemies.FirstBossTest.States
 
             _model.isSearchFinish = false;
             _look.PlayStateAnimation(StateEnum.Chase);
-            _spriteRenderer.color = Color.blue;
         }
 
         public override void Execute()

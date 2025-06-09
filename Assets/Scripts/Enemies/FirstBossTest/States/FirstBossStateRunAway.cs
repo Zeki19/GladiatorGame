@@ -9,7 +9,6 @@ namespace Enemies.FirstBossTest.States
     internal class FirstBossStateRunAway<T> : State_FollowPoints<T>
     {
         private Transform _target;
-        SpriteRenderer _spriteRenderer;
         private EntityManager _entityManager;
         public FirstBossStateRunAway(Transform entity, Transform target, MonoBehaviour monoBehaviour, EntityManager manager, SpriteRenderer spriteRenderer) : base(entity, monoBehaviour)
         {
@@ -17,8 +16,6 @@ namespace Enemies.FirstBossTest.States
             DistanceToPoint = .2f;
             _entityManager = manager;
             _target = target;
-            
-            _spriteRenderer = spriteRenderer;
         }
     
         public override void Enter()
@@ -28,8 +25,6 @@ namespace Enemies.FirstBossTest.States
             _move.ModifySpeed(2f);
             _look.PlayStateAnimation(StateEnum.Runaway);
             _mono.StartCoroutine(DelayedSetPath());
-            
-            _spriteRenderer.color = Color.black;
         }
         private System.Collections.IEnumerator DelayedSetPath()
         {

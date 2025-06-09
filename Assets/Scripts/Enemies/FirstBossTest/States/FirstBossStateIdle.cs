@@ -8,12 +8,10 @@ namespace Enemies.FirstBossTest.States
         private readonly float _duration;
         public bool FinishedResting;
         private FirstBossModel _model;
-        private SpriteRenderer _spriteRenderer;
         public FirstBossStateIdle(MonoBehaviour monoBehaviour, float duration, SpriteRenderer spriteRenderer)
         {
             _mono = monoBehaviour;
-            _duration = duration;
-            _spriteRenderer = spriteRenderer;   
+            _duration = duration; 
         }
 
         public override void Enter()
@@ -24,7 +22,6 @@ namespace Enemies.FirstBossTest.States
             _move.Move(Vector2.zero);
             _look.PlayStateAnimation(StateEnum.Idle);
             _mono.StartCoroutine(StartResting());
-            _spriteRenderer.color = Color.white;
         }
 
         public override void Exit()
