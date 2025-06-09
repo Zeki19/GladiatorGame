@@ -23,9 +23,12 @@ namespace Enemies.FirstBossTest.States
         {
             base.Enter();
             Debug.Log("Patrol");
-            
-            if (_model==null) _model=_move as FirstBossModel;
 
+            if (_model == null)
+            {
+                _model=_move as FirstBossModel;
+            }
+            _model.isTired = false;
             _look.PlayStateAnimation(StateEnum.Patrol);
             
             _patrolCoroutine = _mono.StartCoroutine(StartPatrol());
@@ -69,7 +72,7 @@ namespace Enemies.FirstBossTest.States
         private System.Collections.IEnumerator StartPatrol()
         {
             yield return new WaitForSeconds(_duration);
-            _model.isRested = false;
+            _model.isTired = true;
         }
     }
 }
