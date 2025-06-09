@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Entities;
 using Player;
 using Unity.VisualScripting;
 
@@ -7,16 +8,16 @@ namespace Enemies.FirstBossTest.States
 {
     internal class FirstBossStateRunAway<T> : State_FollowPoints<T>
     {
-        private readonly MonoBehaviour _mono;
         private Transform _target;
         SpriteRenderer _spriteRenderer;
-        public FirstBossStateRunAway(Transform entity, Transform target, MonoBehaviour monoBehaviour, SpriteRenderer spriteRenderer) : base(entity)
+        private EntityManager _entityManager;
+        public FirstBossStateRunAway(Transform entity, Transform target, MonoBehaviour monoBehaviour, EntityManager manager, SpriteRenderer spriteRenderer) : base(entity, monoBehaviour)
         {
             Entity = entity;
             DistanceToPoint = .2f;
+            _entityManager = manager;
             _target = target;
-
-            _mono = monoBehaviour;
+            
             _spriteRenderer = spriteRenderer;
         }
     
@@ -26,26 +27,25 @@ namespace Enemies.FirstBossTest.States
             Debug.Log("Runaway");
             _move.ModifySpeed(2f);
             _look.PlayStateAnimation(StateEnum.Runaway);
-            
             _mono.StartCoroutine(DelayedSetPath());
+            
             _spriteRenderer.color = Color.black;
         }
-        
-        
-        
         private System.Collections.IEnumerator DelayedSetPath()
         {
             yield return null;
             SetPath();
         }
-        
-        private void SetPath()
+        protected override void SetPath()
         {
             var init = Vector3Int.RoundToInt(Entity.transform.position);
             List<Vector3Int> path = ASTAR.Run(init, IsSatisfied, GetConnections, GetCost, Heuristic);
-            //path = ASTAR.CleanPath(path, InView);
-           var a = _move as FirstBossModel;
-           a.Points = path;
+            
+            HashSet<Vector3Int> pickUpPositions = new HashSet<Vector3Int>(GridManager.PickUpDictionary.Values);
+            path = ASTAR.CleanPathPickUps(path, InView, pickUpPositions);
+            
+            var a = _move as FirstBossModel;
+            a.Points = path;
             SetWaypoints(path);
         }
         
@@ -56,27 +56,78 @@ namespace Enemies.FirstBossTest.States
         }
         
         #region Utils
-
             private float Heuristic(Vector3Int current)
+        {
+            Vector3 targetPos = Vector3Int.RoundToInt(_target.position);
+            float baseHeuristic = Vector3.Distance(current, targetPos);
+
+            if (GridManager.PickUpItem.TryGetValue(current, out float pickupValue))
             {
-                Vector3 targetPos = Vector3Int.RoundToInt(_target.position);
-                float baseHeuristic = Vector3.Distance(current, targetPos);
-                
-                if (GridManager.PickUpHeu.TryGetValue(current, out float pickupValue))
+                foreach (var item in GridManager.PickUpDictionary)
                 {
-                    baseHeuristic -= pickupValue;
+                    if (item.Value == current)
+                    {
+                        PowerUpType type = item.Key;
+
+                        if (type == PowerUpType.Speed)
+                        {
+                            baseHeuristic -= pickupValue;
+                        }
+                        else if (type == PowerUpType.Heal)
+                        {
+                            if (_entityManager.HealthComponent.GetCurrentHealthPercentage() < 0.5f) // low HP
+                            {
+                                baseHeuristic -= pickupValue;
+                            }
+                        }
+                        break;
+                    }
                 }
-
-                return baseHeuristic;
             }
-
-            bool IsSatisfied(Vector3Int curr)
+            return baseHeuristic;
+        }
+            private bool IsSatisfied(Vector3Int curr)
             {
                 Vector3 targetPos = Vector3Int.RoundToInt(_target.position);
                 return Vector3.Distance(curr, targetPos) <= (DistanceToPoint) && InView(curr, Vector3Int.RoundToInt(targetPos));
             }
+            private float GetCost(Vector3Int from, Vector3Int child)
+            {
+                var baseCost = 5f;
 
-            
+                if (GridManager.NextToWall.ContainsKey(child))
+                {
+                    baseCost += 3f;
+                }
+
+                if (GridManager.PickUpItem.TryGetValue(child, out float pickupValue))
+                {
+                    foreach (var kvp in GridManager.PickUpDictionary)
+                    {
+                        if (kvp.Value == child)
+                        {
+                            PowerUpType type = kvp.Key;
+
+                            if (type == PowerUpType.Speed)
+                            {
+
+                                baseCost -= pickupValue;
+                            }
+                            else if (type == PowerUpType.Heal)
+                            {
+                                if (_entityManager.HealthComponent.GetCurrentHealthPercentage() < 0.5f)
+                                {
+                                    baseCost -= pickupValue;
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+
+                return baseCost;
+            }
         #endregion
     }
 }
