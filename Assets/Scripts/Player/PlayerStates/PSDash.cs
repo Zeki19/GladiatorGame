@@ -39,6 +39,7 @@ public class PSDash<T> : PSBase<T>
         _move.Dash(_dashForce);
         _dashTimer = _dashDuration;
         _coroutineRunner.StartCoroutine(CooldownCoroutine());
+        _coroutineRunner.StartCoroutine(InvulnerabilityCooldown());
     }
     private IEnumerator CooldownCoroutine()
     {

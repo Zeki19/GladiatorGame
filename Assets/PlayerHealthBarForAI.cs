@@ -19,6 +19,6 @@ public class PlayerHealthBarForAI : MonoBehaviour
 
     void UpdateLife(float amount)
     {
-        _slider.value = _manager.HealthComponent.GetCurrentHealthPercentage();
+        _slider.value = _manager.HealthComponent.GetCurrentHealthPercentage()/100;
     }
 }

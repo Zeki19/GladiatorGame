@@ -40,37 +40,37 @@ namespace Enemies.FirstBossTest.States
                 Debug.Log("Attack");
 
                 var hp = _model.Manager.HealthComponent;
-                var currentHpPercent = hp.GetCurrentHealth() / hp.GetMaxHealth();
+                var currentHpPercent = hp.GetCurrentHealthPercentage()/100;
 
                 
                 Dictionary<AttackType, float> rouletteSource = new Dictionary<AttackType, float>(
-                    currentHpPercent < 0.5f ? _lowHpAttackOptions : _attackOptions
+                    currentHpPercent <= 0.5f ? _lowHpAttackOptions : _attackOptions
                 ); // Usa el diccionario base según la vida 
 
                 // Peso dinámico para ataque Super
-                float superWeight = Mathf.Lerp(0f, 40f, 1f - currentHpPercent);
+                float superWeight = Mathf.Lerp(0f, 80f, 1f - currentHpPercent);
                 if (rouletteSource.ContainsKey(AttackType.Super))
                     rouletteSource[AttackType.Super] = superWeight;
-                else
-                    rouletteSource.Add(AttackType.Super, superWeight);
                 
+
                 _chosenType = MyRandom.Roulette(rouletteSource);
+                
                 Debug.Log($"[Roulette] HP: {currentHpPercent * 100}% | Chosen Attack: {_chosenType}");
 
                 //Esto deberia ser solo el DMG
                 switch (_chosenType)
                 {
                   case  AttackType.Normal:
-                      _damage = 0;//10
+                      _damage = 5;//10
                       break;
                   case AttackType.Charge:
-                      _damage = 0;//20
+                      _damage = 8;//20
                       break;
                   case AttackType.Lunge:
-                      _damage = 0;//15
+                      _damage = 10;//15
                       break;
                   case AttackType.Super:
-                      _damage = 0;//25
+                      _damage = 15;//25
                       break;
                 }
                 _look.PlayStateAnimation(StateEnum.Attack);
