@@ -39,7 +39,12 @@ namespace Enemies
             base.Update();
             Root.Execute(objectContext);
         }
-    
+
+        public StateEnum GetState() 
+        {
+            return Fsm.CurrentStateEnum();
+        }
+
         protected abstract void InitializeTree();
     }
 }

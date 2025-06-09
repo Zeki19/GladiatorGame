@@ -52,7 +52,7 @@ public class  StatueController : EnemyController
         chaseState = new StatueState_Chase<StateEnum>
         (
             this,
-            new StPursuit(transform, target),
+            new StPursuit(transform, target, 0),
             _maxObs,
             _radius,
             _angle,

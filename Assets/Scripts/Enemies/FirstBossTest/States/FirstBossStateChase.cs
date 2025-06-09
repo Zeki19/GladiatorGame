@@ -24,8 +24,7 @@ namespace Enemies.FirstBossTest.States
             Debug.Log("Chase");
             _move.ModifySpeed(1.2f);
             _look.PlayStateAnimation(StateEnum.Chase);
-            Transform test = _leaderBehaviour.GetLeader(_move as IBoid, 5, _boidMask);
-            _leaderBehaviour.Leader = test;
+            _leaderBehaviour.Leader = _target;
             _leaderBehaviour.IsActive = true;
             _spriteRenderer.color = Color.yellow;
         }

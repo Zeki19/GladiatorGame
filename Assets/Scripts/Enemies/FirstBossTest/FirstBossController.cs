@@ -105,7 +105,7 @@ namespace Enemies.FirstBossTest
             //No hace falta inicializarlo asi
             _leaderSteering = GetComponent<FlockingManager>();
             _runawaySteering = new StToPoint(camp.CampCenter, manager.model.transform);
-            _pursuitSteering = new StPursuit(manager.model.transform, target);
+            _pursuitSteering = new StPursuit(manager.model.transform, target, 0);
             _toPointSteering = new StToPoint(_targetLastPos, manager.model.transform);
         }
         protected override void InitializeFsm()

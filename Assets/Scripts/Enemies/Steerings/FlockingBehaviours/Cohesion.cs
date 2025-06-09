@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class Cohesion : FlockingBaseBehaviour
 {
-    protected override Vector3 GetRealDir(List<IBoid> boids, IBoid self)
+    protected override Vector2 GetRealDir(List<IBoid> boids, IBoid self)
     {
-        Vector3 cohesion = Vector3.zero;
-        Vector3 center = Vector3.zero;
+        Vector2 cohesion = Vector2.zero;
+        Vector2 center = Vector2.zero;
 
         for (int i = 0; i< boids.Count; i++)
         {
-            center += boids[i].Position;
+            center += new Vector2(boids[i].Position.x, boids[i].Position.y);
         }
 
         if (boids.Count > 0) 
         { 
             center /= boids.Count;
-            cohesion = center - self.Position;
+            cohesion = center - new Vector2(self.Position.x, self.Position.y);
         }
 
         return cohesion * multiplier;

@@ -11,30 +11,29 @@ public class FlockingManager : MonoBehaviour, ISteering
     [SerializeField] public LayerMask boidMask;
     IFlocking[] _behaviours;
     IBoid _self;
-    Collider[] _colliders;
+    Collider2D[] _colliders;
     List<IBoid> _boids;
-    [SerializeField] ISteering cohesion;
-    [SerializeField] ISteering avoidance;
-    [SerializeField] ISteering alignment;
     private void Awake()
     {
         _behaviours = GetComponents<IFlocking>();
         _self = GetComponent<IBoid>();
-        _colliders = new Collider[maxBoids];
+        _colliders = new Collider2D[maxBoids];
         _boids = new List<IBoid>();
     }
 
     public Vector2 GetDir()
     {
         _boids.Clear();
-        int count = Physics.OverlapSphereNonAlloc(_self.Position, radius, _colliders, boidMask);
+        _colliders = Physics2D.OverlapCircleAll(_self.Position, radius, boidMask);
+        int count = _colliders.Length;
+        Debug.Log(count);
         for (int i = 0; i < count; i++)
         {
             var boid = _colliders[i].GetComponent<IBoid>();
-            if (boid != null || boid == _self) continue;
+            if (boid == null || boid == _self) continue;
             _boids.Add(boid);
         }
-        Vector3 dir = Vector3.zero;
+        Vector2 dir = Vector2.zero;
         for (int i = 0; i < _behaviours.Length; i++) 
         {
             var curr = _behaviours[i];

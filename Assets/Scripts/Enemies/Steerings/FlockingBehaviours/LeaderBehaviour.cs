@@ -1,3 +1,4 @@
+using Enemies;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,15 +12,11 @@ public class LeaderBehaviour : FlockingBaseBehaviour
     bool _isThereLeader = false;
     private void Awake()
     {
-        _pursuit = new StPursuit(transform);
+        _pursuit = new StPursuit(transform, timePrediction);
         _seek = new StSeek(transform.position);
     }
-    protected override Vector3 GetRealDir(List<IBoid> boids, IBoid self)
+    protected override Vector2 GetRealDir(List<IBoid> boids, IBoid self)
     {
-        if (!_isThereLeader)
-        {
-            Leader = Enemy;
-        }
         if (_isPursuit)
         {
             return _pursuit.GetDir() * multiplier;
@@ -57,6 +54,7 @@ public class LeaderBehaviour : FlockingBaseBehaviour
         foreach (Collider2D coll in colls) 
         {
             Transform trans = coll.GetComponent<Transform>();
+            if (trans.GetComponent<EnemyController>().GetState() != StateEnum.Chase) continue;
             transforms.Add(trans);
             center += trans.position;
         }
@@ -76,6 +74,7 @@ public class LeaderBehaviour : FlockingBaseBehaviour
         else
         {
             _isThereLeader = true;
+            timePrediction = 1;
         }
 
         return leader;
