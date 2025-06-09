@@ -14,6 +14,6 @@ namespace Enemies
         //public Transform playerTransform;
         public float attackRange;
         public FSM<StateEnum> stateMachine;
-        public List<(Vector2, int)> Points=new List<(Vector2, int)>();
+        public List<(Vector2, float)> Points=new List<(Vector2, float)>();
     }
 }

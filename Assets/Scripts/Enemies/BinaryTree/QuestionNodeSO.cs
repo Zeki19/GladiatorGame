@@ -65,7 +65,7 @@ namespace Enemies.BinaryTree
             float distance = Vector3.Distance(origin, context.playerGameObject.transform.position);
             int layerBit = 1 << context.playerGameObject.layer;
             LayerMask mask = layerBit;
-            distance = Mathf.Clamp(distance, 0, 3);
+            distance = Mathf.Clamp(distance, 0, 6);
             var hit = Physics2D.Raycast(origin, direction, distance, mask);
             Debug.DrawLine(origin, origin + direction * distance, Color.green);
             if (hit.collider != null)

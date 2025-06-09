@@ -89,8 +89,8 @@ namespace Enemies.FirstBossTest
             _avoidWalls = new StObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
             base.Awake();
             _los = GetComponent<LineOfSight>();
-            objectContext.Points[0] = (camp.CampCenter, (int)camp.patrolRadius);
-            objectContext.Points[1] = (camp.CampCenter, (int)camp.chaseRadius*(int)camp.patrolRadius);
+            objectContext.Points[0] = (camp.CampCenter, camp.patrolRadius);
+            objectContext.Points[1] = (camp.CampCenter, camp.chaseRadius*camp.patrolRadius);
         }
 
         protected override void Start()
