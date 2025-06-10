@@ -9,7 +9,6 @@ namespace HealthSystem
         private float _currentHealth;
         private bool _isInvulnerable;
 
-        public event Action<float> OnHealthChanged;
 
         private void Awake()
         {
