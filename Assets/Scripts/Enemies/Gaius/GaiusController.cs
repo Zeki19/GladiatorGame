@@ -18,6 +18,8 @@ namespace Enemies.FirstBossTest
 
         #region Private Variables
 
+        private States_Base<StateEnum> _idleState;
+        private States_Base<StateEnum> _attackState;
 
         #endregion
 
@@ -26,6 +28,7 @@ namespace Enemies.FirstBossTest
         
         protected override void Awake()
         {
+            base.Awake();
             SpriteRendererBoss = GetComponent<SpriteRenderer>();
         }
 
@@ -43,49 +46,21 @@ namespace Enemies.FirstBossTest
             var move = GetComponent<IMove>();
             var look = GetComponent<ILook>();
             var attack = GetComponent<IAttack>();
-            /*
-            var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration, SpriteRendererBoss);
-            var chaseState = new FirstBossStateChase<StateEnum>(_leaderSteering, _avoidWalls, transform,target.transform,attackRange, GetComponent<LeaderBehaviour>(), flockMask, SpriteRendererBoss);
-            var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown, SpriteRendererBoss, chompEffect);
-            var patrolState = new FirstBossStatePatrol<StateEnum>(this.transform, patrolDuration, camp.GetPoints(amountOfWaypoints), this, SpriteRendererBoss);
-            var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this, SpriteRendererBoss);
-            var runAwayState = new FirstBossStateRunAway<StateEnum>(this.transform, camp.transform, this, manager, SpriteRendererBoss);
-            
+
+            var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss);
+            var attackState = new GaiusStateAttack<StateEnum>(SpriteRendererBoss);
+
             _idleState = idleState;
             _attackState = attackState;
-            _chaseState = chaseState;
-            _searchState = searchState;
-            _patrolState = patrolState;
-            _runAwayState = runAwayState;
 
             var stateList = new List<States_Base<StateEnum>>
             {
                 idleState,
-                chaseState,
                 attackState,
-                searchState,
-                patrolState,
-                runAwayState,
             };
+            idleState.AddTransition(StateEnum.Attack, attackState);
 
-            idleState.AddTransition(StateEnum.Patrol, patrolState);
-            idleState.AddTransition(StateEnum.Runaway, runAwayState);
-            
-            patrolState.AddTransition(StateEnum.Idle, idleState);
-            patrolState.AddTransition(StateEnum.Chase, chaseState);
-
-            chaseState.AddTransition(StateEnum.Search, searchState);
-            chaseState.AddTransition(StateEnum.Runaway, runAwayState);
-            chaseState.AddTransition(StateEnum.Attack, attackState);
-            
-            searchState.AddTransition(StateEnum.Chase, chaseState);
-            searchState.AddTransition(StateEnum.Runaway, runAwayState);
-            
-            runAwayState.AddTransition(StateEnum.Idle, idleState);
-            runAwayState.AddTransition(StateEnum.Patrol, patrolState);
-            
-            attackState.AddTransition(StateEnum.Chase, chaseState);
-            attackState.AddTransition(StateEnum.Runaway, runAwayState);
+            attackState.AddTransition(StateEnum.Idle, idleState);
 
             foreach (var t in stateList)
             {
@@ -93,7 +68,6 @@ namespace Enemies.FirstBossTest
             }
 
             Fsm.SetInit(idleState,StateEnum.Idle);
-            */
         }
 
         protected override void InitializeTree()
