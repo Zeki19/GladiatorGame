@@ -10,7 +10,7 @@ namespace Enemies
         public GameObject playerGameObject;
         public EnemyController controller;
         public EnemyModel model;
-        public float attackRange;
+        public List<float> attackRanges = new List<float>();
         public FSM<StateEnum> stateMachine;
         public List<(Vector2, float)> Points=new List<(Vector2, float)>();
     }

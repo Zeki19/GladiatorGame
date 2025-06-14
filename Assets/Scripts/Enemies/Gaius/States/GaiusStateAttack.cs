@@ -1,12 +1,15 @@
+using Entities.StateMachine;
 using UnityEngine;
 
 public class GaiusStateAttack<T>: States_Base<T>
 {
     private FirstBossModel _model;
     private SpriteRenderer _spriteRenderer;
+    private FSM<T> _fsm;
     public GaiusStateAttack(SpriteRenderer spriteRenderer)
     {
         _spriteRenderer = spriteRenderer;
+        _fsm = StateMachine;
     }
 
     public override void Enter()

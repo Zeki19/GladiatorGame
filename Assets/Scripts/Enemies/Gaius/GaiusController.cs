@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Enemies.FirstBossTest.States;
 using Enemies.Hounds.States;
 using Entities;
@@ -12,27 +14,32 @@ namespace Enemies.FirstBossTest
 {
     public class GaiusController : EnemyController
     {
-        [SerializeField] int[] phasesThresholds;
+        [SerializeField] public float shortRange;
+
+        [SerializeField] public float midRange;
+
+        [SerializeField] public float longRange;
 
         public SpriteRenderer SpriteRendererBoss;
+
+        public bool didAttackMiss;
 
         #region Private Variables
 
         private States_Base<StateEnum> _idleState; // BLUE
         private States_Base<StateEnum> _stunState; // GREEN
         private States_Base<StateEnum> _chaseState; // WHITE
-        private States_Base<StateEnum> _attackState; // NONAPLICABLE
         private States_Base<StateEnum> _shortAttackState; // YELLOW
         private States_Base<StateEnum> _midAttackState; // RED
         private States_Base<StateEnum> _longAttackState; // BLACK
 
         #endregion
 
-        private PhaseSystem _phaseSystem;
-        private int _currentPhase = 1;
-        
         protected override void Awake()
         {
+            attackRanges.Add(shortRange);
+            attackRanges.Add(midRange);
+            attackRanges.Add(longRange);
             base.Awake();
             SpriteRendererBoss = GetComponent<SpriteRenderer>();
         }
@@ -40,7 +47,6 @@ namespace Enemies.FirstBossTest
         protected override void Start()
         {
             base.Start();
-            _phaseSystem = new PhaseSystem(phasesThresholds, manager.HealthComponent);
             manager.HealthComponent.OnDamage += CheckPhase;
             manager.HealthComponent.OnDead += Die;
         }
@@ -55,7 +61,6 @@ namespace Enemies.FirstBossTest
             var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss);
             var stunState = new GaiusStateStun<StateEnum>(SpriteRendererBoss);
             var chaseState = new GaiusStateChase<StateEnum>(SpriteRendererBoss);
-            var attackState = new GaiusStateAttack<StateEnum>(SpriteRendererBoss);
             var shortAttackState = new GaiusStateShortAttack<StateEnum>(SpriteRendererBoss);
             var midAttackState = new GaiusStateMidAttack<StateEnum>(SpriteRendererBoss);
             var longAttackState = new GaiusStateLongAttack<StateEnum>(SpriteRendererBoss);
@@ -63,7 +68,6 @@ namespace Enemies.FirstBossTest
             _idleState = idleState;
             _stunState = stunState;
             _chaseState = chaseState;
-            _attackState = attackState;
             _shortAttackState = shortAttackState;
             _midAttackState = midAttackState;
             _longAttackState = longAttackState;
@@ -74,7 +78,6 @@ namespace Enemies.FirstBossTest
                 idleState,
                 stunState,
                 chaseState,
-                attackState,
                 shortAttackState,
                 midAttackState,
                 longAttackState
@@ -93,8 +96,6 @@ namespace Enemies.FirstBossTest
             chaseState.AddTransition(StateEnum.ShortAttack, shortAttackState);
             chaseState.AddTransition(StateEnum.MidAttack, midAttackState);
             chaseState.AddTransition(StateEnum.LongAttack, longAttackState);
-
-            attackState.AddTransition(StateEnum.Idle, idleState);
             
             shortAttackState.AddTransition(StateEnum.Idle, idleState);
             
@@ -117,16 +118,15 @@ namespace Enemies.FirstBossTest
             Root.Execute(objectContext);
         }
 
-        void CheckPhase(float damage)
-        {
-            _currentPhase = _phaseSystem.currentPhase();
-            Debug.Log("Current phase is:" + _currentPhase);
-        }
-
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
+            Gizmos.DrawWireSphere(transform.position, shortRange);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, midRange);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, longRange);
+
         }
 
         private void Die()
@@ -134,5 +134,11 @@ namespace Enemies.FirstBossTest
             Destroy(gameObject);
         }
 
+        private void OnValidate()
+        {
+            shortRange = Mathf.Clamp(shortRange, 0, midRange);
+            midRange = Mathf.Clamp(midRange, shortRange, longRange);
+            longRange = Mathf.Max(longRange, midRange);
+        }
     }
 }

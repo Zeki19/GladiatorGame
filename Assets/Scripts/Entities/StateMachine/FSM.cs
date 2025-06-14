@@ -4,12 +4,14 @@ namespace Entities.StateMachine
     {
         IState<T> _currentState;
         private T _currentStateEnum;
+        private T _lastStateEnum;
         public FSM() { }
         public void SetInit(IState<T> curr,T initEnum)
         {
             curr.StateMachine = this;
             _currentState = curr;
             _currentStateEnum = initEnum;
+            _lastStateEnum = _currentStateEnum;
             _currentState.Enter();
         }
         public void OnExecute() => _currentState?.Execute();
@@ -18,6 +20,7 @@ namespace Entities.StateMachine
         {
             IState<T> newState = _currentState.GetTransition(input);
             if (newState == null) return;
+            _lastStateEnum = _currentStateEnum;
             _currentStateEnum = input;
             newState.StateMachine = this;
             _currentState.Exit();
@@ -31,5 +34,6 @@ namespace Entities.StateMachine
 
         public T CurrentStateEnum() => _currentStateEnum;
 
+        public T LastStateEnum() => _lastStateEnum;
     }
 }

@@ -19,7 +19,6 @@ namespace Enemies.BinaryTree
         {
             _questionFunc = new Dictionary<QuestionEnum, Func<AIContext, bool>>
             {
-                { QuestionEnum.PlayerInAttackRange, PlayerInAttackRange },
                 { QuestionEnum.PlayerIsInAStraightLine, PlayerIsInAStraightLine },
                 { QuestionEnum.IsFarToPoint1, IsFarToPoint1 },
                 { QuestionEnum.IsFarToPoint2, IsFarToPoint2 },
@@ -33,7 +32,13 @@ namespace Enemies.BinaryTree
                 { QuestionEnum.IsRested, IsRested },
                 { QuestionEnum.IsTired, IsTired },
                 { QuestionEnum.IsAttackOnCd, IsAttackOnCd },
-                { QuestionEnum.FinishedSearching, FinishedSearching }
+                { QuestionEnum.FinishedSearching, FinishedSearching },
+                { QuestionEnum.WasLastStateAttack, WasLastStateAttack },
+                { QuestionEnum.DidAttackMiss, DidAttackMiss },
+                { QuestionEnum.IsInShortRange, c => PlayerInAttackRange(c, 0) },
+                { QuestionEnum.IsInMidRange, c => PlayerInAttackRange(c, 1) },
+                { QuestionEnum.IsInLongRange, c => PlayerInAttackRange(c, 2) },
+                { QuestionEnum.IsInPhase1, IsInPhase1}
             };
         }
 
@@ -53,10 +58,10 @@ namespace Enemies.BinaryTree
             }
         }
 
-        private bool PlayerInAttackRange(AIContext context)
+        private bool PlayerInAttackRange(AIContext context, int attackDistance)
         {
             return Vector3.Distance(context.selfGameObject.transform.position,
-                context.playerGameObject.transform.position) <= context.attackRange;
+                context.playerGameObject.transform.position) <= context.attackRanges[attackDistance];
         }
         private bool PlayerIsInAStraightLine(AIContext context)
         {
@@ -147,27 +152,42 @@ namespace Enemies.BinaryTree
         }
         private bool WasLastStateAttack(AIContext arg)
         {
-            return true;
+            var lastState = arg.stateMachine.LastStateEnum();
+            return lastState == StateEnum.ShortAttack || lastState == StateEnum.MidAttack || lastState == StateEnum.LongAttack;
         }
         private bool DidAttackMiss(AIContext arg)     
         {
-            return true;
+            var controller = arg.controller as GaiusController;
+            return controller != null && controller.didAttackMiss;
         }
+        
+        /*
         private bool IsInShortRange(AIContext arg)    
         {
-            return true;
+            var controller = arg.controller as GaiusController;
+            return Vector3.Distance(arg.selfGameObject.transform.position, arg.playerGameObject.transform.position) <= controller.shortRange;
         }
         private bool IsInMidRange(AIContext arg)      
         {
-            return true;
+            var controller = arg.controller as GaiusController;
+            return Vector3.Distance(arg.selfGameObject.transform.position, arg.playerGameObject.transform.position) <= controller.midRange;
         }
         private bool IsInLongRange(AIContext arg)     
         {
-            return true;
+            var controller = arg.controller as GaiusController;
+            return Vector3.Distance(arg.selfGameObject.transform.position, arg.playerGameObject.transform.position) <= controller.longRange;
         }
+        private bool IsWithinDistance(AIContext arg, float range)
+        {
+            Vector3 posA = arg.selfGameObject.transform.position;
+            Vector3 posB = arg.playerGameObject.transform.position;
+            return Vector3.Distance(posA, posB) <= range;
+        }
+        */
+        
         private bool IsInPhase1(AIContext arg) 
         {
-            return true;
+            return arg.controller.CurrentPhase == 1;
         }
 
     }
