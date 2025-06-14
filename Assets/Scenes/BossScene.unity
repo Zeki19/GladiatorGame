@@ -513,7 +513,7 @@ MonoBehaviour:
   manager: {fileID: 2022685032}
   target: {fileID: 1827914495}
   attackRange: 3
-  Root: {fileID: 11400000, guid: 658d8a8baf2ea824cbf49546dd970d57, type: 2}
+  Root: {fileID: 11400000, guid: 42a34e31767ce6e46afa458c537f22d4, type: 2}
   phasesThresholds: 32000000
   SpriteRendererBoss: {fileID: 2022685035}
 --- !u!114 &2022685032
@@ -592,7 +592,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022685028}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

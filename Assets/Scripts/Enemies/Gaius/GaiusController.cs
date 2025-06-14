@@ -18,8 +18,13 @@ namespace Enemies.FirstBossTest
 
         #region Private Variables
 
-        private States_Base<StateEnum> _idleState;
-        private States_Base<StateEnum> _attackState;
+        private States_Base<StateEnum> _idleState; // BLUE
+        private States_Base<StateEnum> _stunState; // GREEN
+        private States_Base<StateEnum> _chaseState; // WHITE
+        private States_Base<StateEnum> _attackState; // NONAPLICABLE
+        private States_Base<StateEnum> _shortAttackState; // YELLOW
+        private States_Base<StateEnum> _midAttackState; // RED
+        private States_Base<StateEnum> _longAttackState; // BLACK
 
         #endregion
 
@@ -48,19 +53,56 @@ namespace Enemies.FirstBossTest
             var attack = GetComponent<IAttack>();
 
             var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss);
+            var stunState = new GaiusStateStun<StateEnum>(SpriteRendererBoss);
+            var chaseState = new GaiusStateChase<StateEnum>(SpriteRendererBoss);
             var attackState = new GaiusStateAttack<StateEnum>(SpriteRendererBoss);
+            var shortAttackState = new GaiusStateShortAttack<StateEnum>(SpriteRendererBoss);
+            var midAttackState = new GaiusStateMidAttack<StateEnum>(SpriteRendererBoss);
+            var longAttackState = new GaiusStateLongAttack<StateEnum>(SpriteRendererBoss);
 
             _idleState = idleState;
+            _stunState = stunState;
+            _chaseState = chaseState;
             _attackState = attackState;
+            _shortAttackState = shortAttackState;
+            _midAttackState = midAttackState;
+            _longAttackState = longAttackState;
+
 
             var stateList = new List<States_Base<StateEnum>>
             {
                 idleState,
+                stunState,
+                chaseState,
                 attackState,
+                shortAttackState,
+                midAttackState,
+                longAttackState
             };
-            idleState.AddTransition(StateEnum.Attack, attackState);
+
+            idleState.AddTransition(StateEnum.Chase, chaseState);
+            idleState.AddTransition(StateEnum.ShortAttack, shortAttackState);
+            idleState.AddTransition(StateEnum.MidAttack, midAttackState);
+            idleState.AddTransition(StateEnum.LongAttack, longAttackState);
+
+            stunState.AddTransition(StateEnum.Idle, idleState);
+            stunState.AddTransition(StateEnum.Chase, chaseState);
+
+            chaseState.AddTransition(StateEnum.Idle, idleState);
+            chaseState.AddTransition(StateEnum.Stun, stunState);
+            chaseState.AddTransition(StateEnum.ShortAttack, shortAttackState);
+            chaseState.AddTransition(StateEnum.MidAttack, midAttackState);
+            chaseState.AddTransition(StateEnum.LongAttack, longAttackState);
 
             attackState.AddTransition(StateEnum.Idle, idleState);
+            
+            shortAttackState.AddTransition(StateEnum.Idle, idleState);
+            
+            midAttackState.AddTransition(StateEnum.Idle, idleState);
+            
+            longAttackState.AddTransition(StateEnum.Idle, idleState);
+            longAttackState.AddTransition(StateEnum.Stun, stunState);
+
 
             foreach (var t in stateList)
             {

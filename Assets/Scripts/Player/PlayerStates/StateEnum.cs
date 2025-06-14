@@ -2,9 +2,13 @@
 {
     Default,
     Idle,
+    Stun,
     Walk,
     Dash,
     Attack,
+    ShortAttack,
+    MidAttack,
+    LongAttack,
     ChargeAttack,
     Chase,
     Search,
@@ -12,5 +16,6 @@
     Runaway,
     Phase1,
     Phase2,
-    Phase3
+    Phase3,
+
 }

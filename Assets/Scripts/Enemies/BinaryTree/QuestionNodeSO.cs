@@ -58,7 +58,6 @@ namespace Enemies.BinaryTree
             return Vector3.Distance(context.selfGameObject.transform.position,
                 context.playerGameObject.transform.position) <= context.attackRange;
         }
-
         private bool PlayerIsInAStraightLine(AIContext context)
         {
 
@@ -77,43 +76,36 @@ namespace Enemies.BinaryTree
 
             return false;
         }
-
         private bool IsFarToPoint1(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) >
                    context.Points[0].Item2;
         }
-
         private bool IsNearToPoint1(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) <
                    context.Points[0].Item2;
         }
-
         private bool IsFarToPoint2(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[1].Item1) >
                    context.Points[1].Item2;
         }
-
         private bool FinishedSearching(AIContext arg)
         {
             var model = arg.model as FirstBossModel;
             return model != null && model.isSearchFinish;
         }
-
         private bool IsAttackOnCd(AIContext arg)
         {
             var model = arg.model as FirstBossModel;
             return model != null && model.isAttackOnCd;
         }
-
         private bool IsTired(AIContext arg)
         {
             var model = arg.model as FirstBossModel;
             return model != null && model.isTired;
         }
-
         private bool IsRested(AIContext arg)
         {
             var model = arg.model as FirstBossModel;
@@ -123,7 +115,6 @@ namespace Enemies.BinaryTree
         {
             return true;
         }
-
         private bool IsInIdleState(AIContext arg)
         {
             //var controller = arg.controller as FirstBossController;
@@ -131,14 +122,12 @@ namespace Enemies.BinaryTree
             var b = arg.stateMachine.CurrentStateEnum() == StateEnum.Idle;
             return b;
         }
-
         private bool IsInChaseState(AIContext arg)
         {
             //var controller = arg.controller as FirstBossController;
             //return arg.stateMachine.CurrentState() == controller?.ChaseState;
             return arg.stateMachine.CurrentStateEnum() == StateEnum.Chase;
         }
-
         private bool IsInPatrolState(AIContext arg)
         {
             //var controller = arg.controller as FirstBossController;
@@ -146,17 +135,40 @@ namespace Enemies.BinaryTree
             var b = arg.stateMachine.CurrentStateEnum() == StateEnum.Patrol;
             return b;
         }
-
         private bool IsInSearchState(AIContext arg)
         {
             //var controller = arg.controller as FirstBossController;
             //return arg.stateMachine.CurrentState() == controller?.SearchState;
             return arg.stateMachine.CurrentStateEnum() == StateEnum.Search;
         }
-
         private bool IsInAttackState(AIContext arg)
         {
             return arg.stateMachine.CurrentStateEnum() == StateEnum.Attack;
         }
+        private bool WasLastStateAttack(AIContext arg)
+        {
+            return true;
+        }
+        private bool DidAttackMiss(AIContext arg)     
+        {
+            return true;
+        }
+        private bool IsInShortRange(AIContext arg)    
+        {
+            return true;
+        }
+        private bool IsInMidRange(AIContext arg)      
+        {
+            return true;
+        }
+        private bool IsInLongRange(AIContext arg)     
+        {
+            return true;
+        }
+        private bool IsInPhase1(AIContext arg) 
+        {
+            return true;
+        }
+
     }
 }

@@ -12,7 +12,7 @@ public class GaiusStateChase<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
-        _spriteRenderer.color = Color.blue;
+        _spriteRenderer.color = Color.white;
         _move.Move(Vector2.zero);
     }
 
