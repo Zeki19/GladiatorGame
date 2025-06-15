@@ -20,7 +20,6 @@ namespace Enemies.FirstBossTest.States
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Patrol");
 
             if (_model == null)
             {

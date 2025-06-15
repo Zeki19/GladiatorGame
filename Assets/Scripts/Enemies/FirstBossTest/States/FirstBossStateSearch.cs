@@ -16,10 +16,9 @@ namespace Enemies.FirstBossTest.States
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Search");
             var updateSearch = _move as FirstBossModel;
             _steering = new StToPoint(updateSearch.lastSeenPlayerPosition, _self);
-            if (_model==null) _model=_move as FirstBossModel;
+            if (!_model) _model=_move as FirstBossModel;
 
             _model.isSearchFinish = false;
             _look.PlayStateAnimation(StateEnum.Chase);

@@ -10,8 +10,6 @@ namespace Entities
     {
         [SerializeField] protected EntityManager manager;
         public EntityManager Manager => manager;
-        [SerializeField] protected float moveSpeed;
-        protected float _speedModifier = 1;
 
         public Vector2 Position => transform.position;
 

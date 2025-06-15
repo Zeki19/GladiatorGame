@@ -7,6 +7,8 @@ namespace Enemies.Statue
     {
         [SerializeField] private float attackRange;
         public float AttackRange => attackRange;
+        [SerializeField] protected float moveSpeed;
+        protected float _speedModifier;
         public override void Move(Vector2 dir)
         {
             manager.Rb.linearVelocity =  dir * (moveSpeed);

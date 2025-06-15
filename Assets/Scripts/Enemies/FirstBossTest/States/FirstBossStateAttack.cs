@@ -35,9 +35,7 @@ namespace Enemies.FirstBossTest.States
             public override void Enter()
             { 
                 base.Enter();
-                if (_model==null) _model=_move as FirstBossModel;
-                Debug.Log("Attack");
-
+                if (!_model) _model=_move as FirstBossModel;
                 var hp = _model.Manager.HealthComponent;
                 var currentHpPercent = hp.GetCurrentHealthPercentage()/100;
 

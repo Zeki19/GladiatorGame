@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities.Interfaces;
 using Entities.StateMachine;
 using UnityEngine;
 

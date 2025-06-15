@@ -1,6 +1,7 @@
 using System;
 using Entities;
 using Entities.Interfaces;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,16 +14,11 @@ namespace Player
         private PlayerInput _playerInput;
         private InputAction _direction;
 
-        #region KnockBackVariables
-
-        [SerializeField] private float knockbackWeight;
-        private bool _canBeKnockedBack;
-        
-        #endregion 
+        private PlayerStats _stats;
         
         Action _onAttack = delegate { };
-       
-        
+
+
         public override Action OnAttack { get => _onAttack; set => _onAttack = value; }
 
         private void Awake()
@@ -30,6 +26,9 @@ namespace Player
             _playerInput = GetComponent<PlayerInput>();
             var actionMap = _playerInput.actions.FindActionMap("Player");
             _direction = actionMap.FindAction("Move");
+            var playerManager = manager as PlayerManager;
+            if (playerManager != null) _stats = playerManager.stats;
+            else Debug.LogWarning("manager is not A player manager and it should be");
         }
         public void Attack()
         {
@@ -38,42 +37,40 @@ namespace Player
 
         public override void ModifySpeed(float speed)
         {
-            _speedModifier += speed;  //Ask the designer if this should be a + or a *.
+            _stats.SpeedModifier += speed;  //Ask the designer if this should be a + or a *.
         }
 
         public override void Dash(float dashForce)
         {
-            manager.Rb.linearVelocity = _lastDirection * (dashForce * _speedModifier);
+            manager.Rb.linearVelocity = _lastDirection * (dashForce *_stats.SpeedModifier);
         }
 
         public override void Move(Vector2 dir)
         {
             _moveInput = _direction.ReadValue<Vector2>();
             if (_moveInput != Vector2.zero) _lastDirection = _moveInput;
-            manager.Rb.linearVelocity = _moveInput * (moveSpeed * _speedModifier);
+            manager.Rb.linearVelocity = _moveInput * (_stats.MoveSpeed * _stats.SpeedModifier);
         }
 
         #region KnockBack
-
-        float IKnockbackable.KnockbackWeight => knockbackWeight;
-
-        bool IKnockbackable.CanBeKnockedBack => _canBeKnockedBack;
         
         public void ApplyKnockbackFromSource(Vector2 sourcePosition, float intensity)
         {
-            if (!_canBeKnockedBack) return;
+            if (!_stats.canBeKnockedBack) return;
             Vector2 direction = (transform.position - (Vector3)sourcePosition).normalized;
             Vector2 force = direction * intensity;
             ApplyKnockback(force);
         }
+        float IKnockbackable.KnockbackWeight => _stats.KnockbackWeight;
+        bool IKnockbackable.CanBeKnockedBack => _stats.canBeKnockedBack;
         public void ApplyKnockback(Vector2 force)
         {
-            if (!_canBeKnockedBack) return;
-            Vector2 adjustedForce = force / knockbackWeight;
+            if (!_stats.canBeKnockedBack) return;
+            Vector2 adjustedForce = force / _stats.KnockbackWeight;
             manager.Rb.linearVelocity = Vector2.zero;
             manager.Rb.AddForce(adjustedForce, ForceMode2D.Impulse);
         }
-        public void SetKnockbackEnabled(bool can) =>_canBeKnockedBack = can;
+        public void SetKnockbackEnabled(bool can) =>_stats.canBeKnockedBack = can;
 
         #endregion
     }

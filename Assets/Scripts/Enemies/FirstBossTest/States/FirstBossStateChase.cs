@@ -19,7 +19,6 @@ namespace Enemies.FirstBossTest.States
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Chase");
             _move.ModifySpeed(1.2f);
             _look.PlayStateAnimation(StateEnum.Chase);
             _leaderBehaviour.Leader = _target;
@@ -45,8 +44,8 @@ namespace Enemies.FirstBossTest.States
             base.Exit();
             _move.ModifySpeed(-1.2f);
             lastSeenPositionOfTarget = _target.position;
-            var _model = _move as FirstBossModel;
-            _model.lastSeenPlayerPosition = lastSeenPositionOfTarget;
+            var model = _move as FirstBossModel;
+            model.lastSeenPlayerPosition = lastSeenPositionOfTarget;
             _leaderBehaviour.IsActive = false;
         }
     }

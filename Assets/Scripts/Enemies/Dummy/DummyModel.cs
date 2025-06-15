@@ -18,6 +18,8 @@ namespace Enemies.Dummy
         [Min(0.1f)][SerializeField] private float knockbackWeight=1f;
         private bool _canBeKnockedBack = true;
         public override Action OnAttack { get => _onAttack; set => _onAttack = value; }
+        [SerializeField] protected float moveSpeed;
+        protected float SpeedModifier;
 
         #region Public variables
         public float MoveSpeed => moveSpeed;

@@ -1,3 +1,5 @@
+using Entities.Interfaces;
+
 namespace Entities.StateMachine
 {
     public class FSM<T>

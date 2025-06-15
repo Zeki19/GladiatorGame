@@ -11,7 +11,6 @@ public class HoundState_Chase<T> : State_Steering<T>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Chase");
         
         _move.ModifySpeed(2f);
         _look.PlayStateAnimation(StateEnum.Chase);
