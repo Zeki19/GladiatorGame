@@ -19,21 +19,26 @@ namespace Enemies.BinaryTree
         {
             _questionFunc = new Dictionary<QuestionEnum, Func<AIContext, bool>>
             {
-                { QuestionEnum.PlayerInAttackRange, PlayerInAttackRange },
                 { QuestionEnum.PlayerIsInAStraightLine, PlayerIsInAStraightLine },
                 { QuestionEnum.IsFarToPoint1, IsFarToPoint1 },
                 { QuestionEnum.IsFarToPoint2, IsFarToPoint2 },
                 { QuestionEnum.IsNearToPoint1, IsNearToPoint1 },
-                { QuestionEnum.IsInIdleState, IsInIdleState },
-                { QuestionEnum.IsInChaseState, IsInChaseState },
-                { QuestionEnum.IsInPatrolState, IsInPatrolState },
-                { QuestionEnum.IsInSearchState, IsInSearchState },
-                { QuestionEnum.IsInAttackState, IsInAttackState },
+                { QuestionEnum.IsInIdleState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Idle}) },
+                { QuestionEnum.IsInChaseState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Chase}) },
+                { QuestionEnum.IsInPatrolState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Patrol}) },
+                { QuestionEnum.IsInSearchState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Search}) },
+                { QuestionEnum.IsInAttackState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.ShortAttack, StateEnum.MidAttack, StateEnum.LongAttack}) },
                 { QuestionEnum.IsPlayerAlive, IsPlayerAlive },
                 { QuestionEnum.IsRested, IsRested },
                 { QuestionEnum.IsTired, IsTired },
                 { QuestionEnum.IsAttackOnCd, IsAttackOnCd },
-                { QuestionEnum.FinishedSearching, FinishedSearching }
+                { QuestionEnum.FinishedSearching, FinishedSearching },
+                { QuestionEnum.WasLastStateAttack, c => CompareLastState(c, new List<StateEnum>(){StateEnum.ShortAttack, StateEnum.MidAttack, StateEnum.LongAttack}) },
+                { QuestionEnum.DidAttackMiss, DidAttackMiss },
+                { QuestionEnum.IsInShortRange, c => PlayerInAttackRange(c, 0) },
+                { QuestionEnum.IsInMidRange, c => PlayerInAttackRange(c, 1) },
+                { QuestionEnum.IsInLongRange, c => PlayerInAttackRange(c, 2) },
+                { QuestionEnum.IsInPhase1, IsInPhase1}
             };
         }
 
@@ -53,12 +58,11 @@ namespace Enemies.BinaryTree
             }
         }
 
-        private bool PlayerInAttackRange(AIContext context)
+        private bool PlayerInAttackRange(AIContext context, int attackDistance)
         {
             return Vector3.Distance(context.selfGameObject.transform.position,
-                context.playerGameObject.transform.position) <= context.attackRange;
+                context.playerGameObject.transform.position) <= context.attackRanges[attackDistance];
         }
-
         private bool PlayerIsInAStraightLine(AIContext context)
         {
 
@@ -77,43 +81,36 @@ namespace Enemies.BinaryTree
 
             return false;
         }
-
         private bool IsFarToPoint1(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) >
                    context.Points[0].Item2;
         }
-
         private bool IsNearToPoint1(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) <
                    context.Points[0].Item2;
         }
-
         private bool IsFarToPoint2(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[1].Item1) >
                    context.Points[1].Item2;
         }
-
         private bool FinishedSearching(AIContext arg)
         {
             var model = arg.model as FirstBossModel;
             return model != null && model.isSearchFinish;
         }
-
         private bool IsAttackOnCd(AIContext arg)
         {
             var model = arg.model as FirstBossModel;
             return model != null && model.isAttackOnCd;
         }
-
         private bool IsTired(AIContext arg)
         {
             var model = arg.model as FirstBossModel;
             return model != null && model.isTired;
         }
-
         private bool IsRested(AIContext arg)
         {
             var model = arg.model as FirstBossModel;
@@ -123,40 +120,34 @@ namespace Enemies.BinaryTree
         {
             return true;
         }
-
-        private bool IsInIdleState(AIContext arg)
+        private bool CompareLastState(AIContext arg, List<StateEnum> states)
         {
-            //var controller = arg.controller as FirstBossController;
-            //return arg.stateMachine.CurrentState() == controller?.IdleState;
-            var b = arg.stateMachine.CurrentStateEnum() == StateEnum.Idle;
-            return b;
+            var lastState = arg.stateMachine.LastStateEnum();
+            foreach (var state in states)
+            {
+                if (lastState == state)
+                    return true;
+            }
+            return false;
         }
-
-        private bool IsInChaseState(AIContext arg)
+        private bool CompareCurrentState(AIContext arg, List<StateEnum> states)
         {
-            //var controller = arg.controller as FirstBossController;
-            //return arg.stateMachine.CurrentState() == controller?.ChaseState;
-            return arg.stateMachine.CurrentStateEnum() == StateEnum.Chase;
+            var currentState = arg.stateMachine.CurrentStateEnum();
+            foreach (var state in states)
+            {
+                if (currentState == state)
+                    return true;
+            }
+            return false;
         }
-
-        private bool IsInPatrolState(AIContext arg)
+        private bool DidAttackMiss(AIContext arg)     
         {
-            //var controller = arg.controller as FirstBossController;
-            //return arg.stateMachine.CurrentState() == controller?.PatrolState;
-            var b = arg.stateMachine.CurrentStateEnum() == StateEnum.Patrol;
-            return b;
+            var controller = arg.controller as GaiusController;
+            return controller != null && controller.didAttackMiss;
         }
-
-        private bool IsInSearchState(AIContext arg)
+        private bool IsInPhase1(AIContext arg) 
         {
-            //var controller = arg.controller as FirstBossController;
-            //return arg.stateMachine.CurrentState() == controller?.SearchState;
-            return arg.stateMachine.CurrentStateEnum() == StateEnum.Search;
-        }
-
-        private bool IsInAttackState(AIContext arg)
-        {
-            return arg.stateMachine.CurrentStateEnum() == StateEnum.Attack;
+            return arg.controller.CurrentPhase == 1;
         }
     }
 }

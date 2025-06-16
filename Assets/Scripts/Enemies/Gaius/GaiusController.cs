@@ -1,0 +1,147 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using Enemies.FirstBossTest.States;
+using Enemies.Hounds.States;
+using Entities;
+using Entities.Interfaces;
+using Entities.StateMachine;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace Enemies.FirstBossTest
+{
+    public class GaiusController : EnemyController
+    {
+        [SerializeField] public GaiusStatsSO stats;
+
+        public SpriteRenderer SpriteRendererBoss;
+
+        public bool didAttackMiss;
+
+        #region Private Variables
+
+        private States_Base<StateEnum> _idleState; // BLUE
+        private States_Base<StateEnum> _chaseState; // WHITE
+        private States_Base<StateEnum> _shortAttackState; // YELLOW
+        private States_Base<StateEnum> _midAttackState; // RED
+        private States_Base<StateEnum> _longAttackState; // BLACK
+
+        private ISteering _pursuitSteering;
+        private StObstacleAvoidance _avoidWalls;
+
+        #endregion
+
+        protected override void Awake()
+        {
+            InitalizeSteering();
+            // The ranges must go before the base.Awake() so that it uploads them to the context of the decision tree.
+            attackRanges.Add(stats.shortRange);
+            attackRanges.Add(stats.mediumRange);
+            attackRanges.Add(stats.longRange);
+            base.Awake();
+            SpriteRendererBoss = GetComponent<SpriteRenderer>();
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            manager.HealthComponent.OnDamage += CheckPhase;
+            manager.HealthComponent.OnDead += Die;
+        }
+
+        void InitalizeSteering()
+        {
+            _pursuitSteering = new StPursuit(transform, target, 0);
+            _avoidWalls = new StObstacleAvoidance(stats.maxObs, stats.radius, stats.angleOfVision, stats.personalArea, stats.obsMask);
+        }
+
+        protected override void InitializeFsm()
+        {
+            Fsm = new FSM<StateEnum>();
+
+            var move = GetComponent<IMove>();
+            var look = GetComponent<ILook>();
+            var attack = GetComponent<IAttack>();
+
+            var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this);
+            var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss);
+            var shortAttackState = new GaiusStateShortAttack<StateEnum>(SpriteRendererBoss, this);
+            var midAttackState = new GaiusStateMidAttack<StateEnum>(SpriteRendererBoss);
+            var longAttackState = new GaiusStateLongAttack<StateEnum>(SpriteRendererBoss);
+
+            _idleState = idleState;
+            _chaseState = chaseState;
+            _shortAttackState = shortAttackState;
+            _midAttackState = midAttackState;
+            _longAttackState = longAttackState;
+
+
+            var stateList = new List<States_Base<StateEnum>>
+            {
+                idleState,
+                chaseState,
+                shortAttackState,
+                midAttackState,
+                longAttackState
+            };
+
+            idleState.AddTransition(StateEnum.Chase, chaseState);
+            idleState.AddTransition(StateEnum.ShortAttack, shortAttackState);
+            idleState.AddTransition(StateEnum.MidAttack, midAttackState);
+            idleState.AddTransition(StateEnum.LongAttack, longAttackState);
+
+            chaseState.AddTransition(StateEnum.Idle, idleState);
+            chaseState.AddTransition(StateEnum.ShortAttack, shortAttackState);
+            chaseState.AddTransition(StateEnum.MidAttack, midAttackState);
+            chaseState.AddTransition(StateEnum.LongAttack, longAttackState);
+            
+            shortAttackState.AddTransition(StateEnum.Idle, idleState);
+            shortAttackState.AddTransition(StateEnum.Chase, chaseState);
+            shortAttackState.AddTransition(StateEnum.MidAttack, midAttackState);
+            shortAttackState.AddTransition(StateEnum.LongAttack, longAttackState);
+
+            midAttackState.AddTransition(StateEnum.Idle, idleState);
+            midAttackState.AddTransition(StateEnum.Chase, chaseState);
+            midAttackState.AddTransition(StateEnum.ShortAttack, shortAttackState);
+            midAttackState.AddTransition(StateEnum.LongAttack, longAttackState);
+
+            longAttackState.AddTransition(StateEnum.Idle, idleState);
+            longAttackState.AddTransition(StateEnum.Chase, chaseState);
+            longAttackState.AddTransition(StateEnum.ShortAttack, shortAttackState);
+            longAttackState.AddTransition(StateEnum.MidAttack, midAttackState);
+
+
+
+            foreach (var t in stateList)
+            {
+                t.Initialize(move, look, attack);
+            }
+
+            Fsm.SetInit(chaseState,StateEnum.Chase);
+        }
+
+        protected override void InitializeTree()
+        {
+            Root.Execute(objectContext);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, stats.shortRange);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, stats.mediumRange);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, stats.longRange);
+
+        }
+
+        private void Die()
+        {
+            Destroy(gameObject);
+        }
+
+    }
+}

@@ -9,7 +9,6 @@ namespace Enemies.FirstBossTest
 {
     public class FirstBossController : EnemyController
     {
-        [SerializeField] int[] phasesThresholds;
 
         private States_Base<StateEnum> _idleState;
         private States_Base<StateEnum> _chaseState;
@@ -75,9 +74,6 @@ namespace Enemies.FirstBossTest
             { AttackType.Lunge, 10f },
             { AttackType.Super, 20f }
         };
-
-        private PhaseSystem _phaseSystem;
-        private int _currentPhase = 1;
         
         protected override void Awake()
         {
@@ -114,7 +110,7 @@ namespace Enemies.FirstBossTest
             var attack = GetComponent<IAttack>();
             
             var idleState = new FirstBossStateIdle<StateEnum>(this, idleDuration, SpriteRendererBoss);
-            var chaseState = new FirstBossStateChase<StateEnum>(_leaderSteering, _avoidWalls, transform,target.transform,attackRange, GetComponent<LeaderBehaviour>(), flockMask, SpriteRendererBoss);
+            //var chaseState = new FirstBossStateChase<StateEnum>(_leaderSteering, _avoidWalls, transform,target.transform,attackRange, GetComponent<LeaderBehaviour>(), flockMask, SpriteRendererBoss);
             var attackState = new FirstBossStateAttack<StateEnum>(target.transform, _attacks, _lowHealthAttacks, this, AttackCooldown, SpriteRendererBoss, chompEffect);
             var patrolState = new FirstBossStatePatrol<StateEnum>(this.transform, patrolDuration, camp.GetPoints(amountOfWaypoints), this, SpriteRendererBoss);
             var searchState = new FirstBossStateSearch<StateEnum>(_toPointSteering, _avoidWalls, manager.model.transform, this, SpriteRendererBoss);
@@ -122,7 +118,7 @@ namespace Enemies.FirstBossTest
             
             _idleState = idleState;
             _attackState = attackState;
-            _chaseState = chaseState;
+            //_chaseState = chaseState;
             _searchState = searchState;
             _patrolState = patrolState;
             _runAwayState = runAwayState;
@@ -130,7 +126,7 @@ namespace Enemies.FirstBossTest
             var stateList = new List<States_Base<StateEnum>>
             {
                 idleState,
-                chaseState,
+                //chaseState,
                 attackState,
                 searchState,
                 patrolState,
@@ -141,19 +137,19 @@ namespace Enemies.FirstBossTest
             idleState.AddTransition(StateEnum.Runaway, runAwayState);
             
             patrolState.AddTransition(StateEnum.Idle, idleState);
-            patrolState.AddTransition(StateEnum.Chase, chaseState);
+            //patrolState.AddTransition(StateEnum.Chase, chaseState);
 
-            chaseState.AddTransition(StateEnum.Search, searchState);
-            chaseState.AddTransition(StateEnum.Runaway, runAwayState);
-            chaseState.AddTransition(StateEnum.Attack, attackState);
+            //chaseState.AddTransition(StateEnum.Search, searchState);
+            //chaseState.AddTransition(StateEnum.Runaway, runAwayState);
+            //chaseState.AddTransition(StateEnum.Attack, attackState);
             
-            searchState.AddTransition(StateEnum.Chase, chaseState);
+            //searchState.AddTransition(StateEnum.Chase, chaseState);
             searchState.AddTransition(StateEnum.Runaway, runAwayState);
             
             runAwayState.AddTransition(StateEnum.Idle, idleState);
             runAwayState.AddTransition(StateEnum.Patrol, patrolState);
             
-            attackState.AddTransition(StateEnum.Chase, chaseState);
+            //attackState.AddTransition(StateEnum.Chase, chaseState);
             attackState.AddTransition(StateEnum.Runaway, runAwayState);
 
             foreach (var t in stateList)
@@ -169,16 +165,10 @@ namespace Enemies.FirstBossTest
             Root.Execute(objectContext);
         }
 
-        void CheckPhase(float damage)
-        {
-            _currentPhase = _phaseSystem.currentPhase();
-            Debug.Log("Current phase is:" + _currentPhase);
-        }
-
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
+            //Gizmos.DrawWireSphere(transform.position, attackRange);
         }
 
         private void Die()
