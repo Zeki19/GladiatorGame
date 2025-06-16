@@ -256,6 +256,17 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &430788254 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8182166463018864506, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+  m_PrefabInstance: {fileID: 1827914493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b37aaf5bb23e14ba2fe78adc20ce57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &748019328
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +347,34 @@ PrefabInstance:
     - target: {fileID: 4916902690603668684, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_Mass
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522031050175312599, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: stats.dashForce
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522031050175312599, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: stats.maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522031050175312599, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: stats.moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522031050175312599, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: weaponController
+      value: 
+      objectReference: {fileID: 430788254}
+    - target: {fileID: 5522031050175312599, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: stats.dashCooldown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522031050175312599, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: stats.dashDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5522031050175312599, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: stats.canBeKnockedBack
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6520464762290886026, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: dashForce
@@ -497,7 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 2022685032}
-  moveSpeed: 2
+  _moveSpeed: 50
 --- !u!114 &2022685031
 MonoBehaviour:
   m_ObjectHideFlags: 0

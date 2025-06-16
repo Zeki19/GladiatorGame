@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyModel : EntityModel
 {
-    protected float _speedModifier;
+    protected float _speedModifier = 1;
     public override void Dash(float dashForce)
     {
         throw new System.NotImplementedException();

@@ -2,7 +2,6 @@
 
 public class GaiusStateChase<T> : State_Steering<T>
 {
-    private FirstBossModel _model;
     private SpriteRenderer _spriteRenderer;
     public GaiusStateChase(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer) : base(steering, stObstacleAvoidance, self)
     {
