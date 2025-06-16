@@ -18,7 +18,8 @@ namespace Enemies.FirstBossTest
 
         public SpriteRenderer SpriteRendererBoss;
 
-        public bool didAttackMiss;
+        public bool didAttackMiss = false;
+        public bool isAttacking = false;
 
         #region Private Variables
 
@@ -67,8 +68,8 @@ namespace Enemies.FirstBossTest
 
             var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this);
             var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss);
-            var shortAttackState = new GaiusStateShortAttack<StateEnum>(SpriteRendererBoss, this);
-            var midAttackState = new GaiusStateMidAttack<StateEnum>(SpriteRendererBoss);
+            var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this);
+            var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this);
             var longAttackState = new GaiusStateLongAttack<StateEnum>(SpriteRendererBoss);
 
             _idleState = idleState;
@@ -135,6 +136,25 @@ namespace Enemies.FirstBossTest
             Gizmos.DrawWireSphere(transform.position, stats.mediumRange);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, stats.longRange);
+            /*
+            if (Fsm.CurrentStateEnum() == StateEnum.ShortAttack)
+            {
+                Vector3 origin = transform.position;
+                Vector3 facingDir = transform.up;
+
+                float halfAngle = stats.shortAngle / 2f;
+
+                Quaternion leftRot = Quaternion.Euler(0, 0, -halfAngle);
+                Quaternion rightRot = Quaternion.Euler(0, 0, halfAngle);
+
+                Vector3 leftDir = leftRot * facingDir;
+                Vector3 rightDir = rightRot * facingDir;
+
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(origin, origin + leftDir * stats.shortRange);
+                Gizmos.DrawLine(origin, origin + rightDir * stats.shortRange);
+                Gizmos.DrawWireSphere(origin, stats.shortRange);
+            }*/
 
         }
 

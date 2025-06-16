@@ -14,6 +14,7 @@ public class GaiusStatsSO : ScriptableObject
 
     [Header("Medium Attack")]
     [SerializeField] public float mediumRange;
+    [SerializeField] public float mediumWidth;
     [SerializeField] public float mediumDelay;
     [SerializeField] public float mediumDamage;
     [SerializeField] public float mediumPunish;

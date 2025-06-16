@@ -11,22 +11,16 @@ namespace Enemies.FirstBossTest.States
         public FirstBossStateIdle(MonoBehaviour monoBehaviour, float duration, SpriteRenderer spriteRenderer)
         {
             _mono = monoBehaviour;
-            _duration = duration; 
+            _duration = duration;
         }
 
         public override void Enter()
         {
             base.Enter();
-            if (_model==null) _model=_move as FirstBossModel;
+            if (_model==null) _model = _move as FirstBossModel;
             _move.Move(Vector2.zero);
             _look.PlayStateAnimation(StateEnum.Idle);
             _mono.StartCoroutine(StartResting());
-        }
-
-        public override void Exit()
-        {
-            
-            base.Exit();
         }
     
         private System.Collections.IEnumerator StartResting()

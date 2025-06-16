@@ -21,6 +21,7 @@ namespace Enemies.BinaryTree.QuestionFunctions
 
         WasLastStateAttack, 
         DidAttackMiss,
+        IsCurrentlyAttacking,
         IsInShortRange,
         IsInMidRange,
         IsInLongRange,

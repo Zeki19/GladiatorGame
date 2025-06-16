@@ -12,22 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c44274285dd0d246bc0957cfa18f8d2, type: 3}
   m_Name: GaiusStats
   m_EditorClassIdentifier: 
-  shortAngle: 0
-  shortRange: 1
-  shortDelay: 0
+  shortAngle: 90
+  shortRange: 1.5
+  shortDelay: 0.5
   shortDamage: 5
   shortPunish: 1
   shortTargetLayer:
     serializedVersion: 2
-    m_Bits: 0
-  mediumRange: 2
-  mediumDelay: 0
+    m_Bits: 64
+  mediumRange: 3
+  mediumWidth: 0.5
+  mediumDelay: 1
   mediumDamage: 10
   mediumPunish: 4
   mediumTargetLayer:
     serializedVersion: 2
-    m_Bits: 0
-  longRange: 4
+    m_Bits: 64
+  longRange: 5
   longDelay: 0
   longDamage: 20
   longPunish: 10

@@ -38,7 +38,8 @@ namespace Enemies.BinaryTree
                 { QuestionEnum.IsInShortRange, c => PlayerInAttackRange(c, 0) },
                 { QuestionEnum.IsInMidRange, c => PlayerInAttackRange(c, 1) },
                 { QuestionEnum.IsInLongRange, c => PlayerInAttackRange(c, 2) },
-                { QuestionEnum.IsInPhase1, IsInPhase1}
+                { QuestionEnum.IsInPhase1, IsInPhase1},
+                { QuestionEnum.IsCurrentlyAttacking, IsCurrentlyAttacking}
             };
         }
 
@@ -148,6 +149,11 @@ namespace Enemies.BinaryTree
         private bool IsInPhase1(AIContext arg) 
         {
             return arg.controller.CurrentPhase == 1;
+        }
+        private bool IsCurrentlyAttacking(AIContext arg)
+        {
+            var controller = arg.controller as GaiusController;
+            return controller != null && controller.isAttacking;
         }
     }
 }
