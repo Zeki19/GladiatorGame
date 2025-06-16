@@ -12,12 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c44274285dd0d246bc0957cfa18f8d2, type: 3}
   m_Name: GaiusStats
   m_EditorClassIdentifier: 
+  shortRange: 1
   shortDelay: 0
-  shortDamage: 0
-  shortPunish: 0
+  shortDamage: 5
+  shortPunish: 1
+  mediumRange: 2
   mediumDelay: 0
-  mediumDamage: 0
-  mediumPunish: 0
+  mediumDamage: 10
+  mediumPunish: 4
+  longRange: 4
   longDelay: 0
-  longDamage: 0
-  longPunish: 0
+  longDamage: 20
+  longPunish: 10
+  maxObs: 5
+  radius: 2
+  angleOfVision: 75
+  personalArea: 1
+  obsMask:
+    serializedVersion: 2
+    m_Bits: 128

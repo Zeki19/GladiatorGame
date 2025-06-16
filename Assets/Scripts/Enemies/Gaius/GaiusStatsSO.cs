@@ -4,22 +4,37 @@ using UnityEngine;
 public class GaiusStatsSO : ScriptableObject
 {
     [Header("Short Attack")]
+    [SerializeField] public float shortRange;
     [SerializeField] public float shortDelay;
     [SerializeField] public float shortDamage;
     [SerializeField] public float shortPunish;
 
     [Header("Medium Attack")]
+    [SerializeField] public float mediumRange;
     [SerializeField] public float mediumDelay;
     [SerializeField] public float mediumDamage;
     [SerializeField] public float mediumPunish;
 
     [Header("Long Attack")]
+    [SerializeField] public float longRange;
     [SerializeField] public float longDelay;
     [SerializeField] public float longDamage;
     [SerializeField] public float longPunish;
 
+    [Header("Obstacle Avoidance Settings")]
+    [SerializeField] public int maxObs;
+    [SerializeField] public float radius;
+    [SerializeField] public float angleOfVision;
+    [SerializeField] public float personalArea;
+    [SerializeField] public LayerMask obsMask;
+
+
     private void OnValidate()
     {
+        shortRange = Mathf.Clamp(shortRange, 0, mediumRange);
+        mediumRange = Mathf.Clamp(mediumRange, shortRange, longRange);
+        longRange = Mathf.Max(longRange, mediumRange);
+
         shortDelay = Mathf.Max(shortDelay, 0);
         mediumDelay = Mathf.Max(mediumDelay, 0);
         longDelay = Mathf.Max(longDelay, 0);

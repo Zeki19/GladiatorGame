@@ -14,12 +14,6 @@ namespace Enemies.FirstBossTest
 {
     public class GaiusController : EnemyController
     {
-        [SerializeField] public float shortRange;
-
-        [SerializeField] public float midRange;
-
-        [SerializeField] public float longRange;
-
         [SerializeField] public GaiusStatsSO stats;
 
         public SpriteRenderer SpriteRendererBoss;
@@ -29,20 +23,23 @@ namespace Enemies.FirstBossTest
         #region Private Variables
 
         private States_Base<StateEnum> _idleState; // BLUE
-        private States_Base<StateEnum> _stunState; // GREEN
         private States_Base<StateEnum> _chaseState; // WHITE
         private States_Base<StateEnum> _shortAttackState; // YELLOW
         private States_Base<StateEnum> _midAttackState; // RED
         private States_Base<StateEnum> _longAttackState; // BLACK
 
+        private ISteering _pursuitSteering;
+        private StObstacleAvoidance _avoidWalls;
+
         #endregion
 
         protected override void Awake()
         {
+            InitalizeSteering();
             // The ranges must go before the base.Awake() so that it uploads them to the context of the decision tree.
-            attackRanges.Add(shortRange);
-            attackRanges.Add(midRange);
-            attackRanges.Add(longRange);
+            attackRanges.Add(stats.shortRange);
+            attackRanges.Add(stats.mediumRange);
+            attackRanges.Add(stats.longRange);
             base.Awake();
             SpriteRendererBoss = GetComponent<SpriteRenderer>();
         }
@@ -53,6 +50,13 @@ namespace Enemies.FirstBossTest
             manager.HealthComponent.OnDamage += CheckPhase;
             manager.HealthComponent.OnDead += Die;
         }
+
+        void InitalizeSteering()
+        {
+            _pursuitSteering = new StPursuit(transform, target, 0);
+            _avoidWalls = new StObstacleAvoidance(stats.maxObs, stats.radius, stats.angleOfVision, stats.personalArea, stats.obsMask);
+        }
+
         protected override void InitializeFsm()
         {
             Fsm = new FSM<StateEnum>();
@@ -62,14 +66,12 @@ namespace Enemies.FirstBossTest
             var attack = GetComponent<IAttack>();
 
             var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this);
-            var stunState = new GaiusStateStun<StateEnum>(SpriteRendererBoss);
-            var chaseState = new GaiusStateChase<StateEnum>(SpriteRendererBoss);
+            var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss);
             var shortAttackState = new GaiusStateShortAttack<StateEnum>(SpriteRendererBoss);
             var midAttackState = new GaiusStateMidAttack<StateEnum>(SpriteRendererBoss);
             var longAttackState = new GaiusStateLongAttack<StateEnum>(SpriteRendererBoss);
 
             _idleState = idleState;
-            _stunState = stunState;
             _chaseState = chaseState;
             _shortAttackState = shortAttackState;
             _midAttackState = midAttackState;
@@ -79,45 +81,33 @@ namespace Enemies.FirstBossTest
             var stateList = new List<States_Base<StateEnum>>
             {
                 idleState,
-                stunState,
                 chaseState,
                 shortAttackState,
                 midAttackState,
                 longAttackState
             };
 
-            idleState.AddTransition(StateEnum.Stun, stunState);
             idleState.AddTransition(StateEnum.Chase, chaseState);
             idleState.AddTransition(StateEnum.ShortAttack, shortAttackState);
             idleState.AddTransition(StateEnum.MidAttack, midAttackState);
             idleState.AddTransition(StateEnum.LongAttack, longAttackState);
 
-            stunState.AddTransition(StateEnum.Idle, idleState);
-            stunState.AddTransition(StateEnum.Chase, chaseState);
-            stunState.AddTransition(StateEnum.ShortAttack, shortAttackState);
-            stunState.AddTransition(StateEnum.MidAttack, midAttackState);
-            stunState.AddTransition(StateEnum.LongAttack, longAttackState);
-
             chaseState.AddTransition(StateEnum.Idle, idleState);
-            chaseState.AddTransition(StateEnum.Stun, stunState);
             chaseState.AddTransition(StateEnum.ShortAttack, shortAttackState);
             chaseState.AddTransition(StateEnum.MidAttack, midAttackState);
             chaseState.AddTransition(StateEnum.LongAttack, longAttackState);
             
             shortAttackState.AddTransition(StateEnum.Idle, idleState);
-            shortAttackState.AddTransition(StateEnum.Stun, stunState);
             shortAttackState.AddTransition(StateEnum.Chase, chaseState);
             shortAttackState.AddTransition(StateEnum.MidAttack, midAttackState);
             shortAttackState.AddTransition(StateEnum.LongAttack, longAttackState);
 
             midAttackState.AddTransition(StateEnum.Idle, idleState);
-            midAttackState.AddTransition(StateEnum.Stun, stunState);
             midAttackState.AddTransition(StateEnum.Chase, chaseState);
             midAttackState.AddTransition(StateEnum.ShortAttack, shortAttackState);
             midAttackState.AddTransition(StateEnum.LongAttack, longAttackState);
 
             longAttackState.AddTransition(StateEnum.Idle, idleState);
-            longAttackState.AddTransition(StateEnum.Stun, stunState);
             longAttackState.AddTransition(StateEnum.Chase, chaseState);
             longAttackState.AddTransition(StateEnum.ShortAttack, shortAttackState);
             longAttackState.AddTransition(StateEnum.MidAttack, midAttackState);
@@ -129,7 +119,7 @@ namespace Enemies.FirstBossTest
                 t.Initialize(move, look, attack);
             }
 
-            Fsm.SetInit(idleState,StateEnum.Idle);
+            Fsm.SetInit(chaseState,StateEnum.Chase);
         }
 
         protected override void InitializeTree()
@@ -140,11 +130,11 @@ namespace Enemies.FirstBossTest
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, shortRange);
+            Gizmos.DrawWireSphere(transform.position, stats.shortRange);
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, midRange);
+            Gizmos.DrawWireSphere(transform.position, stats.mediumRange);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, longRange);
+            Gizmos.DrawWireSphere(transform.position, stats.longRange);
 
         }
 
@@ -153,11 +143,5 @@ namespace Enemies.FirstBossTest
             Destroy(gameObject);
         }
 
-        private void OnValidate()
-        {
-            shortRange = Mathf.Clamp(shortRange, 0, midRange);
-            midRange = Mathf.Clamp(midRange, shortRange, longRange);
-            longRange = Mathf.Max(longRange, midRange);
-        }
     }
 }

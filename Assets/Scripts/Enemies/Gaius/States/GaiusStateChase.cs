@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class GaiusStateChase<T> : States_Base<T>
+public class GaiusStateChase<T> : State_Steering<T>
 {
     private FirstBossModel _model;
     private SpriteRenderer _spriteRenderer;
-    public GaiusStateChase(SpriteRenderer spriteRenderer)
+    public GaiusStateChase(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer) : base(steering, stObstacleAvoidance, self)
     {
         _spriteRenderer = spriteRenderer;
     }
@@ -15,7 +15,15 @@ public class GaiusStateChase<T> : States_Base<T>
         _spriteRenderer.color = Color.white;
         _move.Move(Vector2.zero);
     }
+    public override void Execute()
+    {
+        base.Execute();
 
+        Vector2 dir = _steering.GetDir();
+
+        _move.Move(dir);
+        _look.LookDir(dir);
+    }
     public override void Exit()
     {
         base.Exit();

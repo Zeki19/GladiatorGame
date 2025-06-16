@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 2022685032}
-  moveSpeed: 10
+  moveSpeed: 2
 --- !u!114 &2022685031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,9 +514,6 @@ MonoBehaviour:
   target: {fileID: 1827914495}
   Root: {fileID: 11400000, guid: af0e8ea6a0374f04b9b45a82cba8ce41, type: 2}
   phasesThresholds: 32000000
-  shortRange: 1
-  midRange: 2
-  longRange: 4
   stats: {fileID: 11400000, guid: 4e96c14f6a2738646bb097759e9708c2, type: 2}
   SpriteRendererBoss: {fileID: 2022685035}
   didAttackMiss: 0

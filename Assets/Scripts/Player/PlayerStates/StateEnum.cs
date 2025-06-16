@@ -2,7 +2,6 @@
 {
     Default,
     Idle,
-    Stun,
     Walk,
     Dash,
     Attack,
