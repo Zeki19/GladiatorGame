@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -17,15 +18,16 @@ public class PSDash<T> : PSBase<T>
     private bool _canDash = true;
 
     T _inputFinish;
-    public PSDash(T inputFinish, float dashForce, float dashDuration, float dashCooldown, float dashInvincibility, IHealth healthSystem,MonoBehaviour coroutineRunner)
+    public PSDash(T inputFinish, PlayerManager manager,MonoBehaviour coroutineRunner)
     {
+        var stats = manager.stats;
         _inputFinish = inputFinish;
-        _dashForce = dashForce;
-        _dashDuration = dashDuration;
-        _dashCooldown = dashCooldown;
+        _dashForce = stats.DashForce;
+        _dashDuration = stats.DashDuration;
+        _dashCooldown = stats.DashCooldown;
         _coroutineRunner = coroutineRunner;
-        _dashInvincibility = Mathf.Clamp(dashInvincibility, 0, 100);
-        _characterHealth = healthSystem;
+        _dashInvincibility = Mathf.Clamp(stats.DashInvincibility, 0, 100);
+        _characterHealth = manager.HealthComponent;
     }
     public override void Enter()
     {

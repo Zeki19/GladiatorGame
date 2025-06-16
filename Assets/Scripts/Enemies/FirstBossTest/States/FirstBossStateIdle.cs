@@ -18,7 +18,6 @@ namespace Enemies.FirstBossTest.States
         {
             base.Enter();
             if (_model==null) _model=_move as FirstBossModel;
-            Debug.Log("Idle");
             _move.Move(Vector2.zero);
             _look.PlayStateAnimation(StateEnum.Idle);
             _mono.StartCoroutine(StartResting());

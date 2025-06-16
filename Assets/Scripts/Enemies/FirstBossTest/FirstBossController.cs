@@ -1,12 +1,9 @@
 using System.Collections.Generic;
 using Enemies.FirstBossTest.States;
 using Enemies.Hounds.States;
-using Entities;
 using Entities.Interfaces;
 using Entities.StateMachine;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemies.FirstBossTest
 {

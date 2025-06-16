@@ -25,7 +25,7 @@ namespace Player.PlayerStates
 
         public override void Enter()
         {
-            SetWeapon(Manager.weapon);
+            SetWeapon(Manager.weaponController.Weapon);
             Weapon.Attacking = true;
             CurrentAttack.FinishAnimation += AttackFinished;
             _attack.StartAttack(CurrentAttack, Weapon);
@@ -44,7 +44,7 @@ namespace Player.PlayerStates
             Weapon.PutOnCooldown();
             _attack.FinishAttack(CurrentAttack, Weapon);
             CurrentAttack.FinishAnimation -= AttackFinished;
-            ServiceLocator.Instance.GetService<PlayerWeaponController>().CheckDurability();
+            Manager.weaponController.CheckDurability();
         }
 
         private void AttackFinished()

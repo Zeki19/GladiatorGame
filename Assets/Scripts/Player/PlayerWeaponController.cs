@@ -10,14 +10,15 @@ namespace Player
 {
     public class PlayerWeaponController : MonoBehaviour
     {
-        [SerializeField] private PlayerManager manager;
         [SerializeField] private GameObject playerRotation;
         [SerializeField] private LayerMask collisionLayer;
-        private List<GameObject> _enemiesHit = new List<GameObject>();
-        private Weapon _weapon;
-        public LayerMask mask;
-        public float offset;
+        [SerializeField] private PlayerManager manager;
+        [SerializeField] private LayerMask mask;
         private WeaponManager _weaponManager;
+        private Weapon _weapon;
+        public Weapon Weapon => _weapon;
+        public float offset;
+        private readonly List<GameObject> _enemiesHit = new List<GameObject>();
 
         private void Awake()
         {
@@ -44,7 +45,6 @@ namespace Player
         public void Attack()
         {
             if (_weapon == null || !_weapon.CanAttack()) return;
-
             var controller = manager.controller as PlayerController;
             controller?.ChangeToAttack();
             _weapon.CurrentAttack = _weapon.BaseAttack;
@@ -53,7 +53,6 @@ namespace Player
         public void ChargeAttack()
         {
             if (_weapon == null || !_weapon.CanAttack()) return;
-
             var controller = manager.controller as PlayerController;
             if (_weapon.CheckCharge())
             {
@@ -65,17 +64,19 @@ namespace Player
         public void GrabWeapon()
         {
             if (_weapon != null) return;
-
             var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
-            if (weapon == default) return;
+            EquipWeapon(weapon);
+        }
 
+        private void EquipWeapon(Weapon weapon)
+        {
+            if (weapon == default) return;
             _weapon = weapon;
             _weapon.WeaponGameObject.gameObject.transform.parent = transform;
-            _weapon.WeaponGameObject.gameObject.transform.localPosition = Vector3.zero;
-            _weapon.WeaponGameObject.gameObject.transform.localRotation = quaternion.identity;
+            _weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero,
+                quaternion.identity);
             _weapon.BaseAttack.FinishAnimation += ClearEnemiesList;
             _weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
-            manager.weapon = _weapon;
         }
 
         public void DropWeapon()

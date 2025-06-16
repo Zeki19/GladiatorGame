@@ -10,11 +10,12 @@ namespace Enemies.Hounds
         [Header("Movement Settings")]
         [Tooltip("Speed at which the hound patrols.")]
         [SerializeField] private float amountOfWaypoints = 5f;
-        
         [Header("Attack Settings")]
         [SerializeField] private float attackRange;
         [SerializeField] private float attackCooldown;
 
+        [SerializeField] protected float moveSpeed;
+        protected float _speedModifier;
         #region Public calls to private variables
         
         public float AttackRange => attackRange;

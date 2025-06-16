@@ -21,7 +21,6 @@ namespace Enemies.FirstBossTest.States
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Runaway");
             _move.ModifySpeed(2f);
             _look.PlayStateAnimation(StateEnum.Runaway);
             _mono.StartCoroutine(DelayedSetPath());

@@ -32,7 +32,6 @@ public class HoundState_Attack<T> : States_Base<T>
     public override void Enter()
     { 
         base.Enter();
-        Debug.Log("Attack");
         
         var hp = _model.GetComponent<HealthSystem.HealthSystem>();
         var currentHpPercent = hp.GetCurrentHealth() / hp.GetMaxHealth();
