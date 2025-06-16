@@ -120,36 +120,6 @@ namespace Enemies.BinaryTree
         {
             return true;
         }
-        private bool IsInIdleState(AIContext arg)
-        {
-            //var controller = arg.controller as FirstBossController;
-            //return arg.stateMachine.CurrentState() == controller?.IdleState;
-            var b = arg.stateMachine.CurrentStateEnum() == StateEnum.Idle;
-            return b;
-        }
-        private bool IsInChaseState(AIContext arg)
-        {
-            //var controller = arg.controller as FirstBossController;
-            //return arg.stateMachine.CurrentState() == controller?.ChaseState;
-            return arg.stateMachine.CurrentStateEnum() == StateEnum.Chase;
-        }
-        private bool IsInPatrolState(AIContext arg)
-        {
-            //var controller = arg.controller as FirstBossController;
-            //return arg.stateMachine.CurrentState() == controller?.PatrolState;
-            var b = arg.stateMachine.CurrentStateEnum() == StateEnum.Patrol;
-            return b;
-        }
-        private bool IsInSearchState(AIContext arg)
-        {
-            //var controller = arg.controller as FirstBossController;
-            //return arg.stateMachine.CurrentState() == controller?.SearchState;
-            return arg.stateMachine.CurrentStateEnum() == StateEnum.Search;
-        }
-        private bool IsInAttackState(AIContext arg)
-        {
-            return arg.stateMachine.CurrentStateEnum() == StateEnum.Attack;
-        }
         private bool CompareLastState(AIContext arg, List<StateEnum> states)
         {
             var lastState = arg.stateMachine.LastStateEnum();
@@ -175,40 +145,9 @@ namespace Enemies.BinaryTree
             var controller = arg.controller as GaiusController;
             return controller != null && controller.didAttackMiss;
         }
-        
-        /*
-        private bool WasLastStateAttack(AIContext arg)
-        {
-            var lastState = arg.stateMachine.LastStateEnum();
-            return lastState == StateEnum.ShortAttack || lastState == StateEnum.MidAttack || lastState == StateEnum.LongAttack;
-        }
-        private bool IsInShortRange(AIContext arg)    
-        {
-            var controller = arg.controller as GaiusController;
-            return Vector3.Distance(arg.selfGameObject.transform.position, arg.playerGameObject.transform.position) <= controller.shortRange;
-        }
-        private bool IsInMidRange(AIContext arg)      
-        {
-            var controller = arg.controller as GaiusController;
-            return Vector3.Distance(arg.selfGameObject.transform.position, arg.playerGameObject.transform.position) <= controller.midRange;
-        }
-        private bool IsInLongRange(AIContext arg)     
-        {
-            var controller = arg.controller as GaiusController;
-            return Vector3.Distance(arg.selfGameObject.transform.position, arg.playerGameObject.transform.position) <= controller.longRange;
-        }
-        private bool IsWithinDistance(AIContext arg, float range)
-        {
-            Vector3 posA = arg.selfGameObject.transform.position;
-            Vector3 posB = arg.playerGameObject.transform.position;
-            return Vector3.Distance(posA, posB) <= range;
-        }
-        */
-        
         private bool IsInPhase1(AIContext arg) 
         {
             return arg.controller.CurrentPhase == 1;
         }
-
     }
 }
