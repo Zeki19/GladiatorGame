@@ -391,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.94
+      value: -2.49
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.z
@@ -512,13 +512,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 2022685032}
   target: {fileID: 1827914495}
-  Root: {fileID: 11400000, guid: 42a34e31767ce6e46afa458c537f22d4, type: 2}
+  Root: {fileID: 11400000, guid: af0e8ea6a0374f04b9b45a82cba8ce41, type: 2}
   phasesThresholds: 32000000
   shortRange: 1
   midRange: 2
   longRange: 4
+  stats: {fileID: 11400000, guid: 4e96c14f6a2738646bb097759e9708c2, type: 2}
   SpriteRendererBoss: {fileID: 2022685035}
-  didAttackMiss: 1
+  didAttackMiss: 0
 --- !u!114 &2022685032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,7 +679,7 @@ Transform:
   m_GameObject: {fileID: 2022685028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.22059193, y: 0.59, z: 0}
+  m_LocalPosition: {x: -0.22059193, y: 2.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

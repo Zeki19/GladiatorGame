@@ -20,6 +20,8 @@ namespace Enemies.FirstBossTest
 
         [SerializeField] public float longRange;
 
+        [SerializeField] public GaiusStatsSO stats;
+
         public SpriteRenderer SpriteRendererBoss;
 
         public bool didAttackMiss;
@@ -59,7 +61,7 @@ namespace Enemies.FirstBossTest
             var look = GetComponent<ILook>();
             var attack = GetComponent<IAttack>();
 
-            var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss);
+            var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this);
             var stunState = new GaiusStateStun<StateEnum>(SpriteRendererBoss);
             var chaseState = new GaiusStateChase<StateEnum>(SpriteRendererBoss);
             var shortAttackState = new GaiusStateShortAttack<StateEnum>(SpriteRendererBoss);
