@@ -4,19 +4,19 @@ using Enemies;
 using Entities.Interfaces;
 using Unity.Mathematics;
 using UnityEngine;
+using Utilities.Factory.WeaponFactory;
 using Weapons;
 
 namespace Player
 {
     public class PlayerWeaponController : MonoBehaviour
     {
-        [SerializeField] private GameObject playerRotation;
         [SerializeField] private LayerMask collisionLayer;
-        [SerializeField] private PlayerManager manager;
-        [SerializeField] private LayerMask mask;
+        [SerializeField] private SoWeapon startingWeapon;
+        private Transform _playerRotation;
+        private PlayerManager _manager;
         private WeaponManager _weaponManager;
-        private Weapon _weapon;
-        public Weapon Weapon => _weapon;
+        public Weapon Weapon { get; private set; }
         public float offset;
         private readonly List<GameObject> _enemiesHit = new List<GameObject>();
 
@@ -28,42 +28,44 @@ namespace Player
         private void Start()
         {
             _weaponManager = ServiceLocator.Instance.GetService<WeaponManager>();
+            EquipWeapon(_weaponManager.RequestWeapon(startingWeapon));
+            _playerRotation = _manager.model.transform;
         }
 
         void Update()
         {
             LookDir();
-            _weapon?.CooldownCounter();
+            Weapon?.CooldownCounter();
         }
 
         private void LookDir()
         {
-            transform.rotation = playerRotation.transform.rotation;
-            transform.position = playerRotation.transform.position + (playerRotation.transform.up) * offset;
+            transform.rotation = _playerRotation.rotation;
+            transform.position = _playerRotation.position + (_playerRotation.up) * offset;
         }
 
         public void Attack()
         {
-            if (_weapon == null || !_weapon.CanAttack()) return;
-            var controller = manager.controller as PlayerController;
+            if (Weapon == null || !Weapon.CanAttack()) return;
+            var controller = _manager.controller as PlayerController;
             controller?.ChangeToAttack();
-            _weapon.CurrentAttack = _weapon.BaseAttack;
+            Weapon.CurrentAttack = Weapon.BaseAttack;
         }
 
         public void ChargeAttack()
         {
-            if (_weapon == null || !_weapon.CanAttack()) return;
-            var controller = manager.controller as PlayerController;
-            if (_weapon.CheckCharge())
+            if (Weapon == null || !Weapon.CanAttack()) return;
+            var controller = _manager.controller as PlayerController;
+            if (Weapon.CheckCharge())
             {
                 controller?.ChangeToChargeAttack();
-                _weapon.CurrentAttack = _weapon.ChargeAttack;
+                Weapon.CurrentAttack = Weapon.ChargeAttack;
             }
         }
 
         public void GrabWeapon()
         {
-            if (_weapon != null) return;
+            if (Weapon != null) return;
             var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
             EquipWeapon(weapon);
         }
@@ -71,31 +73,31 @@ namespace Player
         private void EquipWeapon(Weapon weapon)
         {
             if (weapon == default) return;
-            _weapon = weapon;
-            _weapon.WeaponGameObject.gameObject.transform.parent = transform;
-            _weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero,
+            Weapon = weapon;
+            Weapon.WeaponGameObject.gameObject.transform.parent = transform;
+            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero,
                 quaternion.identity);
-            _weapon.BaseAttack.FinishAnimation += ClearEnemiesList;
-            _weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
+            Weapon.BaseAttack.FinishAnimation += ClearEnemiesList;
+            Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
         }
 
         public void DropWeapon()
         {
-            if (_weapon is not { Attacking: false }) return;
+            if (Weapon is not { Attacking: false }) return;
 
-            _weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = true;
-            _weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
-            _weapon.WeaponGameObject.transform.parent = null;
-            _weapon = null;
+            Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = true;
+            Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
+            Weapon.WeaponGameObject.transform.parent = null;
+            Weapon = null;
         }
 
         private void DestroyWeapon()
         {
-            if (_weapon is not { Attacking: false }) return;
+            if (Weapon is not { Attacking: false }) return;
 
-            _weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
-            _weaponManager.DestroyWeapon(_weapon);
-            _weapon = null;
+            Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
+            _weaponManager.DestroyWeapon(Weapon);
+            Weapon = null;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -104,17 +106,17 @@ namespace Player
                 return;
 
             var enemyManager = ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject);
-            enemyManager.HealthComponent.TakeDamage(_weapon.Damage());
+            enemyManager.HealthComponent.TakeDamage(Weapon.Damage());
             if (enemyManager.model is IKnockbackable knockbackable)
-                knockbackable.ApplyKnockbackFromSource(this.transform.position, _weapon.KnockbackForce);
-            _weapon.ChargeWeapon();
-            _weapon.AffectDurability();
+                knockbackable.ApplyKnockbackFromSource(this.transform.position, Weapon.KnockbackForce);
+            Weapon.ChargeWeapon();
+            Weapon.AffectDurability();
             _enemiesHit.Add(other.gameObject);
         }
 
         public void CheckDurability()
         {
-            if (!_weapon.CheckDurability())
+            if (!Weapon.CheckDurability())
                 DestroyWeapon();
         }
 
@@ -128,7 +130,7 @@ namespace Player
             _enemiesHit.Clear();
         }
 
-        public float CheckWeaponDurabilityPercent() => _weapon.DurabilityPercent();
-        public float CheckWeaponChargePercent() => _weapon.ChargePercent();
+        public float CheckWeaponDurabilityPercent() => Weapon.DurabilityPercent();
+        public float CheckWeaponChargePercent() => Weapon.ChargePercent();
     }
 }

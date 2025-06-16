@@ -6,51 +6,51 @@ namespace Player.PlayerStates
 {
     public class PSAttack<T> : PSBase<T>
     {
-        protected T InputFinish;
-        protected PlayerManager Manager;
+        private readonly T _inputFinish;
+        private readonly PlayerManager _manager;
         protected Attack CurrentAttack;
-        protected Weapon Weapon;
+        protected Weapon CurrentWeapon;
 
         public PSAttack(T inputFinish, PlayerManager manager)
         {
-            InputFinish = inputFinish;
-            Manager = manager;
+            _inputFinish = inputFinish;
+            _manager = manager;
         }
 
         protected virtual void SetWeapon(Weapon weapon)
         {
-            CurrentAttack = weapon.BaseAttack;
-            Weapon = weapon;
+            CurrentWeapon = weapon;
+            CurrentAttack = CurrentWeapon.BaseAttack;
         }
 
         public override void Enter()
         {
-            SetWeapon(Manager.weaponController.Weapon);
-            Weapon.Attacking = true;
+            SetWeapon(_manager.weaponController.Weapon);
+            CurrentWeapon.Attacking = true;
             CurrentAttack.FinishAnimation += AttackFinished;
-            _attack.StartAttack(CurrentAttack, Weapon);
-            _move.ModifySpeed(-Weapon.SlowPercent);
+            _attack.StartAttack(CurrentAttack, CurrentWeapon);
+            _move.ModifySpeed(-CurrentWeapon.SlowPercent);
         }
 
         public override void Execute()
         {
-            _attack.ExecuteAttack(CurrentAttack, Weapon);
+            _attack.ExecuteAttack(CurrentAttack, CurrentWeapon);
             _move.Move(Vector2.zero);
         }
 
         public override void Exit()
         {
-            Weapon.Attacking = false;
-            Weapon.PutOnCooldown();
-            _attack.FinishAttack(CurrentAttack, Weapon);
+            CurrentWeapon.Attacking = false;
+            CurrentWeapon.PutOnCooldown();
+            _attack.FinishAttack(CurrentAttack, CurrentWeapon);
             CurrentAttack.FinishAnimation -= AttackFinished;
-            Manager.weaponController.CheckDurability();
+            _manager.weaponController.CheckDurability();
         }
 
         private void AttackFinished()
         {
-            StateMachine.Transition(InputFinish);
-            _move.ModifySpeed(Weapon.SlowPercent);
+            StateMachine.Transition(_inputFinish);
+            _move.ModifySpeed(CurrentWeapon.SlowPercent);
         }
     }
 }

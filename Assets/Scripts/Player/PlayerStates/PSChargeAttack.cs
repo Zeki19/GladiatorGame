@@ -10,14 +10,14 @@ namespace Player.PlayerStates
         }
         protected override void SetWeapon(Weapon weapon)
         {
-            CurrentAttack = weapon.ChargeAttack;
-            Weapon = weapon;
+            CurrentWeapon = weapon;
+            CurrentAttack = CurrentWeapon.ChargeAttack;
         }
 
         public override void Enter()
         {
             base.Enter();
-            Weapon.ResetChangeMeter();
+            CurrentWeapon.ResetChangeMeter();
         }
     }
 }

@@ -109,28 +109,17 @@ namespace Weapons
 
         public bool CheckDurability() => !(CurrentDurability <= 0);
         private bool IsCurrentAttackBase() => CurrentAttack == BaseAttack;
+        public float DurabilityPercent() => CurrentDurability / Durability;
+        public void ResetChangeMeter() => ChargeMeter = 0;
+        public bool CanAttack() => !IsOnCooldown;
+        public float Damage() => IsCurrentAttackBase() ? BaseDamage : ChargeDamage;
+        public float ChargePercent() => ChargeMeter / ChangeThreshold;
         public bool CheckCharge() => ChargeMeter >= ChangeThreshold;
-
-        public float DurabilityPercent()
-        {
-            return CurrentDurability / Durability;
-        }
-
-        public float ChargePercent()
-        {
-            return ChargeMeter / ChangeThreshold;
-        }
-
         public void ChargeWeapon()
         {
             if (IsCurrentAttackBase())
                 ChargeMeter += ChargePerAttack;
         }
-
-        public void ResetChangeMeter() => ChargeMeter = 0;
-
-        public bool CanAttack() => !IsOnCooldown;
-
         public void CooldownCounter()
         {
             if (_timer <= 0)
@@ -144,6 +133,5 @@ namespace Weapons
             _timer = CoolDown;
         }
 
-        public float Damage() => IsCurrentAttackBase() ? BaseDamage : ChargeDamage;
     }
 }
