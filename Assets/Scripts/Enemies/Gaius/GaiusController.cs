@@ -37,6 +37,7 @@ namespace Enemies.FirstBossTest
 
         protected override void Awake()
         {
+            // The ranges must go before the base.Awake() so that it uploads them to the context of the decision tree.
             attackRanges.Add(shortRange);
             attackRanges.Add(midRange);
             attackRanges.Add(longRange);
@@ -83,6 +84,7 @@ namespace Enemies.FirstBossTest
                 longAttackState
             };
 
+            idleState.AddTransition(StateEnum.Stun, stunState);
             idleState.AddTransition(StateEnum.Chase, chaseState);
             idleState.AddTransition(StateEnum.ShortAttack, shortAttackState);
             idleState.AddTransition(StateEnum.MidAttack, midAttackState);
@@ -90,6 +92,9 @@ namespace Enemies.FirstBossTest
 
             stunState.AddTransition(StateEnum.Idle, idleState);
             stunState.AddTransition(StateEnum.Chase, chaseState);
+            stunState.AddTransition(StateEnum.ShortAttack, shortAttackState);
+            stunState.AddTransition(StateEnum.MidAttack, midAttackState);
+            stunState.AddTransition(StateEnum.LongAttack, longAttackState);
 
             chaseState.AddTransition(StateEnum.Idle, idleState);
             chaseState.AddTransition(StateEnum.Stun, stunState);
@@ -98,11 +103,23 @@ namespace Enemies.FirstBossTest
             chaseState.AddTransition(StateEnum.LongAttack, longAttackState);
             
             shortAttackState.AddTransition(StateEnum.Idle, idleState);
-            
+            shortAttackState.AddTransition(StateEnum.Stun, stunState);
+            shortAttackState.AddTransition(StateEnum.Chase, chaseState);
+            shortAttackState.AddTransition(StateEnum.MidAttack, midAttackState);
+            shortAttackState.AddTransition(StateEnum.LongAttack, longAttackState);
+
             midAttackState.AddTransition(StateEnum.Idle, idleState);
-            
+            midAttackState.AddTransition(StateEnum.Stun, stunState);
+            midAttackState.AddTransition(StateEnum.Chase, chaseState);
+            midAttackState.AddTransition(StateEnum.ShortAttack, shortAttackState);
+            midAttackState.AddTransition(StateEnum.LongAttack, longAttackState);
+
             longAttackState.AddTransition(StateEnum.Idle, idleState);
             longAttackState.AddTransition(StateEnum.Stun, stunState);
+            longAttackState.AddTransition(StateEnum.Chase, chaseState);
+            longAttackState.AddTransition(StateEnum.ShortAttack, shortAttackState);
+            longAttackState.AddTransition(StateEnum.MidAttack, midAttackState);
+
 
 
             foreach (var t in stateList)

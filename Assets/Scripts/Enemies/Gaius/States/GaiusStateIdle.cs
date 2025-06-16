@@ -13,6 +13,7 @@ public class GaiusStateIdle<T> : States_Base<T>
     {
         base.Enter();
         _spriteRenderer.color = Color.blue;
+        Debug.Log("GAIUS ENTERED IDLE STATE");
         _move.Move(Vector2.zero);
     }
 

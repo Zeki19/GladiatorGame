@@ -13,6 +13,7 @@ public class GaiusStateStun<T> : States_Base<T>
     {
         base.Enter();
         _spriteRenderer.color = Color.green;
+        Debug.Log("GAIUS ENTERED STUN STATE");
         _move.Move(Vector2.zero);
     }
 

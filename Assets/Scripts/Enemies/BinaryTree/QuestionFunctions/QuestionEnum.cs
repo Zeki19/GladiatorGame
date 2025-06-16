@@ -2,7 +2,6 @@ namespace Enemies.BinaryTree.QuestionFunctions
 {
     public enum QuestionEnum
     {
-        PlayerInAttackRange,
         PlayerIsInAStraightLine,
         DistanceToWall,
         IsFarToPoint1, //Hound: FarFromCamp
@@ -20,7 +19,7 @@ namespace Enemies.BinaryTree.QuestionFunctions
         IsAttackOnCd, //hound: isAttackOnCd
         FinishedSearching,
 
-        WasLastStateAttack,
+        WasLastStateAttack, 
         DidAttackMiss,
         IsInShortRange,
         IsInMidRange,

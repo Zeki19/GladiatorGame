@@ -23,17 +23,17 @@ namespace Enemies.BinaryTree
                 { QuestionEnum.IsFarToPoint1, IsFarToPoint1 },
                 { QuestionEnum.IsFarToPoint2, IsFarToPoint2 },
                 { QuestionEnum.IsNearToPoint1, IsNearToPoint1 },
-                { QuestionEnum.IsInIdleState, IsInIdleState },
-                { QuestionEnum.IsInChaseState, IsInChaseState },
-                { QuestionEnum.IsInPatrolState, IsInPatrolState },
-                { QuestionEnum.IsInSearchState, IsInSearchState },
-                { QuestionEnum.IsInAttackState, IsInAttackState },
+                { QuestionEnum.IsInIdleState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Idle}) },
+                { QuestionEnum.IsInChaseState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Chase}) },
+                { QuestionEnum.IsInPatrolState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Patrol}) },
+                { QuestionEnum.IsInSearchState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Search}) },
+                { QuestionEnum.IsInAttackState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.ShortAttack, StateEnum.MidAttack, StateEnum.LongAttack}) },
                 { QuestionEnum.IsPlayerAlive, IsPlayerAlive },
                 { QuestionEnum.IsRested, IsRested },
                 { QuestionEnum.IsTired, IsTired },
                 { QuestionEnum.IsAttackOnCd, IsAttackOnCd },
                 { QuestionEnum.FinishedSearching, FinishedSearching },
-                { QuestionEnum.WasLastStateAttack, WasLastStateAttack },
+                { QuestionEnum.WasLastStateAttack, c => CompareLastState(c, new List<StateEnum>(){StateEnum.ShortAttack, StateEnum.MidAttack, StateEnum.LongAttack}) },
                 { QuestionEnum.DidAttackMiss, DidAttackMiss },
                 { QuestionEnum.IsInShortRange, c => PlayerInAttackRange(c, 0) },
                 { QuestionEnum.IsInMidRange, c => PlayerInAttackRange(c, 1) },
@@ -150,10 +150,25 @@ namespace Enemies.BinaryTree
         {
             return arg.stateMachine.CurrentStateEnum() == StateEnum.Attack;
         }
-        private bool WasLastStateAttack(AIContext arg)
+        private bool CompareLastState(AIContext arg, List<StateEnum> states)
         {
             var lastState = arg.stateMachine.LastStateEnum();
-            return lastState == StateEnum.ShortAttack || lastState == StateEnum.MidAttack || lastState == StateEnum.LongAttack;
+            foreach (var state in states)
+            {
+                if (lastState == state)
+                    return true;
+            }
+            return false;
+        }
+        private bool CompareCurrentState(AIContext arg, List<StateEnum> states)
+        {
+            var currentState = arg.stateMachine.CurrentStateEnum();
+            foreach (var state in states)
+            {
+                if (currentState == state)
+                    return true;
+            }
+            return false;
         }
         private bool DidAttackMiss(AIContext arg)     
         {
@@ -162,6 +177,11 @@ namespace Enemies.BinaryTree
         }
         
         /*
+        private bool WasLastStateAttack(AIContext arg)
+        {
+            var lastState = arg.stateMachine.LastStateEnum();
+            return lastState == StateEnum.ShortAttack || lastState == StateEnum.MidAttack || lastState == StateEnum.LongAttack;
+        }
         private bool IsInShortRange(AIContext arg)    
         {
             var controller = arg.controller as GaiusController;
