@@ -4,22 +4,29 @@ using UnityEngine;
 public class GaiusStatsSO : ScriptableObject
 {
     [Header("Short Attack")]
+    [SerializeField] public float shortAngle;
     [SerializeField] public float shortRange;
     [SerializeField] public float shortDelay;
     [SerializeField] public float shortDamage;
     [SerializeField] public float shortPunish;
+    [SerializeField] public LayerMask shortTargetLayer;
+
 
     [Header("Medium Attack")]
     [SerializeField] public float mediumRange;
     [SerializeField] public float mediumDelay;
     [SerializeField] public float mediumDamage;
     [SerializeField] public float mediumPunish;
+    [SerializeField] public LayerMask mediumTargetLayer;
+
 
     [Header("Long Attack")]
     [SerializeField] public float longRange;
     [SerializeField] public float longDelay;
     [SerializeField] public float longDamage;
     [SerializeField] public float longPunish;
+    [SerializeField] public LayerMask longTargetLayer;
+
 
     [Header("Obstacle Avoidance Settings")]
     [SerializeField] public int maxObs;

@@ -67,7 +67,7 @@ namespace Enemies.FirstBossTest
 
             var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this);
             var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss);
-            var shortAttackState = new GaiusStateShortAttack<StateEnum>(SpriteRendererBoss);
+            var shortAttackState = new GaiusStateShortAttack<StateEnum>(SpriteRendererBoss, this);
             var midAttackState = new GaiusStateMidAttack<StateEnum>(SpriteRendererBoss);
             var longAttackState = new GaiusStateLongAttack<StateEnum>(SpriteRendererBoss);
 
