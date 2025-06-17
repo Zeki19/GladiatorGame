@@ -12,6 +12,9 @@ namespace Enemies.Gaius
 
         public SpriteRenderer SpriteRendererBoss;
 
+        public GameObject weapom;
+        [SerializeField]private List<AnimationCurve> curves;
+
         public bool didAttackMiss = false;
         public bool isAttacking = false;
         public bool isBackStepFinished;
@@ -66,7 +69,7 @@ namespace Enemies.Gaius
             var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this,manager);
             var backStepState = new GaiusStateBackStep<StateEnum>( SpriteRendererBoss, this,manager);
             var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss);
-            var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this);
+            var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this,weapom,curves);
             var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this);
             var longAttackState = new GaiusStateLongAttack<StateEnum>(SpriteRendererBoss);
 

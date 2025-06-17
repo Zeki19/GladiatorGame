@@ -1,12 +1,9 @@
-﻿using Enemies.FirstBossTest;
-using Enemies.Hounds.States;
-using System;
+﻿using Enemies.Hounds.States;
 using System.Collections;
 using System.Collections.Generic;
 using Enemies.Gaius;
+using Unity.Mathematics;
 using UnityEngine;
-using Weapons.Attacks;
-using static Unity.Cinemachine.CinemachineDeoccluder;
 
 public class GaiusStateShortAttack<T> : State_Steering<T>
 {
@@ -15,9 +12,20 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
     private GaiusModel _model;
     private GaiusStatsSO _stats;
     Dictionary<AttackType, float> _attackOptions;
+
+    #region aniamtion
+
+    private AttackType _currentAttack;
+    private List<AnimationCurve> _curves;
+    private float _animationTime;
+    private float _animationClock;
+
+    #endregion
+    
     private float _delayTime;
     private float _attackDuration;
-    public GaiusStateShortAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController) : base(steering, stObstacleAvoidance, self)
+    private GameObject _weapon;
+    public GaiusStateShortAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController,GameObject weapon,List<AnimationCurve> curves) : base(steering, stObstacleAvoidance, self)
     {
         _spriteRenderer = spriteRenderer;
         _controller = GaiusController;
@@ -27,41 +35,72 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
             {AttackType.Swipe, 50},
             {AttackType.Lunge, 50}
         }; //HARDCODED.
+        _weapon = weapon;
+        _curves = curves;
     }
 
     public override void Enter()
     {
         base.Enter();
-        _delayTime = _stats.shortDelay;
         _spriteRenderer.color = Color.yellow;
         Vector2 dir = _steering.GetDir();
         _move.Move(Vector2.zero);
         _look.LookDir(dir);
         _model = _attack as GaiusModel;
         _controller.FinishedAttacking = false;
+        _currentAttack = MyRandom.Roulette(_attackOptions);
+        switch(_currentAttack)
+        {
+            case AttackType.Lunge:
+                if (_curves[0].length > 0)
+                    _animationTime = _curves[0].keys[_curves[0].length - 1].time;
+                _animationClock = 0;
+                _controller.StartCoroutine(LungeAttack());
+                break;
+            case AttackType.Swipe:
+                if (_curves[1].length > 0)
+                    _animationTime = _curves[1].keys[_curves[1].length - 1].time;
+                _animationClock = 0;
+                _weapon.transform.localPosition =
+                    _weapon.transform.localPosition.normalized *1.3f;
+                _controller.StartCoroutine(SwipeAttack());
+                break;
+        }
     }
 
     public override void Execute()
     {
-        if (!_controller.isAttacking)
+        switch(_currentAttack)
         {
-            switch(MyRandom.Roulette(_attackOptions))
-            {
-                case AttackType.Lunge:
-                    _controller.StartCoroutine(LungeAttack());
-                    break;
-                case AttackType.Swipe:
-                    _controller.StartCoroutine(SwipeAttack());
-                    break;
-            }
-            
+            case AttackType.Lunge:
+                _animationClock += Time.deltaTime;
+                if (_animationClock < _animationTime)
+                {
+                    _weapon.transform.localPosition =
+                        _weapon.transform.localPosition.normalized *_curves[0].Evaluate(_animationClock);
+                }
+                break;
+            case AttackType.Swipe:
+                _animationClock += Time.deltaTime;
+                if (_animationClock < _animationTime)
+                {
+                    _weapon.transform.localRotation = Quaternion.Euler(0, 0, -90+_curves[1].Evaluate(_animationClock));
+                    //_weapon.transform.position = _attackPosition;
+                }
+                break;
         }
+    }
+
+    public override void Exit()
+    {
+        _weapon.transform.localPosition=new Vector3(0,0.5f,0);
+        _weapon.transform.localRotation=quaternion.identity;
     }
 
     private IEnumerator LungeAttack()
     {
         _controller.isAttacking = true;
-        yield return new WaitForSeconds(_delayTime);
+        yield return new WaitForSeconds(_stats.shortDelay);
         Vector2 origin = _model.transform.position;
         Vector2 direction = _model.transform.up.normalized;
 
@@ -89,7 +128,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
     private IEnumerator SwipeAttack()
     {
         _controller.isAttacking = true;
-        yield return new WaitForSeconds(_delayTime);
+        yield return new WaitForSeconds(_stats.mediumDelay);
         Vector2 origin = _controller.transform.position;
         Vector2 facingDir = _controller.transform.up;
 
