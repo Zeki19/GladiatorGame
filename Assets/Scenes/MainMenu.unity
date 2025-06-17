@@ -338,8 +338,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015866363}
-        m_TargetAssemblyTypeName: UISceneManager, Assembly-CSharp
+      - m_Target: {fileID: 734855017}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
@@ -471,8 +471,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015866363}
-        m_TargetAssemblyTypeName: UISceneManager, Assembly-CSharp
+      - m_Target: {fileID: 734855017}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 3
         m_Arguments:
@@ -604,9 +604,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015866363}
-        m_TargetAssemblyTypeName: UISceneManager, Assembly-CSharp
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 734855017}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
