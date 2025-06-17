@@ -4,6 +4,7 @@ public class GaiusStateLongAttack<T> : States_Base<T>
 {
     private FirstBossModel _model;
     private SpriteRenderer _spriteRenderer;
+    
     public GaiusStateLongAttack(SpriteRenderer spriteRenderer)
     {
         _spriteRenderer = spriteRenderer;

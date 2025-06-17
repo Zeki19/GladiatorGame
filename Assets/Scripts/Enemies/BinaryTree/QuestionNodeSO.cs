@@ -39,7 +39,9 @@ namespace Enemies.BinaryTree
                 { QuestionEnum.IsInMidRange, c => PlayerInAttackRange(c, 1) },
                 { QuestionEnum.IsInLongRange, c => PlayerInAttackRange(c, 2) },
                 { QuestionEnum.IsInPhase1, IsInPhase1},
-                { QuestionEnum.IsCurrentlyAttacking, IsCurrentlyAttacking}
+                { QuestionEnum.IsCurrentlyAttacking, IsCurrentlyAttacking},
+                { QuestionEnum.IsJumpingBackwards, IsJumpingBackwards},
+                { QuestionEnum.FinishedAttacking, FinishedAttacking}
             };
         }
 
@@ -154,6 +156,18 @@ namespace Enemies.BinaryTree
         {
             var controller = arg.controller as GaiusController;
             return controller != null && controller.isAttacking;
+        }
+        
+        private bool IsJumpingBackwards(AIContext arg)
+        {
+            var controller = arg.controller as GaiusController;
+            return controller != null && controller.isBackStepFinished;
+        }
+        
+        private bool FinishedAttacking(AIContext arg)
+        {
+            var controller = arg.controller as GaiusController;
+            return controller != null && controller.isBackStepFinished;
         }
     }
 }

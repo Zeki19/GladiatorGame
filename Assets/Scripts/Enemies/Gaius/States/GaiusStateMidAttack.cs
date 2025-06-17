@@ -63,6 +63,8 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
             _model.AttackTarget(hit.transform, _stats.mediumDamage);            
         }
         _controller.isAttacking = false;
+        _controller.isBackStepFinished = false;
+        _controller.FinishedAttacking = true;
     }
     
 }
