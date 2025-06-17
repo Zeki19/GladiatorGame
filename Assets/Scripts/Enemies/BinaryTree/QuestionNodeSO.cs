@@ -42,7 +42,8 @@ namespace Enemies.BinaryTree
                 { QuestionEnum.IsInPhase1, IsInPhase1},
                 { QuestionEnum.IsCurrentlyAttacking, IsCurrentlyAttacking},
                 { QuestionEnum.IsJumpingBackwards, IsJumpingBackwards},
-                { QuestionEnum.FinishedAttacking, FinishedAttacking}
+                { QuestionEnum.FinishedAttacking, FinishedAttacking},
+                { QuestionEnum.CanLongAttack, CanLongAttack}
             };
         }
 
@@ -169,6 +170,12 @@ namespace Enemies.BinaryTree
         {
             var controller = arg.controller as GaiusController;
             return controller != null && controller.FinishedAttacking;
+        }
+        
+        private bool CanLongAttack(AIContext arg)
+        {
+            var controller = arg.controller as GaiusController;
+            return controller != null && controller.canLongAttack;
         }
     }
 }

@@ -31,10 +31,13 @@ MonoBehaviour:
   longRange: 5
   longDelay: 0.2
   longDamage: 20
-  longPunish: 10
+  longPunish: 2
+  longSpeed: 20
+  longDuration: 1
+  longIntervalCheck: 1
   longTargetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   maxObs: 5
   radius: 2
   angleOfVision: 75
