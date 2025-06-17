@@ -27,6 +27,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
     private float _delayTime;
     private float _attackDuration;
     private GameObject _weapon;
+    private EnemyManager _manager;
     public GaiusStateShortAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController,GameObject weapon,List<AnimationCurve> curves,GaiusView view) : base(steering, stObstacleAvoidance, self)
     {
         _spriteRenderer = spriteRenderer;
@@ -48,7 +49,8 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
         _spriteRenderer.color = Color.yellow;
         Vector2 dir = _steering.GetDir();
         _move.Move(Vector2.zero);
-        _look.LookDir(dir);
+        var a = _look as GaiusView;
+        a.LookDirInsta(dir);
         _model = _attack as GaiusModel;
         _controller.FinishedAttacking = false;
         _currentAttack = MyRandom.Roulette(_attackOptions);

@@ -27,6 +27,15 @@ public class GaiusView : EnemyView, ILook
             targetRotation,
             rotationSpeed * Time.deltaTime
         );
+    }
+    public void LookDirInsta(Vector2 dir)
+    {
+
+        float angle = Vector2.SignedAngle(Vector2.up, dir);
+
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+
+        transform.rotation =targetRotation; 
         
     }
     

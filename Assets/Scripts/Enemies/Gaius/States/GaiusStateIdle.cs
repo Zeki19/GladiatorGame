@@ -53,7 +53,6 @@ namespace Enemies.Gaius.States
             base.Execute();
 
             _idleTime -= Time.deltaTime;
-
             if (_idleTime <= 0.0f)
             {
                 _gaiusController.isBackStepFinished = false;

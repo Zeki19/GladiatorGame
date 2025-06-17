@@ -117,11 +117,16 @@ MonoBehaviour:
   model: {fileID: 110136598475017519}
   view: {fileID: 3230016562665857638}
   controller: {fileID: 6520464762290886026}
-  speed: 5
-  maxHp: 100
-  EnemyLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  stats:
+    maxHealth: 100
+    moveSpeed: 5
+    dashForce: 20
+    dashDuration: 0.2
+    dashCooldown: 1
+    dashInvincibility: 0
+    knockbackWeight: 0
+    canBeKnockedBack: 0
+  weaponController: {fileID: 8182166463018864506}
 --- !u!1 &2382062061231218183
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +202,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1298906051
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 490971195994360826, guid: 37bd8dfd06a078141a978d1ad0f81fc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -277,14 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b37aaf5bb23e14ba2fe78adc20ce57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5522031050175312599}
-  playerRotation: {fileID: 7198093078051529481}
   collisionLayer:
     serializedVersion: 2
     m_Bits: 768
-  mask:
-    serializedVersion: 2
-    m_Bits: 2048
+  startingWeapon: {fileID: 11400000, guid: a3e698ad9960446489270ee23cf4df71, type: 2}
   offset: 0.2
 --- !u!50 &2314230624480292536
 Rigidbody2D:
@@ -361,10 +362,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 5522031050175312599}
-  dashForce: 30
-  dashDuration: 0.1
-  dashCooldown: 0.5
-  dashInvincibility: 1
 --- !u!114 &110136598475017519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,8 +375,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 5522031050175312599}
-  moveSpeed: 10
-  knockbackWeight: 0
 --- !u!114 &3230016562665857638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,6 +502,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5d881614-f478-4a0c-80f5-9996b144d7d4
     m_ActionName: 'Player/Drop[/Keyboard/b]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8182166463018864506}
+        m_TargetAssemblyTypeName: Player.PlayerWeaponController, Assembly-CSharp
+        m_MethodName: ChargeAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cc119b46-a4aa-4744-9d43-5bbf464e13fb
+    m_ActionName: 'Player/ChargeAttack[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

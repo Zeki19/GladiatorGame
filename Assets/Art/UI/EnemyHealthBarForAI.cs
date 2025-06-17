@@ -1,15 +1,13 @@
-using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthBarForAI : MonoBehaviour
+public class EnemyHealthBarForAI : MonoBehaviour
 {
-    private PlayerManager _manager;
     [SerializeField]private Slider _slider;
+    public EnemyManager _manager;
 
     private void Start()
     {
-        _manager=ServiceLocator.Instance.GetService<PlayerManager>();
         _manager.HealthComponent.OnDamage += UpdateLife;
         _manager.HealthComponent.OnHeal += UpdateLife;
 
