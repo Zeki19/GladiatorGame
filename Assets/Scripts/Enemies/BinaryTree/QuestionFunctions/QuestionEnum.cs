@@ -27,6 +27,7 @@ namespace Enemies.BinaryTree.QuestionFunctions
         IsInLongRange,
         IsInPhase1,
         IsJumpingBackwards,
-        FinishedAttacking
+        FinishedAttacking,
+        CanLongAttack
     }
 }

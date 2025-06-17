@@ -26,6 +26,9 @@ public class GaiusStatsSO : ScriptableObject
     [SerializeField] public float longDelay;
     [SerializeField] public float longDamage;
     [SerializeField] public float longPunish;
+    [SerializeField] public float longSpeed;
+    [SerializeField] public float longDuration;
+    [SerializeField] public float longIntervalCheck;
     [SerializeField] public LayerMask longTargetLayer;
 
 

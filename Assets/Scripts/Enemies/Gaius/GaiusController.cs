@@ -19,6 +19,7 @@ namespace Enemies.Gaius
         public bool isAttacking = false;
         public bool isBackStepFinished;
         public bool FinishedAttacking;
+        public bool canLongAttack = true;
 
         #region Private Variables
 
@@ -71,7 +72,7 @@ namespace Enemies.Gaius
             var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss,manager);
             var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this,weapom,curves,manager.view as GaiusView);
             var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this);
-            var longAttackState = new GaiusStateLongAttack<StateEnum>(SpriteRendererBoss);
+            var longAttackState = new GaiusStateLongAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this, weapom, curves, manager);
 
             _idleState = idleState;
             _backStepState = backStepState;
