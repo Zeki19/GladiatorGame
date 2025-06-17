@@ -1,16 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using Enemies.FirstBossTest.States;
-using Enemies.Hounds.States;
-using Entities;
+using Enemies.Gaius.States;
 using Entities.Interfaces;
 using Entities.StateMachine;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Enemies.FirstBossTest
+namespace Enemies.Gaius
 {
     public class GaiusController : EnemyController
     {
@@ -69,8 +63,8 @@ namespace Enemies.FirstBossTest
             var look = GetComponent<ILook>();
             var attack = GetComponent<IAttack>();
 
-            var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this);
-            var backStepState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this);
+            var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this,manager);
+            var backStepState = new GaiusStateBackStep<StateEnum>( SpriteRendererBoss, this,manager);
             var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss);
             var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this);
             var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this);
@@ -87,6 +81,7 @@ namespace Enemies.FirstBossTest
             var stateList = new List<States_Base<StateEnum>>
             {
                 idleState,
+                backStepState,
                 chaseState,
                 shortAttackState,
                 midAttackState,

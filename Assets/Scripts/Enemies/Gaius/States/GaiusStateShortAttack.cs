@@ -3,6 +3,7 @@ using Enemies.Hounds.States;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemies.Gaius;
 using UnityEngine;
 using Weapons.Attacks;
 using static Unity.Cinemachine.CinemachineDeoccluder;
@@ -37,6 +38,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
         _move.Move(Vector2.zero);
         _look.LookDir(dir);
         _model = _attack as GaiusModel;
+        _controller.FinishedAttacking = false;
     }
 
     public override void Execute()
@@ -80,6 +82,8 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
             _model.AttackTarget(hit.transform, _stats.mediumDamage);
         }
         _controller.isAttacking = false;
+        _controller.isBackStepFinished = false;
+        _controller.FinishedAttacking = true;
     }
 
     private IEnumerator SwipeAttack()
@@ -108,5 +112,8 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
             }
         }
         _controller.isAttacking = false;
+        _controller.isBackStepFinished = false;
+        _controller.FinishedAttacking = true;
     }
+
 }

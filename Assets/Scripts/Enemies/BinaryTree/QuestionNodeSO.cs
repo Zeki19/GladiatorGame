@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Enemies.BinaryTree.QuestionFunctions;
 using Enemies.FirstBossTest;
+using Enemies.Gaius;
 using UnityEngine;
 
 namespace Enemies.BinaryTree
@@ -167,7 +168,7 @@ namespace Enemies.BinaryTree
         private bool FinishedAttacking(AIContext arg)
         {
             var controller = arg.controller as GaiusController;
-            return controller != null && controller.isBackStepFinished;
+            return controller != null && controller.FinishedAttacking;
         }
     }
 }

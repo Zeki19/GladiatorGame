@@ -31,6 +31,7 @@ public class GaiusModel : EnemyModel
     public override void Dash(float dashForce)
     {
         manager.Rb.AddForce(-gameObject.transform.up*dashForce,ForceMode2D.Impulse);
+        Debug.Log(-gameObject.transform.up*dashForce);
     }
 
     private void OnDrawGizmos()

@@ -1,6 +1,7 @@
 ﻿using Enemies.FirstBossTest;
 using System;
 using System.Collections;
+using Enemies.Gaius;
 using UnityEngine;
 using static Unity.Cinemachine.CinemachineDeoccluder;
 
