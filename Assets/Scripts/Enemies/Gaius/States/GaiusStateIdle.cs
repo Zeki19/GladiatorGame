@@ -55,3 +55,33 @@ public class GaiusStateIdle<T> : States_Base<T>
         }
     }
 }
+public class GaiusStateBackStep<T> : States_Base<T>
+{
+    private SpriteRenderer _spriteRenderer;
+    private GaiusController _gaiusController;
+    private GaiusStatsSO _stats;
+    private float _BackStepTime;
+    public GaiusStateBackStep(SpriteRenderer spriteRenderer, GaiusController GaiusController)
+    {
+        _spriteRenderer = spriteRenderer;
+        _gaiusController = GaiusController;
+        _stats = GaiusController.stats;
+        _BackStepTime = .5f;
+    }
+
+    public override void Enter()
+    {
+        _gaiusController.isBackStepFinished = false;
+        _BackStepTime = .5f;
+    }
+
+    public override void Execute()
+    {
+        _BackStepTime -= Time.deltaTime;
+
+        if (_BackStepTime <= 0.0f)
+        {
+            _gaiusController.isBackStepFinished = true;
+        }
+    }
+}

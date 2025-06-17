@@ -64,4 +64,5 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
         }
         _controller.isAttacking = false;
     }
+    
 }

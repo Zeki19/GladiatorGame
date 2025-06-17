@@ -27,6 +27,12 @@ public class GaiusModel : EnemyModel
             manager.HealthComponent.TakeDamage(damage);
         }
     }
+
+    public override void Dash(float dashForce)
+    {
+        manager.Rb.AddForce(-gameObject.transform.up*dashForce,ForceMode2D.Impulse);
+    }
+
     private void OnDrawGizmos()
     {
     }
