@@ -49,7 +49,6 @@ namespace Enemies.FirstBossTest
 
         #region Private Variables
 
-        private LineOfSight _los;
         private ISteering _steering;
         private ISteering _patrolSteering;
         private ISteering _pursuitSteering;
@@ -81,7 +80,6 @@ namespace Enemies.FirstBossTest
             InitalizeSteering();
             _avoidWalls = new StObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
             base.Awake();
-            _los = GetComponent<LineOfSight>();
             objectContext.Points[0] = (camp.CampCenter, camp.patrolRadius);
             objectContext.Points[1] = (camp.CampCenter, camp.chaseRadius*camp.patrolRadius);
         }

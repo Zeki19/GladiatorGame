@@ -43,7 +43,6 @@ namespace Enemies.Gaius.States
                     Debug.LogError("The idle case you are trying to acces is not contemplated.");
                     break;
             }
-            _spriteRenderer.color = Color.blue;
             _gaiusManager.model.Move(Vector2.zero);
             _gaiusManager.view.LookDir(Vector2.zero);
         }

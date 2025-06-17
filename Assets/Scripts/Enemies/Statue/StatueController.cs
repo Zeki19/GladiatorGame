@@ -7,8 +7,6 @@ using UnityEngine;
 public class  StatueController : EnemyController
 {
     [SerializeField] private float AttackRange;
-    private LineOfSight _los;
-    private LineOfSightNoMono _playerLOS;
     private ISteering _steering;
 
     public Vector2 _wallPosition;
@@ -35,9 +33,7 @@ public class  StatueController : EnemyController
     protected override void Awake()
     {
         base.Awake();
-        _los = GetComponent<LineOfSight>();
         _steering = new StToPoint(Vector2.zero, transform);
-        _playerLOS = new LineOfSightNoMono(LineOfSightRange, 90, _avoidMask);
     }
 
     protected override void InitializeFsm()
@@ -115,25 +111,18 @@ public class  StatueController : EnemyController
         var qCanAttack = new QuestionNode(QuestionCanAttack, aAttack, aChase);
         var qIsTheWallClose = new QuestionNode(QuestionIsTheWallCloseEnough, aIdle, aRunAway);
         var qLookingForWall = new QuestionNode(QuestionIsThereAWall, qIsTheWallClose, aIdle);
-        var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, qLookingForWall);
-        var qPlayerLooking = new QuestionNode(QuestionIsPlayerLooking, aIdle, qTargetInView);
+
         
         //Root = qPlayerLooking;
     }
 
 
-    bool QuestionTargetInView()
-    {
-        return target != null && _los.LOS(target.transform);
-    }
+
     bool QuestionCanAttack()
     {
         return Vector2.Distance(transform.position, target.position) <= AttackRange;
     }
-    bool QuestionIsPlayerLooking()
-    {
-        return _playerLOS.LOS(RotationHandler.transform,transform, RotationHandler);
-    }
+
     bool QuestionIsThereAWall()
     {
         _wallPosition = _wallFinder.ClosestPoint(Vector2.zero);

@@ -32,7 +32,6 @@ public class HoundController : EnemyController
 
     #region Private Variables
     
-    private LineOfSight _los;
     private ISteering _steering;
     private HoundState_Idle<StateEnum> _idleState;
     private HoundState_Patrol<StateEnum> _patrolState;
@@ -66,7 +65,6 @@ public class HoundController : EnemyController
     protected override void Awake()
     {
         base.Awake();
-        _los = GetComponent<LineOfSight>();
         
         _avoidWalls = new StObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
     }
@@ -194,17 +192,9 @@ public class HoundController : EnemyController
         var qAttackRange = new QuestionNode(QuestionAttackRange, qCanAttack, aChase);
         var qStateAttack = new QuestionNode(QuestionIsAttack, qAttackRange, qInCamp);
         var qFinishedSearching = new QuestionNode(QuestionFinishedSearching, aRunaway, aSearch);
-        var qTargetInViewSearch = new QuestionNode(QuestionTargetInView, aChase, qFinishedSearching);
-        var qStateSearch = new QuestionNode(QuestionIsSearch, qTargetInViewSearch, qStateAttack);
         var qFarFromLimit = new QuestionNode(QuestionFarFromCamp, aRunaway, qAttackRange);
-        var qTargetInViewChase = new QuestionNode(QuestionTargetInView, qFarFromLimit, aSearch);
-        var qStateChase = new QuestionNode(QuestionIsChase, qTargetInViewChase, qStateSearch);
         var qIsTired = new QuestionNode(QuestionIsTired, aIdle, aPatrol);
-        var qTargetInViewPatrol = new QuestionNode(QuestionTargetInView, aChase, qIsTired);
-        var qStatePatrol = new QuestionNode(QuestionIsPatrol, qTargetInViewPatrol, qStateChase);
         var qIsRested = new QuestionNode(QuestionIsRested, aPatrol, aIdle);
-        var qStateIdle = new QuestionNode(QuestionIsIdle, qIsRested, qStatePatrol);
-        var qFarFromCamp = new QuestionNode(QuestionFarFromCamp, aRunaway, qStateIdle);
 
         //Root = qFarFromCamp;
     }
@@ -224,10 +214,6 @@ public class HoundController : EnemyController
     bool QuestionIsRested()
     {
         return _idleState.FinishedResting;
-    }
-    bool QuestionTargetInView()
-    {
-        return target != null && _los.LOS(target.transform);
     }
     bool QuestionIsTired()
     {
