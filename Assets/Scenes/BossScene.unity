@@ -642,12 +642,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 2022685032}
   target: {fileID: 1827914495}
-  Root: {fileID: 11400000, guid: af0e8ea6a0374f04b9b45a82cba8ce41, type: 2}
+  Root: {fileID: 11400000, guid: 4bbf34b8a024acf4aa261bb3e9838070, type: 2}
   phasesThresholds: 32000000
   stats: {fileID: 11400000, guid: 4e96c14f6a2738646bb097759e9708c2, type: 2}
   SpriteRendererBoss: {fileID: 2022685035}
   didAttackMiss: 0
   isAttacking: 0
+  isBackStepFinished: 0
+  FinishedAttacking: 0
 --- !u!114 &2022685032
 MonoBehaviour:
   m_ObjectHideFlags: 0

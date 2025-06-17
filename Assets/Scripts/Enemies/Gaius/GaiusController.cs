@@ -21,6 +21,7 @@ namespace Enemies.FirstBossTest
         public bool didAttackMiss = false;
         public bool isAttacking = false;
         public bool isBackStepFinished;
+        public bool FinishedAttacking;
 
         #region Private Variables
 
