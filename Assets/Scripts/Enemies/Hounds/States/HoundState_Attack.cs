@@ -36,7 +36,7 @@ public class HoundState_Attack<T> : States_Base<T>
         var hp = _model.GetComponent<HealthSystem.HealthSystem>();
         var currentHpPercent = hp.GetCurrentHealth() / hp.GetMaxHealth();
 
-
+        
         var rouletteSource = currentHpPercent < 0.5f ? _lowHpAttackOptions : _attackOptions;
         _chosenType = MyRandom.Roulette(rouletteSource);
         
