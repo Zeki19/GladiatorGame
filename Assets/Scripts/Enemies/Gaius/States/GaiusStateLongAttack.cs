@@ -59,8 +59,8 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         yield return new WaitForSeconds(_stats.longDelay);
         float timer = _stats.longDuration;
 
-        Vector2 hitboxSize = new Vector2(1f, 1f); // Hitbox Size
-        Vector2 offset = Vector2.right * 0.75f;     // Forward from boss
+        Vector2 hitboxSize = new Vector2(1.5f, 1.5f); // Hitbox Size
+        Vector2 offset = _controller.transform.up * 0.75f;     // Forward from boss
 
         _controller.didAttackMiss = true;
         while (timer > 0f)
@@ -69,12 +69,16 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
             _manager.Rb.AddForce(_controller.transform.up * _stats.longSpeed);
             timer -= Time.deltaTime;
 
-            Vector2 hitboxCenter = (Vector2)_controller.transform.position + (Vector2.up * 0.75f);
-            Collider2D hit = Physics2D.OverlapBox(hitboxCenter, hitboxSize, 0f, _stats.longTargetLayer);
+            Vector2 hitboxCenter = (Vector2)_controller.transform.position + ((Vector2)_controller.transform.up * 0.75f);
+            float angle = Mathf.Atan2(_controller.transform.up.y, _controller.transform.up.x) * Mathf.Rad2Deg;
+            Collider2D hit = Physics2D.OverlapBox(hitboxCenter, hitboxSize, angle, _stats.longTargetLayer);
+
+            Debug.DrawLine(hitboxCenter + Vector2.up * hitboxSize.y / 2, hitboxCenter - Vector2.up * hitboxSize.y / 2, Color.red, 0.1f);
+            Debug.DrawLine(hitboxCenter + Vector2.right * hitboxSize.x / 2, hitboxCenter - Vector2.right * hitboxSize.x / 2, Color.red, 0.1f);
 
             if (hit && _controller.didAttackMiss)
             {
-                _model.AttackTarget(hit.transform, _stats.mediumDamage);
+                _model.AttackTarget(hit.transform, _stats.longDamage);
                 _controller.didAttackMiss = false;
             }
             yield return null;
