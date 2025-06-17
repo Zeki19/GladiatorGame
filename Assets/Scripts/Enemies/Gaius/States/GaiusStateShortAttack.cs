@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Enemies.Gaius;
+using Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
     private SpriteRenderer _spriteRenderer;
     private GaiusController _controller;
     private GaiusModel _model;
+    private GaiusView _view;
     private GaiusStatsSO _stats;
     Dictionary<AttackType, float> _attackOptions;
 
@@ -25,7 +27,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
     private float _delayTime;
     private float _attackDuration;
     private GameObject _weapon;
-    public GaiusStateShortAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController,GameObject weapon,List<AnimationCurve> curves) : base(steering, stObstacleAvoidance, self)
+    public GaiusStateShortAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController,GameObject weapon,List<AnimationCurve> curves,GaiusView view) : base(steering, stObstacleAvoidance, self)
     {
         _spriteRenderer = spriteRenderer;
         _controller = GaiusController;
@@ -37,6 +39,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
         }; //HARDCODED.
         _weapon = weapon;
         _curves = curves;
+        _view = view;
     }
 
     public override void Enter()
@@ -56,6 +59,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
                     _animationTime = _curves[0].keys[_curves[0].length - 1].time;
                 _animationClock = 0;
                 _controller.StartCoroutine(LungeAttack());
+                _view.PlayStateAnimation(StateEnum.ShortAttack);
                 break;
             case AttackType.Swipe:
                 if (_curves[1].length > 0)
@@ -64,6 +68,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
                 _weapon.transform.localPosition =
                     _weapon.transform.localPosition.normalized *1.3f;
                 _controller.StartCoroutine(SwipeAttack());
+                _view.PlayStateAnimation(StateEnum.MidAttack);
                 break;
         }
     }

@@ -23,6 +23,7 @@ namespace Enemies.Gaius.States
         public override void Enter()
         {
             base.Enter();
+            _gaiusManager.view.PlayStateAnimation(StateEnum.Idle);
 
             switch (StateMachine.LastStateEnum())
             {

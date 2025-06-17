@@ -68,8 +68,8 @@ namespace Enemies.Gaius
 
             var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this,manager);
             var backStepState = new GaiusStateBackStep<StateEnum>( SpriteRendererBoss, this,manager);
-            var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss);
-            var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this,weapom,curves);
+            var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss,manager);
+            var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this,weapom,curves,manager.view as GaiusView);
             var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this);
             var longAttackState = new GaiusStateLongAttack<StateEnum>(SpriteRendererBoss);
 
