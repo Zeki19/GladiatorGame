@@ -1,4 +1,5 @@
 using System;
+using Entities;
 using TMPro;
 using UnityEngine;
 

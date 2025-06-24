@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,12 @@ namespace Player
         private static readonly int Direction = Animator.StringToHash("MoveDirection");
         private static readonly int Spin = Animator.StringToHash("Spin");
         private static readonly int Vel = Animator.StringToHash("Vel");
+
+        protected override void Start()
+        {
+            base.Start();
+            manager.HealthComponent.OnDamage += (f => ServiceLocator.Instance.GetService<CameraShake>().Shake());
+        }
 
         public override void LookDir(Vector2 dir)
         {

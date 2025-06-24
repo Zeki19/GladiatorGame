@@ -1,39 +1,24 @@
-using System;
-using System.Collections;
-using Entities;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Utilities;
 
-public abstract class EntityView : MonoBehaviour, ILook
+namespace Entities
 {
-    [SerializeField] protected Animator animator;
-    [SerializeField] protected EntityManager manager;
-    [SerializeField] protected SpriteRenderer sprite;
-    private Coroutine _damageBlink;
-
-    public abstract void LookDir(Vector2 dir);
-    public abstract void PlayStateAnimation(StateEnum state);
-
-    private void Start()
+    public abstract class EntityView : MonoBehaviour, ILook
     {
-        manager.HealthComponent.OnDamage += DamageBLinkActivator;
-    }
+        [SerializeField] protected Animator animator;
+        [SerializeField] protected EntityManager manager;
+        [SerializeField] protected SpriteRenderer sprite;
+        private SpriteEffects _blink;
+        [SerializeField]private BlinkValues blinkValues; 
+    
 
-    private void DamageBLinkActivator(float damage)
-    {
-        if (_damageBlink != null)
-            StopCoroutine(_damageBlink);
-        _damageBlink = StartCoroutine(DamagedBlink());
-        
-    }
-    private IEnumerator DamagedBlink()
-    {
-        for (int i = 0; i < 3; i++)
+        public abstract void LookDir(Vector2 dir);
+        public abstract void PlayStateAnimation(StateEnum state);
+
+        protected virtual void Start()
         {
-            sprite.color=Color.red;
-            yield return new WaitForSeconds(.1f);
-            sprite.color=Color.white;
-            yield return new WaitForSeconds(.1f);
+            _blink = new SpriteEffects(this);
+            manager.HealthComponent.OnDamage +=(float a)=> _blink.Blink(sprite,blinkValues.amount,blinkValues.frequency,blinkValues.blinkActive);
         }
     }
 }

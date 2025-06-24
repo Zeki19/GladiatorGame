@@ -125,7 +125,7 @@ MonoBehaviour:
     dashCooldown: 1
     dashInvincibility: 0
     knockbackWeight: 0
-    canBeKnockedBack: 0
+    canBeKnockedBack: 1
   weaponController: {fileID: 8182166463018864506}
 --- !u!1 &2382062061231218183
 GameObject:
@@ -389,6 +389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8307102956479284612}
   manager: {fileID: 5522031050175312599}
+  sprite: {fileID: 8461442029586105149}
+  blinkValues: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
 --- !u!114 &8586703381123056644
 MonoBehaviour:
   m_ObjectHideFlags: 0

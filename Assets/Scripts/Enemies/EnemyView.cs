@@ -1,3 +1,4 @@
+using Entities;
 using UnityEngine;
 
 public class EnemyView : EntityView

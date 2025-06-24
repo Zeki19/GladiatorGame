@@ -8,7 +8,7 @@ public class  StatueController : EnemyController
 {
     [SerializeField] private float AttackRange;
     //private LineOfSight _los;
-    private LineOfSightNoMono _playerLOS;
+    //private LineOfSightNoMono _playerLOS;
     private ISteering _steering;
 
     public Vector2 _wallPosition;
@@ -37,7 +37,7 @@ public class  StatueController : EnemyController
         base.Awake();
         //_los = GetComponent<LineOfSight>();
         _steering = new StToPoint(Vector2.zero, transform);
-        _playerLOS = new LineOfSightNoMono(LineOfSightRange, 90, _avoidMask);
+        //_playerLOS = new LineOfSightNoMono(LineOfSightRange, 90, _avoidMask);
     }
 
     protected override void InitializeFsm()
@@ -116,7 +116,7 @@ public class  StatueController : EnemyController
         var qIsTheWallClose = new QuestionNode(QuestionIsTheWallCloseEnough, aIdle, aRunAway);
         var qLookingForWall = new QuestionNode(QuestionIsThereAWall, qIsTheWallClose, aIdle);
         var qTargetInView = new QuestionNode(QuestionTargetInView, qCanAttack, qLookingForWall);
-        var qPlayerLooking = new QuestionNode(QuestionIsPlayerLooking, aIdle, qTargetInView);
+        //var qPlayerLooking = new QuestionNode(QuestionIsPlayerLooking, aIdle, qTargetInView);
         
         //Root = qPlayerLooking;
     }
@@ -130,10 +130,10 @@ public class  StatueController : EnemyController
     {
         return Vector2.Distance(transform.position, target.position) <= AttackRange;
     }
-    bool QuestionIsPlayerLooking()
-    {
-        return _playerLOS.LOS(RotationHandler.transform,transform, RotationHandler);
-    }
+    //bool QuestionIsPlayerLooking()
+    //{
+    //    //return _playerLOS.LOS(RotationHandler.transform,transform, RotationHandler);
+    //}
     bool QuestionIsThereAWall()
     {
         _wallPosition = _wallFinder.ClosestPoint(Vector2.zero);
