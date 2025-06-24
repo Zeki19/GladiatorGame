@@ -32,7 +32,6 @@ public class HoundController : EnemyController
 
     #region Private Variables
     
-    private LineOfSight _los;
     private ISteering _steering;
     private HoundState_Idle<StateEnum> _idleState;
     private HoundState_Patrol<StateEnum> _patrolState;
@@ -66,7 +65,6 @@ public class HoundController : EnemyController
     protected override void Awake()
     {
         base.Awake();
-        _los = GetComponent<LineOfSight>();
         
         _avoidWalls = new StObstacleAvoidance(_maxObs, _radius, _angle, _personalArea, _obsMask);
     }
@@ -227,7 +225,7 @@ public class HoundController : EnemyController
     }
     bool QuestionTargetInView()
     {
-        return target != null && _los.LOS(target.transform);
+        return false; //target != null && _los.LOS(target.transform);
     }
     bool QuestionIsTired()
     {

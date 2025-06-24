@@ -11,7 +11,6 @@ namespace Dummy
     {
         #region Private variables
         
-        private LineOfSight _los;
         
         //Ref to each State
         private DSChase<StateEnum> _chaseState;

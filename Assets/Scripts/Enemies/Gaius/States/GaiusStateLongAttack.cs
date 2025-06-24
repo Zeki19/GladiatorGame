@@ -14,6 +14,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
     Dictionary<AttackType, float> _attackOptions;
     private AttackType _currentAttack;
     private EntityManager _manager;
+    private GameObject _weapon;
 
     public GaiusStateLongAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController, GameObject weapon, List<AnimationCurve> curves, EntityManager manager ) : base(steering, stObstacleAvoidance, self)
     {
@@ -26,6 +27,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
             {AttackType.Normal, 50}
         }; //HARDCODED.
         _manager = manager;
+        _weapon = weapon;
     }
 
     public override void Enter()
@@ -35,7 +37,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         _move.Move(Vector2.zero);
         _look.LookDir(Vector2.zero);
         _model = _attack as GaiusModel;
-
+        _weapon.SetActive(true);
 
         _currentAttack = MyRandom.Roulette(_attackOptions);
         Debug.Log(_currentAttack);
@@ -49,6 +51,12 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
                 _controller.StartCoroutine(ChargeCooldown());
                 break;
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _weapon.SetActive(false);
     }
 
     private IEnumerator ChargeAttack()

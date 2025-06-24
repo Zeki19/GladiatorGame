@@ -7,7 +7,7 @@ using UnityEngine;
 public class  StatueController : EnemyController
 {
     [SerializeField] private float AttackRange;
-    private LineOfSight _los;
+    //private LineOfSight _los;
     private LineOfSightNoMono _playerLOS;
     private ISteering _steering;
 
@@ -35,7 +35,7 @@ public class  StatueController : EnemyController
     protected override void Awake()
     {
         base.Awake();
-        _los = GetComponent<LineOfSight>();
+        //_los = GetComponent<LineOfSight>();
         _steering = new StToPoint(Vector2.zero, transform);
         _playerLOS = new LineOfSightNoMono(LineOfSightRange, 90, _avoidMask);
     }
@@ -124,7 +124,7 @@ public class  StatueController : EnemyController
 
     bool QuestionTargetInView()
     {
-        return target != null && _los.LOS(target.transform);
+        return false; //target != null && _los.LOS(target.transform);
     }
     bool QuestionCanAttack()
     {

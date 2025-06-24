@@ -54,6 +54,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
         _model = _attack as GaiusModel;
         _controller.FinishedAttacking = false;
         _currentAttack = MyRandom.Roulette(_attackOptions);
+        _weapon.SetActive(true);
         switch(_currentAttack)
         {
             case AttackType.Lunge:
@@ -102,6 +103,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
     {
         _weapon.transform.localPosition=new Vector3(0,0.5f,0);
         _weapon.transform.localRotation=quaternion.identity;
+        _weapon.SetActive(false);
     }
 
     private IEnumerator LungeAttack()
