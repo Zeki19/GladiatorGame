@@ -21,7 +21,10 @@ public class PlayerChargeBar : MonoBehaviour
     {
         if (_weaponController != null && chargeSlider != null)
         {
-            chargeSlider.value = _weaponController.CheckWeaponChargePercent();
+            if (_weaponController.Weapon!=null)
+                chargeSlider.value = _weaponController.CheckWeaponChargePercent();
+            else
+                chargeSlider.value = 0;
         }
     }
 }
