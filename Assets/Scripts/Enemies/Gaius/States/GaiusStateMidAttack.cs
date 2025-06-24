@@ -24,7 +24,6 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
     {
         base.Enter();
         _delayTime = _stats.mediumDelay;
-        _spriteRenderer.color = Color.red;
 
         Vector2 dir = _steering.GetDir();
         _move.Move(Vector2.zero);

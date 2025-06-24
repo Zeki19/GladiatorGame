@@ -14,7 +14,6 @@ public class GaiusStateChase<T> : State_Steering<T>
     public override void Enter()
     {
         base.Enter();
-        _spriteRenderer.color = Color.white;
         _move.Move(Vector2.zero);
         _gaiusManager.view.PlayStateAnimation(StateEnum.Chase);
     }

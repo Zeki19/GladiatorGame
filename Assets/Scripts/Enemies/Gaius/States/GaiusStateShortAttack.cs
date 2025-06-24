@@ -46,7 +46,6 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
     public override void Enter()
     {
         base.Enter();
-        _spriteRenderer.color = Color.yellow;
         Vector2 dir = _steering.GetDir();
         _move.Move(Vector2.zero);
         var a = _look as GaiusView;

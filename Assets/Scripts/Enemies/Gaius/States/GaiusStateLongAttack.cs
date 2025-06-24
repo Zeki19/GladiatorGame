@@ -33,7 +33,6 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
     public override void Enter()
     {
         base.Enter();
-        _spriteRenderer.color = Color.black;
         _move.Move(Vector2.zero);
         _look.LookDir(Vector2.zero);
         _model = _attack as GaiusModel;

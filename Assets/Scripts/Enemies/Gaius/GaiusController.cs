@@ -3,6 +3,7 @@ using Enemies.Gaius.States;
 using Entities.Interfaces;
 using Entities.StateMachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Enemies.Gaius
 {
@@ -177,6 +178,7 @@ namespace Enemies.Gaius
         private void Die()
         {
             Destroy(gameObject);
+            SceneChanger.Instance.ChangeScene(2);
         }
 
     }

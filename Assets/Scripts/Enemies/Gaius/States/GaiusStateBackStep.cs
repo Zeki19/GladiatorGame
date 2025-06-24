@@ -21,8 +21,7 @@ public class GaiusStateBackStep<T> : States_Base<T>
     public override void Enter()
     {
         _BackStepTime = .5f;
-        _spriteRenderer.color=Color.magenta;
-        _gaiusManager.Rb.isKinematic = false;
+        _gaiusManager.Rb.bodyType = RigidbodyType2D.Dynamic;
         _move.Dash(1);
     }
 
@@ -34,7 +33,7 @@ public class GaiusStateBackStep<T> : States_Base<T>
         {
             _gaiusController.isBackStepFinished = false;
             _gaiusController.FinishedAttacking = false;
-            _gaiusManager.Rb.isKinematic = true;
+            _gaiusManager.Rb.bodyType = RigidbodyType2D.Kinematic;
             _gaiusManager.Rb.linearVelocity = Vector2.zero;
         }
     }
