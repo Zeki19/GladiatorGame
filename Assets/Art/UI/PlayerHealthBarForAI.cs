@@ -4,21 +4,56 @@ using UnityEngine.UI;
 
 public class PlayerHealthBarForAI : MonoBehaviour
 {
+    [Header("UI Images")]
+    [SerializeField] private Image healthImage; 
+    [SerializeField] private Image trailImage;   
+
+    [Header("Trail Settings")]
+    [SerializeField] private float trailSpeed = 2f;
+
     private PlayerManager _manager;
-    [SerializeField]private Slider _slider;
 
     private void Start()
     {
-        _manager=ServiceLocator.Instance.GetService<PlayerManager>();
-        _manager.HealthComponent.OnDamage += UpdateLife;
-        _manager.HealthComponent.OnHeal += UpdateLife;
+        _manager = ServiceLocator.Instance.GetService<PlayerManager>();
 
-        _slider = GetComponent<Slider>();
-        _slider.value = 1f;
+        _manager.HealthComponent.OnDamage += OnHealthChanged;
+        _manager.HealthComponent.OnHeal += OnHealthChanged;
+
+        healthImage.fillAmount = 1f;
+        trailImage.fillAmount = 1f;
     }
 
-    void UpdateLife(float amount)
+    private void OnHealthChanged(float _)
     {
-        _slider.value = _manager.HealthComponent.GetCurrentHealthPercentage()/100;
+        float target = _manager.HealthComponent.GetCurrentHealthPercentage() / 100f;
+
+        healthImage.fillAmount = target;
+
+        StopAllCoroutines();
+        StartCoroutine(UpdateTrail(target));
+    }
+
+    private System.Collections.IEnumerator UpdateTrail(float target)
+    {
+        while (trailImage.fillAmount > target)
+        {
+            trailImage.fillAmount = Mathf.MoveTowards(
+                trailImage.fillAmount,
+                target,
+                trailSpeed * Time.deltaTime
+            );
+            yield return null;
+        }
+        trailImage.fillAmount = target;
+    }
+
+    private void OnDestroy()
+    {
+        if (_manager != null && _manager.HealthComponent != null)
+        {
+            _manager.HealthComponent.OnDamage -= OnHealthChanged;
+            _manager.HealthComponent.OnHeal -= OnHealthChanged;
+        }
     }
 }

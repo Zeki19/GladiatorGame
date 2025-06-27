@@ -2,29 +2,50 @@ using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
+using UnityEngine;
+using UnityEngine.UI;
+
 public class PlayerChargeBar : MonoBehaviour
 {
-    [SerializeField] private Slider chargeSlider;
+    [Header("UI Images")]
+    [SerializeField] private Image chargeImage;  
+    [SerializeField] private Image trailImage;   
+
+    [Header("Trail Settings")]
+    [SerializeField] private float trailSpeed = 2f;
+
     private PlayerWeaponController _weaponController;
 
     private void Start()
     {
         _weaponController = ServiceLocator.Instance.GetService<PlayerWeaponController>();
 
-        if (chargeSlider == null)
-            chargeSlider = GetComponent<Slider>();
-
-        chargeSlider.value = 0f;
+        chargeImage.fillAmount = 0f;
+        trailImage.fillAmount = 0f;
     }
 
     private void Update()
     {
-        if (_weaponController != null && chargeSlider != null)
+        if (_weaponController == null) return;
+
+        float target = (_weaponController.Weapon != null)
+            ? _weaponController.CheckWeaponChargePercent()
+            : 0f;
+
+        chargeImage.fillAmount = target;
+
+
+        if (trailImage.fillAmount > target)
         {
-            if (_weaponController.Weapon!=null)
-                chargeSlider.value = _weaponController.CheckWeaponChargePercent();
-            else
-                chargeSlider.value = 0;
+            trailImage.fillAmount = Mathf.MoveTowards(
+                trailImage.fillAmount,
+                target,
+                trailSpeed * Time.deltaTime
+            );
+        }
+        else
+        {
+            trailImage.fillAmount = target;
         }
     }
 }
