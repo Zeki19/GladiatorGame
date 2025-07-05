@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Entities;
 using Entities.Interfaces;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -13,9 +14,9 @@ namespace Player
         private Vector2 _lastDirection;
         private PlayerInput _playerInput;
         private InputAction _direction;
+        private PlayerManager _manager;
 
         private PlayerStats _stats;
-        
         Action _onAttack = delegate { };
 
 
@@ -26,15 +27,26 @@ namespace Player
             _playerInput = GetComponent<PlayerInput>();
             var actionMap = _playerInput.actions.FindActionMap("Player");
             _direction = actionMap.FindAction("Move");
-            var playerManager = manager as PlayerManager;
-            if (playerManager != null) _stats = playerManager.stats;
+            _manager = manager as PlayerManager;
+            if (_manager != null) _stats = _manager.stats;
             else Debug.LogWarning("manager is not A player manager and it should be");
+            manager.HealthComponent.OnDamage += AtivateInvulnerability;
         }
         public void Attack()
         {
             _onAttack();
         }
 
+        public void AtivateInvulnerability(float not)//Falta agregar una forma de terminar la corutina si esta funcion se vuelve a llamar artes de terminar
+        {
+            StartCoroutine(PlayerInvulnerability());
+        }
+        IEnumerator PlayerInvulnerability()
+        {
+            manager.HealthComponent.isInvulnerable = true;
+            yield return new WaitForSeconds(_manager.stats.IFrames);
+            manager.HealthComponent.isInvulnerable = false;
+        }
        
         public override void ModifySpeed(float speed)
         {

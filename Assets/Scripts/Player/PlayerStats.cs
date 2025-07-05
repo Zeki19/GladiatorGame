@@ -11,6 +11,7 @@ namespace Player
         [SerializeField] private float maxHealth;
         public float MaxHealth => maxHealth;
         public int[] stateThreshold;
+        public float IFrames;
         #region SpeedVariables
 
         [Header("Speed")] 
