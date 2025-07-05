@@ -22,7 +22,7 @@ public class GaiusStateBackStep<T> : States_Base<T>
     {
         _BackStepTime = .5f;
         _gaiusManager.Rb.bodyType = RigidbodyType2D.Dynamic;
-        _move.Dash(1);
+        _move.Dash(3);
     }
 
     public override void Execute()

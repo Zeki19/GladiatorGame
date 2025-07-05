@@ -5,7 +5,6 @@ public class GaiusStatsSO : ScriptableObject
 {
     [Header("Short Attack")]
     [SerializeField] public float shortAngle;
-    [SerializeField] public float shortRange;
     [SerializeField] public float shortDelay;
     [SerializeField] public float shortDamage;
     [SerializeField] public float shortPunish;
@@ -42,8 +41,7 @@ public class GaiusStatsSO : ScriptableObject
 
     private void OnValidate()
     {
-        shortRange = Mathf.Clamp(shortRange, 0, mediumRange);
-        mediumRange = Mathf.Clamp(mediumRange, shortRange, longRange);
+        mediumRange = Mathf.Clamp(mediumRange, 0, longRange);
         longRange = Mathf.Max(longRange, mediumRange);
 
         shortDelay = Mathf.Max(shortDelay, 0);
