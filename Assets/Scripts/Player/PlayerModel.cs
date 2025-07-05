@@ -35,6 +35,7 @@ namespace Player
             _onAttack();
         }
 
+       
         public override void ModifySpeed(float speed)
         {
             _stats.SpeedModifier += speed;  //Ask the designer if this should be a + or a *.
@@ -47,8 +48,7 @@ namespace Player
 
         public override void Move(Vector2 dir)
         {
-            _moveInput = _direction.ReadValue<Vector2>();
-            if (_moveInput != Vector2.zero) _lastDirection = _moveInput;
+            if (IsPlayerTryingToMove()) _lastDirection = _moveInput;
             manager.Rb.linearVelocity = _moveInput * (_stats.MoveSpeed * _stats.SpeedModifier);
         }
 
@@ -69,6 +69,12 @@ namespace Player
             Vector2 adjustedForce = force / _stats.KnockbackWeight;
             manager.Rb.linearVelocity = Vector2.zero;
             manager.Rb.AddForce(adjustedForce, ForceMode2D.Impulse);
+        }
+
+        public bool IsPlayerTryingToMove()
+        {
+            _moveInput = _direction.ReadValue<Vector2>();
+            return _moveInput != Vector2.zero;
         }
         public void SetKnockbackEnabled(bool can) =>_stats.canBeKnockedBack = can;
 

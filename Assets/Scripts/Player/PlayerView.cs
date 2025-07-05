@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Entities;
@@ -11,13 +12,18 @@ namespace Player
         private int _oldSector = 1;
     
         private static readonly int Direction = Animator.StringToHash("MoveDirection");
-        private static readonly int Spin = Animator.StringToHash("Spin");
-        private static readonly int Vel = Animator.StringToHash("Vel");
 
         protected override void Start()
         {
             base.Start();
             manager.HealthComponent.OnDamage += (f => ServiceLocator.Instance.GetService<CameraShake>().Shake());
+            manager.HealthComponent.OnDamage += ChackCurrentPhace;
+        }
+        void ChackCurrentPhace(float not)
+        {
+            var playerManager = manager as PlayerManager;
+            var controler = playerManager.controller as PlayerController;
+            animator.SetFloat("State",controler._phaseSystem.currentPhase());
         }
 
         public override void LookDir(Vector2 dir)
@@ -47,18 +53,69 @@ namespace Player
             animator.SetFloat(Direction,sector);
         }
 
-        public override void PlayStateAnimation(StateEnum state)
+        public void SetAnimationBool(StateEnum state,bool boolState)
         {
-            throw new System.NotImplementedException();
+            
+            switch (state)
+            {
+                case StateEnum.Idle:animator.SetTrigger("Idle");
+                    Debug.Log("Idle");
+                    break;
+                case StateEnum.Dash:animator.SetBool("Dash",boolState);
+                    Debug.Log("Dash");
+                    break;
+                case StateEnum.Walk:animator.SetBool("Walk",boolState);
+                    Debug.Log("Walk");
+                    break;
+                case StateEnum.Default:
+                case StateEnum.Attack:
+                case StateEnum.ShortAttack:
+                case StateEnum.MidAttack:
+                case StateEnum.LongAttack:
+                case StateEnum.ChargeAttack:
+                case StateEnum.Chase:
+                case StateEnum.Search:
+                case StateEnum.Patrol:
+                case StateEnum.Runaway:
+                case StateEnum.Phase1:
+                case StateEnum.Phase2:
+                case StateEnum.Phase3:
+                case StateEnum.BackStep:
+                default:
+                    break;
+            }
         }
 
-        public void OnAttackAnim()
+        public override void PlayStateAnimation(StateEnum state)
         {
-            animator.SetTrigger(Spin);
-        }
-        void OnMoveAnim()
-        {
-            animator.SetFloat(Vel, manager.Rb.linearVelocity.magnitude);
+            switch (state)
+            {
+                case StateEnum.Idle:animator.SetTrigger("Idle");
+                    Debug.Log("Idle");
+                    break;
+                case StateEnum.Dash:animator.SetTrigger("Dash");
+                    Debug.Log("Dash");
+                    break;
+                case StateEnum.Walk:animator.SetTrigger("Move");
+                    Debug.Log("Walk");
+                    break;
+                case StateEnum.Default:
+                case StateEnum.Attack:
+                case StateEnum.ShortAttack:
+                case StateEnum.MidAttack:
+                case StateEnum.LongAttack:
+                case StateEnum.ChargeAttack:
+                case StateEnum.Chase:
+                case StateEnum.Search:
+                case StateEnum.Patrol:
+                case StateEnum.Runaway:
+                case StateEnum.Phase1:
+                case StateEnum.Phase2:
+                case StateEnum.Phase3:
+                case StateEnum.BackStep:
+                default:
+                    break;
+            }
         }
     }
 }

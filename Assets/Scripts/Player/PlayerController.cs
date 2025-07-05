@@ -9,6 +9,8 @@ namespace Player
 {
     public class PlayerController : EntityController
     {
+        
+        public PhaseSystem _phaseSystem;
         void Dead()
         {
             transform.parent.gameObject.SetActive(false);
@@ -18,6 +20,8 @@ namespace Player
         private void Start()
         {
             manager.HealthComponent.OnDead += Dead;
+            var playerManager = manager as PlayerManager;
+            _phaseSystem = new PhaseSystem(playerManager.stats.stateThreshold, manager.HealthComponent);
             InitializeFsm();
         }
 
@@ -30,8 +34,8 @@ namespace Player
 
             var stateList = new List<PSBase<StateEnum>>();
 
-            var idleState = new PSIdle<StateEnum>();
-            var walkState = new PSWalk<StateEnum>();
+            var idleState = new PSIdle<StateEnum>(StateEnum.Walk);
+            var walkState = new PSWalk<StateEnum>(StateEnum.Idle);
             var baseAttackState = new PSAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var changeAttackState = new PSChargeAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var dashState = new PSDash<StateEnum>(StateEnum.Idle, (PlayerManager)manager, this);
@@ -71,6 +75,10 @@ namespace Player
             Fsm.OnFixedExecute();
         }
 
+        public void ChangeToIdle()
+        {
+            Fsm.Transition(StateEnum.Idle);
+        }
         public void ChangeToMove()
         {
             Fsm.Transition(StateEnum.Walk);

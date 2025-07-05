@@ -12,6 +12,7 @@ public class PSDash<T> : PSBase<T>
     private float _dashTimer = 1;
     private PlayerStats _stats;
     private IHealth _characterHealth;
+    private PlayerView view;
 
     private bool _canDash = true;
 
@@ -35,6 +36,8 @@ public class PSDash<T> : PSBase<T>
         _dashTimer = _stats.DashDuration;
         _coroutineRunner.StartCoroutine(CooldownCoroutine());
         _coroutineRunner.StartCoroutine(InvulnerabilityCooldown());
+        view = _look as PlayerView;
+        view?.SetAnimationBool(StateEnum.Dash,true);
     }
 
     private IEnumerator CooldownCoroutine()
@@ -63,7 +66,7 @@ public class PSDash<T> : PSBase<T>
     public override void Exit()
     {
         base.Exit();
-        _move.Move(Vector2
-            .zero); //This is here so that the player doesn't go on infinitively with the dash if no input is being received. <-- MANSO CHOCLO
+        _move.Move(Vector2.zero); //This is here so that the player doesn't go on infinitively with the dash if no input is being received. <-- MANSO CHOCLO
+        view?.SetAnimationBool(StateEnum.Dash,false);
     }
 }
