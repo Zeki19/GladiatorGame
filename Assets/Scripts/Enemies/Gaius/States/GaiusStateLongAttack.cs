@@ -11,6 +11,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
     private SpriteRenderer _spriteRenderer;
     private GaiusStatsSO _stats;
     private GaiusController _controller;
+    private GaiusView _view;
     Dictionary<AttackType, float> _attackOptions;
     private AttackType _currentAttack;
     private EntityManager _manager;
@@ -29,15 +30,14 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         _manager = manager;
         _weapon = weapon;
     }
-
     public override void Enter()
     {
         base.Enter();
         _move.Move(Vector2.zero);
-        _look.LookDir(Vector2.zero);
+        _view = _look as GaiusView;
         _model = _attack as GaiusModel;
         _weapon.SetActive(true);
-
+        _view.LookDirInsta(AvoidStObstacles.GetDir(_self, _steering.GetDir()));
         _currentAttack = MyRandom.Roulette(_attackOptions);
         Debug.Log(_currentAttack);
         switch (_currentAttack)
@@ -50,6 +50,9 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
                 _controller.StartCoroutine(ChargeCooldown());
                 break;
         }
+    }
+    public override void Execute()
+    {
     }
 
     public override void Exit()
