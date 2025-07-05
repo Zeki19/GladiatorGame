@@ -6,6 +6,7 @@ public class GaiusModel : EnemyModel
 {
     [SerializeField] float _moveSpeed;
     public Vector3 Forward => transform.forward;
+
     public override void ModifySpeed(float speed)
     {
         _speedModifier += speed;

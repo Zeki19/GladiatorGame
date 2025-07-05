@@ -13,7 +13,7 @@ namespace Enemies.Gaius
 
         public SpriteRenderer SpriteRendererBoss;
 
-        public GameObject weapom;
+        public GameObject weapom; //WEAPOMMMMMMMMM
         [SerializeField]private List<AnimationCurve> curves;
 
         public bool didAttackMiss = false;
@@ -27,7 +27,7 @@ namespace Enemies.Gaius
         private States_Base<StateEnum> _idleState; // BLUE
         private States_Base<StateEnum> _backStepState; // BLUE
         private States_Base<StateEnum> _chaseState; // WHITE
-        private States_Base<StateEnum> _shortAttackState; // YELLOW
+        public States_Base<StateEnum> _shortAttackState; // YELLOW
         private States_Base<StateEnum> _midAttackState; // RED
         private States_Base<StateEnum> _longAttackState; // BLACK
 
@@ -40,7 +40,7 @@ namespace Enemies.Gaius
         {
             InitalizeSteering();
             // The ranges must go before the base.Awake() so that it uploads them to the context of the decision tree.
-            attackRanges.Add(stats.shortRange);
+            attackRanges.Add(0);
             attackRanges.Add(stats.mediumRange);
             attackRanges.Add(stats.longRange);
             base.Awake();
@@ -147,8 +147,6 @@ namespace Enemies.Gaius
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, stats.shortRange);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, stats.mediumRange);
             Gizmos.color = Color.red;
