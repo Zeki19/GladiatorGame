@@ -4,6 +4,7 @@ using Entities.Interfaces;
 using Entities.StateMachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 namespace Enemies.Gaius
 {
@@ -151,25 +152,11 @@ namespace Enemies.Gaius
             Gizmos.DrawWireSphere(transform.position, stats.mediumRange);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, stats.longRange);
-            /*
-            if (Fsm.CurrentStateEnum() == StateEnum.ShortAttack)
-            {
-                Vector3 origin = transform.position;
-                Vector3 facingDir = transform.up;
+            Gizmos.color = Color.green;
+            Vector3 origin = transform.position;
+            Vector3 direction = transform.up * 5;
 
-                float halfAngle = stats.shortAngle / 2f;
-
-                Quaternion leftRot = Quaternion.Euler(0, 0, -halfAngle);
-                Quaternion rightRot = Quaternion.Euler(0, 0, halfAngle);
-
-                Vector3 leftDir = leftRot * facingDir;
-                Vector3 rightDir = rightRot * facingDir;
-
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(origin, origin + leftDir * stats.shortRange);
-                Gizmos.DrawLine(origin, origin + rightDir * stats.shortRange);
-                Gizmos.DrawWireSphere(origin, stats.shortRange);
-            }*/
+            Gizmos.DrawLine(origin, origin + direction);
 
         }
 

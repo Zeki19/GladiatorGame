@@ -44,7 +44,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         {
             case AttackType.Charge:
                     
-                    _controller.StartCoroutine(ChargeAttack());
+                _controller.StartCoroutine(ChargeAttack());
                 break;
             default:
                 _controller.StartCoroutine(ChargeCooldown());
@@ -65,25 +65,24 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         _controller.isAttacking = true;
         _controller.FinishedAttacking = false;
         _controller.canLongAttack = false;
+
+        _manager.Rb.freezeRotation = true;
+
         yield return new WaitForSeconds(_stats.longDelay);
         float timer = _stats.longDuration;
-
-        Vector2 hitboxSize = new Vector2(1.5f, 1.5f); // Hitbox Size
-        Vector2 offset = _controller.transform.up * 0.75f;     // Forward from boss
+        Vector3 direction = _controller.transform.up;
+        Vector2 hitboxSize = new Vector2(1.5f, 1.5f);
 
         _controller.didAttackMiss = true;
         while (timer > 0f)
         {
             _manager.Rb.bodyType = RigidbodyType2D.Dynamic;
-            _manager.Rb.AddForce(_controller.transform.up * _stats.longSpeed);
+            _manager.Rb.AddForce(direction * _stats.longSpeed);
             timer -= Time.deltaTime;
 
-            Vector2 hitboxCenter = (Vector2)_controller.transform.position + ((Vector2)_controller.transform.up * 0.75f);
-            float angle = Mathf.Atan2(_controller.transform.up.y, _controller.transform.up.x) * Mathf.Rad2Deg;
+            Vector2 hitboxCenter = (Vector2)_controller.transform.position + ((Vector2)direction * 0.75f);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Collider2D hit = Physics2D.OverlapBox(hitboxCenter, hitboxSize, angle, _stats.longTargetLayer);
-
-            Debug.DrawLine(hitboxCenter + Vector2.up * hitboxSize.y / 2, hitboxCenter - Vector2.up * hitboxSize.y / 2, Color.red, 0.1f);
-            Debug.DrawLine(hitboxCenter + Vector2.right * hitboxSize.x / 2, hitboxCenter - Vector2.right * hitboxSize.x / 2, Color.red, 0.1f);
 
             if (hit && _controller.didAttackMiss)
             {
@@ -92,12 +91,12 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
             }
             yield return null;
         }
+        _manager.Rb.freezeRotation = false;
         _manager.Rb.bodyType = RigidbodyType2D.Kinematic;
         _controller.isAttacking = false;
         _controller.isBackStepFinished = false;
         _controller.FinishedAttacking = true;
         _controller.canLongAttack = true;
-        Debug.Log("Charge Attack!");
     }
     private IEnumerator ChargeCooldown()
     {
