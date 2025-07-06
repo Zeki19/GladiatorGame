@@ -128,7 +128,6 @@ namespace HealthSystem
         /// </summary>
         public void Kill()
         {
-            if (isInvulnerable) return;
             currentHealth -= maxHealth;
             if (currentHealth <= 0)
             {
