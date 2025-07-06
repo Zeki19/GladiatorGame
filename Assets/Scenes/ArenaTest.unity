@@ -6531,6 +6531,14 @@ PrefabInstance:
       propertyPath: m_Direction
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3537681159813753686, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537681159813753686, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 4250985215330158538, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6538,6 +6546,14 @@ PrefabInstance:
     - target: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: m_Name
       value: Gaius
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205858778247482017, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205858778247482017, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8437142461110674885, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
@@ -22832,15 +22848,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23955,10 +23971,10 @@ SceneRoots:
   - {fileID: 1209311961}
   - {fileID: 477168240}
   - {fileID: 767134956}
-  - {fileID: 1634171591}
   - {fileID: 1610851041}
   - {fileID: 1033759531}
   - {fileID: 750802874}
+  - {fileID: 1634171591}
   - {fileID: 238393685}
   - {fileID: 1741573476}
   - {fileID: 3497405295414825349}
