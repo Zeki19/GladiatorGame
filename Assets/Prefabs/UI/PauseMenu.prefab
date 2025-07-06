@@ -390,8 +390,6 @@ GameObject:
   - component: {fileID: 1000922661962886670}
   - component: {fileID: 1833391338537974310}
   - component: {fileID: 8775931976051396939}
-  - component: {fileID: 3526391507377723926}
-  - component: {fileID: 6568619893468835226}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -482,30 +480,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3526391507377723926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336630239941896859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccd7caa8b802f7f4d9d79c23426ac2bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6568619893468835226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336630239941896859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8272a09ab3230a4099f4b1f9f0e49c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4548735530748611182
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +870,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3526391507377723926}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UISceneManager, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 3
@@ -1029,7 +1003,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3526391507377723926}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UISceneManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
