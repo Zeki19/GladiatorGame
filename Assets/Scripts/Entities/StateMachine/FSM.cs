@@ -28,6 +28,7 @@ namespace Entities.StateMachine
             _currentState.Exit();
             _currentState = newState;
             _currentState.Enter();
+
         }
         public IState<T> CurrentState()
         {

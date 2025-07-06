@@ -7,66 +7,68 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class PSDash<T> : PSBase<T>
 {
-    private MonoBehaviour _coroutineRunner;
+    private readonly MonoBehaviour _coroutineRunner;
+    private readonly IHealth _characterHealth;
+    private readonly PlayerStats _stats;
+    private readonly DashIcon _dashIconUI;
 
-    private float _dashTimer = 1;
-    private PlayerStats _stats;
-    private IHealth _characterHealth;
-    private PlayerView view;
-
+    private float _dashTimer = 1f;
     private bool _canDash = true;
-
-    T _inputFinish;
+    private readonly T _inputFinish;
+    private PlayerView _view;
 
     public PSDash(T inputFinish, PlayerManager manager, MonoBehaviour coroutineRunner)
     {
-        _stats = manager.stats;
         _inputFinish = inputFinish;
         _coroutineRunner = coroutineRunner;
+        _stats = manager.stats;
         _characterHealth = manager.HealthComponent;
+        _dashIconUI = manager.dashIconUI;
     }
-
     public override void Enter()
     {
         base.Enter();
+
         if (!_canDash) return;
+
         _canDash = false;
         _characterHealth.isInvulnerable = true;
+
         _move.Dash(_stats.DashForce);
         _dashTimer = _stats.DashDuration;
+
+        _dashIconUI?.HideIcon();
         _coroutineRunner.StartCoroutine(CooldownCoroutine());
         _coroutineRunner.StartCoroutine(InvulnerabilityCooldown());
-        view = _look as PlayerView;
-        view?.SetAnimationBool(StateEnum.Dash,true);
-    }
 
+        _view = _look as PlayerView;
+        _view?.SetAnimationBool(StateEnum.Dash, true);
+    }
     private IEnumerator CooldownCoroutine()
     {
         yield return new WaitForSeconds(_stats.DashCooldown);
         _canDash = true;
+        _dashIconUI?.ShowIcon();
     }
-
     private IEnumerator InvulnerabilityCooldown()
     {
-        yield return new WaitForSeconds(_stats.DashCooldown * Mathf.Clamp(_stats.DashInvincibility, 0, 100) / 100);
+        float invul = _stats.DashCooldown * Mathf.Clamp(_stats.DashInvincibility, 0f, 100f) / 100f;
+        yield return new WaitForSeconds(invul);
         _characterHealth.isInvulnerable = false;
     }
-
     public override void Execute()
     {
         base.Execute();
-
         _dashTimer -= Time.deltaTime;
         if (_dashTimer <= 0)
         {
             StateMachine.Transition(_inputFinish);
         }
     }
-
     public override void Exit()
     {
         base.Exit();
-        _move.Move(Vector2.zero); //This is here so that the player doesn't go on infinitively with the dash if no input is being received. <-- MANSO CHOCLO
-        view?.SetAnimationBool(StateEnum.Dash,false);
+        _move.Move(Vector2.zero);
+        _view?.SetAnimationBool(StateEnum.Dash, false);
     }
 }

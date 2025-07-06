@@ -8,7 +8,8 @@ namespace Player
     {
         public PlayerStats stats;
         public PlayerWeaponController weaponController;
-        
+
+        public DashIcon dashIconUI; 
 
         private void Awake()
         {
