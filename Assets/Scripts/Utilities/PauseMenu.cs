@@ -13,6 +13,7 @@ namespace Utilities
         [SerializeField]private string playerActionMapName = "Player";
         private InputActionMap playerActionMap;
 
+
         private void Start()
         {
             playerActionMap = inputActions.FindActionMap(playerActionMapName);
@@ -53,5 +54,11 @@ namespace Utilities
                 playerActionMap.Disable();
             }
         }
+
+        private void OnDestroy()
+        {
+            Time.timeScale = 1;
+        }
+
     }
 }

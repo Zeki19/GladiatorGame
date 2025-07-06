@@ -69,7 +69,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         _controller.FinishedAttacking = false;
         _controller.canLongAttack = false;
 
-        _manager.Rb.freezeRotation = true;
+        //_manager.Rb.freezeRotation = true;
 
         yield return new WaitForSeconds(_stats.longDelay);
         float timer = _stats.longDuration;
@@ -94,7 +94,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
             }
             yield return null;
         }
-        _manager.Rb.freezeRotation = false;
+        //_manager.Rb.freezeRotation = false;
         _manager.Rb.bodyType = RigidbodyType2D.Kinematic;
         _controller.isAttacking = false;
         _controller.isBackStepFinished = false;
