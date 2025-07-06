@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Enemies.Gaius.States;
+using Enemies.Hounds.States;
 using Entities.Interfaces;
 using Entities.StateMachine;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace Enemies.Gaius
         public bool isBackStepFinished;
         public bool FinishedAttacking;
         public bool canLongAttack = true;
-
+        public AttackType currentAttack;
         #region Private Variables
 
         private States_Base<StateEnum> _idleState; // BLUE
@@ -73,7 +74,7 @@ namespace Enemies.Gaius
             var backStepState = new GaiusStateBackStep<StateEnum>( SpriteRendererBoss, this,manager);
             var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss,manager);
             var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this,weapom,curves,manager.view as GaiusView);
-            var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this);
+            var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this, weapom, curves, manager.view as GaiusView);
             var longAttackState = new GaiusStateLongAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this, weapom, curves, manager);
 
             _idleState = idleState;

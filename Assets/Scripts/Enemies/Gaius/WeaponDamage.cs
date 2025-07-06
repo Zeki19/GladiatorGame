@@ -17,7 +17,7 @@ public class WeaponDamage : MonoBehaviour
         {
             return;
         }
-        switch (shortAttack.currentAttack)
+        switch (GaiusController.currentAttack)
         {
             case AttackType.Lunge:
                 GaiusController.didAttackMiss = false;
@@ -28,6 +28,7 @@ public class WeaponDamage : MonoBehaviour
                 GaiusModel.AttackTarget(collision.transform, GaiusController.stats.shortDamage);
                 break;
             default:
+                Debug.Log("PIFIASTE CHAMACO");
                 break;
         }
         

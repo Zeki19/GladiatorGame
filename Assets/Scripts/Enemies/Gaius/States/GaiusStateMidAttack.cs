@@ -1,70 +1,83 @@
-﻿using Enemies.FirstBossTest;
-using System;
+﻿using Enemies.Hounds.States;
 using System.Collections;
+using System.Collections.Generic;
 using Enemies.Gaius;
+using Entities;
+using Unity.Mathematics;
 using UnityEngine;
-using static Unity.Cinemachine.CinemachineDeoccluder;
+using Unity.VisualScripting;
 
 public class GaiusStateMidAttack<T> : State_Steering<T>
 {
     private SpriteRenderer _spriteRenderer;
     private GaiusController _controller;
     private GaiusModel _model;
+    private GaiusView _view;
     private GaiusStatsSO _stats;
+
+    #region aniamtion
+    private List<AnimationCurve> _curves;
+    private float _animationTime;
+    private float _animationClock;
+
+    #endregion
+
     private float _delayTime;
     private float _attackDuration;
-    public GaiusStateMidAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController) : base(steering, stObstacleAvoidance, self)
+    private GameObject _weapon;
+    private EnemyManager _manager;
+    public GaiusStateMidAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController, GameObject weapon, List<AnimationCurve> curves, GaiusView view) : base(steering, stObstacleAvoidance, self)
     {
         _spriteRenderer = spriteRenderer;
         _controller = GaiusController;
         _stats = GaiusController.stats;
+        _weapon = weapon;
+        _curves = curves;
+        _view = view;
     }
 
     public override void Enter()
     {
         base.Enter();
-        _delayTime = _stats.mediumDelay;
-
         Vector2 dir = _steering.GetDir();
         _move.Move(Vector2.zero);
-        _look.LookDir(dir);
-
+        _view.LookDirInsta(dir);
         _model = _attack as GaiusModel;
+        _controller.FinishedAttacking = false;
+        _controller.currentAttack = AttackType.Swipe;
+        _weapon.SetActive(true);
+        if (_curves[2].length > 0)
+            _animationTime = _curves[2].keys[_curves[2].length - 1].time;
+        _animationClock = 0;
+        _weapon.transform.localPosition = _weapon.transform.localPosition.normalized * 1.3f;
+        _controller.StartCoroutine(SwipeAttack());
+        _view.PlayStateAnimation(StateEnum.MidAttack);
     }
 
     public override void Execute()
     {
-        if (!_controller.isAttacking)
+        _animationClock += Time.deltaTime;
+        if (_animationClock < _animationTime)
         {
-            _controller.StartCoroutine(Attack());
+            _weapon.transform.localRotation = Quaternion.Euler(0, 0, -90 + _curves[2].Evaluate(_animationClock));
         }
     }
-    private IEnumerator Attack()
+
+    public override void Exit()
+    {
+        _weapon.transform.localPosition = new Vector3(0, 0.5f, 0);
+        _weapon.transform.localRotation = quaternion.identity;
+        _weapon.SetActive(false);
+    }
+
+    private IEnumerator SwipeAttack()
     {
         _controller.isAttacking = true;
-        yield return new WaitForSeconds(_delayTime);
-        Vector2 origin = _model.transform.position;
-        Vector2 direction = _model.transform.up.normalized;
-
-        // Calculates center of the lunge hitbox
-        Vector2 boxCenter = origin + direction * (_stats.mediumRange / 2f);
-        Vector2 boxSize = new Vector2(_stats.mediumRange, _stats.mediumWidth);
-
-        // Rotates the box
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        Collider2D[] hits = Physics2D.OverlapBoxAll(boxCenter, boxSize, angle, _stats.mediumTargetLayer);
-
         _controller.didAttackMiss = true;
-        foreach (var hit in hits)
-        {
-            Debug.Log(hit.name);
-            _controller.didAttackMiss = false;
-            _model.AttackTarget(hit.transform, _stats.mediumDamage);            
-        }
+        yield return new WaitForSeconds(_curves[2].keys[_curves[2].length - 1].time);
         _controller.isAttacking = false;
         _controller.isBackStepFinished = false;
         _controller.FinishedAttacking = true;
     }
-    
+
 }

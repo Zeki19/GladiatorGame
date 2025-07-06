@@ -17,8 +17,6 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
     Dictionary<AttackType, float> _attackOptions;
 
     #region aniamtion
-
-    public AttackType currentAttack;
     private List<AnimationCurve> _curves;
     private float _animationTime;
     private float _animationClock;
@@ -52,9 +50,9 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
         _view.LookDirInsta(dir);
         _model = _attack as GaiusModel;
         _controller.FinishedAttacking = false;
-        currentAttack = MyRandom.Roulette(_attackOptions);
+        _controller.currentAttack = MyRandom.Roulette(_attackOptions);
         _weapon.SetActive(true);
-        switch(currentAttack)
+        switch(_controller.currentAttack)
         {
             case AttackType.Lunge:
                 if (_curves[0].length > 0)
@@ -77,7 +75,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
 
     public override void Execute()
     {
-        switch(currentAttack)
+        switch(_controller.currentAttack)
         {
             case AttackType.Lunge:
                 _animationClock += Time.deltaTime;

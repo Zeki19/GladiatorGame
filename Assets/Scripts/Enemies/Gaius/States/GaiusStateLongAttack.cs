@@ -13,7 +13,6 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
     private GaiusController _controller;
     private GaiusView _view;
     Dictionary<AttackType, float> _attackOptions;
-    private AttackType _currentAttack;
     private EntityManager _manager;
     private GameObject _weapon;
 
@@ -38,9 +37,8 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         _model = _attack as GaiusModel;
         _weapon.SetActive(true);
         _view.LookDirInsta(AvoidStObstacles.GetDir(_self, _steering.GetDir()));
-        _currentAttack = MyRandom.Roulette(_attackOptions);
-        Debug.Log(_currentAttack);
-        switch (_currentAttack)
+        _controller.currentAttack = MyRandom.Roulette(_attackOptions);
+        switch (_controller.currentAttack)
         {
             case AttackType.Charge:
                     
@@ -51,6 +49,8 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
                 break;
         }
     }
+
+    //This is here so that we don't utilize the default execute, this avoids the character to rotate while charging.
     public override void Execute()
     {
     }
