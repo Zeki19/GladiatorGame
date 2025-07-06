@@ -105,6 +105,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
     {
         _controller.canLongAttack = false;
         _controller.FinishedAttacking = true;
+        _controller.didAttackMiss = true;
         yield return new WaitForSeconds(_stats.longIntervalCheck);
         _controller.canLongAttack = true;
     }
