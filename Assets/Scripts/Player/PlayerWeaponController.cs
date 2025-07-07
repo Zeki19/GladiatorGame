@@ -98,6 +98,7 @@ namespace Player
             Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
             Weapon.ChargeAttack.FinishAnimation -= ClearEnemiesList;
             _weaponManager.DestroyWeapon(Weapon);
+            _manager.Sounds.Invoke("BreakWeapon", "Player");
             Weapon = null;
         }
 
