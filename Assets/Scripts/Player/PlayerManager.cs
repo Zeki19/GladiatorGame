@@ -20,7 +20,7 @@ namespace Player
 
         private void damageTaken(float a)
         {
-            Sounds.Invoke("Hit","Player");
+            Sounds?.Invoke("Hit","Player");
         }
     }
 }

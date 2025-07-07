@@ -11211,7 +11211,6 @@ GameObject:
   - component: {fileID: 767134956}
   - component: {fileID: 767134954}
   - component: {fileID: 767134957}
-  - component: {fileID: 767134958}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -11259,26 +11258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724baad7cea294d4cb233b8919f468c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &767134958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767134953}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6834934ad875bc4ca6f868405fdfe76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startingPos: {x: -40, y: -30, z: 0}
-  inactiveWeapon: {fileID: 0}
-  forTest:
-  - {fileID: 11400000, guid: 42fb09580255b524ba931c5fea451200, type: 2}
-  spawnPoints: []
-  UsedspawnPoints: []
-  RespawnTimeRange: {x: 0, y: 0}
-  RespawnWeaponQuantity: {x: 0, y: 0}
 --- !u!1 &793270286
 GameObject:
   m_ObjectHideFlags: 0
