@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 123b0e98187d2204b90cbf9837660630, type: 3}
-  m_Name: AudioSettings
+  m_Name: Sounds_Music
   m_EditorClassIdentifier: 
-  soundName: 
-  clip: {fileID: 0}
-  volume: 1
+  sounds:
+  - name: Combat
+    clip: {fileID: 8300000, guid: 9b1fc73d0d35f2747aa9ea554e55d3f2, type: 3}
+    loop: 1
+    volume: 1

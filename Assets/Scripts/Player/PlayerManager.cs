@@ -15,6 +15,12 @@ namespace Player
         {
             ServiceLocator.Instance.RegisterService(this);
             HealthSystem = new HealthSystem.HealthSystem(stats.MaxHealth);
+            HealthSystem.OnDamage += damageTaken;
+        }
+
+        private void damageTaken(float a)
+        {
+            Sounds.Invoke("Hit","Player");
         }
     }
 }

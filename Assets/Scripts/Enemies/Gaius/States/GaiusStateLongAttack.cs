@@ -68,7 +68,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         _controller.isAttacking = true;
         _controller.FinishedAttacking = false;
         _controller.canLongAttack = false;
-
+        _manager.Sounds?.Invoke("Charge", "Enemy");
         //_manager.Rb.freezeRotation = true;
 
         yield return new WaitForSeconds(_stats.longDelay);

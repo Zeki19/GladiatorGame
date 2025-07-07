@@ -1,5 +1,7 @@
+using System;
 using Entities.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Entities
 {
@@ -15,5 +17,8 @@ namespace Entities
         public EntityView view;
         public EntityController controller;
         public IHealth HealthComponent => HealthSystem;
+        
+        public Action<string, string> Sounds;
+        public Action<string> StopSounds;
     }
 }

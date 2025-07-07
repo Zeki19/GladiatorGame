@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Entities;
 using Entities.Interfaces;
@@ -9,11 +10,11 @@ namespace Player
 {
     public class PlayerController : EntityController
     {
-        
         public PhaseSystem _phaseSystem;
         void Dead()
         {
             transform.parent.gameObject.SetActive(false);
+            manager.Sounds?.Invoke("Death","Player");
             ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(3);
         }
 
@@ -35,7 +36,7 @@ namespace Player
             var stateList = new List<PSBase<StateEnum>>();
 
             var idleState = new PSIdle<StateEnum>(StateEnum.Walk);
-            var walkState = new PSWalk<StateEnum>(StateEnum.Idle);
+            var walkState = new PSWalk<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var baseAttackState = new PSAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var changeAttackState = new PSChargeAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var dashState = new PSDash<StateEnum>(StateEnum.Idle, (PlayerManager)manager, this);

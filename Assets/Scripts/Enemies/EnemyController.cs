@@ -47,6 +47,7 @@ namespace Enemies
         }
         protected void CheckPhase(float damage)
         {
+            manager.Sounds?.Invoke("Hit","Enemy");
             _currentPhase = _phaseSystem.currentPhase();
             Debug.Log("Current phase is:" + _currentPhase);
         }

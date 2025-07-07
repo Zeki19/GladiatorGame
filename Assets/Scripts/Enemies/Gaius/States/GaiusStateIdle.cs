@@ -23,6 +23,8 @@ namespace Enemies.Gaius.States
         public override void Enter()
         {
             base.Enter();
+            
+            _gaiusManager.Sounds?.Invoke("Cooldown", "Enemy");
             _gaiusManager.view.PlayStateAnimation(StateEnum.Idle);
 
             switch (StateMachine.LastStateEnum())

@@ -21,6 +21,8 @@ public class GaiusStateBackStep<T> : States_Base<T>
     public override void Enter()
     {
         _BackStepTime = .5f;
+        
+        _gaiusManager.Sounds?.Invoke("BackStep", "Enemy");
         //_gaiusManager.Rb.bodyType = RigidbodyType2D.Dynamic;
         _move.Dash(3);
     }

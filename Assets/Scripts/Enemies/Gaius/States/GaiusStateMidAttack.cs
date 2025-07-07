@@ -74,6 +74,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
     {
         _controller.isAttacking = true;
         _controller.didAttackMiss = true;
+        _manager.Sounds?.Invoke("MegaSwing", "Enemy");
         yield return new WaitForSeconds(_curves[2].keys[_curves[2].length - 1].time);
         _controller.isAttacking = false;
         _controller.isBackStepFinished = false;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Player;
@@ -17,6 +18,8 @@ public class PSDash<T> : PSBase<T>
     private readonly T _inputFinish;
     private PlayerView _view;
 
+    private PlayerManager _manager;
+
     public PSDash(T inputFinish, PlayerManager manager, MonoBehaviour coroutineRunner)
     {
         _inputFinish = inputFinish;
@@ -24,13 +27,17 @@ public class PSDash<T> : PSBase<T>
         _stats = manager.stats;
         _characterHealth = manager.HealthComponent;
         _dashIconUI = manager.dashIconUI;
+
+        _manager = manager;
     }
     public override void Enter()
     {
         base.Enter();
 
         if (!_canDash) return;
-
+        
+        _manager.Sounds?.Invoke("Dash", "Player");
+        
         _canDash = false;
         _characterHealth.isInvulnerable = true;
 
@@ -43,6 +50,7 @@ public class PSDash<T> : PSBase<T>
 
         _view = _look as PlayerView;
         _view?.SetAnimationBool(StateEnum.Dash, true);
+        
     }
     private IEnumerator CooldownCoroutine()
     {

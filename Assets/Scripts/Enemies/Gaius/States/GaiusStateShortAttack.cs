@@ -27,7 +27,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
     private float _attackDuration;
     private GameObject _weapon;
     private EnemyManager _manager;
-    public GaiusStateShortAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController,GameObject weapon,List<AnimationCurve> curves,GaiusView view) : base(steering, stObstacleAvoidance, self)
+    public GaiusStateShortAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController,GameObject weapon,List<AnimationCurve> curves,GaiusView view, EnemyManager manager) : base(steering, stObstacleAvoidance, self)
     {
         _spriteRenderer = spriteRenderer;
         _controller = GaiusController;
@@ -40,11 +40,13 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
         _weapon = weapon;
         _curves = curves;
         _view = view;
+        _manager = manager;
     }
 
     public override void Enter()
     {
         base.Enter();
+        
         Vector2 dir = _steering.GetDir();
         _move.Move(Vector2.zero);
         _view.LookDirInsta(dir);
@@ -58,6 +60,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
                 if (_curves[0].length > 0)
                     _animationTime = _curves[0].keys[_curves[0].length - 1].time;
                 _animationClock = 0;
+                _manager.Sounds?.Invoke("Lunge", "Enemy");
                 _controller.StartCoroutine(LungeAttack());
                 _view.PlayStateAnimation(StateEnum.ShortAttack);
                 break;
@@ -67,6 +70,7 @@ public class GaiusStateShortAttack<T> : State_Steering<T>
                 _animationClock = 0;
                 _weapon.transform.localPosition =
                     _weapon.transform.localPosition.normalized *1.3f;
+                _manager.Sounds?.Invoke("Swipe", "Enemy");
                 _controller.StartCoroutine(SwipeAttack());
                 _view.PlayStateAnimation(StateEnum.MidAttack);
                 break;

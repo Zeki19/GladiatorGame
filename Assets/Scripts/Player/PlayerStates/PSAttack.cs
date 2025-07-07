@@ -30,6 +30,8 @@ namespace Player.PlayerStates
             CurrentAttack.FinishAnimation += AttackFinished;
             _attack.StartAttack(CurrentAttack, CurrentWeapon);
             _move.ModifySpeed(-CurrentWeapon.SlowPercent);
+            
+            _manager.Sounds?.Invoke("N_Attack", "Player");
         }
 
         public override void Execute()
@@ -47,7 +49,7 @@ namespace Player.PlayerStates
             _manager.weaponController.CheckDurability();
         }
 
-        private void AttackFinished()
+        protected void AttackFinished()
         {
             StateMachine.Transition(_inputFinish);
             _move.ModifySpeed(CurrentWeapon.SlowPercent);
