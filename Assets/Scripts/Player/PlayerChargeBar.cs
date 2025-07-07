@@ -32,6 +32,14 @@ public class PlayerChargeBar : MonoBehaviour
 
         chargeImage.fillAmount = target;
 
+        if (target >= 1f)
+        {
+            chargeImage.color = Color.yellow;
+        }
+        else
+        {
+            chargeImage.color = Color.white;
+        }
 
         if (trailImage.fillAmount > target)
         {
