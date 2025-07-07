@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shortAngle: 90
   shortDelay: 0.5
-  shortDamage: 5
+  shortDamage: 7
   shortPunish: 1
   shortTargetLayer:
     serializedVersion: 2
@@ -22,14 +22,14 @@ MonoBehaviour:
   mediumRange: 3
   mediumWidth: 0.5
   mediumDelay: 1
-  mediumDamage: 10
+  mediumDamage: 12
   mediumPunish: 4
   mediumTargetLayer:
     serializedVersion: 2
     m_Bits: 64
   longRange: 5
   longDelay: 0.2
-  longDamage: 20
+  longDamage: 25
   longPunish: 2
   longSpeed: 1
   longDuration: 1
@@ -45,4 +45,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   Stack: 1
-  Interval: 1
+  Interval: 0.5
