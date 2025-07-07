@@ -291,7 +291,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5b7b165b-bb40-4063-a005-c2725679cf32"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -302,7 +302,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""00f48a5a-349c-46a4-9fa2-2e426d5d22ab"",
-                    ""path"": ""<Keyboard>/b"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
