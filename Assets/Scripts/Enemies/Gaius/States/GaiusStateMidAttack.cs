@@ -26,7 +26,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
     private float _attackDuration;
     private GameObject _weapon;
     private EnemyManager _manager;
-    public GaiusStateMidAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController, GameObject weapon, List<AnimationCurve> curves, GaiusView view) : base(steering, stObstacleAvoidance, self)
+    public GaiusStateMidAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController, GameObject weapon, List<AnimationCurve> curves, GaiusView view, EnemyManager manager) : base(steering, stObstacleAvoidance, self)
     {
         _spriteRenderer = spriteRenderer;
         _controller = GaiusController;
@@ -34,6 +34,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
         _weapon = weapon;
         _curves = curves;
         _view = view;
+        _manager = manager;
     }
 
     public override void Enter()
