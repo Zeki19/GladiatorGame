@@ -85,10 +85,9 @@ namespace Player
         public void DropWeapon()
         {
             if (Weapon is not { Attacking: false }) return;
-
-            Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = true;
+            _weaponManager.CatchDroppedWeapon(Weapon);
             Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
-            Weapon.WeaponGameObject.transform.parent = null;
+            Weapon.ChargeAttack.FinishAnimation -= ClearEnemiesList;
             Weapon = null;
         }
 
@@ -97,6 +96,7 @@ namespace Player
             if (Weapon is not { Attacking: false }) return;
 
             Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
+            Weapon.ChargeAttack.FinishAnimation -= ClearEnemiesList;
             _weaponManager.DestroyWeapon(Weapon);
             Weapon = null;
         }
@@ -107,6 +107,8 @@ namespace Player
                 return;
 
             var enemyManager = ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject);
+            if (enemyManager==null)return;
+            
             enemyManager.HealthComponent.TakeDamage(Weapon.Damage());
             if (enemyManager.model is IKnockbackable knockbackable)
                 knockbackable.ApplyKnockbackFromSource(this.transform.position, Weapon.KnockbackForce);

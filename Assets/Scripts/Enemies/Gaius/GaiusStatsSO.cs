@@ -38,6 +38,10 @@ public class GaiusStatsSO : ScriptableObject
     [SerializeField] public float personalArea;
     [SerializeField] public LayerMask obsMask;
 
+    [Header("SpeedStacking")] 
+    [SerializeField] public float Stack;
+    [SerializeField] public float Interval;
+
 
     private void OnValidate()
     {
