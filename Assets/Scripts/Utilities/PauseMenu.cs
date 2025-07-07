@@ -8,6 +8,8 @@ namespace Utilities
     {
         private bool _isGamePause;
         [SerializeField] private GameObject uiPauseMenu;
+        [SerializeField] private GameObject Tutorial;
+        private bool TutoUp;
         
         [SerializeField]private InputActionAsset inputActions;
         [SerializeField]private string playerActionMapName = "Player";
@@ -41,7 +43,17 @@ namespace Utilities
             Time.timeScale = timeScale;
             //EnablePlayerInput(!state);
             uiPauseMenu.SetActive(state);
+            
+            Tutorial.SetActive(false);
+            TutoUp = false;
+            
             _isGamePause = state;
+        }
+
+        public void ToggleTutorial()
+        {
+            Tutorial.SetActive(!TutoUp);
+            TutoUp = !TutoUp;
         }
         private void EnablePlayerInput(bool enable)
         {
