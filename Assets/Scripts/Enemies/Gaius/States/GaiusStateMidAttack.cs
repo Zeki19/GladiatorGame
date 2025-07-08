@@ -15,6 +15,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
     private GaiusView _view;
     private GaiusStatsSO _stats;
     Dictionary<AttackType, float> _attackOptions;
+    private int _pokeCounter = 0;
 
     #region aniamtion
     private List<AnimationCurve> _curves;
@@ -86,10 +87,15 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
         {
             case AttackType.Lunge:
                 _animationClock += Time.deltaTime;
-                if (_animationClock < _animationTime)
+                if (_animationClock < _animationTime && _pokeCounter < 2)
                 {
                     _weapon.transform.localPosition =
                         _weapon.transform.localPosition.normalized * _curves[0].Evaluate(_animationClock);
+                }
+                else if (_pokeCounter < 2)
+                {
+                    _animationClock = 0;
+                    _pokeCounter++;
                 }
                 break;
             case AttackType.Swipe:
@@ -106,12 +112,13 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
         _weapon.transform.localPosition = new Vector3(0, 0.5f, 0);
         _weapon.transform.localRotation = quaternion.identity;
         _weapon.SetActive(false);
+        _pokeCounter = 0;
     }
     private IEnumerator LungeAttack()
     {
         _controller.isAttacking = true;
         _controller.didAttackMiss = true;
-        yield return new WaitForSeconds(_stats.shortDelay);
+        yield return new WaitForSeconds(_curves[0].keys[_curves[0].length - 1].time * 3);
         _controller.isAttacking = false;
         _controller.isBackStepFinished = false;
         _controller.FinishedAttacking = true;
