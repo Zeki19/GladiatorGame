@@ -60,7 +60,7 @@ public class PSDash<T> : PSBase<T>
     }
     private IEnumerator InvulnerabilityCooldown()
     {
-        float invul = _stats.DashCooldown * Mathf.Clamp(_stats.DashInvincibility, 0f, 100f) / 100f;
+        float invul = _stats.DashDuration * Mathf.Clamp(_stats.DashInvincibility, 0f, 100f) / 100f;
         yield return new WaitForSeconds(invul);
         _characterHealth.isInvulnerable = false;
     }
