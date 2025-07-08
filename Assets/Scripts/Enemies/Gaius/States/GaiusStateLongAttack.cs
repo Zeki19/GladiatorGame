@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Enemies.Hounds.States;
 using Entities;
 
-public class GaiusStateLongAttack<T> : State_Steering<T>
+public class GaiusStateLongAttack<T> : States_Base<T>
 {
     private GaiusModel _model;
     private SpriteRenderer _spriteRenderer;
@@ -16,7 +16,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
     private EntityManager _manager;
     private GameObject _weapon;
 
-    public GaiusStateLongAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController, GameObject weapon, List<AnimationCurve> curves, EntityManager manager ) : base(steering, stObstacleAvoidance, self)
+    public GaiusStateLongAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController, GameObject weapon, List<AnimationCurve> curves, EntityManager manager ) 
     {
         _spriteRenderer = spriteRenderer;
         _controller = GaiusController;
@@ -35,8 +35,6 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         _move.Move(Vector2.zero);
         _view = _look as GaiusView;
         _model = _attack as GaiusModel;
-        _weapon.SetActive(true);
-        _view.LookDirInsta(AvoidStObstacles.GetDir(_self, _steering.GetDir()));
         _controller.currentAttack = MyRandom.Roulette(_attackOptions);
         switch (_controller.currentAttack)
         {
@@ -53,6 +51,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
     //This is here so that we don't utilize the default execute, this avoids the character to rotate while charging.
     public override void Execute()
     {
+        
     }
 
     public override void Exit()
@@ -65,6 +64,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
 
     private IEnumerator ChargeAttack()
     {
+        _weapon.SetActive(true);
         _controller.isAttacking = true;
         _controller.FinishedAttacking = false;
         _controller.canLongAttack = false;
@@ -79,8 +79,7 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
         _controller.didAttackMiss = true;
         while (timer > 0f)
         {
-            _manager.Rb.bodyType = RigidbodyType2D.Dynamic;
-            _manager.Rb.AddForce(direction * _stats.longSpeed);
+            _manager.Rb.linearVelocity=direction * _stats.longSpeed;
             timer -= Time.deltaTime;
 
             Vector2 hitboxCenter = (Vector2)_controller.transform.position + ((Vector2)direction * 0.75f);
@@ -94,8 +93,6 @@ public class GaiusStateLongAttack<T> : State_Steering<T>
             }
             yield return null;
         }
-        //_manager.Rb.freezeRotation = false;
-        _manager.Rb.bodyType = RigidbodyType2D.Kinematic;
         _controller.isAttacking = false;
         _controller.isBackStepFinished = false;
         _controller.FinishedAttacking = true;
