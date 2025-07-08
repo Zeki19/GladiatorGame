@@ -52,22 +52,28 @@ public class SoundManager : MonoBehaviour
             case "Player":
             {
                 Sound playerS = Array.Find(PlayerPlaylist.sounds, sound => sound.name == a);
-                if (playerS.loop)
+                if (playerS != null)
                 {
-                    PlayMusicPlayer(playerS);
-                    return;
+                    if(playerS.loop)
+                    {
+                        PlayMusicPlayer(playerS);
+                        return;
+                    }
+                    PlaySoundPlayer(playerS);
                 }
-                PlaySoundPlayer(playerS);
                 break;
             }
             case "Enemy":
                 Sound enemyS = Array.Find(EnemyPlaylist.sounds, sound => sound.name == a);
-                if (enemyS.loop)
+                if (enemyS != null)
                 {
-                    PlayMusicEnemy(enemyS);
-                    return;
+                    if (enemyS.loop)
+                    {
+                        PlayMusicEnemy(enemyS);
+                        return;
+                    }
+                    PlaySoundEnemy(enemyS);
                 }
-                PlaySoundEnemy(enemyS);
                 break;
         }
     }
