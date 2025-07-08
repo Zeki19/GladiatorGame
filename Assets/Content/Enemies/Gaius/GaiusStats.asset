@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GaiusStats
   m_EditorClassIdentifier: 
   shortAngle: 90
-  shortDelay: 0.5
+  shortDelay: 0.7
   shortDamage: 7
   shortPunish: 1
   shortTargetLayer:
@@ -28,12 +28,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   longRange: 5
-  longDelay: 0.2
+  longDelay: 0.15
   longDamage: 25
   longPunish: 2
-  longSpeed: 2.5
-  longDuration: 1.5
-  longIntervalCheck: 1
+  longSpeed: 2
+  longDuration: 1
+  longIntervalCheck: 1.5
   longTargetLayer:
     serializedVersion: 2
     m_Bits: 64
