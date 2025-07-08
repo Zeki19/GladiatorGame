@@ -38,7 +38,7 @@ namespace Weapons.Attacks
             else
             {
                 _animationClock = 0;
-                FinishAnimation.Invoke();
+                FinishAnimation?.Invoke();
             }
         }
 
