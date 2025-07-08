@@ -15,6 +15,7 @@ public class GaiusStateLongAttack<T> : States_Base<T>
     Dictionary<AttackType, float> _attackOptions;
     private EntityManager _manager;
     private GameObject _weapon;
+    private ISteering _steering;
 
     public GaiusStateLongAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController, GameObject weapon, List<AnimationCurve> curves, EntityManager manager ) 
     {
@@ -28,6 +29,7 @@ public class GaiusStateLongAttack<T> : States_Base<T>
         }; //HARDCODED.
         _manager = manager;
         _weapon = weapon;
+        _steering = steering;
     }
     public override void Enter()
     {
@@ -35,17 +37,20 @@ public class GaiusStateLongAttack<T> : States_Base<T>
         _move.Move(Vector2.zero);
         _view = _look as GaiusView;
         _model = _attack as GaiusModel;
-        _controller.currentAttack = MyRandom.Roulette(_attackOptions);
-        switch (_controller.currentAttack)
-        {
-            case AttackType.Charge:
-                    
-                _controller.StartCoroutine(ChargeAttack());
-                break;
-            default:
-                _controller.StartCoroutine(ChargeCooldown());
-                break;
-        }
+        _view.LookDirInsta(_steering.GetDir());
+        //_controller.currentAttack = MyRandom.Roulette(_attackOptions);
+        _controller.currentAttack = AttackType.Charge;
+        _controller.StartCoroutine(ChargeAttack());
+        //switch (_controller.currentAttack)
+        //{
+        //    case AttackType.Charge:
+        //            
+        //        _controller.StartCoroutine(ChargeAttack());
+        //        break;
+        //    default:
+        //        _controller.StartCoroutine(ChargeCooldown());
+        //        break;
+        //}
     }
 
     //This is here so that we don't utilize the default execute, this avoids the character to rotate while charging.
