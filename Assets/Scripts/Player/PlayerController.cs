@@ -14,7 +14,7 @@ namespace Player
         void Dead()
         {
             transform.parent.gameObject.SetActive(false);
-            manager.Sounds?.Invoke("Death","Player");
+            manager.PlaySound("Death","Player");
             ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(3);
         }
 

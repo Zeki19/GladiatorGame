@@ -55,4 +55,8 @@ public class HoundView : EntityView, ILook
                 break;
         }
     }
+    public override void StopStateAnimation(StateEnum state)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -60,7 +60,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
                 if (_curves[0].length > 0)
                     _animationTime = _curves[0].keys[_curves[0].length - 1].time;
                 _animationClock = 0;
-                _manager.Sounds?.Invoke("Lunge", "Enemy");
+                _manager.PlaySound("Lunge", "Enemy");
                 _controller.StartCoroutine(LungeAttack());
                 _view.PlayStateAnimation(StateEnum.ShortAttack);
                 break;
@@ -70,7 +70,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
                 _animationClock = 0;
                 _weapon.transform.localPosition =
                     _weapon.transform.localPosition.normalized * 1.3f;
-                _manager.Sounds?.Invoke("Swipe", "Enemy");
+                _manager.PlaySound("Swipe", "Enemy");
                 _controller.StartCoroutine(SwipeAttack());
                 _view.PlayStateAnimation(StateEnum.MidAttack);
                 break;
@@ -127,7 +127,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
     {
         _controller.isAttacking = true;
         _controller.didAttackMiss = true;
-        _manager.Sounds?.Invoke("MegaSwing", "Enemy");
+        _manager.PlaySound("MegaSwing", "Enemy");
         yield return new WaitForSeconds(_curves[2].keys[_curves[2].length - 1].time);
         _controller.isAttacking = false;
         _controller.isBackStepFinished = false;

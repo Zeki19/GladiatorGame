@@ -18,7 +18,8 @@ namespace Entities
         public EntityController controller;
         public IHealth HealthComponent => HealthSystem;
         
-        public Action<string, string> Sounds;
+        public void PlaySound (string soundName,string entityName) => Sounds?.Invoke(soundName,entityName);
+       public event Action<string, string> Sounds;
         public Action<string> StopSounds;
     }
 }

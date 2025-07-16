@@ -23,10 +23,8 @@ namespace Enemies.Gaius.States
         public override void Enter()
         {
             base.Enter();
-            
-            _gaiusManager.Sounds?.Invoke("Cooldown", "Enemy");
+            _gaiusManager.PlaySound("Cooldown", "Enemy");
             _gaiusManager.view.PlayStateAnimation(StateEnum.Idle);
-
             switch (StateMachine.LastStateEnum())
             {
                 case StateEnum.ShortAttack:
@@ -45,14 +43,13 @@ namespace Enemies.Gaius.States
                     Debug.LogError("The idle case you are trying to acces is not contemplated.");
                     break;
             }
-            _gaiusManager.model.Move(Vector2.zero);
-            _gaiusManager.view.LookDir(Vector2.zero);
+            _move.Move(Vector2.zero);
+            _look.LookDir(Vector2.zero);
         }
 
         public override void Execute()
         {
             base.Execute();
-
             _idleTime -= Time.deltaTime;
             if (_idleTime <= 0.0f)
             {

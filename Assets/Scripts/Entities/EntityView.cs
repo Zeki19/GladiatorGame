@@ -14,6 +14,7 @@ namespace Entities
 
         public abstract void LookDir(Vector2 dir);
         public abstract void PlayStateAnimation(StateEnum state);
+        public abstract void StopStateAnimation(StateEnum state);
 
         protected virtual void Start()
         {

@@ -52,5 +52,10 @@ namespace Dummy
         {
             throw new System.NotImplementedException();
         }
+
+        public override void StopStateAnimation(StateEnum state)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

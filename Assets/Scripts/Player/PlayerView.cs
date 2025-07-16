@@ -91,13 +91,37 @@ namespace Player
             switch (state)
             {
                 case StateEnum.Idle:animator.SetTrigger("Idle");
-                    Debug.Log("Idle");
                     break;
-                case StateEnum.Dash:animator.SetTrigger("Dash");
-                    Debug.Log("Dash");
+                case StateEnum.Dash:animator.SetBool("Dash",true);
                     break;
-                case StateEnum.Walk:animator.SetTrigger("Move");
-                    Debug.Log("Walk");
+                case StateEnum.Walk:animator.SetBool("Walk",true);
+                    break;
+                case StateEnum.Default:
+                case StateEnum.Attack:
+                case StateEnum.ShortAttack:
+                case StateEnum.MidAttack:
+                case StateEnum.LongAttack:
+                case StateEnum.ChargeAttack:
+                case StateEnum.Chase:
+                case StateEnum.Search:
+                case StateEnum.Patrol:
+                case StateEnum.Runaway:
+                case StateEnum.Phase1:
+                case StateEnum.Phase2:
+                case StateEnum.Phase3:
+                case StateEnum.BackStep:
+                default:
+                    break;
+            }
+        }
+        public override void StopStateAnimation(StateEnum state)
+        {
+            switch (state)
+            {
+                case StateEnum.Idle: break;
+                case StateEnum.Dash:animator.SetBool("Dash",false);
+                    break;
+                case StateEnum.Walk:animator.SetBool("Walk",false);
                     break;
                 case StateEnum.Default:
                 case StateEnum.Attack:

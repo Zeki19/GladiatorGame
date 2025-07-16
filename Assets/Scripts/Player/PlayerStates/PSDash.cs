@@ -36,7 +36,7 @@ public class PSDash<T> : PSBase<T>
 
         if (!_canDash) return;
         
-        _manager.Sounds?.Invoke("Dash", "Player");
+        _manager.PlaySound("Dash", "Player");
         
         _canDash = false;
         _characterHealth.isInvulnerable = true;
@@ -47,9 +47,8 @@ public class PSDash<T> : PSBase<T>
         _dashIconUI?.HideIcon();
         _coroutineRunner.StartCoroutine(CooldownCoroutine());
         _coroutineRunner.StartCoroutine(InvulnerabilityCooldown());
-
-        _view = _look as PlayerView;
-        _view?.SetAnimationBool(StateEnum.Dash, true);
+        
+        _view.PlayStateAnimation(StateEnum.Dash);
         
     }
     private IEnumerator CooldownCoroutine()
@@ -77,6 +76,6 @@ public class PSDash<T> : PSBase<T>
     {
         base.Exit();
         _move.Move(Vector2.zero);
-        _view?.SetAnimationBool(StateEnum.Dash, false);
+        _view.StopStateAnimation(StateEnum.Dash);
     }
 }

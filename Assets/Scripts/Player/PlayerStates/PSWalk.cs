@@ -19,8 +19,8 @@ public class PSWalk<T> : PSBase<T>
         model=_move as PlayerModel;
         view =_look as PlayerView;
         base.Enter();
-        view?.SetAnimationBool(StateEnum.Walk,true);
-        _manager.Sounds?.Invoke("Walk", "Player");
+        view.PlayStateAnimation(StateEnum.Walk);
+        _manager.PlaySound("Walk", "Player");
     }
 
     public override void Execute()
@@ -34,7 +34,7 @@ public class PSWalk<T> : PSBase<T>
     public override void Exit()
     {
         base.Exit();
-        _manager.Sounds?.Invoke("Null","Player");
-        view?.SetAnimationBool(StateEnum.Walk,false);
+        _manager.PlaySound("Null","Player");
+        view.StopStateAnimation(StateEnum.Walk);
     }
 }

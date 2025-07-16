@@ -31,7 +31,7 @@ namespace Player.PlayerStates
             _attack.StartAttack(CurrentAttack, CurrentWeapon);
             _move.ModifySpeed(-CurrentWeapon.SlowPercent);
             
-            _manager.Sounds?.Invoke("N_Attack", "Player");
+            _manager.PlaySound("N_Attack", "Player");
         }
 
         public override void Execute()
