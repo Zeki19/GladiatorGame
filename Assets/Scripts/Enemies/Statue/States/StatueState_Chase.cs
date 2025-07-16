@@ -1,5 +1,6 @@
+using Entities.StateMachine;
 using UnityEngine;
-public class StatueState_Chase<T> : States_Base<T>
+public class StatueState_Chase<T> : StatesBase<T>
 {
     private ISteering _steering;
     StObstacleAvoidance _obs;
@@ -14,7 +15,7 @@ public class StatueState_Chase<T> : States_Base<T>
     public override void Enter()
     {
         base.Enter();
-        _look.PlayStateAnimation(StateEnum.Chase);
+        _animate.PlayStateAnimation(StateEnum.Chase);
     }
 
     public override void Execute()

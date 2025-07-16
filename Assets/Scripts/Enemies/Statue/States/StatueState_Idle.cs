@@ -1,7 +1,8 @@
 using System;
+using Entities.StateMachine;
 using UnityEngine;
 
-public class StatueState_Idle<T> : States_Base<T>
+public class StatueState_Idle<T> : StatesBase<T>
 {
     ISteering _steering;
     public StatueState_Idle(ISteering lookAwayDir)
@@ -12,7 +13,7 @@ public class StatueState_Idle<T> : States_Base<T>
     {
         base.Enter();
         _move.Move(Vector2.zero);
-        _look.PlayStateAnimation(StateEnum.Idle);
+        _animate.PlayStateAnimation(StateEnum.Idle);
     }
     public override void Execute()
     {

@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Player;
+using Player.PlayerStates;
 using UnityEngine;
 
 public class PSIdle<T> : PSBase<T>
 {
     private PlayerModel model;
-    private PlayerView view;
     private T Trancition;
 
     public PSIdle(T trancition)
@@ -16,7 +16,6 @@ public class PSIdle<T> : PSBase<T>
     public override void Enter()
     {
         model=_move as PlayerModel;
-        view =_look as PlayerView;
         base.Enter();
     }
 

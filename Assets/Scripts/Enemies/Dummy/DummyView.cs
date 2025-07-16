@@ -1,10 +1,11 @@
 using Entities;
+using Entities.Interfaces;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Dummy
 {
-    public class DummyView : EntityView, ILook
+    public class DummyView : EntityView
     {
         private static readonly int HeavyDamage = Animator.StringToHash("HeavyDamage");
         private static readonly int MediumDamage = Animator.StringToHash("MediumDamage");
@@ -15,6 +16,11 @@ namespace Dummy
             manager.HealthComponent.OnDamage += TakingDamageAnimation;
         }
         public override void LookDir(Vector2 dir)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void LookDirInsta(Vector2 dir)
         {
             throw new System.NotImplementedException();
         }

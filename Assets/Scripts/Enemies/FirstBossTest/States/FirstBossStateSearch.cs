@@ -21,7 +21,7 @@ namespace Enemies.FirstBossTest.States
             if (!_model) _model=_move as FirstBossModel;
 
             _model.isSearchFinish = false;
-            _look.PlayStateAnimation(StateEnum.Chase);
+            _animate.PlayStateAnimation(StateEnum.Chase);
         }
 
         public override void Execute()

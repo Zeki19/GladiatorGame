@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities.StateMachine;
 using UnityEditor;
 using UnityEngine;
 
-public class State_FollowPoints<T> : States_Base<T>
+public class State_FollowPoints<T> : StatesBase<T>
 {
     protected List<Vector3Int> Waypoints;
     protected int _index;

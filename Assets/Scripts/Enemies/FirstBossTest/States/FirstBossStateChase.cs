@@ -20,7 +20,7 @@ namespace Enemies.FirstBossTest.States
         {
             base.Enter();
             _move.ModifySpeed(1.2f);
-            _look.PlayStateAnimation(StateEnum.Chase);
+            _animate.PlayStateAnimation(StateEnum.Chase);
             _leaderBehaviour.Leader = _target;
             _leaderBehaviour.IsActive = true;
         }

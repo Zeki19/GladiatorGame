@@ -1,6 +1,7 @@
+using Entities.StateMachine;
 using UnityEngine;
 
-public class HoundState_Idle<T> : States_Base<T>
+public class HoundState_Idle<T> : StatesBase<T>
 {
     private readonly MonoBehaviour _mono;
     private readonly float _duration;
@@ -17,7 +18,7 @@ public class HoundState_Idle<T> : States_Base<T>
         base.Enter();
         
         _move.Move(Vector2.zero);
-        _look.PlayStateAnimation(StateEnum.Idle);
+        _animate.PlayStateAnimation(StateEnum.Idle);
         
         _mono.StartCoroutine(StartResting());
     }

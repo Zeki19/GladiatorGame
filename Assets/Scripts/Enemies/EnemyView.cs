@@ -1,13 +1,21 @@
 using Entities;
 using UnityEngine;
 
-public class EnemyView : EntityView
+namespace Enemies
 {
-    [SerializeField] protected float rotationSpeed;
-    public override void LookDir(Vector2 dir){}
-    public override void PlayStateAnimation(StateEnum state){}
-    public override void StopStateAnimation(StateEnum state)
+    public class EnemyView : EntityView
     {
-        throw new System.NotImplementedException();
+        [SerializeField] protected float rotationSpeed;
+        public override void LookDir(Vector2 dir){}
+        public override void LookDirInsta(Vector2 dir)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void PlayStateAnimation(StateEnum state){}
+        public override void StopStateAnimation(StateEnum state)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

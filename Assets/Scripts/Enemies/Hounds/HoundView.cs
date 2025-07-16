@@ -1,5 +1,6 @@
 using System;
 using Entities;
+using Entities.Interfaces;
 using TMPro;
 using UnityEngine;
 
@@ -24,7 +25,12 @@ public class HoundView : EntityView, ILook
             rotationSpeed * Time.deltaTime
         );
     }
-    
+
+    public override void LookDirInsta(Vector2 dir)
+    {
+        throw new NotImplementedException();
+    }
+
     public override void PlayStateAnimation(StateEnum state)
     {
         switch (state)

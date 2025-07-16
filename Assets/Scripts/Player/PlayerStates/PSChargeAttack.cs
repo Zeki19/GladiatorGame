@@ -23,7 +23,7 @@ namespace Player.PlayerStates
             _attack.StartAttack(CurrentAttack, CurrentWeapon);
             _move.ModifySpeed(-CurrentWeapon.SlowPercent);
             
-            _manager.PlaySound("C_Attack", "Player");
+            _sound.PlaySound("C_Attack", "Player");
             CurrentWeapon.ResetChangeMeter();
         }
     }

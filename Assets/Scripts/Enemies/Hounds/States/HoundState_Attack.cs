@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Enemies.Hounds;
 using Enemies.Hounds.States;
 using Entities;
+using Entities.StateMachine;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HoundState_Attack<T> : States_Base<T>
+public class HoundState_Attack<T> : StatesBase<T>
 {
     private Transform _target;
     private AttackType _chosenType;
@@ -56,7 +57,7 @@ public class HoundState_Attack<T> : States_Base<T>
               _damage = 25f;
               break;
         }
-        _look.PlayStateAnimation(StateEnum.Attack);
+        _animate.PlayStateAnimation(StateEnum.Attack);
         
         (_model as HoundModel).AttackTarget(_target, _damage);
         canAttack = false;

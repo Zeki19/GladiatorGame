@@ -1,17 +1,9 @@
 using Entities.Interfaces;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PSBase<T> : State<T>
+namespace Player.PlayerStates
 {
-    protected IMove _move;
-    protected ILook _look;
-    protected IAttack _attack;
-    public override void Initialize(params object[] p)
+    public class PSBase<T> : State<T>
     {
-        base.Initialize(p);
-        _move = p[0] as IMove;
-        _look = p[1] as ILook;
-        _attack = p[2] as IAttack;
+        
     }
 }

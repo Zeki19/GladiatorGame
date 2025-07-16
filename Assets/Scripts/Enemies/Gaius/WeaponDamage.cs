@@ -1,4 +1,5 @@
 using Enemies.Gaius;
+using Enemies.Gaius.States;
 using Enemies.Hounds.States;
 using UnityEngine;
 

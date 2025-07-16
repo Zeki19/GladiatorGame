@@ -1,6 +1,7 @@
+using Entities.StateMachine;
 using UnityEngine;
 
-public class DSIdle<T> : States_Base<T>
+public class DSIdle<T> : StatesBase<T>
 {
     
 }

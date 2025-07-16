@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Player;
+using Player.PlayerStates;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -16,7 +17,6 @@ public class PSDash<T> : PSBase<T>
     private float _dashTimer = 1f;
     private bool _canDash = true;
     private readonly T _inputFinish;
-    private PlayerView _view;
 
     private PlayerManager _manager;
 
@@ -36,7 +36,7 @@ public class PSDash<T> : PSBase<T>
 
         if (!_canDash) return;
         
-        _manager.PlaySound("Dash", "Player");
+        _sound.PlaySound("Dash", "Player");
         
         _canDash = false;
         _characterHealth.isInvulnerable = true;
@@ -48,7 +48,7 @@ public class PSDash<T> : PSBase<T>
         _coroutineRunner.StartCoroutine(CooldownCoroutine());
         _coroutineRunner.StartCoroutine(InvulnerabilityCooldown());
         
-        _view.PlayStateAnimation(StateEnum.Dash);
+        _animate.PlayStateAnimation(StateEnum.Dash);
         
     }
     private IEnumerator CooldownCoroutine()
@@ -76,6 +76,6 @@ public class PSDash<T> : PSBase<T>
     {
         base.Exit();
         _move.Move(Vector2.zero);
-        _view.StopStateAnimation(StateEnum.Dash);
+        _animate.StopStateAnimation(StateEnum.Dash);
     }
 }

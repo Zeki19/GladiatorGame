@@ -1,4 +1,6 @@
 using System;
+using Enemies;
+using Entities.Interfaces;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -28,17 +30,14 @@ public class GaiusView : EnemyView, ILook
             rotationSpeed * Time.deltaTime
         );
     }
-    public void LookDirInsta(Vector2 dir)
+
+    public override void LookDirInsta(Vector2 dir)
     {
-
         float angle = Vector2.SignedAngle(Vector2.up, dir);
-
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
-
-        transform.rotation =targetRotation; 
-        
+        transform.rotation = targetRotation;
     }
-    
+
     public override void PlayStateAnimation(StateEnum state)
     {
         switch (state)
@@ -70,6 +69,6 @@ public class GaiusView : EnemyView, ILook
     private void Update()
     {
         animator.SetFloat(Direction, transform.rotation.z < 0 ? 0 : 1);
-        art.transform.rotation=quaternion.identity;
+        art.transform.rotation = quaternion.identity;
     }
 }

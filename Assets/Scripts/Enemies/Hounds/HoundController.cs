@@ -112,7 +112,7 @@ public class HoundController : EnemyController
         _attackState = attackState;
         _runawayState = runawayState;
         
-        var stateList = new List<States_Base<StateEnum>>
+        var stateList = new List<StatesBase<StateEnum>>
         {
             idleState,
             patrolState,

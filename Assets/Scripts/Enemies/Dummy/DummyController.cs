@@ -33,7 +33,7 @@ namespace Dummy
         
             var idleState = new DSIdle<StateEnum>();
 
-            var stateList = new List<States_Base<StateEnum>>
+            var stateList = new List<StatesBase<StateEnum>>
             {
                 idleState,
             };

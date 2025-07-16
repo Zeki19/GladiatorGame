@@ -1,9 +1,11 @@
+using System;
+using Entities.Interfaces;
 using UnityEngine;
 using Utilities;
 
 namespace Entities
 {
-    public abstract class EntityView : MonoBehaviour, ILook
+    public abstract class EntityView : MonoBehaviour,ILook ,ISound ,IAnimate
     {
         [SerializeField] protected Animator animator;
         [SerializeField] protected EntityManager manager;
@@ -13,8 +15,28 @@ namespace Entities
     
 
         public abstract void LookDir(Vector2 dir);
-        public abstract void PlayStateAnimation(StateEnum state);
-        public abstract void StopStateAnimation(StateEnum state);
+        public abstract void LookDirInsta(Vector2 dir);
+
+
+        #region ISound
+
+            public event Action<string, string> Sounds;
+            public virtual void PlaySound(string soundName, string entityName)
+            {
+                Sounds?.Invoke(soundName,entityName);
+            }
+
+        #endregion
+
+        #region IAnimate
+
+            public abstract void PlayStateAnimation(StateEnum state);
+            public abstract void StopStateAnimation(StateEnum state);
+
+        #endregion
+        
+        
+
 
         protected virtual void Start()
         {

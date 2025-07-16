@@ -22,7 +22,7 @@ namespace Enemies.FirstBossTest.States
         {
             base.Enter();
             _move.ModifySpeed(2f);
-            _look.PlayStateAnimation(StateEnum.Runaway);
+            _animate.PlayStateAnimation(StateEnum.Runaway);
             _mono.StartCoroutine(DelayedSetPath());
         }
         private System.Collections.IEnumerator DelayedSetPath()

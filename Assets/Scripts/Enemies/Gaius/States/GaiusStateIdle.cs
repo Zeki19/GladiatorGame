@@ -1,9 +1,10 @@
 using Entities;
+using Entities.StateMachine;
 using UnityEngine;
 
 namespace Enemies.Gaius.States
 {
-    public class GaiusStateIdle<T> : States_Base<T>
+    public class GaiusStateIdle<T> : StatesBase<T>
     {
         private SpriteRenderer _spriteRenderer;
         private GaiusController _gaiusController;

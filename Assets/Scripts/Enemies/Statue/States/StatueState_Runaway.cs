@@ -1,6 +1,7 @@
+using Entities.StateMachine;
 using UnityEngine;
 
-public class StatueState_Runaway<T> : States_Base<T>
+public class StatueState_Runaway<T> : StatesBase<T>
 {
     private ISteering _steering;
     Vector2 dir;

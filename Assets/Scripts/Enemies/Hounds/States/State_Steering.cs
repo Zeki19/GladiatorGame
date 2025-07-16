@@ -1,5 +1,6 @@
+using Entities.StateMachine;
 using UnityEngine;
-    public class State_Steering<T> : States_Base<T>
+    public class State_Steering<T> : StatesBase<T>
     {
         protected ISteering _steering;
         protected StObstacleAvoidance AvoidStObstacles;

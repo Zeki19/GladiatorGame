@@ -29,14 +29,12 @@ namespace Player
         protected override void InitializeFsm()
         {
             Fsm = new FSM<StateEnum>();
-            var move = GetComponent<IMove>();
-            var look = GetComponent<ILook>();
-            var attack = GetComponent<IAttack>();
+            
 
-            var stateList = new List<PSBase<StateEnum>>();
+            var stateList = new List<State<StateEnum>>();
 
             var idleState = new PSIdle<StateEnum>(StateEnum.Walk);
-            var walkState = new PSWalk<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
+            var walkState = new PSWalk<StateEnum>(StateEnum.Idle);
             var baseAttackState = new PSAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var changeAttackState = new PSChargeAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var dashState = new PSDash<StateEnum>(StateEnum.Idle, (PlayerManager)manager, this);
@@ -63,10 +61,7 @@ namespace Player
             stateList.Add(baseAttackState);
             stateList.Add(changeAttackState);
 
-            foreach (var state in stateList)
-            {
-                state.Initialize(move, look, attack);
-            }
+            InitializeComponents(stateList);
 
             Fsm.SetInit(idleState, StateEnum.Idle);
         }

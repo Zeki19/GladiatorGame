@@ -10,19 +10,19 @@ namespace Enemies.FirstBossTest
     public class FirstBossController : EnemyController
     {
 
-        private States_Base<StateEnum> _idleState;
-        private States_Base<StateEnum> _chaseState;
-        private States_Base<StateEnum> _attackState;
-        private States_Base<StateEnum> _patrolState;
-        private States_Base<StateEnum> _searchState;
-        private States_Base<StateEnum> _runAwayState;
+        private StatesBase<StateEnum> _idleState;
+        private StatesBase<StateEnum> _chaseState;
+        private StatesBase<StateEnum> _attackState;
+        private StatesBase<StateEnum> _patrolState;
+        private StatesBase<StateEnum> _searchState;
+        private StatesBase<StateEnum> _runAwayState;
         public SpriteRenderer SpriteRendererBoss;
-        public States_Base<StateEnum> IdleState => _idleState;
-        public States_Base<StateEnum> ChaseState => _chaseState;
-        public States_Base<StateEnum> AttackState => _attackState; 
-        public States_Base<StateEnum> PatrolState => _patrolState;
-        public States_Base<StateEnum> SearchState => _searchState;
-        public States_Base<StateEnum> RunAwayState => _runAwayState;
+        public StatesBase<StateEnum> IdleState => _idleState;
+        public StatesBase<StateEnum> ChaseState => _chaseState;
+        public StatesBase<StateEnum> AttackState => _attackState; 
+        public StatesBase<StateEnum> PatrolState => _patrolState;
+        public StatesBase<StateEnum> SearchState => _searchState;
+        public StatesBase<StateEnum> RunAwayState => _runAwayState;
 
         [Header("Required GameObjects")] [SerializeField]
         private HoundsCamp camp;
@@ -121,7 +121,7 @@ namespace Enemies.FirstBossTest
             _patrolState = patrolState;
             _runAwayState = runAwayState;
 
-            var stateList = new List<States_Base<StateEnum>>
+            var stateList = new List<StatesBase<StateEnum>>
             {
                 idleState,
                 //chaseState,

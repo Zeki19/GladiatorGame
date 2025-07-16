@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Entities;
+using Entities.Interfaces;
 
-public class GaiusModel : EnemyModel
+public class GaiusModel : EnemyModel 
 {
     [SerializeField] float _moveSpeed;
     public Vector3 Forward => transform.forward;
@@ -32,8 +33,9 @@ public class GaiusModel : EnemyModel
     public override void Dash(float dashForce)
     {
         manager.Rb.AddForce(-gameObject.transform.up*dashForce,ForceMode2D.Impulse);
-        //Debug.Log(-gameObject.transform.up*dashForce);
     }
+
+    
 
     private void OnDrawGizmos()
     {

@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Entities.StateMachine;
+using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
-public class StatueState_SearchingWall<T> : States_Base<T>
+public class StatueState_SearchingWall<T> : StatesBase<T>
 {
     WallFinder _wallFinder;
     T _inputFinish;

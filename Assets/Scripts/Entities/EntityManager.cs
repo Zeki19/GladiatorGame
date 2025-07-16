@@ -19,7 +19,7 @@ namespace Entities
         public IHealth HealthComponent => HealthSystem;
         
         public void PlaySound (string soundName,string entityName) => Sounds?.Invoke(soundName,entityName);
-       public event Action<string, string> Sounds;
+        public event Action<string, string> Sounds;
         public Action<string> StopSounds;
     }
 }

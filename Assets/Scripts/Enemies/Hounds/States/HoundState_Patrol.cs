@@ -16,7 +16,7 @@ public class HoundState_Patrol<T> : State_Steering<T>
     {
         base.Enter();
         
-        _look.PlayStateAnimation(StateEnum.Patrol);
+        _animate.PlayStateAnimation(StateEnum.Patrol);
         
         _patrolCoroutine = _mono.StartCoroutine(StartPatrol());
     }

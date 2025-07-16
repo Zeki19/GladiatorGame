@@ -26,12 +26,12 @@ namespace Enemies.Gaius
         public AttackType currentAttack;
         #region Private Variables
 
-        private States_Base<StateEnum> _idleState; // BLUE
-        private States_Base<StateEnum> _backStepState; // BLUE
-        private States_Base<StateEnum> _chaseState; // WHITE
-        public States_Base<StateEnum> _shortAttackState; // YELLOW
-        private States_Base<StateEnum> _midAttackState; // RED
-        private States_Base<StateEnum> _longAttackState; // BLACK
+        private StatesBase<StateEnum> _idleState; // BLUE
+        private StatesBase<StateEnum> _backStepState; // BLUE
+        private StatesBase<StateEnum> _chaseState; // WHITE
+        public StatesBase<StateEnum> _shortAttackState; // YELLOW
+        private StatesBase<StateEnum> _midAttackState; // RED
+        private StatesBase<StateEnum> _longAttackState; // BLACK
 
         private ISteering _pursuitSteering;
         private StObstacleAvoidance _avoidWalls;
@@ -65,16 +65,12 @@ namespace Enemies.Gaius
         protected override void InitializeFsm()
         {
             Fsm = new FSM<StateEnum>();
-
-            var move = GetComponent<IMove>();
-            var look = GetComponent<ILook>();
-            var attack = GetComponent<IAttack>();
-
+            
             var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this,manager);
-            var backStepState = new GaiusStateBackStep<StateEnum>( SpriteRendererBoss, this,manager);
-            var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,SpriteRendererBoss,manager);
+            var backStepState = new GaiusStateBackStep<StateEnum>(this);
+            var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,manager);
             var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this,weapom,curves,manager.view as GaiusView, (EnemyManager)manager);
-            var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this, weapom, curves, manager.view as GaiusView, (EnemyManager)manager);
+            var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, this, weapom, curves, (EnemyManager)manager);
             var longAttackState = new GaiusStateLongAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this, weapom, curves, manager);
 
             _idleState = idleState;
@@ -85,7 +81,7 @@ namespace Enemies.Gaius
             _longAttackState = longAttackState;
 
 
-            var stateList = new List<States_Base<StateEnum>>
+            var stateList = new List<State<StateEnum>>
             {
                 idleState,
                 backStepState,
@@ -131,14 +127,8 @@ namespace Enemies.Gaius
             backStepState.AddTransition(StateEnum.ShortAttack, shortAttackState);
             backStepState.AddTransition(StateEnum.MidAttack, midAttackState);
             backStepState.AddTransition(StateEnum.LongAttack, longAttackState);
-
-
-
-            foreach (var t in stateList)
-            {
-                t.Initialize(move, look, attack);
-            }
-
+            
+            InitializeComponents(stateList);
             Fsm.SetInit(chaseState,StateEnum.Chase);
         }
 

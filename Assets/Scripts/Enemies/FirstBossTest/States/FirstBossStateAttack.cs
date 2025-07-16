@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using Enemies.Hounds.States;
 using Entities;
+using Entities.StateMachine;
 using Player;
 using TMPro;
 using UnityEngine;
 
 namespace Enemies.FirstBossTest.States
 {
-    internal class FirstBossStateAttack<T> : States_Base<T>
+    internal class FirstBossStateAttack<T> : StatesBase<T>
     {
         private Transform _target;
             private AttackType _chosenType;
@@ -70,7 +71,7 @@ namespace Enemies.FirstBossTest.States
                       _damage = 15;
                       break;
                 }
-                _look.PlayStateAnimation(StateEnum.Attack);
+                _animate.PlayStateAnimation(StateEnum.Attack);
                 chompEffect.PlayEffect();
                 
                 _model.AttackTarget(_target,_damage);

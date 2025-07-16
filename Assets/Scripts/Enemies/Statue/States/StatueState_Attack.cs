@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Enemies.Hounds.States;
+using Entities.StateMachine;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatueState_Attack<T> : States_Base<T>
+public class StatueState_Attack<T> : StatesBase<T>
 {
     private Transform _target;
     private float _damage;
@@ -18,7 +19,7 @@ public class StatueState_Attack<T> : States_Base<T>
     public override void Enter()
     { 
         base.Enter();
-        _look.PlayStateAnimation(StateEnum.Attack);
+        _animate.PlayStateAnimation(StateEnum.Attack);
 
         //if (_target != null && Vector2.Distance(_target.position, _move.Position) <= _attack.AttackRange)
         //{

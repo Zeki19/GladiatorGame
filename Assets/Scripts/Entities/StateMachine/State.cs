@@ -9,8 +9,18 @@ public class State<T> : IState<T>
     FSM<T> _fsm;
     Dictionary<T, IState<T>> _transitions = new Dictionary<T, IState<T>>();
 
+    protected IMove _move;
+    protected ILook _look;
+    protected IAttack _attack;
+    protected ISound _sound;
+    protected IAnimate _animate;
     public virtual void Initialize(params object[] p)
     {
+        _move = p[0] as IMove;
+        _look = p[1] as ILook;
+        _attack = p[2] as IAttack;
+        _sound = p[3] as ISound;
+        _animate = p[4] as IAnimate;
     }
     public virtual void Enter()
     {

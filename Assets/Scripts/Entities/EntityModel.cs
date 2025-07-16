@@ -17,6 +17,11 @@ namespace Entities
         public abstract void ModifySpeed(float speed);
         public abstract void Move(Vector2 dir);
         public abstract void Dash(float dashForce);
+
+        public virtual void SetLinearVelocity(Vector2 velocity)
+        {
+            manager.Rb.linearVelocity = velocity;
+        }
         public void StartAttack(Attack attack,Weapon weapon) => attack.StartAttack(weapon);
         public void ExecuteAttack(Attack attack,Weapon weapon) => attack.ExecuteAttack(weapon);
         public void FinishAttack(Attack attack,Weapon weapon) => attack.FinishAttack(weapon);

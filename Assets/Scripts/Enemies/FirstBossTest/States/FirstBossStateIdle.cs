@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Entities.StateMachine;
+using UnityEngine;
 
 namespace Enemies.FirstBossTest.States
 {
-    internal class FirstBossStateIdle<T> : States_Base<T>
+    internal class FirstBossStateIdle<T> : StatesBase<T>
     {
         private readonly MonoBehaviour _mono;
         private readonly float _duration;
@@ -19,7 +20,7 @@ namespace Enemies.FirstBossTest.States
             base.Enter();
             if (_model==null) _model = _move as FirstBossModel;
             _move.Move(Vector2.zero);
-            _look.PlayStateAnimation(StateEnum.Idle);
+            _animate.PlayStateAnimation(StateEnum.Idle);
             _mono.StartCoroutine(StartResting());
         }
     

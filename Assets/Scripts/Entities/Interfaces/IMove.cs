@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public interface IMove
+namespace Entities.Interfaces
 {
-    void ModifySpeed(float speed);
-    void Move(Vector2 dir);
-    void Dash( float dashForce);
-    void StopMovement();
-    Vector2 Position { get; }
+    public interface IMove
+    {
+        void ModifySpeed(float speed);
+        void Move(Vector2 dir);
+        void Dash( float dashForce);
+        void SetLinearVelocity(Vector2 velocity);
+        void StopMovement();
+        Vector2 Position { get; }
+    }
 }

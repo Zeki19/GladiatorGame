@@ -57,6 +57,7 @@ namespace Player
         {
             manager.Rb.linearVelocity = _lastDirection * (dashForce *_stats.SpeedModifier);
         }
+        
 
         public override void Move(Vector2 dir)
         {

@@ -13,7 +13,7 @@ public class HoundState_Chase<T> : State_Steering<T>
         base.Enter();
         
         _move.ModifySpeed(2f);
-        _look.PlayStateAnimation(StateEnum.Chase);
+        _animate.PlayStateAnimation(StateEnum.Chase);
     }
 
     public override void Execute()

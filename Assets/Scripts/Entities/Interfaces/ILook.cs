@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public interface ILook
+namespace Entities.Interfaces
 {
-    void LookDir(Vector2 dir);
-    public void PlayStateAnimation(StateEnum state);
+    public interface ILook
+    {
+        void LookDir(Vector2 dir);
+        public void LookDirInsta(Vector2 dir);
+    }
 }

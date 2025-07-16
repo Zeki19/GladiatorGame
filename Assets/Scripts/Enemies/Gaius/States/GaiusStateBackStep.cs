@@ -1,27 +1,26 @@
 using Enemies.Gaius;
 using Entities;
+using Entities.StateMachine;
 using UnityEngine;
 
-public class GaiusStateBackStep<T> : States_Base<T>
+public class GaiusStateBackStep<T> : StatesBase<T>
 {
     private SpriteRenderer _spriteRenderer;
     private GaiusController _gaiusController;
     private GaiusStatsSO _stats;
     private float _BackStepTime;
     private EntityManager _gaiusManager;
-    public GaiusStateBackStep(SpriteRenderer spriteRenderer, GaiusController GaiusController,EntityManager manager)
+    public GaiusStateBackStep(GaiusController GaiusController)
     {
-        _spriteRenderer = spriteRenderer;
         _gaiusController = GaiusController;
         _stats = GaiusController.stats;
         _BackStepTime = .5f;
-        _gaiusManager = manager;
     }
 
     public override void Enter()
     {
         _BackStepTime = .5f;
-        _gaiusManager.PlaySound("BackStep", "Enemy");
+        _sound.PlaySound("BackStep", "Enemy");
         _move.Dash(3);
     }
 

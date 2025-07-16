@@ -16,7 +16,7 @@ public class HoundState_Search<T> : State_Steering<T>
         base.Enter();
         
         Searched = false;
-        _look.PlayStateAnimation(StateEnum.Chase);
+        _animate.PlayStateAnimation(StateEnum.Chase);
     }
 
     public override void Execute()

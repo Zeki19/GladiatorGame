@@ -26,7 +26,7 @@ namespace Enemies.FirstBossTest.States
                 _model=_move as FirstBossModel;
             }
             _model.isTired = false;
-            _look.PlayStateAnimation(StateEnum.Patrol);
+            _animate.PlayStateAnimation(StateEnum.Patrol);
             
             _patrolCoroutine = _mono.StartCoroutine(StartPatrol());
 

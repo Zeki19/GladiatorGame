@@ -62,7 +62,7 @@ public class  StatueController : EnemyController
         attackState = new StatueState_Attack<StateEnum>(target.transform, damage);
         RunAwayState = new StatueState_Runaway<StateEnum>(_steering);
 
-        var stateList = new List<States_Base<StateEnum>>
+        var stateList = new List<StatesBase<StateEnum>>
         {
             idleState,
             chaseState,
