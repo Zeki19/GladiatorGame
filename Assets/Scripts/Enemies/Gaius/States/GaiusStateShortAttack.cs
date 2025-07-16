@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Enemies.Hounds.States;
+using Entities.StateMachine;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace Enemies.Gaius.States
 {
-    public class GaiusStateShortAttack<T> : State_Steering<T>
+    public class GaiusStateShortAttack<T> : StatesBase<T>
     {
         private SpriteRenderer _spriteRenderer;
         private GaiusController _controller;
@@ -19,14 +20,14 @@ namespace Enemies.Gaius.States
         private float _animationClock;
 
         #endregion
-    
+
+        private ISteering _steering;
         private float _delayTime;
         private float _attackDuration;
         private GameObject _weapon;
-        private EnemyManager _manager;
-        public GaiusStateShortAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, SpriteRenderer spriteRenderer, GaiusController GaiusController,GameObject weapon,List<AnimationCurve> curves,GaiusView view, EnemyManager manager) : base(steering, stObstacleAvoidance, self)
+        public GaiusStateShortAttack(ISteering steering, GaiusController GaiusController,GameObject weapon,List<AnimationCurve> curves)
         {
-            _spriteRenderer = spriteRenderer;
+            _steering = steering;
             _controller = GaiusController;
             _stats = GaiusController.stats;
             _attackOptions = new Dictionary<AttackType, float>
@@ -36,7 +37,6 @@ namespace Enemies.Gaius.States
             }; //HARDCODED.
             _weapon = weapon;
             _curves = curves;
-            _manager = manager;
         }
 
         public override void Enter()
@@ -55,7 +55,7 @@ namespace Enemies.Gaius.States
                     if (_curves[0].length > 0)
                         _animationTime = _curves[0].keys[_curves[0].length - 1].time;
                     _animationClock = 0;
-                    _manager.PlaySound("Lunge", "Enemy");
+                    _sound.PlaySound("Lunge", "Enemy");
                     _controller.StartCoroutine(LungeAttack());
                     _animate.PlayStateAnimation(StateEnum.ShortAttack);
                     break;
@@ -65,7 +65,7 @@ namespace Enemies.Gaius.States
                     _animationClock = 0;
                     _weapon.transform.localPosition =
                         _weapon.transform.localPosition.normalized *1.3f;
-                    _manager.PlaySound("Swipe", "Enemy");
+                    _sound.PlaySound("Swipe", "Enemy");
                     _controller.StartCoroutine(SwipeAttack());
                     _animate.PlayStateAnimation(StateEnum.MidAttack);
                     break;

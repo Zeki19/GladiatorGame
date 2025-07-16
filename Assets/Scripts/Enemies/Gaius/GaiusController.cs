@@ -66,12 +66,12 @@ namespace Enemies.Gaius
         {
             Fsm = new FSM<StateEnum>();
             
-            var idleState = new GaiusStateIdle<StateEnum>( SpriteRendererBoss, this,manager);
+            var idleState = new GaiusStateIdle<StateEnum>( this);
             var backStepState = new GaiusStateBackStep<StateEnum>(this);
-            var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,_avoidWalls,transform,manager);
-            var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this,weapom,curves,manager.view as GaiusView, (EnemyManager)manager);
-            var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, this, weapom, curves, (EnemyManager)manager);
-            var longAttackState = new GaiusStateLongAttack<StateEnum>(_pursuitSteering, _avoidWalls, transform, SpriteRendererBoss, this, weapom, curves, manager);
+            var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,this);
+            var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, this,weapom,curves);
+            var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, this, weapom, curves);
+            var longAttackState = new GaiusStateLongAttack<StateEnum>(_pursuitSteering, this, weapom);
 
             _idleState = idleState;
             _backStepState = backStepState;

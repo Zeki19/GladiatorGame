@@ -3,38 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemies.Gaius;
 using Entities;
+using Entities.StateMachine;
 using Unity.Mathematics;
 using UnityEngine;
 using Unity.VisualScripting;
 
-public class GaiusStateMidAttack<T> : State_Steering<T>
+public class GaiusStateMidAttack<T> : StatesBase<T>
 {
     
     private GaiusController _controller;
     Dictionary<AttackType, float> _attackOptions;
     private int _pokeCounter = 0;
-
     #region aniamtion
     private List<AnimationCurve> _curves;
     private float _animationTime;
     private float _animationClock;
 
     #endregion
+    ISteering _steering;
     private float _delayTime;
     private float _attackDuration;
     private GameObject _weapon;
-    private EnemyManager _manager;
-    public GaiusStateMidAttack(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self, GaiusController GaiusController, GameObject weapon, List<AnimationCurve> curves, EnemyManager manager) : base(steering, stObstacleAvoidance, self)
+    public GaiusStateMidAttack(ISteering steering, GaiusController GaiusController, GameObject weapon, List<AnimationCurve> curves)
     {
         _controller = GaiusController;
         _weapon = weapon;
         _curves = curves;
-        _manager = manager;
         _attackOptions = new Dictionary<AttackType, float>
         {
             {AttackType.Swipe, 50},
             {AttackType.Lunge, 50}
         }; //HARDCODED.
+        _steering = steering;
     }
 
     public override void Enter()
@@ -52,7 +52,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
                 if (_curves[0].length > 0)
                     _animationTime = _curves[0].keys[_curves[0].length - 1].time;
                 _animationClock = 0;
-                _manager.PlaySound("Lunge", "Enemy");
+                _sound.PlaySound("Lunge", "Enemy");
                 _controller.StartCoroutine(LungeAttack());
                 _animate.PlayStateAnimation(StateEnum.ShortAttack);
                 break;
@@ -62,7 +62,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
                 _animationClock = 0;
                 _weapon.transform.localPosition =
                     _weapon.transform.localPosition.normalized * 1.3f;
-                _manager.PlaySound("Swipe", "Enemy");
+                _sound.PlaySound("Swipe", "Enemy");
                 _controller.StartCoroutine(SwipeAttack());
                 _animate.PlayStateAnimation(StateEnum.MidAttack);
                 break;
@@ -119,7 +119,7 @@ public class GaiusStateMidAttack<T> : State_Steering<T>
     {
         _controller.isAttacking = true;
         _controller.didAttackMiss = true;
-        _manager.PlaySound("MegaSwing", "Enemy");
+        _sound.PlaySound("MegaSwing", "Enemy");
         yield return new WaitForSeconds(_curves[2].keys[_curves[2].length - 1].time);
         _controller.isAttacking = false;
         _controller.isBackStepFinished = false;

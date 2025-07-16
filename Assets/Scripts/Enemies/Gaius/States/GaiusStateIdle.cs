@@ -6,26 +6,22 @@ namespace Enemies.Gaius.States
 {
     public class GaiusStateIdle<T> : StatesBase<T>
     {
-        private SpriteRenderer _spriteRenderer;
         private GaiusController _gaiusController;
         private GaiusStatsSO _stats;
         private float _idleTime;
-        private EntityManager _gaiusManager;
-        public GaiusStateIdle(SpriteRenderer spriteRenderer, GaiusController GaiusController,EntityManager manager)
+        public GaiusStateIdle(GaiusController GaiusController)
         {
-            _spriteRenderer = spriteRenderer;
             _gaiusController = GaiusController;
             _stats = GaiusController.stats;
             _idleTime = 1f;
-            _gaiusManager = manager;
 
         }
 
         public override void Enter()
         {
             base.Enter();
-            _gaiusManager.PlaySound("Cooldown", "Enemy");
-            _gaiusManager.view.PlayStateAnimation(StateEnum.Idle);
+            _sound.PlaySound("Cooldown", "Enemy");
+            _animate.PlayStateAnimation(StateEnum.Idle);
             switch (StateMachine.LastStateEnum())
             {
                 case StateEnum.ShortAttack:

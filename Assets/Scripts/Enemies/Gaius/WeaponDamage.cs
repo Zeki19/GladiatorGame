@@ -28,6 +28,10 @@ public class WeaponDamage : MonoBehaviour
                 GaiusController.didAttackMiss = false;
                 GaiusModel.AttackTarget(collision.transform, GaiusController.stats.shortDamage);
                 break;
+            case AttackType.Super:
+                GaiusController.didAttackMiss = false;
+                GaiusModel.AttackTarget(collision.transform, GaiusController.stats.longDamage);
+                break;
             default:
                 Debug.Log("PIFIASTE CHAMACO");
                 break;

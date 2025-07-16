@@ -32,7 +32,7 @@ public class GaiusStateBackStep<T> : StatesBase<T>
         {
             _gaiusController.isBackStepFinished = false;
             _gaiusController.FinishedAttacking = false;
-            _gaiusManager.Rb.linearVelocity = Vector2.zero;
+            _move.SetLinearVelocity(Vector2.zero);
         }
     }
 

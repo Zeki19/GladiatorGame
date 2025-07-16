@@ -1,48 +1,50 @@
-﻿using Enemies.Gaius;
-using Entities;
+﻿using Entities;
+using Entities.StateMachine;
 using UnityEngine;
 
-public class GaiusStateChase<T> : State_Steering<T>
+namespace Enemies.Gaius.States
 {
-    private EntityManager _gaiusManager;
-    private float SpeedMod;
-    private float StackingSpeed;
-    private float SpeedModeInterval = 1;
-    private float Timer;
-    public GaiusStateChase(ISteering steering, StObstacleAvoidance stObstacleAvoidance, Transform self,EntityManager manager) : base(steering, stObstacleAvoidance, self)
+    public class GaiusStateChase<T> : StatesBase<T>
     {
-        _gaiusManager = manager;
-        var gauisControler = _gaiusManager.controller as GaiusController;
-        SpeedMod = gauisControler.stats.Stack;
-        SpeedModeInterval = gauisControler.stats.Interval;
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-        _move.Move(Vector2.zero);
-        _animate.PlayStateAnimation(StateEnum.Chase);
-        Timer = SpeedModeInterval;
-    }
-    public override void Execute()
-    {
-        base.Execute();
-
-        Vector2 dir = _steering.GetDir();
-        Timer -= Time.deltaTime;
-        if(Timer<0)
+        private ISteering _steering;
+        private float _speedMod;
+        private float _stackingSpeed;
+        private float _speedModeInterval = 1;
+        private float _timer;
+        public GaiusStateChase(ISteering steering, GaiusController controller)
         {
-            _move.ModifySpeed(SpeedMod);
-            StackingSpeed += SpeedMod;
-            Timer = SpeedModeInterval;
+            _steering = steering;
+            _speedMod = controller.stats.Stack;
+            _speedModeInterval = controller.stats.Interval;
         }
-        _move.Move(dir);
-        _look.LookDir(dir);
-    }
-    public override void Exit()
-    {
-        base.Exit();
-        _move.ModifySpeed(-StackingSpeed);
-        StackingSpeed = 0;
+
+        public override void Enter()
+        {
+            base.Enter();
+            _move.Move(Vector2.zero);
+            _animate.PlayStateAnimation(StateEnum.Chase);
+            _timer = _speedModeInterval;
+        }
+        public override void Execute()
+        {
+            base.Execute();
+
+            Vector2 dir = _steering.GetDir();
+            _timer -= Time.deltaTime;
+            if(_timer<0)
+            {
+                _move.ModifySpeed(_speedMod);
+                _stackingSpeed += _speedMod;
+                _timer = _speedModeInterval;
+            }
+            _move.Move(dir);
+            _look.LookDir(dir);
+        }
+        public override void Exit()
+        {
+            base.Exit();
+            _move.ModifySpeed(-_stackingSpeed);
+            _stackingSpeed = 0;
+        }
     }
 }
