@@ -8,20 +8,21 @@ using UnityEngine.Tilemaps;
 //Name of the script can be updated.
 public class ArenaPainter : MonoBehaviour
 {
-    [Header("Grid and tile-maps")]
-    [SerializeField] private Grid grid;
+    [Header("Grid and tile-maps")] [SerializeField]
+    private Grid grid;
+
     [SerializeField] private Tilemap figthingArenaTilemap;
     [SerializeField] private Tilemap bloodTilemap;
 
-    [Header("Possible types of tiles")]
-    [SerializeField] private List<TileType> tileTypes;
-    
+    [Header("Possible types of tiles")] [SerializeField]
+    private List<TileType> tileTypes;
+
     private readonly Dictionary<string, Tile> _createdTiles = new();
 
     #region ForTesting
-    //All this can be deleted.
-        [Header("Testing")] 
-        [SerializeField] private Transform player;
+
+        //All this can be deleted.
+        [Header("Testing")] [SerializeField] private Transform player;
         [SerializeField] private String _type;
 
         private void Start()
@@ -35,13 +36,13 @@ public class ArenaPainter : MonoBehaviour
         }
 
     #endregion
-    
+
     void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);
         InitializeTiles();
     }
-    
+
     public void PaintArena(Transform pos, String effectName, int size = 0)
     {
         var cell = grid.WorldToCell(pos.position);
@@ -49,15 +50,15 @@ public class ArenaPainter : MonoBehaviour
         var tileType = GetType(effectName);
         if (tileType == null)
         {
-            Debug.Log("No tileType with that Name"); 
+            Debug.Log("No tileType with that Name");
             return;
         }
 
         int index = (size == 0) ? UnityEngine.Random.Range(0, tileType.sprites.Length) : size;
-        
-        
+
+
         var tile = _createdTiles[tileType.name + index];
-        
+
         if (figthingArenaTilemap.HasTile(cell))
         {
             bloodTilemap.SetTile(cell, tile);
@@ -104,7 +105,11 @@ public class ArenaPainter : MonoBehaviour
     {
         var randomRotation = UnityEngine.Random.Range(0, 360);
         Matrix4x4 rotationMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 0, randomRotation));
-        bloodTilemap.SetTransformMatrix(cell, rotationMatrix); 
+        bloodTilemap.SetTransformMatrix(cell, rotationMatrix);
     }
-}
+    private void CleanArena()
+    {
+        bloodTilemap.ClearAllTiles();
+    }
 
+}
