@@ -5,40 +5,82 @@ using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 
+//Name of the script can be updated.
 public class ArenaPainter : MonoBehaviour
 {
+    [Header("Grid and tile-maps")]
     [SerializeField] private Grid grid;
     [SerializeField] private Tilemap figthingArenaTilemap;
     [SerializeField] private Tilemap bloodTilemap;
 
     [Header("Possible types of tiles")]
     [SerializeField] private List<TileType> tileTypes;
-
-    [Header("Testing")] 
-    [SerializeField] private Transform player;
-    [SerializeField] private String _type;
     
-    void Start()
+    private readonly Dictionary<string, Tile> _createdTiles = new();
+
+    #region ForTesting
+    //All this can be deleted.
+        [Header("Testing")] 
+        [SerializeField] private Transform player;
+        [SerializeField] private String _type;
+
+        private void Start()
+        {
+            InvokeRepeating(nameof(Try), 0f, 3f);
+        }
+
+        private void Try()
+        {
+            PaintArena(player, _type);
+        }
+
+    #endregion
+    
+    void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);
-        InvokeRepeating(nameof(Try), 0f, 3f);
+        InitializeTiles();
     }
-
-    private void Try()
-    {
-        PaintArena(player, _type);
-    }
-
-    public void PaintArena(Transform pos, String effectName)
+    
+    public void PaintArena(Transform pos, String effectName, int size = 0)
     {
         var cell = grid.WorldToCell(pos.position);
+
+        var tileType = GetType(effectName);
+        if (tileType == null)
+        {
+            Debug.Log("No tileType with that Name"); 
+            return;
+        }
+
+        int index = (size == 0) ? UnityEngine.Random.Range(0, tileType.sprites.Length) : size;
         
-        var tile = CreateTile(GetCorrectType(effectName));
         
-        bloodTilemap.SetTile(cell, figthingArenaTilemap.HasTile(cell) ? tile : null);
+        var tile = _createdTiles[tileType.name + index];
+        
+        if (figthingArenaTilemap.HasTile(cell))
+        {
+            bloodTilemap.SetTile(cell, tile);
+            RotateTile(cell);
+        }
+        else
+        {
+            bloodTilemap.SetTile(cell, null);
+        }
     }
 
-    private TileType GetCorrectType(String tileName)
+    private void InitializeTiles()
+    {
+        foreach (var t in tileTypes)
+        {
+            for (int i = 0; i < t.sprites.Length; i++)
+            {
+                var tile = CreateTile(t, i);
+                _createdTiles.Add(t.name + i, tile);
+            }
+        }
+    }
+    private TileType GetType(String tileName)
     {
         foreach (var type in tileTypes)
         {
@@ -50,14 +92,19 @@ public class ArenaPainter : MonoBehaviour
 
         return null;
     }
-    
-    private static Tile CreateTile(TileType type)
+    private static Tile CreateTile(TileType type, int index)
     {
         Tile tile = ScriptableObject.CreateInstance<Tile>();
-        tile.sprite = type.sprite;
+        tile.sprite = type.sprites[index];
         tile.color = type.color;
-        tile.name = type.name;
+        tile.name = type.name + index;
         return tile;
+    }
+    private void RotateTile(Vector3Int cell)
+    {
+        var randomRotation = UnityEngine.Random.Range(0, 360);
+        Matrix4x4 rotationMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 0, randomRotation));
+        bloodTilemap.SetTransformMatrix(cell, rotationMatrix); 
     }
 }
 

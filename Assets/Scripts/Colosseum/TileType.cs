@@ -7,5 +7,5 @@ public class TileType
 {
     public string name;
     public Color color;
-    public Sprite sprite;
+    public Sprite[] sprites;
 }
