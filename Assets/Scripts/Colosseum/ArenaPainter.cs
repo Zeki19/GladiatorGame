@@ -19,24 +19,6 @@ public class ArenaPainter : MonoBehaviour
 
     private readonly Dictionary<string, Tile> _createdTiles = new();
 
-    #region ForTesting
-
-        //All this can be deleted.
-        [Header("Testing")] [SerializeField] private Transform player;
-        [SerializeField] private String _type;
-
-        private void Start()
-        {
-            InvokeRepeating(nameof(Try), 0f, 3f);
-        }
-
-        private void Try()
-        {
-            PaintArena(player, _type);
-        }
-
-    #endregion
-
     void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);

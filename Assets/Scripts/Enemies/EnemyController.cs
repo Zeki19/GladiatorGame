@@ -48,6 +48,7 @@ namespace Enemies
         protected void CheckPhase(float damage)
         {
             manager.PlaySound("Hit","Enemy");
+            ServiceLocator.Instance.GetService<ArenaPainter>().PaintArena(transform, "Blood");
             _currentPhase = _phaseSystem.currentPhase();
             Debug.Log("Current phase is:" + _currentPhase);
         }
