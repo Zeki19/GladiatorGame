@@ -2,5 +2,5 @@ using UnityEngine;
 
 public enum EnumDialogues
 {
-    GaiusEntrance
+    GaiusEntrance = 0,
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 [CustomPropertyDrawer(typeof(DialogueLine))]
 public class DialogueLineDrawer : PropertyDrawer
 {
-   public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         EditorGUI.BeginProperty(position, label, property);
 
@@ -20,16 +20,6 @@ public class DialogueLineDrawer : PropertyDrawer
         var shakeAtStartProp  = property.FindPropertyRelative("shakeAtTheStart");
         var soundClipProp     = property.FindPropertyRelative("soundToPlay");
         var playAtStartProp   = property.FindPropertyRelative("playAtTheStart");
-
-        // Set default values for toggleable children
-        if (!property.hasMultipleDifferentValues)
-        {
-            if (!shakeAtStartProp.hasMultipleDifferentValues && !shakeAtStartProp.boolValue)
-                shakeAtStartProp.boolValue = true;
-
-            if (!playAtStartProp.hasMultipleDifferentValues && !playAtStartProp.boolValue)
-                playAtStartProp.boolValue = true;
-        }
 
         // Foldout title (use speaker name if present)
         string title = string.IsNullOrEmpty(speakerNameProp.stringValue) ? "Dialogue Line" : speakerNameProp.stringValue;
