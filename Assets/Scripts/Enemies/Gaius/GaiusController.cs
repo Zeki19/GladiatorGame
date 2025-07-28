@@ -1,52 +1,35 @@
 using System.Collections.Generic;
 using Enemies.Gaius.States;
-using Enemies.Hounds.States;
-using Entities.Interfaces;
 using Entities.StateMachine;
+using Unity.Behavior;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using UnityEngine.Serialization;
 
 namespace Enemies.Gaius
 {
     public class GaiusController : EnemyController
     {
         [SerializeField] public GaiusStatsSO stats;
+        [FormerlySerializedAs("weapom")] public GameObject weapon;
+        public AttackManager atamanger;
 
-        public SpriteRenderer SpriteRendererBoss;
-
-        public GameObject weapom; //WEAPOMMMMMMMMM
-        [SerializeField]private List<AnimationCurve> curves;
-
-        public bool didAttackMiss = false;
-        public bool isAttacking = false;
-        public bool isBackStepFinished;
-        public bool FinishedAttacking;
-        public bool canLongAttack = true;
-        public AttackType currentAttack;
+        public int currentAttack;
+        public BehaviorGraphAgent agent;
         #region Private Variables
 
-        private StatesBase<StateEnum> _idleState; // BLUE
-        private StatesBase<StateEnum> _backStepState; // BLUE
-        private StatesBase<StateEnum> _chaseState; // WHITE
-        public StatesBase<StateEnum> _shortAttackState; // YELLOW
-        private StatesBase<StateEnum> _midAttackState; // RED
-        private StatesBase<StateEnum> _longAttackState; // BLACK
+        private StatesBase<EnemyStates> _idleState; // BLUE
+        private StatesBase<EnemyStates> _dashState; // BLUE
+        private StatesBase<EnemyStates> _chaseState; // WHITE
+        public StatesBase<EnemyStates> _AttackState; // YELLOW
 
         private ISteering _pursuitSteering;
-        private StObstacleAvoidance _avoidWalls;
 
         #endregion
 
         protected override void Awake()
         {
             InitalizeSteering();
-            // The ranges must go before the base.Awake() so that it uploads them to the context of the decision tree.
-            attackRanges.Add(0);
-            attackRanges.Add(stats.mediumRange);
-            attackRanges.Add(stats.longRange);
             base.Awake();
-            SpriteRendererBoss = GetComponent<SpriteRenderer>();
         }
 
         protected override void Start()
@@ -59,82 +42,50 @@ namespace Enemies.Gaius
         void InitalizeSteering()
         {
             _pursuitSteering = new StPursuit(transform, target, 0);
-            _avoidWalls = new StObstacleAvoidance(stats.maxObs, stats.radius, stats.angleOfVision, stats.personalArea, stats.obsMask);
         }
 
         protected override void InitializeFsm()
         {
-            Fsm = new FSM<StateEnum>();
-            
-            var idleState = new GaiusStateIdle<StateEnum>( this);
-            var backStepState = new GaiusStateBackStep<StateEnum>(this);
-            var chaseState = new GaiusStateChase<StateEnum>(_pursuitSteering,this);
-            var shortAttackState = new GaiusStateShortAttack<StateEnum>(_pursuitSteering, this,weapom,curves);
-            var midAttackState = new GaiusStateMidAttack<StateEnum>(_pursuitSteering, this, weapom, curves);
-            var longAttackState = new GaiusStateLongAttack<StateEnum>(_pursuitSteering, this, weapom);
+            Fsm = new FSM<EnemyStates>();
+
+            var idleState = new GaiusStateIdle<EnemyStates>();
+            var dashState = new GaiusStateDash<EnemyStates>();
+            var chaseState = new GaiusStateChase<EnemyStates>(_pursuitSteering, this);
+            var AttackState = new GaiusStateAttack<EnemyStates>(_pursuitSteering, weapon, atamanger,this);
 
             _idleState = idleState;
-            _backStepState = backStepState;
+            _dashState = dashState;
             _chaseState = chaseState;
-            _shortAttackState = shortAttackState;
-            _midAttackState = midAttackState;
-            _longAttackState = longAttackState;
+            _AttackState = AttackState;
 
 
-            var stateList = new List<State<StateEnum>>
+            var stateList = new List<State<EnemyStates>>
             {
                 idleState,
-                backStepState,
+                dashState,
                 chaseState,
-                shortAttackState,
-                midAttackState,
-                longAttackState
+                AttackState
             };
 
-            idleState.AddTransition(StateEnum.Chase, chaseState);
-            idleState.AddTransition(StateEnum.ShortAttack, shortAttackState);
-            idleState.AddTransition(StateEnum.MidAttack, midAttackState);
-            idleState.AddTransition(StateEnum.LongAttack, longAttackState);
-            idleState.AddTransition(StateEnum.BackStep, backStepState);
+            idleState.AddTransition(EnemyStates.Chase, chaseState);
+            idleState.AddTransition(EnemyStates.Attack, AttackState);
+            idleState.AddTransition(EnemyStates.Dash, dashState);
 
-            chaseState.AddTransition(StateEnum.Idle, idleState);
-            chaseState.AddTransition(StateEnum.ShortAttack, shortAttackState);
-            chaseState.AddTransition(StateEnum.MidAttack, midAttackState);
-            chaseState.AddTransition(StateEnum.LongAttack, longAttackState);
-            chaseState.AddTransition(StateEnum.BackStep, backStepState);
+            chaseState.AddTransition(EnemyStates.Idle, idleState);
+            chaseState.AddTransition(EnemyStates.Attack, AttackState);
+            chaseState.AddTransition(EnemyStates.Dash, dashState);
 
-            shortAttackState.AddTransition(StateEnum.Idle, idleState);
-            shortAttackState.AddTransition(StateEnum.Chase, chaseState);
-            shortAttackState.AddTransition(StateEnum.MidAttack, midAttackState);
-            shortAttackState.AddTransition(StateEnum.LongAttack, longAttackState);
-            shortAttackState.AddTransition(StateEnum.BackStep, backStepState);
+            AttackState.AddTransition(EnemyStates.Idle, idleState);
+            AttackState.AddTransition(EnemyStates.Chase, chaseState);
+            AttackState.AddTransition(EnemyStates.Dash, dashState);
 
-            midAttackState.AddTransition(StateEnum.Idle, idleState);
-            midAttackState.AddTransition(StateEnum.Chase, chaseState);
-            midAttackState.AddTransition(StateEnum.ShortAttack, shortAttackState);
-            midAttackState.AddTransition(StateEnum.LongAttack, longAttackState);
-            midAttackState.AddTransition(StateEnum.BackStep, backStepState);
+            dashState.AddTransition(EnemyStates.Idle, idleState);
+            dashState.AddTransition(EnemyStates.Chase, chaseState);
+            dashState.AddTransition(EnemyStates.Attack, AttackState);
+            ;
 
-
-            longAttackState.AddTransition(StateEnum.Idle, idleState);
-            longAttackState.AddTransition(StateEnum.Chase, chaseState);
-            longAttackState.AddTransition(StateEnum.ShortAttack, shortAttackState);
-            longAttackState.AddTransition(StateEnum.MidAttack, midAttackState);
-            longAttackState.AddTransition(StateEnum.BackStep, backStepState);
-            
-            backStepState.AddTransition(StateEnum.Idle, idleState);
-            backStepState.AddTransition(StateEnum.Chase, chaseState);
-            backStepState.AddTransition(StateEnum.ShortAttack, shortAttackState);
-            backStepState.AddTransition(StateEnum.MidAttack, midAttackState);
-            backStepState.AddTransition(StateEnum.LongAttack, longAttackState);
-            
             InitializeComponents(stateList);
-            Fsm.SetInit(chaseState,StateEnum.Chase);
-        }
-
-        protected override void InitializeTree()
-        {
-            Root.Execute(objectContext);
+            Fsm.SetInit(idleState, EnemyStates.Idle);
         }
 
         private void OnDrawGizmos()
@@ -148,7 +99,6 @@ namespace Enemies.Gaius
             Vector3 direction = transform.up * 5;
 
             Gizmos.DrawLine(origin, origin + direction);
-
         }
 
         private void Die()
@@ -156,6 +106,27 @@ namespace Enemies.Gaius
             Destroy(gameObject);
             SceneChanger.Instance.ChangeScene(2);
         }
-
+        protected override void Update()
+        {
+            base.Update();
+            if(manager.HealthComponent.currentHealth>50)
+                agent.SetVariableValue("New CurrentPhase",global::CurrentPhase.Phace1);
+            else
+            {
+                agent.SetVariableValue("New CurrentPhase", global::CurrentPhase.Phace2);
+            }
+        }
     }
+}
+
+[BlackboardEnum]
+public enum EnemyStates
+{
+    Idle,
+    Chase,
+    Attack,
+    Stunned,
+    Patrol,
+    Surround,
+    Dash
 }

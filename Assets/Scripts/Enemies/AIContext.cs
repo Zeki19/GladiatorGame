@@ -11,7 +11,7 @@ namespace Enemies
         public EnemyController controller;
         public EnemyModel model;
         public List<float> attackRanges = new List<float>();
-        public FSM<StateEnum> stateMachine;
+        public FSM<EnemyStates> stateMachine;
         public List<(Vector2, float)> Points=new List<(Vector2, float)>();
     }
 }

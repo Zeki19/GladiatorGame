@@ -11,6 +11,8 @@ namespace Player
     public class PlayerController : EntityController
     {
         public PhaseSystem _phaseSystem;
+        protected FSM<StateEnum> Fsm;
+        
         void Dead()
         {
             transform.parent.gameObject.SetActive(false);
@@ -24,6 +26,10 @@ namespace Player
             var playerManager = manager as PlayerManager;
             _phaseSystem = new PhaseSystem(playerManager.stats.stateThreshold, manager.HealthComponent);
             InitializeFsm();
+        }
+        protected virtual void Update()
+        {
+            Fsm.OnExecute();
         }
 
         protected override void InitializeFsm()

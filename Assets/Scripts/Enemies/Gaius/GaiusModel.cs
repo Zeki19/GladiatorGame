@@ -1,24 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Entities;
 using Entities.Interfaces;
+using Unity.Behavior;
 
-public class GaiusModel : EnemyModel 
+public class GaiusModel : EnemyModel
 {
-    [SerializeField] float _moveSpeed;
-    public Vector3 Forward => transform.forward;
-
-    public override void ModifySpeed(float speed)
-    {
-        _speedModifier += speed;
-    }
-
-    public override void Move(Vector2 dir)
-    {
-        dir.Normalize(); //Just in case someone fucks up.
-        manager.Rb.linearVelocity = dir * (_moveSpeed * _speedModifier);
-    }
-    
     public void AttackTarget(Transform target, float damage)
     {
         if (target == null) return;
@@ -28,16 +16,5 @@ public class GaiusModel : EnemyModel
         {
             manager.HealthComponent.TakeDamage(damage);
         }
-    }
-
-    public override void Dash(float dashForce)
-    {
-        manager.Rb.AddForce(-gameObject.transform.up*dashForce,ForceMode2D.Impulse);
-    }
-
-    
-
-    private void OnDrawGizmos()
-    {
     }
 }

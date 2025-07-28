@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entities;
 using Entities.Interfaces;
 using Entities.StateMachine;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class State<T> : IState<T>
 {
@@ -14,6 +16,9 @@ public class State<T> : IState<T>
     protected IAttack _attack;
     protected ISound _sound;
     protected IAnimate _animate;
+    protected IStatus _status;
+    protected ICondition _condition;
+    protected IStatesData _statesData;
     public virtual void Initialize(params object[] p)
     {
         _move = p[0] as IMove;
@@ -21,6 +26,9 @@ public class State<T> : IState<T>
         _attack = p[2] as IAttack;
         _sound = p[3] as ISound;
         _animate = p[4] as IAnimate;
+        _status = p[5] as IStatus;
+        _condition = p[6] as ICondition;
+        _statesData = p[7] as IStatesData;
     }
     public virtual void Enter()
     {

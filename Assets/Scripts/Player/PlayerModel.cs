@@ -57,7 +57,17 @@ namespace Player
         {
             manager.Rb.linearVelocity = _lastDirection * (dashForce *_stats.SpeedModifier);
         }
-        
+
+        public override void Dash(Vector2 dir, float dashForce)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Dash(Vector2 dir, float dashForce, float backStepDistance)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public override void Move(Vector2 dir)
         {

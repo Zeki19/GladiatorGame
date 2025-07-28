@@ -1,16 +1,16 @@
 using Enemies.Gaius;
-using Enemies.Gaius.States;
-using Enemies.Hounds.States;
+using Entities;
 using UnityEngine;
 
 public class WeaponDamage : MonoBehaviour
 {
     [SerializeField] GaiusController GaiusController;
     [SerializeField] GaiusModel GaiusModel;
-    GaiusStateShortAttack<StateEnum> shortAttack;
+    private IStatus status;
+    public AttackManager Attack;
     private void Awake()
     {
-        shortAttack = GaiusController._shortAttackState as GaiusStateShortAttack<StateEnum>;
+        status = GaiusController;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,24 +18,26 @@ public class WeaponDamage : MonoBehaviour
         {
             return;
         }
-        switch (GaiusController.currentAttack)
-        {
-            case AttackType.Lunge:
-                GaiusController.didAttackMiss = false;
-                GaiusModel.AttackTarget(collision.transform, GaiusController.stats.mediumDamage);
-                break;
-            case AttackType.Swipe:
-                GaiusController.didAttackMiss = false;
-                GaiusModel.AttackTarget(collision.transform, GaiusController.stats.shortDamage);
-                break;
-            case AttackType.Super:
-                GaiusController.didAttackMiss = false;
-                GaiusModel.AttackTarget(collision.transform, GaiusController.stats.longDamage);
-                break;
-            default:
-                Debug.Log("PIFIASTE CHAMACO");
-                break;
-        }
+        status.SetStatus(StatusEnum.AttackMissed,false);
+        GaiusModel.AttackTarget(collision.transform, Attack.GetAttackDamage(GaiusController.currentAttack));
+        //switch (GaiusController.currentAttack)
+        //{
+        //    case AttackType.Lunge:
+        //        status.SetStatus(StatusEnum.AttackMissed,false);
+        //        GaiusModel.AttackTarget(collision.transform, GaiusController.stats.mediumDamage);
+        //        break;
+        //    case AttackType.Swipe:
+        //        status.SetStatus(StatusEnum.AttackMissed,false);
+        //        GaiusModel.AttackTarget(collision.transform, GaiusController.stats.shortDamage);
+        //        break;
+        //    case AttackType.Super:
+        //        status.SetStatus(StatusEnum.AttackMissed,false);
+        //        GaiusModel.AttackTarget(collision.transform, GaiusController.stats.longDamage);
+        //        break;
+        //    default:
+        //        Debug.Log("PIFIASTE CHAMACO");
+        //        break;
+        //}
         
     }
 }

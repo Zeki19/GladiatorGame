@@ -29,11 +29,5 @@ namespace Player
         {
             PlaySound("Hit","Player");
         }
-
-        private void Update()
-        {
-            Debug.Log(_status.GetStatus(CommonStatus.IsAlive));
-            Debug.Log(_status.GetStatus(PlayerStatus.IsAlive));
-        }
     }
 }

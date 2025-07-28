@@ -20,7 +20,7 @@ public class DashIcon : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         if (targetImage == null)
         {
-            Debug.LogError("No Image");
+            //Debug.LogError("No Image");
             enabled = false;
             return;
         }

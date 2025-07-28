@@ -5,20 +5,140 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/AttackEnum.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/AttackManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/AttackManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/DashStateData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/DashStateData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/IStateData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/IStateData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/PokeAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/PokeAttack.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/RangedAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/RangedAttack.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/RunningAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/RunningAttack.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/StateDataManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/StateDataManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/SwipeAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/SwipeAttack.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/ICondition.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/ICondition.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/IStatus.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/IStatus.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/StateMachine/IStates.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/StateMachine/IStates.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Weapons/Gladius/GladiusIA.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Weapons/Gladius/GladiusIA.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/AIContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/AIContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/BinaryTree/ActionNodeSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/BinaryTree/ActionNodeSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/BinaryTree/QuestionNodeSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/BinaryTree/QuestionNodeSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyModel.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyStates.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyStates/DSAttack.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyStates/DSAttack.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyStates/DSChase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyStates/DSChase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyStates/DSIdle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyStates/DSIdle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyView.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Dummy/DummyView.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/ChompEffect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/ChompEffect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/FirstBossController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/FirstBossController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/FirstBossModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/FirstBossModel.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/FirstBossView.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/FirstBossView.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateAttack.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateAttack.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateChase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateChase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateIdle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateIdle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStatePatrol.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStatePatrol.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateRunAway.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateRunAway.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateSearch.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/FirstBossTest/States/FirstBossStateSearch.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/GaiusController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/GaiusController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateBackStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateBackStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateChase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateChase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/GaiusModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/GaiusModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateBackStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateDash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateBackStep.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateDash.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateIdle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateIdle.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateLongAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateLongAttack.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateMidAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateMidAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateShortAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateShortAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateShortAttack.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateShortAttack.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateAttack.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/WeaponDamage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/WeaponDamage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundModel.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundView.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundView.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundsCamp.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/HoundsCamp.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/AttackEnum.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/AttackEnum.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/AttackEnum.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Attack.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Attack.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Chase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Chase.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Idle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Idle.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Patrol.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Patrol.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Runaway.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Runaway.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Search.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Search.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/State_Steering.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/State_Steering.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/State_Steering.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/State_Steering.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_Attack.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_Attack.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_Chase.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_Chase.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_Idle.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_Idle.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_Runaway.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_Runaway.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_SearchingWall.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/States/StatueState_SearchingWall.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/StatueController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/StatueController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/StatueModel.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/StatueModel.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/StatueView.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/StatueView.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/WallFinder.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Statue/WallFinder.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/EntityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/EntityController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/EntityModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/EntityModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/Interfaces/IMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/Interfaces/IMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/StateMachine/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/StateMachine/State.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utilities/DashIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utilities/DashIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,9 +156,22 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///AIAssistantSnippet.." root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Chase.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemies/Hounds/States/HoundState_Search.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/ACondition.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/AsAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/AttackFinishedAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/AttackMissCondition.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/AttackMissedAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/BackStepAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/ChangeToStateAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/DistanceToPlayerCondition.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/NextAttackAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/Test2Action.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/TestAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/TestGetABoolFromListAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/TestListAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/TestModifier.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/ZekiCapoAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ListaDebools.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/EntityManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/EntityModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Entities/Interfaces/IKnockbackable.cs" root0="FORCE_HIGHLIGHTING" />
@@ -46,9 +179,28 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerStates/PSChargeAttack.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utilities/CameraShake.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/AttackSo/PokeAttackSo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Authoring/UI/AssetEditor/StoryEditor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Authoring/UI/NodeRegistry.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Attributes/BlackboardEnumAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Blackboard/Blackboard.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Components/BehaviorGraphAgent.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Conditions/CheckDistanceCondition.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Conditions/Condition.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Conditions/VariableComparisonCondition.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Node.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Nodes/Action.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Nodes/Actions/Conditional/ConditionalGuardAction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Nodes/Actions/Physics/SetVelocityAction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Nodes/Composite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Nodes/Composites/BranchingConditionComposite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Nodes/Composites/RandomComposite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Nodes/Composites/SequenceComposite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Nodes/DebugNodes.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior/Runtime/Execution/Nodes/Modifier.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui/Runtime/UGUI/UI/Core/Graphic.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting/Runtime/VisualScripting.Core/Decorators/ValueAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting/Runtime/VisualScripting.Flow/Framework/Variables/GetVariable.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -65,8 +217,8 @@
     &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.6255605&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.5842294&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;TestingPuk&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -205,6 +357,18 @@
       <workItem from="1752593295411" duration="9802000" />
       <workItem from="1752670438397" duration="9905000" />
       <workItem from="1752686943859" duration="4924000" />
+      <workItem from="1753039410205" duration="2396000" />
+      <workItem from="1753104090768" duration="3859000" />
+      <workItem from="1753122022526" duration="594000" />
+      <workItem from="1753190797393" duration="9461000" />
+      <workItem from="1753214800817" duration="7844000" />
+      <workItem from="1753275125442" duration="1630000" />
+      <workItem from="1753351714290" duration="5917000" />
+      <workItem from="1753361380465" duration="5998000" />
+      <workItem from="1753444538571" duration="16497000" />
+      <workItem from="1753531735459" duration="10791000" />
+      <workItem from="1753567617078" duration="8750000" />
+      <workItem from="1753638925361" duration="2635000" />
     </task>
     <servers />
   </component>
@@ -248,7 +412,38 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="38" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/CheckifStateIsCurrentAction.cs</url>
+          <line>21</line>
+          <properties documentPath="D:\Desarrollo\Unreal\GladiatorGame\Assets\Behaiviours\ActionsTest\CheckifStateIsCurrentAction.cs" containingFunctionPresentation="Method 'OnUpdate'">
+            <startOffsets>
+              <option value="665" />
+            </startOffsets>
+            <endOffsets>
+              <option value="699" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/TestAction.cs</url>
+          <line>15</line>
+          <properties documentPath="D:\Desarrollo\Unreal\GladiatorGame\Assets\Behaiviours\ActionsTest\TestAction.cs" containingFunctionPresentation="Method 'OnStart'">
+            <startOffsets>
+              <option value="444" />
+            </startOffsets>
+            <endOffsets>
+              <option value="465" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#Enemies.EnemyController" memberName="CurrentState" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

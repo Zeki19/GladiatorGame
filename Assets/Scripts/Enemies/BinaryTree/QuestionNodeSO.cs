@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Enemies.BinaryTree.QuestionFunctions;
-using Enemies.FirstBossTest;
 using Enemies.Gaius;
 using UnityEngine;
 
@@ -24,26 +23,46 @@ namespace Enemies.BinaryTree
                 { QuestionEnum.IsFarToPoint1, IsFarToPoint1 },
                 { QuestionEnum.IsFarToPoint2, IsFarToPoint2 },
                 { QuestionEnum.IsNearToPoint1, IsNearToPoint1 },
-                { QuestionEnum.IsInIdleState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Idle}) },
-                { QuestionEnum.IsInChaseState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Chase}) },
-                { QuestionEnum.IsInPatrolState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Patrol}) },
-                { QuestionEnum.IsInSearchState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.Search}) },
-                { QuestionEnum.IsInAttackState, c => CompareCurrentState(c, new List<StateEnum>(){StateEnum.ShortAttack, StateEnum.MidAttack, StateEnum.LongAttack}) },
+                {
+                    QuestionEnum.IsInIdleState,
+                    c => CompareCurrentState(c, new List<EnemyStates>() { EnemyStates.Idle })
+                },
+                {
+                    QuestionEnum.IsInChaseState,
+                    c => CompareCurrentState(c, new List<EnemyStates>() { EnemyStates.Chase })
+                },
+                {
+                    QuestionEnum.IsInPatrolState,
+                    c => CompareCurrentState(c, new List<EnemyStates>() { EnemyStates.Patrol })
+                },
+                {
+                    QuestionEnum.IsInSearchState,
+                    c => CompareCurrentState(c, new List<EnemyStates>() { EnemyStates.Chase })
+                },
+                {
+                    QuestionEnum.IsInAttackState,
+                    c => CompareCurrentState(c,
+                        new List<EnemyStates>() { EnemyStates.Attack, EnemyStates.Attack, EnemyStates.Attack })
+                },
                 { QuestionEnum.IsPlayerAlive, IsPlayerAlive },
                 { QuestionEnum.IsRested, IsRested },
                 { QuestionEnum.IsTired, IsTired },
                 { QuestionEnum.IsAttackOnCd, IsAttackOnCd },
                 { QuestionEnum.FinishedSearching, FinishedSearching },
-                { QuestionEnum.WasLastStateAttack, c => CompareLastState(c, new List<StateEnum>(){StateEnum.ShortAttack, StateEnum.MidAttack, StateEnum.LongAttack}) },
+                {
+                    QuestionEnum.WasLastStateAttack,
+                    c => CompareLastState(c,
+                        new List<EnemyStates>() { EnemyStates.Attack, EnemyStates.Attack, EnemyStates.Attack })
+                },
                 { QuestionEnum.DidAttackMiss, DidAttackMiss },
                 { QuestionEnum.IsInShortRange, c => PlayerInAttackRange(c, 0) },
                 { QuestionEnum.IsInMidRange, c => PlayerInAttackRange(c, 1) },
                 { QuestionEnum.IsInLongRange, c => PlayerInAttackRange(c, 2) },
-                { QuestionEnum.IsInPhase1, IsInPhase1},
-                { QuestionEnum.IsCurrentlyAttacking, IsCurrentlyAttacking},
-                { QuestionEnum.IsJumpingBackwards, IsJumpingBackwards},
-                { QuestionEnum.FinishedAttacking, FinishedAttacking},
-                { QuestionEnum.CanLongAttack, CanLongAttack}
+                { QuestionEnum.IsInPhase1, IsInPhase1 },
+                { QuestionEnum.IsCurrentlyAttacking, IsCurrentlyAttacking },
+                { QuestionEnum.IsJumpingBackwards, IsJumpingBackwards },
+                { QuestionEnum.FinishedAttacking, FinishedAttacking },
+                { QuestionEnum.CanLongAttack, CanLongAttack }
             };
         }
 
@@ -68,9 +87,9 @@ namespace Enemies.BinaryTree
             return Vector3.Distance(context.selfGameObject.transform.position,
                 context.playerGameObject.transform.position) <= context.attackRanges[attackDistance];
         }
+
         private bool PlayerIsInAStraightLine(AIContext context)
         {
-
             Vector3 origin = context.selfGameObject.transform.position;
             Vector3 direction = (context.playerGameObject.transform.position - origin).normalized;
             float distance = Vector3.Distance(origin, context.playerGameObject.transform.position);
@@ -86,46 +105,59 @@ namespace Enemies.BinaryTree
 
             return false;
         }
+
         private bool IsFarToPoint1(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) >
                    context.Points[0].Item2;
         }
+
         private bool IsNearToPoint1(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[0].Item1) <
                    context.Points[0].Item2;
         }
+
         private bool IsFarToPoint2(AIContext context)
         {
             return Vector2.Distance(context.selfGameObject.transform.position, context.Points[1].Item1) >
                    context.Points[1].Item2;
         }
+
         private bool FinishedSearching(AIContext arg)
         {
-            var model = arg.model as FirstBossModel;
-            return model != null && model.isSearchFinish;
+            //var model = arg.model as FirstBossModel;
+            //return model != null && model.isSearchFinish;
+            return false;
         }
+
         private bool IsAttackOnCd(AIContext arg)
         {
-            var model = arg.model as FirstBossModel;
-            return model != null && model.isAttackOnCd;
+            //var model = arg.model as FirstBossModel;
+            //return model != null && model.isAttackOnCd;
+            return false;
         }
+
         private bool IsTired(AIContext arg)
         {
-            var model = arg.model as FirstBossModel;
-            return model != null && model.isTired;
+            //var model = arg.model as FirstBossModel;
+            //return model != null && model.isTired;
+            return false;
         }
+
         private bool IsRested(AIContext arg)
         {
-            var model = arg.model as FirstBossModel;
-            return model != null && model.isRested;
+            //var model = arg.model as FirstBossModel;
+            //return model != null && model.isRested;
+            return false;
         }
+
         private bool IsPlayerAlive(AIContext arg)
         {
             return true;
         }
-        private bool CompareLastState(AIContext arg, List<StateEnum> states)
+
+        private bool CompareLastState(AIContext arg, List<EnemyStates> states)
         {
             var lastState = arg.stateMachine.LastStateEnum();
             foreach (var state in states)
@@ -133,9 +165,11 @@ namespace Enemies.BinaryTree
                 if (lastState == state)
                     return true;
             }
+
             return false;
         }
-        private bool CompareCurrentState(AIContext arg, List<StateEnum> states)
+
+        private bool CompareCurrentState(AIContext arg, List<EnemyStates> states)
         {
             var currentState = arg.stateMachine.CurrentStateEnum();
             foreach (var state in states)
@@ -143,39 +177,48 @@ namespace Enemies.BinaryTree
                 if (currentState == state)
                     return true;
             }
+
             return false;
         }
-        private bool DidAttackMiss(AIContext arg)     
+
+        private bool DidAttackMiss(AIContext arg)
         {
-            var controller = arg.controller as GaiusController;
-            return controller != null && controller.didAttackMiss;
+            //var controller = arg.controller as GaiusController;
+            //return controller != null && controller.didAttackMiss;
+            return false;
         }
-        private bool IsInPhase1(AIContext arg) 
+
+        private bool IsInPhase1(AIContext arg)
         {
             return arg.controller.CurrentPhase == 1;
         }
+
         private bool IsCurrentlyAttacking(AIContext arg)
         {
-            var controller = arg.controller as GaiusController;
-            return controller != null && controller.isAttacking;
+            //var controller = arg.controller as GaiusController;
+            //return controller != null && controller.isAttacking;
+            return false;
         }
-        
+
         private bool IsJumpingBackwards(AIContext arg)
         {
-            var controller = arg.controller as GaiusController;
-            return controller != null && controller.isBackStepFinished;
+            //var controller = arg.controller as GaiusController;
+            //return controller != null && controller.isBackStepFinished;
+            return false;
         }
-        
+
         private bool FinishedAttacking(AIContext arg)
         {
-            var controller = arg.controller as GaiusController;
-            return controller != null && controller.FinishedAttacking;
+            //var controller = arg.controller as GaiusController;
+            //return controller != null && controller.FinishedAttacking;
+            return false;
         }
-        
+
         private bool CanLongAttack(AIContext arg)
         {
-            var controller = arg.controller as GaiusController;
-            return controller != null && controller.canLongAttack;
+            //var controller = arg.controller as GaiusController;
+            //return controller != null && controller.canLongAttack;
+            return false;
         }
     }
 }

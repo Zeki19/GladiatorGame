@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Entities.Interfaces;
 using UnityEngine;
 using Weapons;
@@ -17,6 +18,8 @@ namespace Entities
         public abstract void ModifySpeed(float speed);
         public abstract void Move(Vector2 dir);
         public abstract void Dash(float dashForce);
+        public abstract void Dash(Vector2 dir, float dashForce);
+        public abstract void Dash(Vector2 dir, float dashForce, float backStepDistance);
 
         public virtual void SetLinearVelocity(Vector2 velocity)
         {
