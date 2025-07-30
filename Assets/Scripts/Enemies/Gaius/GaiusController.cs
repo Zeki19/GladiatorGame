@@ -10,8 +10,8 @@ namespace Enemies.Gaius
     public class GaiusController : EnemyController
     {
         [SerializeField] public GaiusStatsSO stats;
-        [FormerlySerializedAs("weapom")] public GameObject weapon;
-        public AttackManager atamanger;
+        public GameObject weapon;
+        [FormerlySerializedAs("atamanger")] public AttackManager attackManager;
 
         public int currentAttack;
         public BehaviorGraphAgent agent;
@@ -51,7 +51,7 @@ namespace Enemies.Gaius
             var idleState = new GaiusStateIdle<EnemyStates>();
             var dashState = new GaiusStateDash<EnemyStates>();
             var chaseState = new GaiusStateChase<EnemyStates>(_pursuitSteering, this);
-            var AttackState = new GaiusStateAttack<EnemyStates>(_pursuitSteering, weapon, atamanger,this);
+            var AttackState = new GaiusStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
 
             _idleState = idleState;
             _dashState = dashState;
@@ -110,10 +110,10 @@ namespace Enemies.Gaius
         {
             base.Update();
             if(manager.HealthComponent.currentHealth>50)
-                agent.SetVariableValue("New CurrentPhase",global::CurrentPhase.Phace1);
+                agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phace1);
             else
             {
-                agent.SetVariableValue("New CurrentPhase", global::CurrentPhase.Phace2);
+                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phace2);
             }
         }
     }
