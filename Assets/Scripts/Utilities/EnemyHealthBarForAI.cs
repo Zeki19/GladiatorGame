@@ -21,6 +21,15 @@ public class BossHealthBarUI : MonoBehaviour
     [Header("Boss Phase Sprites")]
     [SerializeField] private List<Sprite> bossPhaseSprites = new List<Sprite>();
 
+    [Header("Phase Markers (Editable)")]
+    [SerializeField] private GameObject phaseMarker1;
+    [SerializeField] private GameObject phaseMarker2;
+    [SerializeField] private GameObject phaseMarker3;
+
+    [SerializeField] private bool Mark1 = true;
+    [SerializeField] private bool Mark2 = true;
+    [SerializeField] private bool Mark3 = true;
+
     [Header("Boss Reference")]
     [SerializeField] private EnemyManager bossManager;
 
@@ -43,12 +52,16 @@ public class BossHealthBarUI : MonoBehaviour
 
         bossManager.HealthComponent.OnDamage += OnHealthChanged;
         bossManager.HealthComponent.OnHeal += OnHealthChanged;
+
+        if (phaseMarker1 != null) phaseMarker1.SetActive(Mark1);
+        if (phaseMarker2 != null) phaseMarker2.SetActive(Mark2);
+        if (phaseMarker3 != null) phaseMarker3.SetActive(Mark3);
     }
+
     private void OnHealthChanged(float _)
     {
         float percent = bossManager.HealthComponent.GetCurrentHealthPercentage() / 100f;
         healthFill.fillAmount = percent;
-
         StopAllCoroutines();
         StartCoroutine(UpdateTrail(percent));
     }
@@ -85,7 +98,6 @@ public class BossHealthBarUI : MonoBehaviour
             if (bossNameText != null) bossNameText.text = value;
         }
     }
-
     public void SetBarColor(Color color)
     {
         healthFill.color = color;
