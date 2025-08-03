@@ -3,9 +3,15 @@ using Enemies;
 using Entities;
 using UnityEngine;
 
+
 public class EnemyManager : EntityManager
 {
     [SerializeField] private int maxLife;
+
+    [Header("Boss UI Reference")]
+    [SerializeField] private BossHealthBarUI bossHealthBarUI;
+
+    private int currentPhase = 0;
 
     private void Awake()
     {
@@ -17,17 +23,19 @@ public class EnemyManager : EntityManager
 
     private void Start()
     {
-        ServiceLocator.Instance.GetService<EnemiesManager>().RegisterEnemy(gameObject,this);
+        ServiceLocator.Instance.GetService<EnemiesManager>().RegisterEnemy(gameObject, this);
+        UpdateBossPhaseUI();
     }
+
     private void PrintHealth(float ignore)
     {
         Debug.Log(HealthSystem.currentHealth);
     }
-    public Vector2 GetEnemyPosition() 
-    { 
+
+    public Vector2 GetEnemyPosition()
+    {
         return gameObject.transform.position;
     }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
         var status = controller as IStatus;
@@ -35,5 +43,31 @@ public class EnemyManager : EntityManager
         {
             status.SetStatus(StatusEnum.Dashing,false);
         }
+    }
+
+    public int CurrentPhase
+    {
+        get => currentPhase;
+        set
+        {
+            if (currentPhase != value)
+            {
+                currentPhase = value;
+                UpdateBossPhaseUI();
+            }
+        }
+    }
+
+    private void UpdateBossPhaseUI()
+    {
+        if (bossHealthBarUI != null)
+        {
+            bossHealthBarUI.SetBossPhase(currentPhase);
+        }
+    }
+
+    public void AdvancePhase()
+    {
+        CurrentPhase++;
     }
 }

@@ -25,9 +25,9 @@ public class SceneChanger : MonoBehaviour
         ServiceLocator.Instance.RegisterService(this);
     }
 
-    public void ChangeScene(int SceneNumber)
+    public void ChangeScene(int sceneNumber)
     {
-        SceneManager.LoadScene(SceneNumber);
+        SceneManager.LoadScene(sceneNumber);
     }
 
     public void Quit() 

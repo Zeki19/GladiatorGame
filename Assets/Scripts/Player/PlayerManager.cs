@@ -21,13 +21,14 @@ namespace Player
         {
             ServiceLocator.Instance.RegisterService(this);
             HealthSystem = new HealthSystem.HealthSystem(stats.MaxHealth);
-            HealthSystem.OnDamage += damageTaken;
+            HealthSystem.OnDamage += DamageTaken;
             _status.SetUpStatus();
         }
 
-        private void damageTaken(float a)
+        private void DamageTaken(float a)
         {
             PlaySound("Hit","Player");
+            ServiceLocator.Instance.GetService<ArenaPainter>().PaintArena(transform, "Blood");
         }
     }
 }
