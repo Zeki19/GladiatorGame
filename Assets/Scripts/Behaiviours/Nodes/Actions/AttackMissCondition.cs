@@ -21,7 +21,6 @@ public class AttackMissCondition : Condition
         if (!StetUP)
         {
             GameObject.GetComponent<BehaviorGraphAgent>().GetVariable("Controller", out Controller);
-            Debug.Log("a");
             StetUP = true;
         }
     }
