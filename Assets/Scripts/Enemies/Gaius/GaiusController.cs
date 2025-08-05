@@ -3,6 +3,7 @@ using Enemies.Gaius.States;
 using Entities.StateMachine;
 using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Serialization;
 
 namespace Enemies.Gaius
@@ -15,6 +16,7 @@ namespace Enemies.Gaius
 
         public int currentAttack;
         public BehaviorGraphAgent agent;
+        public NavMeshAgent navMeshAgent;
         #region Private Variables
 
         private StatesBase<EnemyStates> _idleState; // BLUE
@@ -50,7 +52,7 @@ namespace Enemies.Gaius
 
             var idleState = new GaiusStateIdle<EnemyStates>();
             var dashState = new GaiusStateDash<EnemyStates>();
-            var chaseState = new GaiusStateChase<EnemyStates>(_pursuitSteering, this);
+            var chaseState = new GaiusStateChase<EnemyStates>(_pursuitSteering, this, target);
             var AttackState = new GaiusStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
 
             _idleState = idleState;

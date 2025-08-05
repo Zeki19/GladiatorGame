@@ -6167,6 +6167,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1927326037}
     - target: {fileID: 937127421366007748, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 1927326040}
+    - target: {fileID: 937127421366007748, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: attackManager
       value: 
       objectReference: {fileID: 1927326037}
@@ -6328,6 +6332,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1927326036}
+    - targetCorrespondingSourceObject: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1927326040}
   m_SourcePrefab: {fileID: 100100000, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
 --- !u!1 &238393686 stripped
 GameObject:
@@ -11108,51 +11115,6 @@ PolygonCollider2D:
       - {x: 0.5, y: 0.5}
       - {x: -0.5, y: -0.5}
   m_UseDelaunayMesh: 0
---- !u!1 &750802872
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 750802874}
-  - component: {fileID: 750802873}
-  m_Layer: 0
-  m_Name: Grid
-  m_TagString: Wall
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!156049354 &750802873
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 750802872}
-  m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
-  m_CellGap: {x: 0, y: 0, z: 0}
-  m_CellLayout: 0
-  m_CellSwizzle: 0
---- !u!4 &750802874
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 750802872}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1186355475}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &767134953
 GameObject:
   m_ObjectHideFlags: 0
@@ -11687,6 +11649,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 341415464}
+  - {fileID: 1186355475}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1151239200
@@ -11804,7 +11767,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 208372201}
-  m_Father: {fileID: 750802874}
+  m_Father: {fileID: 1033759531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1186355479
 TilemapRenderer:
@@ -24160,6 +24123,28 @@ MonoBehaviour:
   move: {fileID: 1927326034}
   look: {fileID: 238393687}
   controller: {fileID: 1927326031}
+--- !u!195 &1927326040
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663570681}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!224 &1944786033 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2197189462717508, guid: 5198f961ba46a274b80583f88d6b39b4, type: 3}
@@ -24845,7 +24830,6 @@ SceneRoots:
   - {fileID: 767134956}
   - {fileID: 1610851041}
   - {fileID: 1033759531}
-  - {fileID: 750802874}
   - {fileID: 1634171591}
   - {fileID: 238393685}
   - {fileID: 1741573476}
