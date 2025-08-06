@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BossHealthBarUI : MonoBehaviour
 {
@@ -21,18 +21,14 @@ public class BossHealthBarUI : MonoBehaviour
     [Header("Boss Phase Sprites")]
     [SerializeField] private List<Sprite> bossPhaseSprites = new List<Sprite>();
 
-    [Header("Phase Markers (Editable)")]
-    [SerializeField] private GameObject phaseMarker1;
-    [SerializeField] private GameObject phaseMarker2;
-    [SerializeField] private GameObject phaseMarker3;
-
-    [SerializeField] private bool Mark1 = true;
-    [SerializeField] private bool Mark2 = true;
-    [SerializeField] private bool Mark3 = true;
+    [Header("Phase Markers")]
+    [SerializeField] private RectTransform healthBarFillArea; // El área visual de la barra de vida
+    [SerializeField] private List<RectTransform> phaseMarkers = new List<RectTransform>();
+    [Range(0f, 1f)]
+    [SerializeField] private List<float> markerPositions = new List<float>(); // Porcentajes de posición
 
     [Header("Boss Reference")]
     [SerializeField] private EnemyManager bossManager;
-
     private void Start()
     {
         if (bossManager == null || bossManager.HealthComponent == null)
@@ -53,15 +49,32 @@ public class BossHealthBarUI : MonoBehaviour
         bossManager.HealthComponent.OnDamage += OnHealthChanged;
         bossManager.HealthComponent.OnHeal += OnHealthChanged;
 
-        if (phaseMarker1 != null) phaseMarker1.SetActive(Mark1);
-        if (phaseMarker2 != null) phaseMarker2.SetActive(Mark2);
-        if (phaseMarker3 != null) phaseMarker3.SetActive(Mark3);
+        UpdatePhaseMarkerPositions();
     }
+    private void UpdatePhaseMarkerPositions()
+    {
+        if (healthBarFillArea == null) return;
 
+        float barWidth = healthBarFillArea.rect.width;
+
+        for (int i = 0; i < phaseMarkers.Count && i < markerPositions.Count; i++)
+        {
+            float clamped = Mathf.Clamp01(markerPositions[i]);
+
+            if (phaseMarkers[i] == null) continue;
+
+            Vector2 anchoredPos = phaseMarkers[i].anchoredPosition;
+
+            // Corrige el punto de origen al inicio de la barra, incluso si el pivot es 0.5
+            anchoredPos.x = (clamped * barWidth) - (barWidth * 0.5f);
+            phaseMarkers[i].anchoredPosition = anchoredPos;
+        }
+    }
     private void OnHealthChanged(float _)
     {
         float percent = bossManager.HealthComponent.GetCurrentHealthPercentage() / 100f;
         healthFill.fillAmount = percent;
+
         StopAllCoroutines();
         StartCoroutine(UpdateTrail(percent));
     }
