@@ -22,10 +22,10 @@ public class BossHealthBarUI : MonoBehaviour
     [SerializeField] private List<Sprite> bossPhaseSprites = new List<Sprite>();
 
     [Header("Phase Markers")]
-    [SerializeField] private RectTransform healthBarFillArea; // El área visual de la barra de vida
+    [SerializeField] private RectTransform healthBarFillArea; // El ï¿½rea visual de la barra de vida
     [SerializeField] private List<RectTransform> phaseMarkers = new List<RectTransform>();
     [Range(0f, 1f)]
-    [SerializeField] private List<float> markerPositions = new List<float>(); // Porcentajes de posición
+    [SerializeField] private List<float> markerPositions = new List<float>(); // Porcentajes de posiciï¿½n
 
     [Header("Boss Reference")]
     [SerializeField] private EnemyManager bossManager;
@@ -33,7 +33,7 @@ public class BossHealthBarUI : MonoBehaviour
     {
         if (bossManager == null || bossManager.HealthComponent == null)
         {
-            Debug.LogWarning("BossManager or HealthComponent not assigned");
+            Debug.Log("BossManager or HealthComponent not assigned");
             enabled = false;
             return;
         }

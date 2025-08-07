@@ -47,22 +47,32 @@ public class DialogueManager : MonoBehaviour
         
         ServiceLocator.Instance.RegisterService(this);
     }
+    public void StartConversation(DialogueSO dialogue)
+    {
+        QueueDialogue(dialogue);
+    }
     
     public void StartConversation(EnumDialogues dialogue)
     {
         DialogueSO dialogueSo = FindDialogueSo(dialogue);
         
+        QueueDialogue(dialogueSo);
+    }
+
+    private void QueueDialogue(DialogueSO dialogue)
+    {
         _linesQueue.Clear();
         dialogueCanvas.SetActive(true);
         audioSource.enabled = true;
         
-        foreach (var line in dialogueSo.lines)
+        foreach (var line in dialogue.lines)
         {
             _linesQueue.Enqueue(line);
         }
 
         DisplayNextSentence();
     }
+
     private DialogueSO FindDialogueSo(EnumDialogues dialogue)
     {
         foreach (var so in dialogues)
@@ -94,9 +104,9 @@ public class DialogueManager : MonoBehaviour
     }
     private void EndDialogue()
     {
+        OnConversationEnd?.Invoke();
         dialogueCanvas.SetActive(false);
         audioSource.enabled = false;
-        OnConversationEnd?.Invoke(); 
     }
     private IEnumerator TypeSentence(string sentence)
     {
