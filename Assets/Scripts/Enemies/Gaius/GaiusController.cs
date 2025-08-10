@@ -16,7 +16,6 @@ namespace Enemies.Gaius
 
         public int currentAttack;
         public BehaviorGraphAgent agent;
-        public NavMeshAgent navMeshAgent;
         #region Private Variables
 
         private StatesBase<EnemyStates> _idleState; // BLUE

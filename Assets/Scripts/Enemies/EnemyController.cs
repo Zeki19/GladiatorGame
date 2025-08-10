@@ -4,14 +4,16 @@ using Entities;
 using System.Collections.Generic;
 using Entities.StateMachine;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Enemies
 {
-    public abstract class EnemyController : EntityController, IStatus ,IStatesData,ICondition
+    public abstract class EnemyController : EntityController, IStatus ,IStatesData,ICondition, INavigation
     {
         [SerializeField] protected Rigidbody2D target;
         [SerializeField] protected int[] phasesThresholds;
         [SerializeField] private Dictionary<StatusEnum, bool> Status=new Dictionary<StatusEnum, bool>();
+        [SerializeField] private NavMeshAgent NVagent;
         protected StateDataManager stateDataManager = new StateDataManager();
         
         protected int _currentPhase = 1;
@@ -20,6 +22,8 @@ namespace Enemies
         {
             get { return _currentPhase; }
         }
+
+        public NavMeshAgent _NVagent => NVagent;
 
         protected List<float> attackRanges = new List<float>();
         protected PhaseSystem _phaseSystem;

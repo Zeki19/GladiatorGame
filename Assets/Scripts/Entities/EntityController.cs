@@ -28,9 +28,11 @@ namespace Entities
             var Status = GetComponent<IStatus>();
             var Conditions = GetComponent<ICondition>();
             var StateData = GetComponent<IStatesData>();
+            var Agent = GetComponent<INavigation>();
+
             foreach (var t in stateList)
             {
-                t.Initialize(move, look, attack,sound,animate,Status,Conditions,StateData);
+                t.Initialize(move, look, attack,sound,animate,Status,Conditions,StateData, Agent);
             }
         }
     }

@@ -12,14 +12,12 @@ namespace Enemies.Gaius.States
         private float _stackingSpeed;
         private float _speedModeInterval = 1;
         private float _timer;
-        private NavMeshAgent _agent;
         private Rigidbody2D _target;
         public GaiusStateChase(ISteering steering, GaiusController controller, Rigidbody2D target)
         {
             _steering = steering;
             _speedMod = controller.stats.Stack;
             _speedModeInterval = controller.stats.Interval;
-            _agent = controller.navMeshAgent;
             _target = target;
         }
 
@@ -29,13 +27,15 @@ namespace Enemies.Gaius.States
             _move.Move(Vector2.zero);
             _animate.PlayStateAnimation(StateEnum.Chase);
             _timer = _speedModeInterval;
+            _agent._NVagent.updateRotation = false;
+            _agent._NVagent.updateUpAxis = false;
         }
         public override void Execute()
         {
             base.Execute();
-            _agent.SetDestination(new Vector3 (_target.position.x, _target.position.y, 0));
-            /*
+            _agent._NVagent.SetDestination(new Vector3 (_target.position.x, _target.position.y, 0));
             Vector2 dir = _steering.GetDir();
+            /*
             _timer -= Time.deltaTime;
             if(_timer<0)
             {
@@ -45,8 +45,8 @@ namespace Enemies.Gaius.States
             }
 
             _move.Move(dir);
-            _look.LookDir(dir);
             */
+            _look.LookDir(dir);
         }
         public override void Exit()
         {
