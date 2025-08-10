@@ -36,7 +36,7 @@ public class EnemyModel : EntityModel
         agent.isStopped = true;
 
         Vector3 start = transform.position;
-        Vector3 end = start + (Vector3)dir.normalized * distance;
+        Vector3 end = start + (Vector3)dir.normalized * (distance * 1.1f);
 
         // Optional: Clamp to NavMesh so we don't dash into non-walkable areas
         if (NavMesh.SamplePosition(end, out NavMeshHit hit, 1f, NavMesh.AllAreas))
