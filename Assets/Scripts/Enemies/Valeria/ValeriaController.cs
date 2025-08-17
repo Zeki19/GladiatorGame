@@ -10,8 +10,11 @@ namespace Enemies.Gaius
     public class ValeriaController : EnemyController
     {
         [SerializeField] public GaiusStatsSO stats;
-        [FormerlySerializedAs("atamanger")] public AttackManager attackManager;
+        [SerializeField] private float desiredDistance;
+        [SerializeField] private float stoppingThreshold;
 
+
+        public AttackManager attackManager;
         public int currentAttack;
         public BehaviorGraphAgent agent;
         #region Private Variables
@@ -47,7 +50,7 @@ namespace Enemies.Gaius
         {
             Fsm = new FSM<EnemyStates>();
 
-            var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target);
+            var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold);
 
             _chaseState = chaseState;
 
