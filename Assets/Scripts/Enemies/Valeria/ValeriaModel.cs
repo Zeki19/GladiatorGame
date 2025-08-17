@@ -1,7 +1,7 @@
-using UnityEngine;
 using Entities;
+using UnityEngine;
 
-public class GaiusModel : EnemyModel
+public class ValeriaModel : EnemyModel
 {
     public void AttackTarget(Transform target, float damage)
     {

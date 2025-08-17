@@ -34,14 +34,17 @@ namespace Entities
             public abstract void StopStateAnimation(StateEnum state);
 
         #endregion
-        
-        
+
+
 
 
         protected virtual void Start()
         {
             _blink = new SpriteEffects(this);
-            manager.HealthComponent.OnDamage +=(float a)=> _blink.Blink(sprite,blinkValues.amount,blinkValues.frequency,blinkValues.blinkActive);
+            if (manager != null)
+            {
+                manager.HealthComponent.OnDamage += (float a) => _blink.Blink(sprite, blinkValues.amount, blinkValues.frequency, blinkValues.blinkActive);
+            }
         }
     }
 }

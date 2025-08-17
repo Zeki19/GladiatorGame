@@ -67,6 +67,7 @@ public class EnemyModel : EntityModel
     public override void Move(Vector2 dir)
     {
         dir.Normalize();
+        if(manager.Rb != null)
         manager.Rb.linearVelocity = dir * (_moveSpeed * _speedModifier);
     }
 
