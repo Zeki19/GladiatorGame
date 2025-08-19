@@ -23718,9 +23718,10 @@ MonoBehaviour:
   NVagent: {fileID: 1832387834}
   stats: {fileID: 11400000, guid: 4e96c14f6a2738646bb097759e9708c2, type: 2}
   desiredDistance: 3
-  stoppingThreshold: 0.2
+  stoppingThreshold: 1
   orbitSpeed: 5
-  orbitAngle: 180
+  orbitAngle: 15
+  cooldown: 1
   attackManager: {fileID: 1832387837}
   currentAttack: 0
   agent: {fileID: 1832387835}

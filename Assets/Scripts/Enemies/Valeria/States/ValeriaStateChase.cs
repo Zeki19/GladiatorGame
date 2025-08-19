@@ -1,5 +1,8 @@
 ﻿using Entities.StateMachine;
+using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace Enemies.Gaius.States
 {
@@ -11,8 +14,15 @@ namespace Enemies.Gaius.States
         private float _stoppingThreshold;
         private float _orbitSpeed;
         private float _orbitAngle;
+        private bool _isAttackReady;
 
-        public ValeriaStateChase(ISteering steering, Rigidbody2D target, float desiredDistance, float stoppingThreshold, float orbitSpeed, float orbitAngle)
+        private float _cooldown;
+        private float _timer;
+
+
+        private int _direction;
+        private Dictionary<int, float> _directions = new Dictionary<int, float>();
+        public ValeriaStateChase(ISteering steering, Rigidbody2D target, float desiredDistance, float stoppingThreshold, float orbitSpeed, float orbitAngle, float cooldown)
         {
             _steering = steering;
             _target = target;
@@ -20,6 +30,9 @@ namespace Enemies.Gaius.States
             _stoppingThreshold = stoppingThreshold;
             _orbitSpeed = orbitSpeed;
             _orbitAngle = orbitAngle;
+            _directions.Add(1, 50f);
+            _directions.Add(-1, 50f);
+            _cooldown = cooldown;
         }
 
         public override void Enter()
@@ -29,6 +42,9 @@ namespace Enemies.Gaius.States
             _animate.PlayStateAnimation(StateEnum.Chase);
             _agent._NVagent.updateRotation = false;
             _agent._NVagent.updateUpAxis = false;
+            _timer = 0;
+            _isAttackReady = false;
+            _direction = MyRandom.Roulette(_directions);
         }
         public override void Execute()
         {
@@ -42,7 +58,7 @@ namespace Enemies.Gaius.States
             Vector2 toPlayer = _target.position - _move.Position;
             float dist = toPlayer.magnitude;
 
-            if (dist > _desiredDistance + _stoppingThreshold || dist < _desiredDistance - _stoppingThreshold)
+            if (dist > _desiredDistance + _stoppingThreshold || dist < _desiredDistance - _stoppingThreshold || _isAttackReady)
             {
                 MoveToRing(toPlayer);
             }
@@ -58,16 +74,27 @@ namespace Enemies.Gaius.States
             _agent._NVagent.SetDestination(target);
         }
         private void OrbitAroundPlayer(Vector2 toPlayer)
-        {
-            _orbitAngle += _orbitSpeed * Time.deltaTime;
-            Vector2 orbitOffset = new Vector2(Mathf.Cos(_orbitAngle), Mathf.Sin(_orbitAngle)) * _desiredDistance;
-            Vector2 orbitTarget = (Vector2)_target.position + orbitOffset;
+        {   
+            Vector2 ringPoint = _target.position - toPlayer.normalized*_desiredDistance;
+            Vector2 perp = new Vector2(-toPlayer.y, toPlayer.x).normalized;
+            Vector2 orbitTarget = ringPoint + perp * _direction;
             _agent._NVagent.SetDestination(orbitTarget);
+            if (_cooldown < _timer)
+            {
+                _isAttackReady = true;
+            }
+            else
+            {
+                _timer += Time.deltaTime; 
+            }
         }
 
+        
         public override void Exit()
         {
             base.Exit();
         }
+
+
     }
 }
