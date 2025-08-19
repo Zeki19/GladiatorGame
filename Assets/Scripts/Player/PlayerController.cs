@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Entities;
 using Entities.Interfaces;
@@ -11,12 +12,12 @@ namespace Player
     public class PlayerController : EntityController
     {
         public PhaseSystem _phaseSystem;
-        protected FSM<StateEnum> Fsm;
-        
+        private FSM<StateEnum> Fsm;
+
         void Dead()
         {
             transform.parent.gameObject.SetActive(false);
-            manager.PlaySound("Death","Player");
+            manager.PlaySound("Death", "Player");
             ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(3);
         }
 
@@ -27,6 +28,7 @@ namespace Player
             _phaseSystem = new PhaseSystem(playerManager.stats.stateThreshold, manager.HealthComponent);
             InitializeFsm();
         }
+
         protected virtual void Update()
         {
             Fsm.OnExecute();
@@ -35,7 +37,7 @@ namespace Player
         protected override void InitializeFsm()
         {
             Fsm = new FSM<StateEnum>();
-            
+
 
             var stateList = new List<State<StateEnum>>();
 
@@ -44,7 +46,7 @@ namespace Player
             var baseAttackState = new PSAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var changeAttackState = new PSChargeAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var dashState = new PSDash<StateEnum>(StateEnum.Idle, (PlayerManager)manager, this);
-            
+
             idleState.AddTransition(StateEnum.Walk, walkState);
             idleState.AddTransition(StateEnum.Dash, dashState);
             idleState.AddTransition(StateEnum.Attack, baseAttackState);
@@ -81,6 +83,7 @@ namespace Player
         {
             Fsm.Transition(StateEnum.Idle);
         }
+
         public void ChangeToMove()
         {
             Fsm.Transition(StateEnum.Walk);

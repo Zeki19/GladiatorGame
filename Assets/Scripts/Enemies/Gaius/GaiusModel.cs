@@ -1,20 +1,7 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using Entities;
-using Entities.Interfaces;
-using Unity.Behavior;
-
-public class GaiusModel : EnemyModel
+namespace Enemies.Gaius
 {
-    public void AttackTarget(Transform target, float damage)
+    public class GaiusModel : EnemyModel
     {
-        if (target == null) return;
-
-        var manager = target.GetComponent<EntityManager>();
-        if (manager != null)
-        {
-            manager.HealthComponent.TakeDamage(damage);
-        }
+    
     }
 }

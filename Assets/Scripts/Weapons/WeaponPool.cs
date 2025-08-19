@@ -12,14 +12,14 @@ namespace Weapons
         private Factory<Weapon, SoWeapon> _factory;
 
         private List< Weapon> _pool=new List<Weapon>();
-        private Func<SoWeapon, Weapon> _ceatefunc;
+        private Func<SoWeapon, Weapon> _createfunc;
         public WeaponPool(Func<SoWeapon, Weapon> creat)
         {
-            _ceatefunc = creat;
+            _createfunc = creat;
         }
         private Weapon Create(SoWeapon config)
         {
-            return _ceatefunc(config);
+            return _createfunc(config);
         }
         public Weapon Get(SoWeapon config)
         {

@@ -1,19 +1,23 @@
 using System.Collections;
+using Enemies;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "PokeAttack", menuName = "Weapons/PokeAttack")]
-public class PokeAttack : EnemyBaseAttack
+[CreateAssetMenu(fileName = "PokeAttack", menuName = "Attacks/PokeAttack")]
+public class PokeAttack : BaseAttack
 {
     public AnimationCurve curve;
-    public float Delay;
+    [FormerlySerializedAs("Delay")] public float delay;
+    private Collider2D _collider;
 
     public override void ExecuteAttack()
     {
+        _collider=Weapon.GetComponent<Collider2D>();
         Move.StopMovement();
         CoroutineRunner.StartCoroutine(Attack());
     }
 
-    private IEnumerator Attack()
+    protected override IEnumerator Attack()
     {
         float animationClock = 0;
         float animationTime = 0;
@@ -21,10 +25,10 @@ public class PokeAttack : EnemyBaseAttack
         if (curve.length > 0)
             animationTime = curve.keys[curve.length - 1].time;
         Weapon.SetActive(true);
-        Weapon.GetComponent<Collider2D>().enabled = false;
+        _collider.enabled = false;
         Weapon.transform.localPosition = Weapon.transform.localPosition.normalized *curve.Evaluate(0.01f);
-        yield return new WaitForSeconds(Delay);;
-        Weapon.GetComponent<Collider2D>().enabled = true;
+        yield return new WaitForSeconds(delay);;
+        _collider.enabled = true;
         while(animationClock < animationTime)
         {
             animationClock += Time.deltaTime;

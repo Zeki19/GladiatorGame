@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Enemies.Attack;
 using Entities.StateMachine;
 using Unity.Mathematics;
 using UnityEngine;

@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using Entities.Interfaces;
 using UnityEngine;
-using Weapons;
-using Weapons.Attacks;
 
 namespace Entities
 {
@@ -25,9 +22,6 @@ namespace Entities
         {
             manager.Rb.linearVelocity = velocity;
         }
-        public void StartAttack(Attack attack,Weapon weapon) => attack.StartAttack(weapon);
-        public void ExecuteAttack(Attack attack,Weapon weapon) => attack.ExecuteAttack(weapon);
-        public void FinishAttack(Attack attack,Weapon weapon) => attack.FinishAttack(weapon);
     
         public virtual Action OnAttack { get; set; }
     }

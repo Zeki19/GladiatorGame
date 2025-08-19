@@ -78,16 +78,17 @@ namespace Player
             Weapon.WeaponGameObject.gameObject.transform.parent = transform;
             Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero,
                 quaternion.identity);
-            Weapon.BaseAttack.FinishAnimation += ClearEnemiesList;
+            Weapon.BaseAttack.AttackFinish += ClearEnemiesList;
             Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
+            weapon.BaseAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,this);
         }
 
         public void DropWeapon()
         {
             if (Weapon is not { Attacking: false }) return;
             _weaponManager.CatchDroppedWeapon(Weapon);
-            Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
-            Weapon.ChargeAttack.FinishAnimation -= ClearEnemiesList;
+            Weapon.BaseAttack.AttackFinish -= ClearEnemiesList;
+            Weapon.ChargeAttack.AttackFinish -= ClearEnemiesList;
             Weapon = null;
         }
 
@@ -95,8 +96,8 @@ namespace Player
         {
             if (Weapon is not { Attacking: false }) return;
 
-            Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
-            Weapon.ChargeAttack.FinishAnimation -= ClearEnemiesList;
+            Weapon.BaseAttack.AttackFinish -= ClearEnemiesList;
+            Weapon.ChargeAttack.AttackFinish -= ClearEnemiesList;
             _weaponManager.DestroyWeapon(Weapon);
             _manager.PlaySound("BreakWeapon", "Player");
             Weapon = null;

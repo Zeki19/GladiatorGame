@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Enemies.Attack;
 using Enemies.Gaius.States;
 using Entities.StateMachine;
 using Unity.Behavior;
@@ -11,10 +12,8 @@ namespace Enemies.Gaius
     {
         [SerializeField] public GaiusStatsSO stats;
         public GameObject weapon;
-        [FormerlySerializedAs("atamanger")] public AttackManager attackManager;
-
-        public int currentAttack;
-        public BehaviorGraphAgent agent;
+        private AttackManager _attackManager;
+        private BehaviorGraphAgent _agent;
         #region Private Variables
 
         private StatesBase<EnemyStates> _idleState; // BLUE
@@ -28,8 +27,11 @@ namespace Enemies.Gaius
 
         protected override void Awake()
         {
+            _attackManager = GetComponent<AttackManager>();
+            _agent = GetComponent<BehaviorGraphAgent>();
             InitalizeSteering();
             base.Awake();
+            
         }
 
         protected override void Start()
@@ -51,7 +53,7 @@ namespace Enemies.Gaius
             var idleState = new GaiusStateIdle<EnemyStates>();
             var dashState = new GaiusStateDash<EnemyStates>();
             var chaseState = new GaiusStateChase<EnemyStates>(_pursuitSteering, this);
-            var AttackState = new GaiusStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
+            var AttackState = new GaiusStateAttack<EnemyStates>(_pursuitSteering, weapon, _attackManager,this);
 
             _idleState = idleState;
             _dashState = dashState;
@@ -110,10 +112,10 @@ namespace Enemies.Gaius
         {
             base.Update();
             if(manager.HealthComponent.currentHealth>50)
-                agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phace1);
+                _agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phace1);
             else
             {
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phace2);
+                _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phace2);
             }
         }
     }

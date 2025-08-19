@@ -1,16 +1,18 @@
-using Factory.Essentials;
+using Enemies;
+using Player;
 using UnityEngine;
 using Utilities.Factory.Essentials;
 using Utilities.Factory.WeaponFactory;
-using Weapons.Attacks;
 
 namespace Weapons
 {
-    public class Weapon : IConfigurable<SoWeapon>
+    public class Weapon :IConfigurable<SoWeapon>
     {
         public string WeaponName { get; private set; }
         public GameObject WeaponGameObject { get; private set; }
         private Collider2D _weaponCollider2D;
+        private PlayerController _controller;
+        private PlayerModel _model;
 
         #region BaseStats
 
@@ -56,9 +58,9 @@ namespace Weapons
 
         #region Attacks
 
-        public Attack BaseAttack { get; private set; }
-        public Attack ChargeAttack { get; private set; }
-        public Attack CurrentAttack { get; set; }
+        public BaseAttack BaseAttack { get; private set; }
+        public BaseAttack ChargeAttack { get; private set; }
+        public BaseAttack CurrentAttack { get; set; }
 
         #endregion
 
@@ -79,8 +81,8 @@ namespace Weapons
             CoolDown = config.cooldown;
             Range = config.range;
 
-            ChargeAttack = config.charge.Clone();
-            BaseAttack = config.basic.Clone();
+            ChargeAttack = config.charge;
+            BaseAttack = config.basic;
 
             CurrentDurability = Durability;
 
