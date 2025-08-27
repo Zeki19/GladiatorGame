@@ -4,7 +4,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-namespace Enemies.Gaius.States
+namespace Enemies.Valeria.States
 {
     public class ValeriaStateChase<T> : StatesBase<T>
     {

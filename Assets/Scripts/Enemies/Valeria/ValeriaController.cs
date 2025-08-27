@@ -5,7 +5,7 @@ using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Enemies.Gaius
+namespace Enemies.Valeria
 {
     public class ValeriaController : EnemyController
     {
@@ -18,8 +18,7 @@ namespace Enemies.Gaius
         [SerializeField] private float cooldown;
         #endregion
 
-        public AttackManager attackManager;
-        public int currentAttack;
+        public Attack.AttackManager attackManager;
         public BehaviorGraphAgent agent;
         #region Private Variables
 
@@ -54,7 +53,7 @@ namespace Enemies.Gaius
         {
             Fsm = new FSM<EnemyStates>();
 
-            var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
+            var chaseState = new States.ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
 
             _chaseState = chaseState;
 
@@ -65,7 +64,7 @@ namespace Enemies.Gaius
             };
 
             InitializeComponents(stateList);
-            Fsm.SetInit(chaseState, EnemyStates.Idle);
+            Fsm.SetInit(chaseState, EnemyStates.Chase);
         }
 
         private void OnDrawGizmos()

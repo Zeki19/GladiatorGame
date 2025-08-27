@@ -8,10 +8,11 @@ using UnityEngine.AI;
 
 namespace Enemies
 {
-    public abstract class EnemyController : EntityController,IStatesData,ICondition
+    public abstract class EnemyController : EntityController,IStatesData,ICondition, INavigation
     {
         [SerializeField] protected Rigidbody2D target;
         [SerializeField] protected int[] phasesThresholds;
+        [SerializeField] private NavMeshAgent NVagent;
         protected StateDataManager stateDataManager = new StateDataManager();
         public int currentAttack;
         protected int _currentPhase = 1;
@@ -20,6 +21,7 @@ namespace Enemies
         {
             get { return _currentPhase; }
         }
+        public NavMeshAgent _NVagent => NVagent;
         protected PhaseSystem _phaseSystem;
         protected FSM<EnemyStates> Fsm;
 

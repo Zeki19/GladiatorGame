@@ -23565,6 +23565,7 @@ GameObject:
   - component: {fileID: 1832387835}
   - component: {fileID: 1832387834}
   - component: {fileID: 1832387844}
+  - component: {fileID: 1832387845}
   m_Layer: 8
   m_Name: Valeria
   m_TagString: Untagged
@@ -23606,13 +23607,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Graph: {fileID: 0}
-  m_BlackboardVariableOverridesList: []
+  m_Graph: {fileID: 7476380825961596307, guid: 92a3b7b17921b644d9bd96f31c2cc6cd, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 3815732586683039819
+  - rid: 3815732586683039820
+  - rid: 3815732586683039821
+  - rid: 3815732586683039822
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3815732586683039819
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 1832387833}
+    - rid: 3815732586683039820
+      type: {class: 'BlackboardVariable`1[[Entities.EntityModel, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 5237211683081708500
+          m_Value1: 15002449821169241579
+        Name: Model
+        m_Value: {fileID: 1832387839}
+    - rid: 3815732586683039821
+      type: {class: 'BlackboardVariable`1[[Enemies.EnemyController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3990567665628121329
+          m_Value1: 10756648892004491123
+        Name: Controller
+        m_Value: {fileID: 1832387840}
+    - rid: 3815732586683039822
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 5346223236124533776
+          m_Value1: 1514143420011053385
+        Name: Target
+        m_Value: {fileID: 2020722031}
 --- !u!70 &1832387836
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -23664,9 +23701,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attacks: []
   weapon: {fileID: 0}
-  move: {fileID: 0}
-  look: {fileID: 0}
-  controller: {fileID: 0}
 --- !u!114 &1832387838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23698,8 +23732,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1832387841}
   _moveSpeed: 0
-  agent: {fileID: 1832387834}
-  defaultDashTime: 0.2
 --- !u!114 &1832387840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23716,14 +23748,14 @@ MonoBehaviour:
   target: {fileID: 1634171595}
   phasesThresholds: 
   NVagent: {fileID: 1832387834}
+  currentAttack: 0
   stats: {fileID: 11400000, guid: 4e96c14f6a2738646bb097759e9708c2, type: 2}
   desiredDistance: 3
   stoppingThreshold: 1
   orbitSpeed: 5
   orbitAngle: 15
-  cooldown: 1
+  cooldown: 4
   attackManager: {fileID: 1832387837}
-  currentAttack: 0
   agent: {fileID: 1832387835}
 --- !u!114 &1832387841
 MonoBehaviour:
@@ -23737,7 +23769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f7ff47246bf4e4cadb187cc23c16c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 1832387845}
   model: {fileID: 1832387839}
   view: {fileID: 1832387838}
   controller: {fileID: 1832387840}
@@ -23813,6 +23845,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &1832387845
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832387833}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1870427129
 GameObject:
   m_ObjectHideFlags: 0
