@@ -1,77 +1,81 @@
 using System.Collections;
-using Enemies;
 using Entities;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyModel : EntityModel
+namespace Enemies
 {
-    protected float _speedModifier = 1;
-    [SerializeField] float _moveSpeed;
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] float defaultDashTime = 0.2f;
-    public override void Dash(float dashForce)
+    public class EnemyModel : EntityModel
     {
-        Dash(transform.up, dashForce);
-    }
+        protected float SpeedModifier = 1;
+        [SerializeField] float _moveSpeed;
 
-    public override void Dash(Vector2 dir, float dashForce)
-    {
-        StartCoroutine(DashRoutine(dir.normalized, dashForce, defaultDashTime));
-    }
-
-    public override void Dash(Vector2 dir, float dashForce, float dashDistance)
-    {
-        // Use dashDistance instead of dashForce for travel length
-        StartCoroutine(DashRoutine(dir.normalized, dashDistance, defaultDashTime));
-
-        // Preserve your monitoring behavior
-        var controller = manager.controller as EnemyController;
-        controller.StartDashMonitoring(dir.normalized, dashDistance, transform.position);
-    }
-
-    private IEnumerator DashRoutine(Vector2 dir, float distance, float dashTime)
-    {
-        // Stop normal pathfinding
-        agent.isStopped = true;
-
-        Vector3 start = transform.position;
-        Vector3 end = start + (Vector3)dir.normalized * (distance * 1.1f);
-
-        // Optional: Clamp to NavMesh so we don't dash into non-walkable areas
-        if (NavMesh.SamplePosition(end, out NavMeshHit hit, 1f, NavMesh.AllAreas))
+        public override void ModifySpeed(float speed)
         {
-            end = hit.position;
+            SpeedModifier += speed;
         }
 
-        float elapsed = 0f;
-        while (elapsed < dashTime)
+        public override void Move(Vector2 dir)
         {
-            elapsed += Time.deltaTime;
-            float t = elapsed / dashTime;
-
-            // Smooth movement without breaking NavMesh
-            agent.Warp(Vector3.Lerp(start, end, t));
-            yield return null;
+            dir.Normalize();
+            manager.Rb.linearVelocity = dir * (_moveSpeed * SpeedModifier);
         }
 
-        // Resume normal pathfinding
-        agent.isStopped = false;
-    }
+        public void AttackTarget(Transform target, float damage)
+        {
+            if (target == null) return;
 
-    public override void ModifySpeed(float speed)
-    {
-        _speedModifier += speed;
-    }
+            var manager = target.GetComponent<EntityManager>();
+            if (manager != null)
+            {
+                manager.HealthComponent.TakeDamage(damage);
+            }
+        }
 
-    public override void Move(Vector2 dir)
-    {
-        dir.Normalize();
-        if(manager.Rb != null)
-        manager.Rb.linearVelocity = dir * (_moveSpeed * _speedModifier);
-    }
+        #region Dash
 
-    
-    
+        public override void Dash(float dashForce)
+        {
+            Dash(gameObject.transform.up, dashForce);
+        }
+
+        public override void Dash(Vector2 dir, float dashForce)
+        {
+            manager.Rb.AddForce(dir.normalized * dashForce, ForceMode2D.Impulse);
+        }
+
+        public override void Dash(Vector2 dir, float dashForce, float dashDistance)
+        {
+            Dash(dir, dashForce);
+            StartDashMonitoring(dir.normalized, dashDistance, transform.position);
+        }
+
+        private void StartDashMonitoring(Vector2 dir, float distance, Vector2 startingPosition)
+        {
+            StartCoroutine(MonitorDashDistance(dir, distance, startingPosition));
+        }
+
+        private IEnumerator MonitorDashDistance(Vector2 dir, float distance, Vector2 startingPosition)
+        {
+            Vector2 targetPosition = startingPosition + dir * distance;
+            float targetDistance = Vector2.Distance(startingPosition, targetPosition);
+            while (true)
+            {
+                float currentDistance = Vector2.Distance(startingPosition, (Vector2)transform.position);
+                if (currentDistance >= targetDistance)
+                {
+                    break;
+                }
+
+                yield return null;
+            }
+
+            manager.Rb.linearVelocity = Vector2.zero;
+
+            var controler = manager.controller as EnemyController;
+            controler?.SetStatus(StatusEnum.Dashing, false);
+        }
+
+        #endregion
+    }
 }
-

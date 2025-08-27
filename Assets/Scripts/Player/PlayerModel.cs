@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using Entities;
 using Entities.Interfaces;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -53,6 +52,7 @@ namespace Player
             _stats.SpeedModifier += speed;  //Ask the designer if this should be a + or a *.
         }
 
+        #region Dash
         public override void Dash(float dashForce)
         {
             manager.Rb.linearVelocity = _lastDirection * (dashForce *_stats.SpeedModifier);
@@ -60,14 +60,36 @@ namespace Player
 
         public override void Dash(Vector2 dir, float dashForce)
         {
-            throw new NotImplementedException();
+            manager.Rb.AddForce(dir.normalized * dashForce, ForceMode2D.Impulse);
         }
 
-        public override void Dash(Vector2 dir, float dashForce, float backStepDistance)
+        public override void Dash(Vector2 dir, float dashForce, float dashDistance)
         {
-            throw new NotImplementedException();
+            Dash(dir, dashForce);
+            StartDashMonitoring(dir.normalized, dashDistance, transform.position);
         }
-
+        public void StartDashMonitoring(Vector2 dir, float distance, Vector2 startingPosition)
+        {
+            StartCoroutine(MonitorDashDistance(dir, distance, startingPosition));
+        }
+        public IEnumerator MonitorDashDistance(Vector2 dir, float distance,Vector2 startingPosition)
+        {
+            Vector2 targetPosition = startingPosition + dir * distance;
+            float targetDistance = Vector2.Distance(startingPosition, targetPosition);
+            while (true)
+            {
+                float currentDistance = Vector2.Distance(startingPosition, (Vector2)transform.position);
+                if (currentDistance >= targetDistance)
+                {
+                    break;
+                }
+                yield return null;
+            }
+            manager.Rb.linearVelocity = Vector2.zero;
+            var controler = manager.controller as PlayerController;
+            controler.SetStatus(StatusEnum.Dashing,false);
+        }
+        #endregion
 
         public override void Move(Vector2 dir)
         {

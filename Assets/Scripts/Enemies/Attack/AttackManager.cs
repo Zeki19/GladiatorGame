@@ -1,43 +1,54 @@
 using System.Collections.Generic;
-using Enemies;
 using Entities;
 using UnityEngine;
 
-public class AttackManager : MonoBehaviour
+namespace Enemies.Attack
 {
-    public List<EnemyBaseAttack> attacks = new List<EnemyBaseAttack>();
-
-    public GameObject weapon;
-    public EntityModel move;
-    public EntityView look;
-    public EnemyController controller;
-    
-    public void ExecuteAttack(int index)
+    public class AttackManager : MonoBehaviour
     {
-        if (index >= 0 && index < attacks.Count)
+        public List<BaseAttack> attacks = new List<BaseAttack>();
+        public GameObject weapon;
+        private EntityModel _move;
+        private EntityView _look;
+        private EnemyController _controller;
+
+        private void Awake()
         {
-            attacks[index].ExecuteAttack();
-            controller.SetStatus(StatusEnum.AttackMissed,true);
-            controller.SetStatus(StatusEnum.Attacking,true);
+            _move = GetComponent<EntityModel>();
+            _look = GetComponent<EntityView>();
+            _controller = GetComponent<EnemyController>();
         }
-    }
 
-    public float GetAttackDamage(int index)
-    {
-        return attacks[index].damage;
-    }
-
-    private void FinishAttack()
-    {
-        controller.SetStatus(StatusEnum.Attacking,false);
-    }
-
-    private void Start()
-    {
-        foreach (var attack in attacks)
+        private void Start()
         {
-            attack.SetUp(weapon,move,look,controller,move);
-            attack.AttackFinish += FinishAttack;
+            foreach (var attack in attacks)
+            {
+                attack.SetUp(weapon, _move, _look, _controller, _move);
+                attack.AttackFinish += FinishAttack;
+            }
         }
+        public void ExecuteAttack(int index)
+        {
+            if (index >= 0 && index < attacks.Count)
+            {
+                attacks[index].ExecuteAttack();
+                _controller.SetStatus(StatusEnum.AttackMissed, true);
+                _controller.SetStatus(StatusEnum.Attacking, true);
+            }
+            else
+            {
+                Debug.LogError("Enemy Attack Out Of Index");
+            }
+        }
+
+        public float GetAttackDamage(int index)
+        {
+            return attacks[index].damage;
+        }
+        private void FinishAttack()
+        {
+            _controller.SetStatus(StatusEnum.Attacking, false);
+        }
+        
     }
 }

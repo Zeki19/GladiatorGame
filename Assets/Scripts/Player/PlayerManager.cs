@@ -28,7 +28,7 @@ namespace Player
         private void DamageTaken(float a)
         {
             PlaySound("Hit","Player");
-            ServiceLocator.Instance.GetService<ArenaPainter>().PaintArena(transform, "Blood");
+            //ServiceLocator.Instance.GetService<ArenaPainter>().PaintArena(transform, "Blood");
         }
     }
 }

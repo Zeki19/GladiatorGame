@@ -1,6 +1,5 @@
+using Enemies;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Weapons.AttackSo;
 
 namespace Utilities.Factory.WeaponFactory
 {
@@ -21,7 +20,7 @@ namespace Utilities.Factory.WeaponFactory
       public float chargePerAttack;
       public float knockbackForce;
       public float slowPercent;
-      public AttackSo basic;
-      public AttackSo charge;
+      public BaseAttack basic;
+      public BaseAttack charge;
    }
 }

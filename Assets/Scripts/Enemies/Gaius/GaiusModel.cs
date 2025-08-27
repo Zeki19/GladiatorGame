@@ -1,16 +1,11 @@
 using UnityEngine;
 using Entities;
 
+namespace Enemies.Gaius
 public class GaiusModel : EnemyModel
 {
-    public void AttackTarget(Transform target, float damage)
+    public class GaiusModel : EnemyModel
     {
-        if (target == null) return;
-
-        var manager = target.GetComponent<EntityManager>();
-        if (manager != null)
-        {
-            manager.HealthComponent.TakeDamage(damage);
-        }
+    
     }
 }

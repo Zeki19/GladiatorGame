@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Enemies;
 using Entities.Interfaces;
@@ -8,12 +9,12 @@ using UnityEngine.Analytics;
 
 namespace Entities
 {
-    public abstract class EntityController : MonoBehaviour
+    public abstract class EntityController : MonoBehaviour, IStatus
     {
         [SerializeField] protected EntityManager manager;
-        
+
         protected abstract void InitializeFsm();
-        
+
         /// <summary>
         /// Initializes components in the states.
         /// </summary>
@@ -35,5 +36,30 @@ namespace Entities
                 t.Initialize(move, look, attack,sound,animate,Status,Conditions,StateData, Agent);
             }
         }
+
+        protected virtual void Awake()
+        {
+            //InitializeFsm();
+            foreach (StatusEnum status in (StatusEnum[]) Enum.GetValues(typeof(StatusEnum)))
+            {
+                Status.Add(status, false);
+            }
+        }
+
+        #region Status
+
+        protected Dictionary<StatusEnum, bool> Status = new Dictionary<StatusEnum, bool>();
+
+        public bool GetStatus(StatusEnum status)
+        {
+            return Status[status];
+        }
+
+        public void SetStatus(StatusEnum status, bool value)
+        {
+            Status[status] = value;
+        }
+
+        #endregion
     }
 }

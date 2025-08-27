@@ -1,8 +1,9 @@
 using System.Collections;
+using Enemies;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RunningAttack", menuName = "Weapons/RunningAttack")]
-public class RunningAttack : EnemyBaseAttack
+[CreateAssetMenu(fileName = "RunningAttack", menuName = "Attacks/RunningAttack")]
+public class RunningAttack : BaseAttack
 {
     public float distance;
     public float speed;
@@ -13,11 +14,11 @@ public class RunningAttack : EnemyBaseAttack
         CoroutineRunner.StartCoroutine(Attack());
     }
 
-    private IEnumerator Attack()
+    protected override IEnumerator Attack()
     {
         Weapon.SetActive(true);
-        var enemy = Move as MonoBehaviour;
-        Move.Dash(enemy.transform.up, speed,distance);
+        var user = Move as MonoBehaviour;
+        Move.Dash(user.transform.up, speed,distance);
         Status.SetStatus(StatusEnum.Dashing, true);
         while (Status.GetStatus(StatusEnum.Dashing)) 
         {

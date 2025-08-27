@@ -1,43 +1,30 @@
-using Enemies.Gaius;
+using Enemies.Attack;
 using Entities;
 using UnityEngine;
 
-public class WeaponDamage : MonoBehaviour
+namespace Enemies.Gaius
 {
-    [SerializeField] GaiusController GaiusController;
-    [SerializeField] GaiusModel GaiusModel;
-    private IStatus status;
-    public AttackManager Attack;
-    private void Awake()
+    public class WeaponDamage : MonoBehaviour
     {
-        status = GaiusController;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag != "Player") 
+        private EnemyController _enemyController;
+        private EnemyModel _enemyModel;
+        private IStatus _status;
+        private AttackManager _attack;
+        private void Awake()
         {
-            return;
+            _enemyController = GetComponentInParent<EnemyController>();
+            _status = _enemyController;
+            _enemyModel = GetComponentInParent<EnemyModel>();
+            _attack = GetComponentInParent<AttackManager>();
         }
-        status.SetStatus(StatusEnum.AttackMissed,false);
-        GaiusModel.AttackTarget(collision.transform, Attack.GetAttackDamage(GaiusController.currentAttack));
-        //switch (GaiusController.currentAttack)
-        //{
-        //    case AttackType.Lunge:
-        //        status.SetStatus(StatusEnum.AttackMissed,false);
-        //        GaiusModel.AttackTarget(collision.transform, GaiusController.stats.mediumDamage);
-        //        break;
-        //    case AttackType.Swipe:
-        //        status.SetStatus(StatusEnum.AttackMissed,false);
-        //        GaiusModel.AttackTarget(collision.transform, GaiusController.stats.shortDamage);
-        //        break;
-        //    case AttackType.Super:
-        //        status.SetStatus(StatusEnum.AttackMissed,false);
-        //        GaiusModel.AttackTarget(collision.transform, GaiusController.stats.longDamage);
-        //        break;
-        //    default:
-        //        Debug.Log("PIFIASTE CHAMACO");
-        //        break;
-        //}
-        
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!collision.CompareTag("Player")) 
+            {
+                return;
+            }
+            _status.SetStatus(StatusEnum.AttackMissed,false);
+            _enemyModel.AttackTarget(collision.transform, _attack.GetAttackDamage(_enemyController.currentAttack));
+        }
     }
 }

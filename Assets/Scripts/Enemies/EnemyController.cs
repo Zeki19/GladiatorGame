@@ -8,34 +8,25 @@ using UnityEngine.AI;
 
 namespace Enemies
 {
-    public abstract class EnemyController : EntityController, IStatus ,IStatesData,ICondition, INavigation
+    public abstract class EnemyController : EntityController,IStatesData,ICondition
     {
         [SerializeField] protected Rigidbody2D target;
         [SerializeField] protected int[] phasesThresholds;
-        [SerializeField] private Dictionary<StatusEnum, bool> Status=new Dictionary<StatusEnum, bool>();
-        [SerializeField] private NavMeshAgent NVagent;
         protected StateDataManager stateDataManager = new StateDataManager();
-        
+        public int currentAttack;
         protected int _currentPhase = 1;
 
         public int CurrentPhase
         {
             get { return _currentPhase; }
         }
-
-        public NavMeshAgent _NVagent => NVagent;
-
-        protected List<float> attackRanges = new List<float>();
         protected PhaseSystem _phaseSystem;
         protected FSM<EnemyStates> Fsm;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             InitializeFsm();
-            foreach (StatusEnum status in (StatusEnum[]) Enum.GetValues(typeof(StatusEnum)))
-            {
-                Status.Add(status, false);
-            }
         }
 
         protected virtual void Start()
@@ -57,16 +48,6 @@ namespace Enemies
             Debug.Log("Current phase is:" + _currentPhase);
         }
 
-        public bool GetStatus(StatusEnum status)
-        {
-            return Status[status];
-        }
-
-        public void SetStatus(StatusEnum status, bool value)
-        {
-            Status[status] = value;
-        }
-
         public EnemyStates GetState()
         {
             return Fsm.CurrentStateEnum();
@@ -84,28 +65,6 @@ namespace Enemies
         public T GetStateData<T>(EnemyStates state) where T : class, IStateData
         {
             return stateDataManager.GetStateData<T>(state);
-        }
-        
-        public void StartDashMonitoring(Vector2 dir, float distance, Vector2 startingPosition)
-        {
-            StartCoroutine(MonitorDashDistance(dir, distance, startingPosition));
-        }
-
-        public IEnumerator MonitorDashDistance(Vector2 dir, float distance,Vector2 startingPosition)
-        {
-            Vector2 targetPosition = startingPosition + dir * distance;
-            float targetDistance = Vector2.Distance(startingPosition, targetPosition);
-            while (true)
-            {
-                float currentDistance = Vector2.Distance(startingPosition, (Vector2)transform.position);
-                if (currentDistance >= targetDistance)
-                {
-                    break;
-                }
-                yield return null;
-            }
-            manager.Rb.linearVelocity = Vector2.zero;
-            SetStatus(StatusEnum.Dashing,false);
         }
     }
 }

@@ -19,8 +19,9 @@ namespace Player.PlayerStates
         {
             SetWeapon(_manager.weaponController.Weapon);
             CurrentWeapon.Attacking = true;
-            CurrentAttack.FinishAnimation += AttackFinished;
-            _attack.StartAttack(CurrentAttack, CurrentWeapon);
+            CurrentAttack.AttackFinish += AttackFinished;
+            CurrentAttack.ExecuteAttack();
+            //_attack.StartAttack(CurrentAttack, CurrentWeapon);
             _move.ModifySpeed(-CurrentWeapon.SlowPercent);
             
             _sound.PlaySound("C_Attack", "Player");
