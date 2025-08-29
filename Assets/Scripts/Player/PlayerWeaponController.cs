@@ -106,7 +106,7 @@ namespace Player
         {
             if (!IsInLayerMask(other.gameObject, collisionLayer) || _enemiesHit.Any(hits => hits == other.gameObject))
                 return;
-
+            
             var enemyManager = ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject);
             if (enemyManager==null)return;
             

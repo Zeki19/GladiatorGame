@@ -27,7 +27,12 @@ public class ArenaPainter : MonoBehaviour
 
     public void PaintArena(Transform pos, String effectName, int size = 0)
     {
-        var cell = grid.WorldToCell(pos.position);
+        PaintArena(pos.position, effectName, size);
+    }
+
+    public void PaintArena(Vector3 pos, String effectName, int size = 0)
+    {
+        var cell = grid.WorldToCell(pos);
 
         var tileType = GetType(effectName);
         if (tileType == null)
@@ -92,6 +97,31 @@ public class ArenaPainter : MonoBehaviour
     private void CleanArena()
     {
         bloodTilemap.ClearAllTiles();
+    }
+
+    public void ClearPaint(Vector3 pos)
+    {
+        var cell = grid.WorldToCell(pos);
+        bloodTilemap.SetTile(cell, null);
+    }
+    
+    public void PaintArenaNoRotation(Vector3 pos, String effectName, int size = 0)
+    {
+        var cell = grid.WorldToCell(pos);
+
+        var tileType = GetType(effectName);
+        if (tileType == null)
+        {
+            Debug.Log("No tileType with that Name");
+            return;
+        }
+
+        int index = (size == 0) ? UnityEngine.Random.Range(0, tileType.sprites.Length) : size;
+
+
+        var tile = _createdTiles[tileType.name + index];
+
+        bloodTilemap.SetTile(cell, figthingArenaTilemap.HasTile(cell) ? tile : null);
     }
 
 }
