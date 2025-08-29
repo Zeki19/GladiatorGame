@@ -8,12 +8,14 @@ using UnityEngine.Events;
 [SelectionBase]
 public class ResourceBarTracker : MonoBehaviour
 {
-    //Instant movement of the bar or with smear?
-    [Header("Core")]
+    [Header("Wire")]
     [SerializeField] private Image bar;
     [SerializeField] private Image trail;
+    [SerializeField] private TMP_Text textField;
+    
+    [Header("Settings")]
     [SerializeField] private int resourceMax = 100;
-    [SerializeField]private bool startsFull = true;
+    [SerializeField] private bool startsFull = true;
     
     [Header("Shape")]
     [SerializeField] private ShapeType shapeOfBar = ShapeType.RectangleHorizontal;
@@ -29,15 +31,14 @@ public class ResourceBarTracker : MonoBehaviour
         Arc
     }
     
-    [Header("Arc")]
-    [SerializeField, Range(0, 360)] private int endDegreeValue = 360;
+    [Header("If circular shape")]
+    [SerializeField, Range(0, 360)] private int endDegreeValue = 180;
     
     [Header("Animation")]
-    [SerializeField, Range(0f, 5f)] private float trailSpeed = 0.25f;
+    [SerializeField, Range(0f, 1f)] private float trailSpeed = 0.5f;
     private Coroutine _fillRoutine;
     
     [Header("Text")]
-    [SerializeField] private TMP_Text textField;
     [SerializeField] private DisplayType valueDisplay = DisplayType.Percentage;
     [SerializeField] private TMP_FontAsset font;
     [SerializeField] private Color textColor;
@@ -88,6 +89,8 @@ public class ResourceBarTracker : MonoBehaviour
         
         textField.font = font;
         textField.color = textColor;
+
+        trail.enabled = trailSpeed != 0;
         
         UpdateResourceBar();
     }
@@ -178,9 +181,11 @@ public class ResourceBarTracker : MonoBehaviour
         
         TriggerFillAnimation();
     }
-
-    public void SetUp()
+    public void SetUp(int max, bool startsAt100Percent)
     {
-        //Max, startsFull,
+        resourceMax = max;
+        startsFull = startsAt100Percent;
+        
+        UpdateResourceBar();
     }
 }
