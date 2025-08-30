@@ -12,6 +12,12 @@ namespace Attack
         [SerializeField] private int numberOfProjectiles;
         public override void ExecuteAttack()
         {
+            CoroutineRunner.StartCoroutine(Attack());
+        }
+        protected override IEnumerator Attack()
+        {
+            //notNeed
+            yield return 0;
             Shoot();
             FinishAttack();
         }
@@ -41,10 +47,6 @@ namespace Attack
             }
         }
 
-        protected override IEnumerator Attack()
-        {
-            //notNeed
-            yield break;
-        }
+        
     }
 }

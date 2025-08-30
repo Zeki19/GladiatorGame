@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Attack;
 using Enemies.Gaius.States;
 using Entities.StateMachine;
 using Unity.Behavior;
@@ -18,7 +19,7 @@ namespace Enemies.Valeria
         [SerializeField] private float cooldown;
         #endregion
 
-        public Attack.AttackManager attackManager;
+        public AttackManager attackManager;
         public BehaviorGraphAgent agent;
         #region Private Variables
 
@@ -89,10 +90,10 @@ namespace Enemies.Valeria
         {
             base.Update();
             if (manager.HealthComponent.currentHealth > 50)
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phace1);
+                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase1);
             else
             {
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phace2);
+                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
             }
         }
     }

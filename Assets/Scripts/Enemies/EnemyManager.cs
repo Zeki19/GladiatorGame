@@ -36,8 +36,10 @@ public class EnemyManager : EntityManager
     {
         return gameObject.transform.position;
     }
-    private void OnCollisionEnter2D(Collision2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("olle");
         var status = controller as IStatus;
         if (other.gameObject.CompareTag("Wall") && status != null && status.GetStatus(StatusEnum.Dashing))
         {

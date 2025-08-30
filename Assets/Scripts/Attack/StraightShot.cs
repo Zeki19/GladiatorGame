@@ -9,14 +9,16 @@ namespace Attack
     {
         public override void ExecuteAttack()
         {
-            Shoot();
-            FinishAttack();
+            CoroutineRunner.StartCoroutine(Attack());
         }
 
         protected override IEnumerator Attack()
         {
             //notNeed
-            yield break;
+            yield return 0;
+            Shoot();
+            yield return 0;
+            FinishAttack();
         }
 
         protected void Shoot()
