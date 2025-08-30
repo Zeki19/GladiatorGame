@@ -1,6 +1,7 @@
 using System.Collections;
 using Entities;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Enemies
 {

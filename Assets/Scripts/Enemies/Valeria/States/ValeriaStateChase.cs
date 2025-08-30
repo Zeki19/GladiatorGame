@@ -1,0 +1,100 @@
+﻿using Entities.StateMachine;
+using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+
+namespace Enemies.Valeria.States
+{
+    public class ValeriaStateChase<T> : StatesBase<T>
+    {
+        private ISteering _steering;
+        private Rigidbody2D _target;
+        private float _desiredDistance;
+        private float _stoppingThreshold;
+        private float _orbitSpeed;
+        private float _orbitAngle;
+        private bool _isAttackReady;
+
+        private float _cooldown;
+        private float _timer;
+
+
+        private int _direction;
+        private Dictionary<int, float> _directions = new Dictionary<int, float>();
+        public ValeriaStateChase(ISteering steering, Rigidbody2D target, float desiredDistance, float stoppingThreshold, float orbitSpeed, float orbitAngle, float cooldown)
+        {
+            _steering = steering;
+            _target = target;
+            _desiredDistance = desiredDistance;
+            _stoppingThreshold = stoppingThreshold;
+            _orbitSpeed = orbitSpeed;
+            _orbitAngle = orbitAngle;
+            _directions.Add(1, 50f);
+            _directions.Add(-1, 50f);
+            _cooldown = cooldown;
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+            _move.Move(Vector2.zero);
+            _animate.PlayStateAnimation(StateEnum.Chase);
+            _agent._NVagent.updateRotation = false;
+            _agent._NVagent.updateUpAxis = false;
+            _timer = 0;
+            _isAttackReady = false;
+            _direction = MyRandom.Roulette(_directions);
+        }
+        public override void Execute()
+        {
+            base.Execute();
+            MaintainDistance();
+            Vector2 dir = _steering.GetDir();
+            _look.LookDir(dir);
+        }
+        private void MaintainDistance()
+        {
+            Vector2 toPlayer = _target.position - _move.Position;
+            float dist = toPlayer.magnitude;
+
+            if (dist > _desiredDistance + _stoppingThreshold || dist < _desiredDistance - _stoppingThreshold || _isAttackReady)
+            {
+                MoveToRing(toPlayer);
+            }
+            else
+            {
+                OrbitAroundPlayer(toPlayer);
+            }
+        }
+
+        private void MoveToRing(Vector2 toPlayer)
+        {
+            Vector2 target = _target.position - toPlayer.normalized * _desiredDistance;
+            _agent._NVagent.SetDestination(target);
+        }
+        private void OrbitAroundPlayer(Vector2 toPlayer)
+        {   
+            Vector2 ringPoint = _target.position - toPlayer.normalized*_desiredDistance;
+            Vector2 perp = new Vector2(-toPlayer.y, toPlayer.x).normalized;
+            Vector2 orbitTarget = ringPoint + perp * _direction;
+            _agent._NVagent.SetDestination(orbitTarget);
+            if (_cooldown < _timer)
+            {
+                _isAttackReady = true;
+            }
+            else
+            {
+                _timer += Time.deltaTime; 
+            }
+        }
+
+        
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+
+    }
+}

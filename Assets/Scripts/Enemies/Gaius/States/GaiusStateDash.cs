@@ -1,4 +1,5 @@
 using Entities.StateMachine;
+using UnityEngine;
 
 public class GaiusStateDash<T> : StatesBase<T>
 {

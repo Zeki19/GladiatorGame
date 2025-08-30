@@ -28,7 +28,8 @@ namespace Enemies.Gaius.States
             _status.SetStatus(StatusEnum.Attacking,true);
             Vector2 dir = _steering.GetDir();
             _move.Move(Vector2.zero);
-            _look.LookDirInsta(dir);
+            _look.LookDirInsta(dir); 
+            _agent._NVagent.isStopped = true;
             attack.ExecuteAttack(controller.currentAttack);
         }
 
@@ -41,7 +42,7 @@ namespace Enemies.Gaius.States
             _weapon.transform.localPosition=new Vector3(0,0.5f,0);
             _weapon.transform.localRotation=quaternion.identity;
             _weapon.SetActive(false);
+            _agent._NVagent.isStopped = false;
         }
-
     }
 }

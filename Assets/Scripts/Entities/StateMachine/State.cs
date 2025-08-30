@@ -21,6 +21,7 @@ public class State<T> : IState<T>
     protected ICondition _condition;
     protected IStatesData _statesData;
     protected ITarget _target;
+    protected INavigation _agent;
     public virtual void Initialize(params object[] p)
     {
         _move = p[0] as IMove;
@@ -32,6 +33,7 @@ public class State<T> : IState<T>
         _condition = p[6] as ICondition;
         _statesData = p[7] as IStatesData;
         _target = p[8] as ITarget;
+        _agent = p[9] as INavigation;
     }
     public virtual void Enter()
     {
