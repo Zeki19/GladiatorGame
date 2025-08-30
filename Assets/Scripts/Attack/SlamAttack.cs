@@ -1,9 +1,10 @@
 using System.Collections;
+using Enemies;
 using Entities;
 using Entities.Interfaces;
 using UnityEngine;
 
-namespace Enemies
+namespace Attack
 {
     [CreateAssetMenu(fileName = "SlamAttack", menuName = "Attacks/Slam")]
     public class SlamAttack : BaseAttack
@@ -13,9 +14,9 @@ namespace Enemies
         private GameObject _area;
 
         public override void SetUp(GameObject weapon, IMove move, ILook look, IStatus status,
-            MonoBehaviour coroutineRunner)
+            MonoBehaviour coroutineRunner,ITarget target)
         {
-            base.SetUp(weapon, move, look, status, coroutineRunner);
+            base.SetUp(weapon, move, look, status, coroutineRunner,target);
             _area = Instantiate(areaPrefab, weapon.transform);
             _area.SetActive(false);
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enemies;
 using Entities;
 using Entities.Interfaces;
 using Entities.StateMachine;
@@ -19,6 +20,7 @@ public class State<T> : IState<T>
     protected IStatus _status;
     protected ICondition _condition;
     protected IStatesData _statesData;
+    protected ITarget _target;
     public virtual void Initialize(params object[] p)
     {
         _move = p[0] as IMove;
@@ -29,6 +31,7 @@ public class State<T> : IState<T>
         _status = p[5] as IStatus;
         _condition = p[6] as ICondition;
         _statesData = p[7] as IStatesData;
+        _target = p[8] as ITarget;
     }
     public virtual void Enter()
     {

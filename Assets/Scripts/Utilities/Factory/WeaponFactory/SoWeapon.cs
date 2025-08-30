@@ -1,4 +1,4 @@
-using Enemies;
+using Attack;
 using UnityEngine;
 
 namespace Utilities.Factory.WeaponFactory

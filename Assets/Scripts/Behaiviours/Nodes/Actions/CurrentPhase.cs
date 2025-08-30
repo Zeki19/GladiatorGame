@@ -4,7 +4,7 @@ using Unity.Behavior;
 [BlackboardEnum]
 public enum CurrentPhase
 {
-    Phace1,
-	Phace2,
-	Phace3
+    Phase1,
+	Phase2,
+	Phase3
 }

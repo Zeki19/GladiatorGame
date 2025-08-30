@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using Enemies;
 using Entities;
 using UnityEngine;
 
-namespace Enemies.Attack
+namespace Attack
 {
     public class AttackManager : MonoBehaviour
     {
@@ -10,20 +11,21 @@ namespace Enemies.Attack
         public GameObject weapon;
         private EntityModel _move;
         private EntityView _look;
-        private EnemyController _controller;
+        private EntityController _controller;
+        private EntityManager _Manager;
 
         private void Awake()
         {
             _move = GetComponent<EntityModel>();
             _look = GetComponent<EntityView>();
-            _controller = GetComponent<EnemyController>();
+            _controller = GetComponent<EntityController>();
         }
 
         private void Start()
         {
             foreach (var attack in attacks)
             {
-                attack.SetUp(weapon, _move, _look, _controller, _move);
+                attack.SetUp(weapon, _move, _look, _controller, _move,_controller);
                 attack.AttackFinish += FinishAttack;
             }
         }

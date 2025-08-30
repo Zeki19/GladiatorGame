@@ -1,3 +1,4 @@
+using Attack;
 using Enemies;
 using Player;
 using UnityEngine;
@@ -83,6 +84,8 @@ namespace Weapons
 
             ChargeAttack = config.charge;
             BaseAttack = config.basic;
+
+            BaseAttack.OnHit += ChargeWeapon;
 
             CurrentDurability = Durability;
 

@@ -1,3 +1,4 @@
+using Attack;
 using Enemies;
 using UnityEngine;
 using Weapons;
@@ -38,7 +39,7 @@ namespace Player.PlayerStates
         public override void Execute()
         {
             //_attack.ExecuteAttack(CurrentAttack, CurrentWeapon);
-            //_move.Move(Vector2.zero);
+            _move.Move(Vector2.zero);
         }
 
         public override void Exit()

@@ -64,6 +64,8 @@ namespace Player
             }
         }
 
+        #region EquipAndUnquip
+
         public void GrabWeapon()
         {
             if (Weapon != null) return;
@@ -78,31 +80,52 @@ namespace Player
             Weapon.WeaponGameObject.gameObject.transform.parent = transform;
             Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero,
                 quaternion.identity);
-            Weapon.BaseAttack.AttackFinish += ClearEnemiesList;
+            AttackFinishSubscription(true);
             Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
-            weapon.BaseAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,this);
+            weapon.BaseAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,this,_manager.controller);
+            weapon.ChargeAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,this,_manager.controller);
         }
 
         public void DropWeapon()
         {
             if (Weapon is not { Attacking: false }) return;
             _weaponManager.CatchDroppedWeapon(Weapon);
-            Weapon.BaseAttack.AttackFinish -= ClearEnemiesList;
-            Weapon.ChargeAttack.AttackFinish -= ClearEnemiesList;
-            Weapon = null;
+            UnEquipWeapon();
         }
 
         private void DestroyWeapon()
         {
             if (Weapon is not { Attacking: false }) return;
-
-            Weapon.BaseAttack.AttackFinish -= ClearEnemiesList;
-            Weapon.ChargeAttack.AttackFinish -= ClearEnemiesList;
-            _weaponManager.DestroyWeapon(Weapon);
+            var weaponForDestruction = Weapon;
+            UnEquipWeapon();
+            _weaponManager.DestroyWeapon(weaponForDestruction);
             _manager.PlaySound("BreakWeapon", "Player");
-            Weapon = null;
         }
 
+        private void UnEquipWeapon()
+        {
+            AttackFinishSubscription(false);
+            Weapon.BaseAttack.OnUnequip();
+            Weapon.ChargeAttack.OnUnequip();
+            Weapon = null;
+        }
+        
+        private void AttackFinishSubscription(bool subscribe)
+        {
+            if (subscribe)
+            {
+                Weapon.BaseAttack.AttackFinish += AttackFinish;
+                Weapon.ChargeAttack.AttackFinish += AttackFinish;
+            }
+            else
+            {
+                Weapon.BaseAttack.AttackFinish -= AttackFinish;
+                Weapon.ChargeAttack.AttackFinish -= AttackFinish;
+            }
+        }
+
+        #endregion
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!IsInLayerMask(other.gameObject, collisionLayer) || _enemiesHit.Any(hits => hits == other.gameObject))
@@ -118,24 +141,32 @@ namespace Player
             Weapon.AffectDurability();
             _enemiesHit.Add(other.gameObject);
         }
-
-        public void CheckDurability()
-        {
-            if (!Weapon.CheckDurability())
-                DestroyWeapon();
-        }
-
-        bool IsInLayerMask(GameObject obj, LayerMask layerMask)
+        
+        private bool IsInLayerMask(GameObject obj, LayerMask layerMask)
         {
             return (layerMask.value & (1 << obj.layer)) != 0;
+        }
+
+        private void AttackFinish()
+        {
+            ClearEnemiesList();
+            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero,
+                quaternion.identity);
         }
 
         private void ClearEnemiesList()
         {
             _enemiesHit.Clear();
         }
-
+        
+        public void CheckDurability()
+        {
+            if (!Weapon.CheckDurability())
+                DestroyWeapon();
+        }
+        
         public float CheckWeaponDurabilityPercent() => Weapon.DurabilityPercent();
+        
         public float CheckWeaponChargePercent() => Weapon.ChargePercent();
     }
 }

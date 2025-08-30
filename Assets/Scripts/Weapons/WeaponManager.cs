@@ -110,7 +110,6 @@ namespace Weapons
             _droppedWeapons.Add(weapon.WeaponGameObject,weapon);
             weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = true;
             weapon.WeaponGameObject.transform.parent = transform;
-            Debug.Log(_droppedWeapons.Count-1);
         }
 
         private void OnDrawGizmos()

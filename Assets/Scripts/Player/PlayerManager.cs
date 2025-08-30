@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using Core.Status;
 using Entities;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Weapons;
 
 namespace Player
 {

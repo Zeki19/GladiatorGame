@@ -9,9 +9,10 @@ using UnityEngine.Analytics;
 
 namespace Entities
 {
-    public abstract class EntityController : MonoBehaviour, IStatus
+    public abstract class EntityController : MonoBehaviour, IStatus ,ITarget
     {
         [SerializeField] protected EntityManager manager;
+        [SerializeField] protected EntityManager _target;
 
         protected abstract void InitializeFsm();
 
@@ -29,9 +30,10 @@ namespace Entities
             var Status = GetComponent<IStatus>();
             var Conditions = GetComponent<ICondition>();
             var StateData = GetComponent<IStatesData>();
+            var Target = GetComponent<ITarget>();
             foreach (var t in stateList)
             {
-                t.Initialize(move, look, attack, sound, animate, Status, Conditions, StateData);
+                t.Initialize(move, look, attack, sound, animate, Status, Conditions, StateData,Target);
             }
         }
 
@@ -59,5 +61,15 @@ namespace Entities
         }
 
         #endregion
+
+        public virtual EntityManager GetTarget()
+        {
+            return _target;
+        }
+
+        public virtual void SetTarget(EntityManager Target)
+        {
+            _target=Target;
+        }
     }
 }

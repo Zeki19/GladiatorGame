@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using Enemies.Attack;
+using Attack;
 using Enemies.Gaius.States;
 using Entities.StateMachine;
 using Unity.Behavior;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemies.Gaius
 {
@@ -112,10 +111,10 @@ namespace Enemies.Gaius
         {
             base.Update();
             if(manager.HealthComponent.currentHealth>50)
-                _agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phace1);
+                _agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase1);
             else
             {
-                _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phace2);
+                _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
             }
         }
     }

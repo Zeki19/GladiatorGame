@@ -2,24 +2,22 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Enemies
+namespace Attack
 {
     [CreateAssetMenu(fileName = "DashAttack", menuName = "Attacks/DashAttack")]
-    public class DashAttack : BaseAttack
+    public class DashAttack : MeleeAttack
     {
         public AnimationCurve curve;
         [FormerlySerializedAs("Delay")] public float delay;
 
         public float distance;
         public float speed;
-        
-        private Collider2D _collider;
 
         public override void ExecuteAttack()
         {
             Move.StopMovement();
             CoroutineRunner.StartCoroutine(Attack());
-            _collider=Weapon.GetComponent<Collider2D>();
+            collider=Weapon.GetComponent<Collider2D>();
         }
 
         protected override  IEnumerator Attack()
@@ -47,10 +45,10 @@ namespace Enemies
             if (curve.length > 0)
                 animationTime = curve.keys[curve.length - 1].time;
             Weapon.SetActive(true);
-            //_collider.enabled = false;
+            collider.enabled = false;
             Weapon.transform.localPosition = Weapon.transform.localPosition.normalized * curve.Evaluate(0.01f);
-            //yield return new WaitForSeconds(delay);
-            _collider.enabled = true;
+            yield return new WaitForSeconds(delay);
+            collider.enabled = true;
             while (animationClock < animationTime)
             {
                 animationClock += Time.deltaTime;
@@ -58,8 +56,11 @@ namespace Enemies
                     Weapon.transform.localPosition.normalized * curve.Evaluate(animationClock);
                 yield return 0;
             }
+            collider.enabled = false;
             FinishAttack();
         }
+
+        
 
         private void HandleStuck()
         {

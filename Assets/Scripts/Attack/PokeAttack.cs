@@ -1,10 +1,11 @@
 using System.Collections;
+using Attack;
 using Enemies;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "PokeAttack", menuName = "Attacks/PokeAttack")]
-public class PokeAttack : BaseAttack
+public class PokeAttack : MeleeAttack
 {
     public AnimationCurve curve;
     [FormerlySerializedAs("Delay")] public float delay;
@@ -25,6 +26,7 @@ public class PokeAttack : BaseAttack
         if (curve.length > 0)
             animationTime = curve.keys[curve.length - 1].time;
         Weapon.SetActive(true);
+        collider.enabled = true;
         _collider.enabled = false;
         Weapon.transform.localPosition = Weapon.transform.localPosition.normalized *curve.Evaluate(0.01f);
         yield return new WaitForSeconds(delay);;
@@ -35,6 +37,7 @@ public class PokeAttack : BaseAttack
             Weapon.transform.localPosition = Weapon.transform.localPosition.normalized *curve.Evaluate(animationClock);
             yield return 0;
         }
+        collider.enabled = false;
         FinishAttack();
     }
 }
