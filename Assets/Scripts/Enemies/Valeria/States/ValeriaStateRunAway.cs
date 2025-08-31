@@ -16,7 +16,7 @@ namespace Enemies.Valeria.States
         private float _waitTime;       // how long to wait at the spot
         private float _timer;               // countdown
         private bool _waiting;              // is currently waiting
-        private bool _finishedWaiting; // expose as property
+        private bool _finishedWaiting; 
 
         public ValeriaStateRunAway(Rigidbody2D player, LayerMask hiddingLayer, float waitTime)
         {
