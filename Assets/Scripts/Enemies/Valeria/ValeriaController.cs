@@ -17,15 +17,15 @@ namespace Enemies.Valeria
         [SerializeField] private float orbitAngle;
         [SerializeField] private float cooldown;
         #endregion
+        [SerializeField] private LayerMask hiddingLayer;
+        [SerializeField] private float hiddingTime;
 
         public Attack.AttackManager attackManager;
         public BehaviorGraphAgent agent;
         #region Private Variables
 
-        private StatesBase<EnemyStates> _idleState; // BLUE
-        private StatesBase<EnemyStates> _dashState; // BLUE
-        private StatesBase<EnemyStates> _chaseState; // WHITE
-        public StatesBase<EnemyStates> _AttackState; // YELLOW
+        private StatesBase<EnemyStates> _runAwayState;
+        private StatesBase<EnemyStates> _chaseState; 
 
         private ISteering _pursuitSteering;
 
@@ -54,17 +54,20 @@ namespace Enemies.Valeria
             Fsm = new FSM<EnemyStates>();
 
             var chaseState = new States.ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
+            var runAwayState = new States.ValeriaStateRunAway<EnemyStates>(target, hiddingLayer, hiddingTime);
 
             _chaseState = chaseState;
-
+            _runAwayState = runAwayState;
 
             var stateList = new List<State<EnemyStates>>
             {
                 chaseState,
+                runAwayState,
             };
 
             InitializeComponents(stateList);
             Fsm.SetInit(chaseState, EnemyStates.Chase);
+            Fsm.SetInit(runAwayState, EnemyStates.RunAway);
         }
 
         private void OnDrawGizmos()

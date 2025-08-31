@@ -131,5 +131,6 @@ public enum EnemyStates
     Stunned,
     Patrol,
     Surround,
-    Dash
+    Dash,
+    RunAway
 }
