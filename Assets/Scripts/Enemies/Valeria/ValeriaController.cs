@@ -17,15 +17,19 @@ namespace Enemies.Valeria
         [SerializeField] private float orbitAngle;
         [SerializeField] private float cooldown;
         #endregion
+
         [SerializeField] private LayerMask hiddingLayer;
         [SerializeField] private float hiddingTime;
+        [SerializeField] private float invisibilitySpeed;
+        [SerializeField] private GameObject stepPrefab;
 
         public Attack.AttackManager attackManager;
         public BehaviorGraphAgent agent;
         #region Private Variables
 
         private StatesBase<EnemyStates> _runAwayState;
-        private StatesBase<EnemyStates> _chaseState; 
+        private StatesBase<EnemyStates> _chaseState;
+        private StatesBase<EnemyStates> _invisibilityState;
 
         private ISteering _pursuitSteering;
 
@@ -55,19 +59,21 @@ namespace Enemies.Valeria
 
             var chaseState = new States.ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
             var runAwayState = new States.ValeriaStateRunAway<EnemyStates>(target, hiddingLayer, hiddingTime);
+            var invisibilityState = new States.ValeriaStateInvisibility<EnemyStates>(target, invisibilitySpeed, stepPrefab);
 
             _chaseState = chaseState;
             _runAwayState = runAwayState;
+            _invisibilityState = invisibilityState;
 
             var stateList = new List<State<EnemyStates>>
             {
                 chaseState,
                 runAwayState,
+                invisibilityState,
             };
 
             InitializeComponents(stateList);
-            Fsm.SetInit(chaseState, EnemyStates.Chase);
-            Fsm.SetInit(runAwayState, EnemyStates.RunAway);
+            Fsm.SetInit(invisibilityState, EnemyStates.Surround);
         }
 
         private void OnDrawGizmos()
