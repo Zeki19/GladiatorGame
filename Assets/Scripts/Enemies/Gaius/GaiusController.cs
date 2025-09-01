@@ -4,8 +4,6 @@ using Enemies.Gaius.States;
 using Entities.StateMachine;
 using Unity.Behavior;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace Enemies.Gaius
 {

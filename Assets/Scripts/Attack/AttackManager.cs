@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Enemies;
 using Entities;
 using UnityEngine;
 
@@ -13,6 +12,7 @@ namespace Attack
         private EntityView _look;
         private EntityController _controller;
         private EntityManager _Manager;
+       // public Dictionary<BaseAttack,float> 
 
         private void Awake()
         {
@@ -51,6 +51,5 @@ namespace Attack
         {
             _controller.SetStatus(StatusEnum.Attacking, false);
         }
-        
     }
 }

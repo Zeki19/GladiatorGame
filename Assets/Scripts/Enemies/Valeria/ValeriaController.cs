@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Attack;
-using Enemies.Gaius.States;
+using Enemies.Valeria.States;
 using Entities.StateMachine;
 using Unity.Behavior;
 using UnityEngine;
@@ -19,7 +19,8 @@ namespace Enemies.Valeria
         [SerializeField] private float cooldown;
         #endregion
 
-        public AttackManager attackManager;
+        [SerializeField] private GameObject weapon;
+        [SerializeField] private AttackManager attackManager;
         public BehaviorGraphAgent agent;
         #region Private Variables
 
@@ -54,15 +55,30 @@ namespace Enemies.Valeria
         {
             Fsm = new FSM<EnemyStates>();
 
-            var chaseState = new States.ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
+            var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
+            var dashState = new ValeriaStateDash<EnemyStates>();
+            var attackState = new ValeriaStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
 
+            _dashState = dashState;
             _chaseState = chaseState;
+            _AttackState = attackState;
 
 
             var stateList = new List<State<EnemyStates>>
             {
                 chaseState,
+                dashState,
+                attackState
             };
+            
+            chaseState.AddTransition(EnemyStates.Attack, attackState);
+            chaseState.AddTransition(EnemyStates.Dash, dashState);
+
+            attackState.AddTransition(EnemyStates.Chase, chaseState);
+            attackState.AddTransition(EnemyStates.Dash, dashState);
+
+            dashState.AddTransition(EnemyStates.Chase, chaseState);
+            dashState.AddTransition(EnemyStates.Attack, attackState);
 
             InitializeComponents(stateList);
             Fsm.SetInit(chaseState, EnemyStates.Chase);
