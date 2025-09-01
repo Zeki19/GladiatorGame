@@ -18,15 +18,24 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
     
     private Vector3 _startScale, _targetScale;
     private Vector3 _startPos,   _targetPos;
-    
 
-    public void StartSpawn(PillarContext context)
+    private IHealth _healthSystem;
+
+    public void StartSpawn(PillarContext context, IHealth healthSystem = null)
     {
         _context  = context;
         _painter  = ServiceLocator.Instance.GetService<ArenaPainter>();
-        
         _chosenDir = GetRandomCardinal();
-        
+
+        _healthSystem = healthSystem;
+        transform.position = context.Origin.position;
+
+        if (_healthSystem != null)
+        {
+             _healthSystem.OnDead += HandleDeath;
+        }
+           
+
         _occupiedPositions.Clear();
         Vector3 originPos = _context.Origin.position;
         for (int i = 0; i < pillarLength; i++)
@@ -92,6 +101,11 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
         
         float halfExtentFromCenter = ((pillarLength - 1) * 0.5f);
         _targetPos = originPos + _chosenDir * halfExtentFromCenter;
+    }
+
+    private void HandleDeath()
+    {
+        gameObject.SetActive(false);
     }
 
     private static Vector3 GetRandomCardinal()
