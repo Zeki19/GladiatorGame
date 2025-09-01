@@ -10,9 +10,10 @@ namespace Entities
         [SerializeField] protected Animator animator;
         [SerializeField] protected EntityManager manager;
         [SerializeField] protected SpriteRenderer sprite;
-        private SpriteEffects _blink;
         [SerializeField]private BlinkValues blinkValues; 
-    
+        private SpriteEffects _blink;
+
+        public SpriteRenderer Sprite { get => sprite; }
 
         public abstract void LookDir(Vector2 dir);
         public abstract void LookDirInsta(Vector2 dir);

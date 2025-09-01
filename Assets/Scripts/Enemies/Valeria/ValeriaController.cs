@@ -21,13 +21,17 @@ namespace Enemies.Valeria
 
         [SerializeField] private GameObject weapon;
         [SerializeField] private AttackManager attackManager;
+        [SerializeField] private LayerMask hiddingLayer;
+        [SerializeField] private float hiddingTime;
+        [SerializeField] private float invisibilitySpeed;
+        [SerializeField] private GameObject stepPrefab;
+        public Attack.AttackManager attackManager;
         public BehaviorGraphAgent agent;
         #region Private Variables
 
-        private StatesBase<EnemyStates> _idleState; // BLUE
-        private StatesBase<EnemyStates> _dashState; // BLUE
-        private StatesBase<EnemyStates> _chaseState; // WHITE
-        public StatesBase<EnemyStates> _AttackState; // YELLOW
+        private StatesBase<EnemyStates> _runAwayState;
+        private StatesBase<EnemyStates> _chaseState;
+        private StatesBase<EnemyStates> _invisibilityState;
 
         private ISteering _pursuitSteering;
 
@@ -55,20 +59,26 @@ namespace Enemies.Valeria
         {
             Fsm = new FSM<EnemyStates>();
 
-            var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
+
             var dashState = new ValeriaStateDash<EnemyStates>();
             var attackState = new ValeriaStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
+            var chaseState = new States.ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
+            var runAwayState = new States.ValeriaStateRunAway<EnemyStates>(target, hiddingLayer, hiddingTime);
+            var invisibilityState = new States.ValeriaStateInvisibility<EnemyStates>(target, invisibilitySpeed, stepPrefab);
 
             _dashState = dashState;
             _chaseState = chaseState;
             _AttackState = attackState;
-
+            _runAwayState = runAwayState;
+            _invisibilityState = invisibilityState;
 
             var stateList = new List<State<EnemyStates>>
             {
                 chaseState,
                 dashState,
                 attackState
+                runAwayState,
+                invisibilityState,
             };
             
             chaseState.AddTransition(EnemyStates.Attack, attackState);
@@ -81,7 +91,7 @@ namespace Enemies.Valeria
             dashState.AddTransition(EnemyStates.Attack, attackState);
 
             InitializeComponents(stateList);
-            Fsm.SetInit(chaseState, EnemyStates.Chase);
+            Fsm.SetInit(invisibilityState, EnemyStates.Surround);
         }
 
         private void OnDrawGizmos()
