@@ -18,9 +18,11 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
     
     private Vector3 _startScale, _targetScale;
     private Vector3 _startPos,   _targetPos;
-    
 
-    public void StartSpawn(PillarContext context)
+
+    public event Action OnDamaged;
+
+    public void SpawnPillar(PillarContext context)
     {
         _context  = context;
         _painter  = ServiceLocator.Instance.GetService<ArenaPainter>();
@@ -48,6 +50,12 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
         transform.position   = _startPos;
         
         StartCoroutine(FallRoutine());
+    }
+
+    public void DestroyPillar(PillarContext context)
+    {
+        OnDamaged = null;
+        Destroy(gameObject);
     }
 
     private IEnumerator FallRoutine()
@@ -92,6 +100,11 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
         
         float halfExtentFromCenter = ((pillarLength - 1) * 0.5f);
         _targetPos = originPos + _chosenDir * halfExtentFromCenter;
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        OnDamaged?.Invoke();
     }
 
     private static Vector3 GetRandomCardinal()

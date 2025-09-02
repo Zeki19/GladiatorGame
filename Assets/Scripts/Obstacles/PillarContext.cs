@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Behavior;
 using UnityEngine;
 
 public class PillarContext
@@ -9,5 +10,7 @@ public class PillarContext
 
 public interface IPillar
 {
-    void StartSpawn(PillarContext context);
+    event System.Action OnDamaged;
+    void SpawnPillar(PillarContext context);
+    void DestroyPillar(PillarContext context);
 }
