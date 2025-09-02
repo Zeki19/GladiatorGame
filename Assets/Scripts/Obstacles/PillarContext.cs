@@ -9,5 +9,5 @@ public class PillarContext
 
 public interface IPillar
 {
-    void StartSpawn(PillarContext context, IHealth healthSystem = null);
+    void StartSpawn(PillarContext context);
 }

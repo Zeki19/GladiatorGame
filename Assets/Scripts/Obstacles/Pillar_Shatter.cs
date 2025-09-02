@@ -1,4 +1,3 @@
-using Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,48 +7,22 @@ using Random = UnityEngine.Random;
 public class Pillar_Shatter : MonoBehaviour, IPillar
 {
     [SerializeField] private string paintTag = "Scraps";
-
-    [SerializeField] private int damage = 10;
-    [SerializeField] private LayerMask damageableLayers;
-
+    
     private ArenaPainter _painter;
 
-    [SerializeField] private int damageToPlayer = 10;
-
-    private IHealth _healthSystem;
-
-    public void StartSpawn(PillarContext context, IHealth healthSystem = null)
+    public void StartSpawn(PillarContext context)
     {
-        _healthSystem = healthSystem;
-        transform.position = context.Origin.position;
-
-        if (_healthSystem != null)
+        _painter = ServiceLocator.Instance.GetService<ArenaPainter>();
+        
+        foreach (var p in context.OccupiedSpaces)
         {
-            _healthSystem.OnDead += HandleDeath;
+            _painter.PaintArenaNoRotation(p, paintTag);
+            _painter.PaintArenaNoRotation(p + GetRandomCardinal(), paintTag);
         }
-
-        gameObject.SetActive(true);
+        
+        gameObject.SetActive(false);
     }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-
-        if (((1 << col.gameObject.layer) & damageableLayers) != 0)
-        {
-            var entity = col.GetComponent<EntityManager>();
-            if (entity != null)
-            {
-                entity.HealthComponent.TakeDamage(damage);
-            }
-        }
-    }
-
-    private void HandleDeath()
-    {
-
-        Destroy(gameObject);
-    }
-
+    
     private static Vector3 GetRandomCardinal()
     {
         int r = Random.Range(0, 4);
