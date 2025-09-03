@@ -1,7 +1,6 @@
 ﻿using Entities;
 using Entities.StateMachine;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Enemies.Gaius.States
 {
@@ -12,13 +11,13 @@ namespace Enemies.Gaius.States
         private float _stackingSpeed;
         private float _speedModeInterval = 1;
         private float _timer;
-        private Rigidbody2D _target;
+        private Rigidbody2D target;
         public GaiusStateChase(ISteering steering, GaiusController controller, Rigidbody2D target)
         {
             _steering = steering;
             _speedMod = controller.stats.Stack;
             _speedModeInterval = controller.stats.Interval;
-            _target = target;
+            this.target = target;
         }
 
         public override void Enter()
@@ -33,7 +32,7 @@ namespace Enemies.Gaius.States
         public override void Execute()
         {
             base.Execute();
-            _agent._NVagent.SetDestination(new Vector3 (_target.position.x, _target.position.y, 0));
+            _agent._NVagent.SetDestination(new Vector3 (target.position.x, target.position.y, 0));
             Vector2 dir = _steering.GetDir();
             /*
             _timer -= Time.deltaTime;

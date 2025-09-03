@@ -25,13 +25,14 @@ namespace Enemies.Valeria
         [SerializeField] private float hiddingTime;
         [SerializeField] private float invisibilitySpeed;
         [SerializeField] private GameObject stepPrefab;
-        public Attack.AttackManager attackManager;
         public BehaviorGraphAgent agent;
         #region Private Variables
 
         private StatesBase<EnemyStates> _runAwayState;
         private StatesBase<EnemyStates> _chaseState;
         private StatesBase<EnemyStates> _invisibilityState;
+        private StatesBase<EnemyStates> _dashState;
+        private StatesBase<EnemyStates> _AttackState;
 
         private ISteering _pursuitSteering;
 
@@ -62,9 +63,9 @@ namespace Enemies.Valeria
 
             var dashState = new ValeriaStateDash<EnemyStates>();
             var attackState = new ValeriaStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
-            var chaseState = new States.ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
-            var runAwayState = new States.ValeriaStateRunAway<EnemyStates>(target, hiddingLayer, hiddingTime);
-            var invisibilityState = new States.ValeriaStateInvisibility<EnemyStates>(target, invisibilitySpeed, stepPrefab);
+            var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
+            var runAwayState = new ValeriaStateRunAway<EnemyStates>(target, hiddingLayer, hiddingTime);
+            var invisibilityState = new ValeriaStateInvisibility<EnemyStates>(target, invisibilitySpeed, stepPrefab);
 
             _dashState = dashState;
             _chaseState = chaseState;
@@ -76,22 +77,38 @@ namespace Enemies.Valeria
             {
                 chaseState,
                 dashState,
-                attackState
+                attackState,
                 runAwayState,
                 invisibilityState,
             };
             
             chaseState.AddTransition(EnemyStates.Attack, attackState);
             chaseState.AddTransition(EnemyStates.Dash, dashState);
+            chaseState.AddTransition(EnemyStates.RunAway, runAwayState);
+            chaseState.AddTransition(EnemyStates.Invisibility, invisibilityState);
 
             attackState.AddTransition(EnemyStates.Chase, chaseState);
             attackState.AddTransition(EnemyStates.Dash, dashState);
+            attackState.AddTransition(EnemyStates.RunAway, runAwayState);
+            attackState.AddTransition(EnemyStates.Invisibility, invisibilityState);
 
             dashState.AddTransition(EnemyStates.Chase, chaseState);
             dashState.AddTransition(EnemyStates.Attack, attackState);
+            dashState.AddTransition(EnemyStates.RunAway, runAwayState);
+            dashState.AddTransition(EnemyStates.Invisibility, invisibilityState);
+            
+            runAwayState.AddTransition(EnemyStates.Chase, chaseState);
+            runAwayState.AddTransition(EnemyStates.Attack, attackState);
+            runAwayState.AddTransition(EnemyStates.RunAway, dashState);
+            runAwayState.AddTransition(EnemyStates.Invisibility, invisibilityState);
+            
+            invisibilityState.AddTransition(EnemyStates.Chase, chaseState);
+            invisibilityState.AddTransition(EnemyStates.Attack, attackState);
+            invisibilityState.AddTransition(EnemyStates.RunAway, runAwayState);
+            invisibilityState.AddTransition(EnemyStates.Invisibility, dashState);
 
             InitializeComponents(stateList);
-            Fsm.SetInit(invisibilityState, EnemyStates.Surround);
+            Fsm.SetInit(chaseState, EnemyStates.Chase);
         }
 
         private void OnDrawGizmos()

@@ -1,4 +1,5 @@
 using System;
+using Enemies;
 using Enemies.Gaius;
 using Unity.Behavior;
 using UnityEngine;
@@ -10,7 +11,7 @@ using Unity.Properties;
 public partial class NextAttackAction : Action
 {
     [SerializeReference] public BlackboardVariable<int> Number;
-    [SerializeReference] public BlackboardVariable<GaiusController> Controller;
+    [SerializeReference] public BlackboardVariable<EnemyController> Controller;
 
     protected override Status OnStart()
     {

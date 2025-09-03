@@ -1,4 +1,5 @@
 using Enemies;
+using Unity.Behavior;
 
 namespace Entities
 {
@@ -9,9 +10,16 @@ namespace Entities
     public void SetStatus(StatusEnum status, bool value);
     }
 }
+[BlackboardEnum]
 public enum StatusEnum
 {
     AttackMissed=0,
     Attacking=1,
     Dashing=2,
+    OnMeleeShortCD=3,
+    OnMeleeLongtCD=4,
+    OnMiddleCD=5,
+    OnLongCD=6,
+    isMeleeLock=7
+    
 }

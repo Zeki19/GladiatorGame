@@ -1,15 +1,13 @@
 ﻿using Entities.StateMachine;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace Enemies.Valeria.States
 {
     public class ValeriaStateChase<T> : StatesBase<T>
     {
         private ISteering _steering;
-        private Rigidbody2D _target;
+        private Rigidbody2D target;
         private float _desiredDistance;
         private float _stoppingThreshold;
         private float _orbitSpeed;
@@ -19,13 +17,20 @@ namespace Enemies.Valeria.States
         private float _cooldown;
         private float _timer;
 
+        private float _longAttackCd=5;
+        private float _longTimerCd;
+        
+        private float _middleAttackCd=1;
+        private float _middleTimerCd;
+        
+
 
         private int _direction;
         private Dictionary<int, float> _directions = new Dictionary<int, float>();
         public ValeriaStateChase(ISteering steering, Rigidbody2D target, float desiredDistance, float stoppingThreshold, float orbitSpeed, float orbitAngle, float cooldown)
         {
             _steering = steering;
-            _target = target;
+            this.target = target;
             _desiredDistance = desiredDistance;
             _stoppingThreshold = stoppingThreshold;
             _orbitSpeed = orbitSpeed;
@@ -55,27 +60,39 @@ namespace Enemies.Valeria.States
         }
         private void MaintainDistance()
         {
-            Vector2 toPlayer = _target.position - _move.Position;
+            Vector2 toPlayer = target.position - _move.Position;
             float dist = toPlayer.magnitude;
 
             if (dist > _desiredDistance + _stoppingThreshold || dist < _desiredDistance - _stoppingThreshold || _isAttackReady)
             {
                 MoveToRing(toPlayer);
+                _longTimerCd += Time.deltaTime;
+                if (_longTimerCd > _longAttackCd)
+                {
+                    _status.SetStatus(StatusEnum.OnLongCD,true);
+                    _longTimerCd = 0;
+                }
             }
             else
             {
                 OrbitAroundPlayer(toPlayer);
+                _middleTimerCd += Time.deltaTime;
+                if (_middleTimerCd > _middleAttackCd)
+                {
+                    _status.SetStatus(StatusEnum.OnMiddleCD,true);
+                    _middleTimerCd = 0;
+                }
             }
         }
 
         private void MoveToRing(Vector2 toPlayer)
         {
-            Vector2 target = _target.position - toPlayer.normalized * _desiredDistance;
+            Vector2 target = this.target.position - toPlayer.normalized * _desiredDistance;
             _agent._NVagent.SetDestination(target);
         }
         private void OrbitAroundPlayer(Vector2 toPlayer)
         {   
-            Vector2 ringPoint = _target.position - toPlayer.normalized*_desiredDistance;
+            Vector2 ringPoint = target.position - toPlayer.normalized*_desiredDistance;
             Vector2 perp = new Vector2(-toPlayer.y, toPlayer.x).normalized;
             Vector2 orbitTarget = ringPoint + perp * _direction;
             _agent._NVagent.SetDestination(orbitTarget);

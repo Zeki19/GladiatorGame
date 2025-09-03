@@ -130,5 +130,6 @@ public enum EnemyStates
     Patrol,
     Surround,
     Dash,
-    RunAway
+    RunAway,
+    Invisibility
 }
