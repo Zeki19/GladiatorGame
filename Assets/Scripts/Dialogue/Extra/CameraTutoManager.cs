@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using Unity.Cinemachine;
 
-public class TutorialManager : MonoBehaviour
+public class CameraTutoManager : MonoBehaviour
 {
     [Header("Camera settings")]
     [SerializeField] private CinemachineCamera camera;
@@ -23,7 +23,7 @@ public class TutorialManager : MonoBehaviour
         _originalZoom = camera.Lens.OrthographicSize;
         _player = camera.Follow.gameObject;
         cameraHelper.gameObject.transform.position = _player.transform.position;
-        //StartCoroutine(DelayStart());
+        StartCoroutine(DelayStart());
     }
     
     IEnumerator DelayStart()
