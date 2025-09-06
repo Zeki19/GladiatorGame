@@ -42,8 +42,6 @@ namespace Enemies.Dummy
                 idleState
             };
 
-            // El dummy solo permanece en idle, sin transiciones
-
             InitializeComponents(stateList);
             Fsm.SetInit(idleState, EnemyStates.Idle);
         }
@@ -53,7 +51,7 @@ namespace Enemies.Dummy
             if (stats == null) return;
 
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, 1f); // Dummy visual indicator
+            Gizmos.DrawWireSphere(transform.position, 1f);
         }
 
         private void Die()
@@ -64,7 +62,6 @@ namespace Enemies.Dummy
         protected override void Update()
         {
             base.Update();
-            // El dummy no cambia de fase, pero mantenemos la estructura
             if (agent != null && manager.HealthComponent.currentHealth > 50)
                 agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phace1);
             else if (agent != null)
