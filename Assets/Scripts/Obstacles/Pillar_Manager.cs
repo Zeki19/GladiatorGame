@@ -33,7 +33,7 @@ public class PillarManager : MonoBehaviour
     private void NextState()
     {
         DestroySpawnedPillar();
-        _currentState = (PillarState)(((int)_currentState + 1) % 4);
+        _currentState = (PillarState)(((int)_currentState + 1) % 3);
         SpawnCurrentPillar();
     }
 
