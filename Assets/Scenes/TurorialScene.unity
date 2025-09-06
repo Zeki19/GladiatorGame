@@ -543,7 +543,7 @@ Transform:
   m_GameObject: {fileID: 452084603}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.99, y: -36.02, z: -10}
+  m_LocalPosition: {x: -40, y: -39.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -553,6 +553,11 @@ Transform:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7324726681048451470, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
   m_PrefabInstance: {fileID: 1657256888}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &534253789 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+  m_PrefabInstance: {fileID: 1559000750}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &678704287
 PrefabInstance:
@@ -5141,7 +5146,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 0}
+    TrackingTarget: {fileID: 534253789}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -5173,7 +5178,7 @@ Transform:
   m_GameObject: {fileID: 1830310246}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39.99, y: -36.02, z: -10}
+  m_LocalPosition: {x: -40, y: -39.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5342,8 +5347,8 @@ SceneRoots:
   - {fileID: 1559000750}
   - {fileID: 1361775615}
   - {fileID: 452084608}
-  - {fileID: 1950265192}
   - {fileID: 1830310252}
+  - {fileID: 1950265192}
   - {fileID: 1273275077}
   - {fileID: 1657256888}
   - {fileID: 678704287}

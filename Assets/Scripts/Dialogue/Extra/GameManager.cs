@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        dialogue.StartConversation(EnumDialogues.GaiusEntrance);
+        //dialogue.StartConversation(EnumDialogues.Mission0);
         dialogue.OnConversationEnd += ChangeScene;
     }
 
