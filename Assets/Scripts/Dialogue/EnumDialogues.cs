@@ -2,6 +2,7 @@ using UnityEngine;
 
 public enum EnumDialogues
 {
+    None = -1,
     Mission0 = 0,
     Mission1 = 1,
     Mission2 = 2,

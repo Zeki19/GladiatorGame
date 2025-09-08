@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,14 @@ public class TutorialManager : MonoBehaviour
             dialogueManager = ServiceLocator.Instance.GetService<DialogueManager>();
 
         StartTutorial();
+    }
+
+    private void Update()
+    {
+        if (_currentMission != null && _isProcessingMission)
+        {
+            _currentMission.UpdateMission();
+        }
     }
 
     private void StartTutorial()
@@ -64,10 +73,8 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator ProcessMission(TutorialMission mission)
     {
-        // Initialize mission
         mission.Initialize(this);
 
-        // Start dialogue if configured
         if (mission.dialogueToPlay != EnumDialogues.None)
         {
             bool dialogueComplete = false;
@@ -93,7 +100,7 @@ public class TutorialManager : MonoBehaviour
             ShowUIHint(mission.uiHintPrefab);
         }
 
-        // Wait for mission completion
+        // Wait for mission completion (ahora UpdateMission() se llama en Update())
         yield return new WaitUntil(() => mission.IsCompleted());
 
         // Hide UI hints
