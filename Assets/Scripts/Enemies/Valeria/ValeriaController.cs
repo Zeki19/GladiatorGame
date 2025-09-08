@@ -4,7 +4,6 @@ using Enemies.Valeria.States;
 using Entities.StateMachine;
 using Unity.Behavior;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemies.Valeria
 {
@@ -17,6 +16,8 @@ namespace Enemies.Valeria
         [SerializeField] private float orbitSpeed;
         [SerializeField] private float orbitAngle;
         [SerializeField] private float cooldown;
+        [SerializeField] private float desiredMeleeDistance;
+        
         #endregion
 
         [SerializeField] private GameObject weapon;
@@ -33,6 +34,7 @@ namespace Enemies.Valeria
         private StatesBase<EnemyStates> _invisibilityState;
         private StatesBase<EnemyStates> _dashState;
         private StatesBase<EnemyStates> _AttackState;
+        private StatesBase<EnemyStates> _meleeState;
 
         private ISteering _pursuitSteering;
 
@@ -64,11 +66,13 @@ namespace Enemies.Valeria
             var dashState = new ValeriaStateDash<EnemyStates>();
             var attackState = new ValeriaStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
             var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
+            var meleeState = new ValeriaStateMeleeLock<EnemyStates>(_pursuitSteering, target, desiredMeleeDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
             var runAwayState = new ValeriaStateRunAway<EnemyStates>(target, hiddingLayer, hiddingTime);
             var invisibilityState = new ValeriaStateInvisibility<EnemyStates>(target, invisibilitySpeed, stepPrefab);
 
             _dashState = dashState;
             _chaseState = chaseState;
+            _meleeState = meleeState;
             _AttackState = attackState;
             _runAwayState = runAwayState;
             _invisibilityState = invisibilityState;
@@ -80,32 +84,47 @@ namespace Enemies.Valeria
                 attackState,
                 runAwayState,
                 invisibilityState,
+                meleeState
             };
             
             chaseState.AddTransition(EnemyStates.Attack, attackState);
             chaseState.AddTransition(EnemyStates.Dash, dashState);
             chaseState.AddTransition(EnemyStates.RunAway, runAwayState);
             chaseState.AddTransition(EnemyStates.Invisibility, invisibilityState);
+            chaseState.AddTransition(EnemyStates.Surround, meleeState);
+            
+            meleeState.AddTransition(EnemyStates.Surround, chaseState);
+            meleeState.AddTransition(EnemyStates.Attack, attackState);
+            meleeState.AddTransition(EnemyStates.Dash, dashState);
+            meleeState.AddTransition(EnemyStates.RunAway, runAwayState);
+            meleeState.AddTransition(EnemyStates.Invisibility, invisibilityState);
 
             attackState.AddTransition(EnemyStates.Chase, chaseState);
             attackState.AddTransition(EnemyStates.Dash, dashState);
             attackState.AddTransition(EnemyStates.RunAway, runAwayState);
             attackState.AddTransition(EnemyStates.Invisibility, invisibilityState);
-
+            attackState.AddTransition(EnemyStates.Surround, meleeState);
+            
             dashState.AddTransition(EnemyStates.Chase, chaseState);
             dashState.AddTransition(EnemyStates.Attack, attackState);
             dashState.AddTransition(EnemyStates.RunAway, runAwayState);
             dashState.AddTransition(EnemyStates.Invisibility, invisibilityState);
+            dashState.AddTransition(EnemyStates.Surround, meleeState);
+
             
             runAwayState.AddTransition(EnemyStates.Chase, chaseState);
             runAwayState.AddTransition(EnemyStates.Attack, attackState);
-            runAwayState.AddTransition(EnemyStates.RunAway, dashState);
+            runAwayState.AddTransition(EnemyStates.Dash, dashState);
             runAwayState.AddTransition(EnemyStates.Invisibility, invisibilityState);
+            runAwayState.AddTransition(EnemyStates.Surround, meleeState);
+
             
             invisibilityState.AddTransition(EnemyStates.Chase, chaseState);
             invisibilityState.AddTransition(EnemyStates.Attack, attackState);
             invisibilityState.AddTransition(EnemyStates.RunAway, runAwayState);
-            invisibilityState.AddTransition(EnemyStates.Invisibility, dashState);
+            invisibilityState.AddTransition(EnemyStates.Dash, dashState);
+            invisibilityState.AddTransition(EnemyStates.Surround, meleeState);
+
 
             InitializeComponents(stateList);
             Fsm.SetInit(chaseState, EnemyStates.Chase);

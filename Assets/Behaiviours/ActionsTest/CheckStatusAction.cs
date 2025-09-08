@@ -9,10 +9,11 @@ using Action = Unity.Behavior.Action;
 namespace Behaiviours.ActionsTest
 {
     [Serializable, GeneratePropertyBag]
-    [NodeDescription(name: "CheckStatus", story: "is [status] True", category: "Action", id: "f5e530d9ebfd777179adf1fcd7a9f0d2")]
+    [NodeDescription(name: "CheckStatus", story: "is [status] [bool]", category: "Action", id: "f5e530d9ebfd777179adf1fcd7a9f0d2")]
     public partial class CheckStatusAction : Action
     {
         [SerializeReference] public BlackboardVariable<StatusEnum> status;
+        [SerializeReference] public BlackboardVariable<bool> Bool;
         [SerializeReference] public BlackboardVariable<EnemyController> Controller;
         
         private bool SetUp = false;
@@ -29,10 +30,7 @@ namespace Behaiviours.ActionsTest
 
         protected override Status OnUpdate()
         {
-        if(Controller.Value.GetStatus(status))
-                return Status.Success;
-            else
-                return Status.Failure;
+            return Controller.Value.GetStatus(status)==Bool ? Status.Success : Status.Failure;
         }
 
         protected override void OnEnd()

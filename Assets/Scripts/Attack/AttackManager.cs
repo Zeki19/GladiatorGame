@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Enemies;
 using Entities;
 using UnityEngine;
 
@@ -50,6 +51,11 @@ namespace Attack
         private void FinishAttack()
         {
             _controller.SetStatus(StatusEnum.Attacking, false);
+            if (_controller.GetStatus(StatusEnum.AttackMissed))
+            {
+                var enemyController = _controller as EnemyController;
+                if (enemyController != null) enemyController.MissAttack.AddMissAttack();
+            }
         }
     }
 }

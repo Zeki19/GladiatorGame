@@ -20,6 +20,8 @@ public enum StatusEnum
     OnMeleeLongtCD=4,
     OnMiddleCD=5,
     OnLongCD=6,
-    isMeleeLock=7
+    isMeleeLock=7,
+    IsFleeing=8,
+    isInBack=9
     
 }

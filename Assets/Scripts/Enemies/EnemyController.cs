@@ -16,6 +16,7 @@ namespace Enemies
         protected StateDataManager stateDataManager = new StateDataManager();
         public int currentAttack;
         protected int _currentPhase = 1;
+        public MissAttackHandler MissAttack=new MissAttackHandler();
 
         public int CurrentPhase
         {

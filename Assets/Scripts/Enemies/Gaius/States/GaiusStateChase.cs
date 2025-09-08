@@ -12,6 +12,8 @@ namespace Enemies.Gaius.States
         private float _speedModeInterval = 1;
         private float _timer;
         private Rigidbody2D target;
+        private float _longAttackCd=3;
+        private float _longTimerCd;
         public GaiusStateChase(ISteering steering, GaiusController controller, Rigidbody2D target)
         {
             _steering = steering;
@@ -34,6 +36,12 @@ namespace Enemies.Gaius.States
             base.Execute();
             _agent._NVagent.SetDestination(new Vector3 (target.position.x, target.position.y, 0));
             Vector2 dir = _steering.GetDir();
+            _longTimerCd += Time.deltaTime;
+            if (_longTimerCd > _longAttackCd)
+            {
+                _status.SetStatus(StatusEnum.OnLongCD,true);
+                _longTimerCd = 0;
+            }
             /*
             _timer -= Time.deltaTime;
             if(_timer<0)

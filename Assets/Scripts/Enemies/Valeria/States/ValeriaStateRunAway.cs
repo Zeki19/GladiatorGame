@@ -69,6 +69,7 @@ namespace Enemies.Valeria.States
                         // Start waiting once we’ve arrived
                         _waiting = true;
                         _timer = _waitTime;
+                        _status.SetStatus(StatusEnum.IsFleeing,false);
                     }
                 }
             }

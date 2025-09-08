@@ -29,7 +29,8 @@ namespace Player
         {
             _weaponManager = ServiceLocator.Instance.GetService<WeaponManager>();
             _manager = ServiceLocator.Instance.GetService<PlayerManager>();
-            EquipWeapon(_weaponManager.RequestWeapon(startingWeapon));
+            if(startingWeapon!=null)
+                EquipWeapon(_weaponManager.RequestWeapon(startingWeapon));
             _playerRotation = _manager.model.transform;
         }
 

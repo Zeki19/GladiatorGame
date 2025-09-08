@@ -1,10 +1,10 @@
-﻿using Entities.StateMachine;
 using System.Collections.Generic;
+using Entities.StateMachine;
 using UnityEngine;
 
 namespace Enemies.Valeria.States
 {
-    public class ValeriaStateChase<T> : StatesBase<T>
+    public class ValeriaStateMeleeLock<T> : StatesBase<T>
     {
         private ISteering _steering;
         private Rigidbody2D target;
@@ -17,17 +17,17 @@ namespace Enemies.Valeria.States
         private float _cooldown;
         private float _timer;
 
-        private float _longAttackCd=5;
-        private float _longTimerCd;
+        private float _shortMeleeAttackCd=2.4f;
+        private float _shortMeleeTimerCd;
         
-        private float _middleAttackCd=1;
-        private float _middleTimerCd;
+        private float _longMeleeAttackCd=5;
+        private float _longMeleeTimerCd;
         
 
 
         private int _direction;
         private Dictionary<int, float> _directions = new Dictionary<int, float>();
-        public ValeriaStateChase(ISteering steering, Rigidbody2D target, float desiredDistance, float stoppingThreshold, float orbitSpeed, float orbitAngle, float cooldown)
+        public ValeriaStateMeleeLock(ISteering steering, Rigidbody2D target, float desiredDistance, float stoppingThreshold, float orbitSpeed, float orbitAngle, float cooldown)
         {
             _steering = steering;
             this.target = target;
@@ -62,26 +62,26 @@ namespace Enemies.Valeria.States
         {
             Vector2 toPlayer = target.position - _move.Position;
             float dist = toPlayer.magnitude;
-
+            
+            _shortMeleeTimerCd += Time.deltaTime;
+            if (_shortMeleeTimerCd > _shortMeleeAttackCd)
+            {
+                _status.SetStatus(StatusEnum.OnMeleeShortCD,true);
+                _shortMeleeTimerCd = 0;
+            }
+            _longMeleeTimerCd += Time.deltaTime;
+            if (_longMeleeTimerCd > _longMeleeAttackCd)
+            {
+                _status.SetStatus(StatusEnum.OnMeleeLongtCD,true);
+                _longMeleeTimerCd = 0;
+            }
             if (dist > _desiredDistance + _stoppingThreshold || dist < _desiredDistance - _stoppingThreshold || _isAttackReady)
             {
                 MoveToRing(toPlayer);
-                _longTimerCd += Time.deltaTime;
-                if (_longTimerCd > _longAttackCd)
-                {
-                    _status.SetStatus(StatusEnum.OnLongCD,true);
-                    _longTimerCd = 0;
-                }
             }
             else
             {
                 OrbitAroundPlayer(toPlayer);
-                _middleTimerCd += Time.deltaTime;
-                if (_middleTimerCd > _middleAttackCd)
-                {
-                    _status.SetStatus(StatusEnum.OnMiddleCD,true);
-                    _middleTimerCd = 0;
-                }
             }
         }
 
@@ -110,6 +110,10 @@ namespace Enemies.Valeria.States
         public override void Exit()
         {
             base.Exit();
+            _shortMeleeTimerCd = 0;
+            _longMeleeTimerCd = 0;
         }
+
+
     }
 }
