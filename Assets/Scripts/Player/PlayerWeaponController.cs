@@ -5,7 +5,9 @@ using Entities.Interfaces;
 using Unity.Mathematics;
 using UnityEngine;
 using Utilities.Factory.WeaponFactory;
+
 using Weapons;
+using System;
 
 namespace Player
 {
@@ -19,6 +21,8 @@ namespace Player
         public Weapon Weapon { get; private set; }
         public float offset;
         private readonly List<GameObject> _enemiesHit = new List<GameObject>();
+        public static event Action OnPlayerPicked;
+        public static event Action OnPlayerAttacked;
 
         private void Awake()
         {
@@ -54,6 +58,7 @@ namespace Player
             var controller = _manager.controller as PlayerController;
             controller?.ChangeToAttack();
             Weapon.CurrentAttack = Weapon.BaseAttack;
+            OnPlayerAttacked?.Invoke();
         }
 
         public void ChargeAttack()
@@ -72,6 +77,7 @@ namespace Player
             if (Weapon != null) return;
             var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
             EquipWeapon(weapon);
+            OnPlayerPicked?.Invoke();
         }
 
         private void EquipWeapon(Weapon weapon)

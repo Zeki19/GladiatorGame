@@ -298,6 +298,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missions:
   - {fileID: 11400000, guid: 5e42e85e78e39314ba696149a6d5dbc8, type: 2}
+  - {fileID: 11400000, guid: aaeffd551125124428d1b12238ed939e, type: 2}
+  - {fileID: 11400000, guid: 341f7fca4f13d254fb19063154771247, type: 2}
+  - {fileID: 11400000, guid: 30608e2135170824c814fb911c362a1a, type: 2}
   currentMissionIndex: 0
   dialogueManager: {fileID: 324660594}
   cameraHelper: {fileID: 731268409}
@@ -351,11 +354,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.722633
+      value: -40.81
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -27.241787
+      value: -38.04
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.z

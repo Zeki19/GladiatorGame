@@ -19,7 +19,9 @@ namespace Player
         private PlayerStats _stats;
         Action _onAttack = delegate { };
 
+        //player events
         public static event Action OnPlayerMoved;
+        public static event Action OnPlayerDashed;
         public override Action OnAttack { get => _onAttack; set => _onAttack = value; }
 
         private void Awake()
@@ -58,11 +60,13 @@ namespace Player
         public override void Dash(float dashForce)
         {
             manager.Rb.linearVelocity = _lastDirection * (dashForce *_stats.SpeedModifier);
+            OnPlayerDashed?.Invoke();
         }
 
         public override void Dash(Vector2 dir, float dashForce)
         {
             throw new NotImplementedException();
+   
         }
 
         public override void Dash(Vector2 dir, float dashForce, float backStepDistance)
