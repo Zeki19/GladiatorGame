@@ -21,6 +21,29 @@ namespace Enemies
             manager.Rb.linearVelocity = dir * (_moveSpeed * SpeedModifier);
         }
 
+        public void Reposition(Transform target, float dashForce, LayerMask hitMask)
+        {
+            RaycastHit2D hit = RaycastBetweenCharacters(transform, target, hitMask);
+
+            if (hit.collider != null)
+            {
+                Vector2 direction = (target.position - transform.position).normalized;
+
+                Vector2 perpDir = new Vector2(-direction.y, direction.x);
+
+                Dash(perpDir, dashForce);
+            }
+        }
+
+        private RaycastHit2D RaycastBetweenCharacters(Transform start, Transform target, LayerMask hitMask = default)
+        {
+            Vector2 direction = (target.position - start.position);
+            float distance = direction.magnitude;
+
+            return Physics2D.Raycast(start.position, direction.normalized, distance, hitMask);
+        }
+
+
         public void AttackTarget(Transform target, float damage)
         {
             if (target == null) return;
