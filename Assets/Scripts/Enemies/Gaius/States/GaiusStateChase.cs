@@ -57,7 +57,7 @@ namespace Enemies.Gaius.States
         public override void Exit()
         {
             base.Exit();
-            _agent._NVagent.speed -= _speedMod;
+            _agent._NVagent.speed -= _stackingSpeed;
             _stackingSpeed = 0;
         }
     }
