@@ -42,23 +42,22 @@ namespace Enemies.Gaius.States
                 _status.SetStatus(StatusEnum.OnLongCD,true);
                 _longTimerCd = 0;
             }
-            /*
             _timer -= Time.deltaTime;
+
             if(_timer<0)
             {
-                _move.ModifySpeed(_speedMod);
+                _agent._NVagent.speed += _speedMod;
                 _stackingSpeed += _speedMod;
                 _timer = _speedModeInterval;
             }
 
             _move.Move(dir);
-            */
             _look.LookDir(dir);
         }
         public override void Exit()
         {
             base.Exit();
-            _move.ModifySpeed(-_stackingSpeed);
+            _agent._NVagent.speed -= _speedMod;
             _stackingSpeed = 0;
         }
     }
