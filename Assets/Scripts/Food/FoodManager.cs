@@ -18,11 +18,11 @@ public class FoodManager : MonoBehaviour
     [Space]
     
     [Header("Spawn config")] 
-    [SerializeField] private List<Vector2Int> spawnPoints;
+    [SerializeField] private List<Vector2> spawnPoints;
     [Tooltip("Maximum wait time for food spawn")]
     [SerializeField] private float waitTime;
     
-    private readonly HashSet<Vector2Int> _usedPoints = new HashSet<Vector2Int>();
+    private readonly HashSet<Vector2> _usedPoints = new HashSet<Vector2>();
     private Food[] _instancedFoods;
     private int _nFoodsOnScene;
     private bool _spawning;
@@ -76,16 +76,16 @@ public class FoodManager : MonoBehaviour
             return;
         }
     }
-    private void FoodDestroyed(Vector2Int spawnPoint)
+    private void FoodDestroyed(Vector2 spawnPoint)
     {
         _usedPoints.Remove(spawnPoint);
         _nFoodsOnScene--;
     }
 
     #region Utility
-        private Vector2Int GetRandomPoint()
+        private Vector2 GetRandomPoint()
         {
-            var freePoints = new List<Vector2Int>(spawnPoints);
+            var freePoints = new List<Vector2>(spawnPoints);
 
             foreach (var p in  _usedPoints)
             {

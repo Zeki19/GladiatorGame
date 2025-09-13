@@ -8,21 +8,21 @@ public class Food : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     private float _healingAmount;
-    private Vector2Int _spawnPosition;
+    private Vector2 _spawnPosition;
     
     public bool IsActive => _isActive;
     private bool _isActive;
 
-    public event Action<Vector2Int> OnPickUp;
+    public event Action<Vector2> OnPickUp;
 
     private void Start()
     {
         SetState(false);
     }
 
-    public void Initialize(SOFood food, Vector2Int spawnPoint)
+    public void Initialize(SOFood food, Vector2 spawnPoint)
     {
-        transform.position = (Vector2)spawnPoint;
+        transform.position = spawnPoint;
         _spawnPosition = spawnPoint;
         _healingAmount = food.healingAmount;
         spriteRenderer.sprite = food.foodSprite;

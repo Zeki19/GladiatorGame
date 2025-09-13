@@ -11,7 +11,8 @@ namespace Entities
         [SerializeField] protected EntityManager manager;
         [SerializeField] protected SpriteRenderer sprite;
         private SpriteEffects _blink;
-        [SerializeField]private BlinkValues blinkValues; 
+        [SerializeField]private BlinkValues blinkDamage; 
+        [SerializeField]private BlinkValues blinkHeal; 
     
 
         public abstract void LookDir(Vector2 dir);
@@ -41,7 +42,8 @@ namespace Entities
         protected virtual void Start()
         {
             _blink = new SpriteEffects(this);
-            manager.HealthComponent.OnDamage +=(float a)=> _blink.Blink(sprite,blinkValues.amount,blinkValues.frequency,blinkValues.blinkActive);
+            manager.HealthComponent.OnDamage +=(float a)=> _blink.Blink(sprite,blinkDamage.amount,blinkDamage.frequency,blinkDamage.blinkActive);
+            manager.HealthComponent.OnHeal +=(float a)=> _blink.Blink(sprite,blinkHeal.amount,blinkHeal.frequency,blinkHeal.blinkActive);
         }
     }
 }
