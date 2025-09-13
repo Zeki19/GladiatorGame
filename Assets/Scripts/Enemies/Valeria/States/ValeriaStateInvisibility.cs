@@ -13,16 +13,13 @@ namespace Enemies.Valeria.States
 
         private float _smokeInterval = 2f;
         private float _smokeTimer;
-        private GameObject _smokePrefab;         
-        private Transform _smokeParent;          
+        private GameObject _smokePrefab;
+        private Transform _smokeParent;
 
-        private bool _isFlanking;
-        private float _flankRadius = 2.5f;
-        private float _arcDuration = 1.5f;
+        private bool _isOrbiting;
+        private float _orbitRadius = 1.5f;
+        private float _orbitDuration = 2f;
         private float _elapsedTime;
-        private float _startAngle;
-        private float _targetAngle;
-        private bool _clockwise = true;
 
         public ValeriaStateInvisibility(Rigidbody2D player, float invisibilitySpeed, GameObject smokePrefab, Transform smokeParent = null)
         {
@@ -31,6 +28,7 @@ namespace Enemies.Valeria.States
             _smokePrefab = smokePrefab;
             _smokeParent = smokeParent;
         }
+
         public override void Enter()
         {
             base.Enter();
@@ -38,33 +36,34 @@ namespace Enemies.Valeria.States
 
             _regularSpeed = _agent._NVagent.speed;
 
-            var look = _look as EntityView;
-            look.Sprite.enabled = false;
+            //var look = _look as EntityView;
+            //look.Sprite.enabled = false;
 
             _agent._NVagent.speed = _invisibilitySpeed;
             _agent._NVagent.updateRotation = false;
             _agent._NVagent.updateUpAxis = false;
 
             _smokeTimer = _smokeInterval;
-            _isFlanking = false;
+            _isOrbiting = false;
         }
 
         public override void Execute()
         {
             base.Execute();
-
-            if (!_isFlanking)
+            Vector2 toPlayer = _player.position - _move.Position;
+            if (!_isOrbiting)
             {
                 _agent._NVagent.SetDestination(_player.position);
 
-                if (Vector2.Distance(_move.Position, _player.position) < 3f)
+                if (Vector2.Distance(_move.Position, _player.position) < _orbitRadius * 1.5f)
                 {
-                    StartFlank();
+                    _elapsedTime = 0f;
+                    _isOrbiting = true;
                 }
             }
             else
             {
-                DoFlank();
+                OrbitAroundPlayer(toPlayer);
             }
 
             _smokeTimer -= Time.deltaTime;
@@ -75,31 +74,18 @@ namespace Enemies.Valeria.States
             }
         }
 
-        private void StartFlank()
-        {
-            _isFlanking = true;
-            _elapsedTime = 0f;
-
-            Vector2 offset = _move.Position - _player.position;
-            _startAngle = Mathf.Atan2(offset.y, offset.x);
-
-            _targetAngle = _startAngle + (_clockwise ? Mathf.PI : -Mathf.PI);
-        }
-
-        private void DoFlank()
+        private void OrbitAroundPlayer(Vector2 toPlayer)
         {
             _elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(_elapsedTime / _arcDuration);
 
-            float angle = Mathf.Lerp(_startAngle, _targetAngle, t);
-            Vector2 playerPos = _player.position;
-            Vector2 orbitPos = playerPos + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * _flankRadius;
+            Vector2 ringPoint = _player.position - toPlayer.normalized * _orbitRadius;
+            Vector2 perp = new Vector2(-toPlayer.y, toPlayer.x).normalized;
+            Vector2 orbitTarget = ringPoint + perp;
+            _agent._NVagent.SetDestination(orbitTarget);
 
-            _agent._NVagent.SetDestination(orbitPos);
-
-            if (t >= 1f)
+            if (_elapsedTime >= _orbitDuration)
             {
-                _isFlanking = false;
+                _isOrbiting = false;
                 _status.SetStatus(StatusEnum.isInBack, true);
             }
         }
@@ -109,8 +95,7 @@ namespace Enemies.Valeria.States
             if (_smokePrefab == null) return;
 
             GameObject smoke = Object.Instantiate(_smokePrefab, _move.Position, Quaternion.identity, _smokeParent);
-
-            Object.Destroy(smoke, .5f);
+            Object.Destroy(smoke, 0.5f);
         }
 
         public override void Exit()

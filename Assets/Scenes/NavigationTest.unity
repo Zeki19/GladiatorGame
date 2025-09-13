@@ -22853,6 +22853,11 @@ MonoBehaviour:
     FrequencyGain: 0.5
     Duration: 0.5
     m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!4 &1225030047 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3172057191578357928, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+  m_PrefabInstance: {fileID: 1634171591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1257404130
 GameObject:
   m_ObjectHideFlags: 0
@@ -24890,6 +24895,10 @@ PrefabInstance:
       propertyPath: hiddingTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: playerDirection
+      value: 
+      objectReference: {fileID: 1225030047}
     - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: invisibilitySpeed
       value: 3.5

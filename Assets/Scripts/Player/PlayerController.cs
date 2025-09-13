@@ -103,5 +103,14 @@ namespace Player
         {
             Fsm.Transition(StateEnum.Dash);
         }
+
+        private void OnDrawGizmos()
+        {
+            Vector3 start = transform.position;
+            Vector3 end = transform.position + transform.up * 2;
+
+            Gizmos.DrawLine(start, end);
+        }
+
     }
 }
