@@ -131,5 +131,6 @@ public enum EnemyStates
     Surround,
     Dash,
     RunAway,
-    Invisibility
+    Invisibility,
+    Ambush
 }

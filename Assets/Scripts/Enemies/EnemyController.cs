@@ -8,7 +8,7 @@ using UnityEngine.AI;
 
 namespace Enemies
 {
-    public abstract class EnemyController : EntityController,IStatesData,ICondition, INavigation
+    public abstract class EnemyController : EntityController, IStatesData, ICondition, INavigation
     {
         [SerializeField] protected Rigidbody2D target;
         [SerializeField] protected int[] phasesThresholds;
