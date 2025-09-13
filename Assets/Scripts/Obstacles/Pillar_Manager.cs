@@ -6,6 +6,8 @@ public enum PillarState { Standing = 0, Fallen = 1, Shattered = 2}
 
 public class PillarManager : MonoBehaviour
 {
+    [SerializeField] private int health;
+    private int _currentHealth;
     [SerializeField] private GameObject[] prefabs;
 
     private GameObject _spawnedPillar;
@@ -22,12 +24,18 @@ public class PillarManager : MonoBehaviour
         _renderer.enabled = false;
         
         _context.Origin = transform;
+        
+        _currentHealth = health;
+        
         SpawnCurrentPillar();
     }
 
-    private void Update()
+    private void OnDamage()
     {
-        if (Input.GetMouseButtonDown(1)) NextState();
+        _currentHealth--;
+        
+        if (_currentHealth > 0) return;
+        NextState();
     }
 
     private void NextState()
@@ -35,6 +43,7 @@ public class PillarManager : MonoBehaviour
         DestroySpawnedPillar();
         _currentState = (PillarState)(((int)_currentState + 1) % 3);
         SpawnCurrentPillar();
+        _currentHealth = health;
     }
 
     private void DestroySpawnedPillar()
@@ -57,13 +66,13 @@ public class PillarManager : MonoBehaviour
             return;
         }
 
-        _spawnedPillar = Instantiate(prefab, transform.position, Quaternion.identity);
+        _spawnedPillar = Instantiate(prefab, transform.position, Quaternion.identity, this.gameObject.transform);
 
         if (_spawnedPillar.TryGetComponent<IPillar>(out var behaviour))
         {
             behaviour.SpawnPillar(_context);
 
-            behaviour.OnDamaged += () => Debug.Log("OnDamaged");
+            behaviour.OnDamaged += OnDamage;
 
             _pillars.TryAdd(_spawnedPillar, behaviour);
         }
