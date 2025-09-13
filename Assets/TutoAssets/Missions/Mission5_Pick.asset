@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba3c5cc83d92f34e9d0e4499ae27259, type: 3}
+  m_Name: Mission5_Pick
+  m_EditorClassIdentifier: 
+  missionName: Weapon Durability
+  missionDescription: Press E to grab a weapon
+  dialogueToPlay: 5
+  shouldMoveCamera: 0
+  cameraTarget: {fileID: 0}
+  cameraMoveDuration: 2
+  zoomIn: 0
+  zoomAmount: 5
+  showUIHint: 0
+  uiHintPrefab: {fileID: 0}
+  hintPosition: {x: 0, y: 0}
+  autoCompleteDelay: -1

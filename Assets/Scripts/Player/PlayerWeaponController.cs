@@ -21,9 +21,10 @@ namespace Player
         public Weapon Weapon { get; private set; }
         public float offset;
         private readonly List<GameObject> _enemiesHit = new List<GameObject>();
-        public static event Action OnPlayerPicked;
+        public static event Action OnPlayerWeaponPicked;
+        public static event Action OnPlayerWeaponDropped;
         public static event Action OnPlayerAttacked;
-
+        public static event Action OnPlayerChargedAttack;
         private void Awake()
         {
             ServiceLocator.Instance.RegisterService(this);
@@ -69,6 +70,7 @@ namespace Player
             {
                 controller?.ChangeToChargeAttack();
                 Weapon.CurrentAttack = Weapon.ChargeAttack;
+                OnPlayerChargedAttack?.Invoke();
             }
         }
 
@@ -77,7 +79,7 @@ namespace Player
             if (Weapon != null) return;
             var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
             EquipWeapon(weapon);
-            OnPlayerPicked?.Invoke();
+
         }
 
         private void EquipWeapon(Weapon weapon)
@@ -89,6 +91,7 @@ namespace Player
                 quaternion.identity);
             Weapon.BaseAttack.FinishAnimation += ClearEnemiesList;
             Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
+            OnPlayerWeaponPicked?.Invoke();
         }
 
         public void DropWeapon()
@@ -98,6 +101,7 @@ namespace Player
             Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
             Weapon.ChargeAttack.FinishAnimation -= ClearEnemiesList;
             Weapon = null;
+            OnPlayerWeaponDropped?.Invoke();
         }
 
         private void DestroyWeapon()

@@ -1,12 +1,11 @@
-using Player;
+﻿using Player;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Tutorial/Missions/Mission3_Attack", fileName = "Mission3_Attack")]
-
-
 public class Mission3_Attack : TutorialMission
 {
     private bool _hasCompleted = false;
+    private DummyModel _dummyModel;
 
     protected override void OnInitialize()
     {
@@ -15,11 +14,27 @@ public class Mission3_Attack : TutorialMission
         dialogueToPlay = EnumDialogues.Mission3;
         _hasCompleted = false;
 
-        PlayerWeaponController.OnPlayerAttacked += OnPlayerAttacked;
+        var dummyManager = ServiceLocator.Instance.GetService<EnemyManager>();
+        if (dummyManager != null)
+        {
+            _dummyModel = dummyManager.model as DummyModel;
+            if (_dummyModel != null && dummyManager.HealthComponent != null)
+            {
+                dummyManager.HealthComponent.OnDamage += OnDummyTookDamage;
+            }
+            else
+            {
+                Debug.LogWarning("Mission3_Attack: No se pudo obtener DummyModel o HealthComponent");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Mission3_Attack: No se pudo obtener EnemyManager del ServiceLocator");
+        }
     }
-    private void OnPlayerAttacked()
-    {
 
+    private void OnDummyTookDamage(float damage)
+    {
         if (!_hasCompleted)
         {
             _hasCompleted = true;
@@ -31,14 +46,17 @@ public class Mission3_Attack : TutorialMission
     {
         if (!_isCompleted)
         {
-            Debug.Log("Mission3_Attack: CheckCompletion - Esperando evento...");
+            Debug.Log("Mission3_Attack: CheckCompletion - Esperando que el dummy reciba daño...");
         }
     }
 
     protected override void OnCleanup()
     {
-
-        PlayerWeaponController.OnPlayerAttacked -= OnPlayerAttacked;
+        var dummyManager = ServiceLocator.Instance.GetService<EnemyManager>();
+        if (dummyManager != null && dummyManager.HealthComponent != null)
+        {
+            dummyManager.HealthComponent.OnDamage -= OnDummyTookDamage;
+        }
     }
 
     [ContextMenu("Force Complete")]

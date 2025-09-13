@@ -14,7 +14,7 @@ public class Mission2_Pick : TutorialMission
         dialogueToPlay = EnumDialogues.Mission2;
         _hasCompleted = false;
 
-        PlayerWeaponController.OnPlayerPicked += OnPlayerPicked;
+        PlayerWeaponController.OnPlayerWeaponPicked += OnPlayerPicked;
     }
     private void OnPlayerPicked()
     {
@@ -37,7 +37,7 @@ public class Mission2_Pick : TutorialMission
     protected override void OnCleanup()
     {
 
-        PlayerWeaponController.OnPlayerPicked -= OnPlayerPicked;
+        PlayerWeaponController.OnPlayerWeaponPicked -= OnPlayerPicked;
     }
 
     [ContextMenu("Force Complete")]
