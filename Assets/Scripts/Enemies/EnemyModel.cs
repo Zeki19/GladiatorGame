@@ -31,7 +31,15 @@ namespace Enemies
 
                 Vector2 perpDir = new Vector2(-direction.y, direction.x);
 
-                Dash(perpDir, dashForce);
+                var controller = manager.controller as EnemyController;
+                var dashData = new DashStateData(
+                    perpDir,
+                    10,
+                    dashForce
+                );
+                controller.SetStateData(EnemyStates.Dash, dashData);
+                controller.ChangeToState(EnemyStates.Dash);
+                //Dash(perpDir, dashForce);
             }
         }
 
