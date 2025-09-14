@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public DialogueManager dialogue;
     void Start()
     {
-        StartCoroutine(DelayStart());
+        //StartCoroutine(DelayStart());
     }
 
     IEnumerator DelayStart()

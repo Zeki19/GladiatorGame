@@ -10,9 +10,8 @@ namespace Weapons
     public class WeaponManager : MonoBehaviour
     {
         #region ForTesting
-
-        [SerializeField]private Vector3 startingPos;//For Testing
-        private Factory<Weapon, SoWeapon> _factory;
+        
+            private Factory<Weapon, SoWeapon> _factory;
 
         #endregion
 
@@ -85,6 +84,7 @@ namespace Weapons
             if (_droppedWeapons.Count == 0)
                 StartCoroutine(RespawnWeapon());
         }
+        
         /// <summary>
         /// Return the weapon if it is within the specified range.
         /// </summary>
