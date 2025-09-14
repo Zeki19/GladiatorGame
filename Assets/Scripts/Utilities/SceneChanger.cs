@@ -25,6 +25,11 @@ public class SceneChanger : MonoBehaviour
         ServiceLocator.Instance.RegisterService(this);
     }
 
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     public void ChangeScene(int sceneNumber)
     {
         SceneManager.LoadScene(sceneNumber);
