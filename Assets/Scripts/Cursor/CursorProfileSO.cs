@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "Cursor / New Profile", fileName = "CursorProfile")]
+[CreateAssetMenu(menuName = "New Cursor / CursorProfile", fileName = "CursorProfile")]
 public class CursorProfileSO : ScriptableObject
 {
     [Header("Profile name")]
