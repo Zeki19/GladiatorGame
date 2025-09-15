@@ -2,13 +2,13 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EnemyTelegraph", menuName = "Scriptable Objects/EnemyTelegraph")]
 public class EnemyTelegraph : ScriptableObject
 {
-    [SerializeField] private GameObject telegraphPrefab;
     [Serializable]
     public struct spriteValues
     {
@@ -42,13 +42,9 @@ public class EnemyTelegraph : ScriptableObject
                 Sprites.Add(s.shape, s.sprite);
             }
         }
-        if (telegraphPrefab == null)
-        {
-            Debug.LogWarning("TelegraphPrefab is NULL");
-        }
     }
 
-    public void InstantiateTelegraph(Vector2 telePosition, Quaternion teleQuaternion, Shapes teleShape, string name)
+    public void InstantiateTelegraph(Vector2 telePosition, Quaternion teleQuaternion, string name, bool center = false)
     {
         telegraphValues teleAttack = default;
         bool foundTele = false;
@@ -73,11 +69,33 @@ public class EnemyTelegraph : ScriptableObject
         go.transform.rotation = teleQuaternion;
 
         SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
-        sr.sprite = Sprites[teleShape];
+        sr.sprite = Sprites[teleAttack.shape];
+        sr.sortingLayerName = "Background";
 
+        if (!center) 
+        { 
+            #region AdjustSpriteLocation
+
+            go.transform.localScale = new Vector3(teleAttack.scale.x, teleAttack.scale.y, 1f);
+
+            float rawHeight = sr.sprite.bounds.size.y;
+            float scaledHeight = rawHeight * go.transform.localScale.y;
+            Vector3 localOffset = new Vector3(0, -scaledHeight / 2f, 0);
+
+            go.transform.position += go.transform.rotation * localOffset;
+
+            #endregion
+        }
         go.AddComponent<Telegraph>().StartTelegraph(sr, teleAttack.aliveTime);
 
     }
-    
+
+    public enum Shapes
+    {
+        circle,
+        square,
+        triangle,
+        semiCircle
+    }
 }
 
