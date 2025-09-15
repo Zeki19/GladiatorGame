@@ -1,3 +1,4 @@
+using Attack;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -73,21 +74,21 @@ public class EnemyTelegraph : ScriptableObject
         sr.sortingLayerName = "Background";
 
         if (!center) 
-        { 
-            #region AdjustSpriteLocation
-
-            go.transform.localScale = new Vector3(teleAttack.scale.x, teleAttack.scale.y, 1f);
-
-            float rawHeight = sr.sprite.bounds.size.y;
-            float scaledHeight = rawHeight * go.transform.localScale.y;
-            Vector3 localOffset = new Vector3(0, -scaledHeight / 2f, 0);
-
-            go.transform.position += go.transform.rotation * localOffset;
-
-            #endregion
+        {
+            AdjustSpriteLocation(go, sr, teleAttack);
         }
         go.AddComponent<Telegraph>().StartTelegraph(sr, teleAttack.aliveTime);
+    }
 
+    private void AdjustSpriteLocation(GameObject go, SpriteRenderer sr, telegraphValues teleAttack)
+    {
+        go.transform.localScale = new Vector3(teleAttack.scale.x, teleAttack.scale.y, 1f);
+
+        float rawHeight = sr.sprite.bounds.size.y;
+        float scaledHeight = rawHeight * go.transform.localScale.y;
+        Vector3 localOffset = new Vector3(0, scaledHeight / 2f, 0);
+
+        go.transform.position += go.transform.rotation * localOffset;
     }
 
     public enum Shapes
