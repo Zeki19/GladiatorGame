@@ -59,6 +59,8 @@ namespace Player
             var controller = _manager.controller as PlayerController;
             controller?.ChangeToAttack();
             Weapon.CurrentAttack = Weapon.BaseAttack;
+            if (Weapon.ConsumeDurabilityOnMissStandard())
+                Weapon.AffectDurability();
         }
 
         public void ChargeAttack()
@@ -69,6 +71,8 @@ namespace Player
             {
                 controller?.ChangeToChargeAttack();
                 Weapon.CurrentAttack = Weapon.ChargeAttack;
+                if (Weapon.ConsumeDurabilityOnMissCharge())
+                    Weapon.AffectDurability();
             }
         }
 

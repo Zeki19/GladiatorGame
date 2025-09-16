@@ -39,6 +39,8 @@ namespace Weapons
         private int DurabilityStandardLoss { get; set; }
         private int DurabilityChargeLoss { get; set; }
         private float CurrentDurability { get; set; }
+        private bool StandardConsumeDurabilityOnMiss { get; set; }
+        private bool ChargeConsumeDurabilityOnMiss { get; set; }
 
         #endregion
 
@@ -68,6 +70,8 @@ namespace Weapons
 
         public void Configure(SoWeapon config)
         {
+            StandardConsumeDurabilityOnMiss = config.standardConsumeDurabilityOnMiss;
+            ChargeConsumeDurabilityOnMiss = config.chargeConsumeDurabilityOnMiss;
             DurabilityStandardLoss = config.durabilityStandardLoss;
             DurabilityChargeLoss = config.durabilityChargeLoss;
             ChargePerAttack = config.chargePerAttack;
@@ -109,10 +113,11 @@ namespace Weapons
         {
             CurrentDurability -= IsCurrentAttackBase() ? DurabilityStandardLoss : DurabilityChargeLoss;
             CurrentDurability = Mathf.Clamp(CurrentDurability, 0, Durability);
-            Debug.Log("Current Weapon Durability :" + CurrentDurability);
             return CheckDurability();
         }
 
+        public bool ConsumeDurabilityOnMissStandard() => StandardConsumeDurabilityOnMiss;
+        public bool ConsumeDurabilityOnMissCharge() => ChargeConsumeDurabilityOnMiss;
         public bool CheckDurability() => !(CurrentDurability <= 0);
         private bool IsCurrentAttackBase() => CurrentAttack == BaseAttack;
         public float DurabilityPercent() => CurrentDurability / Durability;

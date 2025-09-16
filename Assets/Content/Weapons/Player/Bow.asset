@@ -18,6 +18,8 @@ MonoBehaviour:
   durability: 50
   durabilityStandardLoss: 5
   durabilityChargeLoss: 20
+  standardConsumeDurabilityOnMiss: 1
+  chargeConsumeDurabilityOnMiss: 1
   changeThreshold: 1
   chargePerAttack: 0.5
   knockbackForce: 0.5

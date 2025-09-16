@@ -14,17 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 8391845874040343952, guid: 43e9e3b43d438be48a3b3c45c9488be6, type: 3}
   weaponName: Gladius
-  attackSpeed: 270
-  baseDamage: 80
-  chargeDamage: 60
   cooldown: 0.5
-  range: 0.2
   durability: 50
   durabilityStandardLoss: -25
   durabilityChargeLoss: 20
+  standardConsumeDurabilityOnMiss: 0
+  chargeConsumeDurabilityOnMiss: 0
   changeThreshold: 1
   chargePerAttack: 0.5
   knockbackForce: 0.5
   slowPercent: 0.9
-  basic: {fileID: 11400000, guid: 43ed6642239bde544ae3e4c2ce28bdf7, type: 2}
+  basic: {fileID: 11400000, guid: 68a1610e3c963ee41ba99751cf43814c, type: 2}
   charge: {fileID: 11400000, guid: d2c598ff8e1fab047b47926d84f8d8a6, type: 2}

@@ -54,6 +54,10 @@ namespace Attack
             CoroutineRunner = null;
         }
 
+        protected void LookPosition(Vector3 position)
+        {
+            Look.LookDirInsta((position-Weapon.transform.position).normalized);
+        }
         protected abstract IEnumerator Attack();
     }
 }

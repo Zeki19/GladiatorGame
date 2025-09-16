@@ -16,6 +16,8 @@ namespace Utilities.Factory.WeaponFactory
       public int durability;
       public int durabilityStandardLoss;
       public int durabilityChargeLoss;
+      public bool standardConsumeDurabilityOnMiss;
+      public bool chargeConsumeDurabilityOnMiss;
       public float changeThreshold;
       public float chargePerAttack;
       public float knockbackForce;

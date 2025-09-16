@@ -34,6 +34,7 @@ namespace Enemies.Valeria.States
 
             _agent._NVagent.updateRotation = false;
             _agent._NVagent.updateUpAxis = false;
+            //_agent._NVagent.speed *=2 ;
 
             Vector2 hidePoint = RunAwayFromPlayer();
             if (hidePoint != Vector2.zero)
@@ -93,6 +94,7 @@ namespace Enemies.Valeria.States
 
         public override void Exit()
         {
+            //_agent._NVagent.speed /=2 ;
             base.Exit();
         }
     }
