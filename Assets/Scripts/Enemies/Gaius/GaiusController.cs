@@ -105,7 +105,7 @@ namespace Enemies.Gaius
         private void Die()
         {
             Destroy(gameObject);
-            SceneChanger.Instance.ChangeScene(2);
+            SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
         }
         protected override void Update()
         {

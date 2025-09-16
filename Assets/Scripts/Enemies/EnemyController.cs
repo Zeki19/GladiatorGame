@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Entities.StateMachine;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Enemies
 {
@@ -13,6 +14,7 @@ namespace Enemies
         [SerializeField] protected Rigidbody2D target;
         [SerializeField] protected int[] phasesThresholds;
         [SerializeField] private NavMeshAgent NVagent;
+        [SerializeField] protected string sceneToChangeWhenDie;
         protected StateDataManager stateDataManager = new StateDataManager();
         public int currentAttack;
         protected int _currentPhase = 1;

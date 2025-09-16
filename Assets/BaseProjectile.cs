@@ -57,7 +57,12 @@ public class BaseProjectile : MonoBehaviour
             return;
 
         var entityManager = other.GetComponent<EntityManager>();
-        if (entityManager == null) return;
+        if (entityManager == null)
+        {
+            ServiceLocator.Instance.GetService<ProjectileManager>().ReturnProjectile(this.name, this);
+            OnReturnedToPool?.Invoke(this);
+            return;
+        };
 
         entityManager.HealthComponent.TakeDamage(_damage);
         OnHit?.Invoke();
