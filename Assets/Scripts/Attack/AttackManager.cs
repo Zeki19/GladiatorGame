@@ -7,8 +7,11 @@ namespace Attack
 {
     public class AttackManager : MonoBehaviour
     {
+        [SerializeField] EnemyTelegraph EnemyTelegraph;
+
         public List<BaseAttack> attacks = new List<BaseAttack>();
         public GameObject weapon;
+
         private EntityModel _move;
         private EntityView _look;
         private EntityController _controller;
@@ -35,6 +38,7 @@ namespace Attack
             if (index >= 0 && index < attacks.Count)
             {
                 attacks[index].ExecuteAttack();
+                //EnemyTelegraph?.InstantiateTelegraph(transform.position, transform.rotation, attacks[index].attackName);
                 _controller.SetStatus(StatusEnum.AttackMissed, true);
                 _controller.SetStatus(StatusEnum.Attacking, true);
             }

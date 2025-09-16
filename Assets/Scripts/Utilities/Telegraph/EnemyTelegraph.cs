@@ -24,6 +24,7 @@ public class EnemyTelegraph : ScriptableObject
         public Shapes shape;
         public Vector2 scale;
         public float aliveTime;
+        public bool center;
     }
 
     public List<spriteValues> correlations = new List<spriteValues>();
@@ -45,7 +46,7 @@ public class EnemyTelegraph : ScriptableObject
         }
     }
 
-    public void InstantiateTelegraph(Vector2 telePosition, Quaternion teleQuaternion, string name, bool center = false)
+    public void InstantiateTelegraph(Vector2 telePosition, Quaternion teleQuaternion, string name)
     {
         telegraphValues teleAttack = default;
         bool foundTele = false;
@@ -61,6 +62,7 @@ public class EnemyTelegraph : ScriptableObject
 
         if (!foundTele)
         {
+            Debug.LogWarning("Telegraph name " + name + " not found.");
             return;
         }
 
@@ -73,7 +75,7 @@ public class EnemyTelegraph : ScriptableObject
         sr.sprite = Sprites[teleAttack.shape];
         sr.sortingLayerName = "Background";
 
-        if (!center) 
+        if (!teleAttack.center) 
         {
             AdjustSpriteLocation(go, sr, teleAttack);
         }

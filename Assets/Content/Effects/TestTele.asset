@@ -26,11 +26,14 @@ MonoBehaviour:
     shape: 2
     scale: {x: 1, y: 1}
     aliveTime: 3
+    center: 0
   - attackName: SquareAttack
     shape: 1
     scale: {x: 3, y: 1}
     aliveTime: 1.5
+    center: 0
   - attackName: CircleAttack
     shape: 0
     scale: {x: 5, y: 5}
     aliveTime: 1.5
+    center: 0
