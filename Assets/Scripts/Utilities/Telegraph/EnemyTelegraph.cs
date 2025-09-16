@@ -46,7 +46,7 @@ public class EnemyTelegraph : ScriptableObject
         }
     }
 
-    public void InstantiateTelegraph(Vector2 telePosition, Quaternion teleQuaternion, string name)
+    public bool InstantiateTelegraph(Vector2 telePosition, Quaternion teleQuaternion, string name)
     {
         telegraphValues teleAttack = default;
         bool foundTele = false;
@@ -63,7 +63,7 @@ public class EnemyTelegraph : ScriptableObject
         if (!foundTele)
         {
             Debug.LogWarning("Telegraph name " + name + " not found.");
-            return;
+            return false;
         }
 
         GameObject go = new GameObject("Telegraph");
@@ -80,6 +80,7 @@ public class EnemyTelegraph : ScriptableObject
             AdjustSpriteLocation(go, sr, teleAttack);
         }
         go.AddComponent<Telegraph>().StartTelegraph(sr, teleAttack.aliveTime);
+        return true;
     }
 
     private void AdjustSpriteLocation(GameObject go, SpriteRenderer sr, telegraphValues teleAttack)
@@ -91,6 +92,18 @@ public class EnemyTelegraph : ScriptableObject
         Vector3 localOffset = new Vector3(0, scaledHeight / 2f, 0);
 
         go.transform.position += go.transform.rotation * localOffset;
+    }
+
+    public telegraphValues GetTelegraph(string name)
+    {
+        foreach (telegraphValues tv in attacks)
+        {
+            if (tv.attackName == name)
+            {
+                return tv;
+            }
+        }
+        return default;
     }
 
     public enum Shapes

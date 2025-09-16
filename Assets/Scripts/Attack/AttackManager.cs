@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Enemies;
 using Entities;
@@ -37,8 +38,14 @@ namespace Attack
         {
             if (index >= 0 && index < attacks.Count)
             {
-                attacks[index].ExecuteAttack();
-                EnemyTelegraph?.InstantiateTelegraph(transform.position, transform.rotation, attacks[index].attackName);
+                if((EnemyTelegraph) && EnemyTelegraph.InstantiateTelegraph(transform.position, transform.rotation, attacks[index].attackName)) 
+                {
+                    StartCoroutine(HoldAttack(attacks[index]));
+                }
+                else
+                {
+                    attacks[index].ExecuteAttack();
+                }
                 _controller.SetStatus(StatusEnum.AttackMissed, true);
                 _controller.SetStatus(StatusEnum.Attacking, true);
             }
@@ -60,6 +67,14 @@ namespace Attack
                 var enemyController = _controller as EnemyController;
                 if (enemyController != null) enemyController.MissAttack.AddMissAttack();
             }
+        }
+    
+        private IEnumerator HoldAttack(BaseAttack currentAttack)
+        {
+            var telegraph = EnemyTelegraph.GetTelegraph(currentAttack.attackName);
+
+            yield return new WaitForSeconds(telegraph.aliveTime);
+            currentAttack.ExecuteAttack();
         }
     }
 }

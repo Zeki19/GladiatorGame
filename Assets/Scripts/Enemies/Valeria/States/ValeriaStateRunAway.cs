@@ -16,7 +16,6 @@ namespace Enemies.Valeria.States
         private float _waitTime;       // how long to wait at the spot
         private float _timer;               // countdown
         private bool _waiting;              // is currently waiting
-        private bool _finishedWaiting; 
 
         public ValeriaStateRunAway(Rigidbody2D player, LayerMask hiddingLayer, float waitTime)
         {
@@ -24,7 +23,6 @@ namespace Enemies.Valeria.States
             _hiddingLayer = hiddingLayer;
             _waitTime = waitTime;
             _waiting = false;
-            _finishedWaiting = false;
         }
 
         public override void Enter()
@@ -39,7 +37,6 @@ namespace Enemies.Valeria.States
             if (hidePoint != Vector2.zero)
                 _agent._NVagent.SetDestination(hidePoint);
 
-            _finishedWaiting = false;
             _waiting = false;
             _timer = _waitTime;
         }
@@ -53,7 +50,6 @@ namespace Enemies.Valeria.States
                 _timer -= Time.deltaTime;
                 if (_timer <= 0f)
                 {
-                    _finishedWaiting = true;
                     _waiting = false;
                     Debug.Log("Finished waiting");
                 }
