@@ -38,7 +38,7 @@ namespace Attack
             if (index >= 0 && index < attacks.Count)
             {
                 attacks[index].ExecuteAttack();
-                //EnemyTelegraph?.InstantiateTelegraph(transform.position, transform.rotation, attacks[index].attackName);
+                EnemyTelegraph?.InstantiateTelegraph(transform.position, transform.rotation, attacks[index].attackName);
                 _controller.SetStatus(StatusEnum.AttackMissed, true);
                 _controller.SetStatus(StatusEnum.Attacking, true);
             }

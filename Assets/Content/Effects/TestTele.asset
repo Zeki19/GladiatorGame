@@ -22,17 +22,17 @@ MonoBehaviour:
   - shape: 3
     sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   attacks:
-  - attackName: TriangleAttack
+  - attackName: DaggerToss
     shape: 2
     scale: {x: 1, y: 1}
     aliveTime: 3
     center: 0
-  - attackName: SquareAttack
+  - attackName: QuickStab
     shape: 1
     scale: {x: 3, y: 1}
     aliveTime: 1.5
     center: 0
-  - attackName: CircleAttack
+  - attackName: Stab&run
     shape: 0
     scale: {x: 5, y: 5}
     aliveTime: 1.5
