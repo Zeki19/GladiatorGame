@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace Enemies.Attack
 {
-    [CreateAssetMenu(fileName = "SwipeAttack", menuName = "Attacks/MeleeAttack")]
+    [CreateAssetMenu(fileName = "SwipeAttack", menuName = "Attacks/SwipeAttack")]
     public class SwipeAttack : MeleeAttack
     {
         public AnimationCurve curve;
+        public float startingAngle=-90;
 
         public override void ExecuteAttack()
         {
@@ -27,7 +28,7 @@ namespace Enemies.Attack
             while(animationClock < animationTime)
             {
                 animationClock += Time.deltaTime;
-                Weapon.transform.localRotation = Quaternion.Euler(0, 0, -90+curve.Evaluate(animationClock));
+                Weapon.transform.localRotation = Quaternion.Euler(0, 0, startingAngle+curve.Evaluate(animationClock));
                 yield return 0;
             }
             collider.enabled = false;

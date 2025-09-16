@@ -17,10 +17,10 @@ namespace Weapons
 
         #region BaseStats
 
-        public float BaseDamage { get; private set; }
-        public float ChargeDamage { get; private set; }
-        public float AttackSpeed { get; private set; }
-        public float Range { get; private set; }
+        //public float BaseDamage { get; private set; }
+        //public float ChargeDamage { get; private set; }
+        //public float AttackSpeed { get; private set; }
+        //public float Range { get; private set; }
         public float KnockbackForce { get; private set; }
         public float SlowPercent { get; private set; }
 
@@ -73,14 +73,14 @@ namespace Weapons
             ChargePerAttack = config.chargePerAttack;
             ChangeThreshold = config.changeThreshold;
             KnockbackForce = config.knockbackForce;
-            ChargeDamage = config.chargeDamage;
+            //ChargeDamage = config.chargeDamage;
             SlowPercent = config.slowPercent;
-            AttackSpeed = config.attackSpeed;
+            //AttackSpeed = config.attackSpeed;
             WeaponName = config.weaponName;
             Durability = config.durability;
-            BaseDamage = config.baseDamage;
+            //BaseDamage = config.baseDamage;
             CoolDown = config.cooldown;
-            Range = config.range;
+            //Range = config.range;
 
             ChargeAttack = config.charge;
             BaseAttack = config.basic;
@@ -90,6 +90,7 @@ namespace Weapons
             CurrentDurability = Durability;
 
             _timer = 0;
+            Initialize(config);
         }
 
         public void Initialize(SoWeapon config)
@@ -117,7 +118,7 @@ namespace Weapons
         public float DurabilityPercent() => CurrentDurability / Durability;
         public void ResetChangeMeter() => ChargeMeter = 0;
         public bool CanAttack() => !IsOnCooldown;
-        public float Damage() => IsCurrentAttackBase() ? BaseDamage : ChargeDamage;
+        public float Damage() => IsCurrentAttackBase() ? BaseAttack.damage : ChargeAttack.damage;
         public float ChargePercent() => ChargeMeter / ChangeThreshold;
         public bool CheckCharge() => ChargeMeter >= ChangeThreshold;
         public void ChargeWeapon()

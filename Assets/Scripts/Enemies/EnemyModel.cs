@@ -21,7 +21,7 @@ namespace Enemies
             manager.Rb.linearVelocity = dir * (_moveSpeed * SpeedModifier);
         }
 
-        public void Reposition(Transform target, float dashForce, LayerMask hitMask)
+        public void Reposition(Transform target, float dashForce, LayerMask hitMask) 
         {
             RaycastHit2D hit = RaycastBetweenCharacters(transform, target, hitMask);
 

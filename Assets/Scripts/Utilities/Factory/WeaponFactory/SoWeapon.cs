@@ -8,11 +8,11 @@ namespace Utilities.Factory.WeaponFactory
    {
       public GameObject weaponPrefab;
       public string weaponName;
-      public float attackSpeed;
-      public float baseDamage;
-      public float chargeDamage;
+      //public float attackSpeed;
+      //public float baseDamage;
+      //public float chargeDamage;
       public float cooldown;
-      public float range;
+      //public float range;
       public int durability;
       public int durabilityStandardLoss;
       public int durabilityChargeLoss;

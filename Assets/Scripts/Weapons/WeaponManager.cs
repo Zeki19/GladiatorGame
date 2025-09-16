@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Factory.Essentials;
@@ -120,6 +121,11 @@ namespace Weapons
                 Gizmos.DrawSphere(spawnPoints[i],0.5f);
                 
             }
+        }
+
+        private void OnDestroy()
+        {
+            ServiceLocator.Instance.RemoveService(this);
         }
     }
 }

@@ -57,5 +57,14 @@ public class ServiceLocator : MonoBehaviour
             return default;
         }
     }
+    public void RemoveService<T>(T service)
+    {
+        var type = typeof(T);
+        if (_services.ContainsKey(type))
+        {
+            _services.Remove(type);
+        }
+
+    }
     
 }
