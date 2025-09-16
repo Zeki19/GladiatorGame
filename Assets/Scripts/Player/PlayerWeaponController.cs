@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Enemies;
@@ -23,6 +24,12 @@ namespace Player
         private void Awake()
         {
             ServiceLocator.Instance.RegisterService(this);
+        }
+
+        private void OnDestroy()
+        {
+            AttackFinishSubscription(false);
+            ServiceLocator.Instance.RemoveService(this);
         }
 
         private void Start()
@@ -79,7 +86,7 @@ namespace Player
             if (weapon == default) return;
             Weapon = weapon;
             Weapon.WeaponGameObject.gameObject.transform.parent = transform;
-            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero,
+            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up*offset, 
                 quaternion.identity);
             AttackFinishSubscription(true);
             Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
@@ -131,7 +138,7 @@ namespace Player
         {
             if (!IsInLayerMask(other.gameObject, collisionLayer) || _enemiesHit.Any(hits => hits == other.gameObject))
                 return;
-
+            
             var enemyManager = ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject);
             if (enemyManager==null)return;
             
@@ -151,7 +158,7 @@ namespace Player
         private void AttackFinish()
         {
             ClearEnemiesList();
-            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.zero,
+            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up*offset, 
                 quaternion.identity);
         }
 

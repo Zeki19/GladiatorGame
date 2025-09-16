@@ -6208,6 +6208,14 @@ PrefabInstance:
       propertyPath: bossHealthBarUI
       value: 
       objectReference: {fileID: 3497405295414825351}
+    - target: {fileID: 4406422302611530635, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: blinkHeal
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e860e5be107cf4419450b13343ac377, type: 2}
+    - target: {fileID: 4406422302611530635, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: blinkDamage
+      value: 
+      objectReference: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
     - target: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: m_Name
       value: Gaius
@@ -10720,7 +10728,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7324726681048451470, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 5340801974201136129, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1331266791}
     m_AddedComponents: []
@@ -23005,7 +23013,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 822077975}
-  m_Father: {fileID: 1481112492}
+  m_Father: {fileID: 477168241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -23292,11 +23300,6 @@ PolygonCollider2D:
       - {x: -0.5, y: 0.5}
       - {x: -0.5, y: -0.5}
   m_UseDelaunayMesh: 0
---- !u!224 &1481112492 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7324726681048451470, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
-  m_PrefabInstance: {fileID: 477168240}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1515287966
 GameObject:
   m_ObjectHideFlags: 0
@@ -23862,6 +23865,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3230016562665857638, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: blinkHeal
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e860e5be107cf4419450b13343ac377, type: 2}
+    - target: {fileID: 3230016562665857638, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: blinkDamage
+      value: 
+      objectReference: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
     - target: {fileID: 5522031050175312599, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: dashIconUI
       value: 

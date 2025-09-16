@@ -24,6 +24,7 @@ public class SceneChanger : MonoBehaviour
     {
         ServiceLocator.Instance.RegisterService(this);
     }
+    
 
     public void ChangeScene(int sceneNumber)
     {

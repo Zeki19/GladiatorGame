@@ -20,6 +20,10 @@ public class EnemyManager : EntityManager
         HealthSystem.OnHeal += PrintHealth;
         ServiceLocator.Instance.RegisterService(this);
     }
+    private void OnDestroy()
+    {
+        ServiceLocator.Instance.RemoveService(this);
+    }
 
     private void Start()
     {

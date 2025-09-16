@@ -60,11 +60,13 @@ namespace Player
 
         public override void Dash(Vector2 dir, float dashForce)
         {
-            manager.Rb.AddForce(dir.normalized * dashForce, ForceMode2D.Impulse);
+            manager.Rb.linearVelocity = dir.normalized * (dashForce *_stats.SpeedModifier);
         }
 
         public override void Dash(Vector2 dir, float dashForce, float dashDistance)
         {
+            if (dir == Vector2.zero)
+                dir = _lastDirection;
             Dash(dir, dashForce);
             StartDashMonitoring(dir.normalized, dashDistance, transform.position);
         }

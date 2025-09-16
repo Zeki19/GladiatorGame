@@ -1,3 +1,4 @@
+using System;
 using Core.Status;
 using Entities;
 using UnityEngine;
@@ -19,6 +20,11 @@ namespace Player
             HealthSystem = new HealthSystem.HealthSystem(stats.MaxHealth);
             HealthSystem.OnDamage += DamageTaken;
             _status.SetUpStatus();
+        }
+
+        private void OnDestroy()
+        {
+            ServiceLocator.Instance.RemoveService(this);
         }
 
         private void DamageTaken(float a)

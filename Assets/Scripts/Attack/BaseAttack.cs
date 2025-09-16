@@ -12,6 +12,7 @@ namespace Attack
     {
         public string attackName;
         public float damage;
+        //public float delay;
         protected GameObject Weapon;
         protected MonoBehaviour CoroutineRunner;
         protected IMove Move;
