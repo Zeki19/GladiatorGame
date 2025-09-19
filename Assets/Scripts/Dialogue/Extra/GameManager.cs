@@ -1,25 +1,13 @@
+using System;
 using System.Collections;
+using Player;
 using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public DialogueManager dialogue;
-    void Start()
+    private void Start()
     {
-        //StartCoroutine(DelayStart());
-    }
-
-    IEnumerator DelayStart()
-    {
-        yield return new WaitForSeconds(3f);
-
-        dialogue.StartConversation(EnumDialogues.GaiusEntrance);
-        dialogue.OnConversationEnd += ChangeScene;
-    }
-
-    void ChangeScene()
-    {
-        ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(3);
+        ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene("MainMenu");
     }
 }
