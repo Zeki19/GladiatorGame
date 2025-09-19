@@ -28,7 +28,7 @@ public class PlayerResourcesUI : MonoBehaviour
         
         UpdateChargeBar();
         _weaponController.OnWeaponChanged += UpdateChargeBar;
-        _weaponController.OnHit += UpdateChargeBar;
+        _weaponController.OnAttack += UpdateChargeBar;
 
         ServiceLocator.Instance.GetService<PlayerManager>().OnDash += Dashed;
     }

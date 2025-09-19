@@ -21,7 +21,7 @@ namespace Player
         public float offset;
         private readonly List<GameObject> _enemiesHit = new List<GameObject>();
         
-        public event Action OnHit;
+        public event Action OnAttack;
         public event Action OnWeaponChanged;
         public bool HasWeapon => Weapon != null;
 
@@ -65,6 +65,8 @@ namespace Player
             Weapon.CurrentAttack = Weapon.BaseAttack;
             if (Weapon.ConsumeDurabilityOnMissStandard())
                 Weapon.AffectDurability();
+            
+            OnAttack?.Invoke();
         }
 
         public void ChargeAttack()
@@ -77,6 +79,8 @@ namespace Player
                 Weapon.CurrentAttack = Weapon.ChargeAttack;
                 if (Weapon.ConsumeDurabilityOnMissCharge())
                     Weapon.AffectDurability();
+                
+                OnAttack?.Invoke();
             }
         }
 
@@ -161,7 +165,7 @@ namespace Player
             Weapon.AffectDurability();
             _enemiesHit.Add(other.gameObject);
             
-            OnHit?.Invoke();
+            OnAttack?.Invoke();
         }
         
         private bool IsInLayerMask(GameObject obj, LayerMask layerMask)
