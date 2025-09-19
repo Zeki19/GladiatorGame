@@ -50,6 +50,7 @@ public class PSDash<T> : PSBase<T>
         
         _animate.PlayStateAnimation(StateEnum.Dash);
         
+        _manager.TriggerDash(_stats.DashCooldown);
     }
     private IEnumerator CooldownCoroutine()
     {
