@@ -22,7 +22,7 @@ namespace Entities
         
         public void PlaySound (string soundName,string entityName) => Sounds?.Invoke(soundName,entityName);
 
-        private void Start()
+        protected virtual void Start()
         {
             PhaseSystem = new PhaseSystem(phasesThresholds, HealthComponent);
         }

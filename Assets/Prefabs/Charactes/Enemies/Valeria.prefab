@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 8564660441278091324}
   - component: {fileID: 949282505484103338}
   - component: {fileID: 5176386878660147709}
+  - component: {fileID: 4275813958421542221}
   m_Layer: 8
   m_Name: Valeria
   m_TagString: Untagged
@@ -197,6 +198,7 @@ MonoBehaviour:
   model: {fileID: 1725781832690022149}
   view: {fileID: 4237797413979217434}
   controller: {fileID: 426389719787109460}
+  phasesThresholds: 32000000
   maxLife: 120
   bossHealthBarUI: {fileID: 0}
 --- !u!114 &426389719787109460
@@ -214,9 +216,9 @@ MonoBehaviour:
   manager: {fileID: 6283928702553193047}
   _target: {fileID: 0}
   target: {fileID: 0}
-  phasesThresholds: 
   NVagent: {fileID: 7217618057694891187}
   sceneToChangeWhenDie: VictoryScene
+  _agent: {fileID: 8183124256356256342}
   currentAttack: 0
   stats: {fileID: 11400000, guid: 4e96c14f6a2738646bb097759e9708c2, type: 2}
   desiredDistance: 3
@@ -260,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49f2c4411ed31a4d88f0808f818d10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 4275813958421542221}
   manager: {fileID: 6283928702553193047}
   sprite: {fileID: 8564660441278091324}
   blinkDamage: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
@@ -337,16 +339,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Graph: {fileID: 7476380825961596307, guid: 92a3b7b17921b644d9bd96f31c2cc6cd, type: 2}
   m_BlackboardVariableOverridesList:
-  - rid: 3815732586683039819
-  - rid: 3815732586683039820
-  - rid: 3815732586683039821
-  - rid: 3815732586683039822
+  - rid: 3723865628257812528
+  - rid: 3723865628257812571
+  - rid: 3723865628257812572
+  - rid: 3723865628257812573
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
     RefIds:
-    - rid: 3815732586683039819
+    - rid: 3723865628257812528
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -354,23 +356,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 7849566506043400556}
-    - rid: 3815732586683039820
-      type: {class: 'BlackboardVariable`1[[Entities.EntityModel, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 5237211683081708500
-          m_Value1: 15002449821169241579
-        Name: Model
-        m_Value: {fileID: 1725781832690022149}
-    - rid: 3815732586683039821
-      type: {class: 'BlackboardVariable`1[[Enemies.EnemyController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 3990567665628121329
-          m_Value1: 10756648892004491123
-        Name: Controller
-        m_Value: {fileID: 426389719787109460}
-    - rid: 3815732586683039822
+    - rid: 3723865628257812571
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -378,6 +364,22 @@ MonoBehaviour:
           m_Value1: 1514143420011053385
         Name: Target
         m_Value: {fileID: 0}
+    - rid: 3723865628257812572
+      type: {class: 'BlackboardVariable`1[[Entities.EntityModel, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 5237211683081708500
+          m_Value1: 15002449821169241579
+        Name: Model
+        m_Value: {fileID: 1725781832690022149}
+    - rid: 3723865628257812573
+      type: {class: 'BlackboardVariable`1[[Enemies.EnemyController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3990567665628121329
+          m_Value1: 10756648892004491123
+        Name: Controller
+        m_Value: {fileID: 426389719787109460}
 --- !u!195 &7217618057694891187
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -579,3 +581,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &4275813958421542221
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7849566506043400556}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f47c416ffc82da42a65c10dddda7801, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

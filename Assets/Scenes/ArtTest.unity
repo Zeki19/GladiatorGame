@@ -6204,38 +6204,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4028609289078078931, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: bossHealthBarUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4406422302611530635, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: blinkHeal
-      value: 
-      objectReference: {fileID: 11400000, guid: 6e860e5be107cf4419450b13343ac377, type: 2}
-    - target: {fileID: 4406422302611530635, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: blinkDamage
-      value: 
-      objectReference: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
     - target: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: m_Name
       value: Gaius
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8505707540481220225, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: managedReferences[8939998720805830841].m_Value
       value: 
       objectReference: {fileID: 2020722031}
-    - target: {fileID: 8613084811357606315, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_AutoBraking
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613084811357606315, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11692,6 +11668,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1291718857}
     m_Modifications:
+    - target: {fileID: 911950227370489278, guid: a079692b822c75544ad4f4e4fca59db3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.021728516
+      objectReference: {fileID: 0}
     - target: {fileID: 1180700716857960032, guid: a079692b822c75544ad4f4e4fca59db3, type: 3}
       propertyPath: bossManager
       value: 
