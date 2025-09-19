@@ -3,6 +3,7 @@ using System.Collections;
 using Entities;
 using System.Collections.Generic;
 using Entities.StateMachine;
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -12,9 +13,9 @@ namespace Enemies
     public abstract class EnemyController : EntityController, IStatesData, ICondition, INavigation
     {
         [SerializeField] protected Rigidbody2D target;
-        [SerializeField] protected int[] phasesThresholds;
         [SerializeField] private NavMeshAgent NVagent;
         [SerializeField] protected string sceneToChangeWhenDie;
+        [SerializeField] protected BehaviorGraphAgent _agent;
         protected StateDataManager stateDataManager = new StateDataManager();
         public int currentAttack;
         protected int _currentPhase = 1;
@@ -25,7 +26,7 @@ namespace Enemies
             get { return _currentPhase; }
         }
         public NavMeshAgent _NVagent => NVagent;
-        protected PhaseSystem _phaseSystem;
+        
         protected FSM<EnemyStates> Fsm;
 
         protected override void Awake()
@@ -36,20 +37,28 @@ namespace Enemies
 
         protected virtual void Start()
         {
-            _phaseSystem = new PhaseSystem(phasesThresholds, manager.HealthComponent);
+            
         }
 
         protected virtual void Update()
         {
             Fsm.OnExecute();
+            switch (manager.PhaseSystem.currentPhase())
+            {
+                case 1:_agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase1);
+                    break;
+                case 2:_agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase2);
+                    break;
+                case 3:_agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase3);
+                    break;
+            }
         }
 
         protected void CheckPhase(float damage)
         {
-
             manager.PlaySound("Hit","Enemy");
             ServiceLocator.Instance.GetService<ArenaPainter>().PaintArena(transform, "Blood");
-            _currentPhase = _phaseSystem.currentPhase();
+            _currentPhase = manager.PhaseSystem.currentPhase();
             Debug.Log("Current phase is:" + _currentPhase);
         }
 

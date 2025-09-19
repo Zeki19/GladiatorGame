@@ -12,7 +12,6 @@ namespace Enemies.Gaius
         [SerializeField] public GaiusStatsSO stats;
         public GameObject weapon;
         private AttackManager _attackManager;
-        private BehaviorGraphAgent _agent;
         #region Private Variables
 
         private StatesBase<EnemyStates> _idleState; // BLUE
@@ -110,12 +109,14 @@ namespace Enemies.Gaius
         protected override void Update()
         {
             base.Update();
-            if(manager.HealthComponent.currentHealth>50)
-                _agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase1);
-            else
-            {
-                _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
-            }
+            
+            
+            //if(manager.HealthComponent.currentHealth>50)
+            //    _agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase1);
+            //else
+            //{
+            //    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
+            //}
         }
     }
 }
