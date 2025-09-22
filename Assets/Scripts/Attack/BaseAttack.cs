@@ -19,6 +19,7 @@ namespace Attack
         protected ILook Look;
         protected IStatus Status;
         protected ITarget Target;
+        public bool AttackMiss{protected set; get;}
         public event Action AttackFinish;
         public event Action OnHit;
 
@@ -36,7 +37,7 @@ namespace Attack
             Target = target;
         }
 
-        protected void FinishAttack()
+        protected virtual void FinishAttack()
         {
             AttackFinish?.Invoke();
         }
