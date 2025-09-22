@@ -9,17 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb97863c9ca846128a18cdb72229777f, type: 3}
-  m_Name: Test
+  m_Script: {fileID: 11500000, guid: 628e3629c4dd47b7840da339966f4e23, type: 3}
+  m_Name: AntiBowConeShot
   m_EditorClassIdentifier: 
   attackName: 
-  damage: 5
+  damage: 0
   projectileSpeed: 5
-  maxRange: 3
-  projectilePrefab: {fileID: 2206256447500830720, guid: 8f94ae6c872f2794baf300b211093669, type: 3}
+  maxRange: 10
+  projectilePrefab: {fileID: 5524527720111712474, guid: 47c0ecad9cee77448857eb8386b26147, type: 3}
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 64
-  distance: 5
-  speed: 2
-  delayBetweenSwans: 0.5
+    m_Bits: 256
+  coneAngle: 130
+  numberOfProjectiles: 11
