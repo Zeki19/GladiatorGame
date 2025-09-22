@@ -5,6 +5,7 @@ public class EnemyResourcesUI : MonoBehaviour
 {
     [Header("Enemy")]
     [SerializeField] private EntityManager entityManager;
+    
     [Header("Bars")]
     [SerializeField] private ResourceBarTracker healthBar;
     void Start()
