@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: Mission4_ChargedAttack
   m_EditorClassIdentifier: 
   missionName: Charged Attack
-  missionDescription: Press the right click to use charge attack
+  missionDescription: Landing attacks charges your Charged attack, press Right Click
+    to use it once the blue bar is full.
   dialogueToPlay: 4
   shouldMoveCamera: 0
-  cameraTarget: {fileID: 0}
-  cameraMoveDuration: 2
-  zoomIn: 0
-  zoomAmount: 5
+  cameraEvent:
+    eventId: Dummy
+    targetTag: Dummy
+    targetName: 
+    moveDuration: 0.2
+    shouldZoom: 1
+    zoomAmount: 5
+    zoomDuration: 0.5
+    executeAfterDialogue: 0
   showUIHint: 0
   uiHintPrefab: {fileID: 0}
   hintPosition: {x: 0, y: 0}

@@ -13,6 +13,7 @@ public class Mission0_Movement : TutorialMission
         dialogueToPlay = EnumDialogues.Mission0;
         _hasCompleted = false;
 
+
         PlayerModel.OnPlayerMoved += OnPlayerMoved;
     }
 

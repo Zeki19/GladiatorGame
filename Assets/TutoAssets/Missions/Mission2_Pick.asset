@@ -15,11 +15,16 @@ MonoBehaviour:
   missionName: Learn To Grab a Weapon
   missionDescription: Press E to grab a weapon
   dialogueToPlay: 2
-  shouldMoveCamera: 0
-  cameraTarget: {fileID: 0}
-  cameraMoveDuration: 2
-  zoomIn: 0
-  zoomAmount: 5
+  shouldMoveCamera: 1
+  cameraEvent:
+    eventId: Weapon
+    targetTag: Weapon
+    targetName: SwordRack
+    moveDuration: 0.5
+    shouldZoom: 1
+    zoomAmount: 4
+    zoomDuration: 1
+    executeAfterDialogue: 1
   showUIHint: 0
   uiHintPrefab: {fileID: 0}
   hintPosition: {x: 0, y: 0}

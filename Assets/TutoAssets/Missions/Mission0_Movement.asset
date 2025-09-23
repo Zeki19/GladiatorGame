@@ -15,11 +15,16 @@ MonoBehaviour:
   missionName: Learn To Move
   missionDescription: Use WASD to move character
   dialogueToPlay: 0
-  shouldMoveCamera: 0
-  cameraTarget: {fileID: 0}
-  cameraMoveDuration: 2
-  zoomIn: 0
-  zoomAmount: 5
+  shouldMoveCamera: 1
+  cameraEvent:
+    eventId: 
+    targetTag: 
+    targetName: 
+    moveDuration: 2
+    shouldZoom: 0
+    zoomAmount: 5
+    zoomDuration: 1
+    executeAfterDialogue: 0
   showUIHint: 0
   uiHintPrefab: {fileID: 0}
   hintPosition: {x: 0, y: 0}

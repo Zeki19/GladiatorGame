@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.Collections;
 
 public class TutorialManager : MonoBehaviour
 {
     [Header("Tutorial Configuration")]
     [SerializeField] private List<TutorialMission> missions = new List<TutorialMission>();
-    [SerializeField] private int currentMissionIndex = 0;
+    [SerializeField] private TMPro.TextMeshProUGUI missionDescriptionUI;
 
-    [Header("References")]
-    [SerializeField] private DialogueManager dialogueManager;
-    [SerializeField] private CameraHelper cameraHelper;
+    [Header("Dependencies")]
+    private DialogueManager _dialogueManager;
+    private CameraTutorialManager _cameraTutorialManager;
 
     private TutorialMission _currentMission;
-    private bool _isProcessingMission = false;
+    private int _currentMissionIndex = 0;
+    private TutorialState _currentState = TutorialState.NotStarted;
+    private bool _dialogueStarted = false;
 
     public static event Action<TutorialMission> OnMissionStarted;
     public static event Action<TutorialMission> OnMissionCompleted;
@@ -27,17 +29,32 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
-        if (dialogueManager == null)
-            dialogueManager = ServiceLocator.Instance.GetService<DialogueManager>();
-
+        InitializeDependencies();
         StartTutorial();
+    }
+
+    private void InitializeDependencies()
+    {
+        _dialogueManager = ServiceLocator.Instance.GetService<DialogueManager>();
+        _cameraTutorialManager = ServiceLocator.Instance.GetService<CameraTutorialManager>();
+
+        if (_dialogueManager == null)
+            Debug.LogError("DialogueManager not found!");
+
+        if (_cameraTutorialManager == null)
+            Debug.LogError("CameraTutorialManager not found!");
     }
 
     private void Update()
     {
-        if (_currentMission != null && _isProcessingMission)
+        if (_currentMission != null && _currentState == TutorialState.WaitingForCompletion)
         {
             _currentMission.UpdateMission();
+
+            if (_currentMission.IsCompleted())
+            {
+                CompleteMission();
+            }
         }
     }
 
@@ -61,66 +78,104 @@ public class TutorialManager : MonoBehaviour
             return;
         }
 
-        currentMissionIndex = index;
-        _currentMission = missions[currentMissionIndex];
-        _isProcessingMission = true;
+        _currentMissionIndex = index;
+        _currentMission = missions[_currentMissionIndex];
+        _currentState = TutorialState.NotStarted;
+        _dialogueStarted = false;
 
         Debug.Log($"Starting Mission: {_currentMission.missionName}");
-        OnMissionStarted?.Invoke(_currentMission);
 
-        StartCoroutine(ProcessMission(_currentMission));
+        UpdateMissionDescription();
+        OnMissionStarted?.Invoke(_currentMission);
+        StartCoroutine(ProcessMissionFlow());
     }
 
-    private IEnumerator ProcessMission(TutorialMission mission)
+    private IEnumerator ProcessMissionFlow()
     {
-        mission.Initialize(this);
 
-        if (mission.dialogueToPlay != EnumDialogues.None)
+        _currentMission.Initialize(this);
+
+        if (_currentMission.shouldMoveCamera && !_currentMission.cameraEvent.executeAfterDialogue)
         {
-            bool dialogueComplete = false;
-            dialogueManager.OnConversationEnd = () => dialogueComplete = true;
-            dialogueManager.StartConversation(mission.dialogueToPlay);
-
-            yield return new WaitUntil(() => dialogueComplete);
+            _currentState = TutorialState.MovingCamera;
+            yield return StartCoroutine(HandleCameraEvent(_currentMission.cameraEvent));
         }
 
-        // Handle camera movement if configured
-        if (mission.cameraTarget != null)
+        if (_currentMission.dialogueToPlay != EnumDialogues.None)
         {
-            if (cameraHelper != null)
-            {
-                cameraHelper.MoveToTarget(mission.cameraTarget.transform);
-                yield return new WaitForSeconds(mission.cameraMoveDuration);
-            }
+            _currentState = TutorialState.ShowingDialogue;
+            yield return StartCoroutine(HandleDialogue());
         }
 
-        // Show UI hints if configured
-        if (mission.showUIHint)
+        if (_currentMission.shouldMoveCamera && _currentMission.cameraEvent.executeAfterDialogue)
         {
-            ShowUIHint(mission.uiHintPrefab);
+            _currentState = TutorialState.MovingCamera;
+            yield return StartCoroutine(HandleCameraEvent(_currentMission.cameraEvent));
         }
 
-        // Wait for mission completion (ahora UpdateMission() se llama en Update())
-        yield return new WaitUntil(() => mission.IsCompleted());
-
-        // Hide UI hints
-        if (mission.showUIHint)
+        if (_currentMission.showUIHint)
         {
-            HideUIHint();
+            ShowUIHint(_currentMission.uiHintPrefab);
         }
 
-        // Mission completed
-        CompleteMission();
+        _currentState = TutorialState.WaitingForCompletion;
+
+        if (_currentMission.autoCompleteDelay > 0)
+        {
+            yield return new WaitForSeconds(_currentMission.autoCompleteDelay);
+            _currentMission.ForceComplete();
+        }
+    }
+
+    private IEnumerator HandleDialogue()
+    {
+        if (_dialogueStarted) yield break;
+
+        bool dialogueComplete = false;
+        _dialogueStarted = true;
+
+        _dialogueManager.OnConversationEnd = () => dialogueComplete = true;
+        _dialogueManager.StartConversation(_currentMission.dialogueToPlay);
+
+        yield return new WaitUntil(() => dialogueComplete);
+    }
+
+    private IEnumerator HandleCameraEvent(CameraEventConfig cameraConfig)
+    {
+        bool cameraComplete = false;
+        _cameraTutorialManager.ExecuteCameraEvent(cameraConfig, () => cameraComplete = true);
+        yield return new WaitUntil(() => cameraComplete);
+
+        // Auto-reset camera after some events
+        if (cameraConfig.shouldZoom)
+        {
+            yield return new WaitForSeconds(1f);
+            bool resetComplete = false;
+            _cameraTutorialManager.ResetCamera(() => resetComplete = true);
+            yield return new WaitUntil(() => resetComplete);
+        }
+    }
+
+    private void UpdateMissionDescription()
+    {
+        if (missionDescriptionUI != null && _currentMission != null)
+        {
+            missionDescriptionUI.text = _currentMission.missionDescription;
+        }
     }
 
     private void CompleteMission()
     {
-        Debug.Log($"Mission Completed: {_currentMission.missionName}");
+        if (_currentState == TutorialState.Completed)
+            return;
 
+        _currentState = TutorialState.Completed;
+
+        Debug.Log($"Mission Completed: {_currentMission.missionName}");
+        HideUIHint();
         OnMissionCompleted?.Invoke(_currentMission);
         _currentMission.Cleanup();
-        _isProcessingMission = false;
-        StartMission(currentMissionIndex + 1);
+        StartMission(_currentMissionIndex + 1);
     }
 
     private void CompleteTutorial()
@@ -128,13 +183,50 @@ public class TutorialManager : MonoBehaviour
         Debug.Log("Tutorial Completed!");
         OnTutorialCompleted?.Invoke();
 
-        // Open exit door or trigger next scene
-        if (dialogueManager != null)
+        // Hacer zoom a la puerta de salida antes del diálogo final
+        if (_cameraTutorialManager != null)
         {
-            dialogueManager.StartConversation(EnumDialogues.Mission7);
+            StartCoroutine(CompleteTutorialWithCameraZoom());
+        }
+        else if (_dialogueManager != null)
+        {
+            _dialogueManager.StartConversation(EnumDialogues.Mission7);
         }
     }
 
+    private IEnumerator CompleteTutorialWithCameraZoom()
+    {
+        if (_dialogueManager != null)
+        {
+            _dialogueManager.StartConversation(EnumDialogues.Mission7);
+
+            bool dialogueComplete = false;
+            _dialogueManager.OnConversationEnd = () => dialogueComplete = true;
+            yield return new WaitUntil(() => dialogueComplete);
+        }
+        CameraEventConfig exitCameraEvent = new CameraEventConfig
+        {
+            eventId = "Exit",
+            targetTag = "Exit",
+            targetName = "ExitDoor",
+            moveDuration = 2.5f,
+            shouldZoom = true,
+            zoomAmount = 6f,
+            zoomDuration = 1.5f
+        };
+
+        bool cameraComplete = false;
+        _cameraTutorialManager.ExecuteCameraEvent(exitCameraEvent, () => cameraComplete = true);
+        yield return new WaitUntil(() => cameraComplete);
+
+        yield return new WaitForSeconds(1.5f);
+
+        bool resetComplete = false;
+        _cameraTutorialManager.ResetCamera(() => resetComplete = true);
+        yield return new WaitUntil(() => resetComplete);
+    }
+
+    #region UI Hint Management
     private GameObject _currentUIHint;
 
     private void ShowUIHint(GameObject hintPrefab)
@@ -153,11 +245,12 @@ public class TutorialManager : MonoBehaviour
             _currentUIHint = null;
         }
     }
+    #endregion
 
     [ContextMenu("Force Complete Current Mission")]
     public void ForceCompleteCurrentMission()
     {
-        if (_currentMission != null)
+        if (_currentMission != null && _currentState == TutorialState.WaitingForCompletion)
         {
             _currentMission.ForceComplete();
         }

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 [System.Serializable]
@@ -11,10 +11,7 @@ public abstract class TutorialMission : ScriptableObject
 
     [Header("Camera Settings")]
     public bool shouldMoveCamera = false;
-    public GameObject cameraTarget;
-    public float cameraMoveDuration = 2f;
-    public bool zoomIn = false;
-    public float zoomAmount = 5f;
+    public CameraEventConfig cameraEvent = new CameraEventConfig();
 
     [Header("UI Settings")]
     public bool showUIHint = false;
@@ -22,7 +19,7 @@ public abstract class TutorialMission : ScriptableObject
     public Vector2 hintPosition = Vector2.zero;
 
     [Header("Completion Settings")]
-    public float autoCompleteDelay = -1f; 
+    public float autoCompleteDelay = -1f;
 
     protected bool _isCompleted = false;
     protected TutorialManager _manager;

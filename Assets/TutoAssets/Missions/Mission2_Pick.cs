@@ -1,4 +1,4 @@
-using Player;
+﻿using Player;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Tutorial/Missions/Mission2_Pick", fileName = "Mission2_Pick")]
@@ -12,6 +12,18 @@ public class Mission2_Pick : TutorialMission
         missionName = "Learn To Grab a Weapon";
         missionDescription = "Press E to grab a weapon";
         dialogueToPlay = EnumDialogues.Mission2;
+        shouldMoveCamera = true;
+        cameraEvent = new CameraEventConfig
+        {
+            eventId = "Weapon",
+            targetTag = "Weapon",
+            targetName = "SwordRack",
+            moveDuration = 0.5f,
+            shouldZoom = true,
+            zoomAmount = 4f,
+            zoomDuration = 1f,
+            executeAfterDialogue = true // ANTES del diálogo para mostrar las armas
+        };
         _hasCompleted = false;
 
         PlayerWeaponController.OnPlayerWeaponPicked += OnPlayerPicked;

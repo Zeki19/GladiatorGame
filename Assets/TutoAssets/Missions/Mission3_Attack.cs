@@ -12,6 +12,18 @@ public class Mission3_Attack : TutorialMission
         missionName = "Basic Attack";
         missionDescription = "Press the left click to strike me with your blade";
         dialogueToPlay = EnumDialogues.Mission3;
+
+        shouldMoveCamera = true;
+        cameraEvent = new CameraEventConfig
+        {
+            eventId = "Dummy",
+            targetTag = "Dummy",
+            moveDuration = 1f,
+            shouldZoom = true,
+            zoomAmount = 5f,
+            zoomDuration = 1f,
+            executeAfterDialogue = true
+        };
         _hasCompleted = false;
 
         var dummyManager = ServiceLocator.Instance.GetService<EnemyManager>();
