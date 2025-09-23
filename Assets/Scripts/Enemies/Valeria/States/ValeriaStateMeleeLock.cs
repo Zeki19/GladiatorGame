@@ -112,6 +112,8 @@ namespace Enemies.Valeria.States
             base.Exit();
             _shortMeleeTimerCd = 0;
             _longMeleeTimerCd = 0;
+            _agent._NVagent.ResetPath(); // clear any current path
+            _agent._NVagent.velocity = Vector3.zero; // kill current movement
         }
 
 

@@ -36,8 +36,8 @@ namespace Enemies.Valeria.States
 
             _regularSpeed = _agent._NVagent.speed;
 
-            //var look = _look as EntityView;
-            //look.Sprite.enabled = false;
+            var look = _look as EntityView;
+            look.Sprite.enabled = false;
 
             _agent._NVagent.speed = _invisibilitySpeed;
             _agent._NVagent.updateRotation = false;
@@ -106,6 +106,9 @@ namespace Enemies.Valeria.States
 
             var look = _look as EntityView;
             look.Sprite.enabled = true;
+
+            _agent._NVagent.ResetPath(); // clear any current path
+            _agent._NVagent.velocity = Vector3.zero; // kill current movement
         }
     }
 }

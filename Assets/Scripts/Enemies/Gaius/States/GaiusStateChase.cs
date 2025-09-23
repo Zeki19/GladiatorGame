@@ -9,7 +9,7 @@ namespace Enemies.Gaius.States
         private ISteering _steering;
         private float _speedMod;
         private float _stackingSpeed;
-        private float _speedModeInterval = 1;
+        private float _speedModeInterval = 4;
         private float _timer;
         private Rigidbody2D target;
         private float _longAttackCd=3;
@@ -59,6 +59,8 @@ namespace Enemies.Gaius.States
             base.Exit();
             _agent._NVagent.speed -= _stackingSpeed;
             _stackingSpeed = 0;
+            _agent._NVagent.ResetPath(); // clear any current path
+            _agent._NVagent.velocity = Vector3.zero; // kill current movement
         }
     }
 }

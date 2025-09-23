@@ -90,8 +90,10 @@ namespace Enemies.Valeria.States
 
         public override void Exit()
         {
-            //_agent._NVagent.speed /=2 ;
             base.Exit();
+
+            _agent._NVagent.ResetPath(); // clear any current path
+            _agent._NVagent.velocity = Vector3.zero; // kill current movement
         }
     }
 }

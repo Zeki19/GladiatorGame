@@ -70,6 +70,8 @@ namespace Enemies.Valeria.States
         {
             base.Exit();
             _agent._NVagent.speed = _regularSpeed;
+            _agent._NVagent.ResetPath(); // clear any current path
+            _agent._NVagent.velocity = Vector3.zero; // kill current movement
         }
     }
 }

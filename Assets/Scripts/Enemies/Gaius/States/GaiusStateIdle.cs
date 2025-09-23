@@ -15,7 +15,10 @@ namespace Enemies.Gaius.States
             _sound.PlaySound("Cooldown", "Enemy");
             _animate.PlayStateAnimation(StateEnum.Idle);
             _move.Move(Vector2.zero);
-            _look.LookDir(Vector2.zero);
+            _look.LookDir(Vector2.zero); 
+
+            _agent._NVagent.ResetPath(); // clear any current path
+            _agent._NVagent.velocity = Vector3.zero; // kill current movement
         }
 
         public override void Execute()
