@@ -30,16 +30,4 @@ public class Test : MonoBehaviour
         em.HealthComponent.OnHeal -= Heal;
         em.HealthComponent.OnDead -= Dead;
     }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            em.HealthComponent.TakeDamage(10);
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            em.HealthComponent.Heal(10);
-        }
-    }
 }

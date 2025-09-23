@@ -12,6 +12,7 @@ namespace Player
         [SerializeField]private EntityStatusManager<PlayerStatus> _status;
 
 
+        public event Action<float> OnDash;
         public DashIcon dashIconUI; 
 
         private void Awake()
@@ -31,6 +32,10 @@ namespace Player
         {
             PlaySound("Hit","Player");
             //ServiceLocator.Instance.GetService<ArenaPainter>().PaintArena(transform, "Blood");
+        }
+        public void TriggerDash(float dashCooldown)
+        {
+            OnDash?.Invoke(dashCooldown);
         }
     }
 }

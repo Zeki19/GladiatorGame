@@ -25,8 +25,9 @@ public class EnemyManager : EntityManager
         ServiceLocator.Instance.RemoveService(this);
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         ServiceLocator.Instance.GetService<EnemiesManager>().RegisterEnemy(gameObject, this);
         UpdateBossPhaseUI();
     }

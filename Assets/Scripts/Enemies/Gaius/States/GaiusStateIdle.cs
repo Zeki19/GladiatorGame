@@ -22,6 +22,7 @@ namespace Enemies.Gaius.States
         {
             base.Execute();
             _idleTime -= Time.deltaTime;
+            _look.LookDir(((Vector2)_target.GetTarget().transform.position-_move.Position).normalized);
             if (_idleTime <= 0.0f)
             {
                 _status.SetStatus(StatusEnum.Dashing,false);

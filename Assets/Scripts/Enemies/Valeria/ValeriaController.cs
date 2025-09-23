@@ -156,8 +156,8 @@ namespace Enemies.Valeria
 
         private void Die()
         {
-            Destroy(gameObject);
-            SceneChanger.Instance.ChangeScene(2);
+            //Destroy(gameObject);
+            SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
         }
         protected override void Update()
         {

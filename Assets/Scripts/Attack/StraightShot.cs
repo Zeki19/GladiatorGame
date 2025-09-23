@@ -32,7 +32,7 @@ namespace Attack
             {
                 projectile.transform.position = Weapon.transform.position + Weapon.transform.up * .5f;
                 projectile.transform.rotation = Weapon.transform.rotation;
-                projectile.Configure(damage, collisionLayer, projectileSpeed,maxRange);
+                projectile.SetUp(damage, collisionLayer, projectileSpeed,maxRange);
             }
         }
         

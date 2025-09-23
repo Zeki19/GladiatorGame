@@ -335,6 +335,7 @@ MonoBehaviour:
   model: {fileID: 5162929912761494692}
   view: {fileID: 4406422302611530635}
   controller: {fileID: 937127421366007748}
+  phasesThresholds: 32000000
   maxLife: 120
   bossHealthBarUI: {fileID: 0}
 --- !u!114 &937127421366007748
@@ -352,8 +353,9 @@ MonoBehaviour:
   manager: {fileID: 4028609289078078931}
   _target: {fileID: 0}
   target: {fileID: 0}
-  phasesThresholds: 32000000
   NVagent: {fileID: 8613084811357606315}
+  sceneToChangeWhenDie: VictoryScene
+  _agent: {fileID: 8505707540481220225}
   currentAttack: 0
   stats: {fileID: 11400000, guid: 4e96c14f6a2738646bb097759e9708c2, type: 2}
   weapon: {fileID: 4250985215330158538}
@@ -386,7 +388,8 @@ MonoBehaviour:
   animator: {fileID: 1451094201174338841}
   manager: {fileID: 4028609289078078931}
   sprite: {fileID: 416904973041328778}
-  blinkValues: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
+  blinkDamage: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
+  blinkHeal: {fileID: 11400000, guid: 6e860e5be107cf4419450b13343ac377, type: 2}
   rotationSpeed: 2700
   art: {fileID: 609326606290799995}
 --- !u!114 &9213571371939786118
@@ -633,9 +636,9 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0

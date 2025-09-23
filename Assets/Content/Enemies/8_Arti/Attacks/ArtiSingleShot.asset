@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57df91b73fa445bb97e937d2c22f7237, type: 3}
+  m_Name: ArtiSingleShot
+  m_EditorClassIdentifier: 
+  attackName: 
+  damage: 0
+  projectileSpeed: 5
+  maxRange: 10
+  projectilePrefab: {fileID: 5524527720111712474, guid: 157294ed8f1f17045b95ee3ccec97ee6, type: 3}
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 64

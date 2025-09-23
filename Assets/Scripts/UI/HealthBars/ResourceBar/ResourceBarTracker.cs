@@ -181,6 +181,15 @@ public class ResourceBarTracker : MonoBehaviour
         
         TriggerFillAnimation();
     }
+
+    public void ChangeResourceToAmount(int amount)
+    {
+        if (_resourceCurrent + amount <= 0) _resourceCurrent = 0;
+        
+        _resourceCurrent += amount;
+        
+        TriggerFillAnimation();
+    }
     public void SetUp(int max, bool startsAt100Percent)
     {
         resourceMax = max;

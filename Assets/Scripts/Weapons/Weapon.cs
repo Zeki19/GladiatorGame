@@ -35,16 +35,18 @@ namespace Weapons
 
         #region Durability
 
-        private int Durability { get; set; }
+        public int Durability { get; private set; }
         private int DurabilityStandardLoss { get; set; }
         private int DurabilityChargeLoss { get; set; }
         private float CurrentDurability { get; set; }
+        private bool StandardConsumeDurabilityOnMiss { get; set; }
+        private bool ChargeConsumeDurabilityOnMiss { get; set; }
 
         #endregion
 
         #region Charge
 
-        private float ChangeThreshold { get; set; }
+        private float ChargeMax { get; set; }
         private float ChargePerAttack { get; set; }
         private float ChargeMeter { get; set; }
 
@@ -68,10 +70,12 @@ namespace Weapons
 
         public void Configure(SoWeapon config)
         {
+            StandardConsumeDurabilityOnMiss = config.standardConsumeDurabilityOnMiss;
+            ChargeConsumeDurabilityOnMiss = config.chargeConsumeDurabilityOnMiss;
             DurabilityStandardLoss = config.durabilityStandardLoss;
             DurabilityChargeLoss = config.durabilityChargeLoss;
             ChargePerAttack = config.chargePerAttack;
-            ChangeThreshold = config.changeThreshold;
+            ChargeMax = config.changeThreshold;
             KnockbackForce = config.knockbackForce;
             //ChargeDamage = config.chargeDamage;
             SlowPercent = config.slowPercent;
@@ -109,18 +113,20 @@ namespace Weapons
         {
             CurrentDurability -= IsCurrentAttackBase() ? DurabilityStandardLoss : DurabilityChargeLoss;
             CurrentDurability = Mathf.Clamp(CurrentDurability, 0, Durability);
-            Debug.Log("Current Weapon Durability :" + CurrentDurability);
             return CheckDurability();
         }
 
+        public bool ConsumeDurabilityOnMissStandard() => StandardConsumeDurabilityOnMiss;
+        public bool ConsumeDurabilityOnMissCharge() => ChargeConsumeDurabilityOnMiss;
         public bool CheckDurability() => !(CurrentDurability <= 0);
         private bool IsCurrentAttackBase() => CurrentAttack == BaseAttack;
         public float DurabilityPercent() => CurrentDurability / Durability;
         public void ResetChangeMeter() => ChargeMeter = 0;
         public bool CanAttack() => !IsOnCooldown;
         public float Damage() => IsCurrentAttackBase() ? BaseAttack.damage : ChargeAttack.damage;
-        public float ChargePercent() => ChargeMeter / ChangeThreshold;
-        public bool CheckCharge() => ChargeMeter >= ChangeThreshold;
+        public float ChargePercent() => ChargeMeter / ChargeMax;
+        public float MaxCharge() => ChargeMax;
+        public bool IsCharged() => ChargeMeter >= ChargeMax;
         public void ChargeWeapon()
         {
             if (IsCurrentAttackBase())

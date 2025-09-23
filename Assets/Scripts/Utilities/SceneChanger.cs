@@ -30,6 +30,10 @@ public class SceneChanger : MonoBehaviour
     {
         SceneManager.LoadScene(sceneNumber);
     }
+    public void ChangeScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 
     public void Quit() 
     {

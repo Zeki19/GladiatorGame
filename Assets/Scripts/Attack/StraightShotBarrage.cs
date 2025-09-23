@@ -8,16 +8,20 @@ namespace Attack
     {
         [SerializeField] private int numberOfRounds;
         [SerializeField] private float delayBetweenRounds;
+        [SerializeField] private bool repositionAfterEachShot;
         public override void ExecuteAttack()
         {
             CoroutineRunner.StartCoroutine(Attack());
         }
         protected override IEnumerator Attack()
         {
+            
             for (int i = 0; i < numberOfRounds; i++)
             {
                 Shoot();
                 yield return new WaitForSeconds(delayBetweenRounds);
+                if(repositionAfterEachShot)
+                    LookPosition(Target.GetTarget().transform.position);
             }
             FinishAttack();
         }

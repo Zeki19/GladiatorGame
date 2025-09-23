@@ -1,4 +1,4 @@
-using System;
+    using System;
 using System.Collections.Generic;
 using System.Linq;
 using Enemies;
@@ -20,6 +20,10 @@ namespace Player
         public Weapon Weapon { get; private set; }
         public float offset;
         private readonly List<GameObject> _enemiesHit = new List<GameObject>();
+        
+        public event Action OnAttack;
+        public event Action OnWeaponChanged;
+        public bool HasWeapon => Weapon != null;
 
         private void Awake()
         {
@@ -59,16 +63,24 @@ namespace Player
             var controller = _manager.controller as PlayerController;
             controller?.ChangeToAttack();
             Weapon.CurrentAttack = Weapon.BaseAttack;
+            if (Weapon.ConsumeDurabilityOnMissStandard())
+                Weapon.AffectDurability();
+            
+            OnAttack?.Invoke();
         }
 
         public void ChargeAttack()
         {
             if (Weapon == null || !Weapon.CanAttack()) return;
             var controller = _manager.controller as PlayerController;
-            if (Weapon.CheckCharge())
+            if (Weapon.IsCharged())
             {
                 controller?.ChangeToChargeAttack();
                 Weapon.CurrentAttack = Weapon.ChargeAttack;
+                if (Weapon.ConsumeDurabilityOnMissCharge())
+                    Weapon.AffectDurability();
+                
+                OnAttack?.Invoke();
             }
         }
 
@@ -92,6 +104,8 @@ namespace Player
             Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
             weapon.BaseAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,this,_manager.controller);
             weapon.ChargeAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,this,_manager.controller);
+            
+            OnWeaponChanged?.Invoke();
         }
 
         public void DropWeapon()
@@ -116,6 +130,8 @@ namespace Player
             Weapon.BaseAttack.OnUnequip();
             Weapon.ChargeAttack.OnUnequip();
             Weapon = null;
+            
+            OnWeaponChanged?.Invoke();
         }
         
         private void AttackFinishSubscription(bool subscribe)
@@ -148,6 +164,8 @@ namespace Player
             Weapon.ChargeWeapon();
             Weapon.AffectDurability();
             _enemiesHit.Add(other.gameObject);
+            
+            OnAttack?.Invoke();
         }
         
         private bool IsInLayerMask(GameObject obj, LayerMask layerMask)

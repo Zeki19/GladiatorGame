@@ -16,9 +16,17 @@ namespace Entities
         public EntityModel model;
         public EntityView view;
         public EntityController controller;
+        public int[] phasesThresholds;
+        public PhaseSystem PhaseSystem;
         public IHealth HealthComponent => HealthSystem;
         
         public void PlaySound (string soundName,string entityName) => Sounds?.Invoke(soundName,entityName);
+
+        protected virtual void Start()
+        {
+            PhaseSystem = new PhaseSystem(phasesThresholds, HealthComponent);
+        }
+
         public event Action<string, string> Sounds;
         public Action<string> StopSounds;
     }

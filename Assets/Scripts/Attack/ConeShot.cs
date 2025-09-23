@@ -43,7 +43,7 @@ namespace Attack
                     (numberOfProjectiles == 1) 
                         ? Weapon.transform.rotation 
                         : Weapon.transform.rotation * Quaternion.Euler(0, 0, coneAngle / 2 - SeparationAngle * j);
-                projectiles[j].Configure(damage, collisionLayer, projectileSpeed,maxRange);
+                projectiles[j].SetUp(damage, collisionLayer, projectileSpeed,maxRange);
             }
         }
 
