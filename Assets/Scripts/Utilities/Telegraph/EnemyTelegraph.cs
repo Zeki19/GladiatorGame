@@ -70,11 +70,11 @@ public class EnemyTelegraph : ScriptableObject
 
         go.transform.position = telePosition;
         go.transform.rotation = teleQuaternion;
+        go.transform.localScale = new Vector3(teleAttack.scale.x, teleAttack.scale.y, 1f);
 
         SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
         sr.sprite = Sprites[teleAttack.shape];
         sr.sortingLayerName = "Background";
-
         if (!teleAttack.center) 
         {
             AdjustSpriteLocation(go, sr, teleAttack);
@@ -85,7 +85,6 @@ public class EnemyTelegraph : ScriptableObject
 
     private void AdjustSpriteLocation(GameObject go, SpriteRenderer sr, telegraphValues teleAttack)
     {
-        go.transform.localScale = new Vector3(teleAttack.scale.x, teleAttack.scale.y, 1f);
 
         float rawHeight = sr.sprite.bounds.size.y;
         float scaledHeight = rawHeight * go.transform.localScale.y;
