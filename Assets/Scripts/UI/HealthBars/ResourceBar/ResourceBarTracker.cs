@@ -20,6 +20,8 @@ public class ResourceBarTracker : MonoBehaviour
     [Header("Shape")]
     [SerializeField] private ShapeType shapeOfBar = ShapeType.RectangleHorizontal;
     [SerializeField] private Color barColor;
+
+    public bool IsFinished { private set; get; }
     private enum ShapeType
     {
         [InspectorName("Rectangle (Horizontal)")]
@@ -91,6 +93,8 @@ public class ResourceBarTracker : MonoBehaviour
         textField.color = textColor;
 
         trail.enabled = trailSpeed != 0;
+        
+        IsFinished = false;
         
         UpdateResourceBar();
     }
@@ -175,7 +179,11 @@ public class ResourceBarTracker : MonoBehaviour
     //Public methods
     public void ChangeResourceByAmount(int amount)
     {
-        if (_resourceCurrent + amount <= 0) _resourceCurrent = 0;
+        if (_resourceCurrent + amount <= 0)
+        {
+            _resourceCurrent = 0;
+            IsFinished = true;
+        }
         
         _resourceCurrent += amount;
         
@@ -184,7 +192,11 @@ public class ResourceBarTracker : MonoBehaviour
 
     public void ChangeResourceToAmount(int amount)
     {
-        if (_resourceCurrent + amount <= 0) _resourceCurrent = 0;
+        if (_resourceCurrent + amount <= 0)
+        {
+            _resourceCurrent = 0;
+            IsFinished = true;
+        }
         
         _resourceCurrent += amount;
         
@@ -196,5 +208,15 @@ public class ResourceBarTracker : MonoBehaviour
         startsFull = startsAt100Percent;
         
         UpdateResourceBar();
+    }
+
+    public void SetUp(int max, bool startsAt100Percent, Color color)
+    {
+        resourceMax = max;
+        startsFull = startsAt100Percent;
+        barColor = color;
+        
+        UpdateResourceBar();
+
     }
 }

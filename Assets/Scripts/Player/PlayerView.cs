@@ -25,7 +25,7 @@ namespace Player
         {
             var playerManager = manager as PlayerManager;
             var controler = playerManager.controller as PlayerController;
-            animator.SetFloat("State", controler._phaseSystem.currentPhase());
+            animator.SetFloat("State", controler._phaseSystem.CurrentPhase());
         }
 
         public override void LookDir(Vector2 dir)

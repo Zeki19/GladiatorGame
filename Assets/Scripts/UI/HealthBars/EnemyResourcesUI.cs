@@ -6,29 +6,47 @@ public class EnemyResourcesUI : MonoBehaviour
     [Header("Enemy")]
     [SerializeField] private EntityManager entityManager;
     
-    [Header("Bars")]
-    [SerializeField] private ResourceBarTracker healthBar;
+    [Header("Bars prefab")]
+    [SerializeField] private GameObject barPrefab;
+    [SerializeField] private GameObject barHolder;
+    private ResourceBarTracker currentBar;
+
+    private int index;
+    private ResourceBarTracker[] rb;
     void Start()
     {
         entityManager.HealthComponent.OnDamage += Damage;
         entityManager.HealthComponent.OnHeal += Heal;
         entityManager.HealthComponent.OnDead += Dead;
 
-        SetUpHealthBar();
+        SetUpHealthBars();
     }
     
-    private void SetUpHealthBar()
+    private void SetUpHealthBars()
     {
-        healthBar.SetUp((int)entityManager.HealthComponent.maxHealth, true);
+        var array = entityManager.PhaseSystem.Phases();
+        
+        rb = new ResourceBarTracker[array.Length];
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            Debug.Log(array[i]);
+            var bar = Instantiate(barPrefab, barHolder.transform, true);
+            var script = bar.GetComponent<ResourceBarTracker>();
+            
+            script.SetUp(array[i], true, Random.ColorHSV());
+            
+            rb[i] = script;
+        }
     }
 
     private void Damage(float value)
     {
-        healthBar.ChangeResourceByAmount((int)value * -1);
+        rb[index].ChangeResourceByAmount((int)value * -1);
     }
     private void Heal(float value)
     {
-        healthBar.ChangeResourceByAmount((int)value);
+        rb[index].ChangeResourceByAmount((int)value);
     }
     private void Dead()
     {
