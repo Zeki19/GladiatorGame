@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
         [SerializeField] private TextMeshProUGUI speakerBoxUIName;
         
         [SerializeField] private AudioSource audioSource;
+        [SerializeField] private Animator animator;
         private CameraShake _cameraShake;
     #endregion
 
@@ -56,14 +57,16 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueSO dialogueSo = FindDialogueSo(dialogue);
         
+        dialogueCanvas.SetActive(true);
+        animator.SetBool("IsOpen", true);
+        audioSource.enabled = true;
+        
         QueueDialogue(dialogueSo);
     }
 
     private void QueueDialogue(DialogueSO dialogue)
     {
         _linesQueue.Clear();
-        dialogueCanvas.SetActive(true);
-        audioSource.enabled = true;
         
         foreach (var line in dialogue.lines)
         {
@@ -104,6 +107,7 @@ public class DialogueManager : MonoBehaviour
     }
     private void EndDialogue()
     {
+        animator.SetBool("IsOpen", false); //No se ve xq se apaga muy rapido
         OnConversationEnd?.Invoke();
         dialogueCanvas.SetActive(false);
         audioSource.enabled = false;
