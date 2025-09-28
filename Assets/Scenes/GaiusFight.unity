@@ -6208,6 +6208,10 @@ PrefabInstance:
       propertyPath: bossHealthBarUI
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4250985215330158538, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4406422302611530635, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: blinkHeal
       value: 
@@ -6236,6 +6240,10 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9213571371939786118, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: EnemyTelegraph
+      value: 
+      objectReference: {fileID: 11400000, guid: 62c552d9595e2cf4eb2451eae77d462c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

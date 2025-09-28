@@ -40,5 +40,7 @@ public class ValeriaStateAttack<T> : StatesBase<T>
         _weapon.transform.localRotation=quaternion.identity;
         _weapon.SetActive(false);
         _agent._NVagent.isStopped = false;
+        _agent._NVagent.ResetPath(); // clear any current path
+        _agent._NVagent.velocity = Vector3.zero; // kill current movement
     }
 }
