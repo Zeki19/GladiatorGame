@@ -32,7 +32,7 @@ public class CameraTutoManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         
         cameraHelper.MoveToTarget(target.transform);
-        dialogueManager.StartConversation(EnumDialogues.GaiusEntrance);
+        dialogueManager.StartConversation(EnumDialogues.Mission0);
         Zoom(EnumZoom.In);
         dialogueManager.OnConversationEnd += TutorialEnded;
     }

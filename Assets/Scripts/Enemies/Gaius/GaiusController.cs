@@ -14,10 +14,10 @@ namespace Enemies.Gaius
         private AttackManager _attackManager;
         #region Private Variables
 
-        private StatesBase<EnemyStates> _idleState; // BLUE
-        private StatesBase<EnemyStates> _dashState; // BLUE
-        private StatesBase<EnemyStates> _chaseState; // WHITE
-        public StatesBase<EnemyStates> _AttackState; // YELLOW
+        private StatesBase<EnemyStates> _idleState; 
+        private StatesBase<EnemyStates> _dashState; 
+        private StatesBase<EnemyStates> _chaseState; 
+        public StatesBase<EnemyStates> _AttackState; 
 
         private ISteering _pursuitSteering;
 

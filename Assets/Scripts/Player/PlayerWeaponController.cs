@@ -6,7 +6,9 @@ using Entities.Interfaces;
 using Unity.Mathematics;
 using UnityEngine;
 using Utilities.Factory.WeaponFactory;
+
 using Weapons;
+using System;
 
 namespace Player
 {
@@ -25,6 +27,10 @@ namespace Player
         public event Action OnWeaponChanged;
         public bool HasWeapon => Weapon != null;
 
+        public static event Action OnPlayerWeaponPicked;
+        public static event Action OnPlayerWeaponDropped;
+        public static event Action OnPlayerAttacked;
+        public static event Action OnPlayerChargedAttack;
         private void Awake()
         {
             ServiceLocator.Instance.RegisterService(this);
@@ -40,8 +46,10 @@ namespace Player
         {
             _weaponManager = ServiceLocator.Instance.GetService<WeaponManager>();
             _manager = ServiceLocator.Instance.GetService<PlayerManager>();
-            if(startingWeapon!=null)
+            if (startingWeapon != null)
+            {
                 EquipWeapon(_weaponManager.RequestWeapon(startingWeapon));
+            }
             _playerRotation = _manager.model.transform;
         }
 
@@ -67,6 +75,7 @@ namespace Player
                 Weapon.AffectDurability();
             
             OnAttack?.Invoke();
+            OnPlayerAttacked?.Invoke();
         }
 
         public void ChargeAttack()
@@ -81,6 +90,7 @@ namespace Player
                     Weapon.AffectDurability();
                 
                 OnAttack?.Invoke();
+                OnPlayerChargedAttack?.Invoke();
             }
         }
 
@@ -91,6 +101,7 @@ namespace Player
             if (Weapon != null) return;
             var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
             EquipWeapon(weapon);
+
         }
 
         private void EquipWeapon(Weapon weapon)
@@ -106,6 +117,7 @@ namespace Player
             weapon.ChargeAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,this,_manager.controller);
             
             OnWeaponChanged?.Invoke();
+            OnPlayerWeaponPicked?.Invoke();
         }
 
         public void DropWeapon()
@@ -113,6 +125,10 @@ namespace Player
             if (Weapon is not { Attacking: false }) return;
             _weaponManager.CatchDroppedWeapon(Weapon);
             UnEquipWeapon();
+            Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
+            Weapon.ChargeAttack.FinishAnimation -= ClearEnemiesList;
+            Weapon = null;
+            OnPlayerWeaponDropped?.Invoke();
         }
 
         private void DestroyWeapon()

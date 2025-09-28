@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32630a25164c19d4b9ccb81576b080b1, type: 3}
+  m_Name: Mission3
+  m_EditorClassIdentifier: 
+  dialogueName: 3
+  lines:
+  - speakerName: Training Dummy
+    speakerImage: {fileID: -6006165637625706423, guid: ed6618cc8510f7641a66587ace0ff5b2, type: 3}
+    sentence: Press the left click to strike me with your blade.
+    cameraShake: 0
+    shakeAtTheStart: 0
+    soundToPlay: {fileID: 0}
+    playAtTheStart: 0
