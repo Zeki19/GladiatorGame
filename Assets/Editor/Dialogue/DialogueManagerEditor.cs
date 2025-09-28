@@ -10,6 +10,7 @@ public class DialogueManagerEditor : Editor
     private SerializedProperty _speakerBoxUIName;
     private SerializedProperty _speakerBoxUIImage;
     private SerializedProperty _audioSource;
+    private SerializedProperty _animator;
 
     // Typing settings
     private SerializedProperty _typingDelay;
@@ -28,6 +29,7 @@ public class DialogueManagerEditor : Editor
         _speakerBoxUIName = serializedObject.FindProperty("speakerBoxUIName");
         _speakerBoxUIImage = serializedObject.FindProperty("speakerBoxUIImage");
         _audioSource = serializedObject.FindProperty("audioSource");
+        _animator          = serializedObject.FindProperty("animator");
 
         _typingDelay = serializedObject.FindProperty("typingDelay");
         _typingSound = serializedObject.FindProperty("typingSound");
@@ -49,6 +51,7 @@ public class DialogueManagerEditor : Editor
             EditorGUILayout.PropertyField(_speakerBoxUIImage, new GUIContent("Speaker box UI Image"));
             EditorGUILayout.PropertyField(_speakerBoxUIName, new GUIContent("Speaker box UI Name"));
             EditorGUILayout.PropertyField(_audioSource, new GUIContent("Audio Source"));
+            EditorGUILayout.PropertyField(_animator,          new GUIContent("Animator")); 
             EditorGUILayout.EndVertical();
         }
 
