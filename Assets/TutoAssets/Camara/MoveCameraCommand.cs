@@ -25,6 +25,8 @@ public class MoveCameraCommand : ICameraCommand
         {
             elapsed += Time.deltaTime;
             float t = elapsed / _duration;
+            t = Mathf.SmoothStep(0f, 1f, t);
+
             _cameraTransform.position = Vector3.Lerp(startPos, _target.position, t);
             yield return null;
         }

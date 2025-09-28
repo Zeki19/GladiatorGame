@@ -11,6 +11,9 @@ public class CameraTutorialManager : MonoBehaviour
     [SerializeField] private Transform cameraHelper;
     [SerializeField] private float defaultZoom = 10f;
 
+    [Header("Camera Return Speed")]
+    [SerializeField] private float returnMoveSpeed = 8f; 
+
     [Header("Registered Camera Targets")]
     [SerializeField] private List<CameraTarget> registeredTargets = new List<CameraTarget>();
 
@@ -102,7 +105,6 @@ public class CameraTutorialManager : MonoBehaviour
 
     private Transform FindTarget(CameraEventConfig config)
     {
-        // 1. Buscar en registry por ID
         if (_targetRegistry.TryGetValue(config.eventId, out Transform registeredTarget))
         {
             return registeredTarget;
@@ -118,11 +120,9 @@ public class CameraTutorialManager : MonoBehaviour
 
     private IEnumerator ProcessCameraEvent(CameraEventConfig config, Transform target, Action onComplete)
     {
-        // Set camera to follow helper
         cinemachineCamera.Follow = cameraHelper;
         cameraHelper.position = cinemachineCamera.transform.position;
 
-        // Queue commands
         _commandQueue.Enqueue(new MoveCameraCommand(cameraHelper, target, config.moveDuration));
 
         if (config.shouldZoom)
@@ -130,7 +130,6 @@ public class CameraTutorialManager : MonoBehaviour
             _commandQueue.Enqueue(new ZoomCameraCommand(cinemachineCamera, config.zoomAmount, config.zoomDuration));
         }
 
-        // Execute commands
         while (_commandQueue.Count > 0)
         {
             ICameraCommand command = _commandQueue.Dequeue();
@@ -148,18 +147,20 @@ public class CameraTutorialManager : MonoBehaviour
 
     private IEnumerator ResetCameraCoroutine(Action onComplete)
     {
-        // Reset zoom
         yield return StartCoroutine(new ZoomCameraCommand(cinemachineCamera, defaultZoom, 1f).Execute());
-
-        // Move helper back to original target
         if (_originalTarget != null)
         {
-            yield return StartCoroutine(new MoveCameraCommand(cameraHelper, _originalTarget, 2f).Execute());
+            float returnDuration = 1.2f;
+            yield return StartCoroutine(new MoveCameraCommand(cameraHelper, _originalTarget, returnDuration, returnMoveSpeed).Execute());
         }
 
-        // Reset follow target
         cinemachineCamera.Follow = _originalTarget;
 
         onComplete?.Invoke();
+    }
+
+    public void SetReturnMoveSpeed(float speed)
+    {
+        returnMoveSpeed = speed;
     }
 }

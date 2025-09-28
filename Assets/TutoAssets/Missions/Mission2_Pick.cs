@@ -22,7 +22,7 @@ public class Mission2_Pick : TutorialMission
             shouldZoom = true,
             zoomAmount = 4f,
             zoomDuration = 1f,
-            executeAfterDialogue = true // ANTES del diálogo para mostrar las armas
+            executeAfterDialogue = true 
         };
         _hasCompleted = false;
 

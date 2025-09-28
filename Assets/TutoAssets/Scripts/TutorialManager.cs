@@ -9,6 +9,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private List<TutorialMission> missions = new List<TutorialMission>();
     [SerializeField] private TMPro.TextMeshProUGUI missionDescriptionUI;
 
+    [Header("Training Hub Configuration")]
+    [SerializeField] private bool isTrainingMode = false; // Bool para controlar si es modo entrenamiento
+
     [Header("Dependencies")]
     private DialogueManager _dialogueManager;
     private CameraTutorialManager _cameraTutorialManager;
@@ -17,10 +20,16 @@ public class TutorialManager : MonoBehaviour
     private int _currentMissionIndex = 0;
     private TutorialState _currentState = TutorialState.NotStarted;
     private bool _dialogueStarted = false;
+    private bool _tutorialCompleted = false; // Para saber si el tutorial se completó
 
     public static event Action<TutorialMission> OnMissionStarted;
     public static event Action<TutorialMission> OnMissionCompleted;
     public static event Action OnTutorialCompleted;
+    public static event Action OnTutorialRestart; // Nuevo evento para reiniciar tutorial
+
+    // Propiedades públicas para acceder desde otros scripts
+    public bool IsTrainingMode => isTrainingMode;
+    public bool IsTutorialCompleted => _tutorialCompleted;
 
     private void Awake()
     {
@@ -30,7 +39,20 @@ public class TutorialManager : MonoBehaviour
     private void Start()
     {
         InitializeDependencies();
-        StartTutorial();
+
+        // Solo iniciar tutorial si no estamos en modo entrenamiento
+        if (!isTrainingMode)
+        {
+            StartTutorial();
+        }
+        else
+        {
+            // En modo entrenamiento, mostrar mensaje de exploración libre
+            if (missionDescriptionUI != null)
+            {
+                missionDescriptionUI.text = "Training Mode - Explore freely or press E near the dummy to restart tutorial";
+            }
+        }
     }
 
     private void InitializeDependencies()
@@ -56,6 +78,50 @@ public class TutorialManager : MonoBehaviour
                 CompleteMission();
             }
         }
+    }
+
+    // Método público para activar/desactivar modo entrenamiento
+    public void SetTrainingMode(bool trainingMode)
+    {
+        isTrainingMode = trainingMode;
+
+        if (trainingMode)
+        {
+            _currentState = TutorialState.NotStarted;
+            _currentMission = null;
+
+            if (missionDescriptionUI != null)
+            {
+                missionDescriptionUI.text = "Training Mode - Explore freely or press E near the dummy to restart tutorial";
+            }
+        }
+    }
+
+    // Método público para reiniciar el tutorial desde 0
+    public void RestartTutorial()
+    {
+        // Solo permitir reinicio si el tutorial se completó o estamos en modo entrenamiento
+        if (!_tutorialCompleted && !isTrainingMode)
+            return;
+
+        Debug.Log("Restarting tutorial from beginning...");
+
+        // Reiniciar variables
+        _currentMissionIndex = 0;
+        _currentMission = null;
+        _currentState = TutorialState.NotStarted;
+        _dialogueStarted = false;
+        _tutorialCompleted = false;
+        isTrainingMode = false;
+
+        // Limpiar UI hint si existe
+        HideUIHint();
+
+        // Disparar evento de reinicio
+        OnTutorialRestart?.Invoke();
+
+        // Iniciar tutorial
+        StartTutorial();
     }
 
     private void StartTutorial()
@@ -181,6 +247,14 @@ public class TutorialManager : MonoBehaviour
     private void CompleteTutorial()
     {
         Debug.Log("Tutorial Completed!");
+        _tutorialCompleted = true; // Marcar como completado
+
+        // Cambiar el texto de la UI AQUÍ, cuando se completa el tutorial
+        if (missionDescriptionUI != null)
+        {
+            missionDescriptionUI.text = "Train or face your opponent";
+        }
+
         OnTutorialCompleted?.Invoke();
 
         // Hacer zoom a la puerta de salida antes del diálogo final
@@ -254,5 +328,17 @@ public class TutorialManager : MonoBehaviour
         {
             _currentMission.ForceComplete();
         }
+    }
+
+    [ContextMenu("Toggle Training Mode")]
+    public void ToggleTrainingMode()
+    {
+        SetTrainingMode(!isTrainingMode);
+    }
+
+    [ContextMenu("Restart Tutorial")]
+    public void RestartTutorialFromMenu()
+    {
+        RestartTutorial();
     }
 }

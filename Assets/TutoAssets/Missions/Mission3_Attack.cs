@@ -20,7 +20,7 @@ public class Mission3_Attack : TutorialMission
             targetTag = "Dummy",
             moveDuration = 1f,
             shouldZoom = true,
-            zoomAmount = 5f,
+            zoomAmount = 3f,
             zoomDuration = 1f,
             executeAfterDialogue = true
         };
