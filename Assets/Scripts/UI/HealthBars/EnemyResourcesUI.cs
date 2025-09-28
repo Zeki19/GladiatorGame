@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Entities;
 using UnityEngine;
 
@@ -9,44 +12,89 @@ public class EnemyResourcesUI : MonoBehaviour
     [Header("Bars prefab")]
     [SerializeField] private GameObject barPrefab;
     [SerializeField] private GameObject barHolder;
-    private ResourceBarTracker currentBar;
-
-    private int index;
-    private ResourceBarTracker[] rb;
-    void Start()
+    
+    private int _index;
+    private ResourceBarTracker[] _rb;
+    private float[] _health;
+    private float _actualHealth;
+    
+    private void Start()
     {
         entityManager.HealthComponent.OnDamage += Damage;
         entityManager.HealthComponent.OnHeal += Heal;
         entityManager.HealthComponent.OnDead += Dead;
 
+        StartCoroutine(Wait(.25f));
+    }
+    private IEnumerator Wait(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
         SetUpHealthBars();
     }
-    
     private void SetUpHealthBars()
     {
-        var array = entityManager.PhaseSystem.Phases();
+        _health = entityManager.PhaseSystem.PhasesHealth();
         
-        rb = new ResourceBarTracker[array.Length];
+        _rb = new ResourceBarTracker[_health.Length];
+        
+        var color = GenerateColors(_health.Length);
 
-        for (int i = 0; i < array.Length; i++)
+        for (int i = 0; i < _health.Length; i++)
         {
-            Debug.Log(array[i]);
-            var bar = Instantiate(barPrefab, barHolder.transform, true);
+            var bar = Instantiate(barPrefab, barHolder.transform, false);
             var script = bar.GetComponent<ResourceBarTracker>();
             
-            script.SetUp(array[i], true, Random.ColorHSV());
+            script.SetUp(_health[i], true, color[i]);
             
-            rb[i] = script;
+            _rb[i] = script;
         }
-    }
 
+        _index = _health.Length - 1;
+        _actualHealth = _health[_index];
+    }
+    private Color[] GenerateColors(int steps)
+    {
+        var colors = new Color[steps];
+        
+        Color red = Color.red;
+        Color orange = new Color(1f, 0.5f, 0f);
+
+        for (int i = 0; i < steps; i++)
+        {
+            var t = i / (float)(steps - 1);
+            var c = Color.Lerp(orange, red, t);
+            colors[i] = c;
+        }
+
+        return colors;
+    }
+    
     private void Damage(float value)
     {
-        rb[index].ChangeResourceByAmount((int)value * -1);
+        _actualHealth -= value;
+        _rb[_index].ChangeResourceByAmount(value * -1f);
+
+        if (_actualHealth > 0) return;
+        
+        _index--;
+        if (_index < 0) _index = 0;
+        
+        _rb[_index].ChangeResourceByAmount(_actualHealth);
+        _actualHealth = _health[_index];
     }
-    private void Heal(float value)
+    private void Heal(float value) //Might not work as intended.
     {
-        rb[index].ChangeResourceByAmount((int)value);
+        _actualHealth += value;
+        _rb[_index].ChangeResourceByAmount(value);
+        
+        if (_actualHealth > _health[_index]) return;
+        
+        _index++;
+        if (_index > _health[_index]) _index = _health.Length;
+        
+        _rb[_index].ChangeResourceByAmount(_actualHealth);
+        _actualHealth = _health[_index];
+        
     }
     private void Dead()
     {
@@ -54,4 +102,5 @@ public class EnemyResourcesUI : MonoBehaviour
         entityManager.HealthComponent.OnHeal -= Heal;
         entityManager.HealthComponent.OnDead -= Dead;
     }
+
 }

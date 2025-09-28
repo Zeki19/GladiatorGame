@@ -6,11 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/1_Gaius/Behaiviour/GauisTest.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/1_Gaius/Behaiviour/GauisTest.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/9_Testing/Attacks/Test.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/9_Testing/Attacks/Test.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ArtTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ArtTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateIdle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/States/GaiusStateIdle.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Fonts/Airnt-qZey2 SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Fonts/Airnt-qZey2 SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Combat/Enemy - UI - Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Combat/Enemy - UI - Canvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Combat/ResourceBar.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Combat/ResourceBar.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GaiusFight.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GaiusFight.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/HealthSystem/PhaseSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/HealthSystem/PhaseSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HealthBars/EnemyResourcesUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HealthBars/EnemyResourcesUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HealthBars/ResourceBar/ResourceBarTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HealthBars/ResourceBar/ResourceBarTracker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +103,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Unity\6000.0.33f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity 6000.0.33f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;D:\Unity Poyects\GladiatorGame&quot; -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Unity Poyects\GladiatorGame" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -110,7 +114,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Unity\6000.0.33f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity 6000.0.33f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;D:\Unity Poyects\GladiatorGame&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Unity Poyects\GladiatorGame" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -233,6 +237,7 @@
       <workItem from="1756498418355" duration="130000" />
       <workItem from="1757807339604" duration="4783000" />
       <workItem from="1758469239285" duration="12998000" />
+      <workItem from="1759090297337" duration="3188000" />
     </task>
     <servers />
   </component>

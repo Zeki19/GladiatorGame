@@ -14,14 +14,14 @@ public class ResourceBarTracker : MonoBehaviour
     [SerializeField] private TMP_Text textField;
     
     [Header("Settings")]
-    [SerializeField] private int resourceMax = 100;
+    [SerializeField] private float resourceMax = 100;
     [SerializeField] private bool startsFull = true;
+    private float _resourceCurrent = 100;
     
     [Header("Shape")]
     [SerializeField] private ShapeType shapeOfBar = ShapeType.RectangleHorizontal;
     [SerializeField] private Color barColor;
-
-    public bool IsFinished { private set; get; }
+    
     private enum ShapeType
     {
         [InspectorName("Rectangle (Horizontal)")]
@@ -56,7 +56,7 @@ public class ResourceBarTracker : MonoBehaviour
     }
     
     
-    private int _resourceCurrent = 100;
+
 
     private void OnValidate()
     {
@@ -94,8 +94,6 @@ public class ResourceBarTracker : MonoBehaviour
 
         trail.enabled = trailSpeed != 0;
         
-        IsFinished = false;
-        
         UpdateResourceBar();
     }
     private void UpdateResourceBar()
@@ -117,6 +115,7 @@ public class ResourceBarTracker : MonoBehaviour
         
         SetTextField();
     }
+    
     private void TriggerFillAnimation()
     {
         float targetFill = CalculateTargetFill();
@@ -127,12 +126,10 @@ public class ResourceBarTracker : MonoBehaviour
         _fillRoutine = StartCoroutine(SmoothlyTransitionToNewValue(targetFill));
         SetTextField();
     }
+    
     private IEnumerator SmoothlyTransitionToNewValue(float targetFill)
     {
         bar.fillAmount = targetFill;
-        
-        bar.fillAmount = targetFill;
-        
         
         while (trail.fillAmount > targetFill)
         {
@@ -177,32 +174,18 @@ public class ResourceBarTracker : MonoBehaviour
     }
     
     //Public methods
-    public void ChangeResourceByAmount(int amount)
+    public void ChangeResourceByAmount(float amount)
     {
-        if (_resourceCurrent + amount <= 0)
-        {
-            _resourceCurrent = 0;
-            IsFinished = true;
-        }
-        
-        _resourceCurrent += amount;
-        
+        _resourceCurrent = Mathf.Clamp(_resourceCurrent + amount, 0f, resourceMax);
         TriggerFillAnimation();
     }
 
-    public void ChangeResourceToAmount(int amount)
+    public void ChangeResourceToAmount(float amount)
     {
-        if (_resourceCurrent + amount <= 0)
-        {
-            _resourceCurrent = 0;
-            IsFinished = true;
-        }
-        
-        _resourceCurrent += amount;
-        
+        _resourceCurrent = Mathf.Clamp(amount, 0f, resourceMax);
         TriggerFillAnimation();
     }
-    public void SetUp(int max, bool startsAt100Percent)
+    public void SetUp(float max, bool startsAt100Percent)
     {
         resourceMax = max;
         startsFull = startsAt100Percent;
@@ -210,13 +193,12 @@ public class ResourceBarTracker : MonoBehaviour
         UpdateResourceBar();
     }
 
-    public void SetUp(int max, bool startsAt100Percent, Color color)
+    public void SetUp(float max, bool startsAt100Percent, Color color)
     {
         resourceMax = max;
         startsFull = startsAt100Percent;
-        barColor = color;
+        bar.color = color;
         
         UpdateResourceBar();
-
     }
 }

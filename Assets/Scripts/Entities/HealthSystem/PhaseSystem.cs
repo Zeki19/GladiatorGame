@@ -25,10 +25,10 @@ public class PhaseSystem
         return _phasesThresholds.Length + 1;
     }
 
-    public int[] Phases()
+    public float[] PhasesHealth()
     {
         int n = _phasesThresholds?.Length ?? 0;
-        var result = new int[n + 1];
+        var result = new float[n + 1];
 
         int max = (int)_entityHealth.maxHealth;
         
