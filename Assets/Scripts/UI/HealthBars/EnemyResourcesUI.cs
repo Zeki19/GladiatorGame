@@ -9,10 +9,16 @@ public class EnemyResourcesUI : MonoBehaviour
     [Header("Enemy")]
     [SerializeField] private EntityManager entityManager;
     
-    [Header("Bars prefab")]
+    [Header("Bars")]
     [SerializeField] private GameObject barPrefab;
     [SerializeField] private GameObject barHolder;
     
+    [Header("Image")]
+    [SerializeField] private UnityEngine.UI.Image headImage;
+
+    [Header("This should not be here but in the Enemy...")]
+    public Sprite[] sprites;
+
     private int _index;
     private ResourceBarTracker[] _rb;
     private float[] _health;
@@ -30,6 +36,7 @@ public class EnemyResourcesUI : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         SetUpHealthBars();
+        SetImage();
     }
     private void SetUpHealthBars()
     {
@@ -68,6 +75,14 @@ public class EnemyResourcesUI : MonoBehaviour
 
         return colors;
     }
+
+    private void SetImage()
+    {
+        if (sprites[_index])
+        {
+            headImage.sprite = sprites[_index];
+        }
+    }
     
     private void Damage(float value)
     {
@@ -81,6 +96,8 @@ public class EnemyResourcesUI : MonoBehaviour
         
         _rb[_index].ChangeResourceByAmount(_actualHealth);
         _actualHealth = _health[_index];
+        
+        SetImage();
     }
     private void Heal(float value) //Might not work as intended.
     {
@@ -95,6 +112,7 @@ public class EnemyResourcesUI : MonoBehaviour
         _rb[_index].ChangeResourceByAmount(_actualHealth);
         _actualHealth = _health[_index];
         
+        SetImage();
     }
     private void Dead()
     {
