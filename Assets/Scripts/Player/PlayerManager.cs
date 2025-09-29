@@ -13,7 +13,6 @@ namespace Player
 
 
         public event Action<float> OnDash;
-        public DashIcon dashIconUI; 
 
         private void Awake()
         {

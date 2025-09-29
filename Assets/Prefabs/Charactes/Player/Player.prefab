@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4916902690603668684}
   - component: {fileID: 7175932056004661134}
   - component: {fileID: 5522031050175312599}
-  - component: {fileID: 229774970092676671}
   - component: {fileID: 7958061990058183237}
   m_Layer: 6
   m_Name: Player
@@ -119,6 +118,7 @@ MonoBehaviour:
   model: {fileID: 110136598475017519}
   view: {fileID: 3230016562665857638}
   controller: {fileID: 6520464762290886026}
+  phasesThresholds: 
   stats:
     maxHealth: 100
     stateThreshold: 4200000021000000
@@ -135,22 +135,6 @@ MonoBehaviour:
     InitialCommonStatuses: []
     InitialSpesificStatuses: []
   dashIconUI: {fileID: 0}
---- !u!114 &229774970092676671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131936256622166193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3873cb501ce890641bbbc062ee7aeb7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetImage: {fileID: 0}
-  fadeDuration: 0.5
-  flashColor: {r: 1, g: 0, b: 0, a: 1}
-  flashDuration: 0.2
 --- !u!82 &7958061990058183237
 AudioSource:
   m_ObjectHideFlags: 0
@@ -323,7 +307,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1298906051
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 490971195994360826, guid: 37bd8dfd06a078141a978d1ad0f81fc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -483,6 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 5522031050175312599}
+  _target: {fileID: 0}
 --- !u!114 &110136598475017519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +496,8 @@ MonoBehaviour:
   animator: {fileID: 8307102956479284612}
   manager: {fileID: 5522031050175312599}
   sprite: {fileID: 8461442029586105149}
-  blinkValues: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
+  blinkDamage: {fileID: 0}
+  blinkHeal: {fileID: 0}
 --- !u!114 &8586703381123056644
 MonoBehaviour:
   m_ObjectHideFlags: 0
