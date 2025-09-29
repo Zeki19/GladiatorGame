@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: f5e3e1f4d36e67c468afb9c59f2a294f
+guid: 80cd2a5a6872c604d87d8519d3aaa9f9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3831802842108528514
-    second: ValeriaIdlePoseLeft_0
+      213: -4709807306771116014
+    second: ValeriaShadowDashLeft_0
   - first:
-      213: 1562200266495319543
-    second: ValeriaIdlePoseLeft_1
+      213: 5691659747024662773
+    second: ValeriaShadowDashLeft_1
   - first:
-      213: -6610987861891708321
-    second: ValeriaIdlePoseLeft_2
+      213: -7133426865921216176
+    second: ValeriaShadowDashLeft_2
   - first:
-      213: -4729206255514201986
-    second: ValeriaIdlePoseLeft_3
-  - first:
-      213: -1743267119888961769
-    second: ValeriaIdlePoseLeft_4
-  - first:
-      213: 2044650223975408122
-    second: ValeriaIdlePoseLeft_5
+      213: 6768805445267355879
+    second: ValeriaShadowDashLeft_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,133 +109,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ValeriaIdlePoseLeft_0
+      name: ValeriaShadowDashLeft_0
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 0
-        width: 33
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e78f9caed93b2dac0800000000000000
-      internalID: -3831802842108528514
+      spriteID: 2105e57453763aeb0800000000000000
+      internalID: -4709807306771116014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ValeriaIdlePoseLeft_1
+      name: ValeriaShadowDashLeft_1
       rect:
         serializedVersion: 2
-        x: 80
+        x: 64
         y: 0
-        width: 33
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7fd59709ddc0ea510800000000000000
-      internalID: 1562200266495319543
+      spriteID: 5f07bcb5266dcfe40800000000000000
+      internalID: 5691659747024662773
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ValeriaIdlePoseLeft_2
+      name: ValeriaShadowDashLeft_2
       rect:
         serializedVersion: 2
-        x: 144
+        x: 128
         y: 0
-        width: 33
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f5a868de09d0144a0800000000000000
-      internalID: -6610987861891708321
+      spriteID: 051b9895f0af00d90800000000000000
+      internalID: -7133426865921216176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ValeriaIdlePoseLeft_3
+      name: ValeriaShadowDashLeft_3
       rect:
         serializedVersion: 2
-        x: 208
+        x: 192
         y: 0
-        width: 33
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e70558e87fb7e5eb0800000000000000
-      internalID: -4729206255514201986
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ValeriaIdlePoseLeft_4
-      rect:
-        serializedVersion: 2
-        x: 272
-        y: 0
-        width: 33
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 71f666a6acbaec7e0800000000000000
-      internalID: -1743267119888961769
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ValeriaIdlePoseLeft_5
-      rect:
-        serializedVersion: 2
-        x: 336
-        y: 0
-        width: 33
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: af12af1bb8e006c10800000000000000
-      internalID: 2044650223975408122
+      spriteID: 7e8f3e690b0afed50800000000000000
+      internalID: 6768805445267355879
       vertices: []
       indices: 
       edges: []
@@ -250,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 021a8e2ec8958e444ae88de4cae8e451
     internalID: 0
     vertices: []
     indices: 
@@ -260,12 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ValeriaIdlePoseLeft_0: -3831802842108528514
-      ValeriaIdlePoseLeft_1: 1562200266495319543
-      ValeriaIdlePoseLeft_2: -6610987861891708321
-      ValeriaIdlePoseLeft_3: -4729206255514201986
-      ValeriaIdlePoseLeft_4: -1743267119888961769
-      ValeriaIdlePoseLeft_5: 2044650223975408122
+      ValeriaShadowDashLeft_0: -4709807306771116014
+      ValeriaShadowDashLeft_1: 5691659747024662773
+      ValeriaShadowDashLeft_2: -7133426865921216176
+      ValeriaShadowDashLeft_3: 6768805445267355879
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

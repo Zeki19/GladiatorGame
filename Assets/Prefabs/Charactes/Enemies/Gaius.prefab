@@ -263,7 +263,6 @@ GameObject:
   - component: {fileID: 5162929912761494692}
   - component: {fileID: 4406422302611530635}
   - component: {fileID: 9213571371939786118}
-  - component: {fileID: 1845712806456345503}
   - component: {fileID: 3537681159813753686}
   - component: {fileID: 5561279907837215079}
   - component: {fileID: 8505707540481220225}
@@ -411,28 +410,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d167abdf33dbf30409f91b0460a0298a, type: 2}
   - {fileID: 11400000, guid: 229ebe5245b60f542a0b755807603025, type: 2}
   weapon: {fileID: 4250985215330158538}
---- !u!95 &1845712806456345503
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4706000453104100654}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e87ed7a361a2a7e4d97ff664e21689e7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &3537681159813753686
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

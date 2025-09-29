@@ -18,7 +18,7 @@ MonoBehaviour:
   - Attack: {fileID: 11400000, guid: 67e33a90fb5a5e34d978df6093bd8b71, type: 2}
     Delay: 0
     BreakComboIfMiss: 0
-    BreakComboIfHit: 1
+    BreakComboIfHit: 0
   - Attack: {fileID: 11400000, guid: b4652788526861d4b8d3e7e9fed57540, type: 2}
     Delay: 0.2
     BreakComboIfMiss: 1
@@ -27,4 +27,4 @@ MonoBehaviour:
     Delay: 0.2
     BreakComboIfMiss: 0
     BreakComboIfHit: 0
-  continueToNextAttack: 0
+  continueToNextAttack: 1

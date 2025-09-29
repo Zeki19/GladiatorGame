@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: e1a3a3051da9b334fa664be4635d4e6f
+guid: 7ca31a2dfce87f04aa763816b735f372
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3198520405970188853
-    second: ValeriaIdlePoseRight_0
+      213: -7099812129877987827
+    second: ValeriaRunRight_0
   - first:
-      213: -4661565297931382915
-    second: ValeriaIdlePoseRight_1
+      213: -7034721282452957466
+    second: ValeriaRunRight_1
   - first:
-      213: -8106066124712264120
-    second: ValeriaIdlePoseRight_2
+      213: -2762007343993176653
+    second: ValeriaRunRight_2
   - first:
-      213: -1406434903587351686
-    second: ValeriaIdlePoseRight_3
+      213: 8596654249783393640
+    second: ValeriaRunRight_3
   - first:
-      213: 54700699010551037
-    second: ValeriaIdlePoseRight_4
+      213: 6736134847783376776
+    second: ValeriaRunRight_4
   - first:
-      213: 6859302324577085125
-    second: ValeriaIdlePoseRight_5
+      213: 6311866531069664947
+    second: ValeriaRunRight_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,133 +115,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ValeriaIdlePoseRight_0
+      name: ValeriaRunRight_0
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 0
-        width: 33
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc50f4323a29c93d0800000000000000
-      internalID: -3198520405970188853
+      spriteID: d0eec9afb76687d90800000000000000
+      internalID: -7099812129877987827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ValeriaIdlePoseRight_1
+      name: ValeriaRunRight_1
       rect:
         serializedVersion: 2
-        x: 80
+        x: 64
         y: 0
-        width: 33
-        height: 43
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d7f038f3f0bce4fb0800000000000000
-      internalID: -4661565297931382915
+      spriteID: 6e6d281e346af5e90800000000000000
+      internalID: -7034721282452957466
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ValeriaIdlePoseRight_2
+      name: ValeriaRunRight_2
       rect:
         serializedVersion: 2
-        x: 144
+        x: 128
         y: 0
-        width: 33
-        height: 43
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 84eb2beaec7718f80800000000000000
-      internalID: -8106066124712264120
+      spriteID: 3bd344254f06ba9d0800000000000000
+      internalID: -2762007343993176653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ValeriaIdlePoseRight_3
+      name: ValeriaRunRight_3
       rect:
         serializedVersion: 2
-        x: 208
+        x: 192
         y: 0
-        width: 33
-        height: 42
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a7317f328e65b7ce0800000000000000
-      internalID: -1406434903587351686
+      spriteID: 86df03f3e737d4770800000000000000
+      internalID: 8596654249783393640
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ValeriaIdlePoseRight_4
+      name: ValeriaRunRight_4
       rect:
         serializedVersion: 2
-        x: 272
+        x: 256
         y: 0
-        width: 33
-        height: 41
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dfc4d75fef552c000800000000000000
-      internalID: 54700699010551037
+      spriteID: 887124954fe8b7d50800000000000000
+      internalID: 6736134847783376776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ValeriaIdlePoseRight_5
+      name: ValeriaRunRight_5
       rect:
         serializedVersion: 2
-        x: 336
+        x: 320
         y: 0
-        width: 33
-        height: 41
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5c6ad6f3f13213f50800000000000000
-      internalID: 6859302324577085125
+      spriteID: 3be95161b21489750800000000000000
+      internalID: 6311866531069664947
       vertices: []
       indices: 
       edges: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0b1322fa1ef36a0439cf553e658f6a8a
     internalID: 0
     vertices: []
     indices: 
@@ -260,12 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ValeriaIdlePoseRight_0: -3198520405970188853
-      ValeriaIdlePoseRight_1: -4661565297931382915
-      ValeriaIdlePoseRight_2: -8106066124712264120
-      ValeriaIdlePoseRight_3: -1406434903587351686
-      ValeriaIdlePoseRight_4: 54700699010551037
-      ValeriaIdlePoseRight_5: 6859302324577085125
+      ValeriaRunRight_0: -7099812129877987827
+      ValeriaRunRight_1: -7034721282452957466
+      ValeriaRunRight_2: -2762007343993176653
+      ValeriaRunRight_3: 8596654249783393640
+      ValeriaRunRight_4: 6736134847783376776
+      ValeriaRunRight_5: 6311866531069664947
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
