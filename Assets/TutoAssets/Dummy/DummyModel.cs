@@ -4,6 +4,7 @@ using UnityEngine;
 using Entities;
 using Entities.Interfaces;
 using Unity.Behavior;
+using Enemies;
 
 public class DummyModel : EnemyModel
 {

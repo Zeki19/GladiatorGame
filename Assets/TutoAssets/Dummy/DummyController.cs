@@ -63,10 +63,10 @@ namespace Enemies.Dummy
         {
             base.Update();
             if (agent != null && manager.HealthComponent.currentHealth > 50)
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phace1);
+                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase1);
             else if (agent != null)
             {
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phace2);
+                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
             }
         }
     }

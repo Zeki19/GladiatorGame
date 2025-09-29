@@ -125,8 +125,6 @@ namespace Player
             if (Weapon is not { Attacking: false }) return;
             _weaponManager.CatchDroppedWeapon(Weapon);
             UnEquipWeapon();
-            Weapon.BaseAttack.FinishAnimation -= ClearEnemiesList;
-            Weapon.ChargeAttack.FinishAnimation -= ClearEnemiesList;
             Weapon = null;
             OnPlayerWeaponDropped?.Invoke();
         }
