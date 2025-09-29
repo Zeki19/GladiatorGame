@@ -10,8 +10,9 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI missionDescriptionUI;
 
     [Header("Training Hub Configuration")]
-    [SerializeField] private bool isTrainingMode = false; // Bool para controlar si es modo entrenamiento
-
+    [SerializeField] private bool isTrainingMode = false;
+    [SerializeField] private GameObject normalExitDoor; 
+    [SerializeField] private GameObject trainingHubExitDoor; 
     [Header("Dependencies")]
     private DialogueManager _dialogueManager;
     private CameraTutorialManager _cameraTutorialManager;
@@ -20,38 +21,76 @@ public class TutorialManager : MonoBehaviour
     private int _currentMissionIndex = 0;
     private TutorialState _currentState = TutorialState.NotStarted;
     private bool _dialogueStarted = false;
-    private bool _tutorialCompleted = false; // Para saber si el tutorial se completó
+    private bool _tutorialCompleted = false;
 
     public static event Action<TutorialMission> OnMissionStarted;
     public static event Action<TutorialMission> OnMissionCompleted;
     public static event Action OnTutorialCompleted;
-    public static event Action OnTutorialRestart; // Nuevo evento para reiniciar tutorial
+    public static event Action OnTutorialRestart;
 
-    // Propiedades públicas para acceder desde otros scripts
     public bool IsTrainingMode => isTrainingMode;
     public bool IsTutorialCompleted => _tutorialCompleted;
 
     private void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);
+        LoadTrainingModeFromSave();
     }
 
     private void Start()
     {
         InitializeDependencies();
-
-        // Solo iniciar tutorial si no estamos en modo entrenamiento
+        SetupDoors();
         if (!isTrainingMode)
         {
             StartTutorial();
         }
         else
         {
-            // En modo entrenamiento, mostrar mensaje de exploración libre
+            _tutorialCompleted = true;
+
             if (missionDescriptionUI != null)
             {
                 missionDescriptionUI.text = "Training Mode - Explore freely or press E near the dummy to restart tutorial";
             }
+        }
+    }
+    private void SetupDoors()
+    {
+        Debug.Log($"[SetupDoors] Training Mode: {isTrainingMode}");
+        Debug.Log($"[SetupDoors] Normal Door: {normalExitDoor != null}, Training Door: {trainingHubExitDoor != null}");
+
+        if (isTrainingMode)
+        {
+            if (normalExitDoor != null)
+            {
+                normalExitDoor.SetActive(false);
+            }
+            if (trainingHubExitDoor != null)
+            {
+                trainingHubExitDoor.SetActive(true);
+            }
+        }
+        else
+        {
+            if (normalExitDoor != null)
+            {
+                normalExitDoor.SetActive(true);
+            }
+            if (trainingHubExitDoor != null)
+            {
+                trainingHubExitDoor.SetActive(false);
+            }
+        }
+    }
+    private void LoadTrainingModeFromSave()
+    {
+        SaveData saveData = SaveManager.Instance.GetCurrentSaveData();
+
+        if (saveData != null)
+        {
+            isTrainingMode = saveData.isTrainingMode;
+            Debug.Log($"Loaded training mode from save: {isTrainingMode}");
         }
     }
 
@@ -80,7 +119,6 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    // Método público para activar/desactivar modo entrenamiento
     public void SetTrainingMode(bool trainingMode)
     {
         isTrainingMode = trainingMode;
@@ -97,16 +135,13 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    // Método público para reiniciar el tutorial desde 0
     public void RestartTutorial()
     {
-        // Solo permitir reinicio si el tutorial se completó o estamos en modo entrenamiento
         if (!_tutorialCompleted && !isTrainingMode)
             return;
 
         Debug.Log("Restarting tutorial from beginning...");
 
-        // Reiniciar variables
         _currentMissionIndex = 0;
         _currentMission = null;
         _currentState = TutorialState.NotStarted;
@@ -114,13 +149,8 @@ public class TutorialManager : MonoBehaviour
         _tutorialCompleted = false;
         isTrainingMode = false;
 
-        // Limpiar UI hint si existe
         HideUIHint();
-
-        // Disparar evento de reinicio
         OnTutorialRestart?.Invoke();
-
-        // Iniciar tutorial
         StartTutorial();
     }
 
@@ -158,7 +188,6 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator ProcessMissionFlow()
     {
-
         _currentMission.Initialize(this);
 
         if (_currentMission.shouldMoveCamera && !_currentMission.cameraEvent.executeAfterDialogue)
@@ -212,7 +241,6 @@ public class TutorialManager : MonoBehaviour
         _cameraTutorialManager.ExecuteCameraEvent(cameraConfig, () => cameraComplete = true);
         yield return new WaitUntil(() => cameraComplete);
 
-        // Auto-reset camera after some events
         if (cameraConfig.shouldZoom)
         {
             yield return new WaitForSeconds(1f);
@@ -247,9 +275,8 @@ public class TutorialManager : MonoBehaviour
     private void CompleteTutorial()
     {
         Debug.Log("Tutorial Completed!");
-        _tutorialCompleted = true; // Marcar como completado
+        _tutorialCompleted = true;
 
-        // Cambiar el texto de la UI AQUÍ, cuando se completa el tutorial
         if (missionDescriptionUI != null)
         {
             missionDescriptionUI.text = "Train or face your opponent";
@@ -257,7 +284,6 @@ public class TutorialManager : MonoBehaviour
 
         OnTutorialCompleted?.Invoke();
 
-        // Hacer zoom a la puerta de salida antes del diálogo final
         if (_cameraTutorialManager != null)
         {
             StartCoroutine(CompleteTutorialWithCameraZoom());
@@ -278,6 +304,7 @@ public class TutorialManager : MonoBehaviour
             _dialogueManager.OnConversationEnd = () => dialogueComplete = true;
             yield return new WaitUntil(() => dialogueComplete);
         }
+
         CameraEventConfig exitCameraEvent = new CameraEventConfig
         {
             eventId = "Exit",
