@@ -6208,6 +6208,10 @@ PrefabInstance:
       propertyPath: bossHealthBarUI
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4250985215330158538, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4406422302611530635, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: blinkHeal
       value: 
@@ -6236,6 +6240,10 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9213571371939786118, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: EnemyTelegraph
+      value: 
+      objectReference: {fileID: 11400000, guid: 62c552d9595e2cf4eb2451eae77d462c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22589,6 +22597,14 @@ PrefabInstance:
       propertyPath: entityManager
       value: 
       objectReference: {fileID: 2020722034}
+    - target: {fileID: 6731579639644996480, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6992724776845569803, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8313184562670099007, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -24131,6 +24147,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &762395248554571265
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3306967609244709980, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_Name
+      value: BossDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306967609244709980, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -20.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7157543009664912287, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: skipBossDefeatCheck
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
 --- !u!1001 &2159130008074702546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24143,30 +24224,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy - UI - Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 2365553142814740368, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
-      propertyPath: textColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2365553142814740368, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
-      propertyPath: textColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2365553142814740368, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
-      propertyPath: textColor.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: entityManager
       value: 
       objectReference: {fileID: 1356049149}
-    - target: {fileID: 6146666175828644774, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
-      propertyPath: m_Name
-      value: Boss image
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641910023599272300, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
-      propertyPath: m_Sprite
+    - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: 'sprites.Array.data[0]'
       value: 
       objectReference: {fileID: 621526461943453568, guid: 84748c98572afc94b926dada61057e4b, type: 3}
+    - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: 'sprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1124271243129300706, guid: b2801212e4623184eb8047f09809fd22, type: 3}
     - target: {fileID: 7760298050412872972, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -24247,10 +24316,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8786512505570740218, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24267,3 +24332,4 @@ SceneRoots:
   - {fileID: 1610851041}
   - {fileID: 1142753287}
   - {fileID: 1291718857}
+  - {fileID: 762395248554571265}

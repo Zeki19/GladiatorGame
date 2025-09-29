@@ -28,10 +28,3 @@ public class Telegraph : MonoBehaviour
         Destroy(gameObject);
     }
 }
-public enum Shapes
-{
-    circle,
-    square,
-    triangle,
-    semiCircle
-}

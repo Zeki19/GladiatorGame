@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using Entities;
 using Entities.Interfaces;
@@ -18,7 +18,9 @@ namespace Player
         private PlayerStats _stats;
         Action _onAttack = delegate { };
 
-
+        //player events
+        public static event Action OnPlayerMoved;
+        public static event Action OnPlayerDashed;
         public override Action OnAttack { get => _onAttack; set => _onAttack = value; }
 
         private void Awake()
@@ -30,6 +32,8 @@ namespace Player
             if (_manager != null) _stats = _manager.stats;
             else Debug.LogWarning("manager is not A player manager and it should be");
             manager.HealthComponent.OnDamage += AtivateInvulnerability;
+
+                ServiceLocator.Instance.RegisterService<PlayerModel>(this);
         }
         public void Attack()
         {
@@ -56,11 +60,13 @@ namespace Player
         public override void Dash(float dashForce)
         {
             manager.Rb.linearVelocity = _lastDirection * (dashForce *_stats.SpeedModifier);
+            OnPlayerDashed?.Invoke();
         }
 
         public override void Dash(Vector2 dir, float dashForce)
         {
             manager.Rb.linearVelocity = dir.normalized * (dashForce *_stats.SpeedModifier);
+
         }
 
         public override void Dash(Vector2 dir, float dashForce, float dashDistance)
@@ -95,12 +101,16 @@ namespace Player
 
         public override void Move(Vector2 dir)
         {
-            if (IsPlayerTryingToMove()) _lastDirection = _moveInput;
+            if (IsPlayerTryingToMove())
+            {
+                _lastDirection = _moveInput;
+                OnPlayerMoved?.Invoke();
+            }
             manager.Rb.linearVelocity = _moveInput * (_stats.MoveSpeed * _stats.SpeedModifier);
         }
 
         #region KnockBack
-        
+
         public void ApplyKnockbackFromSource(Vector2 sourcePosition, float intensity)
         {
             if (!_stats.canBeKnockedBack) return;

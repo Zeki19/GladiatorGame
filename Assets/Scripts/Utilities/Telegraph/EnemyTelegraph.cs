@@ -1,14 +1,15 @@
+using Attack;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EnemyTelegraph", menuName = "Scriptable Objects/EnemyTelegraph")]
 public class EnemyTelegraph : ScriptableObject
 {
-    [SerializeField] private GameObject telegraphPrefab;
     [Serializable]
     public struct spriteValues
     {
@@ -23,6 +24,7 @@ public class EnemyTelegraph : ScriptableObject
         public Shapes shape;
         public Vector2 scale;
         public float aliveTime;
+        public bool center;
     }
 
     public List<spriteValues> correlations = new List<spriteValues>();
@@ -42,13 +44,9 @@ public class EnemyTelegraph : ScriptableObject
                 Sprites.Add(s.shape, s.sprite);
             }
         }
-        if (telegraphPrefab == null)
-        {
-            Debug.LogWarning("TelegraphPrefab is NULL");
-        }
     }
 
-    public void InstantiateTelegraph(Vector2 telePosition, Quaternion teleQuaternion, Shapes teleShape, string name)
+    public bool InstantiateTelegraph(Vector2 telePosition, Quaternion teleQuaternion, string name)
     {
         telegraphValues teleAttack = default;
         bool foundTele = false;
@@ -64,20 +62,55 @@ public class EnemyTelegraph : ScriptableObject
 
         if (!foundTele)
         {
-            return;
+            Debug.LogWarning("Telegraph name " + name + " not found.");
+            return false;
         }
 
         GameObject go = new GameObject("Telegraph");
 
         go.transform.position = telePosition;
         go.transform.rotation = teleQuaternion;
+        go.transform.localScale = new Vector3(teleAttack.scale.x, teleAttack.scale.y, 1f);
 
         SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
-        sr.sprite = Sprites[teleShape];
-
+        sr.sprite = Sprites[teleAttack.shape];
+        sr.sortingLayerName = "Background";
+        if (!teleAttack.center) 
+        {
+            AdjustSpriteLocation(go, sr, teleAttack);
+        }
         go.AddComponent<Telegraph>().StartTelegraph(sr, teleAttack.aliveTime);
-
+        return true;
     }
-    
+
+    private void AdjustSpriteLocation(GameObject go, SpriteRenderer sr, telegraphValues teleAttack)
+    {
+
+        float rawHeight = sr.sprite.bounds.size.y;
+        float scaledHeight = rawHeight * go.transform.localScale.y;
+        Vector3 localOffset = new Vector3(0, scaledHeight / 2f, 0);
+
+        go.transform.position += go.transform.rotation * localOffset;
+    }
+
+    public telegraphValues GetTelegraph(string name)
+    {
+        foreach (telegraphValues tv in attacks)
+        {
+            if (tv.attackName == name)
+            {
+                return tv;
+            }
+        }
+        return default;
+    }
+
+    public enum Shapes
+    {
+        circle,
+        square,
+        triangle,
+        semiCircle
+    }
 }
 

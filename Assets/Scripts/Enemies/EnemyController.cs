@@ -43,7 +43,7 @@ namespace Enemies
         protected virtual void Update()
         {
             Fsm.OnExecute();
-            switch (manager.PhaseSystem.currentPhase())
+            switch (manager.PhaseSystem.CurrentPhase())
             {
                 case 1:_agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase1);
                     break;
@@ -58,7 +58,7 @@ namespace Enemies
         {
             manager.PlaySound("Hit","Enemy");
             ServiceLocator.Instance.GetService<ArenaPainter>().PaintArena(transform, "Blood");
-            _currentPhase = manager.PhaseSystem.currentPhase();
+            _currentPhase = manager.PhaseSystem.CurrentPhase();
             Debug.Log("Current phase is:" + _currentPhase);
         }
 
