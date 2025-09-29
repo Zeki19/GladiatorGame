@@ -26,7 +26,6 @@ public class PSDash<T> : PSBase<T>
         _coroutineRunner = coroutineRunner;
         _stats = manager.stats;
         _characterHealth = manager.HealthComponent;
-        _dashIconUI = manager.dashIconUI;
 
         _manager = manager;
     }
@@ -43,8 +42,7 @@ public class PSDash<T> : PSBase<T>
 
         _move.Dash(_stats.DashForce);
         _dashTimer = _stats.DashDuration;
-
-        _dashIconUI?.HideIcon();
+        
         _coroutineRunner.StartCoroutine(CooldownCoroutine());
         _coroutineRunner.StartCoroutine(InvulnerabilityCooldown());
         
@@ -56,7 +54,6 @@ public class PSDash<T> : PSBase<T>
     {
         yield return new WaitForSeconds(_stats.DashCooldown);
         _canDash = true;
-        _dashIconUI?.ShowIcon();
     }
     private IEnumerator InvulnerabilityCooldown()
     {

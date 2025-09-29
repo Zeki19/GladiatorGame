@@ -8,11 +8,6 @@ public class EnemyManager : EntityManager
 {
     [SerializeField] private int maxLife;
 
-    [Header("Boss UI Reference")]
-    [SerializeField] private BossHealthBarUI bossHealthBarUI;
-
-    private int currentPhase = 0;
-
     private void Awake()
     {
         HealthSystem = new HealthSystem.HealthSystem(maxLife);
@@ -29,7 +24,6 @@ public class EnemyManager : EntityManager
     {
         base.Start();
         ServiceLocator.Instance.GetService<EnemiesManager>().RegisterEnemy(gameObject, this);
-        UpdateBossPhaseUI();
     }
 
     private void PrintHealth(float ignore)
@@ -50,31 +44,5 @@ public class EnemyManager : EntityManager
         {
             status.SetStatus(StatusEnum.Dashing,false);
         }
-    }
-
-    public int CurrentPhase
-    {
-        get => currentPhase;
-        set
-        {
-            if (currentPhase != value)
-            {
-                currentPhase = value;
-                UpdateBossPhaseUI();
-            }
-        }
-    }
-
-    private void UpdateBossPhaseUI()
-    {
-        if (bossHealthBarUI != null)
-        {
-            bossHealthBarUI.SetBossPhase(currentPhase);
-        }
-    }
-
-    public void AdvancePhase()
-    {
-        CurrentPhase++;
     }
 }

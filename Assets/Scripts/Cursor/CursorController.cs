@@ -25,11 +25,6 @@ public class CursorController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
-
     void Update()
     {
         Vector2 p;
