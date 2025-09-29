@@ -12,10 +12,11 @@ public class EnemyResourcesUI : MonoBehaviour
     [Header("Bars")]
     [SerializeField] private GameObject barPrefab;
     [SerializeField] private GameObject barHolder;
+    [SerializeField] private ResourceBarTracker.DisplayType displayType;
     
     [Header("Image")]
     [SerializeField] private UnityEngine.UI.Image headImage;
-
+    
     [Header("This should not be here but in the Enemy...")]
     public Sprite[] sprites;
 
@@ -37,6 +38,7 @@ public class EnemyResourcesUI : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         SetUpHealthBars();
         SetImage();
+        _rb[_index].SetTextField(displayType);
     }
     private void SetUpHealthBars()
     {
@@ -52,6 +54,7 @@ public class EnemyResourcesUI : MonoBehaviour
             var script = bar.GetComponent<ResourceBarTracker>();
             
             script.SetUp(_health[i], true, color[i]);
+            script.SetTextField(ResourceBarTracker.DisplayType.None);
             
             _rb[i] = script;
         }
@@ -91,12 +94,15 @@ public class EnemyResourcesUI : MonoBehaviour
 
         if (_actualHealth > 0) return;
         
+        _rb[_index].SetTextField(ResourceBarTracker.DisplayType.None);
+        
         _index--;
         if (_index < 0) _index = 0;
         
         _rb[_index].ChangeResourceByAmount(_actualHealth);
         _actualHealth = _health[_index];
         
+        _rb[_index].SetTextField(displayType);
         SetImage();
     }
     private void Heal(float value) //Might not work as intended.

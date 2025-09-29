@@ -44,7 +44,8 @@ public class ResourceBarTracker : MonoBehaviour
     [SerializeField] private DisplayType valueDisplay = DisplayType.Percentage;
     [SerializeField] private TMP_FontAsset font;
     [SerializeField] private Color textColor;
-    private enum DisplayType
+    
+    public enum DisplayType
     {
         [InspectorName("Long (50 | 100)")]
         LongValue,
@@ -55,9 +56,6 @@ public class ResourceBarTracker : MonoBehaviour
         None
     }
     
-    
-
-
     private void OnValidate()
     {
         SetUpBar();
@@ -200,5 +198,11 @@ public class ResourceBarTracker : MonoBehaviour
         bar.color = color;
         
         UpdateResourceBar();
+    }
+
+    public void SetTextField(DisplayType displayType)
+    {
+        valueDisplay = displayType;
+        SetTextField();
     }
 }
