@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GaiusFurrySwings
   m_EditorClassIdentifier: 
   attackName: FurrySwings
-  damage: 5
+  damage: 12
   curve:
     serializedVersion: 2
     m_Curve:
@@ -27,43 +27,43 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.2513606
     - serializedVersion: 3
-      time: 0.31312022
+      time: 0.21131353
       value: 180
       inSlope: 1143.1647
-      outSlope: 63.87325
+      outSlope: 94.64614
       tangentMode: 65
       weightedMode: 0
       inWeight: 0.04567689
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.39140025
+      time: 0.2641419
       value: 185
-      inSlope: 1.9406509
-      outSlope: 1.9406509
+      inSlope: 2.8756409
+      outSlope: 2.8756409
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.47474477
+      time: 0.3203881
       value: 180
-      inSlope: -59.991947
+      inSlope: -88.89486
       outSlope: -42.165714
       tangentMode: 5
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.70958495
+      time: 0.47887328
       value: 0
       inSlope: -1077.731
-      outSlope: -68.601746
+      outSlope: -101.65268
       tangentMode: 65
       weightedMode: 0
       inWeight: 0.04486118
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7824694
+      time: 0.5280604
       value: -5
       inSlope: -3.051262
       outSlope: -3.051262
@@ -72,16 +72,16 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.8646982
+      time: 0.58355355
       value: 0
-      inSlope: 60.80596
+      inSlope: 90.101166
       outSlope: 79.84121
       tangentMode: 5
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.0995383
+      time: 0.7420387
       value: 190
       inSlope: 1070.452
       outSlope: 370.3479
@@ -92,3 +92,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  startingAngle: -90

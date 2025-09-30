@@ -13,24 +13,24 @@ MonoBehaviour:
   m_Name: GaiusWideSwing
   m_EditorClassIdentifier: 
   attackName: WideSwing
-  damage: 5
+  damage: 10
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 179
-      outSlope: 179
+      inSlope: 223.9464
+      outSlope: 223.9464
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
+      time: 0.7992984
       value: 180
-      inSlope: 179
-      outSlope: 179
+      inSlope: 223.9464
+      outSlope: 223.9464
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -38,3 +38,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  startingAngle: -90

@@ -34,11 +34,32 @@ namespace Attack
                 attack.AttackFinish += FinishAttack;
             }
         }
+
+
+        //public void ExecuteAttack(int index)
+        //{
+        //    if (index >= 0 && index < attacks.Count)
+        //    {
+        //        attacks[index].ExecuteAttack();
+        //        if (EnemyTelegraph)
+        //        {
+        //            EnemyTelegraph.InstantiateTelegraph(transform.position, transform.rotation, attacks[index].attackName);
+        //        }
+
+        //        _controller.SetStatus(StatusEnum.AttackMissed, true);
+        //        _controller.SetStatus(StatusEnum.Attacking, true);
+        //    }
+        //    else
+        //    {
+        //        Debug.LogError("Enemy Attack Out Of Index");
+        //    }
+        //}
+
         public void ExecuteAttack(int index)
         {
             if (index >= 0 && index < attacks.Count)
             {
-                if((EnemyTelegraph) && EnemyTelegraph.InstantiateTelegraph(transform.position, transform.rotation, attacks[index].attackName)) 
+                if ((EnemyTelegraph) && EnemyTelegraph.InstantiateTelegraph(transform.position, transform.rotation, attacks[index].attackName))
                 {
                     StartCoroutine(HoldAttack(attacks[index]));
                 }
