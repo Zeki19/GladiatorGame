@@ -61,13 +61,6 @@ namespace Enemies.Dummy
 
         protected override void Update()
         {
-            base.Update();
-            if (agent != null && manager.HealthComponent.currentHealth > 50)
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase1);
-            else if (agent != null)
-            {
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
-            }
         }
     }
 }

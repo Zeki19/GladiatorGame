@@ -22,6 +22,7 @@ public class DummyView : EnemyView, ILook
 
     public override void PlayStateAnimation(StateEnum state)
     {
+        /*
         switch (state)
         {
             case StateEnum.Idle:
@@ -31,6 +32,7 @@ public class DummyView : EnemyView, ILook
                 animator.SetTrigger(Idle);
                 break;
         }
+        */
     }
 
     public override void StopStateAnimation(StateEnum state)
@@ -49,18 +51,23 @@ public class DummyView : EnemyView, ILook
 
     private void OnTakeDamage(float damage)
     {
+        /*
         if (animator != null)
         {
             animator.SetTrigger(Hit);
         }
+        */
+        Debug.Log("Create animator for dummy, code is commented");
     }
 
     private void OnDeath()
     {
+        /*
         if (animator != null)
         {
             animator.SetTrigger(Death);
         }
+        */
     }
 
     private void Update()

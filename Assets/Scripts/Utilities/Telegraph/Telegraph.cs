@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Splines.ExtrusionShapes;
 
 public class Telegraph : MonoBehaviour
 {

@@ -39,7 +39,6 @@ namespace Player
         private void OnDestroy()
         {
             AttackFinishSubscription(false);
-            ServiceLocator.Instance.RemoveService(this);
         }
 
         private void Start()

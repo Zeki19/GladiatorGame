@@ -1,11 +1,6 @@
-using Attack;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Build;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EnemyTelegraph", menuName = "Scriptable Objects/EnemyTelegraph")]
 public class EnemyTelegraph : ScriptableObject
