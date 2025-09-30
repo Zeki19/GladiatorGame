@@ -18,9 +18,11 @@ MonoBehaviour:
   durability: 50
   durabilityStandardLoss: 5
   durabilityChargeLoss: 20
+  standardConsumeDurabilityOnMiss: 0
+  chargeConsumeDurabilityOnMiss: 0
   changeThreshold: 1
-  chargePerAttack: 0.5
+  chargePerAttack: 0.2
   knockbackForce: 0.5
-  slowPercent: 0.9
+  slowPercent: 0.7
   basic: {fileID: 11400000, guid: c43716a1af41152459da1d49d275eba0, type: 2}
   charge: {fileID: 11400000, guid: 14f6db58c4de6cf40b1b312ed77fabcd, type: 2}
