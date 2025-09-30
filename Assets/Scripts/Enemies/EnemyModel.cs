@@ -43,7 +43,7 @@ namespace Enemies
             }
         }
 
-        private RaycastHit2D RaycastBetweenCharacters(Transform start, Transform target, LayerMask hitMask = default)
+        public RaycastHit2D RaycastBetweenCharacters(Transform start, Transform target, LayerMask hitMask = default)
         {
             Vector2 direction = (target.position - start.position);
             float distance = direction.magnitude;
