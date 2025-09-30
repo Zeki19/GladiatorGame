@@ -11,6 +11,10 @@ public class BossExitDoor : MonoBehaviour
 
     private bool _bossDefeated = false;
 
+    private void Start()
+    {
+        ServiceLocator.Instance.RegisterService(this);
+    }
     public void OnBossDefeated()
     {
         _bossDefeated = true;
