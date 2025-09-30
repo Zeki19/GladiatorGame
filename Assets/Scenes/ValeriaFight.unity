@@ -11886,7 +11886,7 @@ MonoBehaviour:
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: c4b979a78c53fe0458cc30d068a05376, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 94adcbe58ac89f74586de473276008a8, type: 2}
 --- !u!4 &788120877
 Transform:
   m_ObjectHideFlags: 0
@@ -12334,6 +12334,10 @@ PrefabInstance:
     - target: {fileID: 3306967609244709980, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
       propertyPath: m_Name
       value: BossDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306967609244709980, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25124,6 +25128,14 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 2020722034}
+    - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: hiddingTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725781832690022149, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: _moveSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4237797413979217434, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: art
       value: 
@@ -25167,6 +25179,14 @@ PrefabInstance:
     - target: {fileID: 6108439058689843875, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6283928702553193047, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: maxLife
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_Speed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7849566506043400556, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_Name
