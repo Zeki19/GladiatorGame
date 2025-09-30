@@ -156,8 +156,13 @@ namespace Enemies.Valeria
 
         private void Die()
         {
-            //Destroy(gameObject);
-            SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
+            Destroy(gameObject);
+            //SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
+            BossExitDoor door = ServiceLocator.Instance.GetService<BossExitDoor>();
+            if (door != null)
+            {
+                door.OnBossDefeated();
+            }
         }
         protected override void Update()
         {

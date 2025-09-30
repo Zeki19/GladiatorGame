@@ -104,7 +104,12 @@ namespace Enemies.Gaius
         private void Die()
         {
             Destroy(gameObject);
-            SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
+            BossExitDoor door = ServiceLocator.Instance.GetService<BossExitDoor>();
+            if (door != null)
+            {
+                door.OnBossDefeated();
+            }
+            //  SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
         }
         protected override void Update()
         {
