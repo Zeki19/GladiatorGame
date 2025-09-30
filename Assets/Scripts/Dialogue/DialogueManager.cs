@@ -105,12 +105,23 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence(currentLine.sentence));
     }
-    private void EndDialogue()
+    private IEnumerator CloseDialogueRoutine()
     {
-        animator.SetBool("IsOpen", false); //No se ve xq se apaga muy rapido
+        animator.SetBool("IsOpen", false);
+        
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float duration = stateInfo.length;
+
+        yield return new WaitForSeconds(duration);
+
         OnConversationEnd?.Invoke();
         dialogueCanvas.SetActive(false);
         audioSource.enabled = false;
+    }
+
+    private void EndDialogue()
+    {
+        StartCoroutine(CloseDialogueRoutine());
     }
     private IEnumerator TypeSentence(string sentence)
     {
