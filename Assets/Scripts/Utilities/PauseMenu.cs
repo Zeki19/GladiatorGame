@@ -90,7 +90,10 @@ namespace Utilities
 
         public void Quit()
         {
+            Debug.Log("Missing POP-UP screen");
             //Show pop up
+
+            ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(0);
         }
 
     }
