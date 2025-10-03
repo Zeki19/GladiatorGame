@@ -21,6 +21,11 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        foreach (var item in menuList)
+        {
+            item.SetActive(false);
+        }
+
         menuList[0].SetActive(true);
         _currentScreen = menuList[0];
 
