@@ -6,11 +6,14 @@ namespace Utilities
 {
     public class PauseMenu : MonoBehaviour
     {
-        private bool _isGamePause;
-        [SerializeField] private GameObject uiPauseMenu;
-        [SerializeField] private GameObject Tutorial;
-        private bool TutoUp;
-        
+        private bool _isGamePaused = false;
+        private bool _isSettings;
+
+        [Header("GameObjects")]
+        [SerializeField] private GameObject Menu;
+        [SerializeField] private GameObject Settings;
+
+        [Header("Config")]
         [SerializeField]private InputActionAsset inputActions;
         [SerializeField]private string playerActionMapName = "Player";
         private InputActionMap playerActionMap;
@@ -25,36 +28,49 @@ namespace Utilities
                 Debug.LogError($"Player Action Map '{playerActionMapName}' not found!");
                 return;
             }
-
         }
 
         public void TogglePause(InputAction.CallbackContext context)
         {
-            if (context.started)
-                TogglePause();
-        }
-        public void TogglePause()
-        {
-            PauseGame(!_isGamePause);
-        }
-        private void PauseGame(bool state)
-        {
-            var timeScale = state ?  0 : 1;
-            Time.timeScale = timeScale;
-            //EnablePlayerInput(!state);
-            uiPauseMenu.SetActive(state);
-            
-            Tutorial.SetActive(false);
-            TutoUp = false;
-            
-            _isGamePause = state;
+            if (context.started) TogglePause();
         }
 
-        public void ToggleTutorial()
+        public void TogglePause()
         {
-            Tutorial.SetActive(!TutoUp);
-            TutoUp = !TutoUp;
+            PauseGame(!_isGamePaused);
         }
+
+        private void PauseGame(bool state)
+        {
+            //Use PAUSE SYSTEM
+            var timeScale = state ?  0 : 1;
+            Time.timeScale = timeScale;
+
+            //EnablePlayerInput(!state);
+
+            Menu.SetActive(state);
+            _isGamePaused = state;
+            SettingsMenu(!state);
+        }
+
+        public void ToggleSettings()
+        {
+            SettingsMenu(!_isSettings);
+        }
+
+        private void SettingsMenu(bool state)
+        {
+            if (!_isGamePaused)
+            {
+                Settings.SetActive(false);
+                _isSettings = false;
+                return;
+            }
+
+            Settings.SetActive(state);
+            _isSettings = state;
+        }
+
         private void EnablePlayerInput(bool enable)
         {
             if (enable)
@@ -70,6 +86,11 @@ namespace Utilities
         private void OnDestroy()
         {
             Time.timeScale = 1;
+        }
+
+        public void Quit()
+        {
+            //Show pop up
         }
 
     }
