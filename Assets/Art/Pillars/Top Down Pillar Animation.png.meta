@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: e537e1ea0eef6bb4ba693906819b9f66
+guid: 096bc7a5bd14eb0499a5e4adfee104e3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6343906520862747710
-    second: mace sprite_0
+      213: -4000884031218570287
+    second: Top Down Pillar Animation_0
+  - first:
+      213: 5960599006660904319
+    second: Top Down Pillar Animation_1
+  - first:
+      213: 4841492848739357209
+    second: Top Down Pillar Animation_2
+  - first:
+      213: -9017948913921925525
+    second: Top Down Pillar Animation_3
+  - first:
+      213: 1987569166995201713
+    second: Top Down Pillar Animation_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mace sprite_0
+      name: Top Down Pillar Animation_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 1
-        width: 27
-        height: 62
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +127,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e3cee488e551a0850800000000000000
-      internalID: 6343906520862747710
+      spriteID: 1db2fa3db210a78c0800000000000000
+      internalID: -4000884031218570287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Top Down Pillar Animation_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f75c198473d48b250800000000000000
+      internalID: 5960599006660904319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Top Down Pillar Animation_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91214b73810703340800000000000000
+      internalID: 4841492848739357209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Top Down Pillar Animation_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6e501fed3fc9d280800000000000000
+      internalID: -9017948913921925525
       vertices: []
       indices: 
       edges: []
@@ -125,7 +203,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 61865faa58357c54aacb55934a4443dd
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +213,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mace sprite_0: 6343906520862747710
+      Top Down Pillar Animation_0: -4000884031218570287
+      Top Down Pillar Animation_1: 5960599006660904319
+      Top Down Pillar Animation_2: 4841492848739357209
+      Top Down Pillar Animation_3: -9017948913921925525
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

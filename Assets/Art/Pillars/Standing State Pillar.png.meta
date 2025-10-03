@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: e537e1ea0eef6bb4ba693906819b9f66
+guid: 3552647762be12f4b86186b5959ff21e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6343906520862747710
-    second: mace sprite_0
+      213: -935337261643030383
+    second: Standing State Pillar_0
+  - first:
+      213: -9092183936259041532
+    second: Standing State Pillar_1
+  - first:
+      213: -3934123315815623264
+    second: Standing State Pillar_2
+  - first:
+      213: -5057110850350632000
+    second: Standing State Pillar_3
+  - first:
+      213: -1308938148068595498
+    second: Standing State Pillar_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mace sprite_0
+      name: Standing State Pillar_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 1
-        width: 27
-        height: 62
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +127,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e3cee488e551a0850800000000000000
-      internalID: 6343906520862747710
+      spriteID: 190a49657b30503f0800000000000000
+      internalID: -935337261643030383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Standing State Pillar_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40754c6e1e212d180800000000000000
+      internalID: -9092183936259041532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Standing State Pillar_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a55a3a20bf2769c0800000000000000
+      internalID: -3934123315815623264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Standing State Pillar_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c3b31fa97881d9b0800000000000000
+      internalID: -5057110850350632000
       vertices: []
       indices: 
       edges: []
@@ -125,7 +203,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 60acd855942e58b4a9ea4f1bf2c02baf
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +213,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mace sprite_0: 6343906520862747710
+      Standing State Pillar_0: -935337261643030383
+      Standing State Pillar_1: -9092183936259041532
+      Standing State Pillar_2: -3934123315815623264
+      Standing State Pillar_3: -5057110850350632000
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
