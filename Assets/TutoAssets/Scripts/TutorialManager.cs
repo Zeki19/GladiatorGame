@@ -11,8 +11,9 @@ public class TutorialManager : MonoBehaviour
 
     [Header("Training Hub Configuration")]
     [SerializeField] private bool isTrainingMode = false;
-    [SerializeField] private GameObject normalExitDoor; 
-    [SerializeField] private GameObject trainingHubExitDoor; 
+    [SerializeField] private GameObject normalExitDoor;
+    [SerializeField] private GameObject trainingHubExitDoor;
+
     [Header("Dependencies")]
     private DialogueManager _dialogueManager;
     private CameraTutorialManager _cameraTutorialManager;
@@ -55,6 +56,7 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
+
     private void SetupDoors()
     {
         Debug.Log($"[SetupDoors] Training Mode: {isTrainingMode}");
@@ -83,6 +85,7 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
+
     private void LoadTrainingModeFromSave()
     {
         SaveData saveData = SaveManager.Instance.GetCurrentSaveData();
@@ -290,7 +293,7 @@ public class TutorialManager : MonoBehaviour
         }
         else if (_dialogueManager != null)
         {
-            _dialogueManager.StartConversation(EnumDialogues.Mission7);
+            _dialogueManager.StartConversation(EnumDialogues.TutorialComplete);
         }
     }
 
@@ -298,7 +301,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (_dialogueManager != null)
         {
-            _dialogueManager.StartConversation(EnumDialogues.Mission7);
+            _dialogueManager.StartConversation(EnumDialogues.TutorialComplete);
 
             bool dialogueComplete = false;
             _dialogueManager.OnConversationEnd = () => dialogueComplete = true;

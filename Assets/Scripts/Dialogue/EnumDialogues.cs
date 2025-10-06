@@ -11,4 +11,5 @@ public enum EnumDialogues
     Mission5 = 5,
     Mission6 = 6,
     Mission7 = 7,
+    TutorialComplete = 99,
 }

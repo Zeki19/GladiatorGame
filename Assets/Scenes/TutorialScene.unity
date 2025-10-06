@@ -403,7 +403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2873445474936893918, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
       propertyPath: dialogues.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2873445474936893918, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
       propertyPath: 'dialogues.Array.data[0]'
@@ -437,6 +437,10 @@ PrefabInstance:
       propertyPath: 'dialogues.Array.data[7]'
       value: 
       objectReference: {fileID: 11400000, guid: 89f58dc619e9b4e4287048c3cf621fe2, type: 2}
+    - target: {fileID: 2873445474936893918, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3abb62a1dbdd0e842b1b339cd03ada3c, type: 2}
     - target: {fileID: 5071757150477965863, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
       propertyPath: m_Name
       value: Dialogue prefab
@@ -558,6 +562,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 54eb9b6c2ab731944b769b9de9b3f4e9, type: 2}
   - {fileID: 11400000, guid: 5fc42fb91f8ba2f4ca3cb4af1f53a6fa, type: 2}
   - {fileID: 11400000, guid: 04e964551b9465a4d97034e976ee6632, type: 2}
+  - {fileID: 11400000, guid: 53b246b47f796974a89a627dddf5a3e9, type: 2}
   missionDescriptionUI: {fileID: 0}
   isTrainingMode: 0
   normalExitDoor: {fileID: 1299833044}
@@ -588,15 +593,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: spawnPoints.Array.data[0].x
-      value: -44.5
+      value: -48.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: spawnPoints.Array.data[0].y
+      value: -36.2
       objectReference: {fileID: 0}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: spawnPoints.Array.data[1].x
-      value: -36.8
+      value: -48.2
       objectReference: {fileID: 0}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: spawnPoints.Array.data[1].y
-      value: -38
+      value: -34
       objectReference: {fileID: 0}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: spawnPoints.Array.data[6].x
@@ -616,11 +625,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44.56
+      value: -48.33
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -38.04
+      value: -35.18
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -925,6 +934,8 @@ MonoBehaviour:
     target: {fileID: 935041884}
   - id: Exit
     target: {fileID: 1299833048}
+  - id: Food
+    target: {fileID: 1800249746}
 --- !u!4 &750120652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5122396879312256592, guid: 939fd48e6ca1f3e4ba9aaa548a290fc4, type: 3}
@@ -978,6 +989,7 @@ Transform:
   - {fileID: 406504821}
   - {fileID: 731268408}
   - {fileID: 324660593}
+  - {fileID: 1800249746}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &767134957
@@ -21280,6 +21292,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3230016562665857638, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: blinkHeal
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e860e5be107cf4419450b13343ac377, type: 2}
+    - target: {fileID: 3230016562665857638, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: blinkDamage
+      value: 
+      objectReference: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
     - target: {fileID: 5522031050175312599, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: dashIconUI
       value: 
@@ -23577,6 +23597,60 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+--- !u!1 &1800249745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1800249746}
+  - component: {fileID: 1800249747}
+  m_Layer: 0
+  m_Name: FoodManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1800249746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800249745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -48.44, y: -40.24, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 767134956}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1800249747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800249745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609a475ccdf3eeb448d2bd706c77b9b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodPrefab: {fileID: 2519141427757597578, guid: 25c495c899bff2846b567d2829e213df, type: 3}
+  foodTypes:
+  - {fileID: 11400000, guid: 9316469fada712741bd858621e356be4, type: 2}
+  - {fileID: 11400000, guid: 32cdd3a383507d34d91e06fbbc53325f, type: 2}
+  foodAmount: 2
+  spawnPoints:
+  - {x: -48.2, y: -38.9}
+  - {x: -48.2, y: -41.19}
+  waitTime: 1
+  startInTutorialMode: 1
 --- !u!1 &2020722031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1131936256622166193, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}

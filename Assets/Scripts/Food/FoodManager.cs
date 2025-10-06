@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,54 +7,102 @@ using Random = UnityEngine.Random;
 public class FoodManager : MonoBehaviour
 {
     [SerializeField] private GameObject foodPrefab;
-    
+
     [Space]
-    
+
     [Header("Food config")]
     [SerializeField] private List<SOFood> foodTypes;
     [Tooltip("Maximum number of foods allowed at the same time")]
     [SerializeField] private int foodAmount;
-    
+
     [Space]
-    
-    [Header("Spawn config")] 
+
+    [Header("Spawn config")]
     [SerializeField] private List<Vector2> spawnPoints;
     [Tooltip("Maximum wait time for food spawn")]
     [SerializeField] private float waitTime;
-    
+
+    [Space]
+
+    [Header("Tutorial Mode")]
+    [Tooltip("If true, food spawns normally but collision starts disabled for tutorial")]
+    [SerializeField] private bool startInTutorialMode = false;
+
     private readonly HashSet<Vector2> _usedPoints = new HashSet<Vector2>();
     private Food[] _instancedFoods;
     private int _nFoodsOnScene;
     private bool _spawning;
-    
+    private bool _isTutorialMode;
+
+    public static event Action OnFoodSystemEnabled;
+
+    private void Awake()
+    {
+        ServiceLocator.Instance.RegisterService(this);
+    }
+
     private void Start()
     {
-        if (foodAmount == 0 || foodAmount > spawnPoints.Count) enabled = false;
-        
+        if (foodAmount == 0 || foodAmount > spawnPoints.Count)
+        {
+            enabled = false;
+            return;
+        }
+
         _instancedFoods = new Food[foodAmount];
-        
+
+        var tutorialManager = ServiceLocator.Instance.GetService<TutorialManager>();
+        if (tutorialManager != null && tutorialManager.IsTrainingMode)
+        {
+            _isTutorialMode = false;
+            Debug.Log("FoodManager: Training Mode detected - food collisions enabled from start");
+        }
+        else
+        {
+            _isTutorialMode = startInTutorialMode;
+        }
+
         InstanceFood();
     }
+
     private void InstanceFood()
     {
         for (int i = 0; i < foodAmount; i++)
         {
             var go = Instantiate(foodPrefab, transform.position, Quaternion.identity, this.transform);
             var script = go.GetComponent<Food>();
-            
+
             script.OnPickUp += FoodDestroyed;
-            
+            script.SetCollisionEnabled(!_isTutorialMode);
+
             _instancedFoods[i] = script;
         }
     }
+
+    public void EnableFoodSystem()
+    {
+        if (!_isTutorialMode) return; 
+
+        _isTutorialMode = false;
+
+        foreach (var food in _instancedFoods)
+        {
+            food.SetCollisionEnabled(true);
+        }
+
+        OnFoodSystemEnabled?.Invoke();
+        Debug.Log("Food system enabled - collisions active");
+    }
+
     private void Update()
     {
         if (_nFoodsOnScene >= foodAmount || _spawning) return;
-        
+
         _spawning = true;
         var rTime = Random.Range(0f, waitTime);
         StartCoroutine(Timer(rTime));
     }
+
     private IEnumerator Timer(float time)
     {
         yield return new WaitForSeconds(time);
@@ -62,20 +110,28 @@ public class FoodManager : MonoBehaviour
         SpawnFood();
         _spawning = false;
     }
+
     private void SpawnFood()
     {
         var spawnPoint = GetRandomPoint();
         var foodType = GetFoodType();
-        
+
         foreach (var f in _instancedFoods)
         {
             if (f.IsActive) continue;
-            
+
             f.Initialize(foodType, spawnPoint);
+
+            if (_isTutorialMode)
+            {
+                f.SetCollisionEnabled(false);
+            }
+
             _nFoodsOnScene++;
             return;
         }
     }
+
     private void FoodDestroyed(Vector2 spawnPoint)
     {
         _usedPoints.Remove(spawnPoint);
@@ -83,34 +139,34 @@ public class FoodManager : MonoBehaviour
     }
 
     #region Utility
-        private Vector2 GetRandomPoint()
-        {
-            var freePoints = new List<Vector2>(spawnPoints);
 
-            foreach (var p in  _usedPoints)
-            {
-                freePoints.Remove(p);
-            }
-            
-            var point = freePoints[Random.Range(0, freePoints.Count)];
-            _usedPoints.Add(point);
-            return point;
+    private Vector2 GetRandomPoint()
+    {
+        var freePoints = new List<Vector2>(spawnPoints);
+
+        foreach (var p in _usedPoints)
+        {
+            freePoints.Remove(p);
         }
 
-        private SOFood GetFoodType()
+        var point = freePoints[Random.Range(0, freePoints.Count)];
+        _usedPoints.Add(point);
+        return point;
+    }
+
+    private SOFood GetFoodType()
+    {
+        return foodTypes[Random.Range(0, foodTypes.Count)];
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        foreach (var p in spawnPoints)
         {
-            return foodTypes[Random.Range(0, foodTypes.Count)];
+            Gizmos.DrawSphere((Vector2)p, .5f);
         }
+    }
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.green;
-            foreach (var p in spawnPoints)
-            {
-                Gizmos.DrawSphere((Vector2)p,.5f);
-            }
-        }
-
-        #endregion
-
+    #endregion
 }
