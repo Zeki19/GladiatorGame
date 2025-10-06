@@ -313,10 +313,10 @@ public class TutorialManager : MonoBehaviour
             eventId = "Exit",
             targetTag = "Exit",
             targetName = "ExitDoor",
-            moveDuration = 2.5f,
+            moveDuration = 0.7f,
             shouldZoom = true,
             zoomAmount = 6f,
-            zoomDuration = 1.5f
+            zoomDuration = 0.3f
         };
 
         bool cameraComplete = false;

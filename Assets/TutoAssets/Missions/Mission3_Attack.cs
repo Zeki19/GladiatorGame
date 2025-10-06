@@ -18,10 +18,10 @@ public class Mission3_Attack : TutorialMission
         {
             eventId = "Dummy",
             targetTag = "Dummy",
-            moveDuration = 1f,
+            moveDuration = 0.7f,
             shouldZoom = true,
             zoomAmount = 3f,
-            zoomDuration = 1f,
+            zoomDuration = 0.3f,
             executeAfterDialogue = true
         };
         _hasCompleted = false;

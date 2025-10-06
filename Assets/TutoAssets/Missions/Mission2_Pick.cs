@@ -18,10 +18,10 @@ public class Mission2_Pick : TutorialMission
             eventId = "Weapon",
             targetTag = "Weapon",
             targetName = "SwordRack",
-            moveDuration = 0.5f,
+            moveDuration = 0.7f,
             shouldZoom = true,
             zoomAmount = 4f,
-            zoomDuration = 1f,
+            zoomDuration = 0.3f,
             executeAfterDialogue = true 
         };
         _hasCompleted = false;

@@ -12,7 +12,7 @@ public class CameraTutorialManager : MonoBehaviour
     [SerializeField] private float defaultZoom = 10f;
 
     [Header("Camera Return Speed")]
-    [SerializeField] private float returnMoveSpeed = 8f; 
+    [SerializeField] private float returnMoveSpeed = 15f; 
 
     [Header("Registered Camera Targets")]
     [SerializeField] private List<CameraTarget> registeredTargets = new List<CameraTarget>();

@@ -22,10 +22,10 @@ public class Mission7_Healing : TutorialMission
             eventId = "Food",
             targetTag = "Food",
             targetName = "FoodSpawn",
-            moveDuration = 0.5f,
+            moveDuration = 0.7f,
             shouldZoom = true,
             zoomAmount = 4f,
-            zoomDuration = 1f,
+            zoomDuration = 0.3f,
             executeAfterDialogue = true
         };
 
