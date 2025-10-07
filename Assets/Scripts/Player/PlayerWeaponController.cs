@@ -1,4 +1,4 @@
-    using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Enemies;
@@ -6,19 +6,18 @@ using Entities.Interfaces;
 using Unity.Mathematics;
 using UnityEngine;
 using Utilities.Factory.WeaponFactory;
-
 using Weapons;
-using System;
 
 namespace Player
 {
-    public class PlayerWeaponController : MonoBehaviour
+    public class PlayerWeaponController : MonoBehaviour, IPausable
     {
         [SerializeField] private LayerMask collisionLayer;
         [SerializeField] private SoWeapon startingWeapon;
         private Transform _playerRotation;
         private PlayerManager _manager;
         private WeaponManager _weaponManager;
+        private bool _isGamePaused;
         public Weapon Weapon { get; private set; }
         public float offset;
         private readonly List<GameObject> _enemiesHit = new List<GameObject>();
@@ -39,6 +38,7 @@ namespace Player
         private void OnDestroy()
         {
             AttackFinishSubscription(false);
+            PauseManager.OnPauseStateChanged -= HandlePause;
         }
 
         private void Start()
@@ -50,6 +50,7 @@ namespace Player
                 EquipWeapon(_weaponManager.RequestWeapon(startingWeapon));
             }
             _playerRotation = _manager.model.transform;
+            PauseManager.OnPauseStateChanged += HandlePause;
         }
 
         void Update()
@@ -112,8 +113,8 @@ namespace Player
                 quaternion.identity);
             AttackFinishSubscription(true);
             Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
-            weapon.BaseAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,this,_manager.controller);
-            weapon.ChargeAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,this,_manager.controller);
+            weapon.BaseAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,_manager,_manager.controller);
+            weapon.ChargeAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,_manager,_manager.controller);
             
             OnWeaponChanged?.Invoke();
             OnPlayerWeaponPicked?.Invoke();
@@ -207,5 +208,28 @@ namespace Player
         public float CheckWeaponDurabilityPercent() => Weapon.DurabilityPercent();
         
         public float CheckWeaponChargePercent() => Weapon.ChargePercent();
+
+
+        #region Pause
+
+        private void HandlePause(bool paused)
+        {
+            _isGamePaused = paused;
+            if (paused)
+                OnPause();
+            else
+                OnResume();
+        }
+
+        public void OnPause()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void OnResume()
+        {
+            gameObject.SetActive(true);
+        }
+        #endregion
     }
 }
