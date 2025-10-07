@@ -10,13 +10,21 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private List<GameObject> menuList = new List<GameObject>();
 
     [Header("Button References (Optional)")]
-    [SerializeField] private Button continueButton; 
+    [SerializeField] private Button continueButton;
+
+    [Header("Overwrite Confirmation Popup")]
+    [SerializeField] private OverwriteConfirmationPopup overwriteConfirmationPopup;
 
     private GameObject _currentScreen;
 
     private void Awake()
     {
         foreach (var go in menuList) go.SetActive(false);
+
+        if (overwriteConfirmationPopup != null)
+        {
+            overwriteConfirmationPopup.Initialize(this);
+        }
     }
 
     private void Start()
@@ -51,7 +59,32 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void StartNewGame()
+    public void OnNewGameButtonPressed()
+    {
+        if (SaveManager.Instance.HasSaveData())
+        {
+            if (overwriteConfirmationPopup != null)
+            {
+                overwriteConfirmationPopup.ShowPopup();
+            }
+            else
+            {
+                Debug.LogWarning("Overwrite popup not assigned! Starting new game anyway.");
+                StartNewGame();
+            }
+        }
+        else
+        {
+            StartNewGame();
+        }
+    }
+
+    public void ConfirmNewGame()
+    {
+        StartNewGame();
+    }
+
+    private void StartNewGame()
     {
         SaveManager.Instance.StartNewGame();
 
