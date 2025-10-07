@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &5223026 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+  m_PrefabInstance: {fileID: 1634171591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &208372200
 GameObject:
   m_ObjectHideFlags: 0
@@ -22846,9 +22857,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1356049149}
     - target: {fileID: 6520464762290886026, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: _inputs
+      value: 
+      objectReference: {fileID: 5223026}
+    - target: {fileID: 6520464762290886026, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: _target
       value: 
       objectReference: {fileID: 1356049149}
+    - target: {fileID: 6520464762290886026, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: _actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - target: {fileID: 6520464762290886026, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: _playerInputActions
+      value: 
+      objectReference: {fileID: 5223026}
     - target: {fileID: 7175932056004661134, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_Size.x
       value: 0.51
@@ -22865,6 +22888,22 @@ PrefabInstance:
       propertyPath: startingWeapon
       value: 
       objectReference: {fileID: 11400000, guid: d2b80116dd5cdd34c982cdec44eec770, type: 2}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: f48e47e9-ebee-4b9c-b68e-da1c74cdc39d
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: 'Menu/Pause[/Keyboard/escape]'
+      objectReference: {fileID: 0}
     - target: {fileID: 9152469730512944040, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.99

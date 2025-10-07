@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 
 namespace Enemies
 {
-    public abstract class EnemyController : EntityController, IStatesData, ICondition, INavigation
+    public abstract class EnemyController : EntityController, IStatesData, ICondition, INavigation, IPausable
     {
         [SerializeField] protected Rigidbody2D target;
         [SerializeField] private NavMeshAgent NVagent;
@@ -20,6 +20,7 @@ namespace Enemies
         public int currentAttack;
         protected int _currentPhase = 1;
         public MissAttackHandler MissAttack=new MissAttackHandler();
+        private bool _isGamePaused;
 
         public int CurrentPhase
         {
@@ -33,6 +34,12 @@ namespace Enemies
         {
             base.Awake();
             InitializeFsm();
+            PauseManager.OnCinematicStateChanged += HandlePause;
+        }
+
+        private void OnDestroy()
+        {
+            PauseManager.OnCinematicStateChanged -= HandlePause;
         }
 
         protected virtual void Start()
@@ -80,6 +87,25 @@ namespace Enemies
         public T GetStateData<T>(EnemyStates state) where T : class, IStateData
         {
             return stateDataManager.GetStateData<T>(state);
+        }
+        private void HandlePause(bool paused)
+        {
+            _isGamePaused = paused;
+            if (paused)
+                OnPause();
+            else
+                OnResume();
+        }
+        public void OnPause()
+        {
+            enabled = false;
+            _agent.enabled = false;
+        }
+
+        public void OnResume()
+        {
+            enabled = true;
+            _agent.enabled = true;
         }
     }
 }

@@ -42,7 +42,8 @@ public static class PauseManager
 
     private static void UpdateTimeScale()
     {
-        bool isAnyPaused = IsPaused || IsPausedCinematic;
+        //bool isAnyPaused = IsPaused || IsPausedCinematic;
+        bool isAnyPaused = IsPaused;
         //This can be removed if we want something physics base to work, or we can use Time.UnscaledDeltaTime.
         Time.timeScale = isAnyPaused ? 0f : 1f;
         OnAnyPauseStateChanged?.Invoke(isAnyPaused);

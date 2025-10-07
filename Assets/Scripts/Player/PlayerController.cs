@@ -6,16 +6,22 @@ using Entities.Interfaces;
 using Entities.StateMachine;
 using Player.PlayerStates;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class PlayerController : EntityController
+    public class PlayerController : EntityController, IPausable
     {
         public PhaseSystem _phaseSystem;
         private FSM<StateEnum> Fsm;
+        private bool _isGamePaused;
+        //[SerializeField] private InputActionAsset _actions;
+        [SerializeField] private PlayerInput _inputs;
+
 
         void Dead()
         {
+            PauseManager.OnCinematicStateChanged -= HandlePause;
             transform.parent.gameObject.SetActive(false);
             manager.PlaySound("Death", "Player");
             ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(3);
@@ -27,6 +33,7 @@ namespace Player
             var playerManager = manager as PlayerManager;
             _phaseSystem = new PhaseSystem(playerManager.stats.stateThreshold, manager.HealthComponent);
             InitializeFsm();
+            PauseManager.OnCinematicStateChanged += HandlePause;
         }
 
         protected virtual void Update()
@@ -104,6 +111,26 @@ namespace Player
             Fsm.Transition(StateEnum.Dash);
         }
 
+
+        private void HandlePause(bool paused)
+        {
+            _isGamePaused = paused;
+            if (paused)
+                OnPause();
+            else
+                OnResume();
+        }
+        public void OnPause()
+        {
+            enabled = false;
+            _inputs.enabled = false; 
+        }
+
+        public void OnResume()
+        {
+            enabled = true;
+            _inputs.enabled = true;
+        }
         private void OnDrawGizmos()
         {
             Vector3 start = transform.position;

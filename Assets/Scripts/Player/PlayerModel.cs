@@ -14,7 +14,7 @@ namespace Player
         private PlayerInput _playerInput;
         private InputAction _direction;
         private PlayerManager _manager;
-
+        private bool _isGamePaused;
         private PlayerStats _stats;
         Action _onAttack = delegate { };
 
@@ -32,8 +32,7 @@ namespace Player
             if (_manager != null) _stats = _manager.stats;
             else Debug.LogWarning("manager is not A player manager and it should be");
             manager.HealthComponent.OnDamage += AtivateInvulnerability;
-
-                ServiceLocator.Instance.RegisterService<PlayerModel>(this);
+            ServiceLocator.Instance.RegisterService<PlayerModel>(this);
         }
         public void Attack()
         {
