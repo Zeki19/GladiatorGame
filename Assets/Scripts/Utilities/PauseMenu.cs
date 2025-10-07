@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Utilities
 {
-    public class PauseMenu : MonoBehaviour
+    public class PauseMenu : MonoBehaviour, IPausable
     {
         private bool _isGamePaused = false;
         private bool _isSettings;
@@ -28,29 +28,30 @@ namespace Utilities
                 Debug.LogError($"Player Action Map '{playerActionMapName}' not found!");
                 return;
             }
+            PauseManager.OnPauseStateChanged += HandlePause;
         }
+        void OnDisable()
+        {
+            PauseManager.OnPauseStateChanged -= HandlePause;
+        }
+
 
         public void TogglePause(InputAction.CallbackContext context)
         {
-            if (context.started) TogglePause();
+            if (context.started) TogglePause();    
         }
 
         public void TogglePause()
         {
-            PauseGame(!_isGamePaused);
+            PauseManager.TogglePause();
         }
 
-        private void PauseGame(bool state)
+        private void PauseGame()
         {
-            //Use PAUSE SYSTEM
-            var timeScale = state ?  0 : 1;
-            Time.timeScale = timeScale;
+            EnablePlayerInput(!_isGamePaused);
 
-            //EnablePlayerInput(!state);
-
-            Menu.SetActive(state);
-            _isGamePaused = state;
-            SettingsMenu(!state);
+            Menu.SetActive(_isGamePaused);
+            SettingsMenu(!_isGamePaused);
         }
 
         public void ToggleSettings()
@@ -96,5 +97,23 @@ namespace Utilities
             ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(0);
         }
 
+        private void HandlePause(bool paused)
+        {
+            _isGamePaused = paused;
+            if (paused)
+                OnPause();
+            else
+                OnResume();
+        }
+
+        public void OnPause()
+        {
+            PauseGame();
+        }
+
+        public void OnResume()
+        {
+            PauseGame();
+        }
     }
 }
