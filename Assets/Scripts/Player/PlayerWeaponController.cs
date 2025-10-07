@@ -38,7 +38,7 @@ namespace Player
         private void OnDestroy()
         {
             AttackFinishSubscription(false);
-            PauseManager.OnPauseStateChanged -= HandlePause;
+            PauseManager.OnCinematicStateChanged -= HandlePause;
         }
 
         private void Start()
@@ -50,7 +50,7 @@ namespace Player
                 EquipWeapon(_weaponManager.RequestWeapon(startingWeapon));
             }
             _playerRotation = _manager.model.transform;
-            PauseManager.OnPauseStateChanged += HandlePause;
+            PauseManager.OnCinematicStateChanged += HandlePause;
         }
 
         void Update()
