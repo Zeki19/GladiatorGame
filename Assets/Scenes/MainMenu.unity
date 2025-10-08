@@ -1069,9 +1069,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 769155981}
     m_Modifications:
+    - target: {fileID: 381116452921170613, guid: 588406fa7586b224ca6e4c1abab4c9cb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1535092180}
     - target: {fileID: 796085719023099323, guid: 588406fa7586b224ca6e4c1abab4c9cb, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435415186743471662, guid: 588406fa7586b224ca6e4c1abab4c9cb, type: 3}
+      propertyPath: m_text
+      value: Keybinds
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435415186743471662, guid: 588406fa7586b224ca6e4c1abab4c9cb, type: 3}
+      propertyPath: m_fontSize
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3435415186743471662, guid: 588406fa7586b224ca6e4c1abab4c9cb, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 4140315941889204530, guid: 588406fa7586b224ca6e4c1abab4c9cb, type: 3}
       propertyPath: m_AnchorMax.x
