@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum WallState { Standing = 0, Broken = 1 }
 
-public class WallManager : MonoBehaviour
+public class WallObstacle : MonoBehaviour
 {
     [Header("Health")]
     [SerializeField] private int maxHealth = 1;
@@ -12,9 +12,6 @@ public class WallManager : MonoBehaviour
 
     [Header("Prefabs by State (0 = Standing, 1 = Broken)")]
     [SerializeField] private GameObject[] prefabs;
-
-    [Header("Damage Filter")]
-    [SerializeField] private bool onlyMinotaurCanBreak = true;//only damage from Minotaur will be accepted.
 
     private int _currentHealth;
     private GameObject _spawnedWall;
@@ -27,15 +24,9 @@ public class WallManager : MonoBehaviour
     {
         _context.Origin = transform;
         _currentHealth = maxHealth;
-        SpawnCurrentState();
     }
 
-    private void OnDestroy()
-    {
-        DestroySpawned();
-    }
-
-    private void SpawnCurrentState()
+    public void SpawnCurrentState()
     {
         if (prefabs == null || prefabs.Length < 2)
         {
@@ -44,6 +35,7 @@ public class WallManager : MonoBehaviour
         }
 
         var prefab = prefabs[(int)_currentState];
+        
         if (!prefab)
         {
             Debug.LogError("[WallManager] Missing prefab for state: " + _currentState);
@@ -51,13 +43,9 @@ public class WallManager : MonoBehaviour
         }
 
         _spawnedWall = Instantiate(prefab, transform.position, Quaternion.identity, this.transform);
+        
         if (_spawnedWall.TryGetComponent<IPillar>(out var behaviour))
         {
-            if (_spawnedWall.TryGetComponent<Wall_Standing>(out var standing))
-            {
-                standing.ConfigureDamageFilter(onlyMinotaurCanBreak);
-            }
-
             behaviour.SpawnPillar(_context);
             behaviour.OnDamaged += ReceiveDamage;
             _behaviours[_spawnedWall] = behaviour;

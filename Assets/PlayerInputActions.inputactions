@@ -16,15 +16,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "b5630367-5c76-436e-a6b1-be024403c561",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Look",
                     "type": "Value",
                     "id": "4bed20e1-ac64-40c2-941c-272f0875ea96",
@@ -32,6 +23,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "b5630367-5c76-436e-a6b1-be024403c561",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Attack",
@@ -43,7 +43,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChargeAttack",
+                    "name": "Charged Attack",
                     "type": "Button",
                     "id": "cc119b46-a4aa-4744-9d43-5bbf464e13fb",
                     "expectedControlType": "",
@@ -230,7 +230,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChargeAttack",
+                    "action": "Charged Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -241,7 +241,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChargeAttack",
+                    "action": "Charged Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -252,7 +252,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChargeAttack",
+                    "action": "Charged Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
