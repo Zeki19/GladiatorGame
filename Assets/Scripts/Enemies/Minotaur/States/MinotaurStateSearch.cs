@@ -32,14 +32,12 @@ namespace Enemies.Minotaur.States
                 _status.SetStatus(StatusEnum.FinishedSearching, true);
                 if (_model.RaycastBetweenCharacters(_model.transform, _target.GetTarget().transform).collider != null)
                 {
-                    _status.SetStatus(StatusEnum.ChargeOnSight, true);
                     _status.SetStatus(StatusEnum.SawThePlayer, false);
                     //Now follow the player wanting to charge (DesperateSearch)
                 }
                 else
                 {
                     _status.SetStatus(StatusEnum.SawThePlayer, true);
-                    _status.SetStatus(StatusEnum.ChargeOnSight, false);
                     //Now follow the player normally (Chase)
                 }
             }
