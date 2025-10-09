@@ -29,18 +29,17 @@ namespace Enemies.Minotaur.States
 
             if (_agent._NVagent.remainingDistance <= 1)
             {
-                //FinishedSearching = true;
+                _status.SetStatus(StatusEnum.FinishedSearching, true);
                 if (_model.RaycastBetweenCharacters(_model.transform, _target.GetTarget().transform).collider != null)
                 {
-                    //ChargeOnSight = true;
-                    //SawThePlayer = false;
+                    _status.SetStatus(StatusEnum.ChargeOnSight, true);
+                    _status.SetStatus(StatusEnum.SawThePlayer, false);
                     //Now follow the player wanting to charge (DesperateSearch)
-
                 }
                 else
                 {
-                    //SawThePlayer = true;
-                    //ChargeOnSight = false;
+                    _status.SetStatus(StatusEnum.SawThePlayer, true);
+                    _status.SetStatus(StatusEnum.ChargeOnSight, false);
                     //Now follow the player normally (Chase)
                 }
             }
