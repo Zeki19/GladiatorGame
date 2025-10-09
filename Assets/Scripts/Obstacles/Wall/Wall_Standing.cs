@@ -41,16 +41,11 @@ public class Wall_Standing : MonoBehaviour, IPillar
         return mino != null;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (IsValidMinotaurHit(other))
-        {
-            OnDamaged?.Invoke();
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        OnDamaged?.Invoke();
+        
+        return;
         if (IsValidMinotaurHit(collision.collider))
         {
             OnDamaged?.Invoke();
