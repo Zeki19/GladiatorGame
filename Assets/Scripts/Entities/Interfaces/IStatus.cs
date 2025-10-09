@@ -22,8 +22,6 @@ public enum StatusEnum
     OnLongCD=6,
     isMeleeLock=7,
     IsFleeing=8,
-    isInBack=9,
-    FinishedSearching=10,
-    SawThePlayer=11,
-    ChargeNow=12,
+    isInBack=9
+    
 }
