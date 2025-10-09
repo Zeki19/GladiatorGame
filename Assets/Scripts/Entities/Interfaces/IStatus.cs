@@ -27,6 +27,5 @@ public enum StatusEnum
     ChargeOnSight=11,
     SawThePlayer=12,
     ChargeNow=13,
-
-
+    WallBreaker=14,
 }
