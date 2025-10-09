@@ -31,6 +31,7 @@ namespace Enemies.Minotaur.States
             _agent._NVagent.SetDestination(_target.GetTarget().transform.position);
             if (_model.RaycastBetweenCharacters(_model.transform, _target.GetTarget().transform).collider == null)
             {
+                _status.SetStatus(StatusEnum.OnLongCD,true);
                 //FUCKINGCHARGEEEE == true;
                 //Perform LabyrinthCharge attack
             }

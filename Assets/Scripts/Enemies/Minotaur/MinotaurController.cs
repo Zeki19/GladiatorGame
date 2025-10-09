@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Attack;
-using Enemies.Valeria.States;
+using Enemies.Minotaur.States;
 using Entities.StateMachine;
 using Unity.Behavior;
 using UnityEngine;
@@ -21,6 +21,7 @@ namespace Enemies.Minotaur
         private StatesBase<EnemyStates> _chaseState;
         private StatesBase<EnemyStates> _searchState;
         private StatesBase<EnemyStates> _desperateSearchState;
+        private StatesBase<EnemyStates> _attackState;
 
         private ISteering _pursuitSteering;
 
@@ -47,31 +48,40 @@ namespace Enemies.Minotaur
         protected override void InitializeFsm()
         {
             Fsm = new FSM<EnemyStates>();
-
-            var chaseState = new States.MinotaurStateChase<EnemyStates>(_pursuitSteering, this);
-            var searchState = new States.MinotaurStateSearch<EnemyStates>(_pursuitSteering);
-            var desperateSearchState = new States.MinotaurStateDesperateSearch<EnemyStates>(_pursuitSteering, searchSpeed);
+            var attackState = new MinotaurStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
+            var chaseState = new MinotaurStateChase<EnemyStates>(_pursuitSteering, this);
+            var searchState = new MinotaurStateSearch<EnemyStates>(_pursuitSteering);
+            var desperateSearchState = new MinotaurStateDesperateSearch<EnemyStates>(_pursuitSteering, searchSpeed);
 
 
             _chaseState = chaseState;
             _searchState = searchState;
             _desperateSearchState = desperateSearchState;
+            _attackState = attackState;
 
             var stateList = new List<State<EnemyStates>>
             {
                 chaseState,
                 searchState,
-                desperateSearchState
+                desperateSearchState,
+                attackState
             };
             
             chaseState.AddTransition(EnemyStates.RunAway, searchState);
             chaseState.AddTransition(EnemyStates.Surround, desperateSearchState);
+            chaseState.AddTransition(EnemyStates.Attack, attackState);
             
             searchState.AddTransition(EnemyStates.Chase, chaseState);
             searchState.AddTransition(EnemyStates.Surround, desperateSearchState);
+            searchState.AddTransition(EnemyStates.Attack, attackState);
 
             desperateSearchState.AddTransition(EnemyStates.Chase, chaseState);
             desperateSearchState.AddTransition(EnemyStates.RunAway, searchState);
+            desperateSearchState.AddTransition(EnemyStates.Attack, attackState);
+            
+            attackState.AddTransition(EnemyStates.Chase,chaseState);
+            attackState.AddTransition(EnemyStates.Surround,desperateSearchState);
+            attackState.AddTransition(EnemyStates.RunAway,searchState);
 
             InitializeComponents(stateList);
             Fsm.SetInit(chaseState, EnemyStates.Chase);
