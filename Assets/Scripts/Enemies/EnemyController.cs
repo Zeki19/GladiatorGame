@@ -100,6 +100,8 @@ namespace Enemies
         {
             enabled = false;
             _agent.enabled = false;
+            _NVagent.ResetPath();
+            _NVagent.velocity = Vector3.zero;
         }
 
         public void OnResume()
