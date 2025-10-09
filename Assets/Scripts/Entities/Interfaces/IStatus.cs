@@ -24,8 +24,6 @@ public enum StatusEnum
     IsFleeing=8,
     isInBack=9,
     FinishedSearching=10,
-    ChargeOnSight=11,
-    SawThePlayer=12,
-    ChargeNow=13,
-    WallBreaker=14,
+    SawThePlayer=11,
+    ChargeNow=12,
 }

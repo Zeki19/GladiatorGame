@@ -32,7 +32,7 @@ namespace Enemies.Minotaur.States
             if (_model.RaycastBetweenCharacters(_model.transform, _target.GetTarget().transform).collider == null)
             {
                 _status.SetStatus(StatusEnum.ChargeNow, true);
-                _status.SetStatus(StatusEnum.SawThePlayer, true);
+                //Perform LabyrinthCharge attack
             }
             Vector2 dir = _steering.GetDir();
             _look.LookDir(dir);
