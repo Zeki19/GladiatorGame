@@ -26,4 +26,5 @@ public enum StatusEnum
     FinishedSearching=10,
     SawThePlayer=11,
     ChargeNow=12,
+    WallBreaker=13
 }
