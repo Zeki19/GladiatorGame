@@ -12,21 +12,24 @@ namespace Enemies.Minotaur.States
         private float _speedModeInterval = 4;
         private float _timer;
         private float _longTimerCd;
+        private EnemyModel _model;
         public MinotaurStateChase(ISteering steering, MinotaurController controller)
         {
             _steering = steering;
             _speedMod = controller.stats.Stack;
             _speedModeInterval = controller.stats.Interval;
+            
         }
 
         public override void Enter()
         {
             base.Enter();
             _move.Move(Vector2.zero);
-            _animate.PlayStateAnimation(StateEnum.Chase);
+            //_animate.PlayStateAnimation(StateEnum.Chase);
             _timer = _speedModeInterval;
             _agent._NVagent.updateRotation = false;
             _agent._NVagent.updateUpAxis = false;
+            _model = _move as EnemyModel;
         }
         public override void Execute()
         {
@@ -42,9 +45,20 @@ namespace Enemies.Minotaur.States
                 _stackingSpeed += _speedMod;
                 _timer = _speedModeInterval;
             }
+            if (_model.RaycastBetweenCharacters(_model.transform, _target.GetTarget().transform).collider != null)
+            {
+                Debug.Log("i dont see the player");
+                _status.SetStatus(StatusEnum.SawThePlayer, false);
+                //Now follow the player wanting to charge (DesperateSearch)
+            }
+            else
+            {
+                _status.SetStatus(StatusEnum.SawThePlayer, true);
+                //Now follow the player normally (Chase)
+            }
 
             Vector2 dir = _steering.GetDir();
-            _move.Move(dir);
+            //_move.Move(dir);
             _look.LookDir(dir);
         }
         public override void Exit()

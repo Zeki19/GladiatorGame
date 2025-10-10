@@ -51,7 +51,7 @@ namespace Enemies.Gaius.States
                 _timer = _speedModeInterval;
             }
 
-            _move.Move(dir);
+            //_move.Move(dir);
             _look.LookDir(dir);
         }
         public override void Exit()

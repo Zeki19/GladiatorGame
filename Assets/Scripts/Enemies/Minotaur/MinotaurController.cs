@@ -67,7 +67,7 @@ namespace Enemies.Minotaur
                 attackState
             };
             
-            chaseState.AddTransition(EnemyStates.RunAway, searchState);
+            chaseState.AddTransition(EnemyStates.Patrol, searchState);
             chaseState.AddTransition(EnemyStates.Surround, desperateSearchState);
             chaseState.AddTransition(EnemyStates.Attack, attackState);
             
@@ -76,12 +76,12 @@ namespace Enemies.Minotaur
             searchState.AddTransition(EnemyStates.Attack, attackState);
 
             desperateSearchState.AddTransition(EnemyStates.Chase, chaseState);
-            desperateSearchState.AddTransition(EnemyStates.RunAway, searchState);
+            desperateSearchState.AddTransition(EnemyStates.Patrol, searchState);
             desperateSearchState.AddTransition(EnemyStates.Attack, attackState);
             
             attackState.AddTransition(EnemyStates.Chase,chaseState);
             attackState.AddTransition(EnemyStates.Surround,desperateSearchState);
-            attackState.AddTransition(EnemyStates.RunAway,searchState);
+            attackState.AddTransition(EnemyStates.Patrol,searchState);
 
             InitializeComponents(stateList);
             Fsm.SetInit(chaseState, EnemyStates.Chase);

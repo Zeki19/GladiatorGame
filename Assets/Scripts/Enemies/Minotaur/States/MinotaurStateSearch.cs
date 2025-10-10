@@ -11,35 +11,38 @@ namespace Enemies.Minotaur.States
         public MinotaurStateSearch(ISteering steering)
         {
             _steering = steering;
-            _model = _move as MinotaurModel;
+            
         }
 
         public override void Enter()
         {
             base.Enter();
             _move.Move(Vector2.zero);
-            _animate.PlayStateAnimation(StateEnum.Chase);
+            //_animate.PlayStateAnimation(StateEnum.Chase);
             _agent._NVagent.updateRotation = false;
             _agent._NVagent.updateUpAxis = false;
             _agent._NVagent.SetDestination(_target.GetTarget().transform.position);
+            _model = _move as MinotaurModel;
         }
         public override void Execute()
         {
             base.Execute();
 
+            if (_model.RaycastBetweenCharacters(_model.transform, _target.GetTarget().transform).collider != null)
+            {
+                _status.SetStatus(StatusEnum.SawThePlayer, false);
+                //Now follow the player wanting to charge (DesperateSearch)
+            }
+            else
+            {
+                _status.SetStatus(StatusEnum.SawThePlayer, true);
+                _status.SetStatus(StatusEnum.FinishedSearching, true);
+                //Now follow the player normally (Chase)
+            }
+            
             if (_agent._NVagent.remainingDistance <= 1)
             {
                 _status.SetStatus(StatusEnum.FinishedSearching, true);
-                if (_model.RaycastBetweenCharacters(_model.transform, _target.GetTarget().transform).collider != null)
-                {
-                    _status.SetStatus(StatusEnum.SawThePlayer, false);
-                    //Now follow the player wanting to charge (DesperateSearch)
-                }
-                else
-                {
-                    _status.SetStatus(StatusEnum.SawThePlayer, true);
-                    //Now follow the player normally (Chase)
-                }
             }
             Vector2 dir = _steering.GetDir();
             _look.LookDir(dir);

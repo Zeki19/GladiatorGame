@@ -2,6 +2,7 @@ using System.Collections;
 using Entities;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace Enemies
 {
@@ -9,6 +10,7 @@ namespace Enemies
     {
         protected float SpeedModifier = 1;
         [SerializeField] float _moveSpeed;
+        [SerializeField] private LayerMask obstaclesMask;
 
         public override void ModifySpeed(float speed)
         {
@@ -48,7 +50,7 @@ namespace Enemies
             Vector2 direction = (target.position - start.position);
             float distance = direction.magnitude;
 
-            return Physics2D.Raycast(start.position, direction.normalized, distance, hitMask);
+            return Physics2D.Raycast(start.position, direction.normalized, distance, obstaclesMask);
         }
 
 

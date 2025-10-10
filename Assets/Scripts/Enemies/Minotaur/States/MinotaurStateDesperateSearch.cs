@@ -20,7 +20,7 @@ namespace Enemies.Minotaur.States
         {
             base.Enter();
             _move.Move(Vector2.zero);
-            _animate.PlayStateAnimation(StateEnum.Chase);
+            //_animate.PlayStateAnimation(StateEnum.Chase);
             _agent._NVagent.speed += _speedMod;
             _agent._NVagent.updateRotation = false;
             _agent._NVagent.updateUpAxis = false;

@@ -74,8 +74,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 4479647694098908297}
-  _target: {fileID: 0}
-  target: {fileID: 0}
+  _target: {fileID: 4479647694098908297}
+  target: {fileID: 2234866662532399477}
   NVagent: {fileID: 1762995347600989397}
   sceneToChangeWhenDie: 
   _agent: {fileID: 2040069591655290464}
@@ -417,7 +417,7 @@ Transform:
   m_GameObject: {fileID: 6300078822741067180}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.747, y: -0.014, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -488,7 +488,7 @@ Animator:
   m_GameObject: {fileID: 6300078822741067180}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f47c416ffc82da42a65c10dddda7801, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
