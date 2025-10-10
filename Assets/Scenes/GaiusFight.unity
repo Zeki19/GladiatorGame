@@ -6232,12 +6232,16 @@ PrefabInstance:
       value: 2111879095
       objectReference: {fileID: 0}
     - target: {fileID: 4028609289078078931, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: maxLife
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028609289078078931, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: bossHealthBarUI
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4028609289078078931, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: 'phasesThresholds.Array.data[0]'
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4250985215330158538, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: m_IsActive

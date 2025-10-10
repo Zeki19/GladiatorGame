@@ -24,7 +24,7 @@ namespace Enemies.Attack
             collider.enabled = true;
             if (curve.length > 0)
                 animationTime = curve.keys[curve.length - 1].time;
-            Weapon.transform.localPosition = Weapon.transform.localPosition.normalized *1.3f;
+           // Weapon.transform.localPosition = Weapon.transform.localPosition.normalized *1.3f;
             while(animationClock < animationTime)
             {
                 animationClock += Time.deltaTime;
