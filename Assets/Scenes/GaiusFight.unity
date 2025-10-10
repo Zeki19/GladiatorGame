@@ -6264,6 +6264,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2020722031}
     - target: {fileID: 8613084811357606315, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613084811357606315, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613084811357606315, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: m_AutoBraking
       value: 0
       objectReference: {fileID: 0}
@@ -22259,6 +22267,7 @@ MonoBehaviour:
   Gain: 1
   Use2DDistance: 1
   UseCameraSpace: 1
+  SignalCombinationMode: 0
   ReactionSettings:
     m_SecondaryNoise: {fileID: 0}
     AmplitudeGain: 1
