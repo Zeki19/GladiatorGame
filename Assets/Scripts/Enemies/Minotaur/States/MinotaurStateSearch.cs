@@ -11,7 +11,6 @@ namespace Enemies.Minotaur.States
         public MinotaurStateSearch(ISteering steering)
         {
             _steering = steering;
-            
         }
 
         public override void Enter()
@@ -40,7 +39,7 @@ namespace Enemies.Minotaur.States
                 //Now follow the player normally (Chase)
             }
             
-            if (_agent._NVagent.remainingDistance <= 1)
+            if (_agent._NVagent.remainingDistance <= 1&&_agent._NVagent.hasPath)
             {
                 _status.SetStatus(StatusEnum.FinishedSearching, true);
             }

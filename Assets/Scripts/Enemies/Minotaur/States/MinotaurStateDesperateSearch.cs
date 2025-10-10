@@ -13,7 +13,7 @@ namespace Enemies.Minotaur.States
         {
             _steering = steering;
             _speedMod = speedMod;
-            _model = _move as MinotaurModel;
+            
         }
 
         public override void Enter()
@@ -24,6 +24,7 @@ namespace Enemies.Minotaur.States
             _agent._NVagent.speed += _speedMod;
             _agent._NVagent.updateRotation = false;
             _agent._NVagent.updateUpAxis = false;
+            _model = _move as MinotaurModel;
         }
         public override void Execute()
         {
@@ -32,6 +33,7 @@ namespace Enemies.Minotaur.States
             if (_model.RaycastBetweenCharacters(_model.transform, _target.GetTarget().transform).collider == null)
             {
                 _status.SetStatus(StatusEnum.ChargeNow, true);
+                Debug.Log("ChargeNow");
                 //Perform LabyrinthCharge attack
             }
             Vector2 dir = _steering.GetDir();
