@@ -10,22 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 315ebaae4ce64d3fa07fe1d5aef5ebe5, type: 3}
-  m_Name: MinosNormalCombo
+  m_Name: MinosStrongCombo
   m_EditorClassIdentifier: 
   attackName: 
   damage: 2
   attacks:
-  - Attack: {fileID: 11400000, guid: d3fac5d97fe56ce449c0df06a4befeb4, type: 2}
+  - Attack: {fileID: 11400000, guid: be3bd587494ef65409fb18bfc10785a3, type: 2}
     Delay: 0
     BreakComboIfMiss: 0
     BreakComboIfHit: 0
-  - Attack: {fileID: 11400000, guid: d3fac5d97fe56ce449c0df06a4befeb4, type: 2}
+  - Attack: {fileID: 11400000, guid: be3bd587494ef65409fb18bfc10785a3, type: 2}
     Delay: 0.2
     BreakComboIfMiss: 0
     BreakComboIfHit: 0
   - Attack: {fileID: 11400000, guid: be3bd587494ef65409fb18bfc10785a3, type: 2}
     Delay: 0.2
     BreakComboIfMiss: 0
-    BreakComboIfHit: 1
+    BreakComboIfHit: 0
+  - Attack: {fileID: 11400000, guid: be3bd587494ef65409fb18bfc10785a3, type: 2}
+    Delay: 0.2
+    BreakComboIfMiss: 1
+    BreakComboIfHit: 0
+  - Attack: {fileID: 11400000, guid: be3bd587494ef65409fb18bfc10785a3, type: 2}
+    Delay: 0.2
+    BreakComboIfMiss: 1
+    BreakComboIfHit: 0
   continueToNextAttack: 1
   repositionAfterEachAttack: 1

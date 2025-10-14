@@ -5,23 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Attack/MeteorLikeAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Attack/MeteorLikeAttack.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/1_Gaius/Attacks/GaiusDesperateLunge.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/1_Gaius/Attacks/GaiusDesperateLunge.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosNormalCombo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosNormalCombo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosNormalPunk.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosNormalPunk.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosStrongPunk.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosStrongPunk.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/MinotaurBehaviour.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/MinotaurBehaviour.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MinotaurFight.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MinotaurFight.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Attack/ComboAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Attack/ComboAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Attack/SlamAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Attack/SlamAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Behaiviours/Nodes/Actions/CheckifStateIsCurrentAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Behaiviours/Nodes/Actions/CheckifStateIsCurrentAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/Proyectiles/burst.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/Proyectiles/burst.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Attack/AttackManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Attack/AttackManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Behaiviours/Nodes/Actions/AttackMissedAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Behaiviours/Nodes/Actions/AttackMissedAction.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/States/MinotaurStateChase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/States/MinotaurStateChase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Wall/Wall_Standing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Wall/Wall_Standing.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/BehaviorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/BehaviorSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/MinotaurController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/MinotaurController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/ValeriaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/ValeriaController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/EntityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/EntityController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/GroundBurst.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/GroundBurst.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +71,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utilities/CameraShake.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/Node.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/Nodes/Actions/Navigation/PatrolAction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/Nodes/Composites/SwitchComposite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/Nodes/Decorators/Inverter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@aa507f3228f0/Runtime/TMP/TMP_Settings.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -99,7 +97,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.C#",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -151,15 +149,13 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="10696">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="10696" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -258,6 +254,7 @@
       <workItem from="1760124027962" duration="2295000" />
       <workItem from="1760188172831" duration="4198000" />
       <workItem from="1760294066681" duration="4792000" />
+      <workItem from="1760449671875" duration="8119000" />
     </task>
     <servers />
   </component>

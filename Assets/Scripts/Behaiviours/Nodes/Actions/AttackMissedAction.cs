@@ -20,7 +20,9 @@ public partial class AttackMissedAction : Action
 
     protected override Status OnUpdate()
     {
-        return Status.Success;
+        if (Controller.Value.GetStatus(StatusEnum.AttackMissed))
+            return Status.Success;
+        return Status.Failure;
     }
 
     protected override void OnEnd()

@@ -80,6 +80,7 @@ namespace Enemies.Minotaur
             desperateSearchState.AddTransition(EnemyStates.Attack, attackState);
             
             attackState.AddTransition(EnemyStates.Chase,chaseState);
+            attackState.AddTransition(EnemyStates.Attack, attackState);
             attackState.AddTransition(EnemyStates.Surround,desperateSearchState);
             attackState.AddTransition(EnemyStates.Patrol,searchState);
 
@@ -91,16 +92,6 @@ namespace Enemies.Minotaur
         {
             //Destroy(gameObject);
             SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
-        }
-        protected override void Update()
-        {
-            base.Update();
-            if (manager.HealthComponent.currentHealth > 50)
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase1);
-            else
-            {
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
-            }
         }
     }
 }

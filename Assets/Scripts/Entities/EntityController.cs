@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Enemies;
 using Entities.Interfaces;
 using Entities.StateMachine;
+using Unity.Behavior;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Analytics;

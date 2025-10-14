@@ -59,6 +59,11 @@ namespace Enemies
                 case 3:_agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase3);
                     break;
             }
+
+            _agent.SetVariableValue("CurrentPhase",
+                manager.HealthComponent.currentHealth > manager.phasesThresholds[0]
+                    ? global::CurrentPhase.Phase1
+                    : global::CurrentPhase.Phase2);
         }
 
         protected void CheckPhase(float damage)

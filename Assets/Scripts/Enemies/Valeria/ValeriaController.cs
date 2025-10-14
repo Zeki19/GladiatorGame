@@ -164,15 +164,6 @@ namespace Enemies.Valeria
                 door.OnBossDefeated();
             }
         }
-        protected override void Update()
-        {
-            base.Update();
-            if (manager.HealthComponent.currentHealth > 50)
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase1);
-            else
-            {
-                agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
-            }
-        }
+        
     }
 }

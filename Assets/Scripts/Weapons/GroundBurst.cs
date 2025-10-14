@@ -11,11 +11,13 @@ public class GroundBurst : BaseProjectile
     public override void SetUp(float damage, LayerMask layer, float speed, float maxRange)
     {
         base.SetUp(damage, layer, speed, maxRange);
+        transform.localScale = Vector3.one*maxRange;
         StartCoroutine(Burst());
     }
 
     private IEnumerator Burst()
     {
+        
         yield return new WaitForSeconds(burstTimer);
         var Hits =Physics2D.OverlapCircleAll(transform.position, MaxRange, collisionLayer);
         foreach (var hit in Hits)

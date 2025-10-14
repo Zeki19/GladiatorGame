@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Enemies;
@@ -96,6 +97,11 @@ namespace Attack
 
             yield return new WaitForSeconds(telegraph.aliveTime);
             currentAttack.ExecuteAttack();
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            _controller.SetStatus(StatusEnum.Dashing,false);
         }
     }
 }
