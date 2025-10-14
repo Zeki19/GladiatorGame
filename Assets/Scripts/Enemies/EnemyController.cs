@@ -109,5 +109,48 @@ namespace Enemies
             enabled = true;
             _agent.enabled = true;
         }
+
+        #region Navmesh
+
+        public void TurnOffNavMesh()
+        {
+            NVagent.updatePosition = false;
+            NVagent.updateRotation = false;
+        }
+
+        public void RepositionInNavMesh()
+        {
+            StartCoroutine(ReturnToNavMesh());
+        }
+
+        private IEnumerator ReturnToNavMesh()
+        {
+            // Wait until the surface finishes building (optional delay)
+            yield return new WaitForSeconds(0.2f);
+
+            if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 3f, NavMesh.AllAreas))
+            {
+                Vector3 targetPos = hit.position;
+
+                // Smooth slide back to NavMesh
+                while (Vector3.Distance(transform.position, targetPos) > 0.05f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, targetPos, 5f * Time.deltaTime);
+                    yield return null;
+                }
+
+                // Sync agent
+                NVagent.enabled = true;
+                NVagent.Warp(transform.position);
+                NVagent.updatePosition = true;
+                NVagent.updateRotation = true;
+            }
+            else
+            {
+                Debug.LogWarning("Could not find NavMesh nearby after dash!");
+            }
+        }
+
+        #endregion
     }
 }

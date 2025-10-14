@@ -27,6 +27,17 @@ public class Wall_Standing : MonoBehaviour, IPillar
         Destroy(gameObject);
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        var hit = other.gameObject.GetComponent<EnemyController>();
+        if (!hit) return;
+
+        if (hit.GetStatus(StatusEnum.WallBreaker))
+        {
+            OnDamaged?.Invoke();   
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var hit = collision.gameObject.GetComponent<EnemyController>();

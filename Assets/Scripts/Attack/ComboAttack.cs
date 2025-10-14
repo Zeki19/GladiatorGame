@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Enemies;
 using Entities;
 using Entities.Interfaces;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Attack
@@ -11,8 +12,9 @@ namespace Attack
     [CreateAssetMenu(fileName = "ComboAttack", menuName = "Attacks/ComboAttack")]
     public class ComboAttack : BaseAttack
     {
-        [SerializeField] private List<ComboAttackProperties> attacks;
+        [SerializeField] private List<ComboAttackProperties> attacks=new List<ComboAttackProperties>();
         public bool continueToNextAttack;
+        [SerializeField] private bool repositionAfterEachAttack;
         public override void SetUp(GameObject weapon, IMove move, ILook look, IStatus status, MonoBehaviour coroutineRunner, ITarget target)
         {
             base.SetUp(weapon, move, look, status, coroutineRunner, target);
@@ -40,6 +42,8 @@ namespace Attack
                 continueToNextAttack = false;
                 yield return new WaitForSeconds(attack.Delay);
                 attack.Attack.ExecuteAttack();
+                if(repositionAfterEachAttack)
+                    LookPosition(Target.GetTarget().transform.position);
                 yield return new WaitUntil(()=>continueToNextAttack);
                 if(attack.BreakComboIfHit&&!Status.GetStatus(StatusEnum.AttackMissed))
                     break;
