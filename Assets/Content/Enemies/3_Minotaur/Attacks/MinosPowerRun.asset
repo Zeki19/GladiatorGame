@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: MinosPowerRun
   m_EditorClassIdentifier: 
   attackName: 
-  damage: 0
+  damage: 10
   projectileSpeed: 0
-  maxRange: 0
-  projectilePrefab: {fileID: 0}
+  maxRange: 2
+  projectilePrefab: {fileID: 2206256447500830720, guid: 2942cd37af2798c40ac52b4ce3d44deb, type: 3}
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 0
-  distance: 0
-  speed: 0
-  delayBetweenSwans: 0
+    m_Bits: 64
+  distance: 10
+  speed: 5
+  delayBetweenSwans: 1
