@@ -17,7 +17,7 @@ namespace Attack
             MonoBehaviour coroutineRunner,ITarget target)
         {
             base.SetUp(weapon, move, look, status, coroutineRunner,target);
-            _area = Instantiate(areaPrefab, weapon.transform);
+            _area = Instantiate(areaPrefab, weapon.transform.parent);
             _area.SetActive(false);
         }
 

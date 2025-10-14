@@ -11,6 +11,7 @@ public partial class CheckifStateIsCurrentAction : Action
 {
     [SerializeReference] public BlackboardVariable<EnemyStates> A;
     [SerializeReference] public BlackboardVariable<EnemyController> Controller;
+    [SerializeReference] public BlackboardVariable<bool> CanNotFail;
 
     protected override Status OnStart()
     {
@@ -23,7 +24,9 @@ public partial class CheckifStateIsCurrentAction : Action
             return Status.Success;
         else
         {
-            return Status.Failure;
+            if(!CanNotFail)
+                return Status.Failure;
+            return Status.Running;
         }
     }
 

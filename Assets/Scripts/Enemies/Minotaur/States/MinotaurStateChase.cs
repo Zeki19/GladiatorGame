@@ -11,8 +11,12 @@ namespace Enemies.Minotaur.States
         private float _stackingSpeed;
         private float _speedModeInterval = 4;
         private float _timer;
-        private float _longTimerCd;
         private EnemyModel _model;
+        private float _shortMeleeAttackCd=2.4f;
+        private float _shortMeleeTimerCd;
+        
+        private float _longAttackCd=5;
+        private float _longTimerCd;
         public MinotaurStateChase(ISteering steering, MinotaurController controller)
         {
             _steering = steering;
@@ -35,7 +39,19 @@ namespace Enemies.Minotaur.States
         {
             base.Execute();
             _agent._NVagent.SetDestination(_target.GetTarget().transform.position);
+            
+            _shortMeleeTimerCd += Time.deltaTime;
+            if (_shortMeleeTimerCd > _shortMeleeAttackCd)
+            {
+                _status.SetStatus(StatusEnum.OnMeleeShortCD,true);
+                _shortMeleeTimerCd = 0;
+            }
             _longTimerCd += Time.deltaTime;
+            if (_longTimerCd > _longAttackCd)
+            {
+                _status.SetStatus(StatusEnum.OnLongCD,true);
+                _longTimerCd = 0;
+            }
 
             _timer -= Time.deltaTime;
 

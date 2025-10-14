@@ -1,8 +1,6 @@
 using System.Collections;
 using Entities;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace Enemies
 {
@@ -52,6 +50,7 @@ namespace Enemies
 
             return Physics2D.Raycast(start.position, direction.normalized, distance, obstaclesMask);
         }
+        
 
 
         public void AttackTarget(Transform target, float damage)
@@ -64,7 +63,6 @@ namespace Enemies
                 manager.HealthComponent.TakeDamage(damage);
             }
         }
-
         #region Dash
 
         public override void Dash(float dashForce)
@@ -99,7 +97,6 @@ namespace Enemies
                 {
                     break;
                 }
-
                 yield return null;
             }
 
