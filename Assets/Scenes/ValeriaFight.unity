@@ -24585,6 +24585,10 @@ PrefabInstance:
       propertyPath: hiddingTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: stoppingThreshold
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1725781832690022149, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: _moveSpeed
       value: 0
@@ -24639,11 +24643,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_Height
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7849566506043400556, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_Name
