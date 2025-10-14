@@ -20,6 +20,11 @@ public class EnemyTelegraph : ScriptableObject
         public Vector2 scale;
         public float aliveTime;
         public bool center;
+
+        //This three work only for multiple telegraphs.
+        public bool multiple;
+        public int amount;
+        [SerializeField, Range(0f, 360f)] public float coneAngle;
     }
 
     public List<spriteValues> correlations = new List<spriteValues>();
@@ -46,12 +51,13 @@ public class EnemyTelegraph : ScriptableObject
         telegraphValues teleAttack = default;
         bool foundTele = false;
 
-        foreach(telegraphValues tv in attacks)
+        foreach (telegraphValues tv in attacks)
         {
             if (tv.attackName == name)
             {
                 teleAttack = tv;
                 foundTele = true;
+                break;
             }
         }
 
@@ -61,20 +67,13 @@ public class EnemyTelegraph : ScriptableObject
             return false;
         }
 
-        GameObject go = new GameObject("Telegraph");
-
-        go.transform.position = telePosition;
-        go.transform.rotation = teleQuaternion;
-        go.transform.localScale = new Vector3(teleAttack.scale.x, teleAttack.scale.y, 1f);
-
-        SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
-        sr.sprite = Sprites[teleAttack.shape];
-        sr.sortingLayerName = "Background";
-        if (!teleAttack.center) 
+        if (teleAttack.multiple)
         {
-            AdjustSpriteLocation(go, sr, teleAttack);
+            HandleMultiple(teleAttack, telePosition, teleQuaternion);
+            return true;
         }
-        go.AddComponent<Telegraph>().StartTelegraph(sr, teleAttack.aliveTime);
+
+        CreateTelegraph(teleAttack, telePosition, teleQuaternion);
         return true;
     }
 
@@ -86,6 +85,42 @@ public class EnemyTelegraph : ScriptableObject
         Vector3 localOffset = new Vector3(0, scaledHeight / 2f, 0);
 
         go.transform.position += go.transform.rotation * localOffset;
+    }
+
+    private void HandleMultiple(telegraphValues teleAttack, Vector2 telePosition, Quaternion teleQuaternion)
+    {
+        if (teleAttack.amount <= 1)
+        {
+            CreateTelegraph(teleAttack, telePosition, teleQuaternion);
+            return;
+        }
+
+        float halfCone = teleAttack.coneAngle / 2f;
+        float angleStep = teleAttack.coneAngle / (teleAttack.amount - 1);
+
+        for (int i = 0; i < teleAttack.amount; i++)
+        {
+            float angleOffset = -halfCone + (angleStep * i);
+            Quaternion rotation = teleQuaternion * Quaternion.Euler(0f, 0f, angleOffset);
+            CreateTelegraph(teleAttack, telePosition, rotation);
+        }
+    }
+
+    private void CreateTelegraph(telegraphValues teleAttack, Vector2 telePosition, Quaternion teleQuaternion)
+    {
+        GameObject go = new GameObject("Telegraph");
+        go.transform.position = telePosition;
+        go.transform.rotation = teleQuaternion;
+        go.transform.localScale = new Vector3(teleAttack.scale.x, teleAttack.scale.y, 1f);
+
+        SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
+        sr.sprite = Sprites[teleAttack.shape];
+        sr.sortingLayerName = "Background";
+
+        if (!teleAttack.center)
+            AdjustSpriteLocation(go, sr, teleAttack);
+
+        go.AddComponent<Telegraph>().StartTelegraph(sr, teleAttack.aliveTime);
     }
 
     public telegraphValues GetTelegraph(string name)
