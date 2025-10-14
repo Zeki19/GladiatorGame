@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3ba92999a139941b79a93cccf1ca36, type: 3}
+  m_Name: ValeriaTelegraphs
+  m_EditorClassIdentifier: 
+  correlations:
+  - shape: 0
+    sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  - shape: 1
+    sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  - shape: 2
+    sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  - shape: 3
+    sprite: {fileID: 2774343695701521962, guid: fc5581715dee8724eb7686633ce2f113, type: 3}
+  attacks:
+  - attackName: DaggerToss
+    shape: 1
+    scale: {x: 0.5, y: 25}
+    aliveTime: 1
+    center: 0
+    multiple: 0
+    amount: 0
+    coneAngle: 0
+  - attackName: QuickStab
+    shape: 1
+    scale: {x: 1, y: 4.5}
+    aliveTime: 1
+    center: 0
+    multiple: 0
+    amount: 0
+    coneAngle: 0
+  - attackName: Stab&run
+    shape: 1
+    scale: {x: 1, y: 3}
+    aliveTime: 1
+    center: 0
+    multiple: 0
+    amount: 0
+    coneAngle: 0
+  - attackName: BarrageOfDaggers
+    shape: 1
+    scale: {x: 0.5, y: 25}
+    aliveTime: 5
+    center: 0
+    multiple: 1
+    amount: 7
+    coneAngle: 120
+  - attackName: DaggerStream
+    shape: 3
+    scale: {x: 5, y: 5}
+    aliveTime: 1
+    center: 1
+    multiple: 0
+    amount: 0
+    coneAngle: 0
