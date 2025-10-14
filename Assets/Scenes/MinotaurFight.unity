@@ -9804,6 +9804,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 810089190}
     m_Modifications:
+    - target: {fileID: 74092092268132157, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 74092092268132157, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 488940195679304966, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 488940195679304966, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693780250820230379, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 1693780250820230379, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074872910243828395, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 4074872910243828395, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4336630239941896859, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
       propertyPath: m_Name
       value: Pause menu - Canvas
@@ -9887,6 +9919,30 @@ PrefabInstance:
     - target: {fileID: 5340801974201136129, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643751992494596316, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 5643751992494596316, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693379959531890794, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 6693379959531890794, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8337807127014588736, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 8337807127014588736, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21242,6 +21298,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 810089190}
     m_Modifications:
+    - target: {fileID: 2794322426169023673, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 2794322426169023673, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794322426169023673, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1602854871235269953, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 2794322426169023673, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5836760127076137822, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: m_Name
       value: Player - UI - Canvas
