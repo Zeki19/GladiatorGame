@@ -10327,6 +10327,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -56
       objectReference: {fileID: 0}
+    - target: {fileID: 1700058570942393290, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700058570942393290, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700058570942393290, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700058570942393290, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700058570942393290, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700058570942393290, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1833391338537974310, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
@@ -10350,6 +10374,30 @@ PrefabInstance:
     - target: {fileID: 2148178776937189219, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
       propertyPath: m_fontSizeBase
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013499229920085095, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013499229920085095, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013499229920085095, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013499229920085095, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013499229920085095, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3013499229920085095, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3109534060994606748, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
       propertyPath: m_Sprite
@@ -10510,6 +10558,30 @@ PrefabInstance:
     - target: {fileID: 5509069509343411054, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
       propertyPath: m_SizeDelta.y
       value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601751550493146790, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601751550493146790, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601751550493146790, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601751550493146790, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601751550493146790, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601751550493146790, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5643751992494596316, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
       propertyPath: m_fontSize
@@ -22591,6 +22663,7 @@ MonoBehaviour:
   Gain: 1
   Use2DDistance: 1
   UseCameraSpace: 1
+  SignalCombinationMode: 0
   ReactionSettings:
     m_SecondaryNoise: {fileID: 0}
     AmplitudeGain: 1
