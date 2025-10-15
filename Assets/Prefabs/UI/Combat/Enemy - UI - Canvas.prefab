@@ -118,6 +118,7 @@ MonoBehaviour:
   entityManager: {fileID: 0}
   barPrefab: {fileID: 881678412342272775, guid: 44017f34531761544948b7733f3c7ee9, type: 3}
   barHolder: {fileID: 8619277632512512178}
+  displayType: 0
   headImage: {fileID: 7641910023599272300}
   sprites:
   - {fileID: 1124271243129300706, guid: b2801212e4623184eb8047f09809fd22, type: 3}
@@ -231,11 +232,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5805780342906249178}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.15, y: 1}
+  m_AnchorMin: {x: 0.01, y: 0}
+  m_AnchorMax: {x: 0.165, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &385906814061332189
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -306,10 +307,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5805780342906249178}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.15, y: 0.3}
-  m_AnchorMax: {x: 0.85, y: 0.7}
-  m_AnchoredPosition: {x: 12.5, y: 0}
-  m_SizeDelta: {x: -25, y: 0}
+  m_AnchorMin: {x: 0.2, y: 0.3}
+  m_AnchorMax: {x: 0.9, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7225548566014977881
 CanvasRenderer:

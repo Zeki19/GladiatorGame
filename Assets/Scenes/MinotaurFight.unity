@@ -21582,6 +21582,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 810089190}
     m_Modifications:
+    - target: {fileID: 1004847212362679524, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004847212362679524, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1121312702468547598, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_Name
       value: Enemy - UI - Canvas
@@ -21590,6 +21598,18 @@ PrefabInstance:
       propertyPath: entityManager
       value: 
       objectReference: {fileID: 736081947}
+    - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: 'sprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 130981397, guid: 7499fc38b17e95f46860f0a84c2441e3, type: 3}
+    - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: 'sprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1648874792882316062, guid: 7499fc38b17e95f46860f0a84c2441e3, type: 3}
+    - target: {fileID: 7641910023599272300, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1648874792882316062, guid: 7499fc38b17e95f46860f0a84c2441e3, type: 3}
     - target: {fileID: 7760298050412872972, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
