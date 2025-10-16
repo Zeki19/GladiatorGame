@@ -50,6 +50,10 @@ public class DialogueManager : MonoBehaviour
     }
     public void StartConversation(DialogueSO dialogue)
     {
+        dialogueCanvas.SetActive(true);
+        animator.SetBool("IsOpen", true);
+        audioSource.enabled = true;
+        
         QueueDialogue(dialogue);
     }
     
