@@ -44,7 +44,7 @@ public class CinematicManager : MonoBehaviour
 
     private void InitialView()
     {
-        camera.LookAt = transform; 
+        camera.Follow = transform;
         camera.Lens.OrthographicSize = 12f;
     }
     
@@ -65,6 +65,7 @@ public class CinematicManager : MonoBehaviour
         _uiManager.ShowUI();
         
         camera.Follow = player;
+        
         camera.Lens.OrthographicSize = ZoomPlayer;
         
         PauseManager.TogglePauseCinematic();

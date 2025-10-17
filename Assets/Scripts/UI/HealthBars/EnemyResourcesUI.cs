@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ public class EnemyResourcesUI : MonoBehaviour
     private float[] _phaseCurrentHealth;  
     private float _actualHealth;
 
-    private void Start()
+    private void OnEnable()
     {
         entityManager.HealthComponent.OnDamage += Damage;
         entityManager.HealthComponent.OnHeal += Heal;
@@ -142,6 +143,13 @@ public class EnemyResourcesUI : MonoBehaviour
     }
 
     private void Dead()
+    {
+        entityManager.HealthComponent.OnDamage -= Damage;
+        entityManager.HealthComponent.OnHeal -= Heal;
+        entityManager.HealthComponent.OnDead -= Dead;
+    }
+
+    private void OnDisable()
     {
         entityManager.HealthComponent.OnDamage -= Damage;
         entityManager.HealthComponent.OnHeal -= Heal;
