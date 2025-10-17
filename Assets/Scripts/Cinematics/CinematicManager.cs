@@ -5,22 +5,24 @@ using UnityEngine;
 
 public class CinematicManager : MonoBehaviour
 {
+    [Header("Scene objects")]
     [SerializeField] private CinemachineCamera camera;
     [SerializeField] private Transform player;
     [SerializeField] private Transform boss;
     
-    public DialogueManager dialogueManager;
-    public DialogueSO dialogue;
+    [Header("Dialogue settings")]
+    [SerializeField] private DialogueManager dialogueManager;
+    [SerializeField] private DialogueSO dialogue;
+    
+    [Header("Zoom settings")]
+    [SerializeField] private float zoomSpeed;
+    private const float ZoomEnemy = 6.5f;
+    private const float ZoomPlayer = 4.92f;
     
     private UIManager _uiManager;
-    
-    private float _zoomPlayer = 4.92f;
-    private float _zoomEnemy = 10;
-    
-    private float _zoomSpeed = 1.2f;
-
     private Action _onZoomEnd;
     private Coroutine _frameRoutine;
+    
     private void Start()
     {
         _uiManager = ServiceLocator.Instance.GetService<UIManager>();
@@ -37,7 +39,7 @@ public class CinematicManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         _onZoomEnd += EnemyMoment;
-        Frame(boss, _zoomEnemy);
+        Frame(boss, ZoomEnemy);
     }
 
     private void InitialView()
@@ -55,7 +57,7 @@ public class CinematicManager : MonoBehaviour
     void PlayerMoment()
     {
         _onZoomEnd += Finished;
-        Frame(player, _zoomPlayer);
+        Frame(player, ZoomPlayer);
     }
 
     void Finished()
@@ -63,7 +65,7 @@ public class CinematicManager : MonoBehaviour
         _uiManager.ShowUI();
         
         camera.Follow = player;
-        camera.Lens.OrthographicSize = _zoomPlayer;
+        camera.Lens.OrthographicSize = ZoomPlayer;
         
         PauseManager.TogglePauseCinematic();
         
@@ -80,21 +82,19 @@ public class CinematicManager : MonoBehaviour
     
     private IEnumerator FrameRoutine(Transform target, float goalLens)
     {
-        // Lerp THIS object towards target while lerping lens size toward goal
         while (true)
         {
-            // Move this transform (camera follows this object during the shot)
             transform.position = Vector3.Lerp(
                 transform.position,
                 target.position,
-                Time.unscaledDeltaTime * _zoomSpeed
+                Time.unscaledDeltaTime * zoomSpeed
             );
             
             var lens = camera.Lens;
             lens.OrthographicSize = Mathf.Lerp(
                 lens.OrthographicSize,
                 goalLens,
-                Time.unscaledDeltaTime * _zoomSpeed
+                Time.unscaledDeltaTime * zoomSpeed
             );
             camera.Lens = lens;
 
