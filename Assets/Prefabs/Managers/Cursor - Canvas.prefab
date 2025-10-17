@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 662245633681456629}
   - component: {fileID: 9143681115940215060}
   - component: {fileID: 6120894565189320394}
+  - component: {fileID: 5105665564269035680}
   m_Layer: 5
   m_Name: Cursor - Canvas
   m_TagString: Untagged
@@ -195,6 +196,21 @@ MonoBehaviour:
   cursorImage: {fileID: 973886288896917508}
   profiles:
   - {fileID: 11400000, guid: e39a24dbaffa2fb4582b081f27336e8b, type: 2}
+  - {fileID: 11400000, guid: 153b169eb606d6347a9df789103742cc, type: 2}
+--- !u!114 &5105665564269035680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7465448830319050968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef4e035a6a9eb749b4295c40dd1549a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
+  cursor: {fileID: 6120894565189320394}
 --- !u!1 &7753172084593669310
 GameObject:
   m_ObjectHideFlags: 0

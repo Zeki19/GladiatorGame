@@ -274,11 +274,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6120894565189320394, guid: e479d9dbb470ee9449ff5a79448349f1, type: 3}
+      propertyPath: profiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7465448830319050968, guid: e479d9dbb470ee9449ff5a79448349f1, type: 3}
       propertyPath: m_Name
       value: Cursor - Canvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5105665564269035680, guid: e479d9dbb470ee9449ff5a79448349f1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

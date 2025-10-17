@@ -6077,6 +6077,17 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &211751743 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8182166463018864506, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+  m_PrefabInstance: {fileID: 1634171591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b37aaf5bb23e14ba2fe78adc20ce57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &220162211
 GameObject:
   m_ObjectHideFlags: 0
@@ -22465,6 +22476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player - UI - Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5836760127076137822, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5975537105926103933, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: entityManager
       value: 
@@ -24016,6 +24031,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5105665564269035680, guid: e479d9dbb470ee9449ff5a79448349f1, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 211751743}
+    - target: {fileID: 6120894565189320394, guid: e479d9dbb470ee9449ff5a79448349f1, type: 3}
+      propertyPath: profiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6120894565189320394, guid: e479d9dbb470ee9449ff5a79448349f1, type: 3}
+      propertyPath: 'profiles.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 153b169eb606d6347a9df789103742cc, type: 2}
     - target: {fileID: 7465448830319050968, guid: e479d9dbb470ee9449ff5a79448349f1, type: 3}
       propertyPath: m_Name
       value: Cursor - Canvas
@@ -24182,6 +24209,10 @@ PrefabInstance:
     - target: {fileID: 1121312702468547598, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_Name
       value: Enemy - UI - Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121312702468547598, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: displayType

@@ -10,8 +10,6 @@ namespace Player
         public PlayerStats stats;
         public PlayerWeaponController weaponController;
         [SerializeField]private EntityStatusManager<PlayerStatus> _status;
-
-
         public event Action<float> OnDash;
 
         private void Awake()

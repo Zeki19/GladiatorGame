@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe0be8eb706af3448b6598ee6547de6, type: 3}
   m_Name: Combat
   m_EditorClassIdentifier: 
-  name: 
-  mainTexture: {fileID: 0}
-  clickTexture: {fileID: 0}
+  name: Combat
+  mainTexture: {fileID: 2800000, guid: 13ea33adeacdc2d4db4d65e2b9e89dc1, type: 3}
+  secondaryTexture: {fileID: 2800000, guid: fa9697da6211df8418f2f7121e190716, type: 3}
   cursorScale: 0.6
-  shadowTexture: {fileID: 0}
   shadowColor: {r: 0, g: 0, b: 0, a: 0.5}
   shadowOffset: {x: -15, y: -15}
-  hasProgressBar: 0

@@ -24,7 +24,6 @@ public class CursorController : MonoBehaviour
 
         Cursor.visible = false;
     }
-
     void Update()
     {
         Vector2 p;
@@ -34,11 +33,11 @@ public class CursorController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            cursorImage.sprite = ToSprite(_currentProfile.clickTexture);
+            RotateCursor(true);
         } 
         else if (Input.GetMouseButtonUp(0))
         {
-            cursorImage.sprite = ToSprite(_currentProfile.mainTexture);
+            RotateCursor(false);
         }
     }
     private Sprite ToSprite(Texture2D texture)
@@ -47,27 +46,28 @@ public class CursorController : MonoBehaviour
     }
     private void ApplyProfile(CursorProfileSO profile)
     {
-        cursorRoot.localScale *= profile.cursorScale;
+        if (_currentProfile == profile) return;
         
-        if (profile.mainTexture == null)
+        cursorRoot.localScale = new Vector3(1f,1f,1f) * profile.cursorScale;
+        
+        if (!profile.mainTexture)
         {
             Cursor.visible = true;
+            Debug.Log("Missing mainTexture on the CursorProfile");
             return;
         }
         
         //Main cursor
-        if (cursorImage.enabled) cursorImage.sprite = ToSprite(profile.mainTexture);
+        cursorImage.sprite = ToSprite(profile.mainTexture);
         
         //Shadow cursor
-        if(profile.shadowTexture == null) return;
-        shadowImage.sprite = ToSprite(profile.shadowTexture);
+        shadowImage.sprite = ToSprite(profile.mainTexture);
         shadowImage.rectTransform.anchoredPosition = profile.shadowOffset;
         shadowImage.color = profile.shadowColor;
         
-        //Set variable
-        _currentProfile = profile; //This should be moved because if there is no shadow there wont be a currentprofile.
+        _currentProfile = profile;
     }
-    public void ChangeCursor(String cursorProfileName)
+    public void ChangeProfile(String cursorProfileName)
     {
         foreach (var cursor in profiles)
         {
@@ -76,5 +76,25 @@ public class CursorController : MonoBehaviour
                 ApplyProfile(cursor);
             }
         }
+    }
+    private void RotateCursor(bool value)
+    {
+        if (value)
+        {
+            cursorImage.transform.rotation = Quaternion.Euler(0, 0, 30);
+            shadowImage.transform.rotation = Quaternion.Euler(0, 0, 10);
+        } 
+        else
+        {
+            cursorImage.transform.rotation = Quaternion.Euler(0, 0, 0);
+            shadowImage.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+    public void SwapCursorTexture(bool value)
+    {
+        if (!_currentProfile.secondaryTexture) return;
+
+        cursorImage.sprite = ToSprite(value ? _currentProfile.secondaryTexture : _currentProfile.mainTexture);
+        shadowImage.sprite = ToSprite(value ? _currentProfile.secondaryTexture : _currentProfile.mainTexture);
     }
 }
