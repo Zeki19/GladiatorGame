@@ -44,7 +44,7 @@ public class CinematicManager : MonoBehaviour
 
     private void InitialView()
     {
-        camera.Follow = this.gameObject.transform;
+        camera.LookAt = transform; 
         camera.Lens.OrthographicSize = 12f;
     }
     

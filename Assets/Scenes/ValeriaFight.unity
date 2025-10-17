@@ -470,6 +470,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+--- !u!1 &176860830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1121312702468547598, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+  m_PrefabInstance: {fileID: 176860829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &208372200
 GameObject:
   m_ObjectHideFlags: 0
@@ -6539,6 +6544,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+--- !u!1 &217946221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5836760127076137822, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+  m_PrefabInstance: {fileID: 217946220}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &220162211
 GameObject:
   m_ObjectHideFlags: 0
@@ -24981,6 +24991,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cinematic
       objectReference: {fileID: 0}
+    - target: {fileID: 3130263023510648799, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25403,6 +25417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2110996921}
+  - component: {fileID: 2110996922}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -25419,7 +25434,7 @@ Transform:
   m_GameObject: {fileID: 2110996920}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -44.497143, y: -32.31528, z: -0.069658026}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25428,6 +25443,20 @@ Transform:
   - {fileID: 14207650}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110996922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110996920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfdf339dc15390147a0354013e5e1d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerUI: {fileID: 217946221}
+  enemyUI: {fileID: 176860830}
 --- !u!1001 &2562916678444582058
 PrefabInstance:
   m_ObjectHideFlags: 0
