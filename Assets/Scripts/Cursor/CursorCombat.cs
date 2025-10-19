@@ -12,7 +12,7 @@ public class CursorCombat : MonoBehaviour
     {
         if (PauseManager.IsPaused || PauseManager.IsPausedCinematic)
         {
-            Debug.Log("IsPaused");
+          //  Debug.Log("IsPaused");
             cursor.ChangeProfile("Main");
             return;
         }
@@ -25,7 +25,7 @@ public class CursorCombat : MonoBehaviour
         }
         else
         {
-            Debug.Log("Main");
+           // Debug.Log("Main");
             cursor.ChangeProfile("Main");
         }
     }

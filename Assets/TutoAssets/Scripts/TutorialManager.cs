@@ -159,6 +159,8 @@ public class TutorialManager : MonoBehaviour
 
     private void StartTutorial()
     {
+        Debug.Log("StartTutorial called");
+
         if (missions.Count > 0)
         {
             StartMission(0);
@@ -168,7 +170,6 @@ public class TutorialManager : MonoBehaviour
             Debug.LogError("No missions configured for tutorial!");
         }
     }
-
     private void StartMission(int index)
     {
         if (index >= missions.Count)
@@ -182,10 +183,11 @@ public class TutorialManager : MonoBehaviour
         _currentState = TutorialState.NotStarted;
         _dialogueStarted = false;
 
-        Debug.Log($"Starting Mission: {_currentMission.missionName}");
+        Debug.Log($"Starting Mission {index}: {_currentMission.missionName}");
 
         UpdateMissionDescription();
         OnMissionStarted?.Invoke(_currentMission);
+
         StartCoroutine(ProcessMissionFlow());
     }
 
@@ -350,7 +352,16 @@ public class TutorialManager : MonoBehaviour
         }
     }
     #endregion
-
+    #region Public Getters for UI
+    public TutorialMission GetCurrentMission()
+    {
+        return _currentMission;
+    }
+    public List<TutorialMission> GetAllMissions()
+    {
+        return missions;
+    }
+    #endregion
     [ContextMenu("Force Complete Current Mission")]
     public void ForceCompleteCurrentMission()
     {

@@ -1,43 +1,30 @@
 using UnityEngine;
 using TMPro;
 
-/// <summary>
-/// Manages the tutorial quest panel UI in the top-left corner.
-/// Displays the current active quest and updates dynamically as quests are completed.
-/// </summary>
 public class TutorialQuestPanelUI : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private GameObject questEntryPrefab;
     [SerializeField] private Transform questContainer;
     [SerializeField] private GameObject panelRoot;
-    [SerializeField] private TextMeshProUGUI completionMessageText;
 
-    [Header("Settings")]
-    [SerializeField] private string completionMessage = "Tutorial Complete!";
-    [SerializeField] private bool hideOnCompletion = false;
+    [Header("Completion Quest Settings")]
+    [SerializeField] private string completionQuestLabel = "Continue your journey";
+    [SerializeField] private string completionQuestDescription = "Train or face your opponent\nPress E near dummy to restart tutorial";
 
     private TutorialManager _tutorialManager;
     private TutorialQuestEntryUI _currentQuestEntry;
 
     private void Awake()
     {
-        // Hide completion message initially
-        if (completionMessageText != null)
-        {
-            completionMessageText.gameObject.SetActive(false);
-        }
-
-        // Ensure panel is visible initially
         if (panelRoot != null)
         {
-          //  panelRoot.SetActive(false); // Start hidden until tutorial starts
+            panelRoot.SetActive(true);
         }
     }
 
     private void Start()
     {
-        // Get TutorialManager from ServiceLocator
         _tutorialManager = ServiceLocator.Instance.GetService<TutorialManager>();
 
         if (_tutorialManager == null)
@@ -47,104 +34,143 @@ public class TutorialQuestPanelUI : MonoBehaviour
             return;
         }
 
-        // Subscribe to tutorial events
         TutorialManager.OnMissionStarted += OnMissionStarted;
         TutorialManager.OnMissionCompleted += OnMissionCompleted;
         TutorialManager.OnTutorialCompleted += OnTutorialCompleted;
         TutorialManager.OnTutorialRestart += OnTutorialRestart;
 
-        // Check if tutorial is already in progress or in training mode
         if (_tutorialManager.IsTrainingMode || _tutorialManager.IsTutorialCompleted)
         {
-            if (panelRoot != null)
-            {
-                panelRoot.SetActive(false);
-            }
+            ShowCompletionQuest();
+        }
+        else
+        {
+            CheckForActiveMission();
         }
     }
 
     private void OnDestroy()
     {
-        // Unsubscribe from events
         TutorialManager.OnMissionStarted -= OnMissionStarted;
         TutorialManager.OnMissionCompleted -= OnMissionCompleted;
         TutorialManager.OnTutorialCompleted -= OnTutorialCompleted;
         TutorialManager.OnTutorialRestart -= OnTutorialRestart;
     }
 
-    /// <summary>
-    /// Called when a new mission starts.
-    /// </summary>
+    private void CheckForActiveMission()
+    {
+        StartCoroutine(CheckForActiveMissionDelayed());
+    }
+
+    private System.Collections.IEnumerator CheckForActiveMissionDelayed()
+    {
+        yield return null;
+        yield return null;
+
+        if (_currentQuestEntry == null && !_tutorialManager.IsTrainingMode && !_tutorialManager.IsTutorialCompleted)
+        {
+            Debug.Log("TutorialQuestPanelUI: No quest detected, forcing first mission display...");
+
+            TutorialMission currentMission = _tutorialManager.GetCurrentMission();
+
+            if (currentMission != null)
+            {
+                Debug.Log($"TutorialQuestPanelUI: Forcing display of mission: {currentMission.missionName}");
+                SpawnQuestEntry(currentMission.missionName, currentMission.missionDescription);
+            }
+            else
+            {
+                var missions = _tutorialManager.GetAllMissions();
+                if (missions != null && missions.Count > 0)
+                {
+                    Debug.Log($"TutorialQuestPanelUI: Forcing display of first mission: {missions[0].missionName}");
+                    SpawnQuestEntry(missions[0].missionName, missions[0].missionDescription);
+                }
+                else
+                {
+                    Debug.LogWarning("TutorialQuestPanelUI: No missions available to display!");
+                }
+            }
+        }
+    }
+
+
     private void OnMissionStarted(TutorialMission mission)
     {
-        // Show panel when first mission starts
+        Debug.Log($"TutorialQuestPanelUI: OnMissionStarted - {mission.missionName}");
+
         if (panelRoot != null && !_tutorialManager.IsTrainingMode)
         {
             panelRoot.SetActive(true);
         }
 
-        // Remove previous quest entry if it exists
         if (_currentQuestEntry != null)
         {
-            _currentQuestEntry.FadeOutAndDestroy();
-            _currentQuestEntry = null;
-        }
-
-        // Create new quest entry
-        SpawnQuestEntry(mission);
-    }
-
-    /// <summary>
-    /// Called when a mission is completed.
-    /// </summary>
-    private void OnMissionCompleted(TutorialMission mission)
-    {
-        // The next mission will be started automatically by TutorialManager
-        // which will trigger OnMissionStarted
-        // We can add additional completion effects here if needed
-        Debug.Log($"TutorialQuestPanelUI: Mission '{mission.missionName}' completed.");
-    }
-
-    /// <summary>
-    /// Called when the entire tutorial is completed.
-    /// </summary>
-    private void OnTutorialCompleted()
-    {
-        // Remove current quest entry
-        if (_currentQuestEntry != null)
-        {
-            _currentQuestEntry.FadeOutAndDestroy();
-            _currentQuestEntry = null;
-        }
-
-        // Show completion message or hide panel
-        if (hideOnCompletion)
-        {
-            if (panelRoot != null)
-            {
-                panelRoot.SetActive(false);
-            }
+            StartCoroutine(TransitionToNewQuest(mission.missionName, mission.missionDescription));
         }
         else
         {
-            if (completionMessageText != null)
-            {
-                completionMessageText.text = completionMessage;
-                completionMessageText.gameObject.SetActive(true);
-            }
+            SpawnQuestEntry(mission.missionName, mission.missionDescription);
         }
     }
 
-    /// <summary>
-    /// Called when the tutorial is restarted.
-    /// </summary>
+    private System.Collections.IEnumerator TransitionToNewQuest(string newLabel, string newDescription)
+    {
+        bool fadeOutComplete = false;
+
+        _currentQuestEntry.OnFadeOutComplete += () => fadeOutComplete = true;
+
+        _currentQuestEntry.FadeOutAndDestroy();
+        _currentQuestEntry = null;
+
+        yield return new WaitUntil(() => fadeOutComplete);
+
+        yield return new WaitForSeconds(0.1f);
+
+        SpawnQuestEntry(newLabel, newDescription);
+    }
+
+
+    private void OnMissionCompleted(TutorialMission mission)
+    {
+        Debug.Log($"TutorialQuestPanelUI: Mission '{mission.missionName}' completed.");
+    }
+
+
+    private void OnTutorialCompleted()
+    {
+        Debug.Log("TutorialQuestPanelUI: Tutorial completed - showing completion quest");
+
+        if (_currentQuestEntry != null)
+        {
+            StartCoroutine(TransitionToCompletionQuest());
+        }
+        else
+        {
+            ShowCompletionQuest();
+        }
+    }
+
+
+    private System.Collections.IEnumerator TransitionToCompletionQuest()
+    {
+        bool fadeOutComplete = false;
+
+        _currentQuestEntry.OnFadeOutComplete += () => fadeOutComplete = true;
+
+        _currentQuestEntry.FadeOutAndDestroy();
+        _currentQuestEntry = null;
+
+        yield return new WaitUntil(() => fadeOutComplete);
+
+        yield return new WaitForSeconds(0.1f);
+
+        ShowCompletionQuest();
+    }
+
     private void OnTutorialRestart()
     {
-        // Hide completion message
-        if (completionMessageText != null)
-        {
-            completionMessageText.gameObject.SetActive(false);
-        }
+        Debug.Log("TutorialQuestPanelUI: Tutorial restarted");
 
         // Clear current quest entry
         if (_currentQuestEntry != null)
@@ -153,17 +179,28 @@ public class TutorialQuestPanelUI : MonoBehaviour
             _currentQuestEntry = null;
         }
 
-        // Show panel
         if (panelRoot != null)
         {
             panelRoot.SetActive(true);
         }
     }
 
-    /// <summary>
-    /// Spawns a new quest entry UI element.
-    /// </summary>
-    private void SpawnQuestEntry(TutorialMission mission)
+    private void ShowCompletionQuest()
+    {
+        if (panelRoot != null)
+        {
+            panelRoot.SetActive(true);
+        }
+
+        if (_currentQuestEntry != null)
+        {
+            Destroy(_currentQuestEntry.gameObject);
+            _currentQuestEntry = null;
+        }
+
+        SpawnQuestEntry(completionQuestLabel, completionQuestDescription);
+    }
+    private void SpawnQuestEntry(string label, string description)
     {
         if (questEntryPrefab == null)
         {
@@ -177,7 +214,6 @@ public class TutorialQuestPanelUI : MonoBehaviour
             return;
         }
 
-        // Instantiate the quest entry
         GameObject entryObj = Instantiate(questEntryPrefab, questContainer);
         _currentQuestEntry = entryObj.GetComponent<TutorialQuestEntryUI>();
 
@@ -188,21 +224,32 @@ public class TutorialQuestPanelUI : MonoBehaviour
             return;
         }
 
-        // Set the quest data
-        _currentQuestEntry.SetQuestData(mission.missionName, mission.missionDescription);
+        _currentQuestEntry.SetQuestData(label, description);
+
+        Debug.Log($"TutorialQuestPanelUI: Spawned quest entry - {label}");
     }
 
     #region Editor Utilities
-    [ContextMenu("Test Show Completion")]
-    private void TestShowCompletion()
+    [ContextMenu("Test Show Completion Quest")]
+    private void TestShowCompletionQuest()
     {
-        OnTutorialCompleted();
+        ShowCompletionQuest();
     }
 
     [ContextMenu("Test Restart")]
     private void TestRestart()
     {
         OnTutorialRestart();
+    }
+
+    [ContextMenu("Clear Current Quest")]
+    private void ClearCurrentQuest()
+    {
+        if (_currentQuestEntry != null)
+        {
+            Destroy(_currentQuestEntry.gameObject);
+            _currentQuestEntry = null;
+        }
     }
     #endregion
 }

@@ -1,10 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System;
 
-/// <summary>
-/// Represents a single quest entry in the tutorial UI panel.
-/// Displays the quest label (title) and description (goal).
-/// </summary>
 public class TutorialQuestEntryUI : MonoBehaviour
 {
     [Header("UI References")]
@@ -16,6 +13,10 @@ public class TutorialQuestEntryUI : MonoBehaviour
     [SerializeField] private float fadeOutDuration = 0.2f;
 
     private CanvasGroup _canvasGroup;
+    private bool _isDestroying = false;
+
+
+    public event Action OnFadeOutComplete;
 
     private void Awake()
     {
@@ -24,16 +25,9 @@ public class TutorialQuestEntryUI : MonoBehaviour
         {
             _canvasGroup = gameObject.AddComponent<CanvasGroup>();
         }
-        
-        // Start invisible for fade-in effect
+
         _canvasGroup.alpha = 0f;
     }
-
-    /// <summary>
-    /// Sets the quest data and displays it.
-    /// </summary>
-    /// <param name="missionName">The quest label/title</param>
-    /// <param name="missionDescription">The quest goal/description</param>
     public void SetQuestData(string missionName, string missionDescription)
     {
         if (labelText != null)
@@ -57,20 +51,21 @@ public class TutorialQuestEntryUI : MonoBehaviour
         FadeIn();
     }
 
-    /// <summary>
-    /// Fades in the quest entry.
-    /// </summary>
+
     private void FadeIn()
     {
+        if (_isDestroying) return;
+
         StopAllCoroutines();
         StartCoroutine(FadeCoroutine(0f, 1f, fadeInDuration));
     }
 
-    /// <summary>
-    /// Fades out the quest entry and destroys it.
-    /// </summary>
+
     public void FadeOutAndDestroy()
     {
+        if (_isDestroying) return;
+
+        _isDestroying = true;
         StopAllCoroutines();
         StartCoroutine(FadeOutCoroutine());
     }
@@ -78,20 +73,25 @@ public class TutorialQuestEntryUI : MonoBehaviour
     private System.Collections.IEnumerator FadeCoroutine(float from, float to, float duration)
     {
         float elapsed = 0f;
-        
+
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             _canvasGroup.alpha = Mathf.Lerp(from, to, elapsed / duration);
             yield return null;
         }
-        
+
         _canvasGroup.alpha = to;
     }
 
     private System.Collections.IEnumerator FadeOutCoroutine()
     {
         yield return FadeCoroutine(_canvasGroup.alpha, 0f, fadeOutDuration);
+
+        OnFadeOutComplete?.Invoke();
+
+        yield return null;
+
         Destroy(gameObject);
     }
 }
