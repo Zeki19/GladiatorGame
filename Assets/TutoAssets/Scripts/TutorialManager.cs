@@ -170,6 +170,7 @@ public class TutorialManager : MonoBehaviour
             Debug.LogError("No missions configured for tutorial!");
         }
     }
+
     private void StartMission(int index)
     {
         if (index >= missions.Count)
@@ -186,6 +187,7 @@ public class TutorialManager : MonoBehaviour
         Debug.Log($"Starting Mission {index}: {_currentMission.missionName}");
 
         UpdateMissionDescription();
+
         OnMissionStarted?.Invoke(_currentMission);
 
         StartCoroutine(ProcessMissionFlow());
@@ -352,6 +354,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
     #endregion
+
     #region Public Getters for UI
     public TutorialMission GetCurrentMission()
     {
@@ -362,6 +365,8 @@ public class TutorialManager : MonoBehaviour
         return missions;
     }
     #endregion
+
+    #region Context Menu Utilities
     [ContextMenu("Force Complete Current Mission")]
     public void ForceCompleteCurrentMission()
     {
@@ -369,6 +374,24 @@ public class TutorialManager : MonoBehaviour
         {
             _currentMission.ForceComplete();
         }
+    }
+
+    [ContextMenu("Complete Tutorial")]
+    public void CompleteTutorialFromMenu()
+    {
+        Debug.Log("Force completing entire tutorial from context menu...");
+        if (_currentMission != null)
+        {
+            _currentMission.Cleanup();
+        }
+
+        HideUIHint();
+
+        _currentMissionIndex = missions.Count;
+        _currentMission = null;
+        _currentState = TutorialState.Completed;
+
+        CompleteTutorial();
     }
 
     [ContextMenu("Toggle Training Mode")]
@@ -382,4 +405,5 @@ public class TutorialManager : MonoBehaviour
     {
         RestartTutorial();
     }
+    #endregion
 }
