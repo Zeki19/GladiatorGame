@@ -7,7 +7,6 @@ public class TutorialManager : MonoBehaviour
 {
     [Header("Tutorial Configuration")]
     [SerializeField] private List<TutorialMission> missions = new List<TutorialMission>();
-    [SerializeField] private TMPro.TextMeshProUGUI missionDescriptionUI;
 
     [Header("Training Hub Configuration")]
     [SerializeField] private bool isTrainingMode = false;
@@ -49,11 +48,6 @@ public class TutorialManager : MonoBehaviour
         else
         {
             _tutorialCompleted = true;
-
-            if (missionDescriptionUI != null)
-            {
-                missionDescriptionUI.text = "Training Mode - Explore freely or press E near the dummy to restart tutorial";
-            }
         }
     }
 
@@ -130,11 +124,6 @@ public class TutorialManager : MonoBehaviour
         {
             _currentState = TutorialState.NotStarted;
             _currentMission = null;
-
-            if (missionDescriptionUI != null)
-            {
-                missionDescriptionUI.text = "Training Mode - Explore freely or press E near the dummy to restart tutorial";
-            }
         }
     }
 
@@ -185,9 +174,6 @@ public class TutorialManager : MonoBehaviour
         _dialogueStarted = false;
 
         Debug.Log($"Starting Mission {index}: {_currentMission.missionName}");
-
-        UpdateMissionDescription();
-
         OnMissionStarted?.Invoke(_currentMission);
 
         StartCoroutine(ProcessMissionFlow());
@@ -257,14 +243,6 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private void UpdateMissionDescription()
-    {
-        if (missionDescriptionUI != null && _currentMission != null)
-        {
-            missionDescriptionUI.text = _currentMission.missionDescription;
-        }
-    }
-
     private void CompleteMission()
     {
         if (_currentState == TutorialState.Completed)
@@ -283,11 +261,6 @@ public class TutorialManager : MonoBehaviour
     {
         Debug.Log("Tutorial Completed!");
         _tutorialCompleted = true;
-
-        if (missionDescriptionUI != null)
-        {
-            missionDescriptionUI.text = "Train or face your opponent";
-        }
 
         OnTutorialCompleted?.Invoke();
 
@@ -380,13 +353,13 @@ public class TutorialManager : MonoBehaviour
     public void CompleteTutorialFromMenu()
     {
         Debug.Log("Force completing entire tutorial from context menu...");
+
         if (_currentMission != null)
         {
             _currentMission.Cleanup();
         }
 
         HideUIHint();
-
         _currentMissionIndex = missions.Count;
         _currentMission = null;
         _currentState = TutorialState.Completed;
