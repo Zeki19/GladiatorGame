@@ -4,18 +4,15 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
-
-//Name of the script can be updated.
 public class ArenaPainter : MonoBehaviour
 {
-    [Header("Grid and tile-maps")] [SerializeField]
-    private Grid grid;
-
+    [Header("Grid and tile-maps")]
+    [SerializeField] private Grid grid;
     [SerializeField] private Tilemap figthingArenaTilemap;
     [SerializeField] private Tilemap bloodTilemap;
 
-    [Header("Possible types of tiles")] [SerializeField]
-    private List<TileType> tileTypes;
+    [Header("Possible types of tiles")]
+    [SerializeField] private List<TileType> tileTypes;
 
     private readonly Dictionary<string, Tile> _createdTiles = new();
 
@@ -25,26 +22,48 @@ public class ArenaPainter : MonoBehaviour
         InitializeTiles();
     }
 
+    private void OnDestroy()
+    {
+        ServiceLocator.Instance.RemoveService(this);
+    }
+
     public void PaintArena(Transform pos, String effectName, int size = 0)
     {
+        if (pos == null)
+        {
+            Debug.LogWarning("ArenaPainter: Transform is null, skipping paint");
+            return;
+        }
         PaintArena(pos.position, effectName, size);
     }
 
     public void PaintArena(Vector3 pos, String effectName, int size = 0)
     {
-        var cell = grid.WorldToCell(pos);
+        if (!ValidateComponents())
+        {
+            Debug.LogWarning("ArenaPainter: Grid or Tilemaps are destroyed/null, skipping paint");
+            return;
+        }
 
+        var cell = grid.WorldToCell(pos);
         var tileType = GetType(effectName);
+
         if (tileType == null)
         {
-            Debug.Log("No tileType with that Name");
+            Debug.LogWarning($"ArenaPainter: No tileType with name '{effectName}'");
             return;
         }
 
         int index = (size == 0) ? UnityEngine.Random.Range(0, tileType.sprites.Length) : size;
 
+        string tileKey = tileType.name + index;
+        if (!_createdTiles.ContainsKey(tileKey))
+        {
+            Debug.LogWarning($"ArenaPainter: Tile '{tileKey}' not found in dictionary");
+            return;
+        }
 
-        var tile = _createdTiles[tileType.name + index];
+        var tile = _createdTiles[tileKey];
 
         if (figthingArenaTilemap.HasTile(cell))
         {
@@ -68,6 +87,7 @@ public class ArenaPainter : MonoBehaviour
             }
         }
     }
+
     private TileType GetType(String tileName)
     {
         foreach (var type in tileTypes)
@@ -77,9 +97,9 @@ public class ArenaPainter : MonoBehaviour
                 return type;
             }
         }
-
         return null;
     }
+
     private static Tile CreateTile(TileType type, int index)
     {
         Tile tile = ScriptableObject.CreateInstance<Tile>();
@@ -88,40 +108,91 @@ public class ArenaPainter : MonoBehaviour
         tile.name = type.name + index;
         return tile;
     }
+
     private void RotateTile(Vector3Int cell)
     {
+        if (!ValidateComponents()) return;
+
         var randomRotation = UnityEngine.Random.Range(0, 360);
         Matrix4x4 rotationMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 0, randomRotation));
         bloodTilemap.SetTransformMatrix(cell, rotationMatrix);
     }
+
     private void CleanArena()
     {
+        if (!ValidateComponents()) return;
         bloodTilemap.ClearAllTiles();
     }
 
     public void ClearPaint(Vector3 pos)
     {
+        if (!ValidateComponents()) return;
+
         var cell = grid.WorldToCell(pos);
         bloodTilemap.SetTile(cell, null);
     }
-    
+
     public void PaintArenaNoRotation(Vector3 pos, String effectName, int size = 0)
     {
-        var cell = grid.WorldToCell(pos);
+        if (!ValidateComponents())
+        {
+            Debug.LogWarning("ArenaPainter: Grid or Tilemaps are destroyed/null, skipping paint");
+            return;
+        }
 
+        var cell = grid.WorldToCell(pos);
         var tileType = GetType(effectName);
+
         if (tileType == null)
         {
-            Debug.Log("No tileType with that Name");
+            Debug.LogWarning($"ArenaPainter: No tileType with name '{effectName}'");
             return;
         }
 
         int index = (size == 0) ? UnityEngine.Random.Range(0, tileType.sprites.Length) : size;
 
+        string tileKey = tileType.name + index;
+        if (!_createdTiles.ContainsKey(tileKey))
+        {
+            Debug.LogWarning($"ArenaPainter: Tile '{tileKey}' not found in dictionary");
+            return;
+        }
 
-        var tile = _createdTiles[tileType.name + index];
-
+        var tile = _createdTiles[tileKey];
         bloodTilemap.SetTile(cell, figthingArenaTilemap.HasTile(cell) ? tile : null);
     }
+    private bool ValidateComponents()
+    {
+        if (grid == null)
+        {
+            Debug.LogWarning("ArenaPainter: Grid reference is null");
+            return false;
+        }
 
+        if (figthingArenaTilemap == null)
+        {
+            Debug.LogWarning("ArenaPainter: Fighting arena tilemap reference is null");
+            return false;
+        }
+
+        if (bloodTilemap == null)
+        {
+            Debug.LogWarning("ArenaPainter: Blood tilemap reference is null");
+            return false;
+        }
+
+        try
+        {
+            _ = grid.transform;
+            _ = figthingArenaTilemap.transform;
+            _ = bloodTilemap.transform;
+        }
+        catch (MissingReferenceException)
+        {
+            Debug.LogWarning("ArenaPainter: One or more components have been destroyed");
+            return false;
+        }
+
+        return true;
+    }
 }
