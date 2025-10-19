@@ -31,7 +31,7 @@ public class TutorialQuestPanelUI : MonoBehaviour
         // Ensure panel is visible initially
         if (panelRoot != null)
         {
-            panelRoot.SetActive(false); // Start hidden until tutorial starts
+          //  panelRoot.SetActive(false); // Start hidden until tutorial starts
         }
     }
 
