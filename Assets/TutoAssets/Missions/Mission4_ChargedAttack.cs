@@ -29,7 +29,7 @@ public class Mission4_ChargedAttack : TutorialMission
     {
         if (!_isCompleted)
         {
-            Debug.Log("Mission4_ChargedAttack: CheckCompletion - Esperando uso de ataque cargado...");
+            LogWaitingOnce("Mission4_ChargedAttack: CheckCompletion - Esperando uso de ataque cargado...");
         }
     }
 

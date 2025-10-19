@@ -24,6 +24,8 @@ public abstract class TutorialMission : ScriptableObject
     protected bool _isCompleted = false;
     protected TutorialManager _manager;
 
+    private bool _hasLoggedWaiting = false;
+
     public event Action OnMissionStart;
     public event Action OnMissionComplete;
 
@@ -31,6 +33,7 @@ public abstract class TutorialMission : ScriptableObject
     {
         _manager = manager;
         _isCompleted = false;
+        _hasLoggedWaiting = false;
         OnMissionStart?.Invoke();
         OnInitialize();
     }
@@ -65,6 +68,15 @@ public abstract class TutorialMission : ScriptableObject
     public void ForceComplete()
     {
         CompleteMission();
+    }
+
+    protected void LogWaitingOnce(string message)
+    {
+        if (!_hasLoggedWaiting)
+        {
+            Debug.Log(message);
+            _hasLoggedWaiting = true;
+        }
     }
 
     protected abstract void OnInitialize();

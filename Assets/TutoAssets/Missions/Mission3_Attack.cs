@@ -58,7 +58,7 @@ public class Mission3_Attack : TutorialMission
     {
         if (!_isCompleted)
         {
-            Debug.Log("Mission3_Attack: CheckCompletion - Esperando que el dummy reciba daño...");
+            LogWaitingOnce("Mission3_Attack: CheckCompletion - Esperando que el dummy reciba daño...");
         }
     }
 

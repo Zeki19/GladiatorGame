@@ -42,7 +42,7 @@ public class Mission2_Pick : TutorialMission
     {
         if (!_isCompleted)
         {
-            Debug.Log("Mission2_Pick: CheckCompletion - Esperando evento...");
+            LogWaitingOnce("Mission2_Pick: CheckCompletion - Esperando evento...");
         }
     }
 

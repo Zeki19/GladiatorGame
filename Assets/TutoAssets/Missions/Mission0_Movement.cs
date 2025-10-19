@@ -31,7 +31,7 @@ public class Mission0_Movement : TutorialMission
     {
         if (!_isCompleted)
         {
-            Debug.Log("Mission0_Movement: CheckCompletion - Esperando evento...");
+            LogWaitingOnce("Mission0_Movement: CheckCompletion - Esperando evento...");
         }
     }
 

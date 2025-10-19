@@ -30,7 +30,7 @@ public class Mission5_Pick : TutorialMission
     {
         if (!_isCompleted)
         {
-            Debug.Log("Mission5_Pick: CheckCompletion - Esperando evento...");
+            LogWaitingOnce("Mission5_Pick: CheckCompletion - Esperando evento...");
         }
     }
 

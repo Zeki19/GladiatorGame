@@ -29,7 +29,7 @@ public class Mission6_DropWeapon : TutorialMission
     {
         if (!_isCompleted)
         {
-            Debug.Log("Mission6_DropWeapon: CheckCompletion - Esperando evento...");
+            LogWaitingOnce("Mission6_DropWeapon: CheckCompletion - Esperando evento...");
         }
     }
 

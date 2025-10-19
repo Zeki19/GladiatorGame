@@ -30,7 +30,7 @@ public class Mission1_Dash : TutorialMission
     {
         if (!_isCompleted)
         {
-            Debug.Log("Mission1_Dash: CheckCompletion - Esperando evento...");
+            LogWaitingOnce("Mission1_Dash: CheckCompletion - Esperando evento...");
         }
     }
 
