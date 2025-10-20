@@ -27,7 +27,6 @@ public class CinematicManager : MonoBehaviour
     {
         _uiManager = ServiceLocator.Instance.GetService<UIManager>();
         
-        PauseManager.TogglePauseCinematic();
         _uiManager.HideUI();
         InitialView();
         dialogueManager.OnConversationEnd += PlayerMoment;
@@ -37,7 +36,9 @@ public class CinematicManager : MonoBehaviour
     
     private IEnumerator BeginSequence()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForEndOfFrame();
+        Debug.Log("Beginning sequence");
+        PauseManager.TogglePauseCinematic();
         _onZoomEnd += EnemyMoment;
         Frame(boss, ZoomEnemy);
     }

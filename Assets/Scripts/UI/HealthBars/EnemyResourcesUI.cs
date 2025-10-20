@@ -10,15 +10,13 @@ public class EnemyResourcesUI : MonoBehaviour
     [Header("Enemy")]
     [SerializeField] private EntityManager entityManager;
 
-    [Header("Bars")]
+    [Header("Wiring")]
     [SerializeField] private GameObject barPrefab;
     [SerializeField] private GameObject barHolder;
     [SerializeField] private ResourceBarTracker.DisplayType displayType;
-
-    [Header("Image")]
     [SerializeField] private UnityEngine.UI.Image headImage;
 
-    [Header("This should not be here but in the Enemy...")]
+    [Header("Head image per phase")]
     public Sprite[] sprites;
 
     private int _index;
