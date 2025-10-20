@@ -123,7 +123,7 @@ public class DialogueManager : MonoBehaviour
         audioSource.enabled = false;
     }
 
-    private void EndDialogue()
+    public void EndDialogue()
     {
         StartCoroutine(CloseDialogueRoutine());
     }

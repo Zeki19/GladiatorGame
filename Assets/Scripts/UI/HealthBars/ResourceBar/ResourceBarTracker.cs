@@ -188,16 +188,16 @@ public class ResourceBarTracker : MonoBehaviour
         resourceMax = max;
         startsFull = startsAt100Percent;
         
-        UpdateResourceBar();
+        SetUpBar();
     }
 
     public void SetUp(float max, bool startsAt100Percent, Color color)
     {
         resourceMax = max;
         startsFull = startsAt100Percent;
-        bar.color = color;
+        barColor = color;
         
-        UpdateResourceBar();
+        SetUpBar();
     }
 
     public void SetTextField(DisplayType displayType)

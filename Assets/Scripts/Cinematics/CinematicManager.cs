@@ -30,19 +30,8 @@ public class CinematicManager : MonoBehaviour
         _uiManager.HideUI();
         InitialView();
         dialogueManager.OnConversationEnd += PlayerMoment;
-
-        //StartCoroutine(BeginSequence());
-        Debug.Log("Beginning sequence");
-        PauseManager.TogglePauseCinematic();
-        _onZoomEnd += EnemyMoment;
-        Frame(boss, ZoomEnemy);
-    }
-    
-    private IEnumerator BeginSequence()
-    {
-        yield return new WaitForEndOfFrame();
-        Debug.Log("Beginning sequence");
-        PauseManager.TogglePauseCinematic();
+        
+        PauseManager.SetPausedCinematic(true);
         _onZoomEnd += EnemyMoment;
         Frame(boss, ZoomEnemy);
     }
@@ -56,11 +45,11 @@ public class CinematicManager : MonoBehaviour
     void EnemyMoment()
     {
         dialogueManager.StartConversation(dialogue);
-        _onZoomEnd -= EnemyMoment;
     }
     
     void PlayerMoment()
     {
+        _onZoomEnd -= EnemyMoment;
         _onZoomEnd += Finished;
         Frame(player, ZoomPlayer);
     }
@@ -73,7 +62,7 @@ public class CinematicManager : MonoBehaviour
         
         camera.Lens.OrthographicSize = ZoomPlayer;
         
-        PauseManager.TogglePauseCinematic();
+        PauseManager.SetPausedCinematic(false);
         
         _onZoomEnd -= Finished;
     }
@@ -120,6 +109,11 @@ public class CinematicManager : MonoBehaviour
 
         _frameRoutine = null;
         _onZoomEnd?.Invoke();
+    }
+
+    public void SkipCinematic()
+    {
+        dialogueManager.EndDialogue();
     }
 }
 
