@@ -30,8 +30,12 @@ public class CinematicManager : MonoBehaviour
         _uiManager.HideUI();
         InitialView();
         dialogueManager.OnConversationEnd += PlayerMoment;
-        
-        StartCoroutine(BeginSequence());
+
+        //StartCoroutine(BeginSequence());
+        Debug.Log("Beginning sequence");
+        PauseManager.TogglePauseCinematic();
+        _onZoomEnd += EnemyMoment;
+        Frame(boss, ZoomEnemy);
     }
     
     private IEnumerator BeginSequence()

@@ -21,12 +21,15 @@ namespace Player
 
         void Dead()
         {
-            PauseManager.OnCinematicStateChanged -= HandlePause;
+            //PauseManager.OnCinematicStateChanged -= HandlePause;
             transform.parent.gameObject.SetActive(false);
             manager.PlaySound("Death", "Player");
             ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene("DefeatScene");
         }
-
+        private void OnDestroy()
+        {
+            PauseManager.OnCinematicStateChanged -= HandlePause;
+        }
         private void Start()
         {
             manager.HealthComponent.OnDead += Dead;

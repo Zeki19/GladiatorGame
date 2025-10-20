@@ -37,8 +37,8 @@ namespace Player
 
         private void OnDestroy()
         {
-            AttackFinishSubscription(false);
             PauseManager.OnCinematicStateChanged -= HandlePause;
+            AttackFinishSubscription(false);
         }
 
         private void Start()
