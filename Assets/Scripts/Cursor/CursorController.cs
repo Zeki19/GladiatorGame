@@ -90,7 +90,7 @@ public class CursorController : MonoBehaviour
             shadowImage.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
-    public void SwapCursorTexture(bool value)
+    public void SecondaryTexture(bool value)
     {
         if (!_currentProfile.secondaryTexture) return;
 

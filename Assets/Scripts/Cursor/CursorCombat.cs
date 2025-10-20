@@ -7,26 +7,44 @@ public class CursorCombat : MonoBehaviour
     [Header("Wiring")]
     [SerializeField] private PlayerWeaponController weapon;
     [SerializeField] private CursorController cursor;
-    
-    private void Update()
+
+    private void Start()
     {
-        if (PauseManager.IsPaused || PauseManager.IsPausedCinematic)
+        PauseManager.OnAnyPauseStateChanged += InGamePause;
+        weapon.OnHasWeapon += WeaponCheck;
+    }
+
+    void InGamePause(bool state)
+    {
+        cursor.ChangeProfile(state ? "Main" : "Combat");
+    }
+    void WeaponCheck(bool state)
+    {
+        if (state)
         {
-          //  Debug.Log("IsPaused");
-            cursor.ChangeProfile("Main");
-            return;
-        }
-        
-        if (weapon.HasWeapon)
-        {
-            Debug.Log("HasWeapon");
             cursor.ChangeProfile("Combat");
-            cursor.SwapCursorTexture(!weapon.Weapon.CanAttack());
+            weapon.Weapon.OnCooldown += CooldownCheck;
         }
         else
         {
-           // Debug.Log("Main");
             cursor.ChangeProfile("Main");
         }
+    }
+    void CooldownCheck(bool state)
+    {
+        cursor.SecondaryTexture(state);
+    }
+    
+    private void OnDisable()
+    {
+        PauseManager.OnAnyPauseStateChanged -= InGamePause;
+        weapon.OnHasWeapon -= WeaponCheck;
+        weapon.Weapon.OnCooldown -= CooldownCheck;
+    }
+    private void OnDestroy()
+    {
+        PauseManager.OnAnyPauseStateChanged -= InGamePause;
+        weapon.OnHasWeapon -= WeaponCheck;
+        weapon.Weapon.OnCooldown -= CooldownCheck;
     }
 }

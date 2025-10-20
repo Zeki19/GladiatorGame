@@ -38,14 +38,17 @@ namespace Utilities
 
         public void TogglePause(InputAction.CallbackContext context)
         {
-            if (context.started) TogglePause();    
+            if (context.started)
+            {
+                PauseManager.TogglePause();
+            }    
         }
 
         public void TogglePause()
         {
             PauseManager.TogglePause();
         }
-
+        
         private void PauseGame()
         {
             EnablePlayerInput(!_isGamePaused);

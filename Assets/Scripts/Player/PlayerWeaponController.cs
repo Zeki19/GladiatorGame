@@ -24,6 +24,7 @@ namespace Player
         
         public event Action OnAttack;
         public event Action OnWeaponChanged;
+        public event Action<bool> OnHasWeapon;
         public bool HasWeapon => Weapon != null;
 
         public static event Action OnPlayerWeaponPicked;
@@ -118,6 +119,7 @@ namespace Player
             
             OnWeaponChanged?.Invoke();
             OnPlayerWeaponPicked?.Invoke();
+            OnHasWeapon?.Invoke(true);
         }
 
         public void DropWeapon()
@@ -146,6 +148,7 @@ namespace Player
             Weapon = null;
             
             OnWeaponChanged?.Invoke();
+            OnHasWeapon?.Invoke(false);
         }
         
         private void AttackFinishSubscription(bool subscribe)

@@ -1,9 +1,11 @@
+using System;
 using Attack;
 using Enemies;
 using Player;
 using UnityEngine;
 using Utilities.Factory.Essentials;
 using Utilities.Factory.WeaponFactory;
+using Object = UnityEngine.Object;
 
 namespace Weapons
 {
@@ -68,6 +70,8 @@ namespace Weapons
         #endregion
 
 
+        public event Action<bool> OnCooldown;
+        
         public void Configure(SoWeapon config)
         {
             StandardConsumeDurabilityOnMiss = config.standardConsumeDurabilityOnMiss;
@@ -135,7 +139,10 @@ namespace Weapons
         public void CooldownCounter()
         {
             if (_timer <= 0)
+            {
                 IsOnCooldown = false;
+                OnCooldown?.Invoke(false);
+            }
             _timer -= Time.deltaTime;
         }
 
@@ -143,6 +150,8 @@ namespace Weapons
         {
             IsOnCooldown = true;
             _timer = CoolDown;
+            
+            OnCooldown?.Invoke(true);
         }
 
     }
