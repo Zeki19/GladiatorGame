@@ -359,7 +359,7 @@ MonoBehaviour:
   m_text: Overwrite existing save?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 1602854871235269953, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 166ccd42531af72498096f4313b58546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingCanvasPrefab: {fileID: 7708801583587600829, guid: 999a583c59c03ab42a787a0162f30a9d, type: 3}
 --- !u!4 &707207977
 Transform:
   m_ObjectHideFlags: 0
@@ -3161,6 +3162,10 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 2083733801}
+    - target: {fileID: 9015246090746314838, guid: 7f1e06e3916a49040a90a8c68866c27e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9015246090746314838, guid: 7f1e06e3916a49040a90a8c68866c27e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
