@@ -75,7 +75,7 @@ namespace Enemies.Valeria.States
                 _status.SetStatus(StatusEnum.OnMeleeLongtCD,true);
                 _longMeleeTimerCd = 0;
             }
-            if (dist > _desiredDistance + _stoppingThreshold || dist < _desiredDistance - _stoppingThreshold || _isAttackReady)
+            if (dist > _desiredDistance + _stoppingThreshold || dist < _desiredDistance - _stoppingThreshold)// || _isAttackReady)
             {
                 MoveToRing(toPlayer);
             }

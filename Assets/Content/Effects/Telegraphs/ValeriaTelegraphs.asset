@@ -33,7 +33,7 @@ MonoBehaviour:
   - attackName: QuickStab
     shape: 1
     scale: {x: 1, y: 4.5}
-    aliveTime: 1
+    aliveTime: 0.5
     center: 0
     multiple: 0
     amount: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
   - attackName: Stab&run
     shape: 1
     scale: {x: 1, y: 3}
-    aliveTime: 1
+    aliveTime: 0.5
     center: 0
     multiple: 0
     amount: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   - attackName: BarrageOfDaggers
     shape: 1
     scale: {x: 0.5, y: 25}
-    aliveTime: 5
+    aliveTime: 0.5
     center: 0
     multiple: 1
     amount: 7

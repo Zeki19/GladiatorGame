@@ -77,6 +77,11 @@ namespace Enemies.Valeria.States
             {
                 OrbitAroundPlayer(toPlayer);
                 _middleTimerCd += Time.deltaTime;
+                if (_agent._NVagent.velocity.magnitude > .2f)
+                {
+                    Debug.Log("toSlow");
+                    _middleTimerCd += Time.deltaTime;
+                }
                 if (_middleTimerCd > _middleAttackCd)
                 {
                     _status.SetStatus(StatusEnum.OnMiddleCD,true);

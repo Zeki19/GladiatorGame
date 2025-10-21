@@ -10,6 +10,7 @@ public class PillarContext
 
 public interface IPillar
 {
+    public void AddIgnorePillar(List<Collider2D> collider);
     event System.Action OnDamaged;
     void SpawnPillar(PillarContext context);
     void DestroyPillar(PillarContext context);

@@ -1,6 +1,7 @@
         using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,6 +19,7 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
     
     private Vector3 _startScale, _targetScale;
     private Vector3 _startPos,   _targetPos;
+    private List<Collider2D> _ignoreColliders;
 
 
     public event Action OnDamaged;
@@ -104,7 +106,15 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (_ignoreColliders.Any(collider => collider == other))
+        {
+            return;
+        }
         OnDamaged?.Invoke();
+    }
+    public void AddIgnorePillar(List<Collider2D> colliders)
+    {
+        _ignoreColliders = colliders;
     }
 
     private static Vector3 GetRandomCardinal()

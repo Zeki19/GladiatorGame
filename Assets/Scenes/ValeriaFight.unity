@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause menu - Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4336630239941896859, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4716946522026916611, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
       propertyPath: m_fontSize
       value: 11
@@ -380,6 +384,10 @@ PrefabInstance:
     - target: {fileID: 1121312702468547598, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_Name
       value: Enemy - UI - Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121312702468547598, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: entityManager
@@ -6455,6 +6463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player - UI - Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5836760127076137822, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5975537105926103933, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: entityManager
       value: 
@@ -11233,6 +11245,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8452613016809410372, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
+      propertyPath: ignoreColliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452613016809410372, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
+      propertyPath: 'ignoreColliders.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2093591380}
     - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
       propertyPath: m_SortingOrder
       value: 9
@@ -11782,6 +11802,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8452613016809410372, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
+      propertyPath: ignoreColliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452613016809410372, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
+      propertyPath: 'ignoreColliders.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2093591380}
     - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
       propertyPath: m_SortingOrder
       value: 9
@@ -24064,9 +24092,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6520464762290886026, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+      propertyPath: _inputs
+      value: 
+      objectReference: {fileID: 2107629827}
+    - target: {fileID: 6520464762290886026, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: _target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2093591368}
     - target: {fileID: 7175932056004661134, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
       propertyPath: m_Size.x
       value: 0.51
@@ -24595,6 +24627,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8452613016809410372, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
+      propertyPath: ignoreColliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452613016809410372, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
+      propertyPath: 'ignoreColliders.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2093591380}
     - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
       propertyPath: m_SortingOrder
       value: 9
@@ -25039,9 +25079,17 @@ PrefabInstance:
       propertyPath: stoppingThreshold
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: desiredMeleeDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1725781832690022149, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: _moveSpeed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725781832690022149, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: obstaclesMask.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 2061190095099771505, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: EnemyTelegraph
@@ -25101,11 +25149,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_Speed
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_Height
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_Acceleration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_StoppingDistance
@@ -25386,6 +25442,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8452613016809410372, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
+      propertyPath: ignoreColliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452613016809410372, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
+      propertyPath: 'ignoreColliders.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2093591380}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25421,6 +25485,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a49f2c4411ed31a4d88f0808f818d10a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!70 &2093591380 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5693641551763950375, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+  m_PrefabInstance: {fileID: 1967316716}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2107629827 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8586703381123056644, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
+  m_PrefabInstance: {fileID: 1634171591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2110996920

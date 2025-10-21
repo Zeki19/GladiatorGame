@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,6 +11,7 @@ public class Pillar_Shatter : MonoBehaviour, IPillar
     List<Vector3> _occupiedPositions = new List<Vector3>();
     
     private ArenaPainter _painter;
+    private List<Collider2D> _ignoreColliders;
 
     public event Action OnDamaged;
 
@@ -29,7 +31,10 @@ public class Pillar_Shatter : MonoBehaviour, IPillar
         
         gameObject.SetActive(false);
     }
-
+    public void AddIgnorePillar(List<Collider2D> colliders)
+    {
+        _ignoreColliders = colliders;
+    }
     public void DestroyPillar(PillarContext context)
     {
         foreach (var pos in _occupiedPositions)
@@ -45,6 +50,10 @@ public class Pillar_Shatter : MonoBehaviour, IPillar
     
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (_ignoreColliders.Any(collider => collider == other))
+        {
+            return;
+        }
         OnDamaged?.Invoke();
     }
 

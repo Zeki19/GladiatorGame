@@ -17,6 +17,7 @@ public class PillarManager : MonoBehaviour
     private Dictionary<GameObject, IPillar>  _pillars = new Dictionary<GameObject, IPillar>();
     
     private SpriteRenderer _renderer;
+    [SerializeField] private List<Collider2D> ignoreColliders;
 
     private void Start()
     {
@@ -75,6 +76,7 @@ public class PillarManager : MonoBehaviour
             behaviour.OnDamaged += OnDamage;
 
             _pillars.TryAdd(_spawnedPillar, behaviour);
+            behaviour.AddIgnorePillar(ignoreColliders);
         }
     }
 }

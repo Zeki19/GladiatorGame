@@ -6,13 +6,27 @@
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Cursor/Combat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Cursor/Combat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Cursor/Menu.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Cursor/Menu.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GaiusFight.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GaiusFight.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cursor/CursorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Cursor/CursorController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cursor/CursorProfileSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Cursor/CursorProfileSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Minos/MinosWithBlendTree.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Minos/MinosWithBlendTree.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Animations/Valeria/ValeriaWithBlendTree.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Valeria/ValeriaWithBlendTree.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Effects/Telegraphs/ValeriaTelegraphs.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Effects/Telegraphs/ValeriaTelegraphs.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/Attacks/ValeriaQuickStab.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/Attacks/ValeriaQuickStab.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/ValeriaBehaviour.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/ValeriaBehaviour.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/MinotaurBehaviour.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/MinotaurBehaviour.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Obstacles/Pillar/Pillar - Standing.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Obstacles/Pillar/Pillar - Standing.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ValeriaFight.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ValeriaFight.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cursor/CursorCombat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Cursor/CursorCombat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/MissAttackHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/MissAttackHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateChase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateChase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateMeleeLock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateMeleeLock.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/PillarContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/PillarContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/Pillar_Fallen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/Pillar_Fallen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/Pillar_Manager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/Pillar_Manager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/Pillar_Shatter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/Pillar_Shatter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/Pillar_Standing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Pillar/Pillar_Standing.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Wall/Wall_Broken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Wall/Wall_Broken.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Wall/Wall_Standing.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacles/Wall/Wall_Standing.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +53,7 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/84f0d810adef4e6c8deab33e4ae93f7c1dec00/4b/5116f7a4/Object.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bc9454776f3c42ffb66359567121c5ee11400/40/9b4de94d/NavMeshAgent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/ChanceToMakeNextActionAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/CheckStatusAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Behaiviours/ActionsTest/CheckStatusCondition.cs" root0="FORCE_HIGHLIGHTING" />
@@ -95,7 +110,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$USER_HOME$/Downloads/A\GladiatorGame.exe" />
+      <option name="EXE_PATH" value="$USER_HOME$/Desktop/GladiatorBuild\GladiatorGame.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Ignacio Puk\Downloads" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -106,7 +121,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.58f2\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Unity\6000.0.58f2\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;D:\Unity Poyects\GladiatorGame&quot; -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Unity Poyects\GladiatorGame" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -117,7 +132,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.58f2\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Unity\6000.0.58f2\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;D:\Unity Poyects\GladiatorGame&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Unity Poyects\GladiatorGame" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -250,6 +265,7 @@
       <workItem from="1760624991167" duration="11782000" />
       <workItem from="1760706504727" duration="2190000" />
       <workItem from="1760729315593" duration="5959000" />
+      <workItem from="1760978518519" duration="9396000" />
     </task>
     <servers />
   </component>
@@ -359,13 +375,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Obstacles/Wall/Wall_Standing.cs</url>
-          <line>36</line>
+          <line>43</line>
           <properties documentPath="D:\Desarrollo\Unreal\GladiatorGame\Assets\Scripts\Obstacles\Wall\Wall_Standing.cs" containingFunctionPresentation="Method 'OnTriggerEnter2D'">
             <startOffsets>
-              <option value="918" />
+              <option value="1128" />
             </startOffsets>
             <endOffsets>
-              <option value="938" />
+              <option value="1148" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="70" />

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class MissAttackHandler
 {
     private int TotalMissAttacks;
@@ -9,6 +11,7 @@ public class MissAttackHandler
     {
         TotalMissAttacks++;
         CurrentMissAttacks++;
+        Debug.Log(CurrentMissAttacks);
     }
 
     public void ResetMissAttacks()

@@ -115,6 +115,12 @@ namespace Enemies
             _agent.enabled = true;
         }
 
+        [ContextMenu("WhatIsMyCurrentState")]
+        private void WhatIsMyCurrentState()
+        {
+            Debug.Log(Fsm.CurrentStateEnum());
+        }
+
         #region Navmesh
 
         public void TurnOffNavMesh()
