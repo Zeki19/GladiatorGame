@@ -70,6 +70,39 @@ public class ValeriaView : EnemyView, ILook
                 break;
         }
     }
+    public override void StopStateAnimation(StateEnum state)
+    {
+        switch (state)
+        {
+            case StateEnum.Idle:
+                animator.ResetTrigger(Idle);
+                break;
+            case StateEnum.Chase:
+                animator.ResetTrigger(Move);
+                break;
+            case StateEnum.Dash:
+                animator.ResetTrigger(ForwardDash);
+                break;
+            case StateEnum.BackStep:
+                animator.ResetTrigger(BackDash);
+                break;
+            case StateEnum.ShadowDash:
+                animator.ResetTrigger(ShadowDash);
+                break;
+            case StateEnum.ShortAttack:
+                animator.ResetTrigger(FrontalAttack);
+                break;
+            case StateEnum.MidAttack:
+                animator.ResetTrigger(DoubleAttack);
+                break;
+            case StateEnum.LongAttack:
+                animator.ResetTrigger(DaggerThrow);
+                break;
+            default:
+                Debug.LogWarning("No animation mapped for state: " + state);
+                break;
+        }
+    }
 
     public override void LookDirInsta(Vector2 dir)
     {

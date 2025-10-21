@@ -29,6 +29,7 @@ namespace Enemies.Valeria.States
         {
             base.Enter();
             _move.Move(Vector2.zero);
+            _animate.PlayStateAnimation(StateEnum.Chase);
 
             _agent._NVagent.updateRotation = false;
             _agent._NVagent.updateUpAxis = false;
@@ -94,6 +95,8 @@ namespace Enemies.Valeria.States
 
             _agent._NVagent.ResetPath(); // clear any current path
             _agent._NVagent.velocity = Vector3.zero; // kill current movement
+            
+            _animate.StopStateAnimation(StateEnum.Chase);
         }
     }
 }

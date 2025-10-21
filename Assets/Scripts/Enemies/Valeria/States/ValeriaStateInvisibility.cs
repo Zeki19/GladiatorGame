@@ -33,6 +33,7 @@ namespace Enemies.Valeria.States
         {
             base.Enter();
             _move.Move(Vector2.zero);
+            _animate.PlayStateAnimation(StateEnum.Chase);
 
             _regularSpeed = _agent._NVagent.speed;
 
