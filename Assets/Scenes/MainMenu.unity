@@ -2207,6 +2207,38 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 743490650575691793, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.75000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 743490650575691793, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 743490650575691793, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.25100002
+      objectReference: {fileID: 0}
+    - target: {fileID: 743490650575691793, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.66439545
+      objectReference: {fileID: 0}
+    - target: {fileID: 743490650575691793, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5986023
+      objectReference: {fileID: 0}
+    - target: {fileID: 743490650575691793, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.6472015
+      objectReference: {fileID: 0}
+    - target: {fileID: 743490650575691793, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.49996948
+      objectReference: {fileID: 0}
+    - target: {fileID: 743490650575691793, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 751799531203478445, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_fontSize
       value: 40
@@ -2223,6 +2255,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1278949649960281120, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 145913872272239325, guid: 71080a3262d255f45aaca8ef5f6139d3, type: 3}
     - target: {fileID: 1648061753445446354, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2791,6 +2827,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9061086819783106907, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.6528007
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061086819783106907, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061086819783106907, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.104
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061086819783106907, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061086819783106907, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061086819783106907, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061086819783106907, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.19000244
+      objectReference: {fileID: 0}
     - target: {fileID: 9119128680696056567, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2816,7 +2880,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3580110946067709247, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9061086819783106907, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       insertIndex: 2

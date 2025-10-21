@@ -19,7 +19,7 @@ namespace Enemies
         protected StateDataManager stateDataManager = new StateDataManager();
         public int currentAttack;
         protected int _currentPhase = 1;
-        public MissAttackHandler MissAttack=new MissAttackHandler();
+        public MissAttackHandler MissAttack = new MissAttackHandler();
         private bool _isGamePaused;
 
         public int CurrentPhase
@@ -27,7 +27,7 @@ namespace Enemies
             get { return _currentPhase; }
         }
         public NavMeshAgent _NVagent => NVagent;
-        
+
         protected FSM<EnemyStates> Fsm;
 
         protected override void Awake()
@@ -44,19 +44,23 @@ namespace Enemies
 
         protected virtual void Start()
         {
-            
+
         }
 
         protected virtual void Update()
         {
             Fsm.OnExecute();
+
             switch (manager.PhaseSystem.CurrentPhase())
             {
-                case 1:_agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase1);
+                case 1:
+                    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase1);
                     break;
-                case 2:_agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase2);
+                case 2:
+                    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
                     break;
-                case 3:_agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase3);
+                case 3:
+                    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase3);
                     break;
             }
 
@@ -68,7 +72,7 @@ namespace Enemies
 
         protected void CheckPhase(float damage)
         {
-            manager.PlaySound("Hit","Enemy");
+            manager.PlaySound("Hit", "Enemy");
             var arenaPainter = ServiceLocator.Instance.GetService<ArenaPainter>();
             arenaPainter?.PaintArena(transform, "Blood");
             _currentPhase = manager.PhaseSystem.CurrentPhase();
@@ -93,7 +97,7 @@ namespace Enemies
         {
             return stateDataManager.GetStateData<T>(state);
         }
-        private void HandlePause(bool paused)
+        public void HandlePause(bool paused)
         {
             _isGamePaused = paused;
             if (paused)
@@ -104,23 +108,30 @@ namespace Enemies
         public void OnPause()
         {
             enabled = false;
-            _agent.enabled = false;
-            _NVagent.ResetPath();
-            _NVagent.velocity = Vector3.zero;
+            if (_agent != null)
+            {
+                _agent.enabled = false;
+            }
+            if (NVagent != null)
+            {
+                NVagent.ResetPath();
+                NVagent.velocity = Vector3.zero;
+            }
         }
 
         public void OnResume()
         {
             enabled = true;
-            _agent.enabled = true;
+            if (_agent != null)
+            {
+                _agent.enabled = true;
+            }
         }
-
         [ContextMenu("WhatIsMyCurrentState")]
         private void WhatIsMyCurrentState()
         {
             Debug.Log(Fsm.CurrentStateEnum());
         }
-
         #region Navmesh
 
         public void TurnOffNavMesh()
@@ -136,21 +147,18 @@ namespace Enemies
 
         private IEnumerator ReturnToNavMesh()
         {
-            // Wait until the surface finishes building (optional delay)
             yield return new WaitForSeconds(0.2f);
 
             if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 3f, NavMesh.AllAreas))
             {
                 Vector3 targetPos = hit.position;
 
-                // Smooth slide back to NavMesh
                 while (Vector3.Distance(transform.position, targetPos) > 0.05f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, targetPos, 5f * Time.deltaTime);
                     yield return null;
                 }
 
-                // Sync agent
                 NVagent.enabled = true;
                 NVagent.Warp(transform.position);
                 NVagent.updatePosition = true;
