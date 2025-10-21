@@ -45,11 +45,11 @@ public class CinematicManager : MonoBehaviour
     void EnemyMoment()
     {
         dialogueManager.StartConversation(dialogue);
+        _onZoomEnd -= EnemyMoment;
     }
 
     void PlayerMoment()
     {
-        _onZoomEnd -= EnemyMoment;
         _onZoomEnd += Finished;
         Frame(player, ZoomPlayer);
     }
