@@ -12,13 +12,13 @@ public class UIManager : MonoBehaviour
 
     public void HideUI()
     {
-        playerUI.SetActive(false);
-        enemyUI.SetActive(false);
+        playerUI?.SetActive(false);
+        enemyUI?.SetActive(false);
     }
 
     public void ShowUI()
     {
-        playerUI.SetActive(true);
-        enemyUI.SetActive(true);
+        playerUI?.SetActive(true);
+        enemyUI?.SetActive(true);
     }
 }

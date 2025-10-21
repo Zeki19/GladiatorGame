@@ -17,6 +17,13 @@ public class PlayerResourcesUI : MonoBehaviour
 
     private PlayerWeaponController _weaponController;
     
+    [Header("Charged bar effect")]
+    [SerializeField] private Color chargedColorA = Color.green;
+    [SerializeField] private Color chargedColorB = Color.yellow;
+    [SerializeField] private float pulseSpeed = 2f;
+
+    private Coroutine _pulseCoroutine;
+    
     private void Start()
     {
         _weaponController = ServiceLocator.Instance.GetService<PlayerWeaponController>();
@@ -52,6 +59,8 @@ public class PlayerResourcesUI : MonoBehaviour
     {
         if (_weaponController.HasWeapon)
         {
+            ChargedEffect(_weaponController.Weapon.IsCharged());
+            
             var max = _weaponController.Weapon.MaxCharge() * _multiplier;
             chargeBar.SetUp((int)max, false);
             
@@ -61,6 +70,37 @@ public class PlayerResourcesUI : MonoBehaviour
         }
         
         chargeBar.SetUp((int)1, false);
+    }
+
+    private void ChargedEffect(bool value)
+    {
+        if (value)
+        {
+            _pulseCoroutine ??= StartCoroutine(PulseColors());
+        }
+        else
+        {
+            if (_pulseCoroutine != null)
+            {
+                StopCoroutine(_pulseCoroutine);
+                _pulseCoroutine = null;
+            }
+
+            chargeBar.ResetColor();
+        }
+    }
+
+    private IEnumerator PulseColors()
+    {
+        float t = 0f;
+        while (true)
+        {
+            t += Time.deltaTime * pulseSpeed;
+            float lerp = Mathf.PingPong(t, 1f);
+            Color currentColor = Color.Lerp(chargedColorA, chargedColorB, lerp);
+            chargeBar.ChangeColor(currentColor);
+            yield return null;
+        }
     }
 
     private void Dead()

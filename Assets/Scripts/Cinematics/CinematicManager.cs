@@ -56,6 +56,7 @@ public class CinematicManager : MonoBehaviour
 
     void Finished()
     {
+        Debug.Log("Finished cinematic");
         _uiManager.ShowUI();
 
         camera.Follow = player;
