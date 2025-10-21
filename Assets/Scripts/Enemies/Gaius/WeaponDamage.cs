@@ -1,3 +1,4 @@
+using System;
 using Attack;
 using Entities;
 using UnityEngine;
@@ -6,10 +7,11 @@ namespace Enemies.Gaius
 {
     public class WeaponDamage : MonoBehaviour
     {
-        private EnemyController _enemyController;
-        private EnemyModel _enemyModel;
-        private IStatus _status;
-        private AttackManager _attack;
+        protected EnemyController _enemyController;
+        protected EnemyModel _enemyModel;
+        protected IStatus _status;
+        protected AttackManager _attack;
+        [SerializeField] protected LayerMask _layerMask;
         private void Awake()
         {
             _enemyController = GetComponentInParent<EnemyController>();
@@ -17,14 +19,16 @@ namespace Enemies.Gaius
             _enemyModel = GetComponentInParent<EnemyModel>();
             _attack = GetComponentInParent<AttackManager>();
         }
-        private void OnTriggerEnter2D(Collider2D collision)
+
+        
+
+        protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Player")) 
+            if (collision.CompareTag("Player")) 
             {
-                return;
+                _status.SetStatus(StatusEnum.AttackMissed,false);
+                _enemyModel.AttackTarget(collision.transform, _attack.GetAttackDamage(_enemyController.currentAttack));
             }
-            _status.SetStatus(StatusEnum.AttackMissed,false);
-            _enemyModel.AttackTarget(collision.transform, _attack.GetAttackDamage(_enemyController.currentAttack));
         }
     }
 }

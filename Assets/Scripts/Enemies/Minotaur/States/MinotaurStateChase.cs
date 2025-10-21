@@ -39,6 +39,11 @@ namespace Enemies.Minotaur.States
         {
             base.Execute();
             _agent._NVagent.SetDestination(_target.GetTarget().transform.position);
+            if (Vector3.Distance(_target.GetTarget().transform.position, _model.Position) <
+                _agent._NVagent.stoppingDistance)
+            {
+                _agent._NVagent.velocity = Vector3.zero;
+            }
             
             _shortMeleeTimerCd += Time.deltaTime;
             if (_shortMeleeTimerCd > _shortMeleeAttackCd)

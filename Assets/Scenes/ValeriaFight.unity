@@ -12424,16 +12424,6 @@ Transform:
   - {fileID: 375166820}
   m_Father: {fileID: 1661692243}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1102839365 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5714610711261460322, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-  m_PrefabInstance: {fileID: 1967316716}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1102839367 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2432126468349750068, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-  m_PrefabInstance: {fileID: 1967316716}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1143162226 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7760298050412872972, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
@@ -25071,34 +25061,6 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 2020722034}
-    - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: hiddingTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: stoppingThreshold
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: desiredMeleeDistance
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1725781832690022149, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: _moveSpeed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1725781832690022149, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: obstaclesMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 2061190095099771505, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: EnemyTelegraph
-      value: 
-      objectReference: {fileID: 11400000, guid: 7a7d1f1be50e4e347b9bea74c0fe8516, type: 2}
-    - target: {fileID: 4237797413979217434, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: art
-      value: 
-      objectReference: {fileID: 1102839365}
     - target: {fileID: 6108439058689843875, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.76
@@ -25139,96 +25101,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6108439058689843875, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6283928702553193047, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: maxLife
-      value: 130
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: m_Speed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: m_Height
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: m_Acceleration
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7849566506043400556, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_Name
       value: Valeria
       objectReference: {fileID: 0}
     - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: 'managedReferences[3723866219693211932]'
-      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[Enemies.EnemyView,
-        Assembly-CSharp]]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: 'managedReferences[3723866219693211933]'
-      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.Animator,
-        UnityEngine.AnimationModule]]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: managedReferences[3723866219693211932].Name
-      value: View
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: managedReferences[3723866219693211933].Name
-      value: Animator
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: m_BlackboardVariableOverridesList.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: managedReferences[3723865628257812571].m_Value
       value: 
       objectReference: {fileID: 2020722031}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: managedReferences[3723866219693211932].m_Value
-      value: 
-      objectReference: {fileID: 2093591373}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: managedReferences[3723866219693211933].m_Value
-      value: 
-      objectReference: {fileID: 1102839367}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[4]'
-      value: 3723866219693211932
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[5]'
-      value: 3723866219693211933
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: managedReferences[3723866219693211932].GUID.m_Value0
-      value: 3751879092968737990
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: managedReferences[3723866219693211932].GUID.m_Value1
-      value: 4149380032359731058
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: managedReferences[3723866219693211933].GUID.m_Value0
-      value: 9746793939834777563
-      objectReference: {fileID: 0}
-    - target: {fileID: 8183124256356256342, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: managedReferences[3723866219693211933].GUID.m_Value1
-      value: 14076838221613650442
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25474,17 +25354,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66f7ff47246bf4e4cadb187cc23c16c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2093591373 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4237797413979217434, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-  m_PrefabInstance: {fileID: 1967316716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a49f2c4411ed31a4d88f0808f818d10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!70 &2093591380 stripped
