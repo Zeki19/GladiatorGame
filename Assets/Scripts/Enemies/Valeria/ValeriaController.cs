@@ -26,6 +26,10 @@ namespace Enemies.Valeria
         [SerializeField] private float hiddingTime;
         [SerializeField] private float invisibilitySpeed;
         [SerializeField] private GameObject stepPrefab;
+        [SerializeField] private float shortMeleeAttackCd;
+        [SerializeField] private float longMeleeAttackCd;
+        [SerializeField] private float longAttackCd;
+        [SerializeField] private float middleAttackCd;
         public BehaviorGraphAgent agent;
         #region Private Variables
 
@@ -67,8 +71,8 @@ namespace Enemies.Valeria
 
             var dashState = new ValeriaStateDash<EnemyStates>();
             var attackState = new ValeriaStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
-            var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
-            var meleeState = new ValeriaStateMeleeLock<EnemyStates>(_pursuitSteering, target, desiredMeleeDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown);
+            var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown,longAttackCd,middleAttackCd);
+            var meleeState = new ValeriaStateMeleeLock<EnemyStates>(_pursuitSteering, target, desiredMeleeDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown,shortMeleeAttackCd,longMeleeAttackCd);
             var runAwayState = new ValeriaStateRunAway<EnemyStates>(target, hiddingLayer, hiddingTime);
             var invisibilityState = new ValeriaStateInvisibility<EnemyStates>(target, invisibilitySpeed, stepPrefab);
             var ambushState = new ValeriaStateAmbush<EnemyStates>(target, 20);

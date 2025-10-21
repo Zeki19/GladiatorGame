@@ -23,11 +23,11 @@ namespace Enemies.Valeria.States
         private float _middleAttackCd=1;
         private float _middleTimerCd;
         
-
+        
 
         private int _direction;
         private Dictionary<int, float> _directions = new Dictionary<int, float>();
-        public ValeriaStateChase(ISteering steering, Rigidbody2D target, float desiredDistance, float stoppingThreshold, float orbitSpeed, float orbitAngle, float cooldown)
+        public ValeriaStateChase(ISteering steering, Rigidbody2D target, float desiredDistance, float stoppingThreshold, float orbitSpeed, float orbitAngle, float cooldown,float longAttackCd=5,float middleAttackCd=1)
         {
             _steering = steering;
             this.target = target;
@@ -38,6 +38,8 @@ namespace Enemies.Valeria.States
             _directions.Add(1, 50f);
             _directions.Add(-1, 50f);
             _cooldown = cooldown;
+            _longAttackCd = longAttackCd;
+            _middleAttackCd = middleAttackCd;
         }
 
         public override void Enter()

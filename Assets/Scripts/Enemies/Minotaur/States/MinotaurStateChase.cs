@@ -17,12 +17,14 @@ namespace Enemies.Minotaur.States
         
         private float _longAttackCd=5;
         private float _longTimerCd;
-        public MinotaurStateChase(ISteering steering, MinotaurController controller)
+        public MinotaurStateChase(ISteering steering, MinotaurController controller,float ShortAttackCD,float longAttackCd)
         {
             _steering = steering;
             _speedMod = controller.stats.Stack;
             _speedModeInterval = controller.stats.Interval;
-            
+            _shortMeleeAttackCd = ShortAttackCD;
+            _longAttackCd = longAttackCd;
+
         }
 
         public override void Enter()
@@ -46,6 +48,7 @@ namespace Enemies.Minotaur.States
             }
             
             _shortMeleeTimerCd += Time.deltaTime;
+            Debug.Log(_shortMeleeTimerCd);
             if (_shortMeleeTimerCd > _shortMeleeAttackCd)
             {
                 _status.SetStatus(StatusEnum.OnMeleeShortCD,true);

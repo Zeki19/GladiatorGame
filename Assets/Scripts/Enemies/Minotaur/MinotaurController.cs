@@ -15,6 +15,8 @@ namespace Enemies.Minotaur
         [SerializeField] private AttackManager attackManager;
         [SerializeField] private float searchSpeed;
         [SerializeField] private GameObject stepPrefab;
+        [SerializeField] private float shortAttackCD;
+        [SerializeField] private float longAttackCD;
         public BehaviorGraphAgent agent;
 
         #region Private Variables
@@ -49,7 +51,7 @@ namespace Enemies.Minotaur
         {
             Fsm = new FSM<EnemyStates>();
             var attackState = new MinotaurStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
-            var chaseState = new MinotaurStateChase<EnemyStates>(_pursuitSteering, this);
+            var chaseState = new MinotaurStateChase<EnemyStates>(_pursuitSteering, this,shortAttackCD,longAttackCD);
             var searchState = new MinotaurStateSearch<EnemyStates>(_pursuitSteering);
             var desperateSearchState = new MinotaurStateDesperateSearch<EnemyStates>(_pursuitSteering, searchSpeed);
 
