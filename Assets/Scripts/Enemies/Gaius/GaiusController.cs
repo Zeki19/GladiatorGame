@@ -37,6 +37,7 @@ namespace Enemies.Gaius
             base.Start();
             manager.HealthComponent.OnDamage += CheckPhase;
             manager.HealthComponent.OnDead += Die;
+            ServiceLocator.Instance.RegisterService<GaiusController>(this);
         }
 
         void InitalizeSteering()
@@ -111,6 +112,10 @@ namespace Enemies.Gaius
             }
             //  SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
         }
+        public void KillEnemy()
+        {
+            Die();
+        }
         protected override void Update()
         {
             base.Update();
@@ -122,6 +127,10 @@ namespace Enemies.Gaius
             //{
             //    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
             //}
+        }
+        private void OnDestroy()
+        {
+            ServiceLocator.Instance.RemoveService<GaiusController>(this);
         }
     }
 }

@@ -52,6 +52,7 @@ namespace Enemies.Valeria
             base.Start();
             manager.HealthComponent.OnDamage += CheckPhase;
             manager.HealthComponent.OnDead += Die;
+            ServiceLocator.Instance.RegisterService<ValeriaController>(this);
         }
 
         void InitalizeSteering()
@@ -153,7 +154,10 @@ namespace Enemies.Valeria
 
             Gizmos.DrawLine(origin, origin + direction);
         }
-
+        public void KillEnemy()
+        {
+            Die();
+        }
         private void Die()
         {
             Destroy(gameObject);
@@ -164,6 +168,10 @@ namespace Enemies.Valeria
                 door.OnBossDefeated();
             }
         }
-        
+        private void OnDestroy()
+        {
+            ServiceLocator.Instance.RemoveService<ValeriaController>(this);
+        }
+
     }
 }
