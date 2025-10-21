@@ -4892,7 +4892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3130263023510648799, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5273,6 +5273,14 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 1961551038}
+    - target: {fileID: 2399509781135219198, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: longAttackCD
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399509781135219198, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: shortAttackCD
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2399509781135219198, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: sceneToChangeWhenDie
       value: 
@@ -21698,7 +21706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1121312702468547598, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: entityManager
@@ -21946,7 +21954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5836760127076137822, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5975537105926103933, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: entityManager

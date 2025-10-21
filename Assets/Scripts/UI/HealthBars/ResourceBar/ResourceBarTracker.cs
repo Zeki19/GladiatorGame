@@ -113,7 +113,6 @@ public class ResourceBarTracker : MonoBehaviour
         
         SetTextField();
     }
-    
     private void TriggerFillAnimation()
     {
         float targetFill = CalculateTargetFill();
@@ -124,7 +123,6 @@ public class ResourceBarTracker : MonoBehaviour
         _fillRoutine = StartCoroutine(SmoothlyTransitionToNewValue(targetFill));
         SetTextField();
     }
-    
     private IEnumerator SmoothlyTransitionToNewValue(float targetFill)
     {
         bar.fillAmount = targetFill;
@@ -177,7 +175,6 @@ public class ResourceBarTracker : MonoBehaviour
         _resourceCurrent = Mathf.Clamp(_resourceCurrent + amount, 0f, resourceMax);
         TriggerFillAnimation();
     }
-
     public void ChangeResourceToAmount(float amount)
     {
         _resourceCurrent = Mathf.Clamp(amount, 0f, resourceMax);
@@ -190,7 +187,6 @@ public class ResourceBarTracker : MonoBehaviour
         
         UpdateResourceBar();
     }
-
     public void SetUp(float max, bool startsAt100Percent, Color color)
     {
         resourceMax = max;
@@ -199,10 +195,17 @@ public class ResourceBarTracker : MonoBehaviour
         
         UpdateResourceBar();
     }
-
     public void SetTextField(DisplayType displayType)
     {
         valueDisplay = displayType;
         SetTextField();
+    }
+    public void ChangeColor(Color color)
+    {
+        bar.color = color;
+    }
+    public void ResetColor()
+    {
+        bar.color = barColor;
     }
 }

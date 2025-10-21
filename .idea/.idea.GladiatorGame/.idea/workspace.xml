@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/SlamArea.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/SlamArea.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/MinotaurBehaviour.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/MinotaurBehaviour.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MinotaurFight.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MinotaurFight.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ValeriaFight.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ValeriaFight.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/WeaponDamage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/WeaponDamage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/States/MinotaurStateChase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/States/MinotaurStateChase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Combat/Player - UI - Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Combat/Player - UI - Canvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cinematics/CinematicManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Cinematics/CinematicManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HealthBars/PlayerResourcesUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HealthBars/PlayerResourcesUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HealthBars/ResourceBar/ResourceBarTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HealthBars/ResourceBar/ResourceBarTracker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +105,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Unity\6000.0.58f2\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.58f2\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;D:\Unity Poyects\GladiatorGame&quot; -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Unity Poyects\GladiatorGame" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -118,7 +116,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Unity\6000.0.58f2\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.58f2\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;D:\Unity Poyects\GladiatorGame&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Unity Poyects\GladiatorGame" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -252,6 +250,7 @@
       <workItem from="1760706504727" duration="2190000" />
       <workItem from="1760729315593" duration="5959000" />
       <workItem from="1760978518519" duration="9396000" />
+      <workItem from="1761082994210" duration="3279000" />
     </task>
     <servers />
   </component>
@@ -361,15 +360,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Obstacles/Wall/Wall_Standing.cs</url>
-          <line>43</line>
-          <properties documentPath="D:\Desarrollo\Unreal\GladiatorGame\Assets\Scripts\Obstacles\Wall\Wall_Standing.cs" containingFunctionPresentation="Method 'OnTriggerEnter2D'">
-            <startOffsets>
-              <option value="1128" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1148" />
-            </endOffsets>
-          </properties>
+          <line>50</line>
+          <properties documentPath="D:\Desarrollo\Unreal\GladiatorGame\Assets\Scripts\Obstacles\Wall\Wall_Standing.cs" containingFunctionPresentation="Method 'OnTriggerEnter2D'" />
           <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
