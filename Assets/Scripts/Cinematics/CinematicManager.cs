@@ -9,35 +9,29 @@ public class CinematicManager : MonoBehaviour
     [SerializeField] private CinemachineCamera camera;
     [SerializeField] private Transform player;
     [SerializeField] private Transform boss;
-    
+
     [Header("Dialogue settings")]
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private DialogueSO dialogue;
-    
+
     [Header("Zoom settings")]
     [SerializeField] private float zoomSpeed;
     private const float ZoomEnemy = 6.5f;
     private const float ZoomPlayer = 4.92f;
-    
+
     private UIManager _uiManager;
     private Action _onZoomEnd;
     private Coroutine _frameRoutine;
-    
+
     private void Start()
     {
         _uiManager = ServiceLocator.Instance.GetService<UIManager>();
-        
-        PauseManager.TogglePauseCinematic();
+
         _uiManager.HideUI();
         InitialView();
         dialogueManager.OnConversationEnd += PlayerMoment;
-        
-        StartCoroutine(BeginSequence());
-    }
-    
-    private IEnumerator BeginSequence()
-    {
-        yield return new WaitForSeconds(1f);
+
+        PauseManager.SetPausedCinematic(true);
         _onZoomEnd += EnemyMoment;
         Frame(boss, ZoomEnemy);
     }
@@ -47,15 +41,15 @@ public class CinematicManager : MonoBehaviour
         camera.Follow = transform;
         camera.Lens.OrthographicSize = 12f;
     }
-    
+
     void EnemyMoment()
     {
         dialogueManager.StartConversation(dialogue);
-        _onZoomEnd -= EnemyMoment;
     }
-    
+
     void PlayerMoment()
     {
+        _onZoomEnd -= EnemyMoment;
         _onZoomEnd += Finished;
         Frame(player, ZoomPlayer);
     }
@@ -63,16 +57,16 @@ public class CinematicManager : MonoBehaviour
     void Finished()
     {
         _uiManager.ShowUI();
-        
+
         camera.Follow = player;
-        
+
         camera.Lens.OrthographicSize = ZoomPlayer;
-        
-        PauseManager.TogglePauseCinematic();
-        
+
+        PauseManager.SetPausedCinematic(false);
+
         _onZoomEnd -= Finished;
     }
-    
+
     void Frame(Transform target, float goal)
     {
         if (_frameRoutine != null)
@@ -80,7 +74,7 @@ public class CinematicManager : MonoBehaviour
 
         _frameRoutine = StartCoroutine(FrameRoutine(target, goal));
     }
-    
+
     private IEnumerator FrameRoutine(Transform target, float goalLens)
     {
         while (true)
@@ -90,7 +84,7 @@ public class CinematicManager : MonoBehaviour
                 target.position,
                 Time.unscaledDeltaTime * zoomSpeed
             );
-            
+
             var lens = camera.Lens;
             lens.OrthographicSize = Mathf.Lerp(
                 lens.OrthographicSize,
@@ -107,7 +101,7 @@ public class CinematicManager : MonoBehaviour
 
             yield return null;
         }
-        
+
         transform.position = target.position;
         var finalLens = camera.Lens;
         finalLens.OrthographicSize = goalLens;
@@ -115,6 +109,11 @@ public class CinematicManager : MonoBehaviour
 
         _frameRoutine = null;
         _onZoomEnd?.Invoke();
+    }
+
+    public void SkipCinematic()
+    {
+        dialogueManager.EndDialogue();
     }
 }
 

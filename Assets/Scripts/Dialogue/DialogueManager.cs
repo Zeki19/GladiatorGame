@@ -9,30 +9,30 @@ using UnityEngine.Serialization;
 public class DialogueManager : MonoBehaviour
 {
     private DialogueManager _instance;
-    
+
     #region Constants
-        [SerializeField] private GameObject dialogueCanvas;
-        [SerializeField] private TextMeshProUGUI dialogueBoxUIText;
-        [SerializeField] private Image speakerBoxUIImage;
-        [SerializeField] private TextMeshProUGUI speakerBoxUIName;
-        
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private Animator animator;
-        private CameraShake _cameraShake;
+    [SerializeField] private GameObject dialogueCanvas;
+    [SerializeField] private TextMeshProUGUI dialogueBoxUIText;
+    [SerializeField] private Image speakerBoxUIImage;
+    [SerializeField] private TextMeshProUGUI speakerBoxUIName;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Animator animator;
+    private CameraShake _cameraShake;
     #endregion
 
     #region Variables
-        [SerializeField] private float typingDelay;
-        [SerializeField] private AudioClip typingSound;
-        
+    [SerializeField] private float typingDelay;
+    [SerializeField] private AudioClip typingSound;
+
     #endregion
-    
+
     [SerializeField] private List<DialogueSO> dialogues;
-    
-    private readonly Queue<DialogueLine> _linesQueue = new Queue<DialogueLine>();    
+
+    private readonly Queue<DialogueLine> _linesQueue = new Queue<DialogueLine>();
     private Action _onTypeEnd;
     public Action OnConversationEnd; //Use this for the end of the conversation. To call the scene changer or something.
-    
+
     private void Awake()
     {
         if (_instance == null)
@@ -45,7 +45,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        
+
         ServiceLocator.Instance.RegisterService(this);
     }
     public void StartConversation(DialogueSO dialogue)
@@ -53,25 +53,25 @@ public class DialogueManager : MonoBehaviour
         dialogueCanvas.SetActive(true);
         animator.SetBool("IsOpen", true);
         audioSource.enabled = true;
-        
+
         QueueDialogue(dialogue);
     }
-    
+
     public void StartConversation(EnumDialogues dialogue)
     {
         DialogueSO dialogueSo = FindDialogueSo(dialogue);
-        
+
         dialogueCanvas.SetActive(true);
         animator.SetBool("IsOpen", true);
         audioSource.enabled = true;
-        
+
         QueueDialogue(dialogueSo);
     }
 
     private void QueueDialogue(DialogueSO dialogue)
     {
         _linesQueue.Clear();
-        
+
         foreach (var line in dialogue.lines)
         {
             _linesQueue.Enqueue(line);
@@ -102,9 +102,9 @@ public class DialogueManager : MonoBehaviour
         }
 
         var currentLine = _linesQueue.Dequeue();
-        
+
         PrepareUI(currentLine);
-        
+
         // Types the line
         StopAllCoroutines();
         StartCoroutine(TypeSentence(currentLine.sentence));
@@ -112,7 +112,7 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator CloseDialogueRoutine()
     {
         animator.SetBool("IsOpen", false);
-        
+
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float duration = stateInfo.length;
 
@@ -123,7 +123,7 @@ public class DialogueManager : MonoBehaviour
         audioSource.enabled = false;
     }
 
-    private void EndDialogue()
+    public void EndDialogue()
     {
         StartCoroutine(CloseDialogueRoutine());
     }
@@ -142,12 +142,12 @@ public class DialogueManager : MonoBehaviour
     private void PrepareUI(DialogueLine line)
     {
         _onTypeEnd = null;
-        
+
         if (_cameraShake == null)
         {
             _cameraShake = ServiceLocator.Instance.GetService<CameraShake>();
         }
-        
+
         // Speaker info
         speakerBoxUIName.text = line.speakerName;
         speakerBoxUIImage.sprite = line.speakerImage;
@@ -160,7 +160,7 @@ public class DialogueManager : MonoBehaviour
             else
                 _onTypeEnd += () => audioSource.PlayOneShot(line.soundToPlay);
         }
-        
+
         //Shaker
         if (line.cameraShake)
         {

@@ -147,9 +147,11 @@ namespace Player
             
             OnWeaponChanged?.Invoke();
         }
-        
+
         private void AttackFinishSubscription(bool subscribe)
         {
+            if (Weapon == null) return; // © Agregar esto
+
             if (subscribe)
             {
                 Weapon.BaseAttack.AttackFinish += AttackFinish;
@@ -161,9 +163,8 @@ namespace Player
                 Weapon.ChargeAttack.AttackFinish -= AttackFinish;
             }
         }
-
         #endregion
-        
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!IsInLayerMask(other.gameObject, collisionLayer) || _enemiesHit.Any(hits => hits == other.gameObject))
@@ -223,12 +224,12 @@ namespace Player
 
         public void OnPause()
         {
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
 
         public void OnResume()
         {
-            gameObject.SetActive(true);
+            //gameObject.SetActive(true);
         }
         #endregion
     }

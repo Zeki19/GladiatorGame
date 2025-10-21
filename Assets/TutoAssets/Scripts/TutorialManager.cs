@@ -183,6 +183,14 @@ public class TutorialManager : MonoBehaviour
     {
         _currentMission.Initialize(this);
 
+        Debug.Log($"[TutorialManager] Pausing game for mission: {_currentMission.missionName}");
+
+        yield return null;
+
+        yield return new WaitForSeconds(1f);
+
+        PauseManager.SetPausedCinematic(true);
+
         if (_currentMission.shouldMoveCamera && !_currentMission.cameraEvent.executeAfterDialogue)
         {
             _currentState = TutorialState.MovingCamera;
@@ -200,6 +208,9 @@ public class TutorialManager : MonoBehaviour
             _currentState = TutorialState.MovingCamera;
             yield return StartCoroutine(HandleCameraEvent(_currentMission.cameraEvent));
         }
+
+        Debug.Log($"[TutorialManager] Unpausing game - player can now complete mission: {_currentMission.missionName}");
+        PauseManager.SetPausedCinematic(false);
 
         if (_currentMission.showUIHint)
         {
@@ -276,6 +287,8 @@ public class TutorialManager : MonoBehaviour
 
     private IEnumerator CompleteTutorialWithCameraZoom()
     {
+        PauseManager.SetPausedCinematic(true);
+
         if (_dialogueManager != null)
         {
             _dialogueManager.StartConversation(EnumDialogues.TutorialComplete);
@@ -305,6 +318,7 @@ public class TutorialManager : MonoBehaviour
         bool resetComplete = false;
         _cameraTutorialManager.ResetCamera(() => resetComplete = true);
         yield return new WaitUntil(() => resetComplete);
+        PauseManager.SetPausedCinematic(false);
     }
 
     #region UI Hint Management
