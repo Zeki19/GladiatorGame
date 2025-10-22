@@ -492,16 +492,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1281997810}
+      - m_Target: {fileID: 1240220275}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: ChangeScene
-        m_Mode: 3
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1153306041
@@ -782,7 +782,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &1281997809
+--- !u!1 &1240220274
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -790,37 +790,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1281997811}
-  - component: {fileID: 1281997810}
+  - component: {fileID: 1240220276}
+  - component: {fileID: 1240220275}
   m_Layer: 0
-  m_Name: SceneManager
+  m_Name: SceneChanger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1281997810
+--- !u!114 &1240220275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281997809}
+  m_GameObject: {fileID: 1240220274}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 166ccd42531af72498096f4313b58546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1281997811
+  transitionCanvasPrefab: {fileID: 5964570118786128491, guid: be6d45065f67bd448a37fdf82ea368d7, type: 3}
+  fadeDuration: 1
+--- !u!4 &1240220276
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281997809}
+  m_GameObject: {fileID: 1240220274}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -42.396282, y: -39.132507, z: 3608.2727}
+  m_LocalPosition: {x: -38.336422, y: -36.38349, z: 5.9797544}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -878,4 +880,4 @@ SceneRoots:
   - {fileID: 1223087382}
   - {fileID: 882465844}
   - {fileID: 1805002669}
-  - {fileID: 1281997811}
+  - {fileID: 1240220276}

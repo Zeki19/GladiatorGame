@@ -1,9 +1,10 @@
+using Entities;
+using Entities.StateMachine;
 using System;
 using System.Collections;
-using Entities;
 using System.Collections.Generic;
-using Entities.StateMachine;
 using Unity.Behavior;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -75,8 +76,10 @@ namespace Enemies
             manager.PlaySound("Hit", "Enemy");
             var arenaPainter = ServiceLocator.Instance.GetService<ArenaPainter>();
             arenaPainter?.PaintArena(transform, "Blood");
-            _currentPhase = manager.PhaseSystem.CurrentPhase();
-            Debug.Log("Current phase is:" + _currentPhase);
+            if (_currentPhase != manager.PhaseSystem.CurrentPhase())
+            {
+                _currentPhase = manager.PhaseSystem.CurrentPhase();
+            }
         }
 
         public EnemyStates GetState()

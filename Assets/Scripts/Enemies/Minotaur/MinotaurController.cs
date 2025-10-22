@@ -38,6 +38,7 @@ namespace Enemies.Minotaur
         protected override void Start()
         {
             base.Start();
+            manager.HealthComponent.OnDamage += ChangePhaseStats;
             manager.HealthComponent.OnDamage += CheckPhase;
             manager.HealthComponent.OnDead += Die;
         }
@@ -88,6 +89,14 @@ namespace Enemies.Minotaur
 
             InitializeComponents(stateList);
             Fsm.SetInit(chaseState, EnemyStates.Chase);
+        }
+
+        private void ChangePhaseStats(float filler)
+        {
+            if (_currentPhase != manager.PhaseSystem.CurrentPhase())
+            {
+                _NVagent.speed += stats.SpeedChange;
+            }
         }
 
         private void Die()

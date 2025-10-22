@@ -464,6 +464,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 166ccd42531af72498096f4313b58546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionCanvasPrefab: {fileID: 5964570118786128491, guid: be6d45065f67bd448a37fdf82ea368d7, type: 3}
+  fadeDuration: 1
 --- !u!4 &707207977
 Transform:
   m_ObjectHideFlags: 0
@@ -3226,6 +3228,10 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 2083733801}
+    - target: {fileID: 9015246090746314838, guid: 7f1e06e3916a49040a90a8c68866c27e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9015246090746314838, guid: 7f1e06e3916a49040a90a8c68866c27e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1

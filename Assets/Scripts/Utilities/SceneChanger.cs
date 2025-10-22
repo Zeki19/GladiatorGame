@@ -1,42 +1,115 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    private static SceneChanger _instance;
+    [SerializeField] private GameObject transitionCanvasPrefab;
+    [SerializeField] private float fadeDuration = 1f;
 
-    public static SceneChanger Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new GameObject("service Locator", typeof(SceneChanger)).GetComponent<SceneChanger>();
-            }
+    private CanvasGroup _fadeCanvasGroup;
 
-            return _instance;
-        }
-        private set => _instance = value;
-    }
+    public bool IsTransitioning { get; private set; } = false;
+    public static SceneChanger Instance { get; private set; }
 
     private void Awake()
     {
-        ServiceLocator.Instance.RegisterService(this);
-    }
-    
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-    public void ChangeScene(int sceneNumber)
-    {
-        SceneManager.LoadScene(sceneNumber);
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+
+        ServiceLocator.Instance.RegisterService(this);
+
+        if (transitionCanvasPrefab != null)
+        {
+            var transitionCanvas = Instantiate(transitionCanvasPrefab);
+            DontDestroyOnLoad(transitionCanvas);
+
+            _fadeCanvasGroup = transitionCanvas.GetComponentInChildren<CanvasGroup>();
+
+            if (_fadeCanvasGroup == null)
+                Debug.LogError("Transition Canvas prefab needs a CanvasGroup component.");
+        }
+        else
+        {
+            Debug.LogWarning("SceneChanger has no transitionCanvasPrefab assigned!");
+        }
     }
+
     public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        if (!IsTransitioning)
+            StartCoroutine(TransitionAndLoad(sceneName));
     }
 
-    public void Quit() 
+    public void ChangeScene(int sceneIndex)
     {
-        Application.Quit();
+        if (!IsTransitioning)
+            StartCoroutine(TransitionAndLoad(sceneIndex));
+    }
+
+    private IEnumerator TransitionAndLoad(string sceneName)
+    {
+        IsTransitioning = true;
+
+        if (_fadeCanvasGroup != null)
+        {
+            _fadeCanvasGroup.blocksRaycasts = true;
+            yield return StartCoroutine(Fade(0f, 1f));
+        }
+
+        SceneManager.LoadScene(sceneName);
+        yield return null;
+
+        if (_fadeCanvasGroup != null)
+        {
+            yield return StartCoroutine(Fade(1f, 0f)); 
+            _fadeCanvasGroup.blocksRaycasts = false;
+        }
+
+        IsTransitioning = false;
+    }
+
+    private IEnumerator TransitionAndLoad(int sceneIndex)
+    {
+        IsTransitioning = true;
+
+        if (_fadeCanvasGroup != null)
+        {
+            _fadeCanvasGroup.blocksRaycasts = true;
+            yield return StartCoroutine(Fade(0f, 1f));
+        }
+
+        SceneManager.LoadScene(sceneIndex);
+        yield return null;
+
+        if (_fadeCanvasGroup != null)
+        {
+            yield return StartCoroutine(Fade(1f, 0f));
+            _fadeCanvasGroup.blocksRaycasts = false;
+        }
+
+        IsTransitioning = false;
+    }
+
+    private IEnumerator Fade(float start, float end)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / fadeDuration);
+            _fadeCanvasGroup.alpha = Mathf.Lerp(start, end, t);
+            yield return null;
+        }
+
+        _fadeCanvasGroup.alpha = end;
     }
 }
