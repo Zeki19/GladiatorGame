@@ -42,6 +42,8 @@ public class GaiusStatsSO : ScriptableObject
     [SerializeField] public float Stack;
     [SerializeField] public float Interval;
 
+    [Header("ChangeOfPhase")]
+    [SerializeField] public float SpeedChange;
 
     private void OnValidate()
     {
