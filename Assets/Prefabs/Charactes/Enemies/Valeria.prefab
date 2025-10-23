@@ -138,6 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8921dfb04256d8b4fb80fc8bd68b64d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &5714610711261460322
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +358,7 @@ GameObject:
   - component: {fileID: 7217618057694891187}
   - component: {fileID: 949282505484103338}
   - component: {fileID: 5176386878660147709}
+  - component: {fileID: 305188300752202453}
   m_Layer: 8
   m_Name: Valeria
   m_TagString: Untagged
@@ -431,6 +435,10 @@ MonoBehaviour:
   hiddingTime: 3
   invisibilitySpeed: 0
   stepPrefab: {fileID: 0}
+  shortMeleeAttackCd: 2
+  longMeleeAttackCd: 2
+  longAttackCd: 2
+  middleAttackCd: 2
   agent: {fileID: 8183124256356256342}
 --- !u!114 &1725781832690022149
 MonoBehaviour:
@@ -745,3 +753,40 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &305188300752202453
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7849566506043400556}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.024412155, y: -0.38568687}
+  m_Size: {x: 0.7148094, y: 1.3515129}
+  m_Direction: 0

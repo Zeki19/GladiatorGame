@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8180569660789367053}
   m_Layer: 0
   m_Name: Pillar
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,6 +106,7 @@ MonoBehaviour:
   - {fileID: 6012045532798333955, guid: f8151389831fca945bba7986fc0e6178, type: 3}
   - {fileID: 6012045532798333955, guid: ab3142be577d0ab44ae481035f2d9316, type: 3}
   - {fileID: 6012045532798333955, guid: d2b0d0a0beb731a4981ea1369eb04a59, type: 3}
+  ignoreColliders: []
 --- !u!114 &8180569660789367053
 MonoBehaviour:
   m_ObjectHideFlags: 0
