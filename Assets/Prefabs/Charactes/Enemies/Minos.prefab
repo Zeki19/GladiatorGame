@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2234866662532399477}
   - component: {fileID: 1762995347600989397}
   - component: {fileID: 852651703044625106}
+  - component: {fileID: 4575539220335934451}
   m_Layer: 8
   m_Name: Minos
   m_TagString: Untagged
@@ -59,8 +60,8 @@ MonoBehaviour:
   model: {fileID: 2476569688380313164}
   view: {fileID: 6793767698371252644}
   controller: {fileID: 2399509781135219198}
-  phasesThresholds: 
-  maxLife: 111
+  phasesThresholds: 50000000
+  maxLife: 120
 --- !u!114 &2399509781135219198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +86,8 @@ MonoBehaviour:
   attackManager: {fileID: 6710800238676173381}
   searchSpeed: 5
   stepPrefab: {fileID: 0}
+  shortAttackCD: 2
+  longAttackCD: 4
   agent: {fileID: 2040069591655290464}
 --- !u!114 &2476569688380313164
 MonoBehaviour:
@@ -140,6 +143,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e6ff45c4fb8e3045b7845511371da52, type: 2}
   - {fileID: 11400000, guid: 95519fd02db286f4683a35fce3ba59d7, type: 2}
   - {fileID: 11400000, guid: 4e888b05cc640644fb49d33e49c4f8b0, type: 2}
+  - {fileID: 11400000, guid: 508b3078794064445823db8768d5cd31, type: 2}
+  - {fileID: 11400000, guid: b616a34bb603ed345b780cabef4af6b8, type: 2}
+  - {fileID: 11400000, guid: a69edc5074f9c8449aadd398c0cf0bd1, type: 2}
   weapon: {fileID: 8545697522440084076}
 --- !u!114 &2040069591655290464
 MonoBehaviour:
@@ -292,7 +298,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -397,6 +403,43 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &4575539220335934451
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2924991295810946151}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4033
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.027442932, y: -0.06586075}
+  m_Size: {x: 1.8940735, y: 2.025795}
+  m_Direction: 0
 --- !u!1 &6300078822741067180
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +539,7 @@ Animator:
   m_GameObject: {fileID: 6300078822741067180}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7f47c416ffc82da42a65c10dddda7801, type: 2}
+  m_Controller: {fileID: 9100000, guid: f4f54bd2712f6bb40b4263bc6cde304f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -733,3 +776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8921dfb04256d8b4fb80fc8bd68b64d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
