@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 5532544545316700364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.29000092, y: 0.4300003, z: 0}
-  m_LocalScale: {x: 0.85354, y: 1.38428, z: 1}
+  m_LocalPosition: {x: 0, y: 0.4300003, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6108439058689843875}
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -8184244762938570915, guid: 7a6476417a75a9b4d958c70288dcc152, type: 3}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Sprite: {fileID: 5243643742566439475, guid: 96951f12427fd044bbfe31a2927fc558, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -436,8 +436,8 @@ MonoBehaviour:
   invisibilitySpeed: 0
   stepPrefab: {fileID: 0}
   shortMeleeAttackCd: 2
-  longMeleeAttackCd: 2
-  longAttackCd: 2
+  longMeleeAttackCd: 4
+  longAttackCd: 4
   middleAttackCd: 2
   agent: {fileID: 8183124256356256342}
 --- !u!114 &1725781832690022149
@@ -655,7 +655,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!82 &5176386878660147709
 AudioSource:
   m_ObjectHideFlags: 0
@@ -766,10 +766,10 @@ CapsuleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4087
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

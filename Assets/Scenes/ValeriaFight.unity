@@ -11120,51 +11120,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &465852881
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 465852882}
-  - component: {fileID: 465852883}
-  m_Layer: 0
-  m_Name: ProjectileManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &465852882
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465852881}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 767134956}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &465852883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465852881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 460f675fd5ae08b41a1db7cb1d651f9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePools: []
 --- !u!1 &528926078
 GameObject:
   m_ObjectHideFlags: 0
@@ -11876,7 +11831,6 @@ Transform:
   - {fileID: 1813125931}
   - {fileID: 935041884}
   - {fileID: 1604702040}
-  - {fileID: 465852882}
   - {fileID: 788120877}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24606,6 +24560,9 @@ MonoBehaviour:
   - projectileType: Arrow
     projectilePrefab: {fileID: 5524527720111712474, guid: b39733fc00e27cd48a7559c2e13efb7e, type: 3}
     initialSize: 0
+  - projectileType: ValeriaDagger
+    projectilePrefab: {fileID: 5524527720111712474, guid: 7e6e130a74019804d940a827c4aaecce, type: 3}
+    initialSize: 0
 --- !u!4 &1813125931
 Transform:
   m_ObjectHideFlags: 0
@@ -25121,10 +25078,6 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 2020722034}
-    - target: {fileID: 949282505484103338, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6108439058689843875, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -39.76
