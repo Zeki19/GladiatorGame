@@ -30,13 +30,19 @@ namespace Player
         {
             PauseManager.OnCinematicStateChanged -= HandlePause;
         }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            PauseManager.OnCinematicStateChanged += HandlePause;
+        }
+
         private void Start()
         {
             manager.HealthComponent.OnDead += Dead;
             var playerManager = manager as PlayerManager;
             _phaseSystem = new PhaseSystem(playerManager.stats.stateThreshold, manager.HealthComponent);
             InitializeFsm();
-            PauseManager.OnCinematicStateChanged += HandlePause;
         }
 
         protected virtual void Update()
@@ -126,7 +132,8 @@ namespace Player
         public void OnPause()
         {
             enabled = false;
-            _inputs.enabled = false; 
+            _inputs.enabled = false;
+            Debug.Log(_inputs.inputIsActive);
         }
 
         public void OnResume()
