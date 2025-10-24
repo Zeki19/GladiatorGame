@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 3678931931613461933}
   - component: {fileID: 7082941977172629092}
   m_Layer: 5
-  m_Name: Keybinds
+  m_Name: KeyBinds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,15 +140,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.28848723, g: 0.5377358, b: 0.18009079, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -2049664051120426039, guid: b2a27f3f2dc8b1f40805dda4b1dadd5d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -993,7 +993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2977245669121243997, guid: a2a9266435c72244cb6a8835b3cae827, type: 3}
       propertyPath: m_text
-      value: Space
+      value: Barra Espaciadora
       objectReference: {fileID: 0}
     - target: {fileID: 6116919596144503931, guid: a2a9266435c72244cb6a8835b3cae827, type: 3}
       propertyPath: m_text
