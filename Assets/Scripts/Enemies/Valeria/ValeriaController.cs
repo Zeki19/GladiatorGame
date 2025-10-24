@@ -148,15 +148,22 @@ namespace Enemies.Valeria
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, stats.mediumRange);
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, stats.longRange);
-            Gizmos.color = Color.green;
-            Vector3 origin = transform.position;
-            Vector3 direction = transform.up * 5;
+            if(Fsm == null)
+            {
+                return;
+            }
+            if (Fsm.CurrentState() == _runAwayState)
+            {
+                var runaAway = _runAwayState as ValeriaStateRunAway<EnemyStates>;
+                Vector3 destination = runaAway.currentDestination;
 
-            Gizmos.DrawLine(origin, origin + direction);
+                if (destination != Vector3.zero)
+                {
+                    Gizmos.color = Color.cyan;
+                    Gizmos.DrawLine(transform.position, destination);
+                    Gizmos.DrawSphere(destination, 0.2f);
+                }
+            }
         }
         public void KillEnemy()
         {

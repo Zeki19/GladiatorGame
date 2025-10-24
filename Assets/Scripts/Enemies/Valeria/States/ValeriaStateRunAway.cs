@@ -17,6 +17,7 @@ namespace Enemies.Valeria.States
         private float _timer;               // countdown
         private bool _waiting;              // is currently waiting
 
+        public Vector2 currentDestination;
         public ValeriaStateRunAway(Rigidbody2D player, LayerMask hiddingLayer, float waitTime)
         {
             _player = player;
@@ -36,9 +37,11 @@ namespace Enemies.Valeria.States
             //_agent._NVagent.speed *=2 ;
 
             Vector2 hidePoint = RunAwayFromPlayer();
-            if (hidePoint != Vector2.zero)
+            if (hidePoint != Vector2.zero) 
+            { 
                 _agent._NVagent.SetDestination(hidePoint);
-
+                currentDestination = hidePoint;
+            }
             _waiting = false;
             _timer = _waitTime;
         }
