@@ -7,19 +7,17 @@ using UnityEngine;
 public class MinotaurView : EnemyView, ILook
 {
     private static readonly int Direction = Animator.StringToHash("Direction");
-    private static readonly int ForwardDash = Animator.StringToHash("ForwardDash");
     private static readonly int Idle = Animator.StringToHash("Idle");
     private static readonly int Move = Animator.StringToHash("Move");
-    private static readonly int BackDash = Animator.StringToHash("BackDash");
-    private static readonly int ShadowDash = Animator.StringToHash("ShadowDash");
-    private static readonly int FrontalAttack = Animator.StringToHash("FrontalAttack");
-    private static readonly int DoubleAttack = Animator.StringToHash("DoubleAttack");
-    private static readonly int DaggerThrow = Animator.StringToHash("DaggerThrow");
+    private static readonly int BoulderThrow = Animator.StringToHash("BoulderThrow");
+    private static readonly int BullCharge = Animator.StringToHash("BullCharge");
+    private static readonly int GroundSlam = Animator.StringToHash("GroundSlam");
+    private static readonly int TriHitCombo = Animator.StringToHash("TriHitCombo");
     public GameObject art;
 
     private void Update()
     {
-        animator.SetFloat(Direction, transform.rotation.z < 0 ? 1 : 0);
+        animator.SetFloat(Direction, transform.rotation.z < 0 ? 0 : 1);
         art.transform.rotation = quaternion.identity;
     }
 
@@ -47,23 +45,44 @@ public class MinotaurView : EnemyView, ILook
             case StateEnum.Chase:
                 animator.SetTrigger(Move);
                 break;
-            case StateEnum.Dash:
-                animator.SetTrigger(ForwardDash);
+            case StateEnum.LongAttack:
+                animator.SetTrigger(BoulderThrow);
                 break;
-            case StateEnum.BackStep:
-                animator.SetTrigger(BackDash);
-                break;
-            case StateEnum.ShadowDash:
-                animator.SetTrigger(ShadowDash);
+            case StateEnum.ChargeAttack:
+                animator.SetTrigger(BullCharge);
                 break;
             case StateEnum.ShortAttack:
-                animator.SetTrigger(FrontalAttack);
+                animator.SetTrigger(GroundSlam);
                 break;
             case StateEnum.MidAttack:
-                animator.SetTrigger(DoubleAttack);
+                animator.SetTrigger(TriHitCombo);
+                break;
+            default:
+                Debug.LogWarning("No animation mapped for state: " + state);
+                break;
+        }
+    }
+    public override void StopStateAnimation(StateEnum state)
+    {
+        switch (state)
+        {
+            case StateEnum.Idle:
+                animator.ResetTrigger(Idle);
+                break;
+            case StateEnum.Chase:
+                animator.ResetTrigger(Move);
                 break;
             case StateEnum.LongAttack:
-                animator.SetTrigger(DaggerThrow);
+                animator.ResetTrigger(BoulderThrow);
+                break;
+            case StateEnum.ChargeAttack:
+                animator.ResetTrigger(BullCharge);
+                break;
+            case StateEnum.ShortAttack:
+                animator.ResetTrigger(GroundSlam);
+                break;
+            case StateEnum.MidAttack:
+                animator.ResetTrigger(TriHitCombo);
                 break;
             default:
                 Debug.LogWarning("No animation mapped for state: " + state);

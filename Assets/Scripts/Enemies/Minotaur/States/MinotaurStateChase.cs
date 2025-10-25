@@ -31,7 +31,7 @@ namespace Enemies.Minotaur.States
         {
             base.Enter();
             _move.Move(Vector2.zero);
-            //_animate.PlayStateAnimation(StateEnum.Chase);
+            _animate.PlayStateAnimation(StateEnum.Chase);
             _timer = _speedModeInterval;
             _agent._NVagent.updateRotation = false;
             _agent._NVagent.updateUpAxis = false;
@@ -40,7 +40,9 @@ namespace Enemies.Minotaur.States
         public override void Execute()
         {
             base.Execute();
+            
             _agent._NVagent.SetDestination(_target.GetTarget().transform.position);
+            _animate.PlayStateAnimation(StateEnum.Chase);
             if (Vector3.Distance(_target.GetTarget().transform.position, _model.Position) <
                 _agent._NVagent.stoppingDistance)
             {
@@ -88,6 +90,7 @@ namespace Enemies.Minotaur.States
         public override void Exit()
         {
             base.Exit();
+            _animate.StopStateAnimation(StateEnum.Chase);
             _agent._NVagent.speed -= _stackingSpeed;
             _stackingSpeed = 0;
             _agent._NVagent.ResetPath(); // clear any current path
