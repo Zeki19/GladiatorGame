@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3306967609244709980
+--- !u!1 &3917549670382336266
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3344451753997283476}
-  - component: {fileID: 409955255515939548}
-  - component: {fileID: 7157543009664912287}
-  - component: {fileID: 7872049898652569397}
+  - component: {fileID: 4362910799107779087}
+  - component: {fileID: 6267152382780082207}
+  - component: {fileID: 8460653335085187921}
+  - component: {fileID: 2355874500283482649}
   m_Layer: 0
-  m_Name: BossDoor
+  m_Name: ExitTuto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3344451753997283476
+--- !u!4 &4362910799107779087
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3306967609244709980}
+  m_GameObject: {fileID: 3917549670382336266}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.01, y: -20.14, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -32.84, y: -29.99, z: 0}
+  m_LocalScale: {x: 3.540024, y: 3.332365, z: 1.6364}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &409955255515939548
+--- !u!212 &6267152382780082207
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3306967609244709980}
+  m_GameObject: {fileID: 3917549670382336266}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,11 +75,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2033529085
-  m_SortingLayer: 6
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingLayerID: 1690078593
+  m_SortingLayer: 5
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 396cd0f98414b534cbddfaed3e621bcd, type: 3}
+  m_Color: {r: 0.8962264, g: 0.87203753, b: 0.51152545, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -89,27 +89,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7157543009664912287
+--- !u!114 &8460653335085187921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3306967609244709980}
+  m_GameObject: {fileID: 3917549670382336266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfcc4bcbb83055243a97c2d4db066a30, type: 3}
+  m_Script: {fileID: 11500000, guid: eca4ba5cdb465f54a9da02543628b99a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossNumber: 1
-  tutorialSceneIndex: 1
---- !u!61 &7872049898652569397
+  isTrainingHubDoor: 0
+  doorSpriteRenderer: {fileID: 6267152382780082207}
+  closedDoorSprite: {fileID: 21300000, guid: 396cd0f98414b534cbddfaed3e621bcd, type: 3}
+  openDoorSprite: {fileID: 21300000, guid: 8a8806dbbfd1c924c983c12295cef2c4, type: 3}
+--- !u!61 &2355874500283482649
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3306967609244709980}
+  m_GameObject: {fileID: 3917549670382336266}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -137,15 +139,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0024363995, y: -0.1255456}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.32, y: 0.48}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.34695828, y: 0.74890876}
   m_EdgeRadius: 0

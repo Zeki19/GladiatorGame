@@ -3,7 +3,12 @@
 public class ExitTutorialDoor : MonoBehaviour
 {
     [Header("Door Configuration")]
-    [SerializeField] private bool isTrainingHubDoor = false; 
+    [SerializeField] private bool isTrainingHubDoor = false;
+
+    [Header("Door Sprites")]
+    [SerializeField] private SpriteRenderer doorSpriteRenderer;
+    [SerializeField] private Sprite closedDoorSprite;
+    [SerializeField] private Sprite openDoorSprite;
 
     private TutorialManager _tutorialManager;
     private bool _playerInRange = false;
@@ -11,6 +16,35 @@ public class ExitTutorialDoor : MonoBehaviour
     private void Start()
     {
         _tutorialManager = ServiceLocator.Instance.GetService<TutorialManager>();
+
+        // Inicializar sprite
+        UpdateDoorSprite();
+    }
+
+    private void Update()
+    {
+        // Actualizar sprite en tiempo real según el estado del tutorial
+        UpdateDoorSprite();
+    }
+
+    private void UpdateDoorSprite()
+    {
+        if (doorSpriteRenderer == null) return;
+
+        bool isDoorOpen = IsDoorOpen();
+        doorSpriteRenderer.sprite = isDoorOpen ? openDoorSprite : closedDoorSprite;
+    }
+
+    private bool IsDoorOpen()
+    {
+        if (isTrainingHubDoor)
+        {
+            // Training Hub door siempre está abierta
+            return true;
+        }
+
+        // Tutorial door se abre cuando el tutorial está completo
+        return _tutorialManager != null && _tutorialManager.IsTutorialCompleted;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,11 +77,8 @@ public class ExitTutorialDoor : MonoBehaviour
 
         if (isTrainingHubDoor)
         {
-
             int nextScene = saveData.nextSceneToLoad;
-
             SaveManager.Instance.SaveBeforeLeavingTrainingHub(nextScene);
-
             ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene(nextScene);
             Debug.Log($"Leaving training hub to scene: {nextScene}");
         }
