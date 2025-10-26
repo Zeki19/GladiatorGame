@@ -24,7 +24,6 @@ namespace Player
             PauseManager.OnCinematicStateChanged -= HandlePause;
             transform.parent.gameObject.SetActive(false);
             manager.PlaySound("Death", "Player");
-            ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene("DefeatScene");
         }
         private void OnDestroy()
         {

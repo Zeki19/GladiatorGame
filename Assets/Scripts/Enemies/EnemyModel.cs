@@ -8,7 +8,7 @@ namespace Enemies
     {
         protected float SpeedModifier = 1;
         [SerializeField] float _moveSpeed;
-        [SerializeField] private LayerMask obstaclesMask;
+        public LayerMask obstaclesMask;
 
         public override void ModifySpeed(float speed)
         {

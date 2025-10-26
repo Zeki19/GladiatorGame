@@ -115,6 +115,8 @@ public class ResourceBarTracker : MonoBehaviour
     }
     private void TriggerFillAnimation()
     {
+        if (!gameObject.activeInHierarchy) return;
+        
         float targetFill = CalculateTargetFill();
 
         if (Mathf.Approximately(bar.fillAmount, targetFill)) return;

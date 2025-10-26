@@ -123,9 +123,9 @@ namespace Weapons
             }
         }
 
-        private void OnDestroy()
-        {
-            ServiceLocator.Instance.RemoveService(this);
-        }
+        //private void OnDestroy()
+        //{
+        //    ServiceLocator.Instance.RemoveService(this);
+        //}
     }
 }

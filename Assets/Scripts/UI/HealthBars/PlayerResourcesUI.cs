@@ -74,6 +74,8 @@ public class PlayerResourcesUI : MonoBehaviour
 
     private void ChargedEffect(bool value)
     {
+        if (!chargeBar.isActiveAndEnabled) return;
+        
         if (value)
         {
             _pulseCoroutine ??= StartCoroutine(PulseColors());

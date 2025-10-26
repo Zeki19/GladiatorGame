@@ -13,11 +13,15 @@ public class MinotaurView : EnemyView, ILook
     private static readonly int BullCharge = Animator.StringToHash("BullCharge");
     private static readonly int GroundSlam = Animator.StringToHash("GroundSlam");
     private static readonly int TriHitCombo = Animator.StringToHash("TriHitCombo");
+    private static readonly int Phase = Animator.StringToHash("Phase");
     public GameObject art;
 
     private void Update()
     {
-        animator.SetFloat(Direction, transform.rotation.z < 0 ? 0 : 1);
+        animator.SetFloat(Direction, transform.rotation.z < 0 ? 0.1f : 1);
+        animator.SetFloat(Phase, manager.HealthComponent.currentHealth > manager.phasesThresholds[0]
+            ? 0.1f
+            : 1);
         art.transform.rotation = quaternion.identity;
     }
 

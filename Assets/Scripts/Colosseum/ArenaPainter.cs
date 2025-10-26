@@ -22,10 +22,10 @@ public class ArenaPainter : MonoBehaviour
         InitializeTiles();
     }
 
-    private void OnDestroy()
-    {
-        ServiceLocator.Instance.RemoveService(this);
-    }
+    //private void OnDestroy()
+    //{
+    //    ServiceLocator.Instance.RemoveService(this);
+    //}
 
     public void PaintArena(Transform pos, String effectName, int size = 0)
     {

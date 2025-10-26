@@ -39,10 +39,10 @@ namespace Weapons
                 _poolDict[pool.projectileType] = newQueue;
             }
         }
-        private void OnDestroy()
-        {
-            ServiceLocator.Instance.RemoveService(this);
-        }
+        //private void OnDestroy()
+        //{
+        //    ServiceLocator.Instance.RemoveService(this);
+        //}
 
         private BaseProjectile CreateProjectile(GameObject prefab)
         {

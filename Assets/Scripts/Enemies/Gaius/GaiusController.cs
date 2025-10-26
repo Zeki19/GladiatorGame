@@ -129,10 +129,10 @@ namespace Enemies.Gaius
             //    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
             //}
         }
-        private void OnDestroy()
-        {
-            ServiceLocator.Instance.RemoveService<GaiusController>(this);
-        }
+        //private void OnDestroy()
+        //{
+        //    ServiceLocator.Instance.RemoveService<GaiusController>(this);
+        //}
 
     }
 }

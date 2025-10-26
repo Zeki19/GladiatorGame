@@ -15,7 +15,6 @@ namespace Behaiviours.ActionsTest
         protected override Status OnStart()
         {
             var random = UnityEngine.Random.Range(0f, 100f);
-            Debug.Log(random);
             if (random < Chance.Value)
                 return Status.Success;
             else
