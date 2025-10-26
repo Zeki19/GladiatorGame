@@ -3993,6 +3993,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1682490859}
   - {fileID: 1185894129}
   - {fileID: 1234102759}
   - {fileID: 2106328781}
@@ -23010,7 +23011,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 518312038}
     m_Modifications:
     - target: {fileID: 6944607622408970530, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23070,59 +23071,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[0].x
-      value: -28.2
+      value: -33
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[0].y
-      value: -26
+      value: -25.2
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[1].x
-      value: -27.2
+      value: -23.2
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[1].y
-      value: -33.1
+      value: -39.3
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[2].x
-      value: -56.4
+      value: -55.8
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[2].y
-      value: -29.5
+      value: -30.7
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[3].x
-      value: -45.9
+      value: -47.1
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[3].y
-      value: -25.6
+      value: -28.8
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[4].x
-      value: -28.9
+      value: -33.5
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[4].y
-      value: -44.3
+      value: -43.5
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[5].x
-      value: -51.1
+      value: -50.3
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[5].y
-      value: -44.2
+      value: -48
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[6].x
-      value: -56.2
+      value: -56
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[6].y
-      value: -38
+      value: -40.4
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.data[7].x
@@ -23137,6 +23138,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
+--- !u!4 &1682490859 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6944607622408970530, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
+  m_PrefabInstance: {fileID: 1682490858}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1689710343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54664,7 +54670,6 @@ SceneRoots:
   - {fileID: 189615795}
   - {fileID: 2039367313}
   - {fileID: 518312038}
-  - {fileID: 1682490858}
   - {fileID: 793093407}
   - {fileID: 1187660950}
   - {fileID: 643028923}
