@@ -6,14 +6,19 @@ public static class SaveSystem
     private static readonly string SAVE_FOLDER = Application.persistentDataPath + "/GameSaves/";
     private const string SAVE_FILE_NAME = "gamesave.json";
     private const string SETTINGS_FILE_NAME = "settings.json";
+    private static bool _isInitialized = false;
 
     public static void Init()
     {
+        if (_isInitialized)
+            return;
+
         if (!Directory.Exists(SAVE_FOLDER))
         {
             Directory.CreateDirectory(SAVE_FOLDER);
         }
         Debug.Log($"Save folder initialized at: {SAVE_FOLDER}");
+        _isInitialized = true;
     }
 
     public static void SaveGame(SaveData data)
@@ -77,8 +82,8 @@ public static class SaveSystem
     public static void DeleteAllSaves()
     {
         Init();
-
         string gameSavePath = SAVE_FOLDER + SAVE_FILE_NAME;
+
         if (File.Exists(gameSavePath))
         {
             File.Delete(gameSavePath);
@@ -86,6 +91,7 @@ public static class SaveSystem
         }
 
         string settingsPath = SAVE_FOLDER + SETTINGS_FILE_NAME;
+
         if (File.Exists(settingsPath))
         {
             File.Delete(settingsPath);
@@ -94,7 +100,6 @@ public static class SaveSystem
 
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
-
         Debug.Log("All saves and preferences deleted");
     }
 
