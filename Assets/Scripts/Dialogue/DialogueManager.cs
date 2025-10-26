@@ -32,6 +32,7 @@ public class DialogueManager : MonoBehaviour
     private readonly Queue<DialogueLine> _linesQueue = new Queue<DialogueLine>();
     private Action _onTypeEnd;
     public Action OnConversationEnd; //Use this for the end of the conversation. To call the scene changer or something.
+    public Action OnLineChange;
 
     private void Awake()
     {
@@ -100,6 +101,9 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
+        
+        OnLineChange?.Invoke();
+        OnLineChange = null;
 
         var currentLine = _linesQueue.Dequeue();
 
@@ -122,7 +126,6 @@ public class DialogueManager : MonoBehaviour
         dialogueCanvas.SetActive(false);
         audioSource.enabled = false;
     }
-
     public void EndDialogue()
     {
         StartCoroutine(CloseDialogueRoutine());

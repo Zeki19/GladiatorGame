@@ -1,120 +1,76 @@
 using System;
-using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(CameraZoom))]
+[RequireComponent(typeof(CameraMove))]
 public class CinematicManager : MonoBehaviour
 {
-    [Header("Scene objects")]
-    [SerializeField] private CinemachineCamera camera;
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform boss;
+    [Header("Wire")] 
+    [SerializeField] public Transform player;
+    [SerializeField] public Transform boss;
+    [Space] 
+    [SerializeField] public CinemachineCamera cam;
+    [Space] 
+    [SerializeField] Transform helper;
 
-    [Header("Dialogue settings")]
-    [SerializeField] private DialogueManager dialogueManager;
-    [SerializeField] private DialogueSO dialogue;
+    [Header("Wire Dialogue")] [SerializeField]
+    public DialogueManager dialogueManager;
+    [SerializeField] private Button skipButton;
 
-    [Header("Zoom settings")]
-    [SerializeField] private float zoomSpeed;
-    private const float ZoomEnemy = 6.5f;
-    private const float ZoomPlayer = 4.92f;
+    [Header("Config")] [SerializeField] public float baseZoom = 4.92f;
 
-    private UIManager _uiManager;
-    private Action _onZoomEnd;
-    private Coroutine _frameRoutine;
+    [NonSerialized] public UIManager UIManager;
+    private CameraZoom _zoom;
+    private CameraMove _move;
+
+    public Action OnEndCinematic;
+    public Action OnIntro;
+    public Action OnVictory;
+    public Action OnDefeat;
 
     private void Start()
     {
-        _uiManager = ServiceLocator.Instance.GetService<UIManager>();
+        ServiceLocator.Instance.RegisterService(this);
+        
+        UIManager = ServiceLocator.Instance.GetService<UIManager>();
 
-        _uiManager.HideUI();
-        InitialView();
-        dialogueManager.OnConversationEnd += PlayerMoment;
+        skipButton.gameObject.SetActive(false);
 
-        PauseManager.SetPausedCinematic(true);
-        _onZoomEnd += EnemyMoment;
-        Frame(boss, ZoomEnemy);
+        _zoom = GetComponent<CameraZoom>();
+        _move = GetComponent<CameraMove>();
+
+        var ctx = new CameraContext(cam, helper);
+        foreach (var mod in GetComponentsInChildren<ICameraModule>(true))
+            mod.Init(ctx);
+
+        OnEndCinematic += End;
     }
 
-    private void InitialView()
+    public void ZoomTo(float goal, float duration, Action onEnd = null) => _zoom.ZoomTo(goal, duration, onEnd);
+    public void MoveTo(Transform target, float duration, Action onEnd = null) => _move.MoveTo(target, duration, onEnd);
+
+    public void IntroCinematic()
     {
-        camera.Follow = transform;
-        camera.Lens.OrthographicSize = 12f;
+        skipButton.gameObject.SetActive(true);
+        OnIntro?.Invoke();
+    }
+    public void DefeatCinematic()
+    {
+        skipButton.gameObject.SetActive(false);
+        OnDefeat?.Invoke();
     }
 
-    void EnemyMoment()
+    public void VictoryCinematic()
     {
-        dialogueManager.StartConversation(dialogue);
-        _onZoomEnd -= EnemyMoment;
+        skipButton.gameObject.SetActive(false);
+        OnVictory?.Invoke();
     }
 
-    void PlayerMoment()
+    private void End()
     {
-        _onZoomEnd += Finished;
-        Frame(player, ZoomPlayer);
-    }
-
-    void Finished()
-    {
-        Debug.Log("Finished cinematic");
-        _uiManager.ShowUI();
-
-        camera.Follow = player;
-
-        camera.Lens.OrthographicSize = ZoomPlayer;
-
+        cam.Follow = player;
         PauseManager.SetPausedCinematic(false);
-
-        _onZoomEnd -= Finished;
-    }
-
-    void Frame(Transform target, float goal)
-    {
-        if (_frameRoutine != null)
-            StopCoroutine(_frameRoutine);
-
-        _frameRoutine = StartCoroutine(FrameRoutine(target, goal));
-    }
-
-    private IEnumerator FrameRoutine(Transform target, float goalLens)
-    {
-        while (true)
-        {
-            transform.position = Vector3.Lerp(
-                transform.position,
-                target.position,
-                Time.unscaledDeltaTime * zoomSpeed
-            );
-
-            var lens = camera.Lens;
-            lens.OrthographicSize = Mathf.Lerp(
-                lens.OrthographicSize,
-                goalLens,
-                Time.unscaledDeltaTime * zoomSpeed
-            );
-            camera.Lens = lens;
-
-            bool posDone = Vector3.Distance(transform.position, target.position) <= 0.02f;
-            bool zoomDone = Mathf.Abs(camera.Lens.OrthographicSize - goalLens) <= 0.02f;
-
-            if (posDone && zoomDone)
-                break;
-
-            yield return null;
-        }
-
-        transform.position = target.position;
-        var finalLens = camera.Lens;
-        finalLens.OrthographicSize = goalLens;
-        camera.Lens = finalLens;
-
-        _frameRoutine = null;
-        _onZoomEnd?.Invoke();
-    }
-
-    public void SkipCinematic()
-    {
-        dialogueManager.EndDialogue();
     }
 }
-
