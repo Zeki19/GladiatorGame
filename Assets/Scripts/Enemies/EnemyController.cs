@@ -51,20 +51,7 @@ namespace Enemies
         protected virtual void Update()
         {
             Fsm.OnExecute();
-
-            switch (manager.PhaseSystem.CurrentPhase())
-            {
-                case 1:
-                    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase1);
-                    break;
-                case 2:
-                    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
-                    break;
-                case 3:
-                    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase3);
-                    break;
-            }
-
+            
             _agent.SetVariableValue("CurrentPhase",
                 manager.HealthComponent.currentHealth > manager.phasesThresholds[0]
                     ? global::CurrentPhase.Phase1

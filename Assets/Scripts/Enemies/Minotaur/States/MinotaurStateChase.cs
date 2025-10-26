@@ -50,7 +50,6 @@ namespace Enemies.Minotaur.States
             }
             
             _shortMeleeTimerCd += Time.deltaTime;
-            Debug.Log(_shortMeleeTimerCd);
             if (_shortMeleeTimerCd > _shortMeleeAttackCd)
             {
                 _status.SetStatus(StatusEnum.OnMeleeShortCD,true);

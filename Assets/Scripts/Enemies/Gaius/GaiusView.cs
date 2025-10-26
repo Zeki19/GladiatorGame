@@ -15,6 +15,7 @@ public class GaiusView : EnemyView, ILook
 
     public GameObject art;
     private static readonly int Direction = Animator.StringToHash("Direction");
+    private static readonly int Phase = Animator.StringToHash("Phase");
 
     public override void LookDir(Vector2 dir)
     {
@@ -68,7 +69,10 @@ public class GaiusView : EnemyView, ILook
 
     private void Update()
     {
-        animator.SetFloat(Direction, transform.rotation.z < 0 ? 0 : 1);
+        animator.SetFloat(Direction, transform.rotation.z < 0 ? 0.1f : 1);
+        animator.SetFloat(Phase, manager.HealthComponent.currentHealth > manager.phasesThresholds[0]
+            ? 0.1f
+            : 1);
         art.transform.rotation = quaternion.identity;
     }
 }

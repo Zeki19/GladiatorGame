@@ -43,6 +43,10 @@ namespace Enemies.Minotaur.States
             {
                 _status.SetStatus(StatusEnum.FinishedSearching, true);
             }
+            if (_agent._NVagent.remainingDistance == 0&&!_agent._NVagent.hasPath)
+            {
+                _agent._NVagent.SetDestination(_target.GetTarget().transform.position);
+            }
             Vector2 dir = _steering.GetDir();
             _look.LookDir(dir);
         }

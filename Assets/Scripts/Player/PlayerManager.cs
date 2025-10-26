@@ -20,10 +20,10 @@ namespace Player
             _status.SetUpStatus();
         }
 
-        private void OnDestroy()
-        {
-            ServiceLocator.Instance.RemoveService(this);
-        }
+        //private void OnDestroy()
+        //{
+        //    ServiceLocator.Instance.RemoveService(this);
+        //}
 
         private void DamageTaken(float a)
         {

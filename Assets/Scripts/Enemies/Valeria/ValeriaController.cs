@@ -180,10 +180,10 @@ namespace Enemies.Valeria
                 door.OnBossDefeated();
             }
         }
-        private void OnDestroy()
-        {
-            ServiceLocator.Instance.RemoveService<ValeriaController>(this);
-        }
+        //private void OnDestroy()
+        //{
+        //    ServiceLocator.Instance.RemoveService<ValeriaController>(this);
+        //}
 
     }
 }

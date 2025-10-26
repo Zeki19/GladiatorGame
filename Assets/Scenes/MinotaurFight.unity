@@ -5315,9 +5315,38 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: 'managedReferences[8286364436198064700]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Single,
+        mscorlib]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: managedReferences[8286364436198064700].Name
+      value: LongRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: managedReferences[8286364046663614656].m_Value
       value: 
       objectReference: {fileID: 1961551041}
+    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: managedReferences[8286364436198064700].m_Value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[6]'
+      value: 8286364436198064700
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: managedReferences[8286364436198064700].GUID.m_Value0
+      value: 9348891731908895506
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: managedReferences[8286364436198064700].GUID.m_Value1
+      value: 12826162731954638325
+      objectReference: {fileID: 0}
     - target: {fileID: 2399509781135219198, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: target
       value: 
@@ -5341,6 +5370,10 @@ PrefabInstance:
     - target: {fileID: 4385546290971201430, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479647694098908297, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
+      propertyPath: 'phasesThresholds.Array.data[0]'
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 4774605589821537700, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: m_LocalPosition.x

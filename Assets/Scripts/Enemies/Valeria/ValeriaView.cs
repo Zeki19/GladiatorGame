@@ -15,11 +15,15 @@ public class ValeriaView : EnemyView, ILook
     private static readonly int FrontalAttack = Animator.StringToHash("FrontalAttack");
     private static readonly int DoubleAttack = Animator.StringToHash("DoubleAttack");
     private static readonly int DaggerThrow = Animator.StringToHash("DaggerThrow");
+    private static readonly int Phase = Animator.StringToHash("Phase");
     public GameObject art;
 
     private void Update()
     {
-        animator.SetFloat(Direction, transform.rotation.z < 0 ? 1 : 0);
+        animator.SetFloat(Direction, transform.rotation.z < 0 ? 1 : 0.1f);
+        animator.SetFloat(Phase, manager.HealthComponent.currentHealth > manager.phasesThresholds[0]
+            ? 0.1f
+            : 1);
         art.transform.rotation = quaternion.identity;
     }
 
