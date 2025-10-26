@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8683485732910711964}
   - component: {fileID: 6254406123441994398}
   - component: {fileID: 3211672271558625105}
+  - component: {fileID: 133393248152222470}
+  - component: {fileID: 2674551684910292433}
   m_Layer: 0
   m_Name: MinosGoundBurst
   m_TagString: Untagged
@@ -27,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2206256447500830720}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.6854372, w: 0.72813183}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -43.129025, y: -36.237175, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 86.54}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8683485732910711964
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -78,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -7871303409572433647, guid: 273b468d4a39520448ae99a9682657aa, type: 3}
-  m_Color: {r: 0.5188679, g: 0.4066084, b: 0.2716714, a: 1}
+  m_Sprite: {fileID: -3866314327791364485, guid: 2f4eaaa695eb6e448a45908a54f18e03, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -143,3 +145,40 @@ MonoBehaviour:
     m_Bits: 0
   burstTimer: 1
   RemainAfterBurstTimer: 1
+--- !u!114 &133393248152222470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2206256447500830720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbfb80cdaa54a34cb6705792bf5c7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2674551684910292433}
+  animationName: Eruption
+  animationSpeed: 0.1
+--- !u!95 &2674551684910292433
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2206256447500830720}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 31fada895bb19b648bef3eeb4217b00a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6844661826503033641}
   - component: {fileID: 12742832690418119}
   - component: {fileID: 6902915979435032277}
+  - component: {fileID: 713979181203082162}
+  - component: {fileID: 5763111555092988151}
   m_Layer: 8
   m_Name: SlamArea
   m_TagString: Untagged
@@ -77,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9811321, g: 0.22677112, b: 0.22677112, a: 1}
+  m_Sprite: {fileID: -5109843014221220039, guid: 320ba5c082c62094da7639a748fe1a3b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,3 +105,40 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &713979181203082162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299678314658060156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbfb80cdaa54a34cb6705792bf5c7d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5763111555092988151}
+  animationName: SLam
+  animationSpeed: 0.5
+--- !u!95 &5763111555092988151
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299678314658060156}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 08b8f489ac8d22f4dac7a64b7f01013f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
