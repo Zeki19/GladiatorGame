@@ -99,7 +99,8 @@ public class FoodManager : MonoBehaviour
         if (_nFoodsOnScene >= foodAmount || _spawning) return;
 
         _spawning = true;
-        var rTime = Random.Range(0f, waitTime);
+        // var rTime = Random.Range(0f, waitTime);
+        var rTime = waitTime;
         StartCoroutine(Timer(rTime));
     }
 
