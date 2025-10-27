@@ -39,7 +39,7 @@ namespace Enemies.Gaius.States
 
         public override void Exit()
         {
-            _weapon.transform.localPosition=new Vector3(0,0.5f,0);
+            _weapon.transform.localPosition=new Vector3(0,1f,0);
             _weapon.transform.localRotation=quaternion.identity;
             _weapon.SetActive(false);
             _agent._NVagent.isStopped = false;

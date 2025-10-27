@@ -5,11 +5,18 @@ public class GaiusStateDash<T> : StatesBase<T>
     public override void Enter()
     {
         _sound.PlaySound("BackStep", "Enemy");
+        _agent.TurnOffNavMesh();
         var dashData = _statesData.GetStateData<DashStateData>(EnemyStates.Dash);
         if (dashData != null)
         {
             _move.Dash(dashData.Direction, dashData.Force, dashData.Distance);
             _status.SetStatus(StatusEnum.Dashing, true);
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        _agent.RepositionInNavMesh();
     }
 }
