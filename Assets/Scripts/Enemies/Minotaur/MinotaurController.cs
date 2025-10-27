@@ -101,8 +101,13 @@ namespace Enemies.Minotaur
 
         private void Die()
         {
-            //Destroy(gameObject);
-            SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
+            PauseManager.OnCinematicStateChanged -= HandlePause;
+            Destroy(gameObject);
+            BossExitDoor door = ServiceLocator.Instance.GetService<BossExitDoor>();
+            if (door != null)
+            {
+                door.OnBossDefeated();
+            }
         }
     }
 }
