@@ -25391,10 +25391,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy - UI - Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1121312702468547598, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656702546046596509, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_fontSize
+      value: 54.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656702546046596509, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 1656702546046596509, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656702546046596509, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1602854871235269953, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+    - target: {fileID: 1656702546046596509, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: displayType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: entityManager
       value: 
       objectReference: {fileID: 1356049149}
+    - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: 'sprites.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1124271243129300706, guid: b2801212e4623184eb8047f09809fd22, type: 3}
+    - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: 'sprites.Array.data[1]'
+      value: 
+      objectReference: {fileID: 621526461943453568, guid: 84748c98572afc94b926dada61057e4b, type: 3}
     - target: {fileID: 7760298050412872972, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_Pivot.x
       value: 0

@@ -28,6 +28,7 @@ public class Pillar_Shatter : MonoBehaviour, IPillar
             _painter.PaintArenaNoRotation(newPos, paintTag);
             _occupiedPositions.Add(newPos);
         }
+        
         gameObject.SetActive(false);
     }
     public void AddIgnorePillar(List<Collider2D> colliders)
@@ -67,5 +68,4 @@ public class Pillar_Shatter : MonoBehaviour, IPillar
             default: return Vector3.down;
         }
     }
-
 }

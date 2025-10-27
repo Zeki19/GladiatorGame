@@ -1,4 +1,3 @@
-using NavMeshPlus.Components;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,14 +17,13 @@ public class PillarManager : MonoBehaviour
     private Dictionary<GameObject, IPillar>  _pillars = new Dictionary<GameObject, IPillar>();
     
     private SpriteRenderer _renderer;
-    private NavMeshModifier _navMesh;
     [SerializeField] private List<Collider2D> ignoreColliders;
 
     private void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
         _renderer.enabled = false;
-
+        
         _context.Origin = transform;
         
         _currentHealth = health;
@@ -46,6 +44,7 @@ public class PillarManager : MonoBehaviour
         DestroySpawnedPillar();
         _currentState = (PillarState)(((int)_currentState + 1) % 3);
         SpawnCurrentPillar();
+        ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
         _currentHealth = health;
     }
 
@@ -57,6 +56,7 @@ public class PillarManager : MonoBehaviour
             _pillars.Remove(_spawnedPillar);
         }
     }
+    
     private void SpawnCurrentPillar()
     {
         if (_spawnedPillar) Destroy(_spawnedPillar);

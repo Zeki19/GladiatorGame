@@ -77,7 +77,7 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
 
         transform.localScale = _targetScale;
         transform.position   = _targetPos;
-        ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
+
         foreach (var p in _occupiedPositions)
         {
             _painter.ClearPaint(p);
@@ -127,9 +127,5 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
             case 2: return Vector3.up;
             default: return Vector3.down;
         }
-    }
-    private void OnDestroy()
-    {
-        ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
     }
 }
