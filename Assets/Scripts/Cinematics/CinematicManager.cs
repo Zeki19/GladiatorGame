@@ -30,12 +30,10 @@ public class CinematicManager : MonoBehaviour
     public Action OnVictory;
     public Action OnDefeat;
 
-    private void Start()
+    public void Initialize()
     {
-        ServiceLocator.Instance.RegisterService(this);
-        
         UIManager = ServiceLocator.Instance.GetService<UIManager>();
-
+        
         skipButton.gameObject.SetActive(false);
 
         _zoom = GetComponent<CameraZoom>();

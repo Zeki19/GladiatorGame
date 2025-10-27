@@ -5,41 +5,39 @@ using UnityEngine;
 
 public class FightManager : MonoBehaviour
 {
-    private CinematicManager _cinematicManager;
-    private EnemyManager _enemy;
-    private PlayerManager _player;
+    [SerializeField] private CinematicManager cinematicManager;
+    [SerializeField] private  EnemyManager enemy;
+    [SerializeField] private  PlayerManager player;
     private void Start()
     {
-        StartCoroutine(WaitForFrames(2));
+        //StartCoroutine(WaitForFrames(5));
         
-        _cinematicManager = ServiceLocator.Instance.GetService<CinematicManager>();
+        cinematicManager.Initialize();
         
-        _enemy = ServiceLocator.Instance.GetService<EnemyManager>();
-        _enemy.HealthComponent.OnDead += VictoryCinematic;
+        enemy.HealthComponent.OnDead += VictoryCinematic;
         
-        _player = ServiceLocator.Instance.GetService<PlayerManager>();
-        _player.HealthComponent.OnDead += DefeatCinematic;
-
+        player.HealthComponent.OnDead += DefeatCinematic;
+        
         IntroductionCinematic();
     }
     private void IntroductionCinematic()
     {
-        _cinematicManager.IntroCinematic();
+        cinematicManager.IntroCinematic();
     }
     private void VictoryCinematic()
     {
-        _cinematicManager.VictoryCinematic();
+        cinematicManager.VictoryCinematic();
         Unsubscribe();
     }
     private void DefeatCinematic()
     {
-        _cinematicManager.DefeatCinematic();
+        cinematicManager.DefeatCinematic();
         Unsubscribe();
     }
     private void Unsubscribe()
     {
-        _enemy.HealthComponent.OnDead += VictoryCinematic;
-        _player.HealthComponent.OnDead += DefeatCinematic;
+        enemy.HealthComponent.OnDead += VictoryCinematic;
+        player.HealthComponent.OnDead += DefeatCinematic;
     }
     
     #region Utils

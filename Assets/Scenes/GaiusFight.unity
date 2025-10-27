@@ -10889,6 +10889,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477275d2546246d42a0d39d94edfdd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinematicManager: {fileID: 1373536207}
+  enemy: {fileID: 1356049149}
+  player: {fileID: 2020722034}
 --- !u!1 &788120874
 GameObject:
   m_ObjectHideFlags: 0
@@ -23535,6 +23538,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66f7ff47246bf4e4cadb187cc23c16c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1373536207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5702659611452755984, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
+  m_PrefabInstance: {fileID: 1842635631696963758}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544858e626f0c2a47a649204fe57b31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1416926461

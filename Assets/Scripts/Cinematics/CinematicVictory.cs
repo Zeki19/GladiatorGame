@@ -17,9 +17,6 @@ public class CinematicVictory : MonoBehaviour
     private void Awake()
     {
         _cine = GetComponent<CinematicManager>();
-    }
-    private void Start()
-    {
         _cine.OnVictory += StartCinematic;
     }
     private void StartCinematic()
