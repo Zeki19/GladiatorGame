@@ -17,7 +17,6 @@ public class CinematicManager : MonoBehaviour
 
     [Header("Wire Dialogue")] [SerializeField]
     public DialogueManager dialogueManager;
-    [SerializeField] private Button skipButton;
 
     [Header("Config")] [SerializeField] public float baseZoom = 4.92f;
 
@@ -30,13 +29,9 @@ public class CinematicManager : MonoBehaviour
     public Action OnVictory;
     public Action OnDefeat;
 
-    private void Start()
+    public void Initialize()
     {
-        ServiceLocator.Instance.RegisterService(this);
-        
         UIManager = ServiceLocator.Instance.GetService<UIManager>();
-
-        skipButton.gameObject.SetActive(false);
 
         _zoom = GetComponent<CameraZoom>();
         _move = GetComponent<CameraMove>();
@@ -53,18 +48,15 @@ public class CinematicManager : MonoBehaviour
 
     public void IntroCinematic()
     {
-        skipButton.gameObject.SetActive(true);
         OnIntro?.Invoke();
     }
     public void DefeatCinematic()
     {
-        skipButton.gameObject.SetActive(false);
         OnDefeat?.Invoke();
     }
 
     public void VictoryCinematic()
     {
-        skipButton.gameObject.SetActive(false);
         OnVictory?.Invoke();
     }
 

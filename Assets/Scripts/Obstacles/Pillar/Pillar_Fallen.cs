@@ -40,7 +40,7 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
         
         foreach (var p in _occupiedPositions)
         {
-            _painter.PaintArenaNoRotation(p, "Shadow");
+            //_painter.PaintArenaNoRotation(p, "Shadow");
         }
         
         ComputeTargets(originPos);
@@ -48,10 +48,13 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
         context.OccupiedSpaces.Clear();
         context.OccupiedSpaces.AddRange(_occupiedPositions);
         
-        transform.localScale = _startScale;
-        transform.position   = _startPos;
-        
-        StartCoroutine(FallRoutine());
+        //transform.localScale = _startScale;
+        //transform.position   = _startPos;
+
+        transform.localScale = _targetScale;
+        transform.position = _targetPos;
+        ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
+        //StartCoroutine(FallRoutine()); <--- Change this to make it use the pillar falling animation.
     }
 
     public void DestroyPillar(PillarContext context)
@@ -97,13 +100,15 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
         }
         else
         {
-            _targetScale.y = pillarLength;
+            //transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, 90, transform.rotation.w);
+            _targetScale.x = pillarLength;
         }
-        
+
         float halfExtentFromCenter = ((pillarLength - 1) * 0.5f);
-        _targetPos = originPos + _chosenDir * halfExtentFromCenter;
+        //_targetPos = originPos + Vector3.right * halfExtentFromCenter;
+        _targetPos = originPos + Vector3.right;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (_ignoreColliders.Any(collider => collider == other))
@@ -127,5 +132,9 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
             case 2: return Vector3.up;
             default: return Vector3.down;
         }
+    }
+    private void OnDestroy()
+    {
+        ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
     }
 }

@@ -17,9 +17,6 @@ public class CinematicIntro : MonoBehaviour
     private void Awake()
     {
         _cine = GetComponent<CinematicManager>();
-    }
-    private void Start()
-    {
         _cine.OnIntro += StartCinematic;
     }
     private void StartCinematic()
