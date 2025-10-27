@@ -14,9 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueName: 0
   lines:
-  - speakerName: Minos
+  - speakerName: Minotaur
     speakerImage: {fileID: 1834712985733802431, guid: 6d42a42e70af7e04d96f0251e72036ed, type: 3}
-    sentence: Roar!
+    sentence: "Another fool enters my maze\u2026 Let\u2019s see how long you last
+      before I crush you!"
+    cameraShake: 0
+    shakeAtTheStart: 0
+    soundToPlay: {fileID: 0}
+    playAtTheStart: 0
+  - speakerName: Player
+    speakerImage: {fileID: 1208040086343421634, guid: e47e0f99c78362f478349bf1a0c29600, type: 3}
+    sentence: "Then crush me if you can, beast. I\u2019ve already escaped worse cages."
     cameraShake: 0
     shakeAtTheStart: 0
     soundToPlay: {fileID: 0}
