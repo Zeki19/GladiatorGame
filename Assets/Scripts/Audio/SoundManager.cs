@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 
 public class SoundManager : MonoBehaviour
 {
-    private SoundManager _instance;
     [Header("Music")]
     [SerializeField] private AudioSource musicSource;
     public SO_Sounds playlist;
@@ -17,27 +16,15 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource enemySource;
     public SO_Sounds EnemyPlaylist;
     
-    
     private void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-        else
-        {
-            Destroy(this);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
-        
         ServiceLocator.Instance.RegisterService(this);
     }
 
     private void Start()
     {
-        ServiceLocator.Instance.GetService<PlayerManager>().Sounds += WhoSaidIt;
-        ServiceLocator.Instance.GetService<EnemyManager>().Sounds += WhoSaidIt;
+        ServiceLocator.Instance.GetService<PlayerManager>().Sounds += PlayerSfx;
+        ServiceLocator.Instance.GetService<EnemyManager>().Sounds += EnemySfx;
         ServiceLocator.Instance.GetService<PlayerManager>().StopSounds += WhoToStop;
 
         if (playlist.sounds.Length <= 0) return;
@@ -134,6 +121,35 @@ public class SoundManager : MonoBehaviour
         
         enemySource.clip = sound.clip;
         enemySource.Play();
+    }
+
+    private void PlayerSfx(string sfxName)
+    {
+        Sound playerS = Array.Find(PlayerPlaylist.sounds, sound => sound.name == sfxName);
+        if (playerS == null) return;
+        
+        Debug.Log("Player said: " + playerS.name);
+        
+        if(playerS.loop)
+        {
+            PlayMusicPlayer(playerS);
+            return;
+        }
+        PlaySoundPlayer(playerS);
+    }
+    private void EnemySfx(string sfxName)
+    {
+        Sound enemyS = Array.Find(EnemyPlaylist.sounds, sound => sound.name == sfxName);
+        if (enemyS == null) return;
+        
+        Debug.Log("Enemy said: " + enemyS.name);
+        
+        if (enemyS.loop)
+        {
+            PlayMusicEnemy(enemyS);
+            return;
+        }
+        PlaySoundEnemy(enemyS);
     }
     
 }

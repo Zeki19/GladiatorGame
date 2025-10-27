@@ -109,6 +109,7 @@ namespace Enemies.Gaius
         private void Die()
         {
             PauseManager.OnCinematicStateChanged -= HandlePause;
+            manager.PlaySound("Death");
             Destroy(gameObject);
             BossExitDoor door = ServiceLocator.Instance.GetService<BossExitDoor>();
             if (door != null)

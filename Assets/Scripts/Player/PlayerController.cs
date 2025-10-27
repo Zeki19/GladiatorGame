@@ -23,7 +23,7 @@ namespace Player
         {
             PauseManager.OnCinematicStateChanged -= HandlePause;
             transform.parent.gameObject.SetActive(false);
-            manager.PlaySound("Death", "Player");
+            manager.PlaySound("Death");
         }
         private void OnDestroy()
         {

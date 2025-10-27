@@ -20,14 +20,14 @@ namespace Entities
         public PhaseSystem PhaseSystem;
         public IHealth HealthComponent => HealthSystem;
         
-        public void PlaySound (string soundName,string entityName) => Sounds?.Invoke(soundName,entityName);
+        public void PlaySound (string soundName) => Sounds?.Invoke(soundName);
 
         protected virtual void Start()
         {
             PhaseSystem = new PhaseSystem(phasesThresholds, HealthComponent);
         }
 
-        public event Action<string, string> Sounds;
+        public event Action<string> Sounds;
         public Action<string> StopSounds;
     }
 }

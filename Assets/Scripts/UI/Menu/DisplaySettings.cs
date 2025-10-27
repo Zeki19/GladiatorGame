@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
+using TMPro;
 
-public class SettingsMenu : MonoBehaviour
+public class DisplaySettings : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;

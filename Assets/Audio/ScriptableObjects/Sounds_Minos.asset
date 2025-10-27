@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123b0e98187d2204b90cbf9837660630, type: 3}
+  m_Name: Sounds_Minos
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: ThrowImpact
+    clip: {fileID: 8300000, guid: b3d310c7c36c14e4f91fe3d07d01ce05, type: 3}
+    loop: 0
+    volume: 0
+  - name: Throw
+    clip: {fileID: 8300000, guid: 99929cc3037b5934284dfa1c5fef7860, type: 3}
+    loop: 0
+    volume: 0
+  - name: Charge
+    clip: {fileID: 8300000, guid: 333e71e4a15e4614daa25d2fe6daa250, type: 3}
+    loop: 0
+    volume: 0
+  - name: Dash
+    clip: {fileID: 8300000, guid: 975e6840a0ea75247a7f7aeca6f3fc9e, type: 3}
+    loop: 0
+    volume: 0
+  - name: Cracks
+    clip: {fileID: 8300000, guid: 3d642eea0c877be49bb439e08bae2bbd, type: 3}
+    loop: 0
+    volume: 0
+  - name: Fists
+    clip: {fileID: 8300000, guid: b8b2dda54229b704ea15830f23da4e72, type: 3}
+    loop: 0
+    volume: 0
+  - name: GroundSlam
+    clip: {fileID: 8300000, guid: 5c6001b9e9ede0946b666bf59269650a, type: 3}
+    loop: 0
+    volume: 0
+  - name: Death
+    clip: {fileID: 8300000, guid: fbc5df70a066cbf46a772ba687504918, type: 3}
+    loop: 0
+    volume: 0
+  - name: Footsteps
+    clip: {fileID: 8300000, guid: e2c35f5212b6ab340a08c84e58edb26b, type: 3}
+    loop: 0
+    volume: 0
+  - name: Hit
+    clip: {fileID: 8300000, guid: b950d14760c377947a3b11ddcfa3fd8c, type: 3}
+    loop: 0
+    volume: 0
+  - name: Footsteps
+    clip: {fileID: 8300000, guid: e2c35f5212b6ab340a08c84e58edb26b, type: 3}
+    loop: 0
+    volume: 0

@@ -60,7 +60,7 @@ namespace Enemies
 
         protected void CheckPhase(float damage)
         {
-            manager.PlaySound("Hit", "Enemy");
+            manager.PlaySound("Hit");
             var arenaPainter = ServiceLocator.Instance.GetService<ArenaPainter>();
             arenaPainter?.PaintArena(transform, "Blood");
             if (_currentPhase != manager.PhaseSystem.CurrentPhase())

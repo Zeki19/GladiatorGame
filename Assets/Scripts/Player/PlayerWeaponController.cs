@@ -135,7 +135,7 @@ namespace Player
             var weaponForDestruction = Weapon;
             UnEquipWeapon();
             _weaponManager.DestroyWeapon(weaponForDestruction);
-            _manager.PlaySound("BreakWeapon", "Player");
+            _manager.PlaySound("BreakWeapon");
         }
 
         private void UnEquipWeapon()
@@ -150,7 +150,7 @@ namespace Player
 
         private void AttackFinishSubscription(bool subscribe)
         {
-            if (Weapon == null) return; // Å© Agregar esto
+            if (Weapon == null) return; // ÔøΩÔøΩ Agregar esto
 
             if (subscribe)
             {
