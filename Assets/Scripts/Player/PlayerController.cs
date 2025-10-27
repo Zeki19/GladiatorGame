@@ -132,7 +132,8 @@ namespace Player
         {
             enabled = false;
             _inputs.enabled = false;
-            Debug.Log(_inputs.inputIsActive);
+            manager.Rb.linearVelocity = Vector2.zero;
+            manager.Rb.angularVelocity = 0;
         }
 
         public void OnResume()

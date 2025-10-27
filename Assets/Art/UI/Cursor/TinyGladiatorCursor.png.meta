@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 841d0c6f34b8293418efd407d0258ee6
+guid: 86ee3b20c4e8b9240b6141034aecb819
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 188322103895082066
-    second: TinyBossSword_0
+      213: 423476985831584859
+    second: TinyGladiatorCursor_0
+  - first:
+      213: -8736750486201352289
+    second: TinyGladiatorCursor_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +103,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TinyBossSword_0
+      name: TinyGladiatorCursor_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0}
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 254450aa4fd0d9200800000000000000
-      internalID: 188322103895082066
+      spriteID: b547b0f231e70e500800000000000000
+      internalID: 423476985831584859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TinyGladiatorCursor_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9f3fbad8b3d0c680800000000000000
+      internalID: -8736750486201352289
       vertices: []
       indices: 
       edges: []
@@ -125,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 41b54136db4b3574e9de8a37f5933cf4
+    spriteID: 903d5e0b603dc594cb382f920d3fbf5f
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TinyBossSword_0: 188322103895082066
+      TinyGladiatorCursor_0: 423476985831584859
+      TinyGladiatorCursor_1: -8736750486201352289
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
