@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2145593703655780661}
   - component: {fileID: 8547643601085234438}
   - component: {fileID: 8452613016809410372}
-  - component: {fileID: 8180569660789367053}
   m_Layer: 0
   m_Name: Pillar
   m_TagString: Wall
@@ -107,19 +106,3 @@ MonoBehaviour:
   - {fileID: 6012045532798333955, guid: ab3142be577d0ab44ae481035f2d9316, type: 3}
   - {fileID: 6012045532798333955, guid: d2b0d0a0beb731a4981ea1369eb04a59, type: 3}
   ignoreColliders: []
---- !u!114 &8180569660789367053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5284587418981490820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
