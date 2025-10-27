@@ -13,6 +13,9 @@ public class WallObstacle : MonoBehaviour
     [Header("Prefabs by State (0 = Standing, 1 = Broken)")]
     [SerializeField] private GameObject[] prefabs;
 
+
+    [SerializeField] private SpriteRenderer sprite;
+
     private int _currentHealth;
     private GameObject _spawnedWall;
     private WallState _currentState = WallState.Standing;
@@ -24,6 +27,7 @@ public class WallObstacle : MonoBehaviour
     {
         _context.Origin = transform;
         _currentHealth = maxHealth;
+        sprite.enabled = false;
     }
 
     public void SpawnCurrentState()

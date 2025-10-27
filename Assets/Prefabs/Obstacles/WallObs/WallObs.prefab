@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1242216609386186338}
   - component: {fileID: 9202160962767193942}
   - component: {fileID: 7941037357260793643}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WallObs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ MonoBehaviour:
   prefabs:
   - {fileID: 2548489560555957059, guid: 889595cb5cb313147bfcc5f6bae43114, type: 3}
   - {fileID: 6869784446540987520, guid: 52ac0258981ddfb418548fdffc19eac6, type: 3}
-  onlyMinotaurCanBreak: 1
+  sprite: {fileID: 7941037357260793643}
 --- !u!212 &7941037357260793643
 SpriteRenderer:
   m_ObjectHideFlags: 0
