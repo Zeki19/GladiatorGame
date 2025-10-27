@@ -115,24 +115,7 @@ namespace Enemies.Gaius
             {
                 door.OnBossDefeated();
             }
-            //  SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
         }
-        protected override void Update()
-        {
-            base.Update();
-            
-            
-            //if(manager.HealthComponent.currentHealth>50)
-            //    _agent.SetVariableValue("CurrentPhase",global::CurrentPhase.Phase1);
-            //else
-            //{
-            //    _agent.SetVariableValue("CurrentPhase", global::CurrentPhase.Phase2);
-            //}
-        }
-        //private void OnDestroy()
-        //{
-        //    ServiceLocator.Instance.RemoveService<GaiusController>(this);
-        //}
 
     }
 }
