@@ -44,6 +44,7 @@ public class PillarManager : MonoBehaviour
         DestroySpawnedPillar();
         _currentState = (PillarState)(((int)_currentState + 1) % 3);
         SpawnCurrentPillar();
+        ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
         _currentHealth = health;
     }
 
