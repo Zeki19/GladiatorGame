@@ -10,7 +10,7 @@ public class FightManager : MonoBehaviour
     private PlayerManager _player;
     private void Start()
     {
-        StartCoroutine(WaitForFrames(5));
+        StartCoroutine(WaitForFrames(2));
         
         _cinematicManager = ServiceLocator.Instance.GetService<CinematicManager>();
         
