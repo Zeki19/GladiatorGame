@@ -100,14 +100,15 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
         }
         else
         {
-            transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, 90, transform.rotation.w);
-            _targetScale.y = pillarLength;
+            //transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, 90, transform.rotation.w);
+            _targetScale.x = pillarLength;
         }
 
         float halfExtentFromCenter = ((pillarLength - 1) * 0.5f);
-        _targetPos = originPos + _chosenDir * halfExtentFromCenter;
+        //_targetPos = originPos + Vector3.right * halfExtentFromCenter;
+        _targetPos = originPos + Vector3.right;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (_ignoreColliders.Any(collider => collider == other))
