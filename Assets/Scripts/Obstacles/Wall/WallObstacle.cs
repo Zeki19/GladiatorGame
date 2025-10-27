@@ -63,6 +63,7 @@ public class WallObstacle : MonoBehaviour
             behaviour.DestroyPillar(_context);
             behaviour.OnDamaged -= ReceiveDamage;
             _behaviours.Remove(_spawnedWall);
+            ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
         }
     }
 
