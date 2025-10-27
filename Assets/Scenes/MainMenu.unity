@@ -570,6 +570,7 @@ GameObject:
   - component: {fileID: 769155979}
   - component: {fileID: 769155978}
   - component: {fileID: 769155982}
+  - component: {fileID: 769155983}
   m_Layer: 5
   m_Name: Screens - Canvas
   m_TagString: Untagged
@@ -685,6 +686,18 @@ MonoBehaviour:
   - {fileID: 1097325255}
   continueButton: {fileID: 208201798}
   overwriteConfirmationPopup: {fileID: 44080684}
+--- !u!114 &769155983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769155977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c975916d704a542bae873be27ccf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &793179238
 GameObject:
   m_ObjectHideFlags: 0
@@ -2521,10 +2534,14 @@ PrefabInstance:
     - target: {fileID: 4674228620301694942, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 707207976}
+      objectReference: {fileID: 769155983}
     - target: {fileID: 4674228620301694942, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674228620301694942, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneChangeButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4983397532757219064, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2689,10 +2706,14 @@ PrefabInstance:
     - target: {fileID: 6840730073828199393, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 707207976}
+      objectReference: {fileID: 769155983}
     - target: {fileID: 6840730073828199393, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840730073828199393, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneChangeButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6840730073828199393, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -2889,10 +2910,14 @@ PrefabInstance:
     - target: {fileID: 9004459767028874089, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 707207976}
+      objectReference: {fileID: 769155983}
     - target: {fileID: 9004459767028874089, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 9004459767028874089, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneChangeButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9004459767028874089, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -2905,10 +2930,14 @@ PrefabInstance:
     - target: {fileID: 9120532430066578607, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 707207976}
+      objectReference: {fileID: 769155983}
     - target: {fileID: 9120532430066578607, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 9120532430066578607, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneChangeButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9120532430066578607, guid: 0fa602fd88fa4844db11328567174ade, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument

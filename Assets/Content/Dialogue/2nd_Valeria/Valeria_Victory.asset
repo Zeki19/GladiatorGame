@@ -14,9 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueName: 0
   lines:
+  - speakerName: Valeria
+    speakerImage: {fileID: -6029953790287630373, guid: 5baa7e4362523244b9e79cceb6a399cc, type: 3}
+    sentence: "Tch\u2026 a lucky hit. Don\u2019t let it get to your head."
+    cameraShake: 0
+    shakeAtTheStart: 0
+    soundToPlay: {fileID: 0}
+    playAtTheStart: 0
   - speakerName: Player
     speakerImage: {fileID: 1208040086343421634, guid: e47e0f99c78362f478349bf1a0c29600, type: 3}
-    sentence: I am still in one piece
+    sentence: "Luck doesn\u2019t cut that deep, Valeria. Skill does."
     cameraShake: 0
     shakeAtTheStart: 0
     soundToPlay: {fileID: 0}
