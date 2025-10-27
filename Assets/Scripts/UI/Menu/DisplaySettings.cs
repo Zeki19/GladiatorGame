@@ -23,6 +23,7 @@ public class DisplaySettings : MonoBehaviour
         resolutionDropdown.ClearOptions();
 
         List<string> options = new List<string>();
+        
         int currentResolutionIndex = 0;
 
         for (int i = 0; i < _resolutions.Length; i++)
@@ -47,11 +48,13 @@ public class DisplaySettings : MonoBehaviour
         _currentResolutionIndex = resolutionIndex;
         Resolution resolution = _resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Debug.Log(resolution);
     }
 
     public void SetFullscreen(bool fullscreen)
     {
         _currentFullscreen = fullscreen;
         Screen.fullScreen = fullscreen;
+        Debug.Log("FS: "+ _currentFullscreen);
     }
 }
