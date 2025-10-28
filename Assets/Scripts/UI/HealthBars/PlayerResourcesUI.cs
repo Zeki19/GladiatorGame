@@ -115,7 +115,8 @@ public class PlayerResourcesUI : MonoBehaviour
     private void Dashed(float seconds)
     {
         dashIcon.color = new Color(dashIcon.color.r, dashIcon.color.g, dashIcon.color.b, 0f);
-        StartCoroutine(FadeInDashIcon(seconds));
+        if(gameObject.activeInHierarchy && dashIcon.gameObject.activeInHierarchy)
+            StartCoroutine(FadeInDashIcon(seconds));
     }
     
     private IEnumerator FadeInDashIcon(float duration)

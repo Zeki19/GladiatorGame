@@ -17,7 +17,8 @@ namespace Enemies.Gaius
         private StatesBase<EnemyStates> _idleState; 
         private StatesBase<EnemyStates> _dashState; 
         private StatesBase<EnemyStates> _chaseState; 
-        public StatesBase<EnemyStates> _AttackState; 
+        public StatesBase<EnemyStates> _attackState;
+        private StatesBase<EnemyStates> _deathState;
 
         private ISteering _pursuitSteering;
 
@@ -53,11 +54,13 @@ namespace Enemies.Gaius
             var dashState = new GaiusStateDash<EnemyStates>();
             var chaseState = new GaiusStateChase<EnemyStates>(_pursuitSteering, this, target);
             var AttackState = new GaiusStateAttack<EnemyStates>(_pursuitSteering, weapon, _attackManager,this);
-
+            var deathState = new DeadState<EnemyStates>();
+            
             _idleState = idleState;
             _dashState = dashState;
             _chaseState = chaseState;
-            _AttackState = AttackState;
+            _attackState = AttackState;
+            _deathState = deathState;
 
 
             var stateList = new List<State<EnemyStates>>
@@ -65,25 +68,29 @@ namespace Enemies.Gaius
                 idleState,
                 dashState,
                 chaseState,
-                AttackState
+                AttackState,
+                deathState
             };
 
             idleState.AddTransition(EnemyStates.Chase, chaseState);
             idleState.AddTransition(EnemyStates.Attack, AttackState);
             idleState.AddTransition(EnemyStates.Dash, dashState);
+            idleState.AddTransition(EnemyStates.Death, deathState);
 
             chaseState.AddTransition(EnemyStates.Idle, idleState);
             chaseState.AddTransition(EnemyStates.Attack, AttackState);
             chaseState.AddTransition(EnemyStates.Dash, dashState);
+            chaseState.AddTransition(EnemyStates.Death, deathState);
 
             AttackState.AddTransition(EnemyStates.Idle, idleState);
             AttackState.AddTransition(EnemyStates.Chase, chaseState);
             AttackState.AddTransition(EnemyStates.Dash, dashState);
+            AttackState.AddTransition(EnemyStates.Death, deathState);
 
             dashState.AddTransition(EnemyStates.Idle, idleState);
             dashState.AddTransition(EnemyStates.Chase, chaseState);
             dashState.AddTransition(EnemyStates.Attack, AttackState);
-            ;
+            dashState.AddTransition(EnemyStates.Death, deathState);
 
             InitializeComponents(stateList);
             Fsm.SetInit(idleState, EnemyStates.Idle);
@@ -110,7 +117,7 @@ namespace Enemies.Gaius
         {
             PauseManager.OnCinematicStateChanged -= HandlePause;
             manager.PlaySound("Death");
-            Destroy(gameObject);
+            ChangeToState(EnemyStates.Death);
             BossExitDoor door = ServiceLocator.Instance.GetService<BossExitDoor>();
             if (door != null)
             {
@@ -133,5 +140,6 @@ public enum EnemyStates
     Dash,
     RunAway,
     Invisibility,
-    Ambush
+    Ambush,
+    Death
 }

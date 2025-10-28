@@ -112,20 +112,9 @@ namespace Player
                 case StateEnum.Walk:
                     animator.SetBool("Walk", true);
                     break;
-                case StateEnum.Default:
-                case StateEnum.Attack:
-                case StateEnum.ShortAttack:
-                case StateEnum.MidAttack:
-                case StateEnum.LongAttack:
-                case StateEnum.ChargeAttack:
-                case StateEnum.Chase:
-                case StateEnum.Search:
-                case StateEnum.Patrol:
-                case StateEnum.Runaway:
-                case StateEnum.Phase1:
-                case StateEnum.Phase2:
-                case StateEnum.Phase3:
-                case StateEnum.BackStep:
+                case StateEnum.Death:
+                    animator.SetTrigger("Death");
+                    break;
                 default:
                     break;
             }

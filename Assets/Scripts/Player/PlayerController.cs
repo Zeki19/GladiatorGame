@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Entities;
-using Entities.Interfaces;
 using Entities.StateMachine;
 using Player.PlayerStates;
 using UnityEngine;
@@ -21,8 +18,8 @@ namespace Player
 
         void Dead()
         {
-            PauseManager.OnCinematicStateChanged -= HandlePause;
-            transform.parent.gameObject.SetActive(false);
+            //PauseManager.OnCinematicStateChanged -= HandlePause;
+            manager.view.PlayStateAnimation(StateEnum.Death);
             manager.PlaySound("Death");
         }
         private void OnDestroy()

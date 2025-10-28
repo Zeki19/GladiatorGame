@@ -61,6 +61,9 @@ public class GaiusView : EnemyView, ILook
             case StateEnum.Search:
                 animator.SetTrigger(Run);
                 break;
+            case StateEnum.Death:
+                animator.SetTrigger("Death");
+                break;
             default:
                 Debug.LogWarning("No animation mapped for state: " + state);
                 break;
