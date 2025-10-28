@@ -16,7 +16,7 @@ public class ArenaPainter : MonoBehaviour
 
     private readonly Dictionary<string, Tile> _createdTiles = new();
 
-    void Awake()
+    void Start()
     {
         ServiceLocator.Instance.RegisterService(this);
         InitializeTiles();
@@ -74,6 +74,7 @@ public class ArenaPainter : MonoBehaviour
         {
             bloodTilemap.SetTile(cell, null);
         }
+        Debug.Log("Paint arena" + effectName);
     }
 
     private void InitializeTiles()
