@@ -28,6 +28,26 @@ namespace Enemies.Minotaur.States
             _look.LookDirInsta(dir); 
             _agent._NVagent.isStopped = true;
             attack.ExecuteAttack(controller.currentAttack);
+            switch (controller.currentAttack)
+            {
+                case 0:
+                    _sound.PlaySound("Fists", "Enemy");
+                    break;
+                case 1:
+                    _sound.PlaySound("Charge", "Enemy");
+                    break;
+                case 2:
+                    _sound.PlaySound("GroundSlam", "Enemy");
+                    break;
+                case 3:
+                    _sound.PlaySound("Throw", "Enemy");
+                    break;
+                case 5:
+                    _sound.PlaySound("Cracks", "Enemy");
+                    break;
+                default:
+                    break;
+            }
         }
 
         public override void Execute()

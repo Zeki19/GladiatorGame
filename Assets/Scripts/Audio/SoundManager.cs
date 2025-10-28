@@ -152,5 +152,10 @@ public class SoundManager : MonoBehaviour
         PlaySoundEnemy(enemyS);
     }
     
+    public void PlayAudioClip(AudioClip sound)
+    {
+
+    }
+
 }
 

@@ -7,6 +7,7 @@ namespace Attack
     [CreateAssetMenu(fileName = "RangedAttack", menuName = "Attacks/StraightShot")]
     public class StraightShot : RangedAttack
     {
+        [SerializeField] private AudioClip impactSound;
         public override void ExecuteAttack()
         {
             CoroutineRunner.StartCoroutine(Attack());
@@ -26,6 +27,9 @@ namespace Attack
             var projectile = ServiceLocator.Instance.GetService<ProjectileManager>()
                 .GetProjectile(projectilePrefab.name);
             projectile.OnHit += Hit;
+
+            if (impactSound) { projectile.OnHit += PlayClip; }
+
             projectile.OnReturnedToPool -= OnProjectileReturnsToPool;
             ActiveProjectiles.Add(projectile);
             if (projectile != null)
@@ -36,5 +40,10 @@ namespace Attack
             }
         }
         
+        void PlayClip()
+        {
+            ServiceLocator.Instance.GetService<SoundManager>().PlayAudioClip(impactSound);
+        }
+
     }
 }
