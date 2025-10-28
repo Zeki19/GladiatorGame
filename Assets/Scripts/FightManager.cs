@@ -1,6 +1,7 @@
+using Player;
 using System;
 using System.Collections;
-using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FightManager : MonoBehaviour
@@ -26,11 +27,33 @@ public class FightManager : MonoBehaviour
     }
     private void VictoryCinematic()
     {
+        switch (enemy.gameObject.name)
+        {
+            case "Gaius":
+                enemy.PlaySound("Death");
+                break;
+            case "Valeria":
+                enemy.PlaySound("Death");
+                break;
+            case "Minos":
+                enemy.PlaySound("Death");
+                break;
+            default:
+                break;
+        }
         cinematicManager.VictoryCinematic();
         Unsubscribe();
     }
     private void DefeatCinematic()
     {
+        switch (enemy.gameObject.name)
+        {
+            case "Valeria":
+                enemy.PlaySound("Laugh");
+                break;
+            default:
+                break;
+        }
         cinematicManager.DefeatCinematic();
         Unsubscribe();
     }

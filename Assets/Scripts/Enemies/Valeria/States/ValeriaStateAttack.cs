@@ -28,6 +28,23 @@ public class ValeriaStateAttack<T> : StatesBase<T>
         _look.LookDirInsta(dir); 
         _agent._NVagent.isStopped = true;
         attack.ExecuteAttack(controller.currentAttack);
+        switch (controller.currentAttack)
+        {
+            case 0:
+                _sound.PlaySound("Throw", "Enemy");
+                break;
+            case 2:
+                _sound.PlaySound("Swipe", "Enemy");
+                break;
+            case 3:
+                _sound.PlaySound("Throw", "Enemy");
+                break;
+            case 5:
+                _sound.PlaySound("Throw", "Enemy");
+                break;
+            default: 
+                break;
+        }
     }
 
     public override void Execute()

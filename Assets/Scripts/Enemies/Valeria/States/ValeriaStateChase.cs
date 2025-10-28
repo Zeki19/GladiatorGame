@@ -60,6 +60,7 @@ namespace Enemies.Valeria.States
             MaintainDistance();
             Vector2 dir = _steering.GetDir();
             _look.LookDir(dir);
+            
         }
         private void MaintainDistance()
         {
