@@ -154,7 +154,8 @@ public class SoundManager : MonoBehaviour
     
     public void PlayAudioClip(AudioClip sound)
     {
-
+        playerSource.loop = false;
+        enemySource.PlayOneShot(sound);
     }
 
 }
