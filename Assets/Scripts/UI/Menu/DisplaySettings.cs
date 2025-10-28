@@ -23,16 +23,26 @@ public class DisplaySettings : MonoBehaviour
         resolutionDropdown.ClearOptions();
 
         List<string> options = new List<string>();
-        
+        List<Resolution> uniqueResolutions = new List<Resolution>();
+
         int currentResolutionIndex = 0;
 
-        for (int i = 0; i < _resolutions.Length; i++)
+        foreach (var res in _resolutions)
         {
-            string option = _resolutions[i].width + " x " + _resolutions[i].height;
+            bool exists = uniqueResolutions.Exists(r => r.width == res.width && r.height == res.height);
+            if (!exists)
+            {
+                uniqueResolutions.Add(res);
+            }
+        }
+
+        for (int i = 0; i < uniqueResolutions.Count; i++)
+        {
+            string option = uniqueResolutions[i].width + " x " + uniqueResolutions[i].height;
             options.Add(option);
 
-            if (_resolutions[i].width == Screen.currentResolution.width &&
-                _resolutions[i].height == Screen.currentResolution.height)
+            if (uniqueResolutions[i].width == Screen.currentResolution.width &&
+                uniqueResolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }

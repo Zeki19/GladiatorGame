@@ -10,7 +10,7 @@ namespace Enemies.Valeria.States
         private Coroutine ExitDashTest;
         public override void Enter()
         {
-            _sound.PlaySound("BackStep", "Enemy");
+            _sound.PlaySound("Dash", "Enemy");
             _agent.TurnOffNavMesh();
             var dashData = _statesData.GetStateData<DashStateData>(EnemyStates.Dash);
             if (dashData != null)

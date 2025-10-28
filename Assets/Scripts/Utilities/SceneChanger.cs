@@ -46,12 +46,16 @@ public class SceneChanger : MonoBehaviour
     {
         if (!IsTransitioning)
             StartCoroutine(TransitionAndLoad(sceneName));
+
+        FixPauseState();
     }
 
     public void ChangeScene(int sceneIndex)
     {
         if (!IsTransitioning)
             StartCoroutine(TransitionAndLoad(sceneIndex));
+
+        FixPauseState();
     }
 
     private IEnumerator TransitionAndLoad(string sceneName)
@@ -96,6 +100,18 @@ public class SceneChanger : MonoBehaviour
         }
 
         IsTransitioning = false;
+    }
+
+    private void FixPauseState()
+    {
+        if (PauseManager.IsPaused)
+        {
+            PauseManager.SetPaused(false);
+        }
+        if (PauseManager.IsPausedCinematic)
+        {
+            PauseManager.SetPausedCinematic(false);
+        }
     }
 
     private IEnumerator Fade(float start, float end)
