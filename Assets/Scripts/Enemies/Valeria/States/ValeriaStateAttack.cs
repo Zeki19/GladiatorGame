@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Attack;
 using Enemies;
 using Enemies.Gaius;
@@ -11,6 +13,7 @@ public class ValeriaStateAttack<T> : StatesBase<T>
     private GameObject _weapon;
     private AttackManager attack;
     private EnemyController controller;
+    private Coroutine PreventStuckAttack;
     public ValeriaStateAttack(ISteering steering,GameObject weapon,AttackManager attackManager,EnemyController controller)
     {
         _steering = steering;
@@ -45,6 +48,14 @@ public class ValeriaStateAttack<T> : StatesBase<T>
             default: 
                 break;
         }
+        var A = _move as EnemyModel;
+        PreventStuckAttack = A.StartCoroutine(ExitDash());
+    }
+    private IEnumerator ExitDash()
+    {
+        yield return new WaitForSeconds(3f);
+        _status.SetStatus(StatusEnum.Attacking, false);
+
     }
 
     public override void Execute()
@@ -53,6 +64,8 @@ public class ValeriaStateAttack<T> : StatesBase<T>
 
     public override void Exit()
     {
+        var A = _move as EnemyModel;
+        A.StopCoroutine(PreventStuckAttack);
         _weapon.transform.localPosition=new Vector3(0,0.5f,0);
         _weapon.transform.localRotation=quaternion.identity;
         _weapon.SetActive(false);
