@@ -8,14 +8,13 @@ public class DisplaySettings : MonoBehaviour
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
 
-    private List<Resolution> _filteredResolutions = new List<Resolution>();
+    private readonly List<Resolution> _filteredResolutions = new List<Resolution>();
 
     private void Start()
     {
         SetupResolutions();
         if (fullscreenToggle) fullscreenToggle.isOn = Screen.fullScreen;
     }
-
     private void SetupResolutions()
     {
         var all = Screen.resolutions;
@@ -63,12 +62,9 @@ public class DisplaySettings : MonoBehaviour
         Screen.SetResolution(r.width, r.height, mode, r.refreshRateRatio);
         
     }
-
     public void SetFullscreen(bool fullscreen)
     {
-        Screen.fullScreen = fullscreen;
-        
-        SetResolution(resolutionDropdown.value);
+        Screen.fullScreenMode = fullscreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
     }
 
     #region Utils
