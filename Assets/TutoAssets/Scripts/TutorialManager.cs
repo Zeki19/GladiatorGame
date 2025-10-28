@@ -13,6 +13,10 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject normalExitDoor;
     [SerializeField] private GameObject trainingHubExitDoor;
 
+    [Header("UI References")]
+    [Tooltip("Button that allows skipping to the end of the tutorial")]
+    [SerializeField] private GameObject skipTutorialButton;
+
     [Header("Dependencies")]
     private DialogueManager _dialogueManager;
     private CameraTutorialManager _cameraTutorialManager;
@@ -41,6 +45,9 @@ public class TutorialManager : MonoBehaviour
     {
         InitializeDependencies();
         SetupDoors();
+        
+        UpdateSkipButtonVisibility();
+        
         if (!isTrainingMode)
         {
             StartTutorial();
@@ -125,6 +132,8 @@ public class TutorialManager : MonoBehaviour
             _currentState = TutorialState.NotStarted;
             _currentMission = null;
         }
+        
+        UpdateSkipButtonVisibility();
     }
 
     public void RestartTutorial()
@@ -142,6 +151,7 @@ public class TutorialManager : MonoBehaviour
         isTrainingMode = false;
 
         HideUIHint();
+        UpdateSkipButtonVisibility(); 
         OnTutorialRestart?.Invoke();
         StartTutorial();
     }
@@ -174,6 +184,8 @@ public class TutorialManager : MonoBehaviour
         _dialogueStarted = false;
 
         Debug.Log($"Starting Mission {index}: {_currentMission.missionName}");
+        
+        UpdateSkipButtonVisibility(); 
         OnMissionStarted?.Invoke(_currentMission);
 
         StartCoroutine(ProcessMissionFlow());
@@ -273,6 +285,7 @@ public class TutorialManager : MonoBehaviour
         Debug.Log("Tutorial Completed!");
         _tutorialCompleted = true;
 
+        UpdateSkipButtonVisibility();
         OnTutorialCompleted?.Invoke();
 
         if (_cameraTutorialManager != null)
@@ -320,6 +333,29 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => resetComplete);
         PauseManager.SetPausedCinematic(false);
     }
+
+    #region Skip Button Management
+
+    private void UpdateSkipButtonVisibility()
+    {
+        if (skipTutorialButton == null)
+            return;
+        bool shouldShowButton = !isTrainingMode && 
+                               !_tutorialCompleted && 
+                               (_currentMission != null || _currentMissionIndex == 0);
+
+        skipTutorialButton.SetActive(shouldShowButton);
+        
+        Debug.Log($"[TutorialManager] Skip button visibility: {shouldShowButton} " +
+                  $"(TrainingMode: {isTrainingMode}, Completed: {_tutorialCompleted}, HasMission: {_currentMission != null})");
+    }
+
+    public void SetSkipButton(GameObject button)
+    {
+        skipTutorialButton = button;
+        UpdateSkipButtonVisibility();
+    }
+    #endregion
 
     #region UI Hint Management
     private GameObject _currentUIHint;
@@ -391,6 +427,20 @@ public class TutorialManager : MonoBehaviour
     public void RestartTutorialFromMenu()
     {
         RestartTutorial();
+    }
+
+    [ContextMenu("Toggle Skip Button")]
+    public void ToggleSkipButton()
+    {
+        if (skipTutorialButton != null)
+        {
+            skipTutorialButton.SetActive(!skipTutorialButton.activeSelf);
+            Debug.Log($"Skip button toggled: {skipTutorialButton.activeSelf}");
+        }
+        else
+        {
+            Debug.LogWarning("Skip button reference is null!");
+        }
     }
     #endregion
 }
