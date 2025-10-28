@@ -8,57 +8,79 @@ public class DisplaySettings : MonoBehaviour
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
 
-    private Resolution[] _resolutions;
+    private List<Resolution> _filteredResolutions = new List<Resolution>();
 
     private void Start()
     {
         SetupResolutions();
+        if (fullscreenToggle) fullscreenToggle.isOn = Screen.fullScreen;
     }
 
     private void SetupResolutions()
     {
-        _resolutions = Screen.resolutions;
+        var all = Screen.resolutions;
+        var current = Screen.currentResolution;
+        
+        _filteredResolutions.Clear();
         resolutionDropdown.ClearOptions();
-
-        List<string> options = new List<string>();
-        List<Resolution> uniqueResolutions = new List<Resolution>();
-
-        int currentResolutionIndex = 0;
-
-        foreach (var res in _resolutions)
+        
+        var seen = new HashSet<(int w, int h)>();
+        foreach (var r in all)
         {
-            bool exists = uniqueResolutions.Exists(r => r.width == res.width && r.height == res.height);
-            if (!exists)
-            {
-                uniqueResolutions.Add(res);
-            }
+            if (!SameHz(r, current)) continue;
+            var key = (r.width, r.height);
+            if (seen.Add(key)) _filteredResolutions.Add(r);
         }
-
-        for (int i = 0; i < uniqueResolutions.Count; i++)
+        
+        if (_filteredResolutions.Count == 0)
         {
-            string option = uniqueResolutions[i].width + " x " + uniqueResolutions[i].height;
-            options.Add(option);
-
-            if (uniqueResolutions[i].width == Screen.currentResolution.width &&
-                uniqueResolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
+            _filteredResolutions.Add(current);
+        }
+        
+        var options = new List<string>(_filteredResolutions.Count);
+        int currentIdx = 0;
+        for (int i = 0; i < _filteredResolutions.Count; i++)
+        {
+            var r = _filteredResolutions[i];
+            options.Add($"{r.width} x {r.height}");
+            if (r.width == current.width && r.height == current.height)
+                currentIdx = i;
         }
 
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.value = currentIdx;
         resolutionDropdown.RefreshShownValue();
     }
-
-    public void SetResolution(int resolutionIndex)
+    
+    public void SetResolution(int dropdownIndex)
     {
-        Resolution resolution = _resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        if (dropdownIndex < 0 || dropdownIndex >= _filteredResolutions.Count) return;
+        
+        var r = _filteredResolutions[dropdownIndex];
+        
+        var mode = Screen.fullScreen ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+        
+        Screen.SetResolution(r.width, r.height, mode, r.refreshRateRatio);
+        
     }
 
     public void SetFullscreen(bool fullscreen)
     {
         Screen.fullScreen = fullscreen;
+        
+        SetResolution(resolutionDropdown.value);
     }
+
+    #region Utils
+
+    static float GetHz(in Resolution r)
+    {
+        return (float)r.refreshRateRatio.value;
+    }
+    static bool SameHz(in Resolution a, in Resolution b)
+    {
+        return Mathf.Abs(GetHz(a) - GetHz(b)) < 0.5f;
+    }
+
+    #endregion
 }
