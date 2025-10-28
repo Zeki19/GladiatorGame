@@ -61,6 +61,9 @@ public class MinotaurView : EnemyView, ILook
             case StateEnum.MidAttack:
                 animator.SetTrigger(TriHitCombo);
                 break;
+            case StateEnum.Death:
+                animator.SetTrigger("Death");
+                break;
             default:
                 Debug.LogWarning("No animation mapped for state: " + state);
                 break;

@@ -69,6 +69,9 @@ public class ValeriaView : EnemyView, ILook
             case StateEnum.LongAttack:
                 animator.SetTrigger(DaggerThrow);
                 break;
+            case StateEnum.Death:
+                animator.SetTrigger("Death");
+                break;
             default:
                 Debug.LogWarning("No animation mapped for state: " + state);
                 break;

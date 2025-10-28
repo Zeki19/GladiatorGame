@@ -17,6 +17,7 @@
     Phase2,
     Phase3,
     BackStep,
-    ShadowDash
+    ShadowDash,
+    Death
 
 }

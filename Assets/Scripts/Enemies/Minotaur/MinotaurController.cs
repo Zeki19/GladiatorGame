@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Attack;
+using Enemies.Gaius.States;
 using Enemies.Minotaur.States;
 using Entities.StateMachine;
 using Unity.Behavior;
@@ -24,6 +25,7 @@ namespace Enemies.Minotaur
         private StatesBase<EnemyStates> _searchState;
         private StatesBase<EnemyStates> _desperateSearchState;
         private StatesBase<EnemyStates> _attackState;
+        private StatesBase<EnemyStates> _deathState;
 
         private ISteering _pursuitSteering;
 
@@ -55,36 +57,43 @@ namespace Enemies.Minotaur
             var chaseState = new MinotaurStateChase<EnemyStates>(_pursuitSteering, this,shortAttackCD,longAttackCD);
             var searchState = new MinotaurStateSearch<EnemyStates>(_pursuitSteering);
             var desperateSearchState = new MinotaurStateDesperateSearch<EnemyStates>(_pursuitSteering, searchSpeed);
+            var deathState = new DeadState<EnemyStates>();
 
 
             _chaseState = chaseState;
             _searchState = searchState;
             _desperateSearchState = desperateSearchState;
             _attackState = attackState;
+            _deathState = deathState;
 
             var stateList = new List<State<EnemyStates>>
             {
                 chaseState,
                 searchState,
                 desperateSearchState,
-                attackState
+                attackState,
+                deathState
             };
             
             chaseState.AddTransition(EnemyStates.Patrol, searchState);
             chaseState.AddTransition(EnemyStates.Surround, desperateSearchState);
             chaseState.AddTransition(EnemyStates.Attack, attackState);
+            chaseState.AddTransition(EnemyStates.Death, deathState);
             
             searchState.AddTransition(EnemyStates.Chase, chaseState);
             searchState.AddTransition(EnemyStates.Surround, desperateSearchState);
+            searchState.AddTransition(EnemyStates.Death, deathState);
             searchState.AddTransition(EnemyStates.Attack, attackState);
 
             desperateSearchState.AddTransition(EnemyStates.Chase, chaseState);
             desperateSearchState.AddTransition(EnemyStates.Patrol, searchState);
+            desperateSearchState.AddTransition(EnemyStates.Death, deathState);
             desperateSearchState.AddTransition(EnemyStates.Attack, attackState);
             
             attackState.AddTransition(EnemyStates.Chase,chaseState);
             attackState.AddTransition(EnemyStates.Attack, attackState);
             attackState.AddTransition(EnemyStates.Surround,desperateSearchState);
+            attackState.AddTransition(EnemyStates.Death, deathState);
             attackState.AddTransition(EnemyStates.Patrol,searchState);
 
             InitializeComponents(stateList);
@@ -102,7 +111,8 @@ namespace Enemies.Minotaur
         private void Die()
         {
             PauseManager.OnCinematicStateChanged -= HandlePause;
-            Destroy(gameObject);
+            manager.PlaySound("Death");
+            ChangeToState(EnemyStates.Death);
             BossExitDoor door = ServiceLocator.Instance.GetService<BossExitDoor>();
             if (door != null)
             {

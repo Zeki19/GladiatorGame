@@ -40,6 +40,7 @@ namespace Enemies.Valeria
         private StatesBase<EnemyStates> _AttackState;
         private StatesBase<EnemyStates> _meleeState;
         private StatesBase<EnemyStates> _ambushState;
+        private StatesBase<EnemyStates> _deathState;
 
         private ISteering _pursuitSteering;
 
@@ -76,7 +77,8 @@ namespace Enemies.Valeria
             var runAwayState = new ValeriaStateRunAway<EnemyStates>(target, hiddingLayer, hiddingTime);
             var invisibilityState = new ValeriaStateInvisibility<EnemyStates>(target, invisibilitySpeed, stepPrefab);
             var ambushState = new ValeriaStateAmbush<EnemyStates>(target, 20);
-
+            var deathState = new DeadState<EnemyStates>();
+            
             _dashState = dashState;
             _chaseState = chaseState;
             _meleeState = meleeState;
@@ -84,6 +86,7 @@ namespace Enemies.Valeria
             _runAwayState = runAwayState;
             _invisibilityState = invisibilityState;
             _ambushState = ambushState;
+            _deathState = deathState;
 
             var stateList = new List<State<EnemyStates>>
             {
@@ -93,7 +96,8 @@ namespace Enemies.Valeria
                 runAwayState,
                 invisibilityState,
                 meleeState,
-                ambushState
+                ambushState,
+                deathState
             };
             
             chaseState.AddTransition(EnemyStates.Attack, attackState);
@@ -101,24 +105,28 @@ namespace Enemies.Valeria
             chaseState.AddTransition(EnemyStates.RunAway, runAwayState);
             chaseState.AddTransition(EnemyStates.Invisibility, invisibilityState);
             chaseState.AddTransition(EnemyStates.Surround, meleeState);
+            chaseState.AddTransition(EnemyStates.Death, deathState);
             
             meleeState.AddTransition(EnemyStates.Surround, chaseState);
             meleeState.AddTransition(EnemyStates.Attack, attackState);
             meleeState.AddTransition(EnemyStates.Dash, dashState);
             meleeState.AddTransition(EnemyStates.RunAway, runAwayState);
             meleeState.AddTransition(EnemyStates.Invisibility, invisibilityState);
+            meleeState.AddTransition(EnemyStates.Death, deathState);
 
             attackState.AddTransition(EnemyStates.Chase, chaseState);
             attackState.AddTransition(EnemyStates.Dash, dashState);
             attackState.AddTransition(EnemyStates.RunAway, runAwayState);
             attackState.AddTransition(EnemyStates.Invisibility, invisibilityState);
             attackState.AddTransition(EnemyStates.Surround, meleeState);
+            attackState.AddTransition(EnemyStates.Death, deathState);
             
             dashState.AddTransition(EnemyStates.Chase, chaseState);
             dashState.AddTransition(EnemyStates.Attack, attackState);
             dashState.AddTransition(EnemyStates.RunAway, runAwayState);
             dashState.AddTransition(EnemyStates.Invisibility, invisibilityState);
             dashState.AddTransition(EnemyStates.Surround, meleeState);
+            dashState.AddTransition(EnemyStates.Death, deathState);
 
             
             runAwayState.AddTransition(EnemyStates.Chase, chaseState);
@@ -126,6 +134,7 @@ namespace Enemies.Valeria
             runAwayState.AddTransition(EnemyStates.Dash, dashState);
             runAwayState.AddTransition(EnemyStates.Invisibility, invisibilityState);
             runAwayState.AddTransition(EnemyStates.Surround, meleeState);
+            runAwayState.AddTransition(EnemyStates.Death, deathState);
 
             
             invisibilityState.AddTransition(EnemyStates.Chase, chaseState);
@@ -134,6 +143,7 @@ namespace Enemies.Valeria
             invisibilityState.AddTransition(EnemyStates.Dash, dashState);
             invisibilityState.AddTransition(EnemyStates.Surround, meleeState);
             invisibilityState.AddTransition(EnemyStates.Ambush, ambushState);
+            invisibilityState.AddTransition(EnemyStates.Death, deathState);
 
             ambushState.AddTransition(EnemyStates.Chase, chaseState);
             ambushState.AddTransition(EnemyStates.Attack, attackState);
@@ -141,6 +151,7 @@ namespace Enemies.Valeria
             ambushState.AddTransition(EnemyStates.Dash, dashState);
             ambushState.AddTransition(EnemyStates.Surround, meleeState);
             ambushState.AddTransition(EnemyStates.Invisibility, invisibilityState);
+            ambushState.AddTransition(EnemyStates.Death, deathState);
 
             InitializeComponents(stateList);
             Fsm.SetInit(chaseState, EnemyStates.Chase);
@@ -172,8 +183,8 @@ namespace Enemies.Valeria
         private void Die()
         {
             PauseManager.OnCinematicStateChanged -= HandlePause;
-            Destroy(gameObject);
-            //SceneChanger.Instance.ChangeScene(sceneToChangeWhenDie);
+            manager.PlaySound("Death");
+            ChangeToState(EnemyStates.Death);
             BossExitDoor door = ServiceLocator.Instance.GetService<BossExitDoor>();
             if (door != null)
             {
