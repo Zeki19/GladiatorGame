@@ -9,8 +9,6 @@ public class DisplaySettings : MonoBehaviour
     [SerializeField] private Toggle fullscreenToggle;
 
     private Resolution[] _resolutions;
-    private bool _currentFullscreen;
-    private int _currentResolutionIndex;
 
     private void Start()
     {
@@ -55,16 +53,12 @@ public class DisplaySettings : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        _currentResolutionIndex = resolutionIndex;
         Resolution resolution = _resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        Debug.Log(resolution);
     }
 
     public void SetFullscreen(bool fullscreen)
     {
-        _currentFullscreen = fullscreen;
         Screen.fullScreen = fullscreen;
-        Debug.Log("FS: "+ _currentFullscreen);
     }
 }

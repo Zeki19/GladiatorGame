@@ -157,6 +157,5 @@ public class SoundManager : MonoBehaviour
         playerSource.loop = false;
         enemySource.PlayOneShot(sound);
     }
-
 }
 
