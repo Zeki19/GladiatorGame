@@ -110,8 +110,8 @@ namespace Enemies.Minotaur
 
         private void Die()
         {
-            PauseManager.OnCinematicStateChanged -= HandlePause;
             manager.PlaySound("Death");
+            PauseManager.OnCinematicStateChanged -= HandlePause;
             ChangeToState(EnemyStates.Death);
             BossExitDoor door = ServiceLocator.Instance.GetService<BossExitDoor>();
             if (door != null)
