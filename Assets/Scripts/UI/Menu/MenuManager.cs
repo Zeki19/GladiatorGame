@@ -36,8 +36,6 @@ public class MenuManager : MonoBehaviour
 
         menuList[0].SetActive(true);
         _currentScreen = menuList[0];
-        
-        Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
 
         UpdateContinueButton();
     }
