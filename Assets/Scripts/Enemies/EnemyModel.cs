@@ -41,6 +41,10 @@ namespace Enemies
                 controller.ChangeToState(EnemyStates.Dash);
                 //Dash(perpDir, dashForce);
             }
+            else
+            {
+                manager.controller.SetStatus(StatusEnum.Dashing,false);
+            }
         }
 
         public RaycastHit2D RaycastBetweenCharacters(Transform start, Transform target, LayerMask hitMask = default)
