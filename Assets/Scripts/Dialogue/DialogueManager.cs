@@ -11,19 +11,22 @@ public class DialogueManager : MonoBehaviour
     private DialogueManager _instance;
 
     #region Constants
+    [Header("Wiring")]
     [SerializeField] private GameObject dialogueCanvas;
     [SerializeField] private TextMeshProUGUI dialogueBoxUIText;
     [SerializeField] private Image speakerBoxUIImage;
     [SerializeField] private TextMeshProUGUI speakerBoxUIName;
-
+    [Space]
     [SerializeField] private AudioSource audioSource;
+    [Space]
     [SerializeField] private Animator animator;
     private CameraShake _cameraShake;
     #endregion
 
     #region Variables
+    [Header("Dialogue config")]
     [SerializeField] private float typingDelay;
-    [SerializeField] private AudioClip typingSound;
+    [SerializeField] private Sound typingSound;
 
     #endregion
 
@@ -31,7 +34,7 @@ public class DialogueManager : MonoBehaviour
 
     private readonly Queue<DialogueLine> _linesQueue = new Queue<DialogueLine>();
     private Action _onTypeEnd;
-    public Action OnConversationEnd; //Use this for the end of the conversation. To call the scene changer or something.
+    public Action OnConversationEnd;
     public Action OnLineChange;
 
     private void Awake()
@@ -48,6 +51,8 @@ public class DialogueManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         ServiceLocator.Instance.RegisterService(this);
+        
+        if(typingSound.clip) audioSource.volume = typingSound.volume;
     }
     public void StartConversation(DialogueSO dialogue)
     {
@@ -136,7 +141,10 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence)
         {
             dialogueBoxUIText.text += letter;
-            audioSource.PlayOneShot(typingSound);
+            if (typingSound.clip)
+            {
+                audioSource.PlayOneShot(typingSound.clip);
+            }
             yield return new WaitForSeconds(typingDelay);
         }
         _onTypeEnd?.Invoke();
