@@ -15,7 +15,7 @@ public class MovingProjectile : BaseProjectile
         }
     }
 
-    protected void Move()
+    protected virtual void Move()
     {
         transform.Translate(Vector2.up * (Speed * Time.deltaTime));
     }

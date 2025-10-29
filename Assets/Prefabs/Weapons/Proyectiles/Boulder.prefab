@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2141902345842491442}
   - component: {fileID: 5133580631929134119}
   - component: {fileID: 1592025993930511573}
-  - component: {fileID: 8706722023553514159}
+  - component: {fileID: -6928401556670604310}
   m_Layer: 0
   m_Name: Boulder
   m_TagString: Untagged
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 1467187cc3f28d24da9b8f361943cdb8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.63529414, g: 0.6313726, b: 0.6313726, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -126,7 +126,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
---- !u!114 &8706722023553514159
+--- !u!114 &-6928401556670604310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,9 +135,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5524527720111712474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e02887bbcfd1410aac720b91a8cda6f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 494f680ff43ff5d498cf2b9e89e289d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   collisionLayer:
     serializedVersion: 2
     m_Bits: 0
+  flipRate: 5
