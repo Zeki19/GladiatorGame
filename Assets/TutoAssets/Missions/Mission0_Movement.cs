@@ -8,8 +8,8 @@ public class Mission0_Movement : TutorialMission
 
     protected override void OnInitialize()
     {
-        missionName = "Learn To Move";
-        missionDescription = "Use WASD to move character";
+        missionName = "Movement";
+        missionDescription = "Use WASD to move";
         dialogueToPlay = EnumDialogues.Mission0;
         _hasCompleted = false;
 
