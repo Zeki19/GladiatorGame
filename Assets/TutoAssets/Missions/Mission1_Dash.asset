@@ -12,14 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c23b420c614e4a4bb1f940235b3a7b2, type: 3}
   m_Name: Mission1_Dash
   m_EditorClassIdentifier: 
-  missionName: Learn To Dash
-  missionDescription: Press SPACE to dash in all directions
+  missionName: Dashing
+  missionDescription: Press SPACE to dash
   dialogueToPlay: 1
   shouldMoveCamera: 0
-  cameraTarget: {fileID: 0}
-  cameraMoveDuration: 2
-  zoomIn: 0
-  zoomAmount: 5
+  cameraEvent:
+    eventId: 
+    targetTag: 
+    targetName: 
+    moveDuration: 2
+    shouldZoom: 0
+    zoomAmount: 5
+    zoomDuration: 1
+    executeAfterDialogue: 0
   showUIHint: 0
   uiHintPrefab: {fileID: 0}
   hintPosition: {x: 0, y: 0}

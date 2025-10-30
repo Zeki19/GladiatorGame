@@ -12,14 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3720ae9e52e382d4c8918d7f84d9af81, type: 3}
   m_Name: Mission5_Pick
   m_EditorClassIdentifier: 
-  missionName: Pick another Weapon
+  missionName: Equip another weapon
   missionDescription: Press E to Equip
   dialogueToPlay: 5
   shouldMoveCamera: 0
-  cameraTarget: {fileID: 0}
-  cameraMoveDuration: 2
-  zoomIn: 0
-  zoomAmount: 5
+  cameraEvent:
+    eventId: 
+    targetTag: 
+    targetName: 
+    moveDuration: 2
+    shouldZoom: 0
+    zoomAmount: 5
+    zoomDuration: 1
+    executeAfterDialogue: 0
   showUIHint: 0
   uiHintPrefab: {fileID: 0}
   hintPosition: {x: 0, y: 0}

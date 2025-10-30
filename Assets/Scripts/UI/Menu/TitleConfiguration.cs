@@ -55,7 +55,6 @@ public class TitleConfiguration : MonoBehaviour
     private void TitleAnimations()
     {
         var imageDimensions = (int)imageSize;
-        Debug.Log(imageDimensions);
         if (leftImage)  leftImage.gameObject.SetActive(true);
         if (rightImage) rightImage.gameObject.SetActive(true);
         
