@@ -31,6 +31,7 @@ namespace Weapons
             _pool = new WeaponPool(_factory.Create);
             ServiceLocator.Instance.RegisterService(this);
         }
+        
         private void Start()
         {
             CrateWeaponInRandomPoint();
@@ -63,7 +64,8 @@ namespace Weapons
         }
         private void CrateWeaponInRandomPoint()
         {
-            Weapon weapon= CreateWeapon(forTest[Random.Range(0,forTest.Count)]);
+            Weapon weapon = CreateWeapon(forTest[Random.Range(0,forTest.Count)]);
+            
             if (spawnPoints.Count < 2)
             {
                 foreach (var point in UsedspawnPoints)
@@ -72,8 +74,15 @@ namespace Weapons
                 }
                 UsedspawnPoints.Clear();
             }
+            
             var random = Random.Range(0, spawnPoints.Count);
             weapon.WeaponGameObject.transform.position = spawnPoints[random];
+            
+            Debug.Log("SPAWNED AT " + spawnPoints[random]);
+            
+            float randomZ = Random.Range(0f, 360f);
+            weapon.WeaponGameObject.transform.rotation = Quaternion.Euler(0f, 0f, randomZ);
+            
             UsedspawnPoints.Add(spawnPoints[random]);
             spawnPoints.RemoveAt(random);
         }
@@ -127,5 +136,6 @@ namespace Weapons
         //{
         //    ServiceLocator.Instance.RemoveService(this);
         //}
+
     }
 }
