@@ -3,6 +3,7 @@ using Player;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -28,11 +29,26 @@ public class SoundManager : MonoBehaviour
         ServiceLocator.Instance.GetService<PlayerManager>().StopSounds += WhoToStop;
 
         if (playlist.sounds.Length <= 0) return;
-        Sound s = Array.Find(playlist.sounds, sound => sound.name == "Combat");
-        musicSource.volume = s.volume;
-        musicSource.loop = s.loop;
-        musicSource.clip = s.clip;
-        musicSource.Play();
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        Sound s = null;
+
+        if (sceneName == "TutorialScene")
+        {
+            s = Array.Find(playlist.sounds, sound => sound.name == "Tutorial");
+        }
+        else
+        {
+            s = Array.Find(playlist.sounds, sound => sound.name == "Combat");
+        }
+
+        if (s != null)
+        {
+            musicSource.volume = s.volume;
+            musicSource.loop = s.loop;
+            musicSource.clip = s.clip;
+            musicSource.Play();
+        }
     }
 
     private void WhoSaidIt(string a,string who)
