@@ -83,7 +83,7 @@ namespace Weapons
         {
             if (spawnPoints.Count == 0)
             {
-                spawnPoints = usedSpawnPoint;
+                spawnPoints = new List<Vector3>(usedSpawnPoint);
                 usedSpawnPoint.Clear();
             }
             
