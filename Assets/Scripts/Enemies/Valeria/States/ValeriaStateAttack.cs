@@ -13,7 +13,7 @@ public class ValeriaStateAttack<T> : StatesBase<T>
     private GameObject _weapon;
     private AttackManager attack;
     private EnemyController controller;
-    private Coroutine PreventStuckAttack;
+    private Coroutine PreventStuckDash;
     public ValeriaStateAttack(ISteering steering,GameObject weapon,AttackManager attackManager,EnemyController controller)
     {
         _steering = steering;
@@ -49,7 +49,7 @@ public class ValeriaStateAttack<T> : StatesBase<T>
                 break;
         }
         var A = _move as EnemyModel;
-        PreventStuckAttack = A.StartCoroutine(ExitDash());
+        PreventStuckDash = A.StartCoroutine(ExitDash());
     }
     private IEnumerator ExitDash()
     {
@@ -57,7 +57,7 @@ public class ValeriaStateAttack<T> : StatesBase<T>
         _status.SetStatus(StatusEnum.Attacking, false);
 
     }
-
+    
     public override void Execute()
     {
     }
@@ -65,7 +65,7 @@ public class ValeriaStateAttack<T> : StatesBase<T>
     public override void Exit()
     {
         var A = _move as EnemyModel;
-        A.StopCoroutine(PreventStuckAttack);
+        A.StopCoroutine(PreventStuckDash);
         _weapon.transform.localPosition=new Vector3(0,0.5f,0);
         _weapon.transform.localRotation=quaternion.identity;
         _weapon.SetActive(false);

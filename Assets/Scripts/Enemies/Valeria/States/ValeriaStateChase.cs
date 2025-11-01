@@ -83,7 +83,6 @@ namespace Enemies.Valeria.States
                 _middleTimerCd += Time.deltaTime;
                 if (_agent._NVagent.velocity.magnitude > .2f)
                 {
-                    Debug.Log("toSlow");
                     _middleTimerCd += Time.deltaTime;
                 }
                 if (_middleTimerCd > _middleAttackCd)

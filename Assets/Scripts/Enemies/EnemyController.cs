@@ -160,5 +160,10 @@ namespace Enemies
         }
 
         #endregion
+
+        public string GetCurrentState()
+        {
+            return Fsm.CurrentStateEnum().ToString();
+        }
     }
 }

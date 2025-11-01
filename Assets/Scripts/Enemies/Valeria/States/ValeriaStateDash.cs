@@ -24,6 +24,8 @@ namespace Enemies.Valeria.States
 
         private IEnumerator ExitDash()
         {
+            if(_agent._NVagent.updatePosition )
+                Debug.Log("NVAgent.UpdatePosition is True and Shoud be False");
             yield return new WaitForSeconds(2.5f);
             _status.SetStatus(StatusEnum.Dashing, false);
 

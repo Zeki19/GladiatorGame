@@ -128,7 +128,7 @@ public class SoundManager : MonoBehaviour
         Sound playerS = Array.Find(PlayerPlaylist.sounds, sound => sound.name == sfxName);
         if (playerS == null) return;
         
-        Debug.Log("Player said: " + playerS.name);
+        //Debug.Log("Player said: " + playerS.name);
         
         if(playerS.loop)
         {
@@ -142,7 +142,7 @@ public class SoundManager : MonoBehaviour
         Sound enemyS = Array.Find(EnemyPlaylist.sounds, sound => sound.name == sfxName);
         if (enemyS == null) return;
         
-        Debug.Log("Enemy said: " + enemyS.name);
+        //Debug.Log("Enemy said: " + enemyS.name);
         
         if (enemyS.loop)
         {

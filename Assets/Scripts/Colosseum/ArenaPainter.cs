@@ -74,7 +74,7 @@ public class ArenaPainter : MonoBehaviour
         {
             bloodTilemap.SetTile(cell, null);
         }
-        Debug.Log("Paint arena" + effectName);
+        //Debug.Log("Paint arena" + effectName);
     }
 
     private void InitializeTiles()

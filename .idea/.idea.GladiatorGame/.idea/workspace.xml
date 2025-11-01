@@ -6,7 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/ValeriaBehaviour.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/ValeriaBehaviour.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ValeriaFight.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ValeriaFight.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Colosseum/ArenaPainter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Colosseum/ArenaPainter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/MissAttackHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/MissAttackHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateAmbush.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateAmbush.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateAttack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateChase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateChase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateDash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateDash.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/ValeriaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/ValeriaController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/Interfaces/IStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/Interfaces/IStatus.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,10 +67,13 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Menu/TitleConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UIManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utilities/CameraShake.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utilities/DebugUI/DebugWithUnityEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/BoulderProjectile.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap@b1f6833cdf82/Editor/GridEditorUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/BehaviorGraphModule.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/Node.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/Nodes/Actions/Navigation/PatrolAction.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/Nodes/Composites/SequenceComposite.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/Nodes/Composites/SwitchComposite.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.behavior@3aef49b1615b/Runtime/Execution/Nodes/Decorators/Inverter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@b66fdb7cd1f2/Runtime/Core/CameraTarget.cs" root0="SKIP_HIGHLIGHTING" />
@@ -94,7 +109,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$USER_HOME$/Downloads/TinyGladiator_Beta\GladiatorGame.exe" />
+      <option name="EXE_PATH" value="$USER_HOME$/Desktop/GladiatorBuild\GladiatorGame.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Ignacio Puk\Downloads" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -105,7 +120,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.58f2\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Unity\6000.0.58f2\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;D:\Unity Poyects\GladiatorGame&quot; -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Unity Poyects\GladiatorGame" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -116,7 +131,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.58f2\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Unity\6000.0.58f2\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;D:\Unity Poyects\GladiatorGame&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Unity Poyects\GladiatorGame" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -140,13 +155,15 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="22152">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="22152" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list />
+        <list>
+          <MonoRuntime />
+        </list>
       </option>
       <option name="selectedOptions">
         <list />
@@ -261,6 +278,7 @@
       <workItem from="1761790524162" duration="1245000" />
       <workItem from="1761876906055" duration="1899000" />
       <workItem from="1761962704389" duration="1742000" />
+      <workItem from="1762003453120" duration="8351000" />
     </task>
     <servers />
   </component>
@@ -338,19 +356,6 @@
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Attack/BaseAttack.cs</url>
-          <line>59</line>
-          <properties documentPath="D:\Desarrollo\Unreal\GladiatorGame\Assets\Scripts\Attack\BaseAttack.cs" containingFunctionPresentation="Method 'LookPosition'">
-            <startOffsets>
-              <option value="1517" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1584" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Obstacles/Wall/Wall_Standing.cs</url>
           <line>50</line>
           <properties documentPath="D:\Desarrollo\Unreal\GladiatorGame\Assets\Scripts\Obstacles\Wall\Wall_Standing.cs" containingFunctionPresentation="Method 'OnTriggerEnter2D'" />
@@ -371,13 +376,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs</url>
-          <line>119</line>
-          <properties documentPath="D:\Unity Poyects\GladiatorGame\Assets\Scripts\Weapons\WeaponManager.cs" containingFunctionPresentation="Method 'CatchDroppedWeapon'">
+          <line>128</line>
+          <properties documentPath="D:\Unity Poyects\GladiatorGame\Assets\Scripts\Weapons\WeaponManager.cs" containingFunctionPresentation="Method 'OnDrawGizmos'">
             <startOffsets>
-              <option value="4162" />
+              <option value="4559" />
             </startOffsets>
             <endOffsets>
-              <option value="4163" />
+              <option value="4560" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="73" />

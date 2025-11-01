@@ -156,7 +156,7 @@ namespace Enemies.Valeria
             InitializeComponents(stateList);
             Fsm.SetInit(chaseState, EnemyStates.Chase);
         }
-
+    
         private void OnDrawGizmos()
         {
             if(Fsm == null)

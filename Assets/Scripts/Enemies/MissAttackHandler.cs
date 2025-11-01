@@ -11,7 +11,6 @@ public class MissAttackHandler
     {
         TotalMissAttacks++;
         CurrentMissAttacks++;
-        Debug.Log(CurrentMissAttacks);
     }
 
     public void ResetMissAttacks()

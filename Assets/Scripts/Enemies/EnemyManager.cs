@@ -11,8 +11,8 @@ public class EnemyManager : EntityManager
     private void Awake()
     {
         HealthSystem = new HealthSystem.HealthSystem(maxLife);
-        HealthSystem.OnDamage += PrintHealth;
-        HealthSystem.OnHeal += PrintHealth;
+        //HealthSystem.OnDamage += PrintHealth;
+        //HealthSystem.OnHeal += PrintHealth;
         ServiceLocator.Instance.RegisterService(this);
     }
 
