@@ -971,11 +971,23 @@ PrefabInstance:
       value: WeaponManager
       objectReference: {fileID: 0}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: 'forTest.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: d2b80116dd5cdd34c982cdec44eec770, type: 2}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: 'forTest.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4aa4438dcb0a33b4999ee3caff96345d, type: 2}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: 'weapons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d2b80116dd5cdd34c982cdec44eec770, type: 2}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: 'weapons.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 4aa4438dcb0a33b4999ee3caff96345d, type: 2}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}

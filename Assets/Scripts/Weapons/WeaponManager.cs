@@ -18,10 +18,16 @@ namespace Weapons
 
         [SerializeField] private Transform inactiveWeapon;
         private WeaponPool _pool;
-        public List<SoWeapon>  forTest;
+        
+        [Header("Weapons list")]
+        [SerializeField] private List<SoWeapon>  weapons;
         private Dictionary<GameObject, Weapon> _droppedWeapons;
+        
+        [Header("SpawnPoints list")]
         [SerializeField] private List<Vector3> spawnPoints;
-        [SerializeField] private List<Vector3> usedSpawnPoints;
+        [SerializeField] private List<Vector3> usedSpawnPoint;
+        
+        [Header("Respawn config")]
         [SerializeField] private Vector2 RespawnTimeRange;
         [SerializeField] private Vector2Int RespawnWeaponQuantity;
         
@@ -46,6 +52,7 @@ namespace Weapons
                 CrateWeaponInRandomPoint();
             }
         }
+        
         private Weapon CreateWeapon(SoWeapon weaponConfig)
         {
             var newWeapon = _pool.Get(weaponConfig);
@@ -61,28 +68,33 @@ namespace Weapons
             return weapon;
         }
         
+        [ContextMenu("Spawn Weapon")]
         private void CrateWeaponInRandomPoint()
         {
-            Weapon weapon = CreateWeapon(forTest[Random.Range(0,forTest.Count)]);
-            
-            if (spawnPoints.Count <= 0)
-            {
-                foreach (var point in usedSpawnPoints)
-                {
-                    spawnPoints.Add(point);
-                }
-                usedSpawnPoints.Clear();
-            }
-            
-            var random = Random.Range(0, spawnPoints.Count);
-            weapon.WeaponGameObject.transform.position = spawnPoints[random];
+            Weapon weapon = CreateWeapon(weapons[Random.Range(0,weapons.Count)]);
+
+            var point = GetRandomSpawnPoint();
+            weapon.WeaponGameObject.transform.position = point;
             
             float randomZ = Random.Range(0f, 360f);
             weapon.WeaponGameObject.transform.rotation = Quaternion.Euler(0f, 0f, randomZ);
-            
-            usedSpawnPoints.Add(spawnPoints[random]);
-            spawnPoints.RemoveAt(random);
         }
+        private Vector3 GetRandomSpawnPoint()
+        {
+            if (spawnPoints.Count == 0)
+            {
+                spawnPoints = usedSpawnPoint;
+                usedSpawnPoint.Clear();
+            }
+            
+            var index = Random.Range(0, spawnPoints.Count);
+            var returnValue = spawnPoints[index];
+            spawnPoints.RemoveAt(index);
+            usedSpawnPoint.Add(returnValue);
+            
+            return returnValue;
+        }
+        
         public void DestroyWeapon(Weapon weapon)
         {
             _pool.Release(weapon);
@@ -91,7 +103,6 @@ namespace Weapons
             if (_droppedWeapons.Count == 0)
                 StartCoroutine(RespawnWeapon());
         }
-        
         public Weapon PickUpWeaponInRange(Vector3 pos, float range)
         {
             foreach (var weapon in _droppedWeapons)
