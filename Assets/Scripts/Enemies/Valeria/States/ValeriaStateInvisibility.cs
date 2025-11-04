@@ -27,6 +27,7 @@ namespace Enemies.Valeria.States
             _invisibilitySpeed = invisibilitySpeed;
             _smokePrefab = smokePrefab;
             _smokeParent = smokeParent;
+
         }
 
         public override void Enter()
@@ -37,8 +38,9 @@ namespace Enemies.Valeria.States
 
             _regularSpeed = _agent._NVagent.speed;
 
-            var look = _look as EntityView;
+            var look = _look as ValeriaView;
             look.Sprite.enabled = false;
+            look.shadowSprite.enabled = false;
 
             _agent._NVagent.speed = _invisibilitySpeed;
             _agent._NVagent.updateRotation = false;
