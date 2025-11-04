@@ -17,7 +17,7 @@ public class ValeriaView : EnemyView, ILook
     private static readonly int DaggerThrow = Animator.StringToHash("DaggerThrow");
     private static readonly int Phase = Animator.StringToHash("Phase");
     public GameObject art;
-
+    public SpriteRenderer shadowSprite;
     private void Update()
     {
         animator.SetFloat(Direction, transform.rotation.z < 0 ? 1 : 0.1f);

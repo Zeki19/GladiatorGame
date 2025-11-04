@@ -11,7 +11,7 @@ namespace Enemies.Valeria.States
         private float _invisibilitySpeed;
         private float _regularSpeed;
 
-        private float _smokeInterval = 2f;
+        private float _smokeInterval = .7f;
         private float _smokeTimer;
         private GameObject _smokePrefab;
         private Transform _smokeParent;
@@ -27,6 +27,7 @@ namespace Enemies.Valeria.States
             _invisibilitySpeed = invisibilitySpeed;
             _smokePrefab = smokePrefab;
             _smokeParent = smokeParent;
+
         }
 
         public override void Enter()
@@ -37,8 +38,9 @@ namespace Enemies.Valeria.States
 
             _regularSpeed = _agent._NVagent.speed;
 
-            var look = _look as EntityView;
+            var look = _look as ValeriaView;
             look.Sprite.enabled = false;
+            look.shadowSprite.enabled = false;
 
             _agent._NVagent.speed = _invisibilitySpeed;
             _agent._NVagent.updateRotation = false;
@@ -94,7 +96,6 @@ namespace Enemies.Valeria.States
         private void SpawnSmoke()
         {
             if (_smokePrefab == null) return;
-
             GameObject smoke = Object.Instantiate(_smokePrefab, _move.Position, Quaternion.identity, _smokeParent);
             Object.Destroy(smoke, 0.5f);
         }

@@ -934,7 +934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &179303366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11974,14 +11974,6 @@ PrefabInstance:
       value: WeaponManager
       objectReference: {fileID: 0}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
-      propertyPath: RespawnTimeRange.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
-      propertyPath: RespawnTimeRange.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: forTest.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -12036,10 +12028,6 @@ PrefabInstance:
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: spawnPoints.Array.data[7].y
       value: -30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
-      propertyPath: MinimumAmountOfWeaponsInTheGround
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12298,10 +12286,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1566188938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -25}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &526068343
 MonoBehaviour:
@@ -12567,7 +12555,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1077025694}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.37311995
+  m_Size: 0.5660399
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13336,10 +13324,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1566188938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -25}
-  m_SizeDelta: {x: 100, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &801305920
 MonoBehaviour:
@@ -14216,8 +14204,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1768710878}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.62688005}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -26142,9 +26130,9 @@ RectTransform:
   m_Father: {fileID: 1020258330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1352687265
 MonoBehaviour:
@@ -26372,6 +26360,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b37aaf5bb23e14ba2fe78adc20ce57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!212 &1493281410 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5916784296395507806, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+  m_PrefabInstance: {fileID: 1967316716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1560716742
 GameObject:
   m_ObjectHideFlags: 0
@@ -26490,10 +26483,10 @@ RectTransform:
   - {fileID: 801305919}
   m_Father: {fileID: 983484439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1566188939
 MonoBehaviour:
@@ -26721,10 +26714,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1604702041}
   playlist: {fileID: 11400000, guid: b74014062a5d6f84e9d5fff63c8fdcff, type: 2}
+  sceneMusicConfig: {fileID: 11400000, guid: 88bd332d2f0746f47a6d0add2c267d02, type: 2}
   playerSource: {fileID: 2020722033}
   PlayerPlaylist: {fileID: 11400000, guid: fab5c79e4b5f2474abceff77b8a91671, type: 2}
   enemySource: {fileID: 2093591357}
-  EnemyPlaylist: {fileID: 11400000, guid: c64ec95eff578f841b8dd8a2b1e6ab13, type: 2}
+  EnemyPlaylist: {fileID: 11400000, guid: 66a35d19972ff704dab3883af0f14ee6, type: 2}
 --- !u!1 &1610851039
 GameObject:
   m_ObjectHideFlags: 0
@@ -28381,7 +28375,7 @@ PrefabInstance:
     - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: stepPrefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 270498485649029488, guid: 2c2ab23a927bb9245bbbd0f4c808bdf3, type: 3}
     - target: {fileID: 426389719787109460, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: invisibilitySpeed
       value: 5
@@ -28390,6 +28384,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -3831802842108528514, guid: 2d90485a3091f4a46b01c9a99e0d5e4f, type: 3}
+    - target: {fileID: 3388367603009823360, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237797413979217434, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: shadowSprite
+      value: 
+      objectReference: {fileID: 1493281410}
     - target: {fileID: 5369806094609192191, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -28460,11 +28462,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6283928702553193047, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: maxLife
-      value: 1
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6283928702553193047, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: 'phasesThresholds.Array.data[0]'
       value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_Speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_Acceleration
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217618057694891187, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7849566506043400556, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_Name

@@ -1,21 +1,27 @@
-using System;
+﻿using System;
 using Player;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
     [Header("Music")]
     [SerializeField] private AudioSource musicSource;
     public SO_Sounds playlist;
+
+    [Header("Scene Music Configuration")]
+    [SerializeField] private SO_SceneMusicConfig sceneMusicConfig;
+
     [Header("Player")]
     [SerializeField] private AudioSource playerSource;
     public SO_Sounds PlayerPlaylist;
+
     [Header("Enemy")]
     [SerializeField] private AudioSource enemySource;
     public SO_Sounds EnemyPlaylist;
-    
+
     private void Awake()
     {
         ServiceLocator.Instance.RegisterService(this);
@@ -23,36 +29,78 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        ServiceLocator.Instance.GetService<PlayerManager>().Sounds += PlayerSfx;
-        ServiceLocator.Instance.GetService<EnemyManager>().Sounds += EnemySfx;
-        ServiceLocator.Instance.GetService<PlayerManager>().StopSounds += WhoToStop;
+        PlayerManager playerManager = ServiceLocator.Instance.GetService<PlayerManager>();
+        if (playerManager != null)
+        {
+            playerManager.Sounds += PlayerSfx;
+            playerManager.StopSounds += WhoToStop;
+        }
 
-        if (playlist.sounds.Length <= 0) return;
-        Sound s = Array.Find(playlist.sounds, sound => sound.name == "Combat");
-        musicSource.volume = s.volume;
-        musicSource.loop = s.loop;
-        musicSource.clip = s.clip;
-        musicSource.Play();
+        EnemyManager enemyManager = ServiceLocator.Instance.GetService<EnemyManager>();
+        if (enemyManager != null)
+        {
+            enemyManager.Sounds += EnemySfx;
+        }
+
+        PlaySceneMusic();
     }
 
-    private void WhoSaidIt(string a,string who)
+    private void PlaySceneMusic()
+    {
+        if (playlist.sounds.Length <= 0)
+        {
+            Debug.LogWarning("No hay sonidos en el playlist");
+            return;
+        }
+
+        if (sceneMusicConfig == null)
+        {
+            Debug.LogError("SceneMusicConfig no está asignado en el SoundManager");
+            return;
+        }
+
+        string sceneName = SceneManager.GetActiveScene().name;
+        string musicName = sceneMusicConfig.GetMusicForScene(sceneName);
+
+        if (string.IsNullOrEmpty(musicName))
+        {
+            Debug.LogWarning($"No hay música configurada para la escena '{sceneName}'");
+            return;
+        }
+
+        Sound s = Array.Find(playlist.sounds, sound => sound.name == musicName);
+
+        if (s != null)
+        {
+            musicSource.volume = s.volume;
+            musicSource.loop = s.loop;
+            musicSource.clip = s.clip;
+            musicSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning($"No se encontró la música '{musicName}' en el playlist para la escena '{sceneName}'");
+        }
+    }
+
+    private void WhoSaidIt(string a, string who)
     {
         switch (who)
         {
             case "Player":
-            {
-                Sound playerS = Array.Find(PlayerPlaylist.sounds, sound => sound.name == a);
-                if (playerS != null)
                 {
-                    if(playerS.loop)
+                    Sound playerS = Array.Find(PlayerPlaylist.sounds, sound => sound.name == a);
+                    if (playerS != null)
                     {
-                        PlayMusicPlayer(playerS);
-                        return;
+                        if (playerS.loop)
+                        {
+                            PlayMusicPlayer(playerS);
+                            return;
+                        }
+                        PlaySoundPlayer(playerS);
                     }
-                    PlaySoundPlayer(playerS);
+                    break;
                 }
-                break;
-            }
             case "Enemy":
                 Sound enemyS = Array.Find(EnemyPlaylist.sounds, sound => sound.name == a);
                 if (enemyS != null)
@@ -87,7 +135,7 @@ public class SoundManager : MonoBehaviour
     {
         playerSource.volume = sound.volume;
         playerSource.loop = sound.loop;
-        
+
         playerSource.clip = sound.clip;
         playerSource.Play();
     }
@@ -97,28 +145,28 @@ public class SoundManager : MonoBehaviour
         switch (who)
         {
             case "Player":
-            {
-                playerSource.Stop();
-                break;
-            }
+                {
+                    playerSource.Stop();
+                    break;
+                }
             case "Enemy":
                 enemySource.Stop();
                 break;
         }
     }
-    
+
     private void PlaySoundEnemy(Sound sound)
     {
         enemySource.volume = sound.volume;
         enemySource.loop = sound.loop;
         enemySource.PlayOneShot(sound.clip);
     }
-    
+
     private void PlayMusicEnemy(Sound sound)
     {
         enemySource.volume = sound.volume;
         enemySource.loop = sound.loop;
-        
+
         enemySource.clip = sound.clip;
         enemySource.Play();
     }
@@ -127,23 +175,24 @@ public class SoundManager : MonoBehaviour
     {
         Sound playerS = Array.Find(PlayerPlaylist.sounds, sound => sound.name == sfxName);
         if (playerS == null) return;
-        
+
         //Debug.Log("Player said: " + playerS.name);
-        
-        if(playerS.loop)
+
+        if (playerS.loop)
         {
             PlayMusicPlayer(playerS);
             return;
         }
         PlaySoundPlayer(playerS);
     }
+
     private void EnemySfx(string sfxName)
     {
         Sound enemyS = Array.Find(EnemyPlaylist.sounds, sound => sound.name == sfxName);
         if (enemyS == null) return;
-        
+
         //Debug.Log("Enemy said: " + enemyS.name);
-        
+
         if (enemyS.loop)
         {
             PlayMusicEnemy(enemyS);
@@ -151,11 +200,10 @@ public class SoundManager : MonoBehaviour
         }
         PlaySoundEnemy(enemyS);
     }
-    
+
     public void PlayAudioClip(AudioClip sound)
     {
         playerSource.loop = false;
         enemySource.PlayOneShot(sound);
     }
 }
-
