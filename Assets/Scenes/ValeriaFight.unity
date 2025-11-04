@@ -26360,6 +26360,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b37aaf5bb23e14ba2fe78adc20ce57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!212 &1493281410 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5916784296395507806, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+  m_PrefabInstance: {fileID: 1967316716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1560716742
 GameObject:
   m_ObjectHideFlags: 0
@@ -28379,6 +28384,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -3831802842108528514, guid: 2d90485a3091f4a46b01c9a99e0d5e4f, type: 3}
+    - target: {fileID: 3388367603009823360, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237797413979217434, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
+      propertyPath: shadowSprite
+      value: 
+      objectReference: {fileID: 1493281410}
     - target: {fileID: 5369806094609192191, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
