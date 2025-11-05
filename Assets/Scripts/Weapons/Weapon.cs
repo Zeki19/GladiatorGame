@@ -7,7 +7,7 @@ using Utilities.Factory.WeaponFactory;
 
 namespace Weapons
 {
-    public class Weapon :IConfigurable<SoWeapon>
+    public class Weapon : IConfigurable<SoWeapon>
     {
         public string WeaponName { get; private set; }
         public GameObject WeaponGameObject { get; private set; }
@@ -17,10 +17,6 @@ namespace Weapons
 
         #region BaseStats
 
-        //public float BaseDamage { get; private set; }
-        //public float ChargeDamage { get; private set; }
-        //public float AttackSpeed { get; private set; }
-        //public float Range { get; private set; }
         public float KnockbackForce { get; private set; }
         public float SlowPercent { get; private set; }
 
@@ -77,14 +73,10 @@ namespace Weapons
             ChargePerAttack = config.chargePerAttack;
             ChargeMax = config.changeThreshold;
             KnockbackForce = config.knockbackForce;
-            //ChargeDamage = config.chargeDamage;
             SlowPercent = config.slowPercent;
-            //AttackSpeed = config.attackSpeed;
             WeaponName = config.weaponName;
             Durability = config.durability;
-            //BaseDamage = config.baseDamage;
             CoolDown = config.cooldown;
-            //Range = config.range;
 
             ChargeAttack = config.charge;
             BaseAttack = config.basic;
@@ -127,11 +119,13 @@ namespace Weapons
         public float ChargePercent() => ChargeMeter / ChargeMax;
         public float MaxCharge() => ChargeMax;
         public bool IsCharged() => ChargeMeter >= ChargeMax;
+
         public void ChargeWeapon()
         {
             if (IsCurrentAttackBase())
                 ChargeMeter += ChargePerAttack;
         }
+
         public void CooldownCounter()
         {
             if (_timer <= 0)
@@ -144,6 +138,5 @@ namespace Weapons
             IsOnCooldown = true;
             _timer = CoolDown;
         }
-
     }
 }

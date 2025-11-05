@@ -6,19 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/ValeriaBehaviour.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/ValeriaBehaviour.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ValeriaFight.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ValeriaFight.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Colosseum/ArenaPainter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Colosseum/ArenaPainter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/EnemyManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/MissAttackHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/MissAttackHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateAmbush.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateAmbush.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateAttack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateAttack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateChase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateChase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateDash.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/States/ValeriaStateDash.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/ValeriaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Valeria/ValeriaController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/Interfaces/IStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/Interfaces/IStatus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/StateMachine/DeadState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/StateMachine/DeadState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerWeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerWeaponController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utilities/Factory/WeaponFactory/SoWeapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utilities/Factory/WeaponFactory/SoWeapon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Weapon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,15 +147,13 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="22152">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="22152" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -278,7 +268,8 @@
       <workItem from="1761790524162" duration="1245000" />
       <workItem from="1761876906055" duration="1899000" />
       <workItem from="1761962704389" duration="1742000" />
-      <workItem from="1762003453120" duration="8351000" />
+      <workItem from="1762003453120" duration="9727000" />
+      <workItem from="1762102640948" duration="4191000" />
     </task>
     <servers />
   </component>
@@ -373,19 +364,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs</url>
-          <line>128</line>
-          <properties documentPath="D:\Unity Poyects\GladiatorGame\Assets\Scripts\Weapons\WeaponManager.cs" containingFunctionPresentation="Method 'OnDrawGizmos'">
-            <startOffsets>
-              <option value="4559" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4560" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

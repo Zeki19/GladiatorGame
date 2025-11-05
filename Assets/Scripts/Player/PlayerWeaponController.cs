@@ -21,7 +21,7 @@ namespace Player
         public Weapon Weapon { get; private set; }
         public float offset;
         private readonly List<GameObject> _enemiesHit = new List<GameObject>();
-        
+
         public event Action OnAttack;
         public event Action OnWeaponChanged;
         public bool HasWeapon => Weapon != null;
@@ -30,6 +30,7 @@ namespace Player
         public static event Action OnPlayerWeaponDropped;
         public static event Action OnPlayerAttacked;
         public static event Action OnPlayerChargedAttack;
+
         private void Awake()
         {
             ServiceLocator.Instance.RegisterService(this);
@@ -49,6 +50,7 @@ namespace Player
             {
                 EquipWeapon(_weaponManager.RequestWeapon(startingWeapon));
             }
+
             _playerRotation = _manager.model.transform;
             PauseManager.OnCinematicStateChanged += HandlePause;
         }
@@ -73,7 +75,7 @@ namespace Player
             Weapon.CurrentAttack = Weapon.BaseAttack;
             if (Weapon.ConsumeDurabilityOnMissStandard())
                 Weapon.AffectDurability();
-            
+
             OnAttack?.Invoke();
             OnPlayerAttacked?.Invoke();
         }
@@ -88,7 +90,7 @@ namespace Player
                 Weapon.CurrentAttack = Weapon.ChargeAttack;
                 if (Weapon.ConsumeDurabilityOnMissCharge())
                     Weapon.AffectDurability();
-                
+
                 OnAttack?.Invoke();
                 OnPlayerChargedAttack?.Invoke();
             }
@@ -101,7 +103,6 @@ namespace Player
             if (Weapon != null) return;
             var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
             EquipWeapon(weapon);
-
         }
 
         private void EquipWeapon(Weapon weapon)
@@ -109,13 +110,15 @@ namespace Player
             if (weapon == default) return;
             Weapon = weapon;
             Weapon.WeaponGameObject.gameObject.transform.parent = transform;
-            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up*offset, 
+            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up * offset,
                 quaternion.identity);
             AttackFinishSubscription(true);
             Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
-            weapon.BaseAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,_manager,_manager.controller);
-            weapon.ChargeAttack.SetUp(weapon.WeaponGameObject,_manager.model,_manager.view,_manager.controller as PlayerController,_manager,_manager.controller);
-            
+            weapon.BaseAttack.SetUp(weapon.WeaponGameObject, _manager.model, _manager.view,
+                _manager.controller as PlayerController, _manager, _manager.controller);
+            weapon.ChargeAttack.SetUp(weapon.WeaponGameObject, _manager.model, _manager.view,
+                _manager.controller as PlayerController, _manager, _manager.controller);
+
             OnWeaponChanged?.Invoke();
             OnPlayerWeaponPicked?.Invoke();
         }
@@ -133,6 +136,7 @@ namespace Player
         {
             if (Weapon is not { Attacking: false }) return;
             var weaponForDestruction = Weapon;
+            weaponForDestruction.ResetChangeMeter();
             UnEquipWeapon();
             _weaponManager.DestroyWeapon(weaponForDestruction);
             _manager.PlaySound("BreakWeapon");
@@ -144,7 +148,7 @@ namespace Player
             Weapon.BaseAttack.OnUnequip();
             Weapon.ChargeAttack.OnUnequip();
             Weapon = null;
-            
+
             OnWeaponChanged?.Invoke();
         }
 
@@ -163,26 +167,27 @@ namespace Player
                 Weapon.ChargeAttack.AttackFinish -= AttackFinish;
             }
         }
+
         #endregion
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!IsInLayerMask(other.gameObject, collisionLayer) || _enemiesHit.Any(hits => hits == other.gameObject))
                 return;
-            
+
             var enemyManager = ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject);
-            if (enemyManager==null)return;
-            
+            if (enemyManager == null) return;
+
             enemyManager.HealthComponent.TakeDamage(Weapon.Damage());
             if (enemyManager.model is IKnockbackable knockbackable)
                 knockbackable.ApplyKnockbackFromSource(this.transform.position, Weapon.KnockbackForce);
             Weapon.ChargeWeapon();
             Weapon.AffectDurability();
             _enemiesHit.Add(other.gameObject);
-            
+
             OnAttack?.Invoke();
         }
-        
+
         private bool IsInLayerMask(GameObject obj, LayerMask layerMask)
         {
             return (layerMask.value & (1 << obj.layer)) != 0;
@@ -191,7 +196,7 @@ namespace Player
         private void AttackFinish()
         {
             ClearEnemiesList();
-            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up*offset, 
+            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up * offset,
                 quaternion.identity);
         }
 
@@ -199,15 +204,17 @@ namespace Player
         {
             _enemiesHit.Clear();
         }
-        
+
         public void CheckDurability()
         {
             if (!Weapon.CheckDurability())
+            {
                 DestroyWeapon();
+            }
         }
-        
+
         public float CheckWeaponDurabilityPercent() => Weapon.DurabilityPercent();
-        
+
         public float CheckWeaponChargePercent() => Weapon.ChargePercent();
 
 
@@ -231,6 +238,7 @@ namespace Player
         {
             //gameObject.SetActive(true);
         }
+
         #endregion
     }
 }
