@@ -4,21 +4,17 @@ using UnityEngine.UI;
 public class ButtonSfx : MonoBehaviour
 {
     [SerializeField] private Sound clickSound;
-    private AudioSource _audioSource;
+    [SerializeField] private AudioSource audioSource;
 
     private void Awake()
     {
-        if (!clickSound.clip) return;
+        if (!clickSound.clip || !audioSource) return;
         
-        _audioSource = GetComponent<AudioSource>();
-
-        _audioSource.volume = clickSound.volume;
-
         GetComponent<Button>().onClick.AddListener(PlaySound);
     }
 
     private void PlaySound()
     {
-        if (_audioSource != null && clickSound != null) _audioSource.PlayOneShot(clickSound.clip);
+        audioSource.PlayOneShot(clickSound.clip, clickSound.volume);
     }
 }
