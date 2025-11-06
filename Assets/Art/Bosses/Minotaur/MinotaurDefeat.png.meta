@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: a24586052ecc05248855704bc604d8a4
+guid: c72e4ec374580c94e8fa31152f49824c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 363587004465693822
-    second: TinyGladiatorPhase2VictoryGesture_0
+      213: -1232947632152657872
+    second: MinotaurDefeat_0
   - first:
-      213: 2247162449990482162
-    second: TinyGladiatorPhase2VictoryGesture_1
+      213: -5706328752520495464
+    second: MinotaurDefeat_1
   - first:
-      213: -662769562817359042
-    second: TinyGladiatorPhase2VictoryGesture_2
+      213: -3901455522192785673
+    second: MinotaurDefeat_2
   - first:
-      213: -3911609864112964270
-    second: TinyGladiatorPhase2VictoryGesture_3
+      213: -5756561896672494024
+    second: MinotaurDefeat_3
+  - first:
+      213: -6256388783654514018
+    second: MinotaurDefeat_4
+  - first:
+      213: -5517435007360568664
+    second: MinotaurDefeat_5
+  - first:
+      213: -2547307668165582629
+    second: MinotaurDefeat_6
+  - first:
+      213: -3841133577064268460
+    second: MinotaurDefeat_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +121,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TinyGladiatorPhase2VictoryGesture_0
+      name: MinotaurDefeat_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,42 +136,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e7440264478bb0500800000000000000
-      internalID: 363587004465693822
+      spriteID: 030c1e639a0b3eee0800000000000000
+      internalID: -1232947632152657872
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinyGladiatorPhase2VictoryGesture_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2f87740a7568f2f10800000000000000
-      internalID: 2247162449990482162
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TinyGladiatorPhase2VictoryGesture_2
+      name: MinotaurDefeat_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e339458189e5dc6f0800000000000000
-      internalID: -662769562817359042
+      spriteID: 89efa66ab3c0fc0b0800000000000000
+      internalID: -5706328752520495464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinyGladiatorPhase2VictoryGesture_3
+      name: MinotaurDefeat_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 128
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +180,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 25df1ad9d8b27b9c0800000000000000
-      internalID: -3911609864112964270
+      spriteID: 7fe76b49fde3bd9c0800000000000000
+      internalID: -3901455522192785673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MinotaurDefeat_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83e794d54759c10b0800000000000000
+      internalID: -5756561896672494024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MinotaurDefeat_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e92d88d8c87dc29a0800000000000000
+      internalID: -6256388783654514018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MinotaurDefeat_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a2f7fae7122e63b0800000000000000
+      internalID: -5517435007360568664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MinotaurDefeat_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd0ac590c2526acd0800000000000000
+      internalID: -2547307668165582629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MinotaurDefeat_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45d3244ec5d81bac0800000000000000
+      internalID: -3841133577064268460
       vertices: []
       indices: 
       edges: []
@@ -200,7 +300,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d254149971372b34f9fe529ce192d64a
+    spriteID: 2eb146bfdba8b634285ca9da8c56caf8
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +310,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TinyGladiatorPhase2VictoryGesture_0: 363587004465693822
-      TinyGladiatorPhase2VictoryGesture_1: 2247162449990482162
-      TinyGladiatorPhase2VictoryGesture_2: -662769562817359042
-      TinyGladiatorPhase2VictoryGesture_3: -3911609864112964270
+      MinotaurDefeat_0: -1232947632152657872
+      MinotaurDefeat_1: -5706328752520495464
+      MinotaurDefeat_2: -3901455522192785673
+      MinotaurDefeat_3: -5756561896672494024
+      MinotaurDefeat_4: -6256388783654514018
+      MinotaurDefeat_5: -5517435007360568664
+      MinotaurDefeat_6: -2547307668165582629
+      MinotaurDefeat_7: -3841133577064268460
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

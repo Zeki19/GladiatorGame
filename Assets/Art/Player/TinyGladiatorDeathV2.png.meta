@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: a24586052ecc05248855704bc604d8a4
+guid: 4443fe97011d33649baf6c507b564baa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 363587004465693822
-    second: TinyGladiatorPhase2VictoryGesture_0
+      213: 8791309970378409809
+    second: TinyGladiatorDeath2_0
   - first:
-      213: 2247162449990482162
-    second: TinyGladiatorPhase2VictoryGesture_1
+      213: -8113031916384791570
+    second: TinyGladiatorDeath2_1
   - first:
-      213: -662769562817359042
-    second: TinyGladiatorPhase2VictoryGesture_2
+      213: -3751519907221804839
+    second: TinyGladiatorDeath2_2
   - first:
-      213: -3911609864112964270
-    second: TinyGladiatorPhase2VictoryGesture_3
+      213: -6498222275196869881
+    second: TinyGladiatorDeath2_3
+  - first:
+      213: 8808066574234162452
+    second: TinyGladiatorDeath2_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TinyGladiatorPhase2VictoryGesture_0
+      name: TinyGladiatorDeathV2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -122,16 +125,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e7440264478bb0500800000000000000
-      internalID: 363587004465693822
+      spriteID: 9e145f89afa112949ba026b739f52e4c
+      internalID: 1718698113
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinyGladiatorPhase2VictoryGesture_1
+      name: TinyGladiatorDeathV2_1
       rect:
         serializedVersion: 2
         x: 32
@@ -144,16 +147,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2f87740a7568f2f10800000000000000
-      internalID: 2247162449990482162
+      spriteID: 2249b77303069e34d9d5b5dfc49b8cb3
+      internalID: 1260606687
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinyGladiatorPhase2VictoryGesture_2
+      name: TinyGladiatorDeathV2_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,16 +169,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e339458189e5dc6f0800000000000000
-      internalID: -662769562817359042
+      spriteID: 2fa33e8096c2d7745b4fb61240fa8dc8
+      internalID: 1192784206
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinyGladiatorPhase2VictoryGesture_3
+      name: TinyGladiatorDeathV2_3
       rect:
         serializedVersion: 2
         x: 96
@@ -188,10 +191,32 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 25df1ad9d8b27b9c0800000000000000
-      internalID: -3911609864112964270
+      spriteID: 554e7c48efa24064bb02cd3462cbc425
+      internalID: 1345481054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TinyGladiatorDeathV2_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f29ff7c8ea421e4f81a4471f36563a2
+      internalID: 1991833303
       vertices: []
       indices: 
       edges: []
@@ -200,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d254149971372b34f9fe529ce192d64a
+    spriteID: aede4ddbbf99182418a06508bcc517be
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TinyGladiatorPhase2VictoryGesture_0: 363587004465693822
-      TinyGladiatorPhase2VictoryGesture_1: 2247162449990482162
-      TinyGladiatorPhase2VictoryGesture_2: -662769562817359042
-      TinyGladiatorPhase2VictoryGesture_3: -3911609864112964270
+      TinyGladiatorDeathV2_0: 1718698113
+      TinyGladiatorDeathV2_1: 1260606687
+      TinyGladiatorDeathV2_2: 1192784206
+      TinyGladiatorDeathV2_3: 1345481054
+      TinyGladiatorDeathV2_4: 1991833303
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
