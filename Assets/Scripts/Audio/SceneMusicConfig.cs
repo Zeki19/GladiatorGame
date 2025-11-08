@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "SceneMusicConfig", menuName = "Audio/Scene Music Config")]
 public class SO_SceneMusicConfig : ScriptableObject
@@ -10,8 +11,8 @@ public class SO_SceneMusicConfig : ScriptableObject
         [Tooltip("Exact scene name from Build Settings")]
         public string sceneName;
 
-        [Tooltip("Sound name from the SO_Sounds playlist")]
-        public string musicName;
+        [Tooltip("Sound asset to play for this scene")]
+        public Sound music;
     }
 
     [Header("Scene Music Configuration")]
@@ -20,17 +21,17 @@ public class SO_SceneMusicConfig : ScriptableObject
 
     [Header("Default Music (Optional)")]
     [Tooltip("Music to play if the scene is not in the mappings")]
-    public string defaultMusicName;
-    public string GetMusicForScene(string sceneName)
+    public Sound defaultMusic;
+
+    public Sound GetMusicForScene(string sceneName)
     {
         foreach (var mapping in sceneMappings)
         {
             if (mapping.sceneName == sceneName)
             {
-                return mapping.musicName;
+                return mapping.music;
             }
         }
-
-        return defaultMusicName;
+        return defaultMusic;
     }
 }

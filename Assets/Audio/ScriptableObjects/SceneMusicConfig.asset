@@ -14,13 +14,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneMappings:
   - sceneName: MainMenu
-    musicName: MainMenu
+    music:
+      name: MainMenuMusic
+      clip: {fileID: 8300000, guid: deb768946d4a88c44a6ce41a1746148d, type: 3}
+      loop: 1
+      volume: 1
   - sceneName: TutorialScene
-    musicName: Tutorial
+    music:
+      name: TutorialMusic
+      clip: {fileID: 8300000, guid: a10f1eaf4ab1da3488db3dc7a687066d, type: 3}
+      loop: 1
+      volume: 0.2
   - sceneName: ValeriaFight
-    musicName: Combat
+    music:
+      name: CombatMusic
+      clip: {fileID: 8300000, guid: d7e6e661c2a94dc4790c95acc2baea12, type: 3}
+      loop: 1
+      volume: 0.05
   - sceneName: MinotaurFight
-    musicName: Combat
+    music:
+      name: CombatMusic
+      clip: {fileID: 8300000, guid: d7e6e661c2a94dc4790c95acc2baea12, type: 3}
+      loop: 1
+      volume: 0.05
   - sceneName: GaiusFight
-    musicName: Combat
-  defaultMusicName: 
+    music:
+      name: CombatMusic
+      clip: {fileID: 8300000, guid: d7e6e661c2a94dc4790c95acc2baea12, type: 3}
+      loop: 1
+      volume: 0.05
+  defaultMusic:
+    name: 
+    clip: {fileID: 0}
+    loop: 0
+    volume: 1

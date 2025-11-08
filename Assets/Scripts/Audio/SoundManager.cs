@@ -47,12 +47,6 @@ public class SoundManager : MonoBehaviour
 
     private void PlaySceneMusic()
     {
-        if (playlist.sounds.Length <= 0)
-        {
-            Debug.LogWarning("No hay sonidos en el playlist");
-            return;
-        }
-
         if (sceneMusicConfig == null)
         {
             Debug.LogError("SceneMusicConfig no está asignado en el SoundManager");
@@ -60,17 +54,9 @@ public class SoundManager : MonoBehaviour
         }
 
         string sceneName = SceneManager.GetActiveScene().name;
-        string musicName = sceneMusicConfig.GetMusicForScene(sceneName);
+        Sound s = sceneMusicConfig.GetMusicForScene(sceneName);
 
-        if (string.IsNullOrEmpty(musicName))
-        {
-            Debug.LogWarning($"No hay música configurada para la escena '{sceneName}'");
-            return;
-        }
-
-        Sound s = Array.Find(playlist.sounds, sound => sound.name == musicName);
-
-        if (s != null)
+        if (s != null && s.clip != null)
         {
             musicSource.volume = s.volume;
             musicSource.loop = s.loop;
@@ -79,7 +65,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"No se encontró la música '{musicName}' en el playlist para la escena '{sceneName}'");
+            Debug.LogWarning($"No se encontró música para la escena '{sceneName}' o el Sound no tiene AudioClip asignado");
         }
     }
 
