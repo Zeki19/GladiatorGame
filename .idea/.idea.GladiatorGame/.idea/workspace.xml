@@ -6,11 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="e8ffe4ee-8d98-4891-b8f2-d55689ad1380" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GladiatorGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Entities/StateMachine/DeadState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Entities/StateMachine/DeadState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerWeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerWeaponController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utilities/Factory/WeaponFactory/SoWeapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utilities/Factory/WeaponFactory/SoWeapon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Weapon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/WeaponManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/Attacks/ValeriaBackstab.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/Attacks/ValeriaBackstab.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/Attacks/ValeriaStab&amp;Run.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/2_Valeria/Attacks/ValeriaStab&amp;Run.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosCharge.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosCharge.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosNormalPunk.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosNormalPunk.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosPowerRun.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosPowerRun.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosStrongPunk.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/Attacks/MinosStrongPunk.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/MinotaurStats.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Content/Enemies/3_Minotaur/MinotaurStats.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestSceens/ValeriaFightFixing.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestSceens/ValeriaFightFixing.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/AreaWeaponDamage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Gaius/AreaWeaponDamage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/MinotaurController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/MinotaurController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/States/MinotaurStateChase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/States/MinotaurStateChase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/States/MinotaurStateSearch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/States/MinotaurStateSearch.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +109,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$USER_HOME$/Desktop/GladiatorBuild\GladiatorGame.exe" />
+      <option name="EXE_PATH" value="$USER_HOME$/Music/Game Builds/Gladiator\GladiatorGame.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Ignacio Puk\Downloads" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -270,6 +278,7 @@
       <workItem from="1761962704389" duration="1742000" />
       <workItem from="1762003453120" duration="9727000" />
       <workItem from="1762102640948" duration="4191000" />
+      <workItem from="1762705558310" duration="2860000" />
     </task>
     <servers />
   </component>
@@ -351,19 +360,6 @@
           <line>50</line>
           <properties documentPath="D:\Desarrollo\Unreal\GladiatorGame\Assets\Scripts\Obstacles\Wall\Wall_Standing.cs" containingFunctionPresentation="Method 'OnTriggerEnter2D'" />
           <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Enemies/Minotaur/States/MinotaurStateSearch.cs</url>
-          <line>28</line>
-          <properties documentPath="D:\Desarrollo\Unreal\GladiatorGame\Assets\Scripts\Enemies\Minotaur\States\MinotaurStateSearch.cs" containingFunctionPresentation="Method 'Execute'">
-            <startOffsets>
-              <option value="839" />
-            </startOffsets>
-            <endOffsets>
-              <option value="884" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="72" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
