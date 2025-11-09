@@ -4686,75 +4686,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 443481389141122091, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 7048607484491402158, guid: a8f879665248ec6499d1f821af020f75, type: 3}
-    - target: {fileID: 443481389141122091, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5943396
-      objectReference: {fileID: 0}
-    - target: {fileID: 443481389141122091, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_Color.g
-      value: 0.6506813
-      objectReference: {fileID: 0}
-    - target: {fileID: 443481389141122091, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762995347600989397, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_Speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762995347600989397, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_Radius
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762995347600989397, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_Acceleration
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762995347600989397, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 240
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762995347600989397, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: 'managedReferences[8286364436198064700]'
-      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Single,
-        mscorlib]]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: managedReferences[8286364436198064700].Name
-      value: LongRange
-      objectReference: {fileID: 0}
-    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_BlackboardVariableOverridesList.Array.size
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: managedReferences[8286364046663614656].m_Value
       value: 
       objectReference: {fileID: 1961551041}
-    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: managedReferences[8286364436198064700].m_Value
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[6]'
-      value: 8286364436198064700
-      objectReference: {fileID: 0}
-    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: managedReferences[8286364436198064700].GUID.m_Value0
-      value: 9348891731908895506
-      objectReference: {fileID: 0}
-    - target: {fileID: 2040069591655290464, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: managedReferences[8286364436198064700].GUID.m_Value1
-      value: 12826162731954638325
-      objectReference: {fileID: 0}
     - target: {fileID: 2399509781135219198, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: target
       value: 
@@ -4763,33 +4698,9 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 1961551038}
-    - target: {fileID: 2399509781135219198, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: sceneToChangeWhenDie
-      value: VictoryScene
-      objectReference: {fileID: 0}
     - target: {fileID: 2924991295810946151, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: m_Name
       value: Minos
-      objectReference: {fileID: 0}
-    - target: {fileID: 4385546290971201430, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4385546290971201430, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4385546290971201430, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4479647694098908297, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: maxLife
-      value: 220
-      objectReference: {fileID: 0}
-    - target: {fileID: 4479647694098908297, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: 'phasesThresholds.Array.data[0]'
-      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 4774605589821537700, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4829,10 +4740,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4774605589821537700, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8545697522440084076, guid: 0da5e8f2b78c9dc44bd76a2e12c21683, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

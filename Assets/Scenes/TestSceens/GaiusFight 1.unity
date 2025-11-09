@@ -130,11 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &159456998 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-  m_PrefabInstance: {fileID: 238393685}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &185352573
 GameObject:
   m_ObjectHideFlags: 0
@@ -6463,14 +6458,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 416904973041328778, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 416904973041328778, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1707773313
-      objectReference: {fileID: 0}
     - target: {fileID: 937127421366007748, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: target
       value: 
@@ -6479,14 +6466,6 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 2020722034}
-    - target: {fileID: 1518346384092078951, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1518346384092078951, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 3095651937305172433, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -40.05
@@ -6527,93 +6506,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3151030903692912643, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 188322103895082066, guid: 841d0c6f34b8293418efd407d0258ee6, type: 3}
-    - target: {fileID: 3151030903692912643, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3151030903692912643, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3151030903692912643, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3151030903692912643, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3151030903692912643, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 2111879095
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028609289078078931, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: maxLife
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028609289078078931, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: bossHealthBarUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028609289078078931, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: 'phasesThresholds.Array.data[0]'
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 4250985215330158538, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4406422302611530635, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: blinkHeal
-      value: 
-      objectReference: {fileID: 11400000, guid: 6e860e5be107cf4419450b13343ac377, type: 2}
-    - target: {fileID: 4406422302611530635, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: blinkDamage
-      value: 
-      objectReference: {fileID: 11400000, guid: 09df815bad453e34d89d3f126bf14750, type: 2}
     - target: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: m_Name
       value: Gaius
-      objectReference: {fileID: 0}
-    - target: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8505707540481220225, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
       propertyPath: managedReferences[8939998720805830841].m_Value
       value: 
       objectReference: {fileID: 2020722031}
-    - target: {fileID: 8613084811357606315, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_Height
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613084811357606315, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613084811357606315, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_AutoBraking
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8613084811357606315, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9213571371939786118, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      propertyPath: EnemyTelegraph
-      value: 
-      objectReference: {fileID: 11400000, guid: 62c552d9595e2cf4eb2451eae77d462c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4706000453104100654, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1927326033}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
 --- !u!1 &296244970
 GameObject:
@@ -23975,7 +23879,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4028609289078078931, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
   m_PrefabInstance: {fileID: 238393685}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159456998}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66f7ff47246bf4e4cadb187cc23c16c3, type: 3}
@@ -25259,43 +25163,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3095651937305172433, guid: 3e1abfd37f00c5044be4d153ddb2f58c, type: 3}
   m_PrefabInstance: {fileID: 238393685}
   m_PrefabAsset: {fileID: 0}
---- !u!70 &1927326033
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 159456998}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -0.01, y: 0.3}
-  m_Size: {x: 0.68, y: 1}
-  m_Direction: 0
 --- !u!224 &1929976642 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7760298050412872972, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
