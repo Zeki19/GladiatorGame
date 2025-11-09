@@ -56,11 +56,12 @@ public class SoundManager : MonoBehaviour
         string sceneName = SceneManager.GetActiveScene().name;
         Sound s = sceneMusicConfig.GetMusicForScene(sceneName);
 
-        if (s != null && s.clip != null)
+        if (s != null && s.HasValidClip())
         {
+            AudioClip clipToPlay = s.GetClip();
             musicSource.volume = s.volume;
             musicSource.loop = s.loop;
-            musicSource.clip = s.clip;
+            musicSource.clip = clipToPlay;
             musicSource.Play();
         }
         else
@@ -104,25 +105,45 @@ public class SoundManager : MonoBehaviour
 
     public void PlayMusic(Sound sound)
     {
+        if (sound == null || !sound.HasValidClip())
+        {
+            Debug.LogWarning("Cannot play music: Sound is null or has no valid clip");
+            return;
+        }
+
+        AudioClip clipToPlay = sound.GetClip();
         musicSource.volume = sound.volume;
         musicSource.loop = sound.loop;
-        musicSource.clip = sound.clip;
+        musicSource.clip = clipToPlay;
         musicSource.Play();
     }
 
     private void PlaySoundPlayer(Sound sound)
     {
+        if (sound == null || !sound.HasValidClip())
+        {
+            Debug.LogWarning("Cannot play player sound: Sound is null or has no valid clip");
+            return;
+        }
+
+        AudioClip clipToPlay = sound.GetClip();
         playerSource.volume = sound.volume;
         playerSource.loop = sound.loop;
-        playerSource.PlayOneShot(sound.clip);
+        playerSource.PlayOneShot(clipToPlay);
     }
 
     private void PlayMusicPlayer(Sound sound)
     {
+        if (sound == null || !sound.HasValidClip())
+        {
+            Debug.LogWarning("Cannot play player music: Sound is null or has no valid clip");
+            return;
+        }
+
+        AudioClip clipToPlay = sound.GetClip();
         playerSource.volume = sound.volume;
         playerSource.loop = sound.loop;
-
-        playerSource.clip = sound.clip;
+        playerSource.clip = clipToPlay;
         playerSource.Play();
     }
 
@@ -143,17 +164,30 @@ public class SoundManager : MonoBehaviour
 
     private void PlaySoundEnemy(Sound sound)
     {
+        if (sound == null || !sound.HasValidClip())
+        {
+            Debug.LogWarning("Cannot play enemy sound: Sound is null or has no valid clip");
+            return;
+        }
+
+        AudioClip clipToPlay = sound.GetClip();
         enemySource.volume = sound.volume;
         enemySource.loop = sound.loop;
-        enemySource.PlayOneShot(sound.clip);
+        enemySource.PlayOneShot(clipToPlay);
     }
 
     private void PlayMusicEnemy(Sound sound)
     {
+        if (sound == null || !sound.HasValidClip())
+        {
+            Debug.LogWarning("Cannot play enemy music: Sound is null or has no valid clip");
+            return;
+        }
+
+        AudioClip clipToPlay = sound.GetClip();
         enemySource.volume = sound.volume;
         enemySource.loop = sound.loop;
-
-        enemySource.clip = sound.clip;
+        enemySource.clip = clipToPlay;
         enemySource.Play();
     }
 

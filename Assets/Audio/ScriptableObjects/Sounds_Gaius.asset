@@ -15,37 +15,49 @@ MonoBehaviour:
   sounds:
   - name: Swipe
     clip: {fileID: 8300000, guid: 6baf8bfaa6e94734db8599ddf0423ef7, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Lunge
     clip: {fileID: 8300000, guid: 60bc4518483323f4586095b2915a1322, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: MegaSwing
     clip: {fileID: 8300000, guid: d8a7ad541b326a1448aa3b8582c2b2e6, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Charge
     clip: {fileID: 8300000, guid: 320e9145dbf5c5e4d8560f6c989c1d81, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Hit
-    clip: {fileID: 8300000, guid: 409c79ab225a39448b98883c0d0326d9, type: 3}
+    clip: {fileID: 0}
+    clipVariations:
+    - {fileID: 8300000, guid: 409c79ab225a39448b98883c0d0326d9, type: 3}
+    - {fileID: 8300000, guid: 057ccfccbecb6d44c92c5a61e4b2be58, type: 3}
+    - {fileID: 8300000, guid: 29f777791358a0c429252c8c2e025261, type: 3}
     loop: 0
     volume: 0.5
   - name: Cooldown
     clip: {fileID: 8300000, guid: 5113aadfcb6535b41990cde5c1893f2a, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: BackStep
     clip: {fileID: 8300000, guid: 0288d8d821f931c47a5be009e44b9224, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: TiredLong
     clip: {fileID: 8300000, guid: e70c10711a9d0394f8f2d655097f5412, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Death
     clip: {fileID: 8300000, guid: 71eab9b7232c8d94fbea2d1435e00b4f, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5

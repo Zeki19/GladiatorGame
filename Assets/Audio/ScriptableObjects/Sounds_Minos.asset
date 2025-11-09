@@ -15,41 +15,54 @@ MonoBehaviour:
   sounds:
   - name: ThrowImpact
     clip: {fileID: 8300000, guid: b3d310c7c36c14e4f91fe3d07d01ce05, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Throw
     clip: {fileID: 8300000, guid: 99929cc3037b5934284dfa1c5fef7860, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Charge
     clip: {fileID: 8300000, guid: 333e71e4a15e4614daa25d2fe6daa250, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Dash
     clip: {fileID: 8300000, guid: 975e6840a0ea75247a7f7aeca6f3fc9e, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Cracks
     clip: {fileID: 8300000, guid: 3d642eea0c877be49bb439e08bae2bbd, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Fists
     clip: {fileID: 8300000, guid: b8b2dda54229b704ea15830f23da4e72, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: GroundSlam
     clip: {fileID: 8300000, guid: 5c6001b9e9ede0946b666bf59269650a, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Death
     clip: {fileID: 8300000, guid: fbc5df70a066cbf46a772ba687504918, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Footsteps
     clip: {fileID: 8300000, guid: e2c35f5212b6ab340a08c84e58edb26b, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Hit
-    clip: {fileID: 8300000, guid: b950d14760c377947a3b11ddcfa3fd8c, type: 3}
+    clip: {fileID: 0}
+    clipVariations:
+    - {fileID: 8300000, guid: b950d14760c377947a3b11ddcfa3fd8c, type: 3}
+    - {fileID: 8300000, guid: d8c2f527471054746a59b33a9baeaa55, type: 3}
+    - {fileID: 8300000, guid: f6c5200c63ff2074d9795cc898d2ee34, type: 3}
     loop: 0
     volume: 0.5

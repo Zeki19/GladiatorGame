@@ -15,29 +15,44 @@ MonoBehaviour:
   sounds:
   - name: Walk
     clip: {fileID: 8300000, guid: 709fd42af89d0814f8dafd22b6ddb76b, type: 3}
+    clipVariations: []
     loop: 1
     volume: 0.466
   - name: Dash
     clip: {fileID: 8300000, guid: 5ebb0bd1a96fe0140a9d599ac5b51dfd, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: Hit
-    clip: {fileID: 8300000, guid: 1cd524f1993e1d240a01bbf37994ca30, type: 3}
+    clip: {fileID: 0}
+    clipVariations:
+    - {fileID: 8300000, guid: 1cd524f1993e1d240a01bbf37994ca30, type: 3}
+    - {fileID: 8300000, guid: 68b6e68173273134cab40ac024f6e32b, type: 3}
+    - {fileID: 8300000, guid: 4d5ba4c9bd431334ab01b09ed9a03672, type: 3}
     loop: 0
     volume: 0.5
   - name: Death
     clip: {fileID: 8300000, guid: 9534815096b274d46acff276b2eff205, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: C_Attack
     clip: {fileID: 8300000, guid: fdce57697bba2a249871af8a9d9c97dd, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: N_Attack
     clip: {fileID: 8300000, guid: 07bdfd3377483dc49ab11675aab1fd13, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.5
   - name: WeaponBreak
     clip: {fileID: 8300000, guid: e9303902202f97040bc1e9a644407e9b, type: 3}
+    clipVariations: []
+    loop: 0
+    volume: 0.21
+  - name: Heal
+    clip: {fileID: 8300000, guid: e6b6cd862a47a9e4eb7c554de4ca5082, type: 3}
+    clipVariations: []
     loop: 0
     volume: 0.21
