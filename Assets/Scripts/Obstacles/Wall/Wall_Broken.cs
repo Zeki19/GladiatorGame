@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Wall_Broken : MonoBehaviour, IPillar
 {
@@ -10,6 +11,7 @@ public class Wall_Broken : MonoBehaviour, IPillar
     public void SpawnPillar(PillarContext context)
     {
         transform.position = context.Origin.position;
+        transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
         ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
     }
     public void AddIgnorePillar(List<Collider2D> colliders)
