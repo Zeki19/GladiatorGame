@@ -72,6 +72,9 @@ public class ValeriaView : EnemyView, ILook
             case StateEnum.Death:
                 animator.SetTrigger("Death");
                 break;
+            case StateEnum.Win:
+                animator.SetTrigger("Win");
+                break;
             default:
                 Debug.LogWarning("No animation mapped for state: " + state);
                 break;

@@ -27,25 +27,16 @@ public class FightManager : MonoBehaviour
     }
     private void VictoryCinematic()
     {
-        switch (enemy.gameObject.name)
-        {
-            case "Gaius":
-                enemy.PlaySound("Death");
-                break;
-            case "Valeria":
-                enemy.PlaySound("Death");
-                break;
-            case "Minos":
-                enemy.PlaySound("Death");
-                break;
-            default:
-                break;
-        }
+        enemy.PlaySound("Death");
+
+
         cinematicManager.VictoryCinematic();
         Unsubscribe();
     }
     private void DefeatCinematic()
     {
+        enemy.view.PlayStateAnimation(StateEnum.Win);
+        
         switch (enemy.gameObject.name)
         {
             case "Valeria":

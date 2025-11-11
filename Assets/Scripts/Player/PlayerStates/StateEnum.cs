@@ -18,6 +18,6 @@
     Phase3,
     BackStep,
     ShadowDash,
-    Death
-
+    Death,
+    Win
 }
