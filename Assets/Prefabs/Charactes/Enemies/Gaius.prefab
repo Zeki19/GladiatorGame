@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1707773313
+  m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 8274613632479496492, guid: 69c50207d7b2d5d4181ca11412d0c6fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -227,7 +227,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.51, z: 0}
-  m_LocalScale: {x: 0.8535437, y: 1.3842775, z: 1}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3095651937305172433}
@@ -273,11 +273,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2111879095
+  m_SortingLayer: 1
   m_SortingOrder: 5
-  m_Sprite: {fileID: -8184244762938570915, guid: 7a6476417a75a9b4d958c70288dcc152, type: 3}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Sprite: {fileID: 188322103895082066, guid: 841d0c6f34b8293418efd407d0258ee6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 5561279907837215079}
   - component: {fileID: 8505707540481220225}
   - component: {fileID: 8613084811357606315}
+  - component: {fileID: 5898788712153130215}
   m_Layer: 8
   m_Name: Gaius
   m_TagString: Untagged
@@ -425,8 +426,8 @@ MonoBehaviour:
   model: {fileID: 5162929912761494692}
   view: {fileID: 4406422302611530635}
   controller: {fileID: 937127421366007748}
-  phasesThresholds: 32000000
-  maxLife: 120
+  phasesThresholds: 46000000
+  maxLife: 150
 --- !u!114 &937127421366007748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a47dd94bad4d4b8ddd144ba4f6c8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyTelegraph: {fileID: 0}
+  EnemyTelegraph: {fileID: 11400000, guid: 62c552d9595e2cf4eb2451eae77d462c, type: 2}
   attacks:
   - {fileID: 11400000, guid: b4652788526861d4b8d3e7e9fed57540, type: 2}
   - {fileID: 11400000, guid: 67e33a90fb5a5e34d978df6093bd8b71, type: 2}
@@ -702,7 +703,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4706000453104100654}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -711,7 +712,44 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!70 &5898788712153130215
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706000453104100654}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.01, y: 0.3}
+  m_Size: {x: 0.68, y: 1}
+  m_Direction: 0

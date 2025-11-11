@@ -60,8 +60,8 @@ MonoBehaviour:
   model: {fileID: 2476569688380313164}
   view: {fileID: 6793767698371252644}
   controller: {fileID: 2399509781135219198}
-  phasesThresholds: 50000000
-  maxLife: 120
+  phasesThresholds: 6e000000
+  maxLife: 220
 --- !u!114 &2399509781135219198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   target: {fileID: 0}
   NVagent: {fileID: 1762995347600989397}
-  sceneToChangeWhenDie: 
+  sceneToChangeWhenDie: VictoryScene
   _agent: {fileID: 2040069591655290464}
   currentAttack: 0
   stats: {fileID: 11400000, guid: d5a16a3cef9d29d4fac792f9aea66a02, type: 2}
@@ -167,6 +167,7 @@ MonoBehaviour:
   - rid: 8286364046663614658
   - rid: 8286364046663614659
   - rid: 8286364046663614660
+  - rid: 8286364436198064700
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -220,6 +221,14 @@ MonoBehaviour:
           m_Value1: 14076838221613650442
         Name: Animator
         m_Value: {fileID: 1629830703026209287}
+    - rid: 8286364436198064700
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 9348891731908895506
+          m_Value1: 12826162731954638325
+        Name: LongRange
+        m_Value: 3
 --- !u!70 &5632397026490444938
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -293,11 +302,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 2924991295810946151}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 1
-  m_Speed: 3
-  m_Acceleration: 8
+  m_Radius: 1.5
+  m_Speed: 5
+  m_Acceleration: 12
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 240
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -667,8 +676,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 0.85354, y: 1.38428, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4774605589821537700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -716,8 +725,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -8184244762938570915, guid: 7a6476417a75a9b4d958c70288dcc152, type: 3}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Sprite: {fileID: 7048607484491402158, guid: a8f879665248ec6499d1f821af020f75, type: 3}
+  m_Color: {r: 1, g: 0.6506813, b: 0.5943396, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
