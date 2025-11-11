@@ -6,7 +6,7 @@ namespace Enemies.Gaius
     {
         private void OnEnable()
         {
-            Collider2D hit = Physics2D.OverlapCircle(transform.position, transform.localScale.x, _layerMask);
+            Collider2D hit = Physics2D.OverlapCircle(transform.position, transform.localScale.x/1.5f, _layerMask);
             if (hit != null)
             {
                 _status.SetStatus(StatusEnum.AttackMissed,false);

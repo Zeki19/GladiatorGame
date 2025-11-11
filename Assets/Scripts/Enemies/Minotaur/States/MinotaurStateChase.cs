@@ -66,8 +66,11 @@ namespace Enemies.Minotaur.States
 
             if(_timer<0)
             {
-                _agent._NVagent.speed += _speedMod;
-                _stackingSpeed += _speedMod;
+                if(_agent._NVagent.speed<=12)
+                {
+                    _agent._NVagent.speed += _speedMod;
+                    _stackingSpeed += _speedMod;
+                }
                 _timer = _speedModeInterval;
             }
             if (_model.RaycastBetweenCharacters(_model.transform, _target.GetTarget().transform).collider != null)
