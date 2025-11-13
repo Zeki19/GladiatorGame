@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SplashScreen : MonoBehaviour
+public class SplashScreenTimeline : MonoBehaviour
 {
     [SerializeField] private ImageEffect uade;
     [SerializeField] private ImageEffect icon;
@@ -71,7 +71,8 @@ public class SplashScreen : MonoBehaviour
 
     private void ChangeScene()
     {
-        SceneManager.LoadScene("MainMenu");
+        SplashScreen.HasPlayedSplashScreen = true;
+        gameObject.SetActive(false);
     }
 
     #region Utils

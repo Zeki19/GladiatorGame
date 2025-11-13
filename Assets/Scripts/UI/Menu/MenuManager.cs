@@ -14,6 +14,10 @@ public class MenuManager : MonoBehaviour
 
     [Header("Overwrite Confirmation Popup")]
     [SerializeField] private OverwriteConfirmationPopup overwriteConfirmationPopup;
+    
+    [Header("Splash Screen")]
+    [SerializeField] private GameObject splashScreen;
+    [SerializeField] private bool playAtStart = true;
 
     private GameObject _currentScreen;
 
@@ -36,6 +40,8 @@ public class MenuManager : MonoBehaviour
 
         menuList[0].SetActive(true);
         _currentScreen = menuList[0];
+        
+        if (!SplashScreen.HasPlayedSplashScreen) splashScreen.SetActive(true);
 
         UpdateContinueButton();
     }
