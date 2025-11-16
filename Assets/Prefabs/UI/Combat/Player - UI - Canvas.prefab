@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8313184562670099007
 RectTransform:
   m_ObjectHideFlags: 0
@@ -269,6 +269,9 @@ MonoBehaviour:
   healthBar: {fileID: 2554007618423549847}
   chargeBar: {fileID: 6628859537421222177}
   dashIcon: {fileID: 1796019755821356824}
+  chargedColorA: {r: 0, g: 1, b: 0, a: 1}
+  chargedColorB: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  pulseSpeed: 2
 --- !u!1 &8410113462907694998
 GameObject:
   m_ObjectHideFlags: 0
