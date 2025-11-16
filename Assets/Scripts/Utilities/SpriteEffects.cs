@@ -14,6 +14,7 @@ public class SpriteEffects
     {
         if (EffectCoroutine != null)
             _mono.StopCoroutine(EffectCoroutine);
+
         EffectCoroutine = _mono.StartCoroutine(DamagedBlink(sprite,amount,frequency,activeColor));
     }
 
@@ -21,9 +22,10 @@ public class SpriteEffects
     {
         for (int i = 0; i < amount; i++)
         {
+            var oldColor = sprite.color;
             sprite.color = activeColor;
             yield return new WaitForSeconds(frequency);
-            sprite.color = Color.white;
+            sprite.color = oldColor;
             yield return new WaitForSeconds(frequency);
         }
     }
