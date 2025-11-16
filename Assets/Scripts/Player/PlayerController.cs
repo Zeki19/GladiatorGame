@@ -12,7 +12,7 @@ namespace Player
         public PhaseSystem _phaseSystem;
         private FSM<StateEnum> Fsm;
         private bool _isGamePaused;
-        //[SerializeField] private InputActionAsset _actions;
+        [SerializeField] private GameObject weaponGO;
         [SerializeField] private PlayerInput _inputs;
 
 
@@ -131,12 +131,20 @@ namespace Player
             _inputs.enabled = false;
             manager.Rb.linearVelocity = Vector2.zero;
             manager.Rb.angularVelocity = 0;
+            if (weaponGO != null)
+            {
+                weaponGO.SetActive(false);
+            }
         }
 
         public void OnResume()
         {
             enabled = true;
             _inputs.enabled = true;
+            if (weaponGO != null && !weaponGO.activeSelf)
+            {
+                weaponGO.SetActive(true);
+            }
         }
         private void OnDrawGizmos()
         {

@@ -555,6 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 5522031050175312599}
   _target: {fileID: 0}
+  weaponGO: {fileID: 6692025345113225877}
   _inputs: {fileID: 0}
 --- !u!114 &110136598475017519
 MonoBehaviour:
@@ -715,6 +716,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cc119b46-a4aa-4744-9d43-5bbf464e13fb
     m_ActionName: 'Player/ChargeAttack[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f48e47e9-ebee-4b9c-b68e-da1c74cdc39d
+    m_ActionName: 'Menu/Pause[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

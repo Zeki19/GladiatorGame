@@ -17,6 +17,7 @@ namespace Enemies
         [SerializeField] private NavMeshAgent NVagent;
         [SerializeField] protected string sceneToChangeWhenDie;
         [SerializeField] protected BehaviorGraphAgent _agent;
+        [SerializeField] protected GameObject weaponGO;
         protected StateDataManager stateDataManager = new StateDataManager();
         public int currentAttack;
         protected int _currentPhase = 1;
@@ -106,6 +107,10 @@ namespace Enemies
                 NVagent.ResetPath();
                 NVagent.velocity = Vector3.zero;
             }
+            if (weaponGO != null) 
+            {
+                weaponGO.SetActive(false);
+            }
         }
 
         public void OnResume()
@@ -114,6 +119,10 @@ namespace Enemies
             if (_agent != null)
             {
                 _agent.enabled = true;
+            }
+            if (weaponGO != null && weaponGO.activeSelf)
+            {
+                weaponGO.SetActive(true);
             }
         }
         [ContextMenu("WhatIsMyCurrentState")]
