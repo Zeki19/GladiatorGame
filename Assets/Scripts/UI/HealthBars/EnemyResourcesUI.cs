@@ -29,10 +29,10 @@ public class EnemyResourcesUI : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(Wait(.25f));
         entityManager.HealthComponent.OnDamage += Damage;
         entityManager.HealthComponent.OnHeal += Heal;
         entityManager.HealthComponent.OnDead += Dead;
-        StartCoroutine(Wait(.25f));
     }
 
     private IEnumerator Wait(float seconds)

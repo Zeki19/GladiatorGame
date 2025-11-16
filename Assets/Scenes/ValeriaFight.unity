@@ -800,7 +800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1121312702468547598, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1656702546046596509, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_text
@@ -916,6 +916,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7760298050412872972, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786512505570740218, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6993,7 +6997,7 @@ PrefabInstance:
     - target: {fileID: 2794322426169023673, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2794322426169023673, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: m_fontStyle
       value: 1
@@ -7001,7 +7005,7 @@ PrefabInstance:
     - target: {fileID: 2794322426169023673, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1602854871235269953, guid: c203c9c3002e0ef4dba688d86c884374, type: 2}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2794322426169023673, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -7012,7 +7016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5836760127076137822, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5975537105926103933, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: entityManager
@@ -28023,6 +28027,10 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 11400000, guid: 34b8854ca606fe64ba03de726c98f4d2, type: 2}
+    - target: {fileID: 7572984262837354429, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8272900184724061558, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
       propertyPath: m_fontAsset
       value: 
