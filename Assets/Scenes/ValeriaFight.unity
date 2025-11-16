@@ -26919,17 +26919,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 4916902690603668684, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
   m_PrefabInstance: {fileID: 1634171591}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1641408717 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5805209762841675519, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
-  m_PrefabInstance: {fileID: 1906387051}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b1909ecc0af9e042b33615bd80f3400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1656526043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6944607622408970530, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
@@ -28024,10 +28013,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1634171592}
-    - target: {fileID: 5702659611452755984, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
-      propertyPath: dialogueManager
-      value: 
-      objectReference: {fileID: 1641408717}
     - target: {fileID: 6812207162899195338, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
       propertyPath: boss
       value: 
