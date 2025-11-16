@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Utilities;
 using Random = UnityEngine.Random;
 
 public class Pillar_Fallen : MonoBehaviour, IPillar
@@ -20,6 +21,10 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
     private Vector3 _startScale, _targetScale;
     private Vector3 _startPos,   _targetPos;
     private List<Collider2D> _ignoreColliders;
+    
+    [SerializeField] protected SpriteRenderer sprite;
+    [SerializeField]private BlinkValues blinkDamage;
+    private SpriteEffects _blink;
 
 
     public event Action OnDamaged;
@@ -55,6 +60,8 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
         transform.position = _targetPos;
         ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
         //StartCoroutine(FallRoutine()); <--- Change this to make it use the pillar falling animation.
+
+        OnDamaged += Blink;
     }
 
     public void DestroyPillar(PillarContext context)
@@ -120,6 +127,12 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
     public void AddIgnorePillar(List<Collider2D> colliders)
     {
         _ignoreColliders = colliders;
+    }
+
+    private void Blink()
+    {
+        _blink = new SpriteEffects(this);
+        _blink.Blink(sprite, blinkDamage.amount, blinkDamage.frequency, blinkDamage.blinkActive);
     }
 
     private static Vector3 GetRandomCardinal()

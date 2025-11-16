@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Pillar_Standing : MonoBehaviour, IPillar
 {
+    [SerializeField] protected SpriteRenderer sprite;
+    [SerializeField]private Utilities.BlinkValues blinkDamage;
+    private SpriteEffects _blink;
+    
     public void AddIgnorePillar(List<Collider2D> colliders)
     {
         _ignoreColliders = colliders;
@@ -17,6 +21,8 @@ public class Pillar_Standing : MonoBehaviour, IPillar
     {
         transform.position = context.Origin.position;
         ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
+
+        OnDamaged += Blink;
     }
 
     public void DestroyPillar(PillarContext context)
@@ -32,5 +38,11 @@ public class Pillar_Standing : MonoBehaviour, IPillar
             return;
         }
         OnDamaged?.Invoke();
+    }
+    
+    private void Blink()
+    {
+        _blink = new SpriteEffects(this);
+        _blink.Blink(sprite, blinkDamage.amount, blinkDamage.frequency, blinkDamage.blinkActive);
     }
 }

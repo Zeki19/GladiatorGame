@@ -35,10 +35,11 @@ public class PillarManager : MonoBehaviour
     {
         _currentHealth--;
         
-        if (_currentHealth > 0) return;
+        if (_currentHealth > 0) return; 
         NextState();
     }
 
+    [ContextMenu("Next Stage")]
     private void NextState()
     {
         DestroySpawnedPillar();
