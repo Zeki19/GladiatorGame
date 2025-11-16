@@ -12679,10 +12679,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2093591380}
     - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ca9af9ac9bdc9474aa4225a8fb0e23a0, type: 3}
-    - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
       propertyPath: m_SortingOrder
       value: 9
       objectReference: {fileID: 0}
@@ -13056,10 +13052,6 @@ PrefabInstance:
       propertyPath: 'ignoreColliders.Array.data[0]'
       value: 
       objectReference: {fileID: 2093591380}
-    - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ca9af9ac9bdc9474aa4225a8fb0e23a0, type: 3}
     - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
       propertyPath: m_SortingOrder
       value: 9
@@ -26209,31 +26201,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352687263}
   m_CullTransparentMesh: 1
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
---- !u!114 &1410195514 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6864710295693482699, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
-  m_PrefabInstance: {fileID: 1906387051}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b1909ecc0af9e042b33615bd80f3400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-=======
->>>>>>> Stashed changes
 --- !u!1 &1434334573 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5532544545316700364, guid: ea1389fb20a93c847b9c6dd65fab384c, type: 3}
   m_PrefabInstance: {fileID: 1967316716}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
->>>>>>> c46470f700c5fe3f44f6329640d792e34dc7bd3a
->>>>>>> Stashed changes
 --- !u!1 &1454645437
 GameObject:
   m_ObjectHideFlags: 0
@@ -26947,6 +26919,17 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 4916902690603668684, guid: 1e065a93b9cb9874cabeb6a5b649a356, type: 3}
   m_PrefabInstance: {fileID: 1634171591}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1641408717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5805209762841675519, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
+  m_PrefabInstance: {fileID: 1906387051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1909ecc0af9e042b33615bd80f3400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1656526043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6944607622408970530, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
@@ -27440,10 +27423,6 @@ PrefabInstance:
       propertyPath: 'ignoreColliders.Array.data[0]'
       value: 
       objectReference: {fileID: 2093591380}
-    - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ca9af9ac9bdc9474aa4225a8fb0e23a0, type: 3}
     - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
       propertyPath: m_SortingOrder
       value: 9
@@ -28025,10 +28004,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3535950964573252870, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3766515444324492656, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0.74
@@ -28052,7 +28027,7 @@ PrefabInstance:
     - target: {fileID: 5702659611452755984, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
       propertyPath: dialogueManager
       value: 
-      objectReference: {fileID: 1410195514}
+      objectReference: {fileID: 1641408717}
     - target: {fileID: 6812207162899195338, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
       propertyPath: boss
       value: 
@@ -28062,10 +28037,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 34b8854ca606fe64ba03de726c98f4d2, type: 2}
     - target: {fileID: 7572984262837354429, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162388711676057498, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -28111,8 +28082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2306915149332287051, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
-    m_RemovedGameObjects:
-    - {fileID: 3535950964573252870, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
@@ -28776,10 +28746,6 @@ PrefabInstance:
       propertyPath: 'ignoreColliders.Array.data[0]'
       value: 
       objectReference: {fileID: 2093591380}
-    - target: {fileID: 8547643601085234438, guid: d58eec7fd6d3dc8448a091424f3195db, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ca9af9ac9bdc9474aa4225a8fb0e23a0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

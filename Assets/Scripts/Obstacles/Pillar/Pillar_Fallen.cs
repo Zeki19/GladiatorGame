@@ -56,7 +56,7 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
         //transform.localScale = _startScale;
         //transform.position   = _startPos;
 
-        //transform.localScale = _targetScale;
+        transform.localScale = _targetScale;
         transform.position = _targetPos;
         ServiceLocator.Instance.GetService<NavMeshService>().RebuildNavMesh();
         //StartCoroutine(FallRoutine()); <--- Change this to make it use the pillar falling animation.
