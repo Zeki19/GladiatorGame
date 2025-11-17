@@ -9,6 +9,7 @@ public class NavMeshService : MonoBehaviour
         ServiceLocator.Instance.RegisterService(this);
     }
 
+    [ContextMenu("Rebuild NavMesh")]
     public void RebuildNavMesh()
     {
         surface.RemoveData();
