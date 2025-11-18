@@ -631,6 +631,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa5f3ac316e156e45a95b04cab42fb57, type: 3}
+--- !u!114 &244684426 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+  m_PrefabInstance: {fileID: 324660592}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1909ecc0af9e042b33615bd80f3400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &324660592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -700,6 +711,46 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 89f58dc619e9b4e4287048c3cf621fe2, type: 2}
     - target: {fileID: 2873445474936893918, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3abb62a1dbdd0e842b1b339cd03ada3c, type: 2}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: dialogues.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d67e47e3ea205364ab611bb5cb2e0674, type: 2}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 51bd8471e8619054fb60f884f94891ce, type: 2}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2041538eea9aa3146b91d1e2272db094, type: 2}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: faf029b00c48eab44bd8392ef2cdce1e, type: 2}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eecc2cc2548fcc14ba9cde53acaf7c67, type: 2}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 31440ad541b7a2e46a395c0fb6327af8, type: 2}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 16070633642fd164f8c8fbba051c4d27, type: 2}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
+      propertyPath: 'dialogues.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 89f58dc619e9b4e4287048c3cf621fe2, type: 2}
+    - target: {fileID: 3488852749792970189, guid: 8b62a937dd52fcb489e0072bf88b9b8e, type: 3}
       propertyPath: 'dialogues.Array.data[8]'
       value: 
       objectReference: {fileID: 11400000, guid: 3abb62a1dbdd0e842b1b339cd03ada3c, type: 2}
@@ -952,6 +1003,7 @@ MonoBehaviour:
   normalExitDoor: {fileID: 1299833044}
   trainingHubExitDoor: {fileID: 691591047}
   skipTutorialButton: {fileID: 0}
+  dialogueManager: {fileID: 244684426}
 --- !u!1001 &442707789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82383,6 +82435,10 @@ PrefabInstance:
     - target: {fileID: 5836760127076137822, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: m_Name
       value: Player - UI - Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836760127076137822, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5975537105926103933, guid: 2cc695de6644fbf47adb405894ed44f7, type: 3}
       propertyPath: entityManager
