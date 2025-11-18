@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Attack;
 using Enemies.Attack;
+using Entities;
 using Entities.StateMachine;
 using Unity.Mathematics;
 using UnityEngine;
@@ -14,12 +15,14 @@ namespace Enemies.Gaius.States
         private GameObject _weapon;
         private AttackManager attack;
         private GaiusController controller;
-        public GaiusStateAttack(ISteering steering,GameObject weapon,AttackManager attackManager,GaiusController controller)
+        private EntityManager _manager;
+        public GaiusStateAttack(ISteering steering,GameObject weapon,AttackManager attackManager,GaiusController controller, EntityManager manager)
         {
             _steering = steering;
             attack = attackManager;
             _weapon = weapon;
             this.controller=controller;
+            _manager = manager;
         }
 
         public override void Enter()
@@ -31,6 +34,26 @@ namespace Enemies.Gaius.States
             _look.LookDirInsta(dir); 
             _agent._NVagent.isStopped = true;
             attack.ExecuteAttack(controller.currentAttack);
+            switch (controller.currentAttack) 
+            {
+                case 0:
+                    _manager.PlaySound("Swipe");
+                    break;
+                case 1:
+                    _manager.PlaySound("Lunge");
+                    break;
+                case 2:
+                    _manager.PlaySound("Charge");
+                    break;
+                case 3:
+                    _manager.PlaySound("MegaSwing");
+                    break;
+                case 4:
+                    _manager.PlaySound("Lunge");
+                    break;
+                default: 
+                    break;
+            }
         }
 
         public override void Execute()

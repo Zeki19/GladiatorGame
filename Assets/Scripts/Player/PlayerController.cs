@@ -22,6 +22,12 @@ namespace Player
             manager.view.PlayStateAnimation(StateEnum.Death);
             manager.PlaySound("Death");
         }
+
+        void HealSound(float amount)
+        {
+            manager.PlaySound("Heal");
+        }
+
         private void OnDestroy()
         {
             PauseManager.OnCinematicStateChanged -= HandlePause;
@@ -36,6 +42,7 @@ namespace Player
         private void Start()
         {
             manager.HealthComponent.OnDead += Dead;
+            manager.HealthComponent.OnHeal += HealSound;
             var playerManager = manager as PlayerManager;
             _phaseSystem = new PhaseSystem(playerManager.stats.stateThreshold, manager.HealthComponent);
             InitializeFsm();
@@ -54,7 +61,7 @@ namespace Player
             var stateList = new List<State<StateEnum>>();
 
             var idleState = new PSIdle<StateEnum>(StateEnum.Walk);
-            var walkState = new PSWalk<StateEnum>(StateEnum.Idle);
+            var walkState = new PSWalk<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var baseAttackState = new PSAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var changeAttackState = new PSChargeAttack<StateEnum>(StateEnum.Idle, (PlayerManager)manager);
             var dashState = new PSDash<StateEnum>(StateEnum.Idle, (PlayerManager)manager, this);

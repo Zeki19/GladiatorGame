@@ -34,6 +34,7 @@ namespace Player.PlayerStates
             
             
             _sound.PlaySound("N_Attack", "Player");
+            _manager.PlaySound("N_Attack");
         }
 
         public override void Execute()

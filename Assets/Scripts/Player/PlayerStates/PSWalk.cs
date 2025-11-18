@@ -9,9 +9,10 @@ public class PSWalk<T> : PSBase<T>
 
     private PlayerManager _manager;
 
-    public PSWalk(T trancition)
+    public PSWalk(T trancition, PlayerManager manager)
     {
         Trancition = trancition;
+        _manager = manager;
     }
     public override void Enter()
     {
@@ -19,6 +20,7 @@ public class PSWalk<T> : PSBase<T>
         base.Enter();
         _animate.PlayStateAnimation(StateEnum.Walk);
         _sound.PlaySound("Walk", "Player");
+        _manager.PlaySound("Walk");
     }
 
     public override void Execute()
@@ -33,6 +35,7 @@ public class PSWalk<T> : PSBase<T>
     {
         base.Exit();
         _sound.PlaySound("Null","Player");
+        _manager.StopSounds("Player");
         _animate.StopStateAnimation(StateEnum.Walk);
     }
 }

@@ -1,3 +1,4 @@
+using Entities;
 using Entities.StateMachine;
 using System.Collections;
 using Unity.VisualScripting;
@@ -8,9 +9,15 @@ namespace Enemies.Valeria.States
     public class ValeriaStateDash<T> : StatesBase<T>
     {
         private Coroutine ExitDashTest;
+        private EntityManager _manager;
+        public ValeriaStateDash(EntityManager manager) 
+        {
+            _manager = manager;
+        }
         public override void Enter()
         {
             _sound.PlaySound("Dash", "Enemy");
+            _manager.PlaySound("Dash");
             _agent.TurnOffNavMesh();
             var dashData = _statesData.GetStateData<DashStateData>(EnemyStates.Dash);
             if (dashData != null)
