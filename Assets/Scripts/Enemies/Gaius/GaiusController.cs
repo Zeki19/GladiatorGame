@@ -51,9 +51,9 @@ namespace Enemies.Gaius
             Fsm = new FSM<EnemyStates>();
 
             var idleState = new GaiusStateIdle<EnemyStates>();
-            var dashState = new GaiusStateDash<EnemyStates>();
+            var dashState = new GaiusStateDash<EnemyStates>(manager);
             var chaseState = new GaiusStateChase<EnemyStates>(_pursuitSteering, this, target);
-            var AttackState = new GaiusStateAttack<EnemyStates>(_pursuitSteering, weapon, _attackManager,this);
+            var AttackState = new GaiusStateAttack<EnemyStates>(_pursuitSteering, weapon, _attackManager,this, manager);
             var deathState = new DeadState<EnemyStates>();
             
             _idleState = idleState;
