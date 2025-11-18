@@ -53,7 +53,7 @@ namespace Enemies.Minotaur
         protected override void InitializeFsm()
         {
             Fsm = new FSM<EnemyStates>();
-            var attackState = new MinotaurStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
+            var attackState = new MinotaurStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this, manager);
             var chaseState = new MinotaurStateChase<EnemyStates>(_pursuitSteering, this,shortAttackCD,longAttackCD);
             var searchState = new MinotaurStateSearch<EnemyStates>(_pursuitSteering,this);
             var desperateSearchState = new MinotaurStateDesperateSearch<EnemyStates>(_pursuitSteering, searchSpeed);

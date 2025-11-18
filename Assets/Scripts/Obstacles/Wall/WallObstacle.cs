@@ -15,6 +15,7 @@ public class WallObstacle : MonoBehaviour
 
 
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private EnemyManager enemy;
 
     private int _currentHealth;
     private GameObject _spawnedWall;
@@ -64,6 +65,7 @@ public class WallObstacle : MonoBehaviour
     {
         if (_spawnedWall && _behaviours.TryGetValue(_spawnedWall, out var behaviour))
         {
+            enemy.PlaySound("Collision");
             behaviour.DestroyPillar(_context);
             behaviour.OnDamaged -= ReceiveDamage;
             _behaviours.Remove(_spawnedWall);

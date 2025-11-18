@@ -1,4 +1,5 @@
 using Attack;
+using Entities;
 using Entities.StateMachine;
 using Unity.Mathematics;
 using UnityEngine;
@@ -11,12 +12,14 @@ namespace Enemies.Minotaur.States
         private GameObject _weapon;
         private AttackManager attack;
         private EnemyController controller;
-        public MinotaurStateAttack(ISteering steering,GameObject weapon,AttackManager attackManager,EnemyController controller)
+        private EntityManager _manager;
+        public MinotaurStateAttack(ISteering steering,GameObject weapon,AttackManager attackManager,EnemyController controller, EntityManager manager)
         {
             _steering = steering;
             attack = attackManager;
             _weapon = weapon;
-            this.controller=controller;
+            this.controller = controller;
+            _manager = manager;
         }
 
         public override void Enter()
@@ -32,18 +35,23 @@ namespace Enemies.Minotaur.States
             {
                 case 0:
                     _sound.PlaySound("Fists", "Enemy");
+                    _manager.PlaySound("Fists");
                     break;
                 case 1:
                     _sound.PlaySound("Charge", "Enemy");
+                    _manager.PlaySound("Charge");
                     break;
                 case 2:
                     _sound.PlaySound("GroundSlam", "Enemy");
+                    _manager.PlaySound("GroundSlam");
                     break;
                 case 3:
                     _sound.PlaySound("Throw", "Enemy");
+                    _manager.PlaySound("Throw");
                     break;
                 case 5:
                     _sound.PlaySound("Cracks", "Enemy");
+                    _manager.PlaySound("Cracks");
                     break;
                 default:
                     break;

@@ -27,24 +27,14 @@ public class FightManager : MonoBehaviour
     }
     private void VictoryCinematic()
     {
-        enemy.PlaySound("Death");
-
-
+        enemy?.PlaySound("Death");
         cinematicManager.VictoryCinematic();
         Unsubscribe();
     }
     private void DefeatCinematic()
     {
         enemy.view.PlayStateAnimation(StateEnum.Win);
-        
-        switch (enemy.gameObject.name)
-        {
-            case "Valeria":
-                enemy.PlaySound("Laugh");
-                break;
-            default:
-                break;
-        }
+        enemy?.PlaySound("Laugh");
         cinematicManager.DefeatCinematic();
         Unsubscribe();
     }
