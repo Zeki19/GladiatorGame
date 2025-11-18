@@ -36,7 +36,7 @@ public class PSDash<T> : PSBase<T>
         if (!_canDash) return;
         
         _sound.PlaySound("Dash", "Player");
-        
+        _manager.PlaySound("Dash");
         _canDash = false;
         _characterHealth.isInvulnerable = true;
 

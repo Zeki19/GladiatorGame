@@ -25,6 +25,7 @@ namespace Player.PlayerStates
             _move.ModifySpeed(-CurrentWeapon.SlowPercent);
             
             _sound.PlaySound("C_Attack", "Player");
+            _manager.PlaySound("C_Attack");
             CurrentWeapon.ResetChangeMeter();
         }
     }

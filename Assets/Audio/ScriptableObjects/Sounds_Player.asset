@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Walk
-    clip: {fileID: 8300000, guid: 709fd42af89d0814f8dafd22b6ddb76b, type: 3}
+    clip: {fileID: 8300000, guid: 447b27896725b3644a8c53a06c58d7e6, type: 3}
     clipVariations: []
     loop: 1
-    volume: 0.466
+    volume: 1
   - name: Dash
     clip: {fileID: 8300000, guid: 5ebb0bd1a96fe0140a9d599ac5b51dfd, type: 3}
     clipVariations: []
@@ -47,7 +47,7 @@ MonoBehaviour:
     loop: 0
     volume: 0.5
   - name: WeaponBreak
-    clip: {fileID: 8300000, guid: e9303902202f97040bc1e9a644407e9b, type: 3}
+    clip: {fileID: 8300000, guid: f65c45e946b67c2498f2a0a119f1579c, type: 3}
     clipVariations: []
     loop: 0
     volume: 0.21

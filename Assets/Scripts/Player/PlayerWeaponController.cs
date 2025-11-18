@@ -210,6 +210,7 @@ namespace Player
             if (!Weapon.CheckDurability())
             {
                 DestroyWeapon();
+                _manager.PlaySound("WeaponBreak");
             }
         }
 

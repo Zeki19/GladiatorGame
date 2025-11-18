@@ -21,7 +21,7 @@ namespace Entities
         public IHealth HealthComponent => HealthSystem;
         
         public void PlaySound (string soundName) => Sounds?.Invoke(soundName);
-
+        public void StopSound(string soundSource) => StopSounds(soundSource);
         protected virtual void Start()
         {
             PhaseSystem = new PhaseSystem(phasesThresholds, HealthComponent);
