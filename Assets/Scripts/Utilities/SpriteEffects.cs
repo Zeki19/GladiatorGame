@@ -10,22 +10,23 @@ public class SpriteEffects
     {
         _mono = mono;
     }
-    public void Blink(SpriteRenderer sprite,int amount, float frequency, Color activeColor)
+    public void Blink(SpriteRenderer sprite,int amount, float frequency, Color activeColor, Color originalColor)
     {
         if (EffectCoroutine != null)
             _mono.StopCoroutine(EffectCoroutine);
 
-        EffectCoroutine = _mono.StartCoroutine(DamagedBlink(sprite,amount,frequency,activeColor));
+
+
+        EffectCoroutine = _mono.StartCoroutine(DamagedBlink(sprite,amount,frequency,activeColor, originalColor));
     }
 
-    private IEnumerator DamagedBlink(SpriteRenderer sprite, int amount, float frequency, Color activeColor)
+    private IEnumerator DamagedBlink(SpriteRenderer sprite, int amount, float frequency, Color activeColor, Color originalColor)
     {
         for (int i = 0; i < amount; i++)
         {
-            var oldColor = sprite.color;
             sprite.color = activeColor;
             yield return new WaitForSeconds(frequency);
-            sprite.color = oldColor;
+            sprite.color = originalColor;
             yield return new WaitForSeconds(frequency);
         }
     }
