@@ -8,7 +8,12 @@ public class Pillar_Standing : MonoBehaviour, IPillar
     [SerializeField] protected SpriteRenderer sprite;
     [SerializeField]private Utilities.BlinkValues blinkDamage;
     private SpriteEffects _blink;
-    
+    private Color _originalColor;
+
+    private void Start()
+    {
+        _originalColor = sprite.color;
+    }
     public void AddIgnorePillar(List<Collider2D> colliders)
     {
         _ignoreColliders = colliders;
@@ -43,6 +48,6 @@ public class Pillar_Standing : MonoBehaviour, IPillar
     private void Blink()
     {
         _blink = new SpriteEffects(this);
-        _blink.Blink(sprite, blinkDamage.amount, blinkDamage.frequency, blinkDamage.blinkActive);
+        _blink.Blink(sprite, blinkDamage.amount, blinkDamage.frequency, blinkDamage.blinkActive, _originalColor);
     }
 }
