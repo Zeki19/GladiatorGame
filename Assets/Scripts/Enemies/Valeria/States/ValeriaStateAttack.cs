@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Attack;
 using Enemies;
 using Enemies.Gaius;
+using Entities;
 using Entities.StateMachine;
 using Unity.Mathematics;
 using UnityEngine;
@@ -14,12 +15,14 @@ public class ValeriaStateAttack<T> : StatesBase<T>
     private AttackManager attack;
     private EnemyController controller;
     private Coroutine PreventStuckDash;
-    public ValeriaStateAttack(ISteering steering,GameObject weapon,AttackManager attackManager,EnemyController controller)
+    private EntityManager _manager;
+    public ValeriaStateAttack(ISteering steering,GameObject weapon,AttackManager attackManager,EnemyController controller, EntityManager manager)
     {
         _steering = steering;
         attack = attackManager;
         _weapon = weapon;
-        this.controller=controller;
+        this.controller = controller;
+        _manager = manager;
     }
 
     public override void Enter()
@@ -35,15 +38,25 @@ public class ValeriaStateAttack<T> : StatesBase<T>
         {
             case 0:
                 _sound.PlaySound("Throw", "Enemy");
+                _manager.PlaySound("Throw");
+                break;
+            case 1:
+                _manager.PlaySound("Dash");
                 break;
             case 2:
                 _sound.PlaySound("Swipe", "Enemy");
+                _manager.PlaySound("Swipe");
                 break;
             case 3:
                 _sound.PlaySound("Throw", "Enemy");
+                _manager.PlaySound("Throw");
+                break;
+            case 4:
+                _manager.PlaySound("Dash");
                 break;
             case 5:
                 _sound.PlaySound("Throw", "Enemy");
+                _manager.PlaySound("Throw");
                 break;
             default: 
                 break;

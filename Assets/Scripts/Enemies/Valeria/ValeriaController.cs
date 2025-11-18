@@ -70,8 +70,8 @@ namespace Enemies.Valeria
             Fsm = new FSM<EnemyStates>();
 
 
-            var dashState = new ValeriaStateDash<EnemyStates>();
-            var attackState = new ValeriaStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this);
+            var dashState = new ValeriaStateDash<EnemyStates>(manager);
+            var attackState = new ValeriaStateAttack<EnemyStates>(_pursuitSteering, weapon, attackManager,this, manager);
             var chaseState = new ValeriaStateChase<EnemyStates>(_pursuitSteering, target, desiredDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown,longAttackCd,middleAttackCd);
             var meleeState = new ValeriaStateMeleeLock<EnemyStates>(_pursuitSteering, target, desiredMeleeDistance, stoppingThreshold, orbitSpeed, orbitAngle, cooldown,shortMeleeAttackCd,longMeleeAttackCd);
             var runAwayState = new ValeriaStateRunAway<EnemyStates>(target, hiddingLayer, hiddingTime);
