@@ -18,7 +18,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject skipTutorialButton;
 
     [Header("Dependencies")]
-    private DialogueManager _dialogueManager;
+    [SerializeField] private DialogueManager dialogueManager;
     private CameraTutorialManager _cameraTutorialManager;
 
     private TutorialMission _currentMission;
@@ -100,11 +100,9 @@ public class TutorialManager : MonoBehaviour
 
     private void InitializeDependencies()
     {
-        _dialogueManager = ServiceLocator.Instance.GetService<DialogueManager>();
         _cameraTutorialManager = ServiceLocator.Instance.GetService<CameraTutorialManager>();
 
-        if (_dialogueManager == null)
-            Debug.LogError("DialogueManager not found!");
+        if (dialogueManager == null) dialogueManager = ServiceLocator.Instance.GetService<DialogueManager>();
 
         if (_cameraTutorialManager == null)
             Debug.LogError("CameraTutorialManager not found!");
@@ -245,8 +243,8 @@ public class TutorialManager : MonoBehaviour
         bool dialogueComplete = false;
         _dialogueStarted = true;
 
-        _dialogueManager.OnConversationEnd = () => dialogueComplete = true;
-        _dialogueManager.StartConversation(_currentMission.dialogueToPlay);
+        dialogueManager.OnConversationEnd = () => dialogueComplete = true;
+        dialogueManager.StartConversation(_currentMission.dialogueToPlay);
 
         yield return new WaitUntil(() => dialogueComplete);
     }
@@ -292,9 +290,9 @@ public class TutorialManager : MonoBehaviour
         {
             StartCoroutine(CompleteTutorialWithCameraZoom());
         }
-        else if (_dialogueManager != null)
+        else if (dialogueManager != null)
         {
-            _dialogueManager.StartConversation(EnumDialogues.TutorialComplete);
+            dialogueManager.StartConversation(EnumDialogues.TutorialComplete);
         }
     }
 
@@ -302,12 +300,12 @@ public class TutorialManager : MonoBehaviour
     {
         PauseManager.SetPausedCinematic(true);
 
-        if (_dialogueManager != null)
+        if (dialogueManager != null)
         {
-            _dialogueManager.StartConversation(EnumDialogues.TutorialComplete);
+            dialogueManager.StartConversation(EnumDialogues.TutorialComplete);
 
             bool dialogueComplete = false;
-            _dialogueManager.OnConversationEnd = () => dialogueComplete = true;
+            dialogueManager.OnConversationEnd = () => dialogueComplete = true;
             yield return new WaitUntil(() => dialogueComplete);
         }
 

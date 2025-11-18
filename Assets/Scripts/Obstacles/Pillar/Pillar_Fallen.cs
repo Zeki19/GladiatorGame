@@ -26,8 +26,13 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
     [SerializeField]private BlinkValues blinkDamage;
     private SpriteEffects _blink;
 
-
+    private Color _originalColor;
     public event Action OnDamaged;
+
+    private void Start()
+    {
+        _originalColor = sprite.color;
+    }
 
     public void SpawnPillar(PillarContext context)
     {
@@ -132,7 +137,7 @@ public class Pillar_Fallen : MonoBehaviour, IPillar
     private void Blink()
     {
         _blink = new SpriteEffects(this);
-        _blink.Blink(sprite, blinkDamage.amount, blinkDamage.frequency, blinkDamage.blinkActive);
+        _blink.Blink(sprite, blinkDamage.amount, blinkDamage.frequency, blinkDamage.blinkActive, _originalColor);
     }
 
     private static Vector3 GetRandomCardinal()
