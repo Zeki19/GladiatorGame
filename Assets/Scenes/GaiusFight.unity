@@ -60769,6 +60769,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 409955255515939548, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3306967609244709980, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
       propertyPath: m_Name
       value: BossDoor
@@ -60778,12 +60782,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.4080622
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -40.01
       objectReference: {fileID: 0}
     - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -18.844
+      value: -18.9516
       objectReference: {fileID: 0}
     - target: {fileID: 3344451753997283476, guid: 191ad85b03ad64646b16e123d14115cf, type: 3}
       propertyPath: m_LocalPosition.z
