@@ -44,11 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6834934ad875bc4ca6f868405fdfe76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPos: {x: -40, y: -30, z: 0}
   inactiveWeapon: {fileID: 0}
-  forTest:
-  - {fileID: 11400000, guid: b159f5f16a8c72049a2e740745172e9d, type: 2}
-  - {fileID: 11400000, guid: b159f5f16a8c72049a2e740745172e9d, type: 2}
+  weapons: []
   spawnPoints:
   - {x: -40, y: -38, z: 0}
   - {x: -40, y: -21, z: 0}
@@ -58,6 +55,7 @@ MonoBehaviour:
   - {x: -32, y: -23, z: 0}
   - {x: -34, y: -27, z: 0}
   - {x: -45, y: -33, z: 0}
-  UsedspawnPoints: []
-  RespawnTimeRange: {x: 5, y: 10}
+  usedSpawnPoint: []
+  RespawnTimeRange: {x: 3, y: 6}
   RespawnWeaponQuantity: {x: 1, y: 2}
+  MinimumAmountOfWeaponsInTheGround: 1
