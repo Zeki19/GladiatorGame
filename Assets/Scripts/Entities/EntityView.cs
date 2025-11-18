@@ -15,7 +15,9 @@ namespace Entities
 
         private SpriteEffects _blink;
         [SerializeField]private BlinkValues blinkDamage; 
-        [SerializeField]private BlinkValues blinkHeal; 
+        [SerializeField]private BlinkValues blinkHeal;
+        private Color _originalColor;
+
 
         public abstract void LookDir(Vector2 dir);
         public abstract void LookDirInsta(Vector2 dir);
@@ -43,11 +45,12 @@ namespace Entities
 
         protected virtual void Start()
         {
+            _originalColor = sprite.color;
             _blink = new SpriteEffects(this);
             if (manager != null)
             {
-                manager.HealthComponent.OnDamage += (float a) => _blink.Blink(sprite, blinkDamage.amount, blinkDamage.frequency, blinkDamage.blinkActive);
-                manager.HealthComponent.OnHeal += (float a) => _blink.Blink(sprite, blinkHeal.amount, blinkHeal.frequency, blinkHeal.blinkActive);
+                manager.HealthComponent.OnDamage += (float a) => _blink.Blink(sprite, blinkDamage.amount, blinkDamage.frequency, blinkDamage.blinkActive, _originalColor);
+                manager.HealthComponent.OnHeal += (float a) => _blink.Blink(sprite, blinkHeal.amount, blinkHeal.frequency, blinkHeal.blinkActive, _originalColor);
             }
 
         }
