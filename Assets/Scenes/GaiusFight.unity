@@ -25994,7 +25994,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 74
-      m_TileSpriteIndex: 105
+      m_TileSpriteIndex: 115
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -34314,7 +34314,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 2
+      m_TileSpriteIndex: 105
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -56765,8 +56765,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 5
     m_Data: {fileID: -566387955, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1297551554, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: -2133019621, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
   - m_RefCount: 0
@@ -56972,7 +56972,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: -918470111, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
+    m_Data: {fileID: -1297551554, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1311145987, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
   - m_RefCount: 1
@@ -56991,8 +56991,8 @@ Tilemap:
     m_Data: {fileID: -812124622, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -71588272, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -918470111, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -279764643, guid: 9d16755acab61a74ebcbd6d787bc5dab, type: 3}
   - m_RefCount: 1
@@ -61079,10 +61079,6 @@ PrefabInstance:
     - target: {fileID: 1656702546046596509, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
-      propertyPath: displayType
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5377347691522787334, guid: f432793312dcb4c48a439ded86b52d9f, type: 3}
       propertyPath: entityManager
