@@ -115,6 +115,7 @@ public class PlayerResourcesUI : MonoBehaviour
     private void Dashed(float seconds)
     {
         dashIcon.color = new Color(dashIcon.color.r, dashIcon.color.g, dashIcon.color.b, 0f);
+        
         if(gameObject.activeInHierarchy && dashIcon.gameObject.activeInHierarchy)
             StartCoroutine(FadeInDashIcon(seconds));
     }
@@ -123,7 +124,7 @@ public class PlayerResourcesUI : MonoBehaviour
     {
         float time = 0f;
         Color startColor = dashIcon.color;
-        Color endColor = new Color(dashIcon.color.r, dashIcon.color.g, dashIcon.color.b, 1f);
+        Color endColor = new Color(dashIcon.color.r, dashIcon.color.g, dashIcon.color.b, .4f);
 
         while (time < duration)
         {
@@ -138,6 +139,6 @@ public class PlayerResourcesUI : MonoBehaviour
         }
 
         // Ensure it's fully visible at the end
-        dashIcon.color = endColor;
+        dashIcon.color = new Color(dashIcon.color.r, dashIcon.color.g, dashIcon.color.b, 1f);
     }
 }
