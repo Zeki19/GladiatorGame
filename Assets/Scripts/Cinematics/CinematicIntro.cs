@@ -25,17 +25,16 @@ public class CinematicIntro : MonoBehaviour
         _cine.UIManager.HideUI();
 
         _cine.cam.Lens.OrthographicSize = 7f;
-        
-        _cine.MoveTo(ArenaCenter, 1.5f, ZoomAway);
+
+        GoToEnemy();
     }
-    private void ZoomAway()
+    private void GoToEnemy()
     {
-        _cine.ZoomTo(7f,1.5f, ZoomEnemy);
+        _cine.MoveTo(_cine.boss,1.25f, ZoomEnemy);
     }
     private void ZoomEnemy()
     {
-        _cine.MoveTo(_cine.boss,1.5f);
-        _cine.ZoomTo(5f,1f, StartDialogue);
+        _cine.ZoomTo(5f,.5f, StartDialogue);
     }
     private void StartDialogue()
     {
@@ -44,8 +43,8 @@ public class CinematicIntro : MonoBehaviour
     }
     private void MoveToPlayer()
     {
-        _cine.MoveTo(_cine.player, 1.5f, EndCinematic);
-        _cine.ZoomTo(_cine.baseZoom, 1.25f);
+        _cine.MoveTo(_cine.player, 1f, EndCinematic);
+        _cine.ZoomTo(_cine.baseZoom, 1f);
     }
     private void EndCinematic()
     {
