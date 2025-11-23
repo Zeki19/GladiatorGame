@@ -26,7 +26,7 @@ public class TutorialManager : MonoBehaviour
     private TutorialState _currentState = TutorialState.NotStarted;
     private bool _dialogueStarted = false;
     private bool _tutorialCompleted = false;
-    private bool _hasRestartedTutorial = false;
+    [SerializeField] private bool _hasRestartedTutorial = false;
 
     public static event Action<TutorialMission> OnMissionStarted;
     public static event Action<TutorialMission> OnMissionCompleted;
@@ -340,14 +340,15 @@ public class TutorialManager : MonoBehaviour
     {
         if (skipTutorialButton == null)
             return;
-        bool shouldShowButton = !isTrainingMode && 
-                               !_tutorialCompleted && 
-                               (_currentMission != null || _currentMissionIndex == 0);
+        
+        bool shouldShowButton = _hasRestartedTutorial && 
+                               !isTrainingMode && 
+                               !_tutorialCompleted;
 
         skipTutorialButton.SetActive(shouldShowButton);
         
         Debug.Log($"[TutorialManager] Skip button visibility: {shouldShowButton} " +
-                  $"(TrainingMode: {isTrainingMode}, Completed: {_tutorialCompleted}, HasMission: {_currentMission != null})");
+                  $"(HasRestarted: {_hasRestartedTutorial}, TrainingMode: {isTrainingMode}, Completed: {_tutorialCompleted})");
     }
 
     public void SetSkipButton(GameObject button)
@@ -355,9 +356,6 @@ public class TutorialManager : MonoBehaviour
         skipTutorialButton = button;
         UpdateSkipButtonVisibility();
     }
-    #endregion
-
-    #region Restart Button Management
     #endregion
 
     #region UI Hint Management

@@ -1141,6 +1141,7 @@ MonoBehaviour:
   trainingHubExitDoor: {fileID: 691591047}
   skipTutorialButton: {fileID: 1159737579}
   dialogueManager: {fileID: 244684426}
+  _hasRestartedTutorial: 0
 --- !u!1001 &442707789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83154,7 +83155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7339213267150226643, guid: 939fd48e6ca1f3e4ba9aaa548a290fc4, type: 3}
       propertyPath: maxLife
-      value: 10000
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 7506379029490046513, guid: 939fd48e6ca1f3e4ba9aaa548a290fc4, type: 3}
       propertyPath: m_Sprite
