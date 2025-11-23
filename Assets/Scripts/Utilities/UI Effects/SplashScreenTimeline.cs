@@ -8,6 +8,8 @@ public class SplashScreenTimeline : MonoBehaviour
     [SerializeField] private ImageEffect uade;
     [SerializeField] private ImageEffect icon;
     [SerializeField] private ImageEffect title;
+
+    private Coroutine _co;
     
     private void Start()
     {
@@ -75,11 +77,26 @@ public class SplashScreenTimeline : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (!isActiveAndEnabled || !Input.GetKeyDown(KeyCode.Space)) return;
+
+        SkipSplashScreen();
+    }
+
+    private void SkipSplashScreen()
+    {
+        if (_co != null) StopCoroutine(_co);
+
+        SplashScreen.HasPlayedSplashScreen = true;
+        gameObject.SetActive(false);
+    }
+
     #region Utils
 
         private void Wait(float seconds, Action onComplete)
         {
-            StartCoroutine(WaitCoroutine(seconds, onComplete));
+            _co = StartCoroutine(WaitCoroutine(seconds, onComplete));
         }
         private IEnumerator WaitCoroutine(float duration, Action onComplete)
         {

@@ -15,7 +15,7 @@ public class CameraMove : CameraModuleBase
 
     public void Stop()
     {
-        StopCoroutine(_co);
+        if (_co != null) StopCoroutine(_co);
     }
 
     private IEnumerator MoveRoutine(Transform target, float duration, Action onEnd)
