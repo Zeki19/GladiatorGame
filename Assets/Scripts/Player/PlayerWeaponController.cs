@@ -103,7 +103,7 @@ namespace Player
         public void GrabWeapon()
         {
             if (Weapon != null) return;
-            var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
+            var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 2);
             EquipWeapon(weapon);
             
         }
