@@ -34,7 +34,10 @@ public class CinematicManager : MonoBehaviour
     private bool _defeatCinematic = false;
 
     public void Initialize()
-    {
+    { 
+        _introCinematic = false; 
+        _defeatCinematic = false;
+    
         UIManager = ServiceLocator.Instance.GetService<UIManager>();
 
         _zoom = GetComponent<CameraZoom>();
@@ -84,10 +87,10 @@ public class CinematicManager : MonoBehaviour
         
         _zoom.ZoomTo(baseZoom, 0f);
         
-        End();
-
         if (_introCinematic) UIManager.ShowUI();
         if (_defeatCinematic) SceneChanger.Instance.ChangeScene("DefeatScene");
+        
+        End();
     }
     
     private void End()
@@ -95,5 +98,8 @@ public class CinematicManager : MonoBehaviour
         skipButton.SetActive(false);
         cam.Follow = player;
         PauseManager.SetPausedCinematic(false);
+        
+        _introCinematic = false;
+        _defeatCinematic = false;
     }
 }
