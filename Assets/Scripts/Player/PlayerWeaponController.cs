@@ -30,6 +30,7 @@ namespace Player
         public static event Action OnPlayerWeaponDropped;
         public static event Action OnPlayerAttacked;
         public static event Action OnPlayerChargedAttack;
+        public event Action<float> OnWeaponLossDurability;
 
         private void Awake()
         {
@@ -76,6 +77,7 @@ namespace Player
             if (Weapon.ConsumeDurabilityOnMissStandard())
                 Weapon.AffectDurability();
 
+            OnWeaponLossDurability?.Invoke(Weapon.DurabilityPercent());
             OnAttack?.Invoke();
             OnPlayerAttacked?.Invoke();
         }
@@ -103,6 +105,7 @@ namespace Player
             if (Weapon != null) return;
             var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 1);
             EquipWeapon(weapon);
+            
         }
 
         private void EquipWeapon(Weapon weapon)
@@ -118,7 +121,7 @@ namespace Player
                 _manager.controller as PlayerController, _manager, _manager.controller);
             weapon.ChargeAttack.SetUp(weapon.WeaponGameObject, _manager.model, _manager.view,
                 _manager.controller as PlayerController, _manager, _manager.controller);
-
+            Weapon.WeaponGameObject.GetComponent<PlayerWeaponSpriteChange>().Subscribe();
             OnWeaponChanged?.Invoke();
             OnPlayerWeaponPicked?.Invoke();
         }
@@ -144,6 +147,7 @@ namespace Player
 
         private void UnEquipWeapon()
         {
+            Weapon.WeaponGameObject.GetComponent<PlayerWeaponSpriteChange>().UnSubscribe();
             AttackFinishSubscription(false);
             Weapon.BaseAttack.OnUnequip();
             Weapon.ChargeAttack.OnUnequip();

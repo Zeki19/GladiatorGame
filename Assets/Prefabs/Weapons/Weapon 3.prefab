@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8210315096584661806}
   - component: {fileID: 6035217671768051098}
   - component: {fileID: 7913819280139019259}
+  - component: {fileID: 3724952875695893177}
   m_Layer: 11
   m_Name: Weapon 3
   m_TagString: Untagged
@@ -134,3 +135,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.75, y: 0.35}
   m_EdgeRadius: 0
+--- !u!114 &3724952875695893177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8391845874040343952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be361638a944cca4088f4bbf5bb5e970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -6502604993155047502, guid: 1ad17ea125b52c641a19d3147566de8b, type: 3}
+  - {fileID: -6502604993155047502, guid: 1ad17ea125b52c641a19d3147566de8b, type: 3}
+  - {fileID: -6502604993155047502, guid: 1ad17ea125b52c641a19d3147566de8b, type: 3}
+  spriteRenderer: {fileID: 6035217671768051098}
