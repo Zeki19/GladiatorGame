@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: BowChargeAttack
   m_EditorClassIdentifier: 
   attackName: 
-  damage: 7
+  damage: 8
   projectileSpeed: 15
   maxRange: 10
   projectilePrefab: {fileID: 5524527720111712474, guid: b39733fc00e27cd48a7559c2e13efb7e, type: 3}
   collisionLayer:
     serializedVersion: 2
     m_Bits: 904
-  coneAngle: 120
-  numberOfProjectiles: 5
+  coneAngle: 45
+  numberOfProjectiles: 3
