@@ -1,10 +1,25 @@
 fileFormatVersion: 2
-guid: c4d8a068adbd895489e89bdc11ee2ad2
+guid: 4afa3549b624d7941bd96b9a5b304490
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8373820971351998678
-    second: dagger weapon_0
+      213: -7234418370108079006
+    second: SpearBroken_0
+  - first:
+      213: -2377604836238834818
+    second: SpearBroken_1
+  - first:
+      213: 2919295077985574369
+    second: SpearBroken_2
+  - first:
+      213: 8042011237808777587
+    second: SpearBroken_3
+  - first:
+      213: 1382006373430245473
+    second: SpearBroken_4
+  - first:
+      213: 3589065950976420368
+    second: SpearBroken_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dagger weapon_0
+      name: SpearBroken_0
       rect:
         serializedVersion: 2
-        x: 9
+        x: 0
         y: 0
-        width: 15
-        height: 34
+        width: 32
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +130,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a2ff8d561363acb80800000000000000
-      internalID: -8373820971351998678
+      spriteID: 264c52d62de2a9b90800000000000000
+      internalID: -7234418370108079006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpearBroken_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e73cbbf9ffc010fd0800000000000000
+      internalID: -2377604836238834818
       vertices: []
       indices: 
       edges: []
@@ -125,7 +162,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 68263dea8893f78438ef5ad8152a79a6
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +172,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      dagger weapon_0: -8373820971351998678
+      SpearBroken_0: -7234418370108079006
+      SpearBroken_1: -2377604836238834818
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
