@@ -13,7 +13,12 @@ public class CameraMove : CameraModuleBase
         _co = StartCoroutine(MoveRoutine(target, duration, onEnd));
     }
 
-    public IEnumerator MoveRoutine(Transform target, float duration, Action onEnd)
+    public void Stop()
+    {
+        StopCoroutine(_co);
+    }
+
+    private IEnumerator MoveRoutine(Transform target, float duration, Action onEnd)
     {
         var helper = Ctx.Helper;
         

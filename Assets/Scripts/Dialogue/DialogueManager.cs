@@ -181,4 +181,12 @@ public class DialogueManager : MonoBehaviour
                 _onTypeEnd += () => _cameraShake.Shake();
         }
     }
+
+    public void SkipDialogue()
+    {
+        animator.SetBool("IsOpen", false);
+        Debug.Log("Skipping");
+        audioSource.enabled = false;
+        dialogueCanvas.SetActive(false);
+    }
 }

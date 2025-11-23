@@ -45,6 +45,10 @@ public class CinematicManager : MonoBehaviour
 
     public void ZoomTo(float goal, float duration, Action onEnd = null) => _zoom.ZoomTo(goal, duration, onEnd);
     public void MoveTo(Transform target, float duration, Action onEnd = null) => _move.MoveTo(target, duration, onEnd);
+    public void StopCamera()
+    {
+
+    }
 
     public void IntroCinematic()
     {
@@ -54,12 +58,23 @@ public class CinematicManager : MonoBehaviour
     {
         OnDefeat?.Invoke();
     }
-
     public void VictoryCinematic()
     {
         OnVictory?.Invoke();
     }
-
+    public void SkipCinematic()
+    {
+        dialogueManager.SkipDialogue();
+        
+        _zoom.Stop();
+        _move.Stop();
+        
+        _zoom.ZoomTo(baseZoom, 0f);
+        
+        End();
+        UIManager.ShowUI();
+    }
+    
     private void End()
     {
         cam.Follow = player;

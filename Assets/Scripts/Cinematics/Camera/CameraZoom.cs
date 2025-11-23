@@ -13,6 +13,11 @@ public class CameraZoom : CameraModuleBase
         _co = StartCoroutine(Run(lensGoal, duration, onEnd));
     }
 
+    public void Stop()
+    {
+        if (_co != null) StopCoroutine(_co);
+    }
+
     IEnumerator Run(float goal, float duration, Action onEnd)
     {
         var cam = Ctx.Cam;

@@ -60895,6 +60895,10 @@ PrefabInstance:
       propertyPath: exitDoor
       value: 
       objectReference: {fileID: 762395248554571266}
+    - target: {fileID: 1199750842470503253, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CinematicManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1884675217846054610, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
       propertyPath: m_LocalPosition.x
       value: -40
@@ -60951,6 +60955,10 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 11400000, guid: 2cf428603d1df88428551043de4a1462, type: 2}
+    - target: {fileID: 2988385062445862731, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3130263023510648799, guid: 3f0bcfd9f7a344d4dbc4667a12bb6789, type: 3}
       propertyPath: m_Name
       value: Cinematic
