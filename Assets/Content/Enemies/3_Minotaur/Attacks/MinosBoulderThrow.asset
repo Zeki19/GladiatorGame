@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57df91b73fa445bb97e937d2c22f7237, type: 3}
   m_Name: MinosBoulderThrow
   m_EditorClassIdentifier: 
-  attackName: 
+  attackName: MinosBoulderThrow
   damage: 15
   projectileSpeed: 5
   maxRange: 15
@@ -20,3 +20,4 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 64
+  impactSound: {fileID: 0}
