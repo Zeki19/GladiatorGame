@@ -26,6 +26,7 @@ public class TutorialManager : MonoBehaviour
     private TutorialState _currentState = TutorialState.NotStarted;
     private bool _dialogueStarted = false;
     private bool _tutorialCompleted = false;
+    private bool _hasRestartedTutorial = false;
 
     public static event Action<TutorialMission> OnMissionStarted;
     public static event Action<TutorialMission> OnMissionCompleted;
@@ -147,9 +148,10 @@ public class TutorialManager : MonoBehaviour
         _dialogueStarted = false;
         _tutorialCompleted = false;
         isTrainingMode = false;
+        _hasRestartedTutorial = true;
 
         HideUIHint();
-        UpdateSkipButtonVisibility(); 
+        UpdateSkipButtonVisibility();
         OnTutorialRestart?.Invoke();
         StartTutorial();
     }
@@ -353,6 +355,9 @@ public class TutorialManager : MonoBehaviour
         skipTutorialButton = button;
         UpdateSkipButtonVisibility();
     }
+    #endregion
+
+    #region Restart Button Management
     #endregion
 
     #region UI Hint Management
