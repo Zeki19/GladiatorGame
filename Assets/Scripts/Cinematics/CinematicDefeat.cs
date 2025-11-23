@@ -36,6 +36,6 @@ public class CinematicDefeat : MonoBehaviour
     
     private void EndCinematic()
     {
-        ServiceLocator.Instance.GetService<SceneChanger>().ChangeScene("DefeatScene");
+        SceneChanger.Instance.ChangeScene("DefeatScene");
     }
 }
