@@ -11,12 +11,9 @@ public class FightManager : MonoBehaviour
     [SerializeField] private  PlayerManager player;
     private void Start()
     {
-        //StartCoroutine(WaitForFrames(5));
-        
         cinematicManager.Initialize();
         
         enemy.HealthComponent.OnDead += VictoryCinematic;
-        
         player.HealthComponent.OnDead += DefeatCinematic;
         
         IntroductionCinematic();
