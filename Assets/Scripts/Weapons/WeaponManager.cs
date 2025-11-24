@@ -65,7 +65,6 @@ namespace Weapons
             _droppedWeapons.Add(newWeapon.WeaponGameObject, newWeapon);
             newWeapon.WeaponGameObject.transform.parent = transform;
             newWeapon.WeaponGameObject.SetActive(true);
-            newWeapon.WeaponGameObject.AddComponent<GrabHighlight>();
             return newWeapon;
         }
 

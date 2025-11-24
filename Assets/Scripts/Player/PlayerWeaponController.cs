@@ -18,13 +18,13 @@ namespace Player
         private PlayerManager _manager;
         private WeaponManager _weaponManager;
         private bool _isGamePaused;
-        public Weapon Weapon { get; private set; }
+        public Weapon CurrentWeapon { get; private set; }
         public float offset;
         private readonly List<GameObject> _enemiesHit = new List<GameObject>();
 
         public event Action OnAttack;
         public event Action OnWeaponChanged;
-        public bool HasWeapon => Weapon != null;
+        public bool HasWeapon => CurrentWeapon != null;
 
         public static event Action OnPlayerWeaponPicked;
         public static event Action OnPlayerWeaponDropped;
@@ -59,7 +59,7 @@ namespace Player
         void Update()
         {
             LookDir();
-            Weapon?.CooldownCounter();
+            CurrentWeapon?.CooldownCounter();
         }
 
         private void LookDir()
@@ -70,28 +70,28 @@ namespace Player
 
         public void Attack()
         {
-            if (Weapon == null || !Weapon.CanAttack()) return;
+            if (CurrentWeapon == null || !CurrentWeapon.CanAttack()) return;
             var controller = _manager.controller as PlayerController;
             controller?.ChangeToAttack();
-            Weapon.CurrentAttack = Weapon.BaseAttack;
-            if (Weapon.ConsumeDurabilityOnMissStandard())
-                Weapon.AffectDurability();
+            CurrentWeapon.CurrentAttack = CurrentWeapon.BaseAttack;
+            if (CurrentWeapon.ConsumeDurabilityOnMissStandard())
+                CurrentWeapon.AffectDurability();
 
-            OnWeaponLossDurability?.Invoke(Weapon.DurabilityPercent());
+            OnWeaponLossDurability?.Invoke(CurrentWeapon.DurabilityPercent());
             OnAttack?.Invoke();
             OnPlayerAttacked?.Invoke();
         }
 
         public void ChargeAttack()
         {
-            if (Weapon == null || !Weapon.CanAttack()) return;
+            if (CurrentWeapon == null || !CurrentWeapon.CanAttack()) return;
             var controller = _manager.controller as PlayerController;
-            if (Weapon.IsCharged())
+            if (CurrentWeapon.IsCharged())
             {
                 controller?.ChangeToChargeAttack();
-                Weapon.CurrentAttack = Weapon.ChargeAttack;
-                if (Weapon.ConsumeDurabilityOnMissCharge())
-                    Weapon.AffectDurability();
+                CurrentWeapon.CurrentAttack = CurrentWeapon.ChargeAttack;
+                if (CurrentWeapon.ConsumeDurabilityOnMissCharge())
+                    CurrentWeapon.AffectDurability();
 
                 OnAttack?.Invoke();
                 OnPlayerChargedAttack?.Invoke();
@@ -102,8 +102,8 @@ namespace Player
 
         public void GrabWeapon()
         {
-            if (Weapon != null) return;
-            var weapon = _weaponManager.PickUpWeaponInRange(transform.position, 2);
+            if (CurrentWeapon != null) return;
+            var weapon = _weaponManager.PickUpWeaponInRange(_manager.transform.position, 2);
             EquipWeapon(weapon);
             
         }
@@ -111,34 +111,37 @@ namespace Player
         private void EquipWeapon(Weapon weapon)
         {
             if (weapon == default) return;
-            Weapon = weapon;
-            Weapon.WeaponGameObject.gameObject.transform.parent = transform;
-            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up * offset,
+            CurrentWeapon = weapon;
+            CurrentWeapon.WeaponGameObject.gameObject.transform.parent = transform;
+            CurrentWeapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up * offset,
                 quaternion.identity);
+            CurrentWeapon.WeaponGameObject.gameObject.GetComponentInChildren<GrabHighlight>().DisableOutline();
+            CurrentWeapon.WeaponGameObject.gameObject.transform.GetChild(0).gameObject.SetActive(false);
             AttackFinishSubscription(true);
-            Weapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
+            CurrentWeapon.WeaponGameObject.GetComponent<Collider2D>().enabled = false;
             weapon.BaseAttack.SetUp(weapon.WeaponGameObject, _manager.model, _manager.view,
                 _manager.controller as PlayerController, _manager, _manager.controller);
             weapon.ChargeAttack.SetUp(weapon.WeaponGameObject, _manager.model, _manager.view,
                 _manager.controller as PlayerController, _manager, _manager.controller);
-            Weapon.WeaponGameObject.GetComponent<PlayerWeaponSpriteChange>().Subscribe();
+            CurrentWeapon.WeaponGameObject.GetComponent<PlayerWeaponSpriteChange>().Subscribe();
             OnWeaponChanged?.Invoke();
             OnPlayerWeaponPicked?.Invoke();
         }
 
         public void DropWeapon()
         {
-            if (Weapon is not { Attacking: false }) return;
-            _weaponManager.CatchDroppedWeapon(Weapon);
+            if (CurrentWeapon is not { Attacking: false }) return;
+            _weaponManager.CatchDroppedWeapon(CurrentWeapon);
+            CurrentWeapon.WeaponGameObject.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             UnEquipWeapon();
-            Weapon = null;
+            CurrentWeapon = null;
             OnPlayerWeaponDropped?.Invoke();
         }
 
         private void DestroyWeapon()
         {
-            if (Weapon is not { Attacking: false }) return;
-            var weaponForDestruction = Weapon;
+            if (CurrentWeapon is not { Attacking: false }) return;
+            var weaponForDestruction = CurrentWeapon;
             weaponForDestruction.ResetChangeMeter();
             UnEquipWeapon();
             _weaponManager.DestroyWeapon(weaponForDestruction);
@@ -147,28 +150,28 @@ namespace Player
 
         private void UnEquipWeapon()
         {
-            Weapon.WeaponGameObject.GetComponent<PlayerWeaponSpriteChange>().UnSubscribe();
+            CurrentWeapon.WeaponGameObject.GetComponent<PlayerWeaponSpriteChange>().UnSubscribe();
             AttackFinishSubscription(false);
-            Weapon.BaseAttack.OnUnequip();
-            Weapon.ChargeAttack.OnUnequip();
-            Weapon = null;
+            CurrentWeapon.BaseAttack.OnUnequip();
+            CurrentWeapon.ChargeAttack.OnUnequip();
+            CurrentWeapon = null;
 
             OnWeaponChanged?.Invoke();
         }
 
         private void AttackFinishSubscription(bool subscribe)
         {
-            if (Weapon == null) return; // �� Agregar esto
+            if (CurrentWeapon == null) return; // �� Agregar esto
 
             if (subscribe)
             {
-                Weapon.BaseAttack.AttackFinish += AttackFinish;
-                Weapon.ChargeAttack.AttackFinish += AttackFinish;
+                CurrentWeapon.BaseAttack.AttackFinish += AttackFinish;
+                CurrentWeapon.ChargeAttack.AttackFinish += AttackFinish;
             }
             else
             {
-                Weapon.BaseAttack.AttackFinish -= AttackFinish;
-                Weapon.ChargeAttack.AttackFinish -= AttackFinish;
+                CurrentWeapon.BaseAttack.AttackFinish -= AttackFinish;
+                CurrentWeapon.ChargeAttack.AttackFinish -= AttackFinish;
             }
         }
 
@@ -182,11 +185,11 @@ namespace Player
             var enemyManager = ServiceLocator.Instance.GetService<EnemiesManager>().GetManager(other.gameObject);
             if (enemyManager == null) return;
 
-            enemyManager.HealthComponent.TakeDamage(Weapon.Damage());
+            enemyManager.HealthComponent.TakeDamage(CurrentWeapon.Damage());
             if (enemyManager.model is IKnockbackable knockbackable)
-                knockbackable.ApplyKnockbackFromSource(this.transform.position, Weapon.KnockbackForce);
-            Weapon.ChargeWeapon();
-            Weapon.AffectDurability();
+                knockbackable.ApplyKnockbackFromSource(this.transform.position, CurrentWeapon.KnockbackForce);
+            CurrentWeapon.ChargeWeapon();
+            CurrentWeapon.AffectDurability();
             _enemiesHit.Add(other.gameObject);
 
             OnAttack?.Invoke();
@@ -200,7 +203,7 @@ namespace Player
         private void AttackFinish()
         {
             ClearEnemiesList();
-            Weapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up * offset,
+            CurrentWeapon.WeaponGameObject.gameObject.transform.SetLocalPositionAndRotation(Vector3.up * offset,
                 quaternion.identity);
         }
 
@@ -211,16 +214,16 @@ namespace Player
 
         public void CheckDurability()
         {
-            if (!Weapon.CheckDurability())
+            if (!CurrentWeapon.CheckDurability())
             {
                 DestroyWeapon();
                 _manager.PlaySound("WeaponBreak");
             }
         }
 
-        public float CheckWeaponDurabilityPercent() => Weapon.DurabilityPercent();
+        public float CheckWeaponDurabilityPercent() => CurrentWeapon.DurabilityPercent();
 
-        public float CheckWeaponChargePercent() => Weapon.ChargePercent();
+        public float CheckWeaponChargePercent() => CurrentWeapon.ChargePercent();
 
 
         #region Pause

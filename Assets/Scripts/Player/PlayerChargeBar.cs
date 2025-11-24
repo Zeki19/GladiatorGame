@@ -26,7 +26,7 @@ public class PlayerChargeBar : MonoBehaviour
     {
         if (_weaponController == null) return;
 
-        float target = (_weaponController.Weapon != null)
+        float target = (_weaponController.CurrentWeapon != null)
             ? _weaponController.CheckWeaponChargePercent()
             : 0f;
 

@@ -59,9 +59,9 @@ public class PlayerResourcesUI : MonoBehaviour
     {
         if (_weaponController.HasWeapon)
         {
-            ChargedEffect(_weaponController.Weapon.IsCharged());
+            ChargedEffect(_weaponController.CurrentWeapon.IsCharged());
             
-            var max = _weaponController.Weapon.MaxCharge() * _multiplier;
+            var max = _weaponController.CurrentWeapon.MaxCharge() * _multiplier;
             chargeBar.SetUp((int)max, false);
             
             var num = _weaponController.CheckWeaponChargePercent() * _multiplier;

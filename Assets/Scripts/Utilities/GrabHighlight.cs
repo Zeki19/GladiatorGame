@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GrabHighlight : MonoBehaviour
 {
-    private SpriteRenderer _renderer;
+    [SerializeField] SpriteRenderer _renderer;
     private MaterialPropertyBlock _mpb;
 
     private static Shader _outlineShader;
@@ -11,10 +11,12 @@ public class GrabHighlight : MonoBehaviour
     private static readonly int OutlineSize = Shader.PropertyToID("_OutlineSize");
 
     private Material _runtimeMaterial;
-
+    private bool _isHighlighted;
     void Awake()
     {
-        _renderer = GetComponent<SpriteRenderer>();
+        if(!_renderer)
+            Destroy(gameObject);
+
         _mpb = new MaterialPropertyBlock();
 
         if (_outlineShader == null)
@@ -25,22 +27,27 @@ public class GrabHighlight : MonoBehaviour
 
         _renderer.material = _runtimeMaterial;
     }
-
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerStay2D(Collider2D col)
     {
         if (col.gameObject.layer != LayerMask.NameToLayer("Player"))
             return;
-        EnableOutline(Color.white, 1f);
+        if (Vector3.Distance(col.gameObject.transform.position, transform.position) > 2) 
+        {
+            if (!_isHighlighted)
+                return;
+            DisableOutline();
+            _isHighlighted = false;
+        }
+        else 
+        {
+            if (_isHighlighted)
+                return;
+            EnableOutline(Color.white, 1f);
+            _isHighlighted = true;
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.layer != LayerMask.NameToLayer("Player"))
-            return;
-        DisableOutline();
-    }
-
-    void EnableOutline(Color color, float size)
+    public void EnableOutline(Color color, float size)
     {
         _renderer.GetPropertyBlock(_mpb);
         _mpb.SetColor(OutlineColor, color);
@@ -48,7 +55,7 @@ public class GrabHighlight : MonoBehaviour
         _renderer.SetPropertyBlock(_mpb);
     }
 
-    void DisableOutline()
+    public void DisableOutline()
     {
         _renderer.GetPropertyBlock(_mpb);
         _mpb.SetFloat(OutlineSize, 0f);

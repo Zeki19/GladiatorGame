@@ -20,7 +20,7 @@ public class CursorCombat : MonoBehaviour
         if (weapon.HasWeapon)
         {
             cursor.ChangeProfile("Combat");
-            cursor.SwapCursorTexture(!weapon.Weapon.CanAttack());
+            cursor.SwapCursorTexture(!weapon.CurrentWeapon.CanAttack());
         }
         else
         {

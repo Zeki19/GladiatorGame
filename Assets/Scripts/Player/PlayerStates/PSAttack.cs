@@ -25,7 +25,7 @@ namespace Player.PlayerStates
 
         public override void Enter()
         {
-            SetWeapon(_manager.weaponController.Weapon);
+            SetWeapon(_manager.weaponController.CurrentWeapon);
             CurrentWeapon.Attacking = true;
             CurrentAttack.AttackFinish += AttackFinished;
             //_attack.ExecuteAttack(CurrentAttack, CurrentWeapon);
