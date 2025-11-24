@@ -32,6 +32,9 @@ TextureImporter:
   - first:
       213: 7861531175448324597
     second: GladiusBroken_9
+  - first:
+      213: 5627942502492201476
+    second: GladiusBroken_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -123,19 +126,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -147,8 +137,8 @@ TextureImporter:
         y: 0
         width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.49865156, y: -0.0016181469}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,7 +160,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -183,11 +173,33 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: GladiusBroken_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0565834514749f80800000000000000
+      internalID: -8100722195056728818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d2ae670a42ac5984c89283f22d185007
+    spriteID: 9d42fd600a4419d48b17d285fa8e63e4
     internalID: 0
     vertices: []
     indices: 
@@ -199,6 +211,7 @@ TextureImporter:
     nameFileIdTable:
       GladiusBroken_0: 6991175210693983631
       GladiusBroken_1: -1659276417751534039
+      GladiusBroken_2: -8100722195056728818
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
