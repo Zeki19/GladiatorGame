@@ -8,6 +8,8 @@ public class SplashScreenTimeline : MonoBehaviour
     [SerializeField] private ImageEffect uade;
     [SerializeField] private ImageEffect icon;
     [SerializeField] private ImageEffect title;
+    
+    [SerializeField] private KeyCode skipKey = KeyCode.Space;
 
     private Coroutine _co;
     
@@ -79,7 +81,7 @@ public class SplashScreenTimeline : MonoBehaviour
 
     private void Update()
     {
-        if (!isActiveAndEnabled || !Input.GetKeyDown(KeyCode.Space)) return;
+        if (!isActiveAndEnabled || !Input.GetKeyDown(skipKey)) return;
 
         SkipSplashScreen();
     }
