@@ -5,7 +5,7 @@ public class GrabHighlight : MonoBehaviour
     [SerializeField] SpriteRenderer _renderer;
     private MaterialPropertyBlock _mpb;
 
-    private static Shader _outlineShader;
+    [SerializeField] private Shader outlineShader;
 
     private static readonly int OutlineColor = Shader.PropertyToID("_OutlineColor");
     private static readonly int OutlineSize = Shader.PropertyToID("_OutlineSize");
@@ -19,10 +19,9 @@ public class GrabHighlight : MonoBehaviour
 
         _mpb = new MaterialPropertyBlock();
 
-        if (_outlineShader == null)
-            _outlineShader = Shader.Find("Custom/SpriteOutline");
+        if (!outlineShader) outlineShader = Shader.Find("Custom/SpriteOutline");
 
-        _runtimeMaterial = new Material(_outlineShader);
+        _runtimeMaterial = new Material(outlineShader);
         _runtimeMaterial.mainTexture = _renderer.sprite.texture;
 
         _renderer.material = _runtimeMaterial;
