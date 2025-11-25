@@ -2903,33 +2903,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4521511593896928583, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4586838602004254469, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 5081619081588634187, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5081619081588634187, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5081619081588634187, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 384
       objectReference: {fileID: 0}
     - target: {fileID: 5081619081588634187, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 82.333336
       objectReference: {fileID: 0}
     - target: {fileID: 5081619081588634187, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 192
       objectReference: {fileID: 0}
     - target: {fileID: 5081619081588634187, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -245.83334
       objectReference: {fileID: 0}
     - target: {fileID: 5090126122534055125, guid: 8bc3e0e05a5a83048a34a149a12021cb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
