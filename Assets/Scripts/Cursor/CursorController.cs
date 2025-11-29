@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +30,12 @@ public class CursorController : MonoBehaviour
         Vector2 p;
         RectTransformUtility.ScreenPointToLocalPointInRectangle((RectTransform)cursorRoot.parent, Input.mousePosition, null, out p);
 
+        if (IsMobile())
+        {
+            Cursor.visible = false;
+            cursorImage.color = new Color(1,1,1,0);
+            shadowImage.color = new Color(1,1,1,0);
+        }
         cursorRoot.anchoredPosition = p;
 
         if (Input.GetMouseButtonDown(0))
@@ -96,5 +103,16 @@ public class CursorController : MonoBehaviour
 
         cursorImage.sprite = ToSprite(value ? _currentProfile.secondaryTexture : _currentProfile.mainTexture);
         shadowImage.sprite = ToSprite(value ? _currentProfile.secondaryTexture : _currentProfile.mainTexture);
+    }
+    [DllImport("__Internal")]
+    private static extern int IsMobileBrowser();
+
+    public bool IsMobile()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        return IsMobileBrowser() == 1;
+#else
+        return false;
+#endif
     }
 }

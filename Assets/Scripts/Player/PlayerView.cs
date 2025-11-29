@@ -13,6 +13,7 @@ namespace Player
         private int _oldSector = 1;
 
         private static readonly int Direction = Animator.StringToHash("MoveDirection");
+        [SerializeField] private MobileInput mobileInput;
 
         protected override void Start()
         {
@@ -30,8 +31,14 @@ namespace Player
 
         public override void LookDir(Vector2 dir)
         {
-            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            Vector2 lookDir = (mouseWorldPos - transform.position);
+            Vector2 lookDir=new Vector2();
+            if (mobileInput.IsMobile())
+                lookDir= mobileInput.Aim;
+            else
+            {
+                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+                lookDir = (mouseWorldPos - transform.position);
+            }
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, angle - 90);
             RotateSprite(lookDir);

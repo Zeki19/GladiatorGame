@@ -17,6 +17,7 @@ namespace Player
         private bool _isGamePaused;
         private PlayerStats _stats;
         Action _onAttack = delegate { };
+        [SerializeField] private MobileInput mobileInput;
 
         //player events
         public static event Action OnPlayerMoved;
@@ -129,7 +130,10 @@ namespace Player
 
         public bool IsPlayerTryingToMove()
         {
-            _moveInput = _direction.ReadValue<Vector2>();
+            if (mobileInput.IsMobile())
+                _moveInput = mobileInput.Move;
+            else
+                _moveInput = _direction.ReadValue<Vector2>();
             return _moveInput != Vector2.zero;
         }
         public void SetKnockbackEnabled(bool can) =>_stats.canBeKnockedBack = can;
