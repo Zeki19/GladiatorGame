@@ -81,8 +81,8 @@ public class CursorController : MonoBehaviour
     {
         if (value)
         {
-            cursorImage.transform.rotation = Quaternion.Euler(0, 0, 30);
-            shadowImage.transform.rotation = Quaternion.Euler(0, 0, 10);
+            cursorImage.transform.rotation = Quaternion.Euler(0, 0, 10);
+            shadowImage.transform.rotation = Quaternion.Euler(0, 0, 5);
         } 
         else
         {
