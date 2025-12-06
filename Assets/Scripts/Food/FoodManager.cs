@@ -20,7 +20,8 @@ public class FoodManager : MonoBehaviour
     [Header("Spawn config")]
     [SerializeField] private List<Vector2> spawnPoints;
     [Tooltip("Maximum wait time for food spawn")]
-    [SerializeField] private float waitTime;
+    [SerializeField] private float minWaitTime = 1f;
+    [SerializeField] private float maxWaitTime = 3f;
 
     [Space]
 
@@ -99,8 +100,8 @@ public class FoodManager : MonoBehaviour
         if (_nFoodsOnScene >= foodAmount || _spawning) return;
 
         _spawning = true;
-        // var rTime = Random.Range(0f, waitTime);
-        var rTime = waitTime;
+
+        int rTime = Random.Range((int)minWaitTime, (int)maxWaitTime);
         StartCoroutine(Timer(rTime));
     }
 

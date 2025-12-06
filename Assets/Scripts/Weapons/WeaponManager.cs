@@ -134,7 +134,7 @@ namespace Weapons
             weapon.WeaponGameObject.transform.parent = transform;
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.magenta;
             for (int i = 0; i < spawnPoints.Count; i++)

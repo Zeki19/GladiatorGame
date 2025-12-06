@@ -10496,6 +10496,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4221796273133589599, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: inactiveWeapon
       value: 
@@ -10525,12 +10529,44 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4aa4438dcb0a33b4999ee3caff96345d, type: 2}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
-      propertyPath: spawnPoints.Array.data[1].y
+      propertyPath: spawnPoints.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: spawnPoints.Array.data[0].y
       value: -21.5
       objectReference: {fileID: 0}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
-      propertyPath: spawnPoints.Array.data[6].x
+      propertyPath: spawnPoints.Array.data[1].x
+      value: -47
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: spawnPoints.Array.data[1].y
+      value: -23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: spawnPoints.Array.data[2].y
+      value: -36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: spawnPoints.Array.data[3].x
+      value: -32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: spawnPoints.Array.data[4].y
+      value: -23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: spawnPoints.Array.data[5].x
       value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: spawnPoints.Array.data[5].y
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
+      propertyPath: spawnPoints.Array.data[6].x
+      value: -49
       objectReference: {fileID: 0}
     - target: {fileID: 6371971906921020686, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: spawnPoints.Array.data[6].y
@@ -10546,15 +10582,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.722633
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -27.241787
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.14434215
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6979888000685408529, guid: 7158112670e73bf4f8a5f8f6f59241d9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -60576,7 +60612,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: waitTime
-      value: 15
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
+      propertyPath: maxWaitTime
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
+      propertyPath: minWaitTime
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7336418419542781944, guid: 71b4b4914e57f1e4b8d10f00973416df, type: 3}
       propertyPath: spawnPoints.Array.size
